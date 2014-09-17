@@ -22,9 +22,9 @@
  Reported that construction decoration
  Decoration acceptance
  Office passes
- Temporary use of fire
+ Temporary fire
  Temporary power
- Delivery and installation
+ Delivery&Installation
  Deposit refund
  I have a complaint
  */
@@ -56,7 +56,7 @@
     self.decorateReportedConstruction = [self createButtonWithTitle:NSLocalizedString(@"Reported that construction decoration", nil) selector:@selector(decorateReportedConstructionButton_Clicked:) row:0 coloum:0];
     self.decorateAcceptance = [self createButtonWithTitle:NSLocalizedString(@"Decoration acceptance", nil) selector:@selector(decorateAcceptanceButton_Clicked:) row:0 coloum:1];
     self.officePasses = [self createButtonWithTitle:NSLocalizedString(@"Office passes", nil) selector:@selector(officePassesButton_Clicked:) row:0 coloum:2];
-    self.temporaryFire = [self createButtonWithTitle:NSLocalizedString(@"Temporary use of fire", nil) selector:@selector(temporaryFireConstructionButton_Clicked:) row:1 coloum:0];
+    self.temporaryFire = [self createButtonWithTitle:NSLocalizedString(@"Temporary fire", nil) selector:@selector(temporaryFireConstructionButton_Clicked:) row:1 coloum:0];
     self.temporaryPower = [self createButtonWithTitle:NSLocalizedString(@"Temporary power", nil) selector:@selector(temporaryPowerButton_Clicked:) row:1 coloum:1];
     self.deliveryAndInstallation = [self createButtonWithTitle:NSLocalizedString(@"Delivery&Installation", nil) selector:@selector(deliveryAndInstallationButton_Clicked:) row:1 coloum:2];
     self.depositRefund = [self createButtonWithTitle:NSLocalizedString(@"Deposit refund", nil) selector:@selector(depositRefundButton_Clicked:) row:2 coloum:0];

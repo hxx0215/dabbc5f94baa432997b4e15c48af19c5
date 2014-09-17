@@ -9,3 +9,13 @@
 "E Decorate" = "E Decorate";
 "Business Background" = "Business Background";
 "Message" = "Message";
+
+//Decoration
+"Reported that construction decoration" = "Decoration Reported";
+"Decoration acceptance" = "Decoration Acceptance";
+"Office passes" = "Office Passes";
+"Temporary fire" = "Temporary Fire";
+"Temporary power" = "Temporary Power";
+"Delivery&Installation" = "Delivery&Installation";
+"Deposit refund" = "Deposit Refund";
+"I have a complaint" = "Complaint";

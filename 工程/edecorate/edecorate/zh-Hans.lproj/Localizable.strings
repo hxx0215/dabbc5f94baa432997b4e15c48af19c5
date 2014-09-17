@@ -9,3 +9,13 @@
 "E Decorate" = "E 装修商家助手";
 "Business Background" = "商家后台管理";
 "Message" = "消息";
+
+//decoration
+"Reported that construction decoration" = "装修报建";
+"Decoration acceptance" = "装修验收";
+"Office passes" = "办出入证";
+"Temporary fire" = "临时用火";
+"Temporary power" = "临时用电";
+"Delivery&Installation" = "送货安装";
+"Deposit refund" = "押金退款";
+"I have a complaint" = "我要投诉";
