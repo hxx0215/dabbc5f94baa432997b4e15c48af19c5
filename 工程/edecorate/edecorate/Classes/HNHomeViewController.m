@@ -8,6 +8,7 @@
 
 #import "HNHomeViewController.h"
 #import "UIView+AHKit.h"
+#import "HNDecorateControlViewController.h"
 
 @interface HNHomeViewController ()
 @property (nonatomic, strong)UIButton *decorateControlButton;
@@ -71,6 +72,8 @@ const CGFloat busiTop = 120;
 
 - (void)decorateControlButton_Clicked:(id)sender{
     NSLog(@"decor");
+    HNDecorateControlViewController* DC = [[HNDecorateControlViewController alloc]init];
+    [self presentViewController:DC animated:YES completion:^{}];
 }
 
 - (void)businessBackgroundButton_Clicked:(id)sender{
