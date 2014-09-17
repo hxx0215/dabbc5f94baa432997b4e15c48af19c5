@@ -8,19 +8,20 @@
 
 #import "HNHomeViewController.h"
 #import "UIView+AHKit.h"
+#import "HNMessageViewController.h"
+#define hSpace 40
+#define tSpacePer 0.1
+#define decorTop 50
+#define btnHeight 50
+#define busiTop 120
 
 @interface HNHomeViewController ()
 @property (nonatomic, strong)UIButton *decorateControlButton;
 @property (nonatomic, strong)UIButton *businessBackgroundButton;
 @property (nonatomic, strong)UIBarButtonItem *messageButton;
+@property (nonatomic, strong)HNMessageViewController *messageViewController;
 @end
 
-const CGFloat hSpace = 40;
-const CGFloat tSpacePer = 0.1;
-
-const CGFloat btnHeight = 50;
-const CGFloat decorTop = 50;
-const CGFloat busiTop = 120;
 
 @implementation HNHomeViewController
 
@@ -78,6 +79,9 @@ const CGFloat busiTop = 120;
     NSLog(@"busi");
 }
 - (void)messageButton_Clicked:(id)sender{
-    NSLog(@"message");
+    if (!self.messageViewController){
+        self.messageViewController = [[HNMessageViewController alloc] init];
+    }
+    [self.navigationController pushViewController:self.messageViewController animated:YES];
 }
 @end

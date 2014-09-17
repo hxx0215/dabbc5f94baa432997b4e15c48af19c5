@@ -30,9 +30,11 @@
 		B916F0E319C878AC00A849C7 /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = B916F0E219C878AC00A849C7 /* PushConfig.plist */; };
 		B916F0E719C8795F00A849C7 /* libPushSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B916F0E619C8795F00A849C7 /* libPushSDK.a */; };
 		B94B7A6519C9BF3E000112ED /* HNHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B94B7A6419C9BF3E000112ED /* HNHomeViewController.m */; };
+		B94C854819C9CA770040D47E /* HNMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B94C854719C9CA770040D47E /* HNMessageModel.m */; };
 		B9DE55FD19C9C0EA00280EC7 /* UIView+AHKit.m in Sources */ = {isa = PBXBuildFile; fileRef = B9DE55FC19C9C0EA00280EC7 /* UIView+AHKit.m */; };
 		B9DE560119C9C26700280EC7 /* HNDecorateControlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9DE560019C9C26700280EC7 /* HNDecorateControlViewController.m */; };
 		B9DE560419C9C40B00280EC7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B9DE560619C9C40B00280EC7 /* Localizable.strings */; };
+		B9DE560D19C9C5D300280EC7 /* HNMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9DE560C19C9C5D300280EC7 /* HNMessageViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +78,8 @@
 		B916F0E619C8795F00A849C7 /* libPushSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libPushSDK.a; sourceTree = "<group>"; };
 		B94B7A6319C9BF3E000112ED /* HNHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNHomeViewController.h; path = Classes/HNHomeViewController.h; sourceTree = "<group>"; };
 		B94B7A6419C9BF3E000112ED /* HNHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNHomeViewController.m; path = Classes/HNHomeViewController.m; sourceTree = "<group>"; };
+		B94C854619C9CA770040D47E /* HNMessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNMessageModel.h; path = Classes/Message/HNMessageModel.h; sourceTree = "<group>"; };
+		B94C854719C9CA770040D47E /* HNMessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNMessageModel.m; path = Classes/Message/HNMessageModel.m; sourceTree = "<group>"; };
 		B9DE55FB19C9C0EA00280EC7 /* UIView+AHKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+AHKit.h"; path = "Third Party/UIView+AHKit.h"; sourceTree = "<group>"; };
 		B9DE55FC19C9C0EA00280EC7 /* UIView+AHKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+AHKit.m"; path = "Third Party/UIView+AHKit.m"; sourceTree = "<group>"; };
 		B9DE55FF19C9C26700280EC7 /* HNDecorateControlViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNDecorateControlViewController.h; path = Classes/DecorateControl/HNDecorateControlViewController.h; sourceTree = "<group>"; };
@@ -85,6 +89,8 @@
 		B9DE560819C9C42000280EC7 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		B9DE560919C9C42000280EC7 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		B9DE560A19C9C42100280EC7 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		B9DE560B19C9C5D300280EC7 /* HNMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNMessageViewController.h; path = Classes/Message/HNMessageViewController.h; sourceTree = "<group>"; };
+		B9DE560C19C9C5D300280EC7 /* HNMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNMessageViewController.m; path = Classes/Message/HNMessageViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -230,6 +236,10 @@
 		B94B7A6219C9BE73000112ED /* Message */ = {
 			isa = PBXGroup;
 			children = (
+				B9DE560B19C9C5D300280EC7 /* HNMessageViewController.h */,
+				B9DE560C19C9C5D300280EC7 /* HNMessageViewController.m */,
+				B94C854619C9CA770040D47E /* HNMessageModel.h */,
+				B94C854719C9CA770040D47E /* HNMessageModel.m */,
 			);
 			name = Message;
 			sourceTree = "<group>";
@@ -368,12 +378,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9DE560D19C9C5D300280EC7 /* HNMessageViewController.m in Sources */,
 				B916F0B819C8781D00A849C7 /* ViewController.m in Sources */,
 				B916F0B219C8781D00A849C7 /* AppDelegate.m in Sources */,
 				B916F0AE19C8781D00A849C7 /* main.m in Sources */,
 				B9DE55FD19C9C0EA00280EC7 /* UIView+AHKit.m in Sources */,
 				B94B7A6519C9BF3E000112ED /* HNHomeViewController.m in Sources */,
 				B9DE560119C9C26700280EC7 /* HNDecorateControlViewController.m in Sources */,
+				B94C854819C9CA770040D47E /* HNMessageModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
