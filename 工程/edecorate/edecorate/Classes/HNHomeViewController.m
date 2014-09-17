@@ -75,7 +75,8 @@
 - (void)decorateControlButton_Clicked:(id)sender{
     NSLog(@"decor");
     HNDecorateControlViewController* DC = [[HNDecorateControlViewController alloc]init];
-    [self presentViewController:DC animated:YES completion:^{}];
+//    [self presentViewController:DC animated:YES completion:^{}];
+    [self.navigationController pushViewController:DC animated:YES];
 }
 
 - (void)businessBackgroundButton_Clicked:(id)sender{
