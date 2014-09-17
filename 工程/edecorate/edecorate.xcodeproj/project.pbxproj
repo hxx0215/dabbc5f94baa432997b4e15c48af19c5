@@ -29,8 +29,8 @@
 		B916F0E119C8788D00A849C7 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B916F0E019C8788D00A849C7 /* libz.dylib */; };
 		B916F0E319C878AC00A849C7 /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = B916F0E219C878AC00A849C7 /* PushConfig.plist */; };
 		B916F0E719C8795F00A849C7 /* libPushSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B916F0E619C8795F00A849C7 /* libPushSDK.a */; };
-		B990C2F719C98736004DE1BC /* HNHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B990C2F619C98736004DE1BC /* HNHomeViewController.m */; };
-		B9F295E619C9A97E003242DF /* UIView+AHKit.m in Sources */ = {isa = PBXBuildFile; fileRef = B9F295E519C9A97E003242DF /* UIView+AHKit.m */; };
+		B94B7A6519C9BF3E000112ED /* HNHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B94B7A6419C9BF3E000112ED /* HNHomeViewController.m */; };
+		B9DE55FD19C9C0EA00280EC7 /* UIView+AHKit.m in Sources */ = {isa = PBXBuildFile; fileRef = B9DE55FC19C9C0EA00280EC7 /* UIView+AHKit.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,10 +72,10 @@
 		B916F0E219C878AC00A849C7 /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PushConfig.plist; sourceTree = "<group>"; };
 		B916F0E519C8795F00A849C7 /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
 		B916F0E619C8795F00A849C7 /* libPushSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libPushSDK.a; sourceTree = "<group>"; };
-		B990C2F519C98736004DE1BC /* HNHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNHomeViewController.h; sourceTree = "<group>"; };
-		B990C2F619C98736004DE1BC /* HNHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNHomeViewController.m; sourceTree = "<group>"; };
-		B9F295E419C9A97E003242DF /* UIView+AHKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AHKit.h"; sourceTree = "<group>"; };
-		B9F295E519C9A97E003242DF /* UIView+AHKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AHKit.m"; sourceTree = "<group>"; };
+		B94B7A6319C9BF3E000112ED /* HNHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNHomeViewController.h; path = Classes/HNHomeViewController.h; sourceTree = "<group>"; };
+		B94B7A6419C9BF3E000112ED /* HNHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNHomeViewController.m; path = Classes/HNHomeViewController.m; sourceTree = "<group>"; };
+		B9DE55FB19C9C0EA00280EC7 /* UIView+AHKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+AHKit.h"; path = "Third Party/UIView+AHKit.h"; sourceTree = "<group>"; };
+		B9DE55FC19C9C0EA00280EC7 /* UIView+AHKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+AHKit.m"; path = "Third Party/UIView+AHKit.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				B916F0E419C8795F00A849C7 /* JPushlib */,
+				B9DE55FE19C9C12C00280EC7 /* Resources */,
 				B9F295E219C9A8DA003242DF /* Classes */,
 				B916F0A719C8781D00A849C7 /* edecorate */,
 				B916F0C619C8781E00A849C7 /* edecorateTests */,
@@ -201,12 +202,44 @@
 			path = lib;
 			sourceTree = "<group>";
 		};
+		B94B7A6019C9BE25000112ED /* DecorateControl */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = DecorateControl;
+			sourceTree = "<group>";
+		};
+		B94B7A6119C9BE4E000112ED /* BusinessBackground */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = BusinessBackground;
+			sourceTree = "<group>";
+		};
+		B94B7A6219C9BE73000112ED /* Message */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Message;
+			sourceTree = "<group>";
+		};
+		B9DE55FE19C9C12C00280EC7 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			path = edecorate;
+			sourceTree = "<group>";
+		};
 		B9F295E219C9A8DA003242DF /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				B94B7A6319C9BF3E000112ED /* HNHomeViewController.h */,
+				B94B7A6419C9BF3E000112ED /* HNHomeViewController.m */,
+				B94B7A6219C9BE73000112ED /* Message */,
+				B94B7A6119C9BE4E000112ED /* BusinessBackground */,
+				B94B7A6019C9BE25000112ED /* DecorateControl */,
 				B9F295E319C9A961003242DF /* Third Party */,
-				B990C2F519C98736004DE1BC /* HNHomeViewController.h */,
-				B990C2F619C98736004DE1BC /* HNHomeViewController.m */,
 			);
 			name = Classes;
 			path = edecorate;
@@ -215,8 +248,8 @@
 		B9F295E319C9A961003242DF /* Third Party */ = {
 			isa = PBXGroup;
 			children = (
-				B9F295E419C9A97E003242DF /* UIView+AHKit.h */,
-				B9F295E519C9A97E003242DF /* UIView+AHKit.m */,
+				B9DE55FB19C9C0EA00280EC7 /* UIView+AHKit.h */,
+				B9DE55FC19C9C0EA00280EC7 /* UIView+AHKit.m */,
 			);
 			name = "Third Party";
 			sourceTree = "<group>";
@@ -324,8 +357,8 @@
 				B916F0B819C8781D00A849C7 /* ViewController.m in Sources */,
 				B916F0B219C8781D00A849C7 /* AppDelegate.m in Sources */,
 				B916F0AE19C8781D00A849C7 /* main.m in Sources */,
-				B9F295E619C9A97E003242DF /* UIView+AHKit.m in Sources */,
-				B990C2F719C98736004DE1BC /* HNHomeViewController.m in Sources */,
+				B9DE55FD19C9C0EA00280EC7 /* UIView+AHKit.m in Sources */,
+				B94B7A6519C9BF3E000112ED /* HNHomeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
