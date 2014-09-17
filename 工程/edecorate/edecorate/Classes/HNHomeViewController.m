@@ -27,6 +27,7 @@ const CGFloat busiTop = 120;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.title = NSLocalizedString(@"E Decorate", nil);
     self.view.backgroundColor = [UIColor whiteColor];
     self.decorateControlButton = [self createButtonWithTitle:NSLocalizedString(@"Decorate Control", nil) selector:@selector(decorateControlButton_Clicked:)];
     
