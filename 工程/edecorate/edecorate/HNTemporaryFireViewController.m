@@ -8,6 +8,7 @@
 
 #import "HNTemporaryFireViewController.h"
 #import "HNTemporaryTableViewCell.h"
+#import "HNTemporaryApplyViewController.h"
 
 @interface HNTemporaryModel : NSObject
 @property (nonatomic, strong)NSString *roomName;
@@ -59,6 +60,14 @@
     tModel.roomName = @"施工房号：XXXX";
     tModel.status = @"审核进度:审核中";
     [self.reportList addObject:tModel];
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //NSInteger row = indexPath.row;
+    HNTemporaryApplyViewController* tac = [[HNTemporaryApplyViewController alloc]init];
+    [self.navigationController pushViewController:tac animated:YES];
+    
 }
 
 -(NSString*)getTitleString
