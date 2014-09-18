@@ -62,13 +62,7 @@
     [self.reportList addObject:tModel];
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    //NSInteger row = indexPath.row;
-    HNTemporaryApplyViewController* tac = [[HNTemporaryApplyViewController alloc]init];
-    [self.navigationController pushViewController:tac animated:YES];
-    
-}
+
 
 -(NSString*)getTitleString
 {
@@ -86,7 +80,7 @@
     [super viewWillAppear:animated];
     
 }
-
+#pragma mark - tableView Delegate & DataSource
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 75.0;
 }
@@ -106,7 +100,13 @@
     return cell;
 }
 
-
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //NSInteger row = indexPath.row;
+    HNTemporaryApplyViewController* tac = [[HNTemporaryApplyViewController alloc]init];
+    [self.navigationController pushViewController:tac animated:YES];
+    
+}
 /*
 #pragma mark - Navigation
 

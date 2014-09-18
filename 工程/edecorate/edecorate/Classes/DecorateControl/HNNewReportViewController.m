@@ -7,9 +7,12 @@
 //
 
 #import "HNNewReportViewController.h"
+#import "HNNewCompanyReportView.h"
 
 @interface HNNewReportViewController ()
 @property (nonatomic, strong)UIScrollView *backView;
+@property (nonatomic, strong)HNNewCompanyReportView *companyReportView;
+@property (nonatomic, strong)UIBarButtonItem *cancel;
 @end
 
 @implementation HNNewReportViewController
@@ -29,8 +32,14 @@
     // Do any additional setup after loading the view.
     self.title = NSLocalizedString(@"Decorate Construction", nil);
     self.backView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
-//    self.backView.backgroundColor = [UIColor orangeColor];
+    self.backView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.backView];
+    
+    self.companyReportView = [[HNNewCompanyReportView alloc] initWithFrame:CGRectMake(0, 20, self.backView.bounds.size.width, self.backView.bounds.size.height * 2)];
+    [self.backView addSubview:self.companyReportView];
+    
+    self.cancel = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)];
+    self.navigationItem.leftBarButtonItem = self.cancel;
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -38,7 +47,7 @@
 }
 - (void)setMyInterfaceOrientation:(UIInterfaceOrientation)orientation{
     self.backView.frame = self.view.bounds;
-    self.backView.contentSize = CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height + 20);
+    self.backView.contentSize = CGSizeMake(self.view.bounds.size.width, self.companyReportView.bounds.size.height + 20);
 }
 
 
@@ -48,6 +57,8 @@
     // Dispose of any resources that can be recreated.
 }
 
-
+- (void)cancel:(id)sender{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 @end
