@@ -19,3 +19,25 @@
 "Delivery&Installation" = "送货安装";
 "Deposit refund" = "押金退款";
 "I have a complaint" = "我要投诉";
+
+
+"Company Data" = "装修公司资料";
+"Company Certificate" = "营业执照";
+"tax Certificate" = "税务登记证";
+"Organization Certificate" = "组织登记代码证";
+"Qualification Certificate" = "资质证书";
+"Electrician Certificate" = "电工证";
+"Power of attorney and Corporate identity" = "法人委托书及法人身份证";
+"Charge of Construction's Identify" = "施工负责人身份证";
+"Owner Data" = "业主及图纸资料";
+"Construction Room No." = "施工房号";
+"Community" = "所在小区";
+"Area" = "所在地";
+"Owner" = "业主姓名";
+"Mobile" ="手机号";
+"Planar Structure" = "平面结构图";
+"Floor Plan" = "平面布置图";
+"Wall transformation diagram" = "墙体改造图";
+"The ceiling layout" = "天花布置图";
+"Water layout" = "水路布置图";
+"Circuit layout" = "电路布置图";
