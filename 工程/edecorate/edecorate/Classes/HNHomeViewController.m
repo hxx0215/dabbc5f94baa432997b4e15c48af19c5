@@ -15,11 +15,13 @@
 #define decorTop 50
 #define btnHeight 50
 #define busiTop 120
+#define messTop 190
 
 @interface HNHomeViewController ()
 @property (nonatomic, strong)UIButton *decorateControlButton;
 @property (nonatomic, strong)UIButton *businessBackgroundButton;
-@property (nonatomic, strong)UIBarButtonItem *messageButton;
+@property (nonatomic, strong)UIButton *messageButton;
+@property (nonatomic, strong)UIBarButtonItem *settingButton;
 @property (nonatomic, strong)HNMessageViewController *messageViewController;
 @end
 
@@ -37,8 +39,11 @@
     self.businessBackgroundButton.top = busiTop;
     [self.view addSubview:self.decorateControlButton];
     [self.view addSubview:self.businessBackgroundButton];
-    self.messageButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Message", nil) style:UIBarButtonItemStylePlain target:self action:@selector(messageButton_Clicked:)];
-    self.navigationItem.rightBarButtonItem = self.messageButton;
+    self.messageButton = [self createButtonWithTitle:NSLocalizedString(@"Message", nil) selector:@selector(messageButton_Clicked:)];
+    [self.view addSubview:self.messageButton];
+    
+    self.settingButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Setting", nil) style:UIBarButtonItemStylePlain target:self action:@selector(settingButton_Clicked:)];
+    self.navigationItem.rightBarButtonItem = self.settingButton;
 }
 
 - (UIButton *)createButtonWithTitle:(NSString *)title selector:(SEL)selector{
@@ -67,6 +72,7 @@
     if (UIInterfaceOrientationIsPortrait(orientation)){
         self.decorateControlButton.top = decorTop;
         self.businessBackgroundButton.top = busiTop;
+        self.messageButton.top = messTop;
     }
     else{
     }
@@ -87,5 +93,9 @@
         self.messageViewController = [[HNMessageViewController alloc] init];
     }
     [self.navigationController pushViewController:self.messageViewController animated:YES];
+}
+
+- (void)settingButton_Clicked:(id)sender{
+    NSLog(@"setting");
 }
 @end
