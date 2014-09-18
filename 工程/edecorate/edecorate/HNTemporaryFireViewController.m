@@ -1,0 +1,88 @@
+//
+//  HNTemporaryFireViewController.m
+//  edecorate
+//
+//  Created by 刘向宏 on 14-9-18.
+//
+//
+
+#import "HNTemporaryFireViewController.h"
+#import "HNTemporaryTableViewCell.h"
+
+@interface HNTemporaryModel : NSObject
+@property (nonatomic, strong)NSString *roomName;
+@property (nonatomic, strong)NSString *status;
+@end
+@implementation HNTemporaryModel
+@end
+
+@interface HNTemporaryFireViewController ()<UITableViewDelegate,UITableViewDataSource>
+
+@property (nonatomic, strong)UITableView *rTableView;
+@property (nonatomic, strong)NSMutableArray *reportList;
+@end
+
+@implementation HNTemporaryFireViewController
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+    self.view.backgroundColor = [UIColor whiteColor];
+    self.rTableView = [[UITableView alloc] initWithFrame:self.view.bounds];
+    self.rTableView.delegate = self;
+    self.rTableView.dataSource = self;
+    [self.view addSubview:self.rTableView];
+    
+    self.reportList = [[NSMutableArray alloc] init];
+    HNTemporaryModel *tModel = [[HNTemporaryModel alloc] init];
+    tModel.roomName = @"施工房号：XXXX";
+    tModel.status = @"审核进度:审核中";
+    [self.reportList addObject:tModel];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 75.0;
+}
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return [self.reportList count];
+}
+
+- (HNTemporaryTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *reuseIdentifier = @"reportCell";
+    HNTemporaryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
+    if (!cell){
+        cell = [[HNTemporaryTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
+    }
+    HNTemporaryModel *model =self.reportList[indexPath.row];
+    [cell setRoomName:model.roomName];
+    [cell setStatus:model.status];
+    return cell;
+}
+
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end

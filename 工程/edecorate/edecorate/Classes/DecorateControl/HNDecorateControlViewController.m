@@ -9,6 +9,7 @@
 #import "HNDecorateControlViewController.h"
 #import "UIView+AHKit.h"
 #import "HNDecorateReportViewController.h"
+#import "HNTemporaryFireViewController.h"
 
 /*
  装修报建
@@ -105,7 +106,8 @@
 }
 
 - (void)temporaryFireConstructionButton_Clicked:(id)sender{
-    NSLog(@"temporaryFire");
+    HNTemporaryFireViewController *temporaryViewController = [[HNTemporaryFireViewController alloc] init];
+    [self.navigationController pushViewController:temporaryViewController animated:YES];
 }
 
 - (void)temporaryPowerButton_Clicked:(id)sender{
