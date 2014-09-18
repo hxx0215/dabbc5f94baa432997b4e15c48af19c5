@@ -34,6 +34,8 @@
 		B953CE0E19CAFBE000BD57DF /* HNLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B953CE0D19CAFBE000BD57DF /* HNLoginViewController.m */; };
 		B9882DF219CB06D90093F0F4 /* HNDecorateReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9882DF119CB06D90093F0F4 /* HNDecorateReportViewController.m */; };
 		B9882DF519CB079A0093F0F4 /* HNReportTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B9882DF419CB079A0093F0F4 /* HNReportTableViewCell.m */; };
+		B9882DF819CB11920093F0F4 /* HNNewReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9882DF719CB11920093F0F4 /* HNNewReportViewController.m */; };
+		B9882DFB19CB152F0093F0F4 /* HNNewCompanyReportView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9882DFA19CB152F0093F0F4 /* HNNewCompanyReportView.m */; };
 		B9DE55FD19C9C0EA00280EC7 /* UIView+AHKit.m in Sources */ = {isa = PBXBuildFile; fileRef = B9DE55FC19C9C0EA00280EC7 /* UIView+AHKit.m */; };
 		B9DE560119C9C26700280EC7 /* HNDecorateControlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9DE560019C9C26700280EC7 /* HNDecorateControlViewController.m */; };
 		B9DE560419C9C40B00280EC7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B9DE560619C9C40B00280EC7 /* Localizable.strings */; };
@@ -91,6 +93,10 @@
 		B9882DF119CB06D90093F0F4 /* HNDecorateReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNDecorateReportViewController.m; path = Classes/DecorateControl/HNDecorateReportViewController.m; sourceTree = "<group>"; };
 		B9882DF319CB079A0093F0F4 /* HNReportTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNReportTableViewCell.h; path = Classes/DecorateControl/HNReportTableViewCell.h; sourceTree = "<group>"; };
 		B9882DF419CB079A0093F0F4 /* HNReportTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNReportTableViewCell.m; path = Classes/DecorateControl/HNReportTableViewCell.m; sourceTree = "<group>"; };
+		B9882DF619CB11920093F0F4 /* HNNewReportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNNewReportViewController.h; path = Classes/DecorateControl/HNNewReportViewController.h; sourceTree = "<group>"; };
+		B9882DF719CB11920093F0F4 /* HNNewReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNNewReportViewController.m; path = Classes/DecorateControl/HNNewReportViewController.m; sourceTree = "<group>"; };
+		B9882DF919CB152F0093F0F4 /* HNNewCompanyReportView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNNewCompanyReportView.h; path = Classes/DecorateControl/HNNewCompanyReportView.h; sourceTree = "<group>"; };
+		B9882DFA19CB152F0093F0F4 /* HNNewCompanyReportView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNNewCompanyReportView.m; path = Classes/DecorateControl/HNNewCompanyReportView.m; sourceTree = "<group>"; };
 		B9DE55FB19C9C0EA00280EC7 /* UIView+AHKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+AHKit.h"; path = "Third Party/UIView+AHKit.h"; sourceTree = "<group>"; };
 		B9DE55FC19C9C0EA00280EC7 /* UIView+AHKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+AHKit.m"; path = "Third Party/UIView+AHKit.m"; sourceTree = "<group>"; };
 		B9DE55FF19C9C26700280EC7 /* HNDecorateControlViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNDecorateControlViewController.h; path = Classes/DecorateControl/HNDecorateControlViewController.h; sourceTree = "<group>"; };
@@ -241,10 +247,17 @@
 				B9882DF119CB06D90093F0F4 /* HNDecorateReportViewController.m */,
 				B9882DF319CB079A0093F0F4 /* HNReportTableViewCell.h */,
 				B9882DF419CB079A0093F0F4 /* HNReportTableViewCell.m */,
+
+				B9882DF619CB11920093F0F4 /* HNNewReportViewController.h */,
+				B9882DF719CB11920093F0F4 /* HNNewReportViewController.m */,
+				B9882DF919CB152F0093F0F4 /* HNNewCompanyReportView.h */,
+				B9882DFA19CB152F0093F0F4 /* HNNewCompanyReportView.m */,
+
 				D3F90F0E19CB13CA000C95E4 /* HNTemporaryFireViewController.h */,
 				D3F90F0F19CB13CA000C95E4 /* HNTemporaryFireViewController.m */,
 				D3F90F1119CB1474000C95E4 /* HNTemporaryTableViewCell.h */,
 				D3F90F1219CB1474000C95E4 /* HNTemporaryTableViewCell.m */,
+
 			);
 			name = DecorateControl;
 			sourceTree = "<group>";
@@ -413,6 +426,8 @@
 				B94B7A6519C9BF3E000112ED /* HNHomeViewController.m in Sources */,
 				D3F90F1019CB13CA000C95E4 /* HNTemporaryFireViewController.m in Sources */,
 				B9DE560119C9C26700280EC7 /* HNDecorateControlViewController.m in Sources */,
+				B9882DFB19CB152F0093F0F4 /* HNNewCompanyReportView.m in Sources */,
+				B9882DF819CB11920093F0F4 /* HNNewReportViewController.m in Sources */,
 				B9882DF219CB06D90093F0F4 /* HNDecorateReportViewController.m in Sources */,
 				D3F90F1319CB1474000C95E4 /* HNTemporaryTableViewCell.m in Sources */,
 				B94C854819C9CA770040D47E /* HNMessageModel.m in Sources */,
