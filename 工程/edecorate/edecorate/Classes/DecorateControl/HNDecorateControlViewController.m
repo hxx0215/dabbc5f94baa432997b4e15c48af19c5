@@ -8,6 +8,7 @@
 
 #import "HNDecorateControlViewController.h"
 #import "UIView+AHKit.h"
+#import "HNDecorateReportViewController.h"
 
 /*
  装修报建
@@ -92,7 +93,8 @@
 }
 
 - (void)decorateReportedConstructionButton_Clicked:(id)sender{
-    NSLog(@"decorateReportedConstruction");
+    HNDecorateReportViewController *reportViewController = [[HNDecorateReportViewController alloc] init];
+    [self.navigationController pushViewController:reportViewController animated:YES];
 }
 
 - (void)decorateAcceptanceButton_Clicked:(id)sender{

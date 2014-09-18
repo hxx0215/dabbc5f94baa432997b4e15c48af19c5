@@ -32,6 +32,8 @@
 		B94B7A6519C9BF3E000112ED /* HNHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B94B7A6419C9BF3E000112ED /* HNHomeViewController.m */; };
 		B94C854819C9CA770040D47E /* HNMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B94C854719C9CA770040D47E /* HNMessageModel.m */; };
 		B953CE0E19CAFBE000BD57DF /* HNLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B953CE0D19CAFBE000BD57DF /* HNLoginViewController.m */; };
+		B9882DF219CB06D90093F0F4 /* HNDecorateReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9882DF119CB06D90093F0F4 /* HNDecorateReportViewController.m */; };
+		B9882DF519CB079A0093F0F4 /* HNReportTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B9882DF419CB079A0093F0F4 /* HNReportTableViewCell.m */; };
 		B9DE55FD19C9C0EA00280EC7 /* UIView+AHKit.m in Sources */ = {isa = PBXBuildFile; fileRef = B9DE55FC19C9C0EA00280EC7 /* UIView+AHKit.m */; };
 		B9DE560119C9C26700280EC7 /* HNDecorateControlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9DE560019C9C26700280EC7 /* HNDecorateControlViewController.m */; };
 		B9DE560419C9C40B00280EC7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B9DE560619C9C40B00280EC7 /* Localizable.strings */; };
@@ -83,6 +85,10 @@
 		B94C854719C9CA770040D47E /* HNMessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNMessageModel.m; path = Classes/Message/HNMessageModel.m; sourceTree = "<group>"; };
 		B953CE0C19CAFBE000BD57DF /* HNLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNLoginViewController.h; path = Classes/HNLoginViewController.h; sourceTree = "<group>"; };
 		B953CE0D19CAFBE000BD57DF /* HNLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNLoginViewController.m; path = Classes/HNLoginViewController.m; sourceTree = "<group>"; };
+		B9882DF019CB06D90093F0F4 /* HNDecorateReportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNDecorateReportViewController.h; path = Classes/DecorateControl/HNDecorateReportViewController.h; sourceTree = "<group>"; };
+		B9882DF119CB06D90093F0F4 /* HNDecorateReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNDecorateReportViewController.m; path = Classes/DecorateControl/HNDecorateReportViewController.m; sourceTree = "<group>"; };
+		B9882DF319CB079A0093F0F4 /* HNReportTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNReportTableViewCell.h; path = Classes/DecorateControl/HNReportTableViewCell.h; sourceTree = "<group>"; };
+		B9882DF419CB079A0093F0F4 /* HNReportTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNReportTableViewCell.m; path = Classes/DecorateControl/HNReportTableViewCell.m; sourceTree = "<group>"; };
 		B9DE55FB19C9C0EA00280EC7 /* UIView+AHKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+AHKit.h"; path = "Third Party/UIView+AHKit.h"; sourceTree = "<group>"; };
 		B9DE55FC19C9C0EA00280EC7 /* UIView+AHKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+AHKit.m"; path = "Third Party/UIView+AHKit.m"; sourceTree = "<group>"; };
 		B9DE55FF19C9C26700280EC7 /* HNDecorateControlViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNDecorateControlViewController.h; path = Classes/DecorateControl/HNDecorateControlViewController.h; sourceTree = "<group>"; };
@@ -225,6 +231,10 @@
 			children = (
 				B9DE55FF19C9C26700280EC7 /* HNDecorateControlViewController.h */,
 				B9DE560019C9C26700280EC7 /* HNDecorateControlViewController.m */,
+				B9882DF019CB06D90093F0F4 /* HNDecorateReportViewController.h */,
+				B9882DF119CB06D90093F0F4 /* HNDecorateReportViewController.m */,
+				B9882DF319CB079A0093F0F4 /* HNReportTableViewCell.h */,
+				B9882DF419CB079A0093F0F4 /* HNReportTableViewCell.m */,
 			);
 			name = DecorateControl;
 			sourceTree = "<group>";
@@ -384,6 +394,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B9DE560D19C9C5D300280EC7 /* HNMessageViewController.m in Sources */,
+				B9882DF519CB079A0093F0F4 /* HNReportTableViewCell.m in Sources */,
 				B916F0B819C8781D00A849C7 /* ViewController.m in Sources */,
 				B916F0B219C8781D00A849C7 /* AppDelegate.m in Sources */,
 				B916F0AE19C8781D00A849C7 /* main.m in Sources */,
@@ -391,6 +402,7 @@
 				B953CE0E19CAFBE000BD57DF /* HNLoginViewController.m in Sources */,
 				B94B7A6519C9BF3E000112ED /* HNHomeViewController.m in Sources */,
 				B9DE560119C9C26700280EC7 /* HNDecorateControlViewController.m in Sources */,
+				B9882DF219CB06D90093F0F4 /* HNDecorateReportViewController.m in Sources */,
 				B94C854819C9CA770040D47E /* HNMessageModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
