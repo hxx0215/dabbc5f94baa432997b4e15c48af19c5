@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "APService.h"
 #import "HNHomeViewController.h"
+#import "HNLoginViewController.h"
 
 @implementation AppDelegate
 
@@ -28,9 +29,10 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] ;
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor blackColor];
-    HNHomeViewController *homeViewController = [[HNHomeViewController alloc] init];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:homeViewController];
-    self.window.rootViewController = nav;
+//    HNHomeViewController *homeViewController = [[HNHomeViewController alloc] init];
+    HNLoginViewController *loginViewController = [[HNLoginViewController alloc] init];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginViewController];
+    self.window.rootViewController = loginViewController;
     nav.navigationBar.translucent = NO;
 //    _infoLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 90, 320, 200)];
 //    [_infoLabel setBackgroundColor:[UIColor clearColor]];
