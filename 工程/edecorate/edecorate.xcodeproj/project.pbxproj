@@ -42,6 +42,7 @@
 		B9DE560D19C9C5D300280EC7 /* HNMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9DE560C19C9C5D300280EC7 /* HNMessageViewController.m */; };
 		D3F90F1019CB13CA000C95E4 /* HNTemporaryFireViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F90F0F19CB13CA000C95E4 /* HNTemporaryFireViewController.m */; };
 		D3F90F1319CB1474000C95E4 /* HNTemporaryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F90F1219CB1474000C95E4 /* HNTemporaryTableViewCell.m */; };
+		D3F90F1619CB1F0B000C95E4 /* HNTemporaryApplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F90F1519CB1F0B000C95E4 /* HNTemporaryApplyViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -112,6 +113,8 @@
 		D3F90F0F19CB13CA000C95E4 /* HNTemporaryFireViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNTemporaryFireViewController.m; sourceTree = "<group>"; };
 		D3F90F1119CB1474000C95E4 /* HNTemporaryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNTemporaryTableViewCell.h; sourceTree = "<group>"; };
 		D3F90F1219CB1474000C95E4 /* HNTemporaryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNTemporaryTableViewCell.m; sourceTree = "<group>"; };
+		D3F90F1419CB1F0B000C95E4 /* HNTemporaryApplyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNTemporaryApplyViewController.h; sourceTree = "<group>"; };
+		D3F90F1519CB1F0B000C95E4 /* HNTemporaryApplyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNTemporaryApplyViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -247,17 +250,16 @@
 				B9882DF119CB06D90093F0F4 /* HNDecorateReportViewController.m */,
 				B9882DF319CB079A0093F0F4 /* HNReportTableViewCell.h */,
 				B9882DF419CB079A0093F0F4 /* HNReportTableViewCell.m */,
-
 				B9882DF619CB11920093F0F4 /* HNNewReportViewController.h */,
 				B9882DF719CB11920093F0F4 /* HNNewReportViewController.m */,
 				B9882DF919CB152F0093F0F4 /* HNNewCompanyReportView.h */,
 				B9882DFA19CB152F0093F0F4 /* HNNewCompanyReportView.m */,
-
 				D3F90F0E19CB13CA000C95E4 /* HNTemporaryFireViewController.h */,
 				D3F90F0F19CB13CA000C95E4 /* HNTemporaryFireViewController.m */,
 				D3F90F1119CB1474000C95E4 /* HNTemporaryTableViewCell.h */,
 				D3F90F1219CB1474000C95E4 /* HNTemporaryTableViewCell.m */,
-
+				D3F90F1419CB1F0B000C95E4 /* HNTemporaryApplyViewController.h */,
+				D3F90F1519CB1F0B000C95E4 /* HNTemporaryApplyViewController.m */,
 			);
 			name = DecorateControl;
 			sourceTree = "<group>";
@@ -418,6 +420,7 @@
 			files = (
 				B9DE560D19C9C5D300280EC7 /* HNMessageViewController.m in Sources */,
 				B9882DF519CB079A0093F0F4 /* HNReportTableViewCell.m in Sources */,
+				D3F90F1619CB1F0B000C95E4 /* HNTemporaryApplyViewController.m in Sources */,
 				B916F0B819C8781D00A849C7 /* ViewController.m in Sources */,
 				B916F0B219C8781D00A849C7 /* AppDelegate.m in Sources */,
 				B916F0AE19C8781D00A849C7 /* main.m in Sources */,

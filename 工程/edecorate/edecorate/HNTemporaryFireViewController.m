@@ -8,6 +8,7 @@
 
 #import "HNTemporaryFireViewController.h"
 #import "HNTemporaryTableViewCell.h"
+#import "HNTemporaryApplyViewController.h"
 
 @interface HNTemporaryModel : NSObject
 @property (nonatomic, strong)NSString *roomName;
@@ -18,11 +19,19 @@
 
 @interface HNTemporaryFireViewController ()<UITableViewDelegate,UITableViewDataSource>
 
-@property (nonatomic, strong)UITableView *rTableView;
+@property (nonatomic, strong)UITableView *tTableView;
 @property (nonatomic, strong)NSMutableArray *reportList;
+@property (nonatomic)HNTemporaryType temporaryType;
 @end
 
 @implementation HNTemporaryFireViewController
+
+-(id)initWithTemporaryType:(HNTemporaryType)type
+{
+    self = [super init];
+    self.temporaryType = type;
+    return self;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -38,16 +47,39 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
-    self.rTableView = [[UITableView alloc] initWithFrame:self.view.bounds];
-    self.rTableView.delegate = self;
-    self.rTableView.dataSource = self;
-    [self.view addSubview:self.rTableView];
+    self.tTableView = [[UITableView alloc] initWithFrame:self.view.bounds];
+    self.tTableView.delegate = self;
+    self.tTableView.dataSource = self;
+    [self.view addSubview:self.tTableView];
+    
+    
+    self.navigationItem.title = [self getTitleString];
     
     self.reportList = [[NSMutableArray alloc] init];
     HNTemporaryModel *tModel = [[HNTemporaryModel alloc] init];
     tModel.roomName = @"施工房号：XXXX";
     tModel.status = @"审核进度:审核中";
     [self.reportList addObject:tModel];
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //NSInteger row = indexPath.row;
+    HNTemporaryApplyViewController* tac = [[HNTemporaryApplyViewController alloc]init];
+    [self.navigationController pushViewController:tac animated:YES];
+    
+}
+
+-(NSString*)getTitleString
+{
+    if (self.temporaryType == FIRE) {
+        return NSLocalizedString(@"Temporary fire", nil);
+    }
+    else if(self.temporaryType == POWER)
+    {
+        return NSLocalizedString(@"Temporary power", nil);
+    }
+    return @"";
 }
 
 - (void)viewWillAppear:(BOOL)animated{
