@@ -18,7 +18,7 @@
 
 @interface HNTemporaryFireViewController ()<UITableViewDelegate,UITableViewDataSource>
 
-@property (nonatomic, strong)UITableView *rTableView;
+@property (nonatomic, strong)UITableView *tTableView;
 @property (nonatomic, strong)NSMutableArray *reportList;
 @property (nonatomic)HNTemporaryType temporaryType;
 @end
@@ -46,16 +46,31 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
-    self.rTableView = [[UITableView alloc] initWithFrame:self.view.bounds];
-    self.rTableView.delegate = self;
-    self.rTableView.dataSource = self;
-    [self.view addSubview:self.rTableView];
+    self.tTableView = [[UITableView alloc] initWithFrame:self.view.bounds];
+    self.tTableView.delegate = self;
+    self.tTableView.dataSource = self;
+    [self.view addSubview:self.tTableView];
+    
+    
+    self.navigationItem.title = [self getTitleString];
     
     self.reportList = [[NSMutableArray alloc] init];
     HNTemporaryModel *tModel = [[HNTemporaryModel alloc] init];
     tModel.roomName = @"施工房号：XXXX";
     tModel.status = @"审核进度:审核中";
     [self.reportList addObject:tModel];
+}
+
+-(NSString*)getTitleString
+{
+    if (self.temporaryType == FIRE) {
+        return NSLocalizedString(@"Temporary fire", nil);
+    }
+    else if(self.temporaryType == POWER)
+    {
+        return NSLocalizedString(@"Temporary power", nil);
+    }
+    return @"";
 }
 
 - (void)viewWillAppear:(BOOL)animated{
