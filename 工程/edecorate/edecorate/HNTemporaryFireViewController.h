@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HNTemporaryFireViewController : UIViewController
+typedef NS_ENUM(NSInteger, HNTemporaryType)
+{
+    FIRE,
+    POWER
+};
 
+@interface HNTemporaryFireViewController : UIViewController
+-(id)initWithTemporaryType:(HNTemporaryType)type;
 @end

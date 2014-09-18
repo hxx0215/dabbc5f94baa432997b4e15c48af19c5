@@ -20,9 +20,17 @@
 
 @property (nonatomic, strong)UITableView *rTableView;
 @property (nonatomic, strong)NSMutableArray *reportList;
+@property (nonatomic)HNTemporaryType temporaryType;
 @end
 
 @implementation HNTemporaryFireViewController
+
+-(id)initWithTemporaryType:(HNTemporaryType)type
+{
+    self = [super init];
+    self.temporaryType = type;
+    return self;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

@@ -106,12 +106,13 @@
 }
 
 - (void)temporaryFireConstructionButton_Clicked:(id)sender{
-    HNTemporaryFireViewController *temporaryViewController = [[HNTemporaryFireViewController alloc] init];
+    HNTemporaryFireViewController *temporaryViewController = [[HNTemporaryFireViewController alloc] initWithTemporaryType:FIRE];
     [self.navigationController pushViewController:temporaryViewController animated:YES];
 }
 
 - (void)temporaryPowerButton_Clicked:(id)sender{
-    NSLog(@"temporaryPower");
+    HNTemporaryFireViewController *temporaryViewController = [[HNTemporaryFireViewController alloc] initWithTemporaryType:POWER];
+    [self.navigationController pushViewController:temporaryViewController animated:YES];
 }
 
 - (void)deliveryAndInstallationButton_Clicked:(id)sender{
