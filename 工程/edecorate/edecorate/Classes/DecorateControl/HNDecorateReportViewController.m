@@ -8,6 +8,7 @@
 
 #import "HNDecorateReportViewController.h"
 #import "HNReportTableViewCell.h"
+#import "HNNewReportViewController.h"
 
 @interface HNReportModel : NSObject
 @property (nonatomic, strong)NSString *roomName;
@@ -21,6 +22,7 @@
 
 @property (nonatomic, strong)UITableView *rTableView;
 @property (nonatomic, strong)NSMutableArray *reportList;
+@property (nonatomic, strong)UIBarButtonItem *reportButton;
 @end
 
 @implementation HNDecorateReportViewController
@@ -39,10 +41,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
+    self.title = NSLocalizedString(@"Decorate Construction", nil);
     self.rTableView = [[UITableView alloc] initWithFrame:self.view.bounds];
     self.rTableView.delegate = self;
     self.rTableView.dataSource = self;
     [self.view addSubview:self.rTableView];
+    
+    self.reportButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Report", nil) style:UIBarButtonItemStylePlain target:self action:@selector(reportButton_Clicked:)];
+    self.navigationItem.rightBarButtonItem = self.reportButton;
     
     self.reportList = [[NSMutableArray alloc] init];
     HNReportModel *tModel = [[HNReportModel alloc] init];
@@ -55,7 +61,13 @@
     [super viewWillAppear:animated];
     
 }
-
+- (void)reportButton_Clicked:(id)sender{
+    HNNewReportViewController *newReportViewController = [[HNNewReportViewController alloc] init];
+    UINavigationController *nav =[[UINavigationController alloc] initWithRootViewController:newReportViewController];
+    nav.navigationBar.translucent = NO;
+    [self presentViewController:nav animated:YES completion:nil];
+}
+# pragma mark - tableViewDelegate & tableViewDataSource
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 75.0;
 }
@@ -74,4 +86,5 @@
     [cell setStatus:model.status];
     return cell;
 }
+
 @end
