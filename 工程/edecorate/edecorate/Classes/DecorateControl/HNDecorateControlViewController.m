@@ -10,6 +10,7 @@
 #import "UIView+AHKit.h"
 #import "HNDecorateReportViewController.h"
 #import "HNTemporaryFireViewController.h"
+#import "HNOfficePassesViewController.h"
 
 /*
  装修报建
@@ -32,6 +33,7 @@
  */
 
 @interface HNDecorateControlViewController ()
+
 @property (nonatomic, strong)UIButton *decorateReportedConstruction;
 @property (nonatomic, strong)UIButton *decorateAcceptance;
 @property (nonatomic, strong)UIButton *officePasses;
@@ -102,7 +104,8 @@
     NSLog(@"decorateAcceptance");
 }
 - (void)officePassesButton_Clicked:(id)sender{
-    NSLog(@"officePasses");
+    HNOfficePassesViewController *officePassViewcontroller=[[HNOfficePassesViewController alloc] init];
+    [self.navigationController pushViewController:officePassViewcontroller animated:YES];
 }
 
 - (void)temporaryFireConstructionButton_Clicked:(id)sender{
