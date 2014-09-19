@@ -42,7 +42,6 @@
 		B9DE560419C9C40B00280EC7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B9DE560619C9C40B00280EC7 /* Localizable.strings */; };
 		B9DE560D19C9C5D300280EC7 /* HNMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9DE560C19C9C5D300280EC7 /* HNMessageViewController.m */; };
 		D33BBD1519CC711700AA1039 /* HNTemporaryApplyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D33BBD1419CC711700AA1039 /* HNTemporaryApplyView.xib */; };
-		D33BBD1819CC8BD800AA1039 /* HNTemporaryApplyView.m in Sources */ = {isa = PBXBuildFile; fileRef = D33BBD1719CC8BD800AA1039 /* HNTemporaryApplyView.m */; };
 		D3F90F1019CB13CA000C95E4 /* HNTemporaryFireViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F90F0F19CB13CA000C95E4 /* HNTemporaryFireViewController.m */; };
 		D3F90F1319CB1474000C95E4 /* HNTemporaryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F90F1219CB1474000C95E4 /* HNTemporaryTableViewCell.m */; };
 		D3F90F1619CB1F0B000C95E4 /* HNTemporaryApplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F90F1519CB1F0B000C95E4 /* HNTemporaryApplyViewController.m */; };
@@ -117,8 +116,6 @@
 		B9DE560B19C9C5D300280EC7 /* HNMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNMessageViewController.h; path = Classes/Message/HNMessageViewController.h; sourceTree = "<group>"; };
 		B9DE560C19C9C5D300280EC7 /* HNMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNMessageViewController.m; path = Classes/Message/HNMessageViewController.m; sourceTree = "<group>"; };
 		D33BBD1419CC711700AA1039 /* HNTemporaryApplyView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HNTemporaryApplyView.xib; sourceTree = "<group>"; };
-		D33BBD1619CC8BD800AA1039 /* HNTemporaryApplyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNTemporaryApplyView.h; sourceTree = "<group>"; };
-		D33BBD1719CC8BD800AA1039 /* HNTemporaryApplyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNTemporaryApplyView.m; sourceTree = "<group>"; };
 		D3F90F0E19CB13CA000C95E4 /* HNTemporaryFireViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNTemporaryFireViewController.h; sourceTree = "<group>"; };
 		D3F90F0F19CB13CA000C95E4 /* HNTemporaryFireViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNTemporaryFireViewController.m; sourceTree = "<group>"; };
 		D3F90F1119CB1474000C95E4 /* HNTemporaryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNTemporaryTableViewCell.h; sourceTree = "<group>"; };
@@ -270,26 +267,17 @@
 				FC6DCA3F19CC825E00075927 /* HNOfficePassesApplyViewController.m */,
 				FC6DCA4019CC825E00075927 /* HNOfficePassesDetailsViewController.h */,
 				FC6DCA4119CC825E00075927 /* HNOfficePassesDetailsViewController.m */,
-				37C8C3DE19CC22470020458C /* HNOfficePassesViewController.h */,
-				37C8C3DF19CC22470020458C /* HNOfficePassesViewController.m */,
 				B9882DF319CB079A0093F0F4 /* HNReportTableViewCell.h */,
 				B9882DF419CB079A0093F0F4 /* HNReportTableViewCell.m */,
-				D33BBD1419CC711700AA1039 /* HNTemporaryApplyView.xib */,
-				D3F90F1419CB1F0B000C95E4 /* HNTemporaryApplyViewController.h */,
-				D3F90F1519CB1F0B000C95E4 /* HNTemporaryApplyViewController.m */,
 				D3F90F0E19CB13CA000C95E4 /* HNTemporaryFireViewController.h */,
 				D3F90F0F19CB13CA000C95E4 /* HNTemporaryFireViewController.m */,
 				D3F90F1119CB1474000C95E4 /* HNTemporaryTableViewCell.h */,
 				D3F90F1219CB1474000C95E4 /* HNTemporaryTableViewCell.m */,
-
 				D3F90F1419CB1F0B000C95E4 /* HNTemporaryApplyViewController.h */,
 				D3F90F1519CB1F0B000C95E4 /* HNTemporaryApplyViewController.m */,
 				37C8C3DE19CC22470020458C /* HNOfficePassesViewController.h */,
 				37C8C3DF19CC22470020458C /* HNOfficePassesViewController.m */,
 				D33BBD1419CC711700AA1039 /* HNTemporaryApplyView.xib */,
-				D33BBD1619CC8BD800AA1039 /* HNTemporaryApplyView.h */,
-				D33BBD1719CC8BD800AA1039 /* HNTemporaryApplyView.m */,
-
 			);
 			name = DecorateControl;
 			sourceTree = "<group>";
@@ -459,7 +447,6 @@
 				B9DE55FD19C9C0EA00280EC7 /* UIView+AHKit.m in Sources */,
 				B953CE0E19CAFBE000BD57DF /* HNLoginViewController.m in Sources */,
 				B94B7A6519C9BF3E000112ED /* HNHomeViewController.m in Sources */,
-				D33BBD1819CC8BD800AA1039 /* HNTemporaryApplyView.m in Sources */,
 				D3F90F1019CB13CA000C95E4 /* HNTemporaryFireViewController.m in Sources */,
 				FC6DCA4219CC825E00075927 /* HNOfficePassesApplyViewController.m in Sources */,
 				B9DE560119C9C26700280EC7 /* HNDecorateControlViewController.m in Sources */,
