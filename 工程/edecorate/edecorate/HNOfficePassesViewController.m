@@ -1,6 +1,6 @@
 //
 //  HNOfficePassesViewController.m
-//  edecorate
+//  edecorate 出入证申请列表
 //
 //  Created by 熊彬 on 14-9-19.
 //
@@ -8,6 +8,7 @@
 
 #import "HNOfficePassesViewController.h"
 #import "HNTemporaryTableViewCell.h"
+#import "HNOfficePassesDetailsViewController.h"
 
 @interface HNOfficePassModel : NSObject
 @property (nonatomic, strong)NSString *roomName;
@@ -40,9 +41,14 @@
     self.reportList=[[NSMutableArray alloc] init];
     
     HNOfficePassModel *tModel=[[HNOfficePassModel alloc] init];
-    tModel.roomName=@"施工房号：深圳市南山区大富大贵花园A座23G";
+    tModel.roomName=@"施工房号：大富大贵花园A座001";
     tModel.status=@"审核进度：审核中";
     [self.reportList addObject:tModel];
+    
+    HNOfficePassModel *TModel2=[[HNOfficePassModel alloc] init];
+    TModel2.roomName=@"施工房号：大富大贵花园A座002";
+    TModel2.status=@"审核进度：审核通过";
+    [self.reportList addObject:TModel2];
 }
 
 -(void) viewWillAppear:(BOOL)animated{
@@ -70,7 +76,11 @@
 }
 
 
-
+-(void) tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    HNOfficePassesDetailsViewController *officePasseesApply=[[HNOfficePassesDetailsViewController alloc] init];
+    [self.navigationController pushViewController:officePasseesApply animated:YES];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -78,13 +88,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end
