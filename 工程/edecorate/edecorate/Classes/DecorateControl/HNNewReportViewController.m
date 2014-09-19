@@ -12,7 +12,6 @@
 @interface HNNewReportViewController ()
 @property (nonatomic, strong)UIScrollView *backView;
 @property (nonatomic, strong)HNNewCompanyReportView *companyReportView;
-@property (nonatomic, strong)UIBarButtonItem *cancel;
 @end
 
 @implementation HNNewReportViewController
@@ -38,8 +37,6 @@
     self.companyReportView = [[HNNewCompanyReportView alloc] initWithFrame:CGRectMake(0, 20, self.backView.bounds.size.width, self.backView.bounds.size.height * 2)];
     [self.backView addSubview:self.companyReportView];
     
-    self.cancel = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)];
-    self.navigationItem.leftBarButtonItem = self.cancel;
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -57,8 +54,5 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)cancel:(id)sender{
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
 
 @end

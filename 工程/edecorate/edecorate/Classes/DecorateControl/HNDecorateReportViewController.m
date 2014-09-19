@@ -47,8 +47,8 @@
     self.rTableView.dataSource = self;
     [self.view addSubview:self.rTableView];
     
-    self.reportButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Report", nil) style:UIBarButtonItemStylePlain target:self action:@selector(reportButton_Clicked:)];
-    self.navigationItem.rightBarButtonItem = self.reportButton;
+//    self.reportButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Report", nil) style:UIBarButtonItemStylePlain target:self action:@selector(reportButton_Clicked:)];
+//    self.navigationItem.rightBarButtonItem = self.reportButton;
     
     self.reportList = [[NSMutableArray alloc] init];
     HNReportModel *tModel = [[HNReportModel alloc] init];
@@ -62,10 +62,7 @@
     
 }
 - (void)reportButton_Clicked:(id)sender{
-    HNNewReportViewController *newReportViewController = [[HNNewReportViewController alloc] init];
-    UINavigationController *nav =[[UINavigationController alloc] initWithRootViewController:newReportViewController];
-    nav.navigationBar.translucent = NO;
-    [self presentViewController:nav animated:YES completion:nil];
+   
 }
 # pragma mark - tableViewDelegate & tableViewDataSource
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -87,4 +84,10 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    HNNewReportViewController *newReportViewController = [[HNNewReportViewController alloc] init];
+    [self.navigationController pushViewController:newReportViewController animated:YES];
+}
 @end

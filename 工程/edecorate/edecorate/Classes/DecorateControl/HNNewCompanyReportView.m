@@ -80,7 +80,7 @@
     self.companyDataLabels = [[NSMutableArray alloc] init];
     self.companyDataButtons = [[NSMutableArray alloc] init];
     [self.companyDatas enumerateObjectsUsingBlock:^(id obj,NSUInteger idx, BOOL *stop){
-        [self.companyDataLabels addObject:[self createLabelWithString:[NSString stringWithFormat:@"%d、 %@",idx + 1,obj]]];
+        [self.companyDataLabels addObject:[self createLabelWithString:[NSString stringWithFormat:@"%lu、 %@",idx + 1,obj]]];
         [self.companyDataButtons addObject:[self createButtonWithTag:idx + 10]];
     }];
 }
@@ -88,7 +88,7 @@
     self.ownerDataLabels = [[NSMutableArray alloc] init];
     self.ownerDataButtons = [[NSMutableArray alloc] init];
     [self.ownerDatas enumerateObjectsUsingBlock:^(id obj,NSUInteger idx, BOOL *stop){
-        [self.ownerDataLabels addObject:[self createLabelWithString:[NSString stringWithFormat:@"%d、%@",idx + 1, obj]]];
+        [self.ownerDataLabels addObject:[self createLabelWithString:[NSString stringWithFormat:@"%lu、%@",idx + 1, obj]]];
         [self.ownerDataButtons addObject:[self createButtonWithTag:idx + 50]];
     }];
 }
