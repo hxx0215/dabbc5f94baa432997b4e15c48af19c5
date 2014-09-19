@@ -103,6 +103,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //NSInteger row = indexPath.row;
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     HNTemporaryApplyViewController* tac = [[HNTemporaryApplyViewController alloc]init];
     [self.navigationController pushViewController:tac animated:YES];
     

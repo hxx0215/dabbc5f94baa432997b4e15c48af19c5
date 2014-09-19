@@ -24,6 +24,8 @@
 @property (nonatomic, strong)NSMutableArray *ownerDatas;
 @property (nonatomic, strong)NSMutableArray *companyDataButtons;
 @property (nonatomic, strong)NSMutableArray *ownerDataButtons;
+@property (nonatomic, strong)UIButton *areaButton;
+@property (nonatomic, strong)UIButton *communityButton;
 @end
 @implementation HNNewCompanyReportView
 
@@ -44,6 +46,9 @@
         
         self.ownerDatas = [@[NSLocalizedString(@"Planar Structure", nil),NSLocalizedString(@"Floor Plan", nil),NSLocalizedString(@"Wall transformation diagram", nil),NSLocalizedString(@"The ceiling layout", nil),NSLocalizedString(@"Water layout", nil),NSLocalizedString(@"Circuit layout", nil)] mutableCopy];
         [self initOwnerLabels];
+        
+        self.areaButton = [self createButtonWithTag:101];
+        self.communityButton = [self createButtonWithTag:102];
         [self setMyInterface];
     }
     return self;
@@ -70,6 +75,7 @@
     [self addSubview:btn];
     return btn;
 }
+
 - (void)initCompanyLabels{
     self.companyDataLabels = [[NSMutableArray alloc] init];
     self.companyDataButtons = [[NSMutableArray alloc] init];
@@ -102,6 +108,8 @@
     top = [self setLabel:self.communityLabel Top:top];
     top = [self setLabel:self.ownerLabel Top:top];
     top = [self setLabel:self.mobileLabel Top:top];
+    self.areaButton.centerY = self.areaLabel.centerY;
+    self.communityButton.centerY = self.communityLabel.centerY;
     
     [self.ownerDataLabels enumerateObjectsUsingBlock:^(UILabel *label, NSUInteger idx, BOOL *stop){
         UIButton *btn = (UIButton *)self.ownerDataButtons[idx];
