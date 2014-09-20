@@ -8,6 +8,7 @@
 
 #import "HNDecorateCheckViewController.h"
 #import "HNCheckTableViewCell.h"
+#import "HNCheckDetailViewController.h"
 
 @interface HNCheckModel : NSObject
 @property (nonatomic, strong)NSString *roomName;
@@ -66,5 +67,9 @@
     cell.checkSchedule.text = model.checkSchedule;
     cell.checkStage.text = model.checkStage;
     return cell;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    HNCheckDetailViewController *checkDetail = [[HNCheckDetailViewController alloc] init];
+    [self.navigationController pushViewController:checkDetail animated:YES];
 }
 @end
