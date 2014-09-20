@@ -64,13 +64,13 @@
     
     switch (status) {
         case TemporaryStatusApplying:
-            self.statusLabel.text = @"审核进度:审核中";
+            self.statusLabel.text = @"正在处理";
             break;
         case TemporaryStatusPassed:
-            self.statusLabel.text = @"审核进度:已通过";
+            self.statusLabel.text = @"投诉成功";
             break;
         case TemporaryStatusNotPassed:
-            self.statusLabel.text = @"审核进度:未通过";
+            self.statusLabel.text = @"投诉驳回";
             break;
         default:
             self.statusLabel.text = @"";

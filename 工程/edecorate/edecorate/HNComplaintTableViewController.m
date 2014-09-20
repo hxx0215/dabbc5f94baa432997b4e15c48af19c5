@@ -8,6 +8,8 @@
 
 #import "HNComplaintTableViewController.h"
 #import "HNComplaintTableViewCell.h"
+#import "HNComplaintApplyViewController.h"
+#import "HNComplaintDetailsViewController.h"
 
 @interface HNComplaintTableViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong)UITableView *tTableView;
@@ -38,7 +40,7 @@
     [self.view addSubview:self.tTableView];
     
     
-    self.navigationItem.title = NSLocalizedString(@"Temporary power", nil);
+    self.navigationItem.title = NSLocalizedString(@"I have a complaint", nil);
     
     self.modelList = [[NSMutableArray alloc] init];
     HNTemporaryModel *tModel = [[HNTemporaryModel alloc] init];
@@ -82,13 +84,13 @@
     HNTemporaryModel* model = self.modelList[row];
     if(model.status==TemporaryStatusCustom)
     {
-        //HNComplaintTableViewCell* tac = [[HNTemporaryApplyViewController alloc]initWithModel:model];
-        //[self.navigationController pushViewController:tac animated:YES];
+        HNComplaintApplyViewController* avc = [[HNComplaintApplyViewController alloc]initWithModel:model];
+        [self.navigationController pushViewController:avc animated:YES];
     }
     else
     {
-        //HNTemporaryDetailsViewController* tdc = [[HNTemporaryDetailsViewController alloc]initWithModel:model];
-        //[self.navigationController pushViewController:tdc animated:YES];
+        HNComplaintDetailsViewController* dac = [[HNComplaintDetailsViewController alloc]initWithModel:model];
+        [self.navigationController pushViewController:dac animated:YES];
     }
     
 }
