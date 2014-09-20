@@ -64,3 +64,9 @@
 "The ceiling layout" = "天花布置图";
 "Water layout" = "水路布置图";
 "Circuit layout" = "电路布置图";
+
+"Origin" = "原始结构";
+"Water" = "防水闭水";
+"Circuir" = "打压电路";
+"Backfill" = "沉侧回填";
+"Complete" = "竣工综合";

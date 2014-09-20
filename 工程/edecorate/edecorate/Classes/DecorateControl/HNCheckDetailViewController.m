@@ -23,6 +23,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [self.originStructure setTitle:NSLocalizedString(@"Origin", nil) forState:UIControlStateNormal];
+    [self.waterProof setTitle:NSLocalizedString(@"Water", nil) forState:UIControlStateNormal];
+    [self.Circuit setTitle:NSLocalizedString(@"Circuir", nil) forState:UIControlStateNormal];
+    [self.backFill setTitle:NSLocalizedString(@"Backfill", nil) forState:UIControlStateNormal];
+    [self.complete setTitle:NSLocalizedString(@"Complete", nil) forState:UIControlStateNormal];
 }
 
 - (void)didReceiveMemoryWarning {
