@@ -7,15 +7,18 @@
 //
 
 #import "HNCheckDetailViewController.h"
+#import "UIView+AHKit.h"
+#import "HNCheckDetailView.h"
 
 @interface HNCheckDetailViewController ()
-@property (nonatomic, strong)IBOutlet UIScrollView *backView;
+@property (nonatomic, strong) IBOutlet UIScrollView *backView;
 @property (strong, nonatomic) IBOutlet UIButton *originStructure;
 @property (strong, nonatomic) IBOutlet UIButton *waterProof;
 @property (strong, nonatomic) IBOutlet UIButton *Circuit;
 @property (strong, nonatomic) IBOutlet UIButton *backFill;
 @property (strong, nonatomic) IBOutlet UIButton *complete;
-
+@property (strong, nonatomic) HNCheckDetailView *mainStruct;
+@property (strong, nonatomic) NSMutableArray *mainStructItems;
 @end
 
 @implementation HNCheckDetailViewController
@@ -28,6 +31,7 @@
     [self.Circuit setTitle:NSLocalizedString(@"Circuir", nil) forState:UIControlStateNormal];
     [self.backFill setTitle:NSLocalizedString(@"Backfill", nil) forState:UIControlStateNormal];
     [self.complete setTitle:NSLocalizedString(@"Complete", nil) forState:UIControlStateNormal];
+    [self initMainStruct];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -35,14 +39,15 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)initMainStruct{
+    self.mainStructItems = [@[NSLocalizedString(@"Kitchen Structure", nil),NSLocalizedString(@"WC Structure", nil),NSLocalizedString(@"House Structure", nil)] mutableCopy];
+    self.mainStruct = [[HNCheckDetailView alloc] initWithTitle:@"主体结构" items:self.mainStructItems width:self.view.width];
+    self.mainStruct.controller = self;
+    [self.backView addSubview:self.mainStruct];
+    self.mainStruct.top = self.originStructure.bottom;
 }
-*/
 
+- (void)upload:(id)sender{
+    
+}
 @end

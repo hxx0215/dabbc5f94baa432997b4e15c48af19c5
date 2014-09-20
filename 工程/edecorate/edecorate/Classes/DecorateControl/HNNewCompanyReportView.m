@@ -68,7 +68,7 @@
 - (UILabel *)createLabelWithString:(NSString *)content{
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(5, 0, 200, 30)];
     label.text = content;
-    label.font = [UIFont systemFontOfSize:15];
+    label.font = [UIFont systemFontOfSize:12];
     label.numberOfLines = 2;
 //    [label sizeToFit];
     [self addSubview:label];
@@ -91,7 +91,7 @@
     self.companyDataLabels = [[NSMutableArray alloc] init];
     self.companyDataButtons = [[NSMutableArray alloc] init];
     [self.companyDatas enumerateObjectsUsingBlock:^(id obj,NSUInteger idx, BOOL *stop){
-        [self.companyDataLabels addObject:[self createLabelWithString:[NSString stringWithFormat:@"%lu、 %@",idx + 1,obj]]];
+        [self.companyDataLabels addObject:[self createLabelWithString:[NSString stringWithFormat:@"%u、 %@",idx + 1,obj]]];
         [self.companyDataButtons addObject:[self createButtonWithTag:idx + 10]];
     }];
 }
@@ -99,7 +99,7 @@
     self.ownerDataLabels = [[NSMutableArray alloc] init];
     self.ownerDataButtons = [[NSMutableArray alloc] init];
     [self.ownerDatas enumerateObjectsUsingBlock:^(id obj,NSUInteger idx, BOOL *stop){
-        [self.ownerDataLabels addObject:[self createLabelWithString:[NSString stringWithFormat:@"%lu、%@",idx + 1, obj]]];
+        [self.ownerDataLabels addObject:[self createLabelWithString:[NSString stringWithFormat:@"%u、%@",idx + 1, obj]]];
         [self.ownerDataButtons addObject:[self createButtonWithTag:idx + 50]];
     }];
 }
@@ -139,8 +139,25 @@
 }
 
 - (void)upload:(id)sender{
-    
+    UIButton *btn = (UIButton *)sender;
+    if (self.controller && [self.controller respondsToSelector:@selector(companyReportView:shouldUpload:)]){
+        [self.controller companyReportView:self shouldUpload:btn.tag];
+    }
 }
 
-
+- (void)buttonImageSelected:(NSInteger)tag{
+    UIButton *btn = (UIButton *)[self viewWithTag:tag];
+    if (![btn.titleLabel.text isEqualToString:NSLocalizedString(@"Change", nil)]){
+        UILabel *label = [[UILabel alloc] init];
+        label.text = NSLocalizedString(@"Uploaded", nil);
+        [label sizeToFit];
+        [self addSubview:label];
+        btn.width += 5;
+        btn.right += 10;
+        label.right = btn.left;
+        label.centerY = btn.centerY;
+    }
+    [btn setTitle:NSLocalizedString(@"Change", nil) forState:UIControlStateNormal];
+    
+}
 @end
