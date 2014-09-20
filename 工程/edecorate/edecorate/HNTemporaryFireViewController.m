@@ -9,19 +9,15 @@
 #import "HNTemporaryFireViewController.h"
 #import "HNTemporaryTableViewCell.h"
 #import "HNTemporaryApplyViewController.h"
+#import "HNTemporaryDetailsViewController.h"
 
-@interface HNTemporaryModel : NSObject
-@property (nonatomic, strong)NSString *roomName;
-@property (nonatomic, strong)NSString *status;
-@end
-@implementation HNTemporaryModel
-@end
 
 @interface HNTemporaryFireViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong)UITableView *tTableView;
-@property (nonatomic, strong)NSMutableArray *reportList;
+@property (nonatomic, strong)NSMutableArray *modelList;
 @property (nonatomic)HNTemporaryType temporaryType;
+@property (nonatomic, strong)HNTemporaryTableViewCell* temporaryTableViewCell;
 @end
 
 @implementation HNTemporaryFireViewController
@@ -55,14 +51,12 @@
     
     self.navigationItem.title = [self getTitleString];
     
-    self.reportList = [[NSMutableArray alloc] init];
+    self.modelList = [[NSMutableArray alloc] init];
     HNTemporaryModel *tModel = [[HNTemporaryModel alloc] init];
     tModel.roomName = @"施工房号：XXXX";
-    tModel.status = @"审核进度:审核中";
-    [self.reportList addObject:tModel];
+    tModel.status = TemporaryStatusCustom;
+    [self.modelList addObject:tModel];
 }
-
-
 
 -(NSString*)getTitleString
 {
@@ -78,6 +72,10 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    if(self.temporaryTableViewCell)
+    {
+        [self.temporaryTableViewCell update];
+    }
     
 }
 #pragma mark - tableView Delegate & DataSource
@@ -85,27 +83,36 @@
     return 75.0;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [self.reportList count];
+    return [self.modelList count];
 }
 
 - (HNTemporaryTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *reuseIdentifier = @"reportCell";
     HNTemporaryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
     if (!cell){
-        cell = [[HNTemporaryTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
+        HNTemporaryModel *model =self.modelList[indexPath.row];
+        cell = [[HNTemporaryTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier withModel:model];
     }
-    HNTemporaryModel *model =self.reportList[indexPath.row];
-    [cell setRoomName:model.roomName];
-    [cell setStatus:model.status];
+    
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //NSInteger row = indexPath.row;
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    HNTemporaryApplyViewController* tac = [[HNTemporaryApplyViewController alloc]init];
-    [self.navigationController pushViewController:tac animated:YES];
+    self.temporaryTableViewCell = (HNTemporaryTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
+    NSInteger row = indexPath.row;
+    HNTemporaryModel* model = self.modelList[row];
+    if(model.status==TemporaryStatusCustom)
+    {
+        HNTemporaryApplyViewController* tac = [[HNTemporaryApplyViewController alloc]initWithModel:model];
+        [self.navigationController pushViewController:tac animated:YES];
+    }
+    else
+    {
+        HNTemporaryDetailsViewController* tdc = [[HNTemporaryDetailsViewController alloc]initWithModel:model];
+        [self.navigationController pushViewController:tdc animated:YES];
+    }
     
 }
 /*
