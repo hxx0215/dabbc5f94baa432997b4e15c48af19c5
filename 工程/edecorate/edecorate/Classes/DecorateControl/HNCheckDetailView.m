@@ -33,7 +33,7 @@
         self.items = [items mutableCopy];
         self.buttons = [[NSMutableArray alloc] init];
         [self initItems];
-        [self sizeToFit];
+        self.height = ((UIButton *)[self.buttons lastObject]).bottom;
     }
     return self;
 }
@@ -60,5 +60,16 @@
         [self addSubview:btn];
         [self.buttons addObject:btn];
     }];
+}
+- (void)setSelector:(SEL)selector{
+    [self.buttons enumerateObjectsUsingBlock:^(id obj, NSUInteger idx,BOOL *stop){
+        UIButton *btn = obj;
+        [btn addTarget:self.controller action:selector forControlEvents:UIControlEventTouchUpInside];
+    }];
+}
+- (void)setButtonTag:(NSInteger)base{
+    self.base = base;
+    for (int i=0;i< [self.buttons count];i++)
+        ((UIButton *)self.buttons[i]).tag = base+i;
 }
 @end
