@@ -11,6 +11,7 @@
 #import "HNDecorateReportViewController.h"
 #import "HNTemporaryFireViewController.h"
 #import "HNOfficePassesViewController.h"
+#import "HNDecorateCheckViewController.h"
 
 /*
  装修报建
@@ -101,7 +102,8 @@
 }
 
 - (void)decorateAcceptanceButton_Clicked:(id)sender{
-    NSLog(@"decorateAcceptance");
+    HNDecorateCheckViewController *checkViewController = [[HNDecorateCheckViewController alloc] init];
+    [self.navigationController pushViewController:checkViewController animated:YES];
 }
 - (void)officePassesButton_Clicked:(id)sender{
     HNOfficePassesViewController *officePassViewcontroller=[[HNOfficePassesViewController alloc] init];
