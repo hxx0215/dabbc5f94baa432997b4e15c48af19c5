@@ -69,9 +69,9 @@
     if (!cell){
         cell = [[HNTemporaryTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
     }
-    HNOfficePassModel *model =self.reportList[indexPath.row];
-    [cell setRoomName:model.roomName];
-    [cell setStatus:model.status];
+    //HNOfficePassModel *model =self.reportList[indexPath.row];
+    //[cell setRoomName:model.roomName];
+    //[cell setStatus:model.status];
     return cell;
 }
 

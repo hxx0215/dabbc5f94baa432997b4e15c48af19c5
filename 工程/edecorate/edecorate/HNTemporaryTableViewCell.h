@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#include "HNTemporaryModel.h"
 
 @interface HNTemporaryTableViewCell : UITableViewCell
-- (void)setRoomName:(NSString *)roomname;
-- (void)setStatus:(NSString *)status;
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withModel:(HNTemporaryModel*)model;
+-(void)update;
 @end

@@ -1,33 +1,15 @@
 //
-//  HNTemporaryApplyViewController.m
+//  HNTemporaryDetailsViewController.m
 //  edecorate
 //
-//  Created by 刘向宏 on 14-9-18.
+//  Created by 刘向宏 on 14-9-20.
 //
 //
 
-#import "HNTemporaryApplyViewController.h"
+#import "HNTemporaryDetailsViewController.h"
 #import "UIView+AHKit.h"
-/*
- "House Information" = "房屋信息";
- "Owners" = "业主";
- "Phone number" = "手机号";
- "Construction unit" = "施工单位";
- "Person in charge of construction" = "施工负责人";
- "Notice the use of fire" = "用火须知";
- "Fire units" = "用火单位";
- "Use of fire by" = "用火是由";
- "Fire tools" = "用火工具";
- "Fire load" = "用火负荷";
- "Start Time" = "开始时间";
- "End Time" = "结束时间";
- "Operator" = "操作人";
- "Phone" = "联系电话";
- "Valid documents" = "有效证件";
- "Upload" = "上传";
- "Submission" = "提交申请";
- */
-@interface HNTemporaryApplyViewController ()<UIAlertViewDelegate>
+
+@interface HNTemporaryDetailsViewController ()
 @property (nonatomic, strong)IBOutlet UIScrollView *mainView;
 @property (nonatomic, strong)IBOutlet UILabel *houseInfMainLabel;
 @property (nonatomic, strong)IBOutlet UILabel *houseInfTitleLabel;
@@ -54,16 +36,10 @@
 @property (strong, nonatomic) IBOutlet UILabel *validDocumentsTitleLabel;
 @property (strong, nonatomic) IBOutlet UIButton *noticeFireButton;
 @property (strong, nonatomic) IBOutlet UILabel *uploadTitleLabel;
-@property (strong, nonatomic) IBOutlet UIButton *commitButton;
+@property (strong, nonatomic) IBOutlet UIButton *checkOutButton;
 @end
 
-#define HSPACE 10
-#define WSPACE 5
-#define TSPACEPER 0.1
-#define LABELHEIGHT 20
-#define STARTTOP 10
-
-@implementation HNTemporaryApplyViewController
+@implementation HNTemporaryDetailsViewController
 
 -(id)initWithModel:(HNTemporaryModel *)model
 {
@@ -74,30 +50,37 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    // Do any additional setup after loading the view from its nib.
     self.view.backgroundColor = [UIColor whiteColor];
-    
     [self labelWithTitle:NSLocalizedString(@"House Information", nil) label:self.houseInfMainLabel];
     
     [self labelWithTitle:NSLocalizedString(@"House Information", nil) label:self.houseInfTitleLabel];
-    [self labelWithTitle:self.temporaryModel.houseInf label:self.houseInfLabel];
+    NSString* houseiformation = @"深圳南三区么么大厦1层23楼";
+    [self labelWithTitle:houseiformation label:self.houseInfLabel];
     
     [self labelWithTitle:NSLocalizedString(@"Owners", nil) label:self.ownersTitleLabel];
-    [self labelWithTitle:self.temporaryModel.constructionPerson  label:self.constructionPersonLabel];
+    houseiformation = @"李大木";
+    [self labelWithTitle:houseiformation label:self.constructionPersonLabel];
     [self labelWithTitle:NSLocalizedString(@"Phone number", nil) label:self.ownersPhoneNumberTitleLabel];
-    [self labelWithTitle:self.temporaryModel.ownersPhoneNumber  label:self.ownersPhoneNumberLabel];
+    houseiformation = @"13560731432";
+    [self.ownersPhoneNumberLabel setText:houseiformation];
+    [self labelWithTitle:houseiformation label:self.ownersPhoneNumberLabel];
     
     //constructionUnitTitleLabel
     [self labelWithTitle:NSLocalizedString(@"Construction unit", nil) label:self.constructionUnitTitleLabel];
     
-    [self labelWithTitle:self.temporaryModel.constructionUnit  label:self.constructionUnitLabel];
+    houseiformation = @"深圳装修公司";
+    [self labelWithTitle:houseiformation label:self.constructionUnitLabel];
     
     [self labelWithTitle:NSLocalizedString(@"Person in charge of construction", nil) label:self.constructionPersonTitleLabel];
     
-    [self labelWithTitle:self.temporaryModel.owners  label:self.ownersLabel];
+    houseiformation = @"李大木";
+    [self labelWithTitle:houseiformation label:self.ownersLabel];
     
     [self labelWithTitle:NSLocalizedString(@"Phone number", nil) label:self.constructionPersonPhoneNumberTitleLabel];
     
-    [self labelWithTitle:self.temporaryModel.constructionPersonPhoneNumber  label:self.constructionPersonPhoneNumberLabel];
+    houseiformation = @"13560731432";
+    [self labelWithTitle:houseiformation label:self.constructionPersonPhoneNumberLabel];
     
     
     [self labelWithTitle:NSLocalizedString(@"Fire Apply", nil) label:self.temporaryApplyMainLable];
@@ -114,20 +97,24 @@
     //@property (strong, nonatomic) IBOutlet UIButton *commitButton;
     [self.noticeFireButton setTitle:NSLocalizedString(@"Notice the use of fire", nil) forState:UIControlStateNormal];
     [self.noticeFireButton sizeToFit];
-
     
-    [self.commitButton setTitle:NSLocalizedString(@"Submission", nil) forState:UIControlStateNormal];
-    [self.commitButton sizeToFit];
-    self.commitButton.layer.borderWidth = 1.0;
-    self.commitButton.layer.borderColor = [UIColor blackColor].CGColor;
-
-        // Do any additional setup after loading the view.
+    
+    [self.checkOutButton setTitle:NSLocalizedString(@"Check Out", nil) forState:UIControlStateNormal];
+    [self.checkOutButton sizeToFit];
+    self.checkOutButton.layer.borderWidth = 1.0;
+    self.checkOutButton.layer.borderColor = [UIColor blackColor].CGColor;
 }
 
-- (IBAction)commit:(id)sender
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.mainView.frame = [[UIScreen mainScreen] bounds];
+    self.mainView.contentSize = CGSizeMake(self.view.bounds.size.width, self.mainView.height+20);
+}
+
+- (IBAction)checkOut:(id)sender
 {
-    UIAlertView* alert=[[UIAlertView alloc]initWithTitle:nil message:@"已提交审核" delegate:self cancelButtonTitle:@"OK"otherButtonTitles:nil,nil];
-    alert.tag=1;
+    UIAlertView* alert=[[UIAlertView alloc]initWithTitle:nil message:NSLocalizedString(@"Check Out", nil) delegate:self cancelButtonTitle:@"OK"otherButtonTitles:nil,nil];
+    alert.tag=3;
     [alert show];
 }
 
@@ -141,10 +128,7 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if(alertView.tag==1)
-    {
-        self.temporaryModel.status = TemporaryStatusApplying;
         [self.navigationController popViewControllerAnimated:YES];
-    }
 }
 
 - (void)labelWithTitle:(NSString *)title label:(UILabel*)lab
@@ -152,12 +136,6 @@
     [lab setText:title];
     [lab sizeToFit];
     lab.layer.borderColor = [UIColor blackColor].CGColor;
-}
-
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    self.mainView.frame = [[UIScreen mainScreen] bounds];
-    self.mainView.contentSize = CGSizeMake(self.view.bounds.size.width, self.mainView.height+20);
 }
 
 - (void)didReceiveMemoryWarning {

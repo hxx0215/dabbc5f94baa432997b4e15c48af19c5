@@ -11,10 +11,11 @@
 @interface HNTemporaryTableViewCell ()
 @property (nonatomic, strong)UILabel *roomLabel;
 @property (nonatomic, strong)UILabel *statusLabel;
+@property (nonatomic, strong)HNTemporaryModel* temporaryModel;
 @end
 @implementation HNTemporaryTableViewCell
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withModel:(HNTemporaryModel*)model
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
@@ -26,13 +27,19 @@
         self.statusLabel.font = [UIFont systemFontOfSize:28];
         [self.contentView addSubview:self.roomLabel];
         [self.contentView addSubview:self.statusLabel];
+        self.temporaryModel = model;
+        self.roomLabel.text = model.roomName;
+        [self setStatus:model.status];
         
         self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     return self;
 }
 
-
+-(void)update
+{
+    [self setStatus:self.temporaryModel.status];
+}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
@@ -43,8 +50,22 @@
 - (void)setRoomName:(NSString *)roomname{
     self.roomLabel.text = roomname;
 }
-- (void)setStatus:(NSString *)status{
-    self.statusLabel.text = status;
+- (void)setStatus:(HNTemporaryStatus)status
+{
+    switch (status) {
+        case TemporaryStatusApplying:
+            self.statusLabel.text = @"审核进度:审核中";
+            break;
+        case TemporaryStatusPassed:
+            self.statusLabel.text = @"审核进度:已通过";
+            break;
+        case TemporaryStatusNotPassed:
+            self.statusLabel.text = @"审核进度:未通过";
+            break;
+        default:
+            self.statusLabel.text = @"";
+            break;
+    }
 }
 @end
 

@@ -49,6 +49,9 @@
 		B9DE560419C9C40B00280EC7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B9DE560619C9C40B00280EC7 /* Localizable.strings */; };
 		B9DE560D19C9C5D300280EC7 /* HNMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9DE560C19C9C5D300280EC7 /* HNMessageViewController.m */; };
 		D33BBD1519CC711700AA1039 /* HNTemporaryApplyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D33BBD1419CC711700AA1039 /* HNTemporaryApplyView.xib */; };
+		D39662F519CD4E6300EE49B8 /* HNTemporaryDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D39662F319CD4E6300EE49B8 /* HNTemporaryDetailsViewController.m */; };
+		D39662F619CD4E6300EE49B8 /* HNTemporaryDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D39662F419CD4E6300EE49B8 /* HNTemporaryDetailsViewController.xib */; };
+		D3C07BBD19CD60AF003EA5E4 /* HNTemporaryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C07BBC19CD60AF003EA5E4 /* HNTemporaryModel.m */; };
 		D3F90F1019CB13CA000C95E4 /* HNTemporaryFireViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F90F0F19CB13CA000C95E4 /* HNTemporaryFireViewController.m */; };
 		D3F90F1319CB1474000C95E4 /* HNTemporaryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F90F1219CB1474000C95E4 /* HNTemporaryTableViewCell.m */; };
 		D3F90F1619CB1F0B000C95E4 /* HNTemporaryApplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F90F1519CB1F0B000C95E4 /* HNTemporaryApplyViewController.m */; };
@@ -135,6 +138,11 @@
 		B9DE560B19C9C5D300280EC7 /* HNMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNMessageViewController.h; path = Classes/Message/HNMessageViewController.h; sourceTree = "<group>"; };
 		B9DE560C19C9C5D300280EC7 /* HNMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNMessageViewController.m; path = Classes/Message/HNMessageViewController.m; sourceTree = "<group>"; };
 		D33BBD1419CC711700AA1039 /* HNTemporaryApplyView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HNTemporaryApplyView.xib; sourceTree = "<group>"; };
+		D39662F219CD4E6300EE49B8 /* HNTemporaryDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNTemporaryDetailsViewController.h; sourceTree = "<group>"; };
+		D39662F319CD4E6300EE49B8 /* HNTemporaryDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNTemporaryDetailsViewController.m; sourceTree = "<group>"; };
+		D39662F419CD4E6300EE49B8 /* HNTemporaryDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HNTemporaryDetailsViewController.xib; sourceTree = "<group>"; };
+		D3C07BBB19CD60AF003EA5E4 /* HNTemporaryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNTemporaryModel.h; sourceTree = "<group>"; };
+		D3C07BBC19CD60AF003EA5E4 /* HNTemporaryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNTemporaryModel.m; sourceTree = "<group>"; };
 		D3F90F0E19CB13CA000C95E4 /* HNTemporaryFireViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNTemporaryFireViewController.h; sourceTree = "<group>"; };
 		D3F90F0F19CB13CA000C95E4 /* HNTemporaryFireViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNTemporaryFireViewController.m; sourceTree = "<group>"; };
 		D3F90F1119CB1474000C95E4 /* HNTemporaryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNTemporaryTableViewCell.h; sourceTree = "<group>"; };
@@ -309,6 +317,11 @@
 				37C8C3DE19CC22470020458C /* HNOfficePassesViewController.h */,
 				37C8C3DF19CC22470020458C /* HNOfficePassesViewController.m */,
 				D33BBD1419CC711700AA1039 /* HNTemporaryApplyView.xib */,
+				D39662F219CD4E6300EE49B8 /* HNTemporaryDetailsViewController.h */,
+				D39662F319CD4E6300EE49B8 /* HNTemporaryDetailsViewController.m */,
+				D39662F419CD4E6300EE49B8 /* HNTemporaryDetailsViewController.xib */,
+				D3C07BBB19CD60AF003EA5E4 /* HNTemporaryModel.h */,
+				D3C07BBC19CD60AF003EA5E4 /* HNTemporaryModel.m */,
 			);
 			name = DecorateControl;
 			sourceTree = "<group>";
@@ -454,6 +467,7 @@
 			files = (
 				B9DE560419C9C40B00280EC7 /* Localizable.strings in Resources */,
 				D33BBD1519CC711700AA1039 /* HNTemporaryApplyView.xib in Resources */,
+				D39662F619CD4E6300EE49B8 /* HNTemporaryDetailsViewController.xib in Resources */,
 				B916F0E319C878AC00A849C7 /* PushConfig.plist in Resources */,
 				B916F0BA19C8781D00A849C7 /* Images.xcassets in Resources */,
 				B916F0AC19C8781D00A849C7 /* InfoPlist.strings in Resources */,
@@ -478,6 +492,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3C07BBD19CD60AF003EA5E4 /* HNTemporaryModel.m in Sources */,
 				B9DE560D19C9C5D300280EC7 /* HNMessageViewController.m in Sources */,
 				FC6DCA4319CC825E00075927 /* HNOfficePassesDetailsViewController.m in Sources */,
 				B9882DF519CB079A0093F0F4 /* HNReportTableViewCell.m in Sources */,
@@ -485,6 +500,7 @@
 				B916F0B819C8781D00A849C7 /* ViewController.m in Sources */,
 				B916F0B219C8781D00A849C7 /* AppDelegate.m in Sources */,
 				B9D3DEDA19CD235A0020CDC9 /* HNCheckTableViewCell.m in Sources */,
+				D39662F519CD4E6300EE49B8 /* HNTemporaryDetailsViewController.m in Sources */,
 				B916F0AE19C8781D00A849C7 /* main.m in Sources */,
 				B9DE55FD19C9C0EA00280EC7 /* UIView+AHKit.m in Sources */,
 				B953CE0E19CAFBE000BD57DF /* HNLoginViewController.m in Sources */,
