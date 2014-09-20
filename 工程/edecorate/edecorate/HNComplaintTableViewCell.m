@@ -1,20 +1,20 @@
 //
-//  HNTemporaryTableViewCell.m
+//  HNComplaintTableViewCell.m
 //  edecorate
 //
-//  Created by 刘向宏 on 14-9-18.
+//  Created by 刘向宏 on 14-9-20.
 //
 //
 
-#import "HNTemporaryTableViewCell.h"
+#import "HNComplaintTableViewCell.h"
+@interface HNComplaintTableViewCell()
 
-@interface HNTemporaryTableViewCell ()
 @property (nonatomic, strong)UILabel *roomLabel;
 @property (nonatomic, strong)UILabel *statusLabel;
 @property (nonatomic, strong)HNTemporaryModel* temporaryModel;
 @end
-@implementation HNTemporaryTableViewCell
 
+@implementation HNComplaintTableViewCell
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withModel:(HNTemporaryModel*)model
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -36,7 +36,7 @@
     return self;
 }
 
--(void)updateMyCell
+-(void)update
 {
     [self setStatus:self.temporaryModel.status];
 }
@@ -47,12 +47,21 @@
     
     // Configure the view for the selected state
 }
+
+-(void)updateMyCell
+{
+    [self setStatus:self.temporaryModel.status];
+}
+
 - (void)setRoomName:(NSString *)roomname{
     self.roomLabel.text = roomname;
 }
+
 - (void)setStatus:(HNTemporaryStatus)status
 {
+    
     self.roomLabel.font = [UIFont systemFontOfSize:15];
+    
     switch (status) {
         case TemporaryStatusApplying:
             self.statusLabel.text = @"审核进度:审核中";
@@ -69,5 +78,11 @@
             break;
     }
 }
-@end
 
+
+- (void)awakeFromNib {
+    // Initialization code
+}
+
+
+@end

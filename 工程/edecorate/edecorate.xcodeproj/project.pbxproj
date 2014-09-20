@@ -49,9 +49,11 @@
 		B9DE560419C9C40B00280EC7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B9DE560619C9C40B00280EC7 /* Localizable.strings */; };
 		B9DE560D19C9C5D300280EC7 /* HNMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9DE560C19C9C5D300280EC7 /* HNMessageViewController.m */; };
 		D33BBD1519CC711700AA1039 /* HNTemporaryApplyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D33BBD1419CC711700AA1039 /* HNTemporaryApplyView.xib */; };
+		D391EE8C19CD787D00DE3363 /* HNComplaintTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D391EE8B19CD787D00DE3363 /* HNComplaintTableViewController.m */; };
 		D39662F519CD4E6300EE49B8 /* HNTemporaryDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D39662F319CD4E6300EE49B8 /* HNTemporaryDetailsViewController.m */; };
 		D39662F619CD4E6300EE49B8 /* HNTemporaryDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D39662F419CD4E6300EE49B8 /* HNTemporaryDetailsViewController.xib */; };
 		D3C07BBD19CD60AF003EA5E4 /* HNTemporaryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C07BBC19CD60AF003EA5E4 /* HNTemporaryModel.m */; };
+		D3C07BC019CDAC7A003EA5E4 /* HNComplaintTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C07BBF19CDAC7A003EA5E4 /* HNComplaintTableViewCell.m */; };
 		D3F90F1019CB13CA000C95E4 /* HNTemporaryFireViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F90F0F19CB13CA000C95E4 /* HNTemporaryFireViewController.m */; };
 		D3F90F1319CB1474000C95E4 /* HNTemporaryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F90F1219CB1474000C95E4 /* HNTemporaryTableViewCell.m */; };
 		D3F90F1619CB1F0B000C95E4 /* HNTemporaryApplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F90F1519CB1F0B000C95E4 /* HNTemporaryApplyViewController.m */; };
@@ -138,11 +140,15 @@
 		B9DE560B19C9C5D300280EC7 /* HNMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNMessageViewController.h; path = Classes/Message/HNMessageViewController.h; sourceTree = "<group>"; };
 		B9DE560C19C9C5D300280EC7 /* HNMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNMessageViewController.m; path = Classes/Message/HNMessageViewController.m; sourceTree = "<group>"; };
 		D33BBD1419CC711700AA1039 /* HNTemporaryApplyView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HNTemporaryApplyView.xib; sourceTree = "<group>"; };
+		D391EE8A19CD787D00DE3363 /* HNComplaintTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNComplaintTableViewController.h; sourceTree = "<group>"; };
+		D391EE8B19CD787D00DE3363 /* HNComplaintTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNComplaintTableViewController.m; sourceTree = "<group>"; };
 		D39662F219CD4E6300EE49B8 /* HNTemporaryDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNTemporaryDetailsViewController.h; sourceTree = "<group>"; };
 		D39662F319CD4E6300EE49B8 /* HNTemporaryDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNTemporaryDetailsViewController.m; sourceTree = "<group>"; };
 		D39662F419CD4E6300EE49B8 /* HNTemporaryDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HNTemporaryDetailsViewController.xib; sourceTree = "<group>"; };
 		D3C07BBB19CD60AF003EA5E4 /* HNTemporaryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNTemporaryModel.h; sourceTree = "<group>"; };
 		D3C07BBC19CD60AF003EA5E4 /* HNTemporaryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNTemporaryModel.m; sourceTree = "<group>"; };
+		D3C07BBE19CDAC7A003EA5E4 /* HNComplaintTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNComplaintTableViewCell.h; sourceTree = "<group>"; };
+		D3C07BBF19CDAC7A003EA5E4 /* HNComplaintTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNComplaintTableViewCell.m; sourceTree = "<group>"; };
 		D3F90F0E19CB13CA000C95E4 /* HNTemporaryFireViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNTemporaryFireViewController.h; sourceTree = "<group>"; };
 		D3F90F0F19CB13CA000C95E4 /* HNTemporaryFireViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNTemporaryFireViewController.m; sourceTree = "<group>"; };
 		D3F90F1119CB1474000C95E4 /* HNTemporaryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNTemporaryTableViewCell.h; sourceTree = "<group>"; };
@@ -322,6 +328,10 @@
 				D39662F419CD4E6300EE49B8 /* HNTemporaryDetailsViewController.xib */,
 				D3C07BBB19CD60AF003EA5E4 /* HNTemporaryModel.h */,
 				D3C07BBC19CD60AF003EA5E4 /* HNTemporaryModel.m */,
+				D391EE8A19CD787D00DE3363 /* HNComplaintTableViewController.h */,
+				D391EE8B19CD787D00DE3363 /* HNComplaintTableViewController.m */,
+				D3C07BBE19CDAC7A003EA5E4 /* HNComplaintTableViewCell.h */,
+				D3C07BBF19CDAC7A003EA5E4 /* HNComplaintTableViewCell.m */,
 			);
 			name = DecorateControl;
 			sourceTree = "<group>";
@@ -505,6 +515,7 @@
 				B9DE55FD19C9C0EA00280EC7 /* UIView+AHKit.m in Sources */,
 				B953CE0E19CAFBE000BD57DF /* HNLoginViewController.m in Sources */,
 				B94B7A6519C9BF3E000112ED /* HNHomeViewController.m in Sources */,
+				D3C07BC019CDAC7A003EA5E4 /* HNComplaintTableViewCell.m in Sources */,
 				B9D3DECB19CD0B2C0020CDC9 /* HNReportPurchaseViewController.m in Sources */,
 				B9D3DEE619CD65500020CDC9 /* HNCheckDetailView.m in Sources */,
 				D3F90F1019CB13CA000C95E4 /* HNTemporaryFireViewController.m in Sources */,
@@ -514,6 +525,7 @@
 				B9882DFB19CB152F0093F0F4 /* HNNewCompanyReportView.m in Sources */,
 				37C8C3E019CC22470020458C /* HNOfficePassesViewController.m in Sources */,
 				B9882DF819CB11920093F0F4 /* HNNewReportViewController.m in Sources */,
+				D391EE8C19CD787D00DE3363 /* HNComplaintTableViewController.m in Sources */,
 				B9882DF219CB06D90093F0F4 /* HNDecorateReportViewController.m in Sources */,
 				D3F90F1319CB1474000C95E4 /* HNTemporaryTableViewCell.m in Sources */,
 				B94C854819C9CA770040D47E /* HNMessageModel.m in Sources */,

@@ -12,6 +12,7 @@
 #import "HNTemporaryFireViewController.h"
 #import "HNOfficePassesViewController.h"
 #import "HNDecorateCheckViewController.h"
+#include "HNComplaintTableViewController.h"
 
 /*
  装修报建
@@ -129,7 +130,8 @@
 }
 
 - (void)IHaveAComplaintButton_Clicked:(id)sender{
-    NSLog(@"IHaveAComplaint");
+    HNComplaintTableViewController *complaintViewController = [[HNComplaintTableViewController alloc] init];
+    [self.navigationController pushViewController:complaintViewController animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
