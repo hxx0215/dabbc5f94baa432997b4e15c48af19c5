@@ -22,6 +22,7 @@
                 <outlet property="houseInfMainLabel" destination="9C1-S0-f2m" id="DeR-Mw-vTx"/>
                 <outlet property="houseInfTitleLabel" destination="Nh9-Sm-i8l" id="geB-sb-K8E"/>
                 <outlet property="mainView" destination="iN0-l3-epB" id="Bqu-6t-c6T"/>
+                <outlet property="noticeFireButton" destination="U6x-ev-ma7" id="DNl-8P-tjj"/>
                 <outlet property="operatorTitleLabel" destination="iGw-jD-YRC" id="aY2-EV-8Wq"/>
                 <outlet property="ownersLabel" destination="QCS-dy-lBb" id="vBh-oU-imM"/>
                 <outlet property="ownersPhoneNumberLabel" destination="Wb7-aw-NfE" id="Ptb-W8-WJn"/>
@@ -278,6 +279,15 @@
                     </state>
                     <connections>
                         <action selector="commit:" destination="-1" eventType="touchUpInside" id="0zS-HO-IaH"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="U6x-ev-ma7">
+                    <rect key="frame" x="249" y="134" width="46" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Italic" family="Helvetica Neue" pointSize="15"/>
+                    <state key="normal" title="Button"/>
+                    <connections>
+                        <action selector="noticeFireClicked:" destination="-1" eventType="touchUpInside" id="63K-5S-ooC"/>
                     </connections>
                 </button>
             </subviews>

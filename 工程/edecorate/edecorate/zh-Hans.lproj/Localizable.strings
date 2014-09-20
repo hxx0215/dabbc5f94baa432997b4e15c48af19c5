@@ -26,6 +26,7 @@
 "Phone number" = "手机号";
 "Construction unit" = "施工单位";
 "Person in charge of construction" = "施工负责人";
+"Fire Apply" = "用火申请";
 "Notice the use of fire" = "用火须知";
 "Fire units" = "用火单位";
 "Use of fire by" = "用火是由";
@@ -38,6 +39,7 @@
 "Valid documents" = "有效证件";
 "Upload" = "上传";
 "Submission" = "提交申请";
+"Details" = "详情";
 
 
 
