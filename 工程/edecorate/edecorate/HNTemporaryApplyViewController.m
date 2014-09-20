@@ -157,7 +157,7 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.mainView.frame = [[UIScreen mainScreen] bounds];
-    self.mainView.contentSize = CGSizeMake(self.view.bounds.size.width, self.mainView.height+20);
+    self.mainView.contentSize = CGSizeMake(self.view.bounds.size.width, self.commitButton.bottom+20);
 }
 
 - (void)didReceiveMemoryWarning {
