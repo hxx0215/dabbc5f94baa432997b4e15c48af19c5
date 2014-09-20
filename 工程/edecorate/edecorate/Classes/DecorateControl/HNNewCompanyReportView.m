@@ -138,7 +138,7 @@
     return view.bottom;
 }
 
-- (void)upload:(id)sedner{
+- (void)upload:(id)sender{
     
 }
 

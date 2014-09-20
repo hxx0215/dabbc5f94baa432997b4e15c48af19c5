@@ -43,6 +43,7 @@
 		B9D3DEDA19CD235A0020CDC9 /* HNCheckTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D3DED919CD235A0020CDC9 /* HNCheckTableViewCell.m */; };
 		B9D3DEDE19CD25430020CDC9 /* HNCheckDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D3DEDC19CD25430020CDC9 /* HNCheckDetailViewController.m */; };
 		B9D3DEDF19CD25430020CDC9 /* HNCheckDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9D3DEDD19CD25430020CDC9 /* HNCheckDetailViewController.xib */; };
+		B9D3DEE319CD2EFD0020CDC9 /* HNImagePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D3DEE219CD2EFD0020CDC9 /* HNImagePickerViewController.m */; };
 		B9DE55FD19C9C0EA00280EC7 /* UIView+AHKit.m in Sources */ = {isa = PBXBuildFile; fileRef = B9DE55FC19C9C0EA00280EC7 /* UIView+AHKit.m */; };
 		B9DE560119C9C26700280EC7 /* HNDecorateControlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9DE560019C9C26700280EC7 /* HNDecorateControlViewController.m */; };
 		B9DE560419C9C40B00280EC7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B9DE560619C9C40B00280EC7 /* Localizable.strings */; };
@@ -120,6 +121,8 @@
 		B9D3DEDB19CD25430020CDC9 /* HNCheckDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNCheckDetailViewController.h; path = Classes/DecorateControl/HNCheckDetailViewController.h; sourceTree = "<group>"; };
 		B9D3DEDC19CD25430020CDC9 /* HNCheckDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNCheckDetailViewController.m; path = Classes/DecorateControl/HNCheckDetailViewController.m; sourceTree = "<group>"; };
 		B9D3DEDD19CD25430020CDC9 /* HNCheckDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HNCheckDetailViewController.xib; path = Classes/DecorateControl/HNCheckDetailViewController.xib; sourceTree = "<group>"; };
+		B9D3DEE119CD2EFD0020CDC9 /* HNImagePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNImagePickerViewController.h; path = Classes/HNImagePickerViewController.h; sourceTree = "<group>"; };
+		B9D3DEE219CD2EFD0020CDC9 /* HNImagePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNImagePickerViewController.m; path = Classes/HNImagePickerViewController.m; sourceTree = "<group>"; };
 		B9DE55FB19C9C0EA00280EC7 /* UIView+AHKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+AHKit.h"; path = "Third Party/UIView+AHKit.h"; sourceTree = "<group>"; };
 		B9DE55FC19C9C0EA00280EC7 /* UIView+AHKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+AHKit.m"; path = "Third Party/UIView+AHKit.m"; sourceTree = "<group>"; };
 		B9DE55FF19C9C26700280EC7 /* HNDecorateControlViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNDecorateControlViewController.h; path = Classes/DecorateControl/HNDecorateControlViewController.h; sourceTree = "<group>"; };
@@ -326,6 +329,15 @@
 			name = Message;
 			sourceTree = "<group>";
 		};
+		B9D3DEE019CD2E8A0020CDC9 /* Share */ = {
+			isa = PBXGroup;
+			children = (
+				B9D3DEE119CD2EFD0020CDC9 /* HNImagePickerViewController.h */,
+				B9D3DEE219CD2EFD0020CDC9 /* HNImagePickerViewController.m */,
+			);
+			name = Share;
+			sourceTree = "<group>";
+		};
 		B9DE55FE19C9C12C00280EC7 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -345,6 +357,7 @@
 				B94B7A6219C9BE73000112ED /* Message */,
 				B94B7A6119C9BE4E000112ED /* BusinessBackground */,
 				B94B7A6019C9BE25000112ED /* DecorateControl */,
+				B9D3DEE019CD2E8A0020CDC9 /* Share */,
 				B9F295E319C9A961003242DF /* Third Party */,
 			);
 			name = Classes;
@@ -471,6 +484,7 @@
 				D3F90F1619CB1F0B000C95E4 /* HNTemporaryApplyViewController.m in Sources */,
 				B916F0B819C8781D00A849C7 /* ViewController.m in Sources */,
 				B916F0B219C8781D00A849C7 /* AppDelegate.m in Sources */,
+				B9D3DEE319CD2EFD0020CDC9 /* HNImagePickerViewController.m in Sources */,
 				B9D3DEDA19CD235A0020CDC9 /* HNCheckTableViewCell.m in Sources */,
 				B916F0AE19C8781D00A849C7 /* main.m in Sources */,
 				B9DE55FD19C9C0EA00280EC7 /* UIView+AHKit.m in Sources */,

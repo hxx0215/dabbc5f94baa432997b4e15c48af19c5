@@ -69,6 +69,7 @@
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     HNCheckDetailViewController *checkDetail = [[HNCheckDetailViewController alloc] init];
     [self.navigationController pushViewController:checkDetail animated:YES];
 }

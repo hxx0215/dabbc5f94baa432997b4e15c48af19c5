@@ -23,6 +23,7 @@
 @property (nonatomic, strong)UITableView *rTableView;
 @property (nonatomic, strong)NSMutableArray *reportList;
 @property (nonatomic, strong)UIBarButtonItem *reportButton;
+@property (nonatomic, strong)UIImagePickerController *imgaPicker;
 @end
 
 @implementation HNDecorateReportViewController
