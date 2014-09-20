@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface HNNewCompanyReportView : UIView
-
+@property (nonatomic, strong)UIButton *purchaseButton;
 @end

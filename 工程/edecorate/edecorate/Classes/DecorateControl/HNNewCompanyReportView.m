@@ -9,6 +9,7 @@
 #import "HNNewCompanyReportView.h"
 #import "UIView+AHKit.h"
 
+
 @interface HNNewCompanyReportView()
 @property (nonatomic, strong)UILabel *companyDataLabel;
 @property (nonatomic, strong)NSMutableArray *companyDataLabels;
@@ -26,6 +27,7 @@
 @property (nonatomic, strong)NSMutableArray *ownerDataButtons;
 @property (nonatomic, strong)UIButton *areaButton;
 @property (nonatomic, strong)UIButton *communityButton;
+
 @end
 @implementation HNNewCompanyReportView
 
@@ -49,6 +51,15 @@
         
         self.areaButton = [self createButtonWithTag:101];
         self.communityButton = [self createButtonWithTag:102];
+        
+        self.purchaseButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        self.purchaseButton.frame = CGRectMake(100, 0, 160, 35);
+        
+        [self.purchaseButton setTitle:NSLocalizedString(@"Go to Purchase", nil) forState:UIControlStateNormal];
+        [self.purchaseButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        self.purchaseButton.layer.borderColor = [UIColor blackColor].CGColor;
+        self.purchaseButton.layer.borderWidth = 1.0;
+        [self addSubview:self.purchaseButton];
         [self setMyInterface];
     }
     return self;
@@ -97,36 +108,39 @@
     __block CGFloat top = self.companyDataLabel.bottom;
     [self.companyDataLabels enumerateObjectsUsingBlock:^(UILabel *label, NSUInteger idx, BOOL *stop){
         UIButton *btn = (UIButton *)self.companyDataButtons[idx];
-        top = [self setLabel:label Top:top];
+        top = [self setView:label Top:top];
         btn.centerY = label.centerY;
 //        [label sizeToFit];
     }];
     
-    top = [self setLabel:self.ownerDataLabel Top:top];
-    top = [self setLabel:self.roomNameLabel Top:top];
-    top = [self setLabel:self.areaLabel Top:top];
-    top = [self setLabel:self.communityLabel Top:top];
-    top = [self setLabel:self.ownerLabel Top:top];
-    top = [self setLabel:self.mobileLabel Top:top];
+    top = [self setView:self.ownerDataLabel Top:top];
+    top = [self setView:self.roomNameLabel Top:top];
+    top = [self setView:self.areaLabel Top:top];
+    top = [self setView:self.communityLabel Top:top];
+    top = [self setView:self.ownerLabel Top:top];
+    top = [self setView:self.mobileLabel Top:top];
     self.areaButton.centerY = self.areaLabel.centerY;
     self.communityButton.centerY = self.communityLabel.centerY;
     
     [self.ownerDataLabels enumerateObjectsUsingBlock:^(UILabel *label, NSUInteger idx, BOOL *stop){
         UIButton *btn = (UIButton *)self.ownerDataButtons[idx];
         btn.top = top;
-        top = [self setLabel:label Top:top];
+        top = [self setView:label Top:top];
         btn.centerY = label.centerY;
 //        [label sizeToFit];
     }];
-    self.height = top;
+    self.purchaseButton.top = top + 10;
+    self.height = self.purchaseButton.bottom + 10;
 }
 
-- (CGFloat)setLabel:(UILabel *)label Top:(CGFloat)top{
-    label.top =top;
-    return label.bottom;
+- (CGFloat)setView:(UIView *)view Top:(CGFloat)top{
+    view.top =top;
+    return view.bottom;
 }
 
 - (void)upload:(id)sedner{
     
 }
+
+
 @end

@@ -8,6 +8,7 @@
 
 #import "HNNewReportViewController.h"
 #import "HNNewCompanyReportView.h"
+#import "HNReportPurchaseViewController.h"
 
 @interface HNNewReportViewController ()
 @property (nonatomic, strong)UIScrollView *backView;
@@ -36,7 +37,7 @@
     
     self.companyReportView = [[HNNewCompanyReportView alloc] initWithFrame:CGRectMake(0, 20, self.backView.bounds.size.width, self.backView.bounds.size.height * 2)];
     [self.backView addSubview:self.companyReportView];
-    
+    [self.companyReportView.purchaseButton addTarget:self action:@selector(purchase:) forControlEvents:UIControlEventTouchUpInside];
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -54,5 +55,8 @@
     // Dispose of any resources that can be recreated.
 }
 
-
+- (void)purchase:(id)sender{
+    HNReportPurchaseViewController *purchaseViewController = [[HNReportPurchaseViewController alloc] init];
+    [self.navigationController pushViewController:purchaseViewController animated:YES];
+}
 @end
