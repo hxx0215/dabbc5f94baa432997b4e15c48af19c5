@@ -27,20 +27,33 @@
  "Upload" = "上传";
  "Submission" = "提交申请";
  */
-@interface HNTemporaryApplyViewController ()
-@property (nonatomic, strong)UILabel *houseInfMainLabel;
-@property (nonatomic, strong)UILabel *houseInfTitleLabel;
-@property (nonatomic, strong)UILabel *houseInfLabel;
-@property (nonatomic, strong)UILabel *ownersTitleLabel;
-@property (nonatomic, strong)UILabel *ownersLabel;
-@property (nonatomic, strong)UILabel *ownersPhoneNumberTitleLabel;
-@property (nonatomic, strong)UILabel *ownersPhoneNumberLabel;
-@property (nonatomic, strong)UILabel *constructionUnitTitleLabel;
-@property (nonatomic, strong)UILabel *constructionUnitLabel;
-@property (nonatomic, strong)UILabel *constructionPersonTitleLabel;
-@property (nonatomic, strong)UILabel *constructionPersonLabel;
-@property (nonatomic, strong)UILabel *constructionPersonPhoneNumberTitleLabel;
-@property (nonatomic, strong)UILabel *constructionPersonPhoneNumberLabel;
+@interface HNTemporaryApplyViewController ()<UIAlertViewDelegate>
+@property (nonatomic, strong)IBOutlet UIScrollView *mainView;
+@property (nonatomic, strong)IBOutlet UILabel *houseInfMainLabel;
+@property (nonatomic, strong)IBOutlet UILabel *houseInfTitleLabel;
+@property (nonatomic, strong)IBOutlet UILabel *houseInfLabel;
+@property (nonatomic, strong)IBOutlet UILabel *ownersTitleLabel;
+@property (nonatomic, strong)IBOutlet UILabel *ownersLabel;
+@property (nonatomic, strong)IBOutlet UILabel *ownersPhoneNumberTitleLabel;
+@property (nonatomic, strong)IBOutlet UILabel *ownersPhoneNumberLabel;
+@property (nonatomic, strong)IBOutlet UILabel *constructionUnitTitleLabel;
+@property (nonatomic, strong)IBOutlet UILabel *constructionUnitLabel;
+@property (nonatomic, strong)IBOutlet UILabel *constructionPersonTitleLabel;
+@property (nonatomic, strong)IBOutlet UILabel *constructionPersonLabel;
+@property (nonatomic, strong)IBOutlet UILabel *constructionPersonPhoneNumberTitleLabel;
+@property (nonatomic, strong)IBOutlet UILabel *constructionPersonPhoneNumberLabel;
+@property (strong, nonatomic) IBOutlet UILabel *temporaryApplyMainLable;
+@property (strong, nonatomic) IBOutlet UILabel *fireunitsTitleLabel;
+@property (strong, nonatomic) IBOutlet UILabel *useOfFireByTitleLabel;
+@property (strong, nonatomic) IBOutlet UILabel *fireToolsTitleLabel;
+@property (strong, nonatomic) IBOutlet UILabel *fireLoadTitleLabel;
+@property (strong, nonatomic) IBOutlet UILabel *startTimeTitleLabel;
+@property (strong, nonatomic) IBOutlet UILabel *endTimeTitleLabel;
+@property (strong, nonatomic) IBOutlet UILabel *operatorTitleLabel;
+@property (strong, nonatomic) IBOutlet UILabel *phoneTitleLabel;
+@property (strong, nonatomic) IBOutlet UILabel *validDocumentsTitleLabel;
+@property (strong, nonatomic) IBOutlet UILabel *uploadTitleLabel;
+@property (strong, nonatomic) IBOutlet UIButton *commitButton;
 @end
 
 #define HSPACE 10
@@ -53,92 +66,67 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSInteger width = self.view.width;
-    NSInteger height = self.view.height;
     self.view.backgroundColor = [UIColor whiteColor];
-    self.houseInfMainLabel = [self createLabelWithTitle:NSLocalizedString(@"House Information", nil)];
-    self.houseInfMainLabel.top = STARTTOP;
-    self.houseInfMainLabel.left = WSPACE;
-    self.houseInfMainLabel.width = width - 2*WSPACE;
-    self.houseInfMainLabel.textColor = [UIColor greenColor];
+    [self labelWithTitle:NSLocalizedString(@"House Information", nil) label:self.houseInfMainLabel];
     
-    self.houseInfTitleLabel = [self createLabelWithTitle:NSLocalizedString(@"House Information", nil)];
-    self.houseInfTitleLabel.top = STARTTOP+LABELHEIGHT;
-    self.houseInfTitleLabel.left = WSPACE;
-    
-    NSInteger lableWidth = self.houseInfTitleLabel.width;
-    NSInteger lableLeft = self.houseInfTitleLabel.width+2*WSPACE;
-    
+    [self labelWithTitle:NSLocalizedString(@"House Information", nil) label:self.houseInfTitleLabel];
     NSString* houseiformation = @"深圳南三区么么大厦1层23楼";
-    self.houseInfLabel = [self createLabelWithTitle:houseiformation];
-    self.houseInfLabel.top = STARTTOP+LABELHEIGHT;
-    self.houseInfLabel.left = lableLeft;
+    [self labelWithTitle:houseiformation label:self.houseInfLabel];
     
-    self.ownersTitleLabel = [self createLabelWithTitle:NSLocalizedString(@"Owners", nil)];
-    self.ownersTitleLabel.top = STARTTOP+2*LABELHEIGHT;
-    self.ownersTitleLabel.left = WSPACE;
-    self.ownersTitleLabel.width = lableWidth;
-    
+    [self labelWithTitle:NSLocalizedString(@"Owners", nil) label:self.ownersTitleLabel];
     houseiformation = @"李大木";
-    self.constructionPersonLabel = [self createLabelWithTitle:houseiformation];
-    self.constructionPersonLabel.top = STARTTOP+2*LABELHEIGHT;
-    self.constructionPersonLabel.left = lableLeft;
-    self.constructionPersonLabel.width = width/2-lableLeft-HSPACE;
-    
-    self.ownersPhoneNumberTitleLabel = [self createLabelWithTitle:NSLocalizedString(@"Phone number", nil)];
-    self.ownersPhoneNumberTitleLabel.top = STARTTOP+2*LABELHEIGHT;
-    self.ownersPhoneNumberTitleLabel.left = width/2-HSPACE;
-    self.ownersPhoneNumberTitleLabel.width = lableWidth;
-    
+    [self labelWithTitle:houseiformation label:self.constructionPersonLabel];
+    [self labelWithTitle:NSLocalizedString(@"Phone number", nil) label:self.ownersPhoneNumberTitleLabel];
     houseiformation = @"13560731432";
-    self.ownersPhoneNumberTitleLabel = [self createLabelWithTitle:houseiformation];
-    self.ownersPhoneNumberTitleLabel.top = STARTTOP+2*LABELHEIGHT;
-    self.ownersPhoneNumberTitleLabel.left = width - self.ownersPhoneNumberTitleLabel.right;
-    
+    [self.ownersPhoneNumberLabel setText:houseiformation];
+    [self labelWithTitle:houseiformation label:self.ownersPhoneNumberLabel];
     
     //constructionUnitTitleLabel
-    self.constructionUnitTitleLabel = [self createLabelWithTitle:NSLocalizedString(@"Construction unit", nil)];
-    self.constructionUnitTitleLabel.top = STARTTOP+3*LABELHEIGHT;
-    self.constructionUnitTitleLabel.left = WSPACE;
+    [self labelWithTitle:NSLocalizedString(@"Construction unit", nil) label:self.constructionUnitTitleLabel];
     
     houseiformation = @"深圳装修公司";
-    self.constructionUnitLabel = [self createLabelWithTitle:houseiformation];
-    self.constructionUnitLabel.top = STARTTOP+3*LABELHEIGHT;
-    self.constructionUnitLabel.left = lableLeft;
+    [self labelWithTitle:houseiformation label:self.constructionUnitLabel];
     
-    self.constructionPersonTitleLabel = [self createLabelWithTitle:NSLocalizedString(@"Person in charge of construction", nil)];
-    self.constructionPersonTitleLabel.top = STARTTOP+4*LABELHEIGHT;
-    self.constructionPersonTitleLabel.left = WSPACE;
-    self.constructionPersonTitleLabel.width = lableWidth;
+    [self labelWithTitle:NSLocalizedString(@"Person in charge of construction", nil) label:self.constructionPersonTitleLabel];
     
     houseiformation = @"李大木";
-    self.ownersLabel = [self createLabelWithTitle:houseiformation];
-    self.ownersLabel.top = STARTTOP+4*LABELHEIGHT;
-    self.ownersLabel.left = lableLeft;
-    self.ownersLabel.width = width/2-lableLeft-HSPACE;
+    [self labelWithTitle:houseiformation label:self.ownersLabel];
     
-    self.constructionPersonPhoneNumberTitleLabel = [self createLabelWithTitle:NSLocalizedString(@"Phone number", nil)];
-    self.constructionPersonPhoneNumberTitleLabel.top = STARTTOP+4*LABELHEIGHT;
-    self.constructionPersonPhoneNumberTitleLabel.left = width/2-HSPACE;
-    self.constructionPersonPhoneNumberTitleLabel.width = lableWidth;
+    [self labelWithTitle:NSLocalizedString(@"Phone number", nil) label:self.constructionPersonPhoneNumberTitleLabel];
     
     houseiformation = @"13560731432";
-    self.constructionPersonPhoneNumberLabel = [self createLabelWithTitle:houseiformation];
-    self.constructionPersonPhoneNumberLabel.top = STARTTOP+4*LABELHEIGHT;
-    self.constructionPersonPhoneNumberLabel.left = self.ownersPhoneNumberTitleLabel.left;
-    // Do any additional setup after loading the view.
+    [self labelWithTitle:houseiformation label:self.constructionPersonPhoneNumberLabel];
+    
+    
+    
+    self.commitButton.layer.borderWidth = 1.0;
+    self.commitButton.layer.borderColor = [UIColor blackColor].CGColor;
+
+        // Do any additional setup after loading the view.
 }
 
-- (UILabel *)createLabelWithTitle:(NSString *)title
+- (IBAction)commit:(id)sender
 {
-    UILabel *lab = [[UILabel alloc]init];
+    UIAlertView* alert=[[UIAlertView alloc]initWithTitle:nil message:@"已提交审核" delegate:self cancelButtonTitle:@"OK"otherButtonTitles:nil,nil];
+    [alert show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)labelWithTitle:(NSString *)title label:(UILabel*)lab
+{
     [lab setText:title];
-    [lab setTextColor:[UIColor blackColor]];
     [lab sizeToFit];
-    lab.height = LABELHEIGHT;
     lab.layer.borderColor = [UIColor blackColor].CGColor;
-    [self.view addSubview:lab];
-    return lab;
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.mainView.frame = [[UIScreen mainScreen] bounds];
+    self.mainView.contentSize = CGSizeMake(self.view.bounds.size.width, self.mainView.height+20);
 }
 
 - (void)didReceiveMemoryWarning {
