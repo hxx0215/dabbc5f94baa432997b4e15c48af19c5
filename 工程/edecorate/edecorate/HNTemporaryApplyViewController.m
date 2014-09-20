@@ -79,25 +79,25 @@
     [self labelWithTitle:NSLocalizedString(@"House Information", nil) label:self.houseInfMainLabel];
     
     [self labelWithTitle:NSLocalizedString(@"House Information", nil) label:self.houseInfTitleLabel];
-    [self labelWithTitle:self.temporaryModel.houseInf label:self.houseInfLabel];
+    [self labelWithTitle:self.temporaryModel.huseInfo.houseInf label:self.houseInfLabel];
     
     [self labelWithTitle:NSLocalizedString(@"Owners", nil) label:self.ownersTitleLabel];
-    [self labelWithTitle:self.temporaryModel.constructionPerson  label:self.constructionPersonLabel];
+    [self labelWithTitle:self.temporaryModel.huseInfo.constructionPerson  label:self.constructionPersonLabel];
     [self labelWithTitle:NSLocalizedString(@"Phone number", nil) label:self.ownersPhoneNumberTitleLabel];
-    [self labelWithTitle:self.temporaryModel.ownersPhoneNumber  label:self.ownersPhoneNumberLabel];
+    [self labelWithTitle:self.temporaryModel.huseInfo.ownersPhoneNumber  label:self.ownersPhoneNumberLabel];
     
     //constructionUnitTitleLabel
     [self labelWithTitle:NSLocalizedString(@"Construction unit", nil) label:self.constructionUnitTitleLabel];
     
-    [self labelWithTitle:self.temporaryModel.constructionUnit  label:self.constructionUnitLabel];
+    [self labelWithTitle:self.temporaryModel.huseInfo.constructionUnit  label:self.constructionUnitLabel];
     
     [self labelWithTitle:NSLocalizedString(@"Person in charge of construction", nil) label:self.constructionPersonTitleLabel];
     
-    [self labelWithTitle:self.temporaryModel.owners  label:self.ownersLabel];
+    [self labelWithTitle:self.temporaryModel.huseInfo.owners  label:self.ownersLabel];
     
     [self labelWithTitle:NSLocalizedString(@"Phone number", nil) label:self.constructionPersonPhoneNumberTitleLabel];
     
-    [self labelWithTitle:self.temporaryModel.constructionPersonPhoneNumber  label:self.constructionPersonPhoneNumberLabel];
+    [self labelWithTitle:self.temporaryModel.huseInfo.constructionPersonPhoneNumber  label:self.constructionPersonPhoneNumberLabel];
     
     
     [self labelWithTitle:NSLocalizedString(@"Fire Apply", nil) label:self.temporaryApplyMainLable];

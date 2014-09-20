@@ -20,10 +20,7 @@ typedef NS_ENUM(NSInteger, HNTemporaryStatus)
     
 };
 
-@interface HNTemporaryModel : NSObject
-@property (nonatomic, strong)NSString *roomName;
-@property (nonatomic)HNTemporaryStatus status;
-
+@interface HNHouseInfoModel : NSObject
 @property (nonatomic, strong)NSString *houseInf;
 @property (nonatomic, strong)NSString *constructionPerson;
 @property (nonatomic, strong)NSString *constructionPersonPhoneNumber;
@@ -31,4 +28,11 @@ typedef NS_ENUM(NSInteger, HNTemporaryStatus)
 @property (nonatomic, strong)NSString *ownersPhoneNumber;
 @property (nonatomic, strong)NSString *constructionUnit;
 @end
+
+@interface HNTemporaryModel : NSObject
+@property (nonatomic, strong)NSString *roomName;
+@property (nonatomic, strong)HNHouseInfoModel *huseInfo;
+@property (nonatomic)HNTemporaryStatus status;
+@end
+
 #endif
