@@ -27,7 +27,7 @@
  "Upload" = "上传";
  "Submission" = "提交申请";
  */
-@interface HNTemporaryApplyViewController ()<UIAlertViewDelegate>
+@interface HNTemporaryApplyViewController ()<UIAlertViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (nonatomic, strong)IBOutlet UIScrollView *mainView;
 @property (nonatomic, strong)IBOutlet UILabel *houseInfMainLabel;
 @property (nonatomic, strong)IBOutlet UILabel *houseInfTitleLabel;
@@ -53,8 +53,22 @@
 @property (strong, nonatomic) IBOutlet UILabel *phoneTitleLabel;
 @property (strong, nonatomic) IBOutlet UILabel *validDocumentsTitleLabel;
 @property (strong, nonatomic) IBOutlet UIButton *noticeFireButton;
+@property (strong, nonatomic) IBOutlet UIButton *uploadButton;
 @property (strong, nonatomic) IBOutlet UILabel *uploadTitleLabel;
 @property (strong, nonatomic) IBOutlet UIButton *commitButton;
+
+
+@property (strong, nonatomic) IBOutlet UITextField *fireunitsTF;
+@property (strong, nonatomic) IBOutlet UITextField *useOfFireByTF;
+@property (strong, nonatomic) IBOutlet UITextField *fireToolsTF;
+@property (strong, nonatomic) IBOutlet UITextField *fireLoadTF;
+@property (strong, nonatomic) IBOutlet UITextField *startTimeTF;
+@property (strong, nonatomic) IBOutlet UITextField *endTimeTF;
+@property (strong, nonatomic) IBOutlet UITextField *operatorTF;
+@property (strong, nonatomic) IBOutlet UITextField *phoneTF;
+@property (strong, nonatomic) IBOutlet UITextField *validDocumentsTF;
+
+@property (nonatomic, strong)UIImagePickerController *imagePicker;
 @end
 
 #define HSPACE 10
@@ -111,15 +125,41 @@
     [self labelWithTitle:NSLocalizedString(@"Phone", nil) label:self.phoneTitleLabel];
     [self labelWithTitle:NSLocalizedString(@"Valid documents", nil) label:self.validDocumentsTitleLabel];
     [self labelWithTitle:NSLocalizedString(@"Upload", nil) label:self.uploadTitleLabel];
+    
+    NSInteger i=0;
+    self.fireunitsTF.tag = i++;
+    self.useOfFireByTF.tag = i++;
+    self.fireToolsTF.tag = i++;
+    self.fireLoadTF.tag = i++;
+    self.startTimeTF.tag = i++;
+    self.endTimeTF.tag = i++;
+    self.operatorTF.tag = i++;
+    self.phoneTF.tag = i++;
+    self.validDocumentsTF.tag = i++;
+    
     //@property (strong, nonatomic) IBOutlet UIButton *commitButton;
     [self.noticeFireButton setTitle:NSLocalizedString(@"Notice the use of fire", nil) forState:UIControlStateNormal];
     [self.noticeFireButton sizeToFit];
 
+    [self.uploadButton setTitle:NSLocalizedString(@"Upload", nil) forState:UIControlStateNormal];
+    [self.uploadButton sizeToFit];
+    self.uploadButton.layer.borderWidth = 1.0;
+    self.uploadButton.layer.borderColor = [UIColor blackColor].CGColor;
     
     [self.commitButton setTitle:NSLocalizedString(@"Submission", nil) forState:UIControlStateNormal];
     [self.commitButton sizeToFit];
     self.commitButton.layer.borderWidth = 1.0;
     self.commitButton.layer.borderColor = [UIColor blackColor].CGColor;
+    
+    
+    UIImagePickerControllerSourceType sourceType=UIImagePickerControllerSourceTypePhotoLibrary;
+    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        sourceType=UIImagePickerControllerSourceTypePhotoLibrary;
+    }
+    self.imagePicker = [[UIImagePickerController alloc] init];
+    self.imagePicker.delegate =self;
+    self.imagePicker.sourceType = sourceType;
+    self.imagePicker.allowsEditing = NO;
 
         // Do any additional setup after loading the view.
 }
@@ -137,6 +177,46 @@
     alert.tag = 2;
     [alert show];
 }
+- (IBAction)beginEdit:(id)sender {
+    NSLog(@"beginEdit");
+}
+- (IBAction)editEnd:(id)sender {
+    UITextField *tf = (UITextField *)sender;
+    switch (tf.tag) {
+        case 0:
+            self.temporaryModel.dataInfo.fireUnits = tf.text;
+            break;
+        case 1:
+            self.temporaryModel.dataInfo.useOfFireBy = tf.text;
+            break;
+        case 2:
+            self.temporaryModel.dataInfo.fireTools = tf.text;
+            break;
+        case 3:
+            self.temporaryModel.dataInfo.fireLoad = tf.text;
+            break;
+        case 4:
+            self.temporaryModel.dataInfo.startTime = tf.text;
+            break;
+        case 5:
+            self.temporaryModel.dataInfo.endTime = tf.text;
+            break;
+        case 6:
+            self.temporaryModel.dataInfo.operatorPerson = tf.text;
+            break;
+        case 7:
+            self.temporaryModel.dataInfo.phone = tf.text;
+            break;
+        case 8:
+            self.temporaryModel.dataInfo.validDocuments = tf.text;
+            break;
+            
+        default:
+            NSLog(@"unknow text field!!");
+            break;
+    }
+    
+}
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -151,8 +231,23 @@
 {
     [lab setText:title];
     [lab sizeToFit];
+    lab.font = [UIFont systemFontOfSize:12];
+    lab.numberOfLines = 2;
+
     lab.layer.borderColor = [UIColor blackColor].CGColor;
 }
+
+- (IBAction)upload:(id)sender{
+    [self presentViewController:self.imagePicker animated:YES completion:nil];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
+    UIImage *image=[info objectForKey:UIImagePickerControllerOriginalImage];
+    [self.imagePicker dismissViewControllerAnimated:YES completion:nil];
+    //[self.uploadImages setObject:image forKey:[NSNumber numberWithInteger:self.curButton.tag]];;
+}
+
+
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];

@@ -29,9 +29,23 @@ typedef NS_ENUM(NSInteger, HNTemporaryStatus)
 @property (nonatomic, strong)NSString *constructionUnit;
 @end
 
+@interface HNDataInfoModel : NSObject
+@property (nonatomic, strong)NSString *fireUnits;
+@property (nonatomic, strong)NSString *useOfFireBy;
+@property (nonatomic, strong)NSString *fireTools;
+@property (nonatomic, strong)NSString *fireLoad;
+@property (nonatomic, strong)NSString *startTime;
+@property (nonatomic, strong)NSString *endTime;
+@property (nonatomic, strong)NSString *operatorPerson;
+@property (nonatomic, strong)NSString *phone;
+@property (nonatomic, strong)NSString *validDocuments;
+@end
+
+
 @interface HNTemporaryModel : NSObject
 @property (nonatomic, strong)NSString *roomName;
 @property (nonatomic, strong)HNHouseInfoModel *huseInfo;
+@property (nonatomic, strong)HNDataInfoModel *dataInfo;
 @property (nonatomic)HNTemporaryStatus status;
 @end
 

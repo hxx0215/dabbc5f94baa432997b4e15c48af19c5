@@ -1,38 +1,48 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
-        <deployment defaultVersion="1808" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HNTemporaryDetailsViewController">
             <connections>
+                <outlet property="checkOutButton" destination="cKU-PY-NJi" id="gns-WQ-6IM"/>
                 <outlet property="constructionPersonLabel" destination="us7-nG-A7q" id="sNi-hd-DTC"/>
                 <outlet property="constructionPersonPhoneNumberLabel" destination="6PF-Vz-fSY" id="YHp-SS-G35"/>
                 <outlet property="constructionPersonPhoneNumberTitleLabel" destination="HW8-ZI-7f0" id="rOa-k0-9Bp"/>
                 <outlet property="constructionPersonTitleLabel" destination="md0-wD-BPM" id="lha-qp-2P2"/>
                 <outlet property="constructionUnitLabel" destination="HB1-bC-Cmg" id="iIl-KQ-SRm"/>
                 <outlet property="constructionUnitTitleLabel" destination="Kiv-at-jLg" id="uPb-ad-uDh"/>
+                <outlet property="endTimeLabel" destination="ZDA-9U-G02" id="Jg1-LY-IR7"/>
                 <outlet property="endTimeTitleLabel" destination="mh3-sk-neA" id="7b1-vJ-DWw"/>
+                <outlet property="fireLoadLabel" destination="kZH-QN-L68" id="3Zg-Wk-pqc"/>
                 <outlet property="fireLoadTitleLabel" destination="CKG-qq-ZHm" id="fqS-k4-XjF"/>
+                <outlet property="fireToolsLabel" destination="z4y-hp-JOH" id="b4i-mR-M47"/>
                 <outlet property="fireToolsTitleLabel" destination="CS8-dz-uSp" id="iI6-H6-koV"/>
+                <outlet property="fireunitsLabel" destination="2Wm-9U-k6H" id="jzv-Xo-tLY"/>
                 <outlet property="fireunitsTitleLabel" destination="fpZ-6H-i5K" id="cin-MQ-TMM"/>
                 <outlet property="houseInfLabel" destination="IgQ-Qa-A9U" id="BYg-b9-VEs"/>
                 <outlet property="houseInfMainLabel" destination="nyY-Hk-NEb" id="L8o-h8-Mbn"/>
                 <outlet property="houseInfTitleLabel" destination="bB4-2t-zCK" id="pNK-V7-Gha"/>
                 <outlet property="mainView" destination="i5M-Pr-FkT" id="GL3-QV-0YJ"/>
                 <outlet property="noticeFireButton" destination="EtT-sN-12Q" id="Ewb-Rx-9Nr"/>
-                <outlet property="operatorTitleLabel" destination="vBh-fl-G2I" id="DUb-xq-NzF"/>
+                <outlet property="operatorLabel" destination="J8G-b5-CDs" id="dJ6-Qf-uzc"/>
+                <outlet property="operatorTitleUILabel" destination="vBh-fl-G2I" id="CJ5-jM-ieT"/>
                 <outlet property="ownersLabel" destination="NtG-Jd-rdl" id="JCz-YY-Xfw"/>
                 <outlet property="ownersPhoneNumberLabel" destination="7Uy-AZ-Ses" id="XhE-tX-vr7"/>
                 <outlet property="ownersPhoneNumberTitleLabel" destination="gih-dA-aTl" id="tTA-Dl-eFK"/>
                 <outlet property="ownersTitleLabel" destination="bB4-2t-zCK" id="eON-bc-2Sq"/>
+                <outlet property="phoneLabel" destination="szi-je-w8v" id="XLk-UJ-56u"/>
                 <outlet property="phoneTitleLabel" destination="orm-Kb-0nE" id="gkL-lr-Hpn"/>
+                <outlet property="startTimeLabel" destination="5oC-c4-ftz" id="1wj-7g-SjP"/>
                 <outlet property="startTimeTitleLabel" destination="0qa-E4-3cz" id="Agq-Lb-OLa"/>
-                <outlet property="statusLable" destination="4Hl-dh-RJw" id="2cI-46-Be5"/>
+                <outlet property="statusLable" destination="4Hl-dh-RJw" id="1tq-4Y-WVt"/>
                 <outlet property="temporaryApplyMainLable" destination="eFd-41-ScQ" id="PjQ-cL-LnQ"/>
+                <outlet property="uploadStatusLable" destination="KKS-3n-Wtu" id="313-Ea-dSq"/>
                 <outlet property="uploadTitleLabel" destination="mCU-1e-HUf" id="3vc-S7-tYq"/>
+                <outlet property="useOfFireByLabel" destination="Jjp-Mk-DyZ" id="05u-bm-xak"/>
                 <outlet property="useOfFireByTitleLabel" destination="VKl-Nv-iqg" id="AVm-Gl-EpJ"/>
+                <outlet property="validDocumentsLabel" destination="KeC-dI-dOb" id="gJe-KW-AKw"/>
                 <outlet property="validDocumentsTitleLabel" destination="som-aV-Omp" id="2tf-Qu-Mde"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -101,13 +111,6 @@
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="施工负责人:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="md0-wD-BPM">
                     <rect key="frame" x="9" y="118" width="89" height="21"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="us7-nG-A7q">
-                    <rect key="frame" x="101" y="118" width="42" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -302,6 +305,13 @@
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4Hl-dh-RJw">
                     <rect key="frame" x="48" y="545" width="42" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="us7-nG-A7q">
+                    <rect key="frame" x="90" y="118" width="42" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>

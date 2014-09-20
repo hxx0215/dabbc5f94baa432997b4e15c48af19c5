@@ -8,7 +8,7 @@
 
 #import "HNComplaintApplyViewController.h"
 
-@interface HNComplaintApplyViewController ()
+@interface HNComplaintApplyViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (nonatomic, strong)IBOutlet UILabel *houseInfMainLabel;
 @property (nonatomic, strong)IBOutlet UILabel *houseInfTitleLabel;
 @property (nonatomic, strong)IBOutlet UILabel *houseInfLabel;
@@ -23,6 +23,8 @@
 @property (nonatomic, strong)IBOutlet UILabel *constructionPersonPhoneNumberTitleLabel;
 @property (nonatomic, strong)IBOutlet UILabel *constructionPersonPhoneNumberLabel;
 @property (strong, nonatomic) IBOutlet UIButton *commitButton;
+
+@property (nonatomic, strong)UIImagePickerController *imagePicker;
 @end
 
 @implementation HNComplaintApplyViewController
@@ -69,6 +71,16 @@
     self.commitButton.layer.borderWidth = 1.0;
     self.commitButton.layer.borderColor = [UIColor blackColor].CGColor;
     
+    
+    UIImagePickerControllerSourceType sourceType=UIImagePickerControllerSourceTypePhotoLibrary;
+    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        sourceType=UIImagePickerControllerSourceTypePhotoLibrary;
+    }
+    self.imagePicker = [[UIImagePickerController alloc] init];
+    self.imagePicker.delegate =self;
+    self.imagePicker.sourceType = sourceType;
+    self.imagePicker.allowsEditing = NO;
+    
 
 }
 - (void)labelWithTitle:(NSString *)title label:(UILabel*)lab
@@ -94,6 +106,15 @@
     }
 }
 
+- (IBAction)upload:(id)sender{
+    [self presentViewController:self.imagePicker animated:YES completion:nil];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
+    UIImage *image=[info objectForKey:UIImagePickerControllerOriginalImage];
+    [self.imagePicker dismissViewControllerAnimated:YES completion:nil];
+    //[self.uploadImages setObject:image forKey:[NSNumber numberWithInteger:self.curButton.tag]];;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

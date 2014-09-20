@@ -23,11 +23,33 @@
 }
 @end
 
+@implementation HNDataInfoModel
+-(id)init
+{
+    self = [super init];
+    
+    self.fireUnits = @"";
+    self.useOfFireBy = @"";
+    self.fireTools = @"";
+    self.fireLoad = @"";
+    self.startTime = @"";
+    self.endTime = @"";
+    self.operatorPerson = @"";
+    self.phone = @"";
+    self.validDocuments = @"";
+    
+    return self;
+}
+@end
+
+
 @implementation HNTemporaryModel
 -(id)init
 {
     self = [super init];
     self.huseInfo = [[HNHouseInfoModel alloc] init];
+    self.dataInfo = [[HNDataInfoModel alloc] init];
+    
     return self;
 }
 @end

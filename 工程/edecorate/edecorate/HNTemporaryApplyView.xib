@@ -14,25 +14,35 @@
                 <outlet property="constructionPersonTitleLabel" destination="Wqh-RS-zgO" id="RzY-8T-5yB"/>
                 <outlet property="constructionUnitLabel" destination="zXO-dR-4on" id="hFr-5Q-0FT"/>
                 <outlet property="constructionUnitTitleLabel" destination="ggD-Ba-e1t" id="dZr-tU-KUm"/>
+                <outlet property="endTimeTF" destination="SOL-qn-U4n" id="aZG-Eq-snR"/>
                 <outlet property="endTimeTitleLabel" destination="RdO-Y1-tZs" id="CeN-Zq-cFO"/>
+                <outlet property="fireLoadTF" destination="3Q9-TE-gxs" id="2CU-Sa-7pi"/>
                 <outlet property="fireLoadTitleLabel" destination="hCu-mw-ITF" id="cCu-rD-egl"/>
+                <outlet property="fireToolsTF" destination="jky-TC-8fL" id="Xxb-nQ-j8l"/>
                 <outlet property="fireToolsTitleLabel" destination="zKm-SD-IGX" id="tmV-KO-RzM"/>
+                <outlet property="fireunitsTF" destination="VIS-Dw-ENk" id="XvI-4X-VKa"/>
                 <outlet property="fireunitsTitleLabel" destination="PAH-mC-S10" id="ylz-lk-9Wy"/>
                 <outlet property="houseInfLabel" destination="MJJ-co-cKf" id="Ix4-aX-p1e"/>
                 <outlet property="houseInfMainLabel" destination="9C1-S0-f2m" id="DeR-Mw-vTx"/>
                 <outlet property="houseInfTitleLabel" destination="Nh9-Sm-i8l" id="geB-sb-K8E"/>
                 <outlet property="mainView" destination="iN0-l3-epB" id="Bqu-6t-c6T"/>
                 <outlet property="noticeFireButton" destination="U6x-ev-ma7" id="DNl-8P-tjj"/>
+                <outlet property="operatorTF" destination="I5y-yY-B2Q" id="y3q-Zg-6cw"/>
                 <outlet property="operatorTitleLabel" destination="iGw-jD-YRC" id="aY2-EV-8Wq"/>
                 <outlet property="ownersLabel" destination="QCS-dy-lBb" id="vBh-oU-imM"/>
                 <outlet property="ownersPhoneNumberLabel" destination="Wb7-aw-NfE" id="Ptb-W8-WJn"/>
                 <outlet property="ownersPhoneNumberTitleLabel" destination="RLs-Ol-4my" id="wze-1I-69j"/>
                 <outlet property="ownersTitleLabel" destination="mG7-Us-t6M" id="MBt-pS-HRj"/>
+                <outlet property="phoneTF" destination="SMr-Q9-Bir" id="hTV-aE-QQx"/>
                 <outlet property="phoneTitleLabel" destination="Jcc-pv-Tes" id="aaQ-e4-cgM"/>
+                <outlet property="startTimeTF" destination="sA8-79-7gB" id="L8j-nR-LSK"/>
                 <outlet property="startTimeTitleLabel" destination="tPI-we-cwh" id="1Fj-4n-z6G"/>
                 <outlet property="temporaryApplyMainLable" destination="IcQ-as-xqd" id="0I8-jb-n7x"/>
+                <outlet property="uploadButton" destination="r8g-TD-nV3" id="daB-7P-IHI"/>
                 <outlet property="uploadTitleLabel" destination="FBS-qc-S2a" id="oaz-qC-ref"/>
+                <outlet property="useOfFireByTF" destination="0Kd-CP-nsO" id="lyo-Q2-S42"/>
                 <outlet property="useOfFireByTitleLabel" destination="Us1-Df-wdp" id="IbD-om-Ze9"/>
+                <outlet property="validDocumentsTF" destination="GCg-8z-hJn" id="Qa0-nw-J4x"/>
                 <outlet property="validDocumentsTitleLabel" destination="wHc-68-Icf" id="ekl-oj-YXC"/>
                 <outlet property="view" destination="iN0-l3-epB" id="e5u-EC-JhF"/>
             </connections>
@@ -101,13 +111,6 @@
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="施工负责人:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Wqh-RS-zgO">
                     <rect key="frame" x="8" y="118" width="89" height="21"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Be8-L9-k8z">
-                    <rect key="frame" x="100" y="118" width="42" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -209,54 +212,80 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <action selector="beginEdit:" destination="-1" eventType="editingDidBegin" id="Nne-On-vQe"/>
+                        <action selector="editEnd:" destination="-1" eventType="editingDidEnd" id="dyB-ZH-bUY"/>
+                    </connections>
                 </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="0Kd-CP-nsO">
                     <rect key="frame" x="89" y="210" width="223" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <action selector="beginEdit:" destination="-1" eventType="editingDidBegin" id="DpI-HJ-qmU"/>
+                        <action selector="editEnd:" destination="-1" eventType="editingDidEnd" id="52Q-Ic-jtP"/>
+                    </connections>
                 </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="jky-TC-8fL">
                     <rect key="frame" x="89" y="248" width="223" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <action selector="beginEdit:" destination="-1" eventType="editingDidBegin" id="Med-Uc-en9"/>
+                        <action selector="editEnd:" destination="-1" eventType="editingDidEnd" id="air-7P-gfg"/>
+                    </connections>
                 </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="3Q9-TE-gxs">
                     <rect key="frame" x="89" y="286" width="223" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <action selector="beginEdit:" destination="-1" eventType="editingDidBegin" id="dkG-XX-pMX"/>
+                        <action selector="editEnd:" destination="-1" eventType="editingDidEnd" id="Uwn-67-lqw"/>
+                    </connections>
                 </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="sA8-79-7gB">
                     <rect key="frame" x="89" y="324" width="223" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <action selector="beginEdit:" destination="-1" eventType="editingDidBegin" id="1z9-2P-Hr7"/>
+                        <action selector="editEnd:" destination="-1" eventType="editingDidEnd" id="QAG-Ni-QgX"/>
+                    </connections>
                 </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="I5y-yY-B2Q">
                     <rect key="frame" x="89" y="400" width="223" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <action selector="beginEdit:" destination="-1" eventType="editingDidBegin" id="4Mi-MK-Xju"/>
+                        <action selector="editEnd:" destination="-1" eventType="editingDidEnd" id="4Ex-nT-NL4"/>
+                    </connections>
                 </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="SMr-Q9-Bir">
                     <rect key="frame" x="89" y="438" width="223" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <action selector="beginEdit:" destination="-1" eventType="editingDidBegin" id="t5k-YI-Up3"/>
+                        <action selector="editEnd:" destination="-1" eventType="editingDidEnd" id="9BB-9m-KUu"/>
+                    </connections>
                 </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="GCg-8z-hJn">
                     <rect key="frame" x="89" y="475" width="223" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
-                </textField>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="1pb-Ta-kbW">
-                    <rect key="frame" x="89" y="512" width="223" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <action selector="beginEdit:" destination="-1" eventType="editingDidBegin" id="J2W-g2-SZW"/>
+                        <action selector="editEnd:" destination="-1" eventType="editingDidEnd" id="lbe-An-tPx"/>
+                    </connections>
                 </textField>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="用火是由" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Us1-Df-wdp">
                     <rect key="frame" x="8" y="213" width="68" height="21"/>
@@ -270,6 +299,10 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <action selector="beginEdit:" destination="-1" eventType="editingDidBegin" id="NlQ-hF-gvv"/>
+                        <action selector="editEnd:" destination="-1" eventType="editingDidEnd" id="PfN-F6-E2J"/>
+                    </connections>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="iHf-52-Ldg">
                     <rect key="frame" x="128" y="550" width="100" height="30"/>
@@ -290,6 +323,23 @@
                         <action selector="noticeFireClicked:" destination="-1" eventType="touchUpInside" id="63K-5S-ooC"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="r8g-TD-nV3">
+                    <rect key="frame" x="89" y="512" width="46" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="Button">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="upload:" destination="-1" eventType="touchUpInside" id="r62-WU-Kpm"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Be8-L9-k8z">
+                    <rect key="frame" x="89" y="118" width="42" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <point key="canvasLocation" x="141" y="155"/>

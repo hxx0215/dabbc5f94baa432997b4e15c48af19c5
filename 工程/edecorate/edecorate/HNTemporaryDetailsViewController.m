@@ -31,12 +31,23 @@
 @property (strong, nonatomic) IBOutlet UILabel *fireLoadTitleLabel;
 @property (strong, nonatomic) IBOutlet UILabel *startTimeTitleLabel;
 @property (strong, nonatomic) IBOutlet UILabel *endTimeTitleLabel;
-@property (strong, nonatomic) IBOutlet UILabel *operatorTitleLabel;
+@property (strong, nonatomic) IBOutlet UILabel *operatorTitleUILabel;
 @property (strong, nonatomic) IBOutlet UILabel *phoneTitleLabel;
 @property (strong, nonatomic) IBOutlet UILabel *validDocumentsTitleLabel;
 @property (strong, nonatomic) IBOutlet UIButton *noticeFireButton;
 @property (strong, nonatomic) IBOutlet UILabel *uploadTitleLabel;
 @property (strong, nonatomic) IBOutlet UIButton *checkOutButton;
+
+@property (strong, nonatomic) IBOutlet UILabel *fireunitsLabel;
+@property (strong, nonatomic) IBOutlet UILabel *useOfFireByLabel;
+@property (strong, nonatomic) IBOutlet UILabel *fireToolsLabel;
+@property (strong, nonatomic) IBOutlet UILabel *fireLoadLabel;
+@property (strong, nonatomic) IBOutlet UILabel *startTimeLabel;
+@property (strong, nonatomic) IBOutlet UILabel *endTimeLabel;
+@property (strong, nonatomic) IBOutlet UILabel *operatorLabel;
+@property (strong, nonatomic) IBOutlet UILabel *phoneLabel;
+@property (strong, nonatomic) IBOutlet UILabel *validDocumentsLabel;
+@property (strong, nonatomic) IBOutlet UILabel *uploadStatusLable;
 
 @property (strong, nonatomic) IBOutlet UILabel *statusLable;
 @end
@@ -92,10 +103,22 @@
     [self labelWithTitle:NSLocalizedString(@"Fire load", nil) label:self.fireLoadTitleLabel];
     [self labelWithTitle:NSLocalizedString(@"Start Time", nil) label:self.startTimeTitleLabel];
     [self labelWithTitle:NSLocalizedString(@"End Time", nil) label:self.endTimeTitleLabel];
-    [self labelWithTitle:NSLocalizedString(@"Operator", nil) label:self.operatorTitleLabel];
+    [self labelWithTitle:NSLocalizedString(@"Operator", nil) label:self.operatorTitleUILabel];
     [self labelWithTitle:NSLocalizedString(@"Phone", nil) label:self.phoneTitleLabel];
     [self labelWithTitle:NSLocalizedString(@"Valid documents", nil) label:self.validDocumentsTitleLabel];
     [self labelWithTitle:NSLocalizedString(@"Upload", nil) label:self.uploadTitleLabel];
+    
+    [self labelWithTitle:self.temporaryModel.dataInfo.fireUnits label:self.fireunitsLabel];
+    [self labelWithTitle:self.temporaryModel.dataInfo.useOfFireBy label:self.useOfFireByLabel];
+    [self labelWithTitle:self.temporaryModel.dataInfo.fireTools label:self.fireToolsLabel];
+    [self labelWithTitle:self.temporaryModel.dataInfo.fireLoad label:self.fireLoadLabel];
+    [self labelWithTitle:self.temporaryModel.dataInfo.startTime label:self.startTimeLabel];
+    [self labelWithTitle:self.temporaryModel.dataInfo.endTime label:self.endTimeLabel];
+    [self labelWithTitle:self.temporaryModel.dataInfo.operatorPerson label:self.operatorLabel];
+    [self labelWithTitle:self.temporaryModel.dataInfo.phone label:self.phoneLabel];
+    [self labelWithTitle:self.temporaryModel.dataInfo.validDocuments label:self.validDocumentsLabel];
+    [self labelWithTitle:@"未上传" label:self.uploadStatusLable];
+    
     //@property (strong, nonatomic) IBOutlet UIButton *commitButton;
     [self.noticeFireButton setTitle:NSLocalizedString(@"Notice the use of fire", nil) forState:UIControlStateNormal];
     [self.noticeFireButton sizeToFit];
@@ -105,6 +128,9 @@
     [self.checkOutButton sizeToFit];
     self.checkOutButton.layer.borderWidth = 1.0;
     self.checkOutButton.layer.borderColor = [UIColor blackColor].CGColor;
+    
+    [self.statusLable setText:@"正在审核"];
+    [self.statusLable sizeToFit];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -137,6 +163,8 @@
 {
     [lab setText:title];
     [lab sizeToFit];
+    lab.font = [UIFont systemFontOfSize:12];
+    lab.numberOfLines = 2;
     lab.layer.borderColor = [UIColor blackColor].CGColor;
 }
 
