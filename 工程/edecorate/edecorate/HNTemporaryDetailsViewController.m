@@ -37,6 +37,8 @@
 @property (strong, nonatomic) IBOutlet UIButton *noticeFireButton;
 @property (strong, nonatomic) IBOutlet UILabel *uploadTitleLabel;
 @property (strong, nonatomic) IBOutlet UIButton *checkOutButton;
+
+@property (strong, nonatomic) IBOutlet UILabel *statusLable;
 @end
 
 @implementation HNTemporaryDetailsViewController
@@ -108,7 +110,7 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.mainView.frame = [[UIScreen mainScreen] bounds];
-    self.mainView.contentSize = CGSizeMake(self.view.bounds.size.width, self.mainView.height+20);
+    self.mainView.contentSize = CGSizeMake(self.view.bounds.size.width, self.statusLable.bottom+20);
 }
 
 - (IBAction)checkOut:(id)sender
