@@ -52,6 +52,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *operatorTitleLabel;
 @property (strong, nonatomic) IBOutlet UILabel *phoneTitleLabel;
 @property (strong, nonatomic) IBOutlet UILabel *validDocumentsTitleLabel;
+@property (strong, nonatomic) IBOutlet UIButton *noticeFireButton;
 @property (strong, nonatomic) IBOutlet UILabel *uploadTitleLabel;
 @property (strong, nonatomic) IBOutlet UIButton *commitButton;
 @end
@@ -98,7 +99,24 @@
     [self labelWithTitle:houseiformation label:self.constructionPersonPhoneNumberLabel];
     
     
+    [self labelWithTitle:NSLocalizedString(@"Fire Apply", nil) label:self.temporaryApplyMainLable];
+    [self labelWithTitle:NSLocalizedString(@"Fire units", nil) label:self.fireunitsTitleLabel];
+    [self labelWithTitle:NSLocalizedString(@"Use of fire by", nil) label:self.useOfFireByTitleLabel];
+    [self labelWithTitle:NSLocalizedString(@"Fire tools", nil) label:self.fireToolsTitleLabel];
+    [self labelWithTitle:NSLocalizedString(@"Fire load", nil) label:self.fireLoadTitleLabel];
+    [self labelWithTitle:NSLocalizedString(@"Start Time", nil) label:self.startTimeTitleLabel];
+    [self labelWithTitle:NSLocalizedString(@"End Time", nil) label:self.endTimeTitleLabel];
+    [self labelWithTitle:NSLocalizedString(@"Operator", nil) label:self.operatorTitleLabel];
+    [self labelWithTitle:NSLocalizedString(@"Phone", nil) label:self.phoneTitleLabel];
+    [self labelWithTitle:NSLocalizedString(@"Valid documents", nil) label:self.validDocumentsTitleLabel];
+    [self labelWithTitle:NSLocalizedString(@"Upload", nil) label:self.uploadTitleLabel];
+    //@property (strong, nonatomic) IBOutlet UIButton *commitButton;
+    [self.noticeFireButton setTitle:NSLocalizedString(@"Notice the use of fire", nil) forState:UIControlStateNormal];
+    [self.noticeFireButton sizeToFit];
+
     
+    [self.commitButton setTitle:NSLocalizedString(@"Submission", nil) forState:UIControlStateNormal];
+    [self.commitButton sizeToFit];
     self.commitButton.layer.borderWidth = 1.0;
     self.commitButton.layer.borderColor = [UIColor blackColor].CGColor;
 
@@ -108,12 +126,21 @@
 - (IBAction)commit:(id)sender
 {
     UIAlertView* alert=[[UIAlertView alloc]initWithTitle:nil message:@"已提交审核" delegate:self cancelButtonTitle:@"OK"otherButtonTitles:nil,nil];
+    alert.tag=1;
+    [alert show];
+}
+
+- (IBAction)noticeFireClicked:(id)sender
+{
+    UIAlertView* alert=[[UIAlertView alloc]initWithTitle:nil message:@"用火须知" delegate:self cancelButtonTitle:@"OK"otherButtonTitles:nil,nil];
+    alert.tag = 2;
     [alert show];
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    if(alertView.tag==1)
+        [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)labelWithTitle:(NSString *)title label:(UILabel*)lab
