@@ -58,6 +58,7 @@
 		D3C07BC519CDC8A0003EA5E4 /* HNComplaintApplyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3C07BC319CDC8A0003EA5E4 /* HNComplaintApplyViewController.xib */; };
 		D3C07BC919CDC8CA003EA5E4 /* HNComplaintDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C07BC719CDC8CA003EA5E4 /* HNComplaintDetailsViewController.m */; };
 		D3C07BCA19CDC8CA003EA5E4 /* HNComplaintDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3C07BC819CDC8CA003EA5E4 /* HNComplaintDetailsViewController.xib */; };
+		D3CD90F419CED1FA00E76AF4 /* HNCommbox.m in Sources */ = {isa = PBXBuildFile; fileRef = D3CD90F319CED1FA00E76AF4 /* HNCommbox.m */; };
 		D3F90F1019CB13CA000C95E4 /* HNTemporaryFireViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F90F0F19CB13CA000C95E4 /* HNTemporaryFireViewController.m */; };
 		D3F90F1319CB1474000C95E4 /* HNTemporaryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F90F1219CB1474000C95E4 /* HNTemporaryTableViewCell.m */; };
 		D3F90F1619CB1F0B000C95E4 /* HNTemporaryApplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F90F1519CB1F0B000C95E4 /* HNTemporaryApplyViewController.m */; };
@@ -159,6 +160,8 @@
 		D3C07BC619CDC8CA003EA5E4 /* HNComplaintDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNComplaintDetailsViewController.h; sourceTree = "<group>"; };
 		D3C07BC719CDC8CA003EA5E4 /* HNComplaintDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNComplaintDetailsViewController.m; sourceTree = "<group>"; };
 		D3C07BC819CDC8CA003EA5E4 /* HNComplaintDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HNComplaintDetailsViewController.xib; sourceTree = "<group>"; };
+		D3CD90F219CED1FA00E76AF4 /* HNCommbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNCommbox.h; sourceTree = "<group>"; };
+		D3CD90F319CED1FA00E76AF4 /* HNCommbox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNCommbox.m; sourceTree = "<group>"; };
 		D3F90F0E19CB13CA000C95E4 /* HNTemporaryFireViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNTemporaryFireViewController.h; sourceTree = "<group>"; };
 		D3F90F0F19CB13CA000C95E4 /* HNTemporaryFireViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNTemporaryFireViewController.m; sourceTree = "<group>"; };
 		D3F90F1119CB1474000C95E4 /* HNTemporaryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNTemporaryTableViewCell.h; sourceTree = "<group>"; };
@@ -348,6 +351,8 @@
 				D3C07BC619CDC8CA003EA5E4 /* HNComplaintDetailsViewController.h */,
 				D3C07BC719CDC8CA003EA5E4 /* HNComplaintDetailsViewController.m */,
 				D3C07BC819CDC8CA003EA5E4 /* HNComplaintDetailsViewController.xib */,
+				D3CD90F219CED1FA00E76AF4 /* HNCommbox.h */,
+				D3CD90F319CED1FA00E76AF4 /* HNCommbox.m */,
 			);
 			name = DecorateControl;
 			sourceTree = "<group>";
@@ -530,6 +535,7 @@
 				B9D3DEDA19CD235A0020CDC9 /* HNCheckTableViewCell.m in Sources */,
 				D39662F519CD4E6300EE49B8 /* HNTemporaryDetailsViewController.m in Sources */,
 				B916F0AE19C8781D00A849C7 /* main.m in Sources */,
+				D3CD90F419CED1FA00E76AF4 /* HNCommbox.m in Sources */,
 				B9DE55FD19C9C0EA00280EC7 /* UIView+AHKit.m in Sources */,
 				B953CE0E19CAFBE000BD57DF /* HNLoginViewController.m in Sources */,
 				B94B7A6519C9BF3E000112ED /* HNHomeViewController.m in Sources */,

@@ -7,6 +7,8 @@
 //
 
 #import "HNComplaintApplyViewController.h"
+#import "HNCommbox.h"
+#import "UIView+AHKit.h"
 
 @interface HNComplaintApplyViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (nonatomic, strong)IBOutlet UILabel *houseInfMainLabel;
@@ -23,6 +25,7 @@
 @property (nonatomic, strong)IBOutlet UILabel *constructionPersonPhoneNumberTitleLabel;
 @property (nonatomic, strong)IBOutlet UILabel *constructionPersonPhoneNumberLabel;
 @property (strong, nonatomic) IBOutlet UIButton *commitButton;
+@property (strong, nonatomic) IBOutlet UIButton *uploadButton;
 @property (strong, nonatomic) IBOutlet UITextView *complaintContansTextView;
 
 @property (nonatomic, strong)IBOutlet UILabel *complaintInformationTitleLable;
@@ -30,8 +33,11 @@
 @property (nonatomic, strong)IBOutlet UILabel *complaintObjectTitleLable;
 @property (nonatomic, strong)IBOutlet UILabel *complaintIssueTitleLable;
 @property (nonatomic, strong)IBOutlet UILabel *evidenceTitleLable;
+@property (nonatomic, strong)IBOutlet UITextField *complaintObjectTF;
 
 @property (nonatomic, strong)UIImagePickerController *imagePicker;
+
+@property (nonatomic, strong)HNCommbox* commbox;
 @end
 
 @implementation HNComplaintApplyViewController
@@ -83,6 +89,10 @@
     self.complaintContansTextView.layer.borderWidth = 1.0;
     self.complaintContansTextView.layer.borderColor = [UIColor blackColor].CGColor;
 
+    [self.uploadButton setTitle:NSLocalizedString(@"Upload", nil) forState:UIControlStateNormal];
+    self.uploadButton.layer.borderWidth = 1.0;
+    self.uploadButton.font = [UIFont systemFontOfSize:12];
+    self.uploadButton.layer.borderColor = [UIColor blackColor].CGColor;
     
     [self.commitButton setTitle:NSLocalizedString(@"Submit complaint", nil) forState:UIControlStateNormal];
     [self.commitButton sizeToFit];
@@ -99,8 +109,14 @@
     self.imagePicker.sourceType = sourceType;
     self.imagePicker.allowsEditing = NO;
     
-
+    
+    NSMutableArray* arr = [[NSMutableArray alloc] init];
+    [arr addObject:@"投诉业主"];
+    [arr addObject:@"投诉装修单位"];
+    _commbox = [[HNCommbox alloc] initWithFrame:CGRectMake(self.houseInfLabel.left, self.complaintCategoryTitleLable.top, self.complaintContansTextView.width, self.commitButton.height) withArray:arr];
+    [self.view addSubview:_commbox];
 }
+
 - (void)labelWithTitle:(NSString *)title label:(UILabel*)lab
 {
     [lab setText:title];
@@ -112,6 +128,9 @@
 
 - (IBAction)commit:(id)sender
 {
+    self.temporaryModel.complaintInfo.complaintCategory = _commbox.currentText;
+    self.temporaryModel.complaintInfo.complaintObject = self.complaintObjectTF.text;
+    self.temporaryModel.complaintInfo.complaintIssue = self.complaintContansTextView.text;
     UIAlertView* alert=[[UIAlertView alloc]initWithTitle:nil message:@"已提交投诉" delegate:self cancelButtonTitle:@"OK"otherButtonTitles:nil,nil];
     alert.tag=1;
     [alert show];

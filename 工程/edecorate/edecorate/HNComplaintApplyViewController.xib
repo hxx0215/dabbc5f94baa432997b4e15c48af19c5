@@ -11,6 +11,7 @@
                 <outlet property="complaintContansTextView" destination="hue-ky-NpK" id="flq-kE-ssm"/>
                 <outlet property="complaintInformationTitleLable" destination="YPX-Bf-J9x" id="8le-Dj-MZ2"/>
                 <outlet property="complaintIssueTitleLable" destination="lil-HG-sXQ" id="NuX-Da-ygw"/>
+                <outlet property="complaintObjectTF" destination="Nn0-KB-mQP" id="8uh-GX-yZU"/>
                 <outlet property="complaintObjectTitleLable" destination="iMB-Cs-GoB" id="l2J-aj-PON"/>
                 <outlet property="constructionPersonLabel" destination="BIN-s6-WAQ" id="fdn-QJ-LGO"/>
                 <outlet property="constructionPersonPhoneNumberLabel" destination="7V6-Dc-bfn" id="dmZ-Ju-DKH"/>
@@ -26,6 +27,7 @@
                 <outlet property="ownersPhoneNumberLabel" destination="mxY-eo-lbd" id="cRV-DD-ohR"/>
                 <outlet property="ownersPhoneNumberTitleLabel" destination="8Ve-5u-dgC" id="lOW-k6-Pis"/>
                 <outlet property="ownersTitleLabel" destination="wVx-ID-Ylf" id="H4r-e2-ZIt"/>
+                <outlet property="uploadButton" destination="YPA-Mf-wEr" id="2Oy-0A-Zvj"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -140,13 +142,6 @@
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="7LQ-ME-3wq">
-                    <rect key="frame" x="89" y="172" width="46" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Button">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                </button>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" minimumFontSize="17" id="Nn0-KB-mQP">
                     <rect key="frame" x="89" y="205" width="206" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

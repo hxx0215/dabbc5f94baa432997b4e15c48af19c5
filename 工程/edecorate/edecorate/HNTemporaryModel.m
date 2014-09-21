@@ -42,6 +42,17 @@
 }
 @end
 
+@implementation HNComplaintModel
+-(id)init
+{
+    self = [super init];
+    self.complaintCategory = @"";
+    self.complaintIssue = @"";
+    self.complaintObject = @"";
+
+    return self;
+}
+@end
 
 @implementation HNTemporaryModel
 -(id)init
@@ -49,7 +60,10 @@
     self = [super init];
     self.huseInfo = [[HNHouseInfoModel alloc] init];
     self.dataInfo = [[HNDataInfoModel alloc] init];
+    self.complaintInfo = [[HNComplaintModel alloc] init];
     
     return self;
 }
 @end
+
+

@@ -7,6 +7,7 @@
 //
 
 #import "HNComplaintDetailsViewController.h"
+#import "UIView+AHKit.h"
 
 @interface HNComplaintDetailsViewController ()
 @property (nonatomic, strong)IBOutlet UILabel *houseInfMainLabel;
@@ -83,10 +84,21 @@
     [self labelWithTitle:NSLocalizedString(@"Complaint Issue", nil) label:self.complaintIssueTitleLable];
     [self labelWithTitle:NSLocalizedString(@"Evidence", nil) label:self.evidenceTitleLable];
     [self labelWithTitle:NSLocalizedString(@"Uploaded", nil) label:self.uploadStatusLable];
+    
+    [self labelWithTitle:self.temporaryModel.complaintInfo.complaintCategory label:self.complaintCategoryLable];
+    [self labelWithTitle:self.temporaryModel.complaintInfo.complaintObject label:self.complaintObjectLable];
+    [self.complaintIssueLable setText:self.temporaryModel.complaintInfo.complaintIssue];
+    self.complaintIssueLable.font = [UIFont systemFontOfSize:12];
+    [self.complaintIssueLable sizeToFit];
+    self.complaintIssueLable.numberOfLines = 4;
 
+    CGFloat pos = self.complaintIssueLable.bottom>self.complaintIssueTitleLable.bottom?self.complaintIssueLable.bottom:self.complaintIssueTitleLable.bottom;
+    self.checkOutButton.top = pos+self.complaintIssueTitleLable.top-self.complaintObjectTitleLable.bottom;
+    self.uploadStatusLable.top = self.checkOutButton.top;
+    self.evidenceTitleLable.top = self.checkOutButton.top;
+    self.complaintStatusLable.top = self.checkOutButton.bottom+2;
     
     [self.checkOutButton setTitle:NSLocalizedString(@"Check Out", nil) forState:UIControlStateNormal];
-    [self.checkOutButton sizeToFit];
     self.checkOutButton.layer.borderWidth = 1.0;
     self.checkOutButton.layer.borderColor = [UIColor blackColor].CGColor;
     

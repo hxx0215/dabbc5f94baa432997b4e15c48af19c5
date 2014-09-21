@@ -41,12 +41,19 @@ typedef NS_ENUM(NSInteger, HNTemporaryStatus)
 @property (nonatomic, strong)NSString *validDocuments;
 @end
 
+@interface HNComplaintModel : NSObject
+@property (nonatomic, strong)NSString *complaintCategory;
+@property (nonatomic, strong)NSString *complaintObject;
+@property (nonatomic, strong)NSString *complaintIssue;
+@end
 
 @interface HNTemporaryModel : NSObject
 @property (nonatomic, strong)NSString *roomName;
 @property (nonatomic, strong)HNHouseInfoModel *huseInfo;
 @property (nonatomic, strong)HNDataInfoModel *dataInfo;
+@property (nonatomic, strong)HNComplaintModel *complaintInfo;
 @property (nonatomic)HNTemporaryStatus status;
 @end
 
 #endif
+
