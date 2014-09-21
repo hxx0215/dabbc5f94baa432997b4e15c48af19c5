@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HNCommbox : UIView<UITableViewDataSource, UITableViewDelegate,UITextFieldDelegate>
+@interface HNCommbox : UIView
 {
     UITableView *tv;//下拉列表
     NSMutableArray *tableArray;//下拉列表数据
