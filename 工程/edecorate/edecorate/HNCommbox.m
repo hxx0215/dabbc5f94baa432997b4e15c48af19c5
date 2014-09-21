@@ -8,7 +8,7 @@
 
 #import "HNCommbox.h"
 
-@interface HNCommbox()
+@interface HNCommbox()<UITableViewDataSource, UITableViewDelegate,UITextFieldDelegate>
 @property (nonatomic,retain) NSArray *tableArray;
 @property (nonatomic,retain) UITableView *tv;
 @property (nonatomic,retain) UITextField *textField;
@@ -61,9 +61,31 @@
         [self addSubview:textField];
         
     }
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillShow) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillHide) name:UIKeyboardWillHideNotification object:nil];
     self.backgroundColor = [UIColor whiteColor];
     self.selectRow = -1;
     return self;
+}
+
+-(void)keyBoardWillShow
+{
+    NSLog(@"keyBoardWillShow");
+}
+
+-(void)keyBoardWillHide
+{
+    NSLog(@"keyBoardWillHide");
+}
+
+-(bool)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    return NO;
+    
+}
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    [self.textField resignFirstResponder];
 }
 
 -(NSString*)currentText
@@ -99,8 +121,8 @@
         frame.size.height = 0;
         tv.frame = frame;
         frame.size.height = tabheight;
-        [UIView beginAnimations:@"ResizeForKeyBoard" context:nil];
-        [UIView setAnimationCurve:UIViewAnimationCurveLinear];
+        //[UIView beginAnimations:@"ResizeForKeyBoard" context:nil];
+        //[UIView setAnimationCurve:UIViewAnimationCurveLinear];
         self.frame = sf;
         tv.frame = frame;
         [UIView commitAnimations];
