@@ -23,6 +23,13 @@
 @property (nonatomic, strong)IBOutlet UILabel *constructionPersonPhoneNumberTitleLabel;
 @property (nonatomic, strong)IBOutlet UILabel *constructionPersonPhoneNumberLabel;
 @property (strong, nonatomic) IBOutlet UIButton *commitButton;
+@property (strong, nonatomic) IBOutlet UITextView *complaintContansTextView;
+
+@property (nonatomic, strong)IBOutlet UILabel *complaintInformationTitleLable;
+@property (nonatomic, strong)IBOutlet UILabel *complaintCategoryTitleLable;
+@property (nonatomic, strong)IBOutlet UILabel *complaintObjectTitleLable;
+@property (nonatomic, strong)IBOutlet UILabel *complaintIssueTitleLable;
+@property (nonatomic, strong)IBOutlet UILabel *evidenceTitleLable;
 
 @property (nonatomic, strong)UIImagePickerController *imagePicker;
 @end
@@ -65,8 +72,19 @@
     
     [self labelWithTitle:self.temporaryModel.huseInfo.constructionPersonPhoneNumber  label:self.constructionPersonPhoneNumberLabel];
     
+    //Complaint Information
+    [self labelWithTitle:NSLocalizedString(@"Complaint Information", nil) label:self.complaintInformationTitleLable];
+    [self labelWithTitle:NSLocalizedString(@"Complaint Category", nil) label:self.complaintCategoryTitleLable];
+    [self labelWithTitle:NSLocalizedString(@"Complaint Object", nil) label:self.complaintObjectTitleLable];
+    [self labelWithTitle:NSLocalizedString(@"Complaint Issue", nil) label:self.complaintIssueTitleLable];
+    [self labelWithTitle:NSLocalizedString(@"Evidence", nil) label:self.evidenceTitleLable];
+
     
-    [self.commitButton setTitle:NSLocalizedString(@"Submission", nil) forState:UIControlStateNormal];
+    self.complaintContansTextView.layer.borderWidth = 1.0;
+    self.complaintContansTextView.layer.borderColor = [UIColor blackColor].CGColor;
+
+    
+    [self.commitButton setTitle:NSLocalizedString(@"Submit complaint", nil) forState:UIControlStateNormal];
     [self.commitButton sizeToFit];
     self.commitButton.layer.borderWidth = 1.0;
     self.commitButton.layer.borderColor = [UIColor blackColor].CGColor;
@@ -87,6 +105,8 @@
 {
     [lab setText:title];
     [lab sizeToFit];
+    lab.font = [UIFont systemFontOfSize:12];
+    lab.numberOfLines = 2;
     lab.layer.borderColor = [UIColor blackColor].CGColor;
 }
 

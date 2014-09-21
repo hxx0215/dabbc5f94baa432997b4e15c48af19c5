@@ -42,7 +42,13 @@
 "Details" = "详情";
 "Check Out" = "查看";
 
-
+"Complaint Information" = "投诉信息";
+"Complaint Category" = "投诉类别";
+"Complaint Object" = "投诉对象";
+"Complaint Issue" = "投诉问题";
+"Evidence" = "证明材料";
+"Submit complaint" = "提交投诉";
+"Processing" = "正在处理";
 
 "Company Data" = "装修公司资料";
 "Company Certificate" = "营业执照";

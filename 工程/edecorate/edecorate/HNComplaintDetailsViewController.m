@@ -22,6 +22,20 @@
 @property (nonatomic, strong)IBOutlet UILabel *constructionPersonLabel;
 @property (nonatomic, strong)IBOutlet UILabel *constructionPersonPhoneNumberTitleLabel;
 @property (nonatomic, strong)IBOutlet UILabel *constructionPersonPhoneNumberLabel;
+
+@property (nonatomic, strong)IBOutlet UILabel *complaintInformationTitleLable;
+@property (nonatomic, strong)IBOutlet UILabel *complaintCategoryTitleLable;
+@property (nonatomic, strong)IBOutlet UILabel *complaintObjectTitleLable;
+@property (nonatomic, strong)IBOutlet UILabel *complaintIssueTitleLable;
+@property (nonatomic, strong)IBOutlet UILabel *evidenceTitleLable;
+
+@property (nonatomic, strong)IBOutlet UILabel *complaintCategoryLable;
+@property (nonatomic, strong)IBOutlet UILabel *complaintObjectLable;
+@property (nonatomic, strong)IBOutlet UILabel *complaintIssueLable;
+
+@property (nonatomic, strong)IBOutlet UILabel *uploadStatusLable;
+@property (nonatomic, strong)IBOutlet UILabel *complaintStatusLable;
+@property (nonatomic, strong)IBOutlet UIButton *checkOutButton;
 @end
 
 @implementation HNComplaintDetailsViewController
@@ -62,13 +76,40 @@
     
     [self labelWithTitle:self.temporaryModel.huseInfo.constructionPersonPhoneNumber  label:self.constructionPersonPhoneNumberLabel];
     
+    //Complaint Information
+    [self labelWithTitle:NSLocalizedString(@"Complaint Information", nil) label:self.complaintInformationTitleLable];
+    [self labelWithTitle:NSLocalizedString(@"Complaint Category", nil) label:self.complaintCategoryTitleLable];
+    [self labelWithTitle:NSLocalizedString(@"Complaint Object", nil) label:self.complaintObjectTitleLable];
+    [self labelWithTitle:NSLocalizedString(@"Complaint Issue", nil) label:self.complaintIssueTitleLable];
+    [self labelWithTitle:NSLocalizedString(@"Evidence", nil) label:self.evidenceTitleLable];
+    [self labelWithTitle:NSLocalizedString(@"Uploaded", nil) label:self.uploadStatusLable];
 
+    
+    [self.checkOutButton setTitle:NSLocalizedString(@"Check Out", nil) forState:UIControlStateNormal];
+    [self.checkOutButton sizeToFit];
+    self.checkOutButton.layer.borderWidth = 1.0;
+    self.checkOutButton.layer.borderColor = [UIColor blackColor].CGColor;
+    
+    [self.complaintStatusLable setText:NSLocalizedString(@"Processing", nil)];
+    [self.complaintStatusLable sizeToFit];
+    /*
+     "Processing" ＝ "正在处理";*/
+    
+}
+
+- (IBAction)checkOut:(id)sender
+{
+    UIAlertView* alert=[[UIAlertView alloc]initWithTitle:nil message:NSLocalizedString(@"Check Out", nil) delegate:self cancelButtonTitle:@"OK"otherButtonTitles:nil,nil];
+    alert.tag=3;
+    [alert show];
 }
 
 - (void)labelWithTitle:(NSString *)title label:(UILabel*)lab
 {
     [lab setText:title];
     [lab sizeToFit];
+    lab.font = [UIFont systemFontOfSize:12];
+    lab.numberOfLines = 2;
     lab.layer.borderColor = [UIColor blackColor].CGColor;
 }
 

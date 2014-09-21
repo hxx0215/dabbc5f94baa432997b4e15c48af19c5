@@ -1,18 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
+        <deployment defaultVersion="1808" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HNComplaintApplyViewController">
             <connections>
                 <outlet property="commitButton" destination="XHg-Ij-4jH" id="Vot-fe-NJD"/>
+                <outlet property="complaintCategoryTitleLable" destination="QCF-16-ZL7" id="hNF-iz-3P6"/>
+                <outlet property="complaintContansTextView" destination="hue-ky-NpK" id="flq-kE-ssm"/>
+                <outlet property="complaintInformationTitleLable" destination="YPX-Bf-J9x" id="8le-Dj-MZ2"/>
+                <outlet property="complaintIssueTitleLable" destination="lil-HG-sXQ" id="NuX-Da-ygw"/>
+                <outlet property="complaintObjectTitleLable" destination="iMB-Cs-GoB" id="l2J-aj-PON"/>
                 <outlet property="constructionPersonLabel" destination="BIN-s6-WAQ" id="fdn-QJ-LGO"/>
                 <outlet property="constructionPersonPhoneNumberLabel" destination="7V6-Dc-bfn" id="dmZ-Ju-DKH"/>
                 <outlet property="constructionPersonPhoneNumberTitleLabel" destination="6Kt-iu-1eD" id="p8p-zk-vNV"/>
                 <outlet property="constructionPersonTitleLabel" destination="cay-kQ-fGS" id="sj7-r5-8rt"/>
                 <outlet property="constructionUnitLabel" destination="c6m-kL-XmR" id="V9S-Qr-wsL"/>
                 <outlet property="constructionUnitTitleLabel" destination="gIX-7G-8iA" id="7Kz-hI-3tr"/>
+                <outlet property="evidenceTitleLable" destination="Z0t-Ih-he3" id="G1n-MH-wCT"/>
                 <outlet property="houseInfLabel" destination="QcY-7h-1sM" id="5pk-EE-KJp"/>
                 <outlet property="houseInfMainLabel" destination="ZZN-MB-QaP" id="5D4-af-3GO"/>
                 <outlet property="houseInfTitleLabel" destination="iTL-jv-Yaw" id="KOp-2b-whn"/>
@@ -92,13 +99,6 @@
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BIN-s6-WAQ">
-                    <rect key="frame" x="100" y="118" width="42" height="21"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6Kt-iu-1eD">
                     <rect key="frame" x="150" y="118" width="42" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -161,6 +161,16 @@
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="YPA-Mf-wEr">
+                    <rect key="frame" x="89" y="344" width="46" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="Button">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="upload:" destination="-1" eventType="touchUpInside" id="88U-D2-CYA"/>
+                    </connections>
+                </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="iMB-Cs-GoB">
                     <rect key="frame" x="8" y="209" width="42" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -185,16 +195,13 @@
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="YPA-Mf-wEr">
-                    <rect key="frame" x="89" y="344" width="46" height="30"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BIN-s6-WAQ">
+                    <rect key="frame" x="89" y="118" width="42" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Button">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="upload:" destination="-1" eventType="touchUpInside" id="88U-D2-CYA"/>
-                    </connections>
-                </button>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <point key="canvasLocation" x="140" y="154"/>
