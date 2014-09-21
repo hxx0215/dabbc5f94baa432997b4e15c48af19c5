@@ -20,6 +20,34 @@
 "Deposit refund" = "Deposit Refund";
 "I have a complaint" = "Complaint";
 
+"House Information" = "House Information";
+"Owners" = "Owners";
+"Phone number" = "Phone number";
+"Construction unit" = "Construction unit";
+"Person in charge of construction" = "Person in charge of construction";
+"Fire Apply" = "Fire Apply";
+"Notice the use of fire" = "Notice the use of fire";
+"Fire units" = "Fire units";
+"Use of fire by" = "Use of fire by";
+"Fire tools" = "Fire tools";
+"Fire load" = "Fire load";
+"Start Time" = "Start Time";
+"End Time" = "End Time";
+"Operator" = "Operator";
+"Phone" = "Phone";
+"Valid documents" = "Valid documents";
+"Upload" = "Upload";
+"Submission" = "Submission";
+"Details" = "Details";
+"Check Out" = "Check Out";
+
+"Complaint Information" = "Complaint Information";
+"Complaint Category" = "Complaint Category";
+"Complaint Object" = "Complaint Object";
+"Complaint Issue" = "Complaint Issue";
+"Evidence" = "Evidence";
+"Submit complaint" = "Submit complaint";
+"Processing" = "Processing";
 
 "Company Data" = "Company Data";
 "Company Certificate" = "Company Certificate";
