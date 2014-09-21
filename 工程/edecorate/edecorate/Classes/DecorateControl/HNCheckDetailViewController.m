@@ -9,8 +9,9 @@
 #import "HNCheckDetailViewController.h"
 #import "UIView+AHKit.h"
 #import "HNCheckDetailView.h"
+#import "CTAssetsPickerController.h"
 
-@interface HNCheckDetailViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface HNCheckDetailViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,CTAssetsPickerControllerDelegate>
 @property (nonatomic, strong) IBOutlet UIScrollView *backView;
 @property (strong, nonatomic) IBOutlet UIButton *originStructure;
 @property (strong, nonatomic) IBOutlet UIButton *waterProof;
@@ -23,6 +24,7 @@
 @property (assign, nonatomic) NSInteger shouldUploadNums;
 @property (strong, nonatomic) UIImagePickerController *imagePicker;
 @property (strong, nonatomic) UIButton *curButton;
+@property (strong, nonatomic) CTAssetsPickerController *assPicker;
 
 @property (strong, nonatomic) UIView *originView;
 @property (strong, nonatomic) HNCheckDetailView *mainStruct;
@@ -70,6 +72,9 @@
     self.imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     self.imagePicker.delegate = self;
     self.imagePicker.allowsEditing = NO;
+    
+    self.assPicker = [[CTAssetsPickerController alloc] init];
+    self.assPicker.delegate = self;
 }
 
 
@@ -174,12 +179,22 @@
 }
 - (void)upload:(id)sender{
     self.curButton = (UIButton *)sender;
-    [self presentViewController:self.imagePicker animated:YES completion:nil];
+//    [self presentViewController:self.imagePicker animated:YES completion:nil];
+    [self presentViewController:self.assPicker animated:YES completion:nil];
 }
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
     UIImage *image=[info objectForKey:UIImagePickerControllerOriginalImage];
     [self.imagePicker dismissViewControllerAnimated:YES completion:nil];
-    [self.uploadImages setObject:image forKey:[NSNumber numberWithInteger:self.curButton.tag]];;
+    [self.uploadImages setObject:image forKey:[NSNumber numberWithInteger:self.curButton.tag]];
+    [self.curButton setTitle:NSLocalizedString(@"Change", nil) forState:UIControlStateNormal];
+}
+- (void)assetsPickerController:(CTAssetsPickerController *)picker didFinishPickingAssets:(NSArray *)assets{
+    NSLog(@"%@",assets);
+}
+- (BOOL)assetsPickerController:(CTAssetsPickerController *)picker shouldSelectAsset:(ALAsset *)asset
+{
+    // Allow 10 assets to be picked
+    return (picker.selectedAssets.count < 3);
 }
 - (IBAction)origin_Clicked:(id)sender {
     UIButton *btn = (UIButton *)sender;
