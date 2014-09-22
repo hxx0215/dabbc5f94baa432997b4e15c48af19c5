@@ -49,6 +49,10 @@
 @property (strong, nonatomic) NSMutableArray *backFillItems;
 @property (strong, nonatomic) UIButton *addKitchenWashroom;
 @property (assign, nonatomic) NSInteger backFillbase;
+
+@property (strong, nonatomic) UIView *completeView;
+@property (strong, nonatomic) HNCheckDetailView *completeDetail;
+@property (strong, nonatomic) NSMutableArray *completeItems;
 @end
 
 @implementation HNCheckDetailViewController
@@ -67,6 +71,7 @@
     [self initWaterProof];
     [self initCircuit];
     [self initBackFill];
+    [self initComplete];
     
     self.imagePicker = [[UIImagePickerController alloc] init];
     self.imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
@@ -168,6 +173,13 @@
     self.addKitchenWashroom.centerX = tBtn.centerX;
     self.backFillView.height = self.addKitchenWashroom.bottom;
 }
+- (void)initComplete{
+    self.completeView = [self createContentView];
+    self.completeItems = [@[NSLocalizedString(@"Main Structure(3 Pics)", nil),NSLocalizedString(@"Out elevation(3 Pics)", nil),NSLocalizedString(@"Gas Pipes(3 Pics)", nil),NSLocalizedString(@"Air condtion(3 Pics)", nil),NSLocalizedString(@"Public(3 Pics)", nil),NSLocalizedString(@"Complete Drawing(3 Pics)", nil),NSLocalizedString(@"Force & Weak Circuit(3 Pics)", nil)] mutableCopy];
+    self.completeDetail = [self createDetailViewWithTitile:@"" items:self.completeItems selector:@selector(uploadPics:) base:70];
+    [self.completeView addSubview:self.completeDetail];
+    self.completeView.height = self.completeDetail.bottom;
+}
 - (void)addKitchen:(id)sender{
     HNCheckDetailView *washroom = [self createDetailViewWithTitile:[NSString stringWithFormat:@"%@%d",NSLocalizedString(@"Washroom", nil),[self.backFillDetails count] + 1] items:self.backFillItems selector:@selector(upload:) base:self.backFillbase + [self.backFillDetails count] * 10];
     [self.backFillView addSubview:washroom];
@@ -179,7 +191,11 @@
 }
 - (void)upload:(id)sender{
     self.curButton = (UIButton *)sender;
-//    [self presentViewController:self.imagePicker animated:YES completion:nil];
+    [self presentViewController:self.imagePicker animated:YES completion:nil];
+//    [self presentViewController:self.assPicker animated:YES completion:nil];
+}
+- (void)uploadPics:(id)sender{
+    self.curButton = (UIButton *)sender;
     [self presentViewController:self.assPicker animated:YES completion:nil];
 }
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
@@ -189,7 +205,13 @@
     [self.curButton setTitle:NSLocalizedString(@"Change", nil) forState:UIControlStateNormal];
 }
 - (void)assetsPickerController:(CTAssetsPickerController *)picker didFinishPickingAssets:(NSArray *)assets{
-    NSLog(@"%@",assets);
+    if ([assets count]<3)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:NSLocalizedString(@"You Should Choose 3 Pics", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+        [alert show];
+        return;
+    }
+    [picker dismissViewControllerAnimated:YES completion:nil];
 }
 - (BOOL)assetsPickerController:(CTAssetsPickerController *)picker shouldSelectAsset:(ALAsset *)asset
 {
@@ -226,5 +248,6 @@
     self.waterProofView.hidden = !self.waterProof.selected;
     self.circuitView.hidden = !self.Circuit.selected;
     self.backFillView.hidden = !self.backFill.selected;
+    self.completeView.hidden = !self.complete.selected;
 }
 @end
