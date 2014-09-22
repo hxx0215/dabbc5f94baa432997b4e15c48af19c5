@@ -14,6 +14,8 @@
 #import "HNDecorateCheckViewController.h"
 #include "HNComplaintTableViewController.h"
 #import "HNRefundTableViewController.h"
+#import "HNOfficePassesApplyViewController.h"
+
 
 /*
  装修报建
@@ -108,8 +110,11 @@
     [self.navigationController pushViewController:checkViewController animated:YES];
 }
 - (void)officePassesButton_Clicked:(id)sender{
-    HNOfficePassesViewController *officePassViewcontroller=[[HNOfficePassesViewController alloc] init];
-    [self.navigationController pushViewController:officePassViewcontroller animated:YES];
+   // HNOfficePassesViewController *officePassViewcontroller=[[HNOfficePassesViewController alloc] init];
+   // [self.navigationController pushViewController:officePassViewcontroller animated:YES];
+    
+    HNOfficePassesApplyViewController *officePassApplyViewcontroller=[[HNOfficePassesApplyViewController alloc] init];
+    [self.navigationController pushViewController:officePassApplyViewcontroller animated:YES];
 }
 
 - (void)temporaryFireConstructionButton_Clicked:(id)sender{

@@ -1,14 +1,17 @@
 //
 //  HNOfficePassesApplyViewController.m
-//  edecorate  出入证申请提交页面
+//  edecorate
 //
-//  Created by 熊彬 on 14-9-19.
+//  Created by 熊彬 on 14-9-22.
 //
 //
 
 #import "HNOfficePassesApplyViewController.h"
+#import "UIView+AHKit.h"
 
 @interface HNOfficePassesApplyViewController ()
+
+@property (nonatomic,strong) IBOutlet UIScrollView *mainView;
 
 @end
 
@@ -16,8 +19,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    // Do any additional setup after loading the view.
+   // _mainView.contentSize=cgsizemake(self.view.bounds.size.width, self.sumMoney.bottom+20);
+    // Do any additional setup after loading the view from its nib.
 }
 
 - (void)didReceiveMemoryWarning {

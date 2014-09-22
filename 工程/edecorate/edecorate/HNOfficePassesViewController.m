@@ -67,11 +67,9 @@
     static NSString *reuseIdentifier = @"reportCell";
     HNTemporaryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
     if (!cell){
-        cell = [[HNTemporaryTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
+        HNOfficePassModel *model =self.reportList[indexPath.row];
+        cell = [[HNTemporaryTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier withModel:model];
     }
-    //HNOfficePassModel *model =self.reportList[indexPath.row];
-    //[cell setRoomName:model.roomName];
-    //[cell setStatus:model.status];
     return cell;
 }
 
