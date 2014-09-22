@@ -91,6 +91,7 @@
     [super viewWillAppear:animated];
     if (self.shouldUploadNums != [self.uploadImages count])
         self.submit.enabled = NO;
+    [self origin_Clicked:self.originStructure];
 }
 - (UIView *)createContentView{
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 0)];
