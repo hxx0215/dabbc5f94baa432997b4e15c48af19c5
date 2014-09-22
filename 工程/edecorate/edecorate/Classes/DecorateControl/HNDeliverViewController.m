@@ -8,6 +8,7 @@
 
 #import "HNDeliverViewController.h"
 #import "HNReportTableViewCell.h"
+#import "HNDeliverDetailViewController.h"
 
 @interface HNDeliverModel : NSObject
 @property (nonatomic, strong)NSString *roomName;
@@ -66,7 +67,8 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
+    HNDeliverDetailViewController *detail = [[HNDeliverDetailViewController alloc] init];
+    [self.navigationController pushViewController:detail animated:YES];
 }
 
 @end
