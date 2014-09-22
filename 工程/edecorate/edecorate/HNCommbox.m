@@ -78,7 +78,7 @@
     NSLog(@"keyBoardWillHide");
 }
 
--(bool)textFieldShouldBeginEditing:(UITextField *)textField
+-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
     return NO;
     

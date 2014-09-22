@@ -59,7 +59,7 @@
     static NSString *reuseIdentifier = @"refundCell";
     HNRefundTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
     if (!cell){
-        HNRefundTableViewCell *model =self.modelList[indexPath.row];
+        HNTemporaryModel *model =self.modelList[indexPath.row];
         cell = [[HNRefundTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier withModel:model];
     }
     
