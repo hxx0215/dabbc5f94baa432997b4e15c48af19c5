@@ -387,8 +387,10 @@
 		B94B7A6019C9BE25000112ED /* DecorateControl */ = {
 			isa = PBXGroup;
 			children = (
-				B9DE55FF19C9C26700280EC7 /* HNDecorateControlViewController.h */,
 				B9DE560019C9C26700280EC7 /* HNDecorateControlViewController.m */,
+				B9DE55FF19C9C26700280EC7 /* HNDecorateControlViewController.h */,
+				D3FAA5BD19D070530062B912 /* Refund */,
+				D3FAA5BC19D0703A0062B912 /* Complaint */,
 				B965E76119D04B95004CD201 /* Report */,
 				B965E76219D04BDF004CD201 /* Check */,
 				B965E76319D04C10004CD201 /* Pass */,
@@ -396,26 +398,6 @@
 				B965E76519D04C43004CD201 /* Temporary */,
 				D3CD90F219CED1FA00E76AF4 /* HNCommbox.h */,
 				D3CD90F319CED1FA00E76AF4 /* HNCommbox.m */,
-				D3C07BC119CDC8A0003EA5E4 /* HNComplaintApplyViewController.h */,
-				D3C07BC219CDC8A0003EA5E4 /* HNComplaintApplyViewController.m */,
-				D3C07BC319CDC8A0003EA5E4 /* HNComplaintApplyViewController.xib */,
-				D3C07BC619CDC8CA003EA5E4 /* HNComplaintDetailsViewController.h */,
-				D3C07BC719CDC8CA003EA5E4 /* HNComplaintDetailsViewController.m */,
-				D3C07BC819CDC8CA003EA5E4 /* HNComplaintDetailsViewController.xib */,
-				D3C07BBE19CDAC7A003EA5E4 /* HNComplaintTableViewCell.h */,
-				D3C07BBF19CDAC7A003EA5E4 /* HNComplaintTableViewCell.m */,
-				D391EE8A19CD787D00DE3363 /* HNComplaintTableViewController.h */,
-				D391EE8B19CD787D00DE3363 /* HNComplaintTableViewController.m */,
-				D3CD90FB19CF13DE00E76AF4 /* HNRefundApplyViewController.h */,
-				D3CD90FC19CF13DE00E76AF4 /* HNRefundApplyViewController.m */,
-				D3CD90FD19CF13DE00E76AF4 /* HNRefundApplyViewController.xib */,
-				D3CD910019CF141C00E76AF4 /* HNRefundDetailViewController.h */,
-				D3CD910119CF141C00E76AF4 /* HNRefundDetailViewController.m */,
-				D3CD910219CF141C00E76AF4 /* HNRefundDetailViewController.xib */,
-				D3CD90F819CF09E000E76AF4 /* HNRefundTableViewCell.h */,
-				D3CD90F919CF09E000E76AF4 /* HNRefundTableViewCell.m */,
-				D3CD90F519CF09B500E76AF4 /* HNRefundTableViewController.h */,
-				D3CD90F619CF09B500E76AF4 /* HNRefundTableViewController.m */,
 			);
 			name = DecorateControl;
 			sourceTree = "<group>";
@@ -599,6 +581,40 @@
 				B9DE55FC19C9C0EA00280EC7 /* UIView+AHKit.m */,
 			);
 			name = "Third Party";
+			sourceTree = "<group>";
+		};
+		D3FAA5BC19D0703A0062B912 /* Complaint */ = {
+			isa = PBXGroup;
+			children = (
+				D3C07BC119CDC8A0003EA5E4 /* HNComplaintApplyViewController.h */,
+				D3C07BC219CDC8A0003EA5E4 /* HNComplaintApplyViewController.m */,
+				D3C07BC319CDC8A0003EA5E4 /* HNComplaintApplyViewController.xib */,
+				D3C07BC619CDC8CA003EA5E4 /* HNComplaintDetailsViewController.h */,
+				D3C07BC719CDC8CA003EA5E4 /* HNComplaintDetailsViewController.m */,
+				D3C07BC819CDC8CA003EA5E4 /* HNComplaintDetailsViewController.xib */,
+				D3C07BBE19CDAC7A003EA5E4 /* HNComplaintTableViewCell.h */,
+				D3C07BBF19CDAC7A003EA5E4 /* HNComplaintTableViewCell.m */,
+				D391EE8A19CD787D00DE3363 /* HNComplaintTableViewController.h */,
+				D391EE8B19CD787D00DE3363 /* HNComplaintTableViewController.m */,
+			);
+			name = Complaint;
+			sourceTree = "<group>";
+		};
+		D3FAA5BD19D070530062B912 /* Refund */ = {
+			isa = PBXGroup;
+			children = (
+				D3CD90FB19CF13DE00E76AF4 /* HNRefundApplyViewController.h */,
+				D3CD90FC19CF13DE00E76AF4 /* HNRefundApplyViewController.m */,
+				D3CD90FD19CF13DE00E76AF4 /* HNRefundApplyViewController.xib */,
+				D3CD910019CF141C00E76AF4 /* HNRefundDetailViewController.h */,
+				D3CD910119CF141C00E76AF4 /* HNRefundDetailViewController.m */,
+				D3CD910219CF141C00E76AF4 /* HNRefundDetailViewController.xib */,
+				D3CD90F819CF09E000E76AF4 /* HNRefundTableViewCell.h */,
+				D3CD90F919CF09E000E76AF4 /* HNRefundTableViewCell.m */,
+				D3CD90F519CF09B500E76AF4 /* HNRefundTableViewController.h */,
+				D3CD90F619CF09B500E76AF4 /* HNRefundTableViewController.m */,
+			);
+			name = Refund;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
