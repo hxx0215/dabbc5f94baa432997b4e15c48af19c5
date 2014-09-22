@@ -15,6 +15,7 @@
 #include "HNComplaintTableViewController.h"
 #import "HNRefundTableViewController.h"
 #import "HNOfficePassesApplyViewController.h"
+#import "HNDeliverViewController.h"
 
 
 /*
@@ -128,7 +129,8 @@
 }
 
 - (void)deliveryAndInstallationButton_Clicked:(id)sender{
-    NSLog(@"deliveryAndInstallation");
+    HNDeliverViewController *deliverViewController = [[HNDeliverViewController alloc]init];
+    [self.navigationController pushViewController:deliverViewController animated:YES];
 }
 
 - (void)depositRefundButton_Clicked:(id)sender{
