@@ -12,6 +12,7 @@
 		3732B13119D0182100ADF3F5 /* HNOfficePassesApplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3732B12F19D0182100ADF3F5 /* HNOfficePassesApplyViewController.m */; };
 		3732B13219D0182100ADF3F5 /* HNOfficePassesApplyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3732B13019D0182100ADF3F5 /* HNOfficePassesApplyViewController.xib */; };
 		37C8C3E019CC22470020458C /* HNOfficePassesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C8C3DF19CC22470020458C /* HNOfficePassesViewController.m */; };
+		37D2354519D1171400295572 /* HNOfficePassedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D2354419D1171400295572 /* HNOfficePassedTableViewCell.m */; };
 		B916F0A219C8781D00A849C7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B916F0A119C8781D00A849C7 /* Foundation.framework */; };
 		B916F0A419C8781D00A849C7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B916F0A319C8781D00A849C7 /* CoreGraphics.framework */; };
 		B916F0A619C8781D00A849C7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B916F0A519C8781D00A849C7 /* UIKit.framework */; };
@@ -115,6 +116,8 @@
 		3732B13019D0182100ADF3F5 /* HNOfficePassesApplyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HNOfficePassesApplyViewController.xib; sourceTree = "<group>"; };
 		37C8C3DE19CC22470020458C /* HNOfficePassesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNOfficePassesViewController.h; sourceTree = "<group>"; };
 		37C8C3DF19CC22470020458C /* HNOfficePassesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNOfficePassesViewController.m; sourceTree = "<group>"; };
+		37D2354319D1171400295572 /* HNOfficePassedTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNOfficePassedTableViewCell.h; sourceTree = "<group>"; };
+		37D2354419D1171400295572 /* HNOfficePassedTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNOfficePassedTableViewCell.m; sourceTree = "<group>"; };
 		B916F09E19C8781D00A849C7 /* edecorate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = edecorate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B916F0A119C8781D00A849C7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B916F0A319C8781D00A849C7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -465,6 +468,8 @@
 				3732B12B19CFC46E00ADF3F5 /* HNOfficePassesDetailsViewController.xib */,
 				37C8C3DE19CC22470020458C /* HNOfficePassesViewController.h */,
 				37C8C3DF19CC22470020458C /* HNOfficePassesViewController.m */,
+				37D2354319D1171400295572 /* HNOfficePassedTableViewCell.h */,
+				37D2354419D1171400295572 /* HNOfficePassedTableViewCell.m */,
 			);
 			name = Pass;
 			sourceTree = "<group>";
@@ -780,6 +785,7 @@
 				B9B2BC1B19CF1F3000839AED /* CTAssetScrollView.m in Sources */,
 				B9882DF219CB06D90093F0F4 /* HNDecorateReportViewController.m in Sources */,
 				3732B13119D0182100ADF3F5 /* HNOfficePassesApplyViewController.m in Sources */,
+				37D2354519D1171400295572 /* HNOfficePassedTableViewCell.m in Sources */,
 				D3F90F1319CB1474000C95E4 /* HNTemporaryTableViewCell.m in Sources */,
 				B9B2BC2119CF1F3000839AED /* CTAssetsPickerController.m in Sources */,
 				B94C854819C9CA770040D47E /* HNMessageModel.m in Sources */,

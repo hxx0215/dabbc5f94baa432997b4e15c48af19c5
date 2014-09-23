@@ -38,6 +38,13 @@
 
 @implementation HNOfficePassesDetailsViewController
 
+-(id)initWithModel:(HNTemporaryModel *)model
+{
+    self = [super init];
+    self.temporaryModel = model;
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor=[UIColor whiteColor];

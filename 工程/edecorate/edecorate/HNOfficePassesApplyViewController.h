@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HNTemporaryModel.h"
 
 @interface HNOfficePassesApplyViewController : UIViewController
-
+@property (nonatomic, strong)HNTemporaryModel* temporaryModel;
+-(id)initWithModel:(HNTemporaryModel *)model;
 @end

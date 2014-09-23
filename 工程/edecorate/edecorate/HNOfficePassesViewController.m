@@ -7,21 +7,23 @@
 //
 
 #import "HNOfficePassesViewController.h"
-#import "HNTemporaryTableViewCell.h"
+#import "HNOfficePassedTableViewCell.h"
 #import "HNOfficePassesDetailsViewController.h"
+#import "HNOfficePassesApplyViewController.h"
 
-@interface HNOfficePassModel : NSObject
-@property (nonatomic, strong)NSString *roomName;
-@property (nonatomic, strong)NSString *status;
-@end
-@implementation HNOfficePassModel
-@end
+//@interface HNOfficePassModel : NSObject
+//@property (nonatomic, strong)NSString *roomName;
+//@property (nonatomic, strong)NSString *status;
+//@end
+//@implementation HNOfficePassModel
+//@end
 
 
 @interface HNOfficePassesViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic,strong) UITableView *tTableView;
-@property (nonatomic,strong) NSMutableArray *reportList;
+@property (nonatomic,strong)NSMutableArray *modelList;
+@property (nonatomic,strong)HNOfficePassedTableViewCell *passTableViewCell;
 
 @end
 
@@ -38,21 +40,26 @@
     [self.view addSubview:self.tTableView];
     
     self.navigationItem.title=@"办理出入证";
-    self.reportList=[[NSMutableArray alloc] init];
+    self.modelList=[[NSMutableArray alloc] init];
     
-    HNOfficePassModel *tModel=[[HNOfficePassModel alloc] init];
+    HNTemporaryModel *tModel=[[HNTemporaryModel alloc] init];
     tModel.roomName=@"施工房号：大富大贵花园A座001";
-    tModel.status=@"审核进度：审核中";
-    [self.reportList addObject:tModel];
+    tModel.status = TemporaryStatusCustom;
+    [self.modelList addObject:tModel];
     
-    HNOfficePassModel *TModel2=[[HNOfficePassModel alloc] init];
+    HNTemporaryModel *TModel2=[[HNTemporaryModel alloc] init];
     TModel2.roomName=@"施工房号：大富大贵花园A座002";
-    TModel2.status=@"审核进度：审核通过";
-    [self.reportList addObject:TModel2];
+    TModel2.status=TemporaryStatusCustom;
+    [self.modelList addObject:TModel2];
 }
 
 -(void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    if(self.passTableViewCell)
+    {
+        [self.passTableViewCell updateMyCell];
+    }
+    
 }
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -60,15 +67,17 @@
 }
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return  [self.reportList count];
+    return  [self.modelList count];
 }
 
-- (HNTemporaryTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *reuseIdentifier = @"reportCell";
-    HNTemporaryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
+
+
+-(HNOfficePassedTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *reuseIdentifier = @"refundCell";
+    HNOfficePassedTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
     if (!cell){
-        HNOfficePassModel *model =self.reportList[indexPath.row];
-        cell = [[HNTemporaryTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier withModel:model];
+        HNTemporaryModel *model =self.modelList[indexPath.row];
+        cell = [[HNOfficePassedTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier withModel:model];
     }
     return cell;
 }
@@ -76,8 +85,16 @@
 
 -(void) tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    HNOfficePassesDetailsViewController *officePasseesApply=[[HNOfficePassesDetailsViewController alloc] init];
-    [self.navigationController pushViewController:officePasseesApply animated:YES];
+    HNTemporaryModel* model = self.modelList[indexPath.row];
+    if(model.status==TemporaryStatusCustom)
+    {
+        HNOfficePassesApplyViewController* officePasseesApply=[[HNOfficePassesApplyViewController alloc] initWithModel:model];
+        [self.navigationController pushViewController:officePasseesApply animated:YES];
+    }else{
+        HNOfficePassesDetailsViewController *officeDetails=[[HNOfficePassesDetailsViewController alloc]  initWithModel:model];
+        [self.navigationController pushViewController:officeDetails animated:YES];
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning {

@@ -7,13 +7,36 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HNOfficePassesApplyViewController">
             <connections>
+                <outlet property="AddPassCardMan" destination="Nvm-Tu-eV3" id="kbb-ea-8OJ"/>
+                <outlet property="PasscardInfo" destination="8Q1-ol-LSb" id="Qb1-Yr-Zjz"/>
+                <outlet property="decorationChargeMan" destination="9Es-Wg-ozT" id="hOa-P3-pmk"/>
+                <outlet property="decorationChargeMobile" destination="TwL-ng-o1M" id="2Vn-wy-nYM"/>
+                <outlet property="decorationCompany" destination="229-Rb-lkF" id="Clp-Js-QpY"/>
+                <outlet property="depositCount" destination="nZN-4e-5ii" id="lg2-fo-foA"/>
+                <outlet property="depositPerFee" destination="UVS-Yd-FRF" id="Mdv-WO-naw"/>
+                <outlet property="depositSumFee" destination="vOl-9e-rz5" id="8KE-aE-9eU"/>
+                <outlet property="houseInfo" destination="V2u-ua-6J6" id="hdf-li-DUp"/>
+                <outlet property="houseOwner" destination="0Fz-Ax-NPT" id="jux-oO-SXa"/>
+                <outlet property="houseOwnerMobile" destination="QKN-2T-jdL" id="WfM-Ny-LsE"/>
                 <outlet property="mainView" destination="i5M-Pr-FkT" id="ClQ-Lf-rQK"/>
+                <outlet property="passcardCount" destination="6iU-ie-s2M" id="CUf-e3-gto"/>
+                <outlet property="passcardIdcardNo" destination="KUF-j3-70Z" id="Mdk-Sb-FMc"/>
+                <outlet property="passcardManList" destination="8Q1-ol-LSb" id="3FO-l3-UDW"/>
+                <outlet property="passcardMobile" destination="jih-7v-ybS" id="qbD-oK-OkB"/>
+                <outlet property="passcardName" destination="huG-3r-p3F" id="h7L-7K-geU"/>
+                <outlet property="passcardPerFee" destination="qrG-iq-vqc" id="hJT-O7-3J5"/>
+                <outlet property="passcardSumFee" destination="BnJ-wM-V2g" id="jVi-Hy-MIR"/>
+                <outlet property="passcardsum" destination="bK7-oo-VrB" id="hOz-5E-QMm"/>
+                <outlet property="submit" destination="qUn-An-2IO" id="wZd-xs-CiR"/>
+                <outlet property="sumMoney" destination="RKu-Ht-4Mr" id="p7v-8E-xZa"/>
+                <outlet property="uploadIdCardPic" destination="eNu-0a-HVO" id="UX3-We-I1E"/>
+                <outlet property="uploadPic" destination="Vl2-CV-DQB" id="bEO-Qm-8cs"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT" customClass="UIScrollView">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="637"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="房屋信息" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="D8Z-uJ-IJ0">
@@ -199,14 +222,7 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="eNu-0a-HVO">
                     <rect key="frame" x="112" y="333" width="30" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="查看">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Vl2-CV-DQB">
-                    <rect key="frame" x="112" y="366" width="30" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="查看">
+                    <state key="normal" title="上传">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
@@ -349,6 +365,9 @@
                     <state key="normal" title="在线支付">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="checkOut:" destination="-1" eventType="touchDown" id="kdY-fm-i4H"/>
+                    </connections>
                 </button>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="huG-3r-p3F">
                     <rect key="frame" x="99" y="225" width="193" height="30"/>
@@ -356,6 +375,13 @@
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Vl2-CV-DQB">
+                    <rect key="frame" x="112" y="366" width="30" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="上传">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <point key="canvasLocation" x="140" y="154"/>
