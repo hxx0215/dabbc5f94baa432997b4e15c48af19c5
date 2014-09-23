@@ -9,6 +9,7 @@
 #import "HNDecorateReportViewController.h"
 #import "HNReportTableViewCell.h"
 #import "HNNewReportViewController.h"
+#import "HNNewConstructViewController.h"
 
 @interface HNReportModel : NSObject
 @property (nonatomic, strong)NSString *roomName;
@@ -88,7 +89,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    HNNewReportViewController *newReportViewController = [[HNNewReportViewController alloc] init];
-    [self.navigationController pushViewController:newReportViewController animated:YES];
+//    HNNewReportViewController *newReportViewController = [[HNNewReportViewController alloc] init];
+//    [self.navigationController pushViewController:newReportViewController animated:YES];
+    HNNewConstructViewController *constructViewController = [[HNNewConstructViewController alloc]init];
+    [self.navigationController pushViewController:constructViewController animated:YES];
 }
 @end

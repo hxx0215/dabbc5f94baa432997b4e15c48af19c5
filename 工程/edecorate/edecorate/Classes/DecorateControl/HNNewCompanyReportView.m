@@ -11,6 +11,7 @@
 
 
 @interface HNNewCompanyReportView()
+@property (nonatomic, strong)UIView *companyView;
 @property (nonatomic, strong)UILabel *companyDataLabel;
 @property (nonatomic, strong)NSMutableArray *companyDataLabels;
 @property (nonatomic, strong)UILabel *ownerDataLabel;

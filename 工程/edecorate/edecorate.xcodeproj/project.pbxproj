@@ -38,6 +38,8 @@
 		B94B7A6519C9BF3E000112ED /* HNHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B94B7A6419C9BF3E000112ED /* HNHomeViewController.m */; };
 		B94C854819C9CA770040D47E /* HNMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B94C854719C9CA770040D47E /* HNMessageModel.m */; };
 		B953CE0E19CAFBE000BD57DF /* HNLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B953CE0D19CAFBE000BD57DF /* HNLoginViewController.m */; };
+		B955579619D1A06A00FC0AAE /* HNNewConstructViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B955579419D1A06A00FC0AAE /* HNNewConstructViewController.m */; };
+		B955579719D1A06A00FC0AAE /* HNNewConstructViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B955579519D1A06A00FC0AAE /* HNNewConstructViewController.xib */; };
 		B965E76019D04955004CD201 /* HNDeliverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B965E75F19D04955004CD201 /* HNDeliverViewController.m */; };
 		B965E76919D04CDA004CD201 /* HNDeliverDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B965E76719D04CDA004CD201 /* HNDeliverDetailViewController.m */; };
 		B965E76A19D04CDA004CD201 /* HNDeliverDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B965E76819D04CDA004CD201 /* HNDeliverDetailViewController.xib */; };
@@ -152,6 +154,9 @@
 		B94C854719C9CA770040D47E /* HNMessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNMessageModel.m; path = Classes/Message/HNMessageModel.m; sourceTree = "<group>"; };
 		B953CE0C19CAFBE000BD57DF /* HNLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNLoginViewController.h; path = Classes/HNLoginViewController.h; sourceTree = "<group>"; };
 		B953CE0D19CAFBE000BD57DF /* HNLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNLoginViewController.m; path = Classes/HNLoginViewController.m; sourceTree = "<group>"; };
+		B955579319D1A06A00FC0AAE /* HNNewConstructViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNNewConstructViewController.h; path = Classes/DecorateControl/HNNewConstructViewController.h; sourceTree = "<group>"; };
+		B955579419D1A06A00FC0AAE /* HNNewConstructViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNNewConstructViewController.m; path = Classes/DecorateControl/HNNewConstructViewController.m; sourceTree = "<group>"; };
+		B955579519D1A06A00FC0AAE /* HNNewConstructViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HNNewConstructViewController.xib; path = Classes/DecorateControl/HNNewConstructViewController.xib; sourceTree = "<group>"; };
 		B965E75E19D04955004CD201 /* HNDeliverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNDeliverViewController.h; path = Classes/DecorateControl/HNDeliverViewController.h; sourceTree = "<group>"; };
 		B965E75F19D04955004CD201 /* HNDeliverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNDeliverViewController.m; path = Classes/DecorateControl/HNDeliverViewController.m; sourceTree = "<group>"; };
 		B965E76619D04CDA004CD201 /* HNDeliverDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNDeliverDetailViewController.h; path = Classes/DecorateControl/HNDeliverDetailViewController.h; sourceTree = "<group>"; };
@@ -428,6 +433,9 @@
 			children = (
 				B9882DF019CB06D90093F0F4 /* HNDecorateReportViewController.h */,
 				B9882DF119CB06D90093F0F4 /* HNDecorateReportViewController.m */,
+				B955579319D1A06A00FC0AAE /* HNNewConstructViewController.h */,
+				B955579419D1A06A00FC0AAE /* HNNewConstructViewController.m */,
+				B955579519D1A06A00FC0AAE /* HNNewConstructViewController.xib */,
 				B9882DF919CB152F0093F0F4 /* HNNewCompanyReportView.h */,
 				B9882DFA19CB152F0093F0F4 /* HNNewCompanyReportView.m */,
 				B9882DF619CB11920093F0F4 /* HNNewReportViewController.h */,
@@ -707,6 +715,7 @@
 				D39662F619CD4E6300EE49B8 /* HNTemporaryDetailsViewController.xib in Resources */,
 				B916F0E319C878AC00A849C7 /* PushConfig.plist in Resources */,
 				D3CD910419CF141C00E76AF4 /* HNRefundDetailViewController.xib in Resources */,
+				B955579719D1A06A00FC0AAE /* HNNewConstructViewController.xib in Resources */,
 				B916F0BA19C8781D00A849C7 /* Images.xcassets in Resources */,
 				D3C07BC519CDC8A0003EA5E4 /* HNComplaintApplyViewController.xib in Resources */,
 				B9B2BC1F19CF1F3000839AED /* CTAssetsPicker.xcassets in Resources */,
@@ -784,6 +793,7 @@
 				D391EE8C19CD787D00DE3363 /* HNComplaintTableViewController.m in Sources */,
 				B9B2BC1B19CF1F3000839AED /* CTAssetScrollView.m in Sources */,
 				B9882DF219CB06D90093F0F4 /* HNDecorateReportViewController.m in Sources */,
+				B955579619D1A06A00FC0AAE /* HNNewConstructViewController.m in Sources */,
 				3732B13119D0182100ADF3F5 /* HNOfficePassesApplyViewController.m in Sources */,
 				37D2354519D1171400295572 /* HNOfficePassedTableViewCell.m in Sources */,
 				D3F90F1319CB1474000C95E4 /* HNTemporaryTableViewCell.m in Sources */,
@@ -888,7 +898,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Deying Yu (N4Q8DG7HD5)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Deying Yu (EG87838K93)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "edecorate/edecorate-Prefix.pch";
