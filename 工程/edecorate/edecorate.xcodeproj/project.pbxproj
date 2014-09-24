@@ -861,7 +861,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		37D2354619D15AE900295572 /* ad hoc distribution */ = {
+		37114B7F19D373F000AFCEB9 /* ad hoc distribution test */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -877,7 +877,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Deying Yu (N4Q8DG7HD5)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -891,14 +891,14 @@
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
-			name = "ad hoc distribution";
+			name = "ad hoc distribution test";
 		};
-		37D2354719D15AE900295572 /* ad hoc distribution */ = {
+		37114B8019D373F000AFCEB9 /* ad hoc distribution test */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Deying Yu (EG87838K93)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "edecorate/edecorate-Prefix.pch";
@@ -908,12 +908,12 @@
 					"$(PROJECT_DIR)/lib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b51e7a41-46e5-490b-af96-7fd926334a6d";
+				PROVISIONING_PROFILE = "da877219-839b-4844-a9bf-f0bca2fbd8f6";
 				WRAPPER_EXTENSION = app;
 			};
-			name = "ad hoc distribution";
+			name = "ad hoc distribution test";
 		};
-		37D2354819D15AE900295572 /* ad hoc distribution */ = {
+		37114B8119D373F000AFCEB9 /* ad hoc distribution test */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/edecorate.app/edecorate";
@@ -929,7 +929,7 @@
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
-			name = "ad hoc distribution";
+			name = "ad hoc distribution test";
 		};
 		B916F0CE19C8781E00A849C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1016,7 +1016,7 @@
 					"$(PROJECT_DIR)/lib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b51e7a41-46e5-490b-af96-7fd926334a6d";
+				PROVISIONING_PROFILE = "da877219-839b-4844-a9bf-f0bca2fbd8f6";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1036,7 +1036,7 @@
 					"$(PROJECT_DIR)/lib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b51e7a41-46e5-490b-af96-7fd926334a6d";
+				PROVISIONING_PROFILE = "da877219-839b-4844-a9bf-f0bca2fbd8f6";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -1089,7 +1089,7 @@
 			buildConfigurations = (
 				B916F0CE19C8781E00A849C7 /* Debug */,
 				B916F0CF19C8781E00A849C7 /* Release */,
-				37D2354619D15AE900295572 /* ad hoc distribution */,
+				37114B7F19D373F000AFCEB9 /* ad hoc distribution test */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1099,7 +1099,7 @@
 			buildConfigurations = (
 				B916F0D119C8781E00A849C7 /* Debug */,
 				B916F0D219C8781E00A849C7 /* Release */,
-				37D2354719D15AE900295572 /* ad hoc distribution */,
+				37114B8019D373F000AFCEB9 /* ad hoc distribution test */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1109,7 +1109,7 @@
 			buildConfigurations = (
 				B916F0D419C8781E00A849C7 /* Debug */,
 				B916F0D519C8781E00A849C7 /* Release */,
-				37D2354819D15AE900295572 /* ad hoc distribution */,
+				37114B8119D373F000AFCEB9 /* ad hoc distribution test */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
