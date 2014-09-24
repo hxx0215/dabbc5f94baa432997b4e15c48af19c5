@@ -73,6 +73,7 @@
 @property (strong, nonatomic) UIView* textOKView;
 @property (nonatomic)NSInteger keyboardHeight;
 @property (strong, nonatomic) UITextField* currntTF;
+@property (nonatomic) CGFloat mainViewFramRectTop;
 @end
 
 #define HSPACE 10
@@ -140,6 +141,15 @@
     self.operatorTF.tag = i++;
     self.phoneTF.tag = i++;
     self.validDocumentsTF.tag = i++;
+    self.fireunitsTF.delegate = self;
+    self.useOfFireByTF.delegate = self;
+    self.fireToolsTF.delegate = self;
+    self.fireLoadTF.delegate = self;
+    self.startTimeTF.delegate = self;
+    self.endTimeTF.delegate = self;
+    self.operatorTF.delegate = self;
+    self.phoneTF.delegate = self;
+    self.validDocumentsTF.delegate = self;
     
     //@property (strong, nonatomic) IBOutlet UIButton *commitButton;
     [self.noticeFireButton setTitle:NSLocalizedString(@"Notice the use of fire", nil) forState:UIControlStateNormal];
@@ -262,7 +272,10 @@
             NSLog(@"unknow text field!!");
             break;
     }
-    self.view.frame =CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+    if (self.currntTF) {
+        self.textOKView.hidden = YES;
+    }
+    
     self.currntTF = nil;
     
 }
@@ -321,14 +334,19 @@
     [self.imagePicker dismissViewControllerAnimated:YES completion:nil];
     //[self.uploadImages setObject:image forKey:[NSNumber numberWithInteger:self.curButton.tag]];;
 }
-
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    self.mainViewFramRectTop = [self.view convertRect:self.view.bounds toView:[[UIApplication sharedApplication] keyWindow]].origin.y;
+}
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [self registerForKeyboardNotifications];
-    self.mainView.frame = [[UIScreen mainScreen] bounds];
+    self.mainView.frame = [self.view bounds];
     self.mainView.contentSize = CGSizeMake(self.view.bounds.size.width, self.commitButton.bottom+20);
+    self.mainViewFramRectTop = self.view.top;
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -348,31 +366,39 @@
     NSDictionary* info = [aNotification userInfo];
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
     NSLog(@"hight_hitht:%f",kbSize.height);
+    if(0 == self.keyboardHeight)
+    {
+        self.keyboardHeight = kbSize.height;
+        [self moveViewToShowTF];
+    }
     self.keyboardHeight = kbSize.height;
-    [self moveViewToShowTF];
     
 }
 
 -(void)moveViewToShowTF
 {
-    self.view.frame =CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
-    if (0 == self.keyboardHeight || nil == self.currntTF) {
+    
+    if (0 == self.keyboardHeight || nil == self.currntTF)
+    {
         return;
     }
+    self.view.top = self.mainViewFramRectTop;
     
-    int offset = self.keyboardHeight - ([UIScreen mainScreen].bounds.size.height -([self.currntTF convertRect:self.currntTF.bounds toView:[[UIApplication sharedApplication] keyWindow]].origin.y + self.currntTF.height+40));
+    CGRect rect = [self.currntTF convertRect:self.currntTF.bounds toView:[[UIApplication sharedApplication] keyWindow]];
+    CGFloat offset = self.keyboardHeight - ([UIScreen mainScreen].bounds.size.height -(rect.origin.y + rect.size.height));
     if(offset > 0){
         NSTimeInterval animationDuration = 0.30f;
         [UIView beginAnimations:@"ResizeForKeyboard" context:nil];
         [UIView setAnimationDuration:animationDuration];
-        self.view.frame = CGRectMake(0.0f, -offset, self.view.frame.size.width, self.view.frame.size.height);
+        self.view.top = self.mainViewFramRectTop-offset;
         [UIView commitAnimations];
     }
 }
 
 - (void)keyboardWillBeHidden:(NSNotification*)aNotification
 {
-    //do something
+    self.view.top = self.mainViewFramRectTop;
+    self.keyboardHeight = 0;
 }
 
 
