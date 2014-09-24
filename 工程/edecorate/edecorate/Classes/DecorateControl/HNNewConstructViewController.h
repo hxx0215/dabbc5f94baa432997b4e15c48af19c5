@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-
+typedef enum HNConstructType{
+    kCompanyNew = 0,
+    kPersonalNew,
+    kCompanyDetail,
+    kPersonalDetail
+} HNConstructType;
 @interface HNNewConstructViewController : UIViewController
-
+@property (nonatomic, assign)HNConstructType constructType;
+- (instancetype)initWithConstructType:(HNConstructType)constructType;
 @end

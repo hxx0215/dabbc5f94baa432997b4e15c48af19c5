@@ -434,11 +434,11 @@
 		B965E76119D04B95004CD201 /* Report */ = {
 			isa = PBXGroup;
 			children = (
-				B9882DF019CB06D90093F0F4 /* HNDecorateReportViewController.h */,
-				B9882DF119CB06D90093F0F4 /* HNDecorateReportViewController.m */,
 				B955579319D1A06A00FC0AAE /* HNNewConstructViewController.h */,
 				B955579419D1A06A00FC0AAE /* HNNewConstructViewController.m */,
 				B955579519D1A06A00FC0AAE /* HNNewConstructViewController.xib */,
+				B9882DF019CB06D90093F0F4 /* HNDecorateReportViewController.h */,
+				B9882DF119CB06D90093F0F4 /* HNDecorateReportViewController.m */,
 				B9882DF919CB152F0093F0F4 /* HNNewCompanyReportView.h */,
 				B9882DFA19CB152F0093F0F4 /* HNNewCompanyReportView.m */,
 				B9882DF619CB11920093F0F4 /* HNNewReportViewController.h */,

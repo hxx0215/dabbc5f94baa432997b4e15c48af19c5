@@ -14,6 +14,7 @@
 @interface HNReportModel : NSObject
 @property (nonatomic, strong)NSString *roomName;
 @property (nonatomic, strong)NSString *status;
+@property (nonatomic, assign)HNConstructType constructType;
 @end
 @implementation HNReportModel
 @end
@@ -24,7 +25,6 @@
 @property (nonatomic, strong)UITableView *rTableView;
 @property (nonatomic, strong)NSMutableArray *reportList;
 @property (nonatomic, strong)UIBarButtonItem *reportButton;
-@property (nonatomic, strong)UIImagePickerController *imgaPicker;
 @end
 
 @implementation HNDecorateReportViewController
@@ -56,7 +56,14 @@
     HNReportModel *tModel = [[HNReportModel alloc] init];
     tModel.roomName = @"施工房号：XXXX";
     tModel.status = @"审核进度:审核中";
+    tModel.constructType = kCompanyNew;
     [self.reportList addObject:tModel];
+    
+    HNReportModel *modelComDetail = [[HNReportModel alloc] init];
+    modelComDetail.roomName = @"施工房号：";
+    modelComDetail.status =@"审核进度:已通过";
+    modelComDetail.constructType = kCompanyDetail;
+    [self.reportList addObject:modelComDetail];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -91,7 +98,8 @@
     
 //    HNNewReportViewController *newReportViewController = [[HNNewReportViewController alloc] init];
 //    [self.navigationController pushViewController:newReportViewController animated:YES];
-    HNNewConstructViewController *constructViewController = [[HNNewConstructViewController alloc]init];
+    HNReportModel *model = (HNReportModel *)self.reportList[indexPath.row];
+    HNNewConstructViewController *constructViewController = [[HNNewConstructViewController alloc]initWithConstructType:model.constructType];
     [self.navigationController pushViewController:constructViewController animated:YES];
 }
 @end
