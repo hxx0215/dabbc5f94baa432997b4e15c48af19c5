@@ -8,7 +8,7 @@
 
 #import "HNRefundApplyViewController.h"
 
-@interface HNRefundApplyViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface HNRefundApplyViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate>
 @property (strong, nonatomic) IBOutlet UIButton *commitButton;
 @property (strong, nonatomic) IBOutlet UIButton *uploadButton;
 

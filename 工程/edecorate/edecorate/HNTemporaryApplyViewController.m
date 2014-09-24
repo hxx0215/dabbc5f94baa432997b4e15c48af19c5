@@ -387,11 +387,9 @@
     CGRect rect = [self.currntTF convertRect:self.currntTF.bounds toView:[[UIApplication sharedApplication] keyWindow]];
     CGFloat offset = self.keyboardHeight - ([UIScreen mainScreen].bounds.size.height -(rect.origin.y + rect.size.height));
     if(offset > 0){
-        NSTimeInterval animationDuration = 0.30f;
-        [UIView beginAnimations:@"ResizeForKeyboard" context:nil];
-        [UIView setAnimationDuration:animationDuration];
-        self.view.top = self.mainViewFramRectTop-offset;
-        [UIView commitAnimations];
+        [UIView animateWithDuration:0.30f animations:^{
+            self.view.top = self.mainViewFramRectTop-offset;
+        }];
     }
 }
 

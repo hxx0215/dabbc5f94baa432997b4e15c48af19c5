@@ -10,7 +10,7 @@
 #import "HNCommbox.h"
 #import "UIView+AHKit.h"
 
-@interface HNComplaintApplyViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface HNComplaintApplyViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate,UITextViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource>
 @property (nonatomic, strong)IBOutlet UILabel *houseInfMainLabel;
 @property (nonatomic, strong)IBOutlet UILabel *houseInfTitleLabel;
 @property (nonatomic, strong)IBOutlet UILabel *houseInfLabel;
@@ -34,10 +34,16 @@
 @property (nonatomic, strong)IBOutlet UILabel *complaintIssueTitleLable;
 @property (nonatomic, strong)IBOutlet UILabel *evidenceTitleLable;
 @property (nonatomic, strong)IBOutlet UITextField *complaintObjectTF;
+@property (nonatomic, strong)IBOutlet UITextField *complaintOCategoryTF;
 
 @property (nonatomic, strong)UIImagePickerController *imagePicker;
 
 @property (nonatomic, strong)HNCommbox* commbox;
+@property (nonatomic, strong)UIPickerView* complaintCategoryPickView;
+@property (nonatomic, strong)NSArray* complaintCategoryPickerArray;
+@property (strong, nonatomic) UIView* textOKView;
+
+@property (nonatomic) CGFloat mainViewFramRectTop;
 @end
 
 @implementation HNComplaintApplyViewController
@@ -110,11 +116,41 @@
     self.imagePicker.allowsEditing = NO;
     
     
-    NSMutableArray* arr = [[NSMutableArray alloc] init];
-    [arr addObject:@"投诉业主"];
-    [arr addObject:@"投诉装修单位"];
-    _commbox = [[HNCommbox alloc] initWithFrame:CGRectMake(self.houseInfLabel.left, self.complaintCategoryTitleLable.top, self.complaintContansTextView.width, self.commitButton.height) withArray:arr];
-    [self.view addSubview:_commbox];
+//    NSMutableArray* arr = [[NSMutableArray alloc] init];
+//    [arr addObject:@"投诉业主"];
+//    [arr addObject:@"投诉装修单位"];
+//    _commbox = [[HNCommbox alloc] initWithFrame:CGRectMake(self.houseInfLabel.left, self.complaintCategoryTitleLable.top, self.complaintContansTextView.width, self.commitButton.height) withArray:arr];
+//    [self.view addSubview:_commbox];
+    
+    self.complaintObjectTF.delegate = self;
+    self.complaintContansTextView.delegate = self;
+    
+    
+    self.complaintCategoryPickerArray = [NSArray arrayWithObjects:@"投诉业主",@"投诉装修单位", nil];
+    self.complaintCategoryPickView = [[UIPickerView alloc]init];
+    self.complaintCategoryPickView.delegate = self;
+    self.complaintCategoryPickView.dataSource = self;
+    [self.complaintCategoryPickView setFrame:CGRectMake(0, 0, 320, 200)];
+    self.complaintCategoryPickView.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
+    self.complaintCategoryPickView.showsSelectionIndicator = YES;
+    self.complaintOCategoryTF.inputView = self.complaintCategoryPickView;
+    self.complaintOCategoryTF.delegate = self;
+    self.textOKView = [[UIView alloc]init];
+    self.textOKView.backgroundColor = [UIColor grayColor];
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.textOKView addSubview:button];
+    button.width = self.textOKView.width = 50;
+    button.height = self.textOKView.height = self.complaintOCategoryTF.height;
+    [button setTitle:@"OK" forState:UIControlStateNormal];
+    self.textOKView.hidden = YES;
+    [self.view addSubview:self.textOKView];
+    [button addTarget:self action:@selector(OKTextClick) forControlEvents:UIControlEventTouchUpInside];
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    self.mainViewFramRectTop = [self.view convertRect:self.view.bounds toView:[[UIApplication sharedApplication] keyWindow]].origin.y;
 }
 
 - (void)labelWithTitle:(NSString *)title label:(UILabel*)lab
@@ -126,9 +162,17 @@
     lab.layer.borderColor = [UIColor blackColor].CGColor;
 }
 
+-(void)OKTextClick
+{
+    NSInteger row = [self.complaintCategoryPickView selectedRowInComponent:0];
+    self.complaintOCategoryTF.text = [self.complaintCategoryPickerArray objectAtIndex:row];
+    [self.complaintOCategoryTF resignFirstResponder];
+    
+}
+
 - (IBAction)commit:(id)sender
 {
-    self.temporaryModel.complaintInfo.complaintCategory = _commbox.currentText;
+    self.temporaryModel.complaintInfo.complaintCategory = self.complaintOCategoryTF.text;
     self.temporaryModel.complaintInfo.complaintObject = self.complaintObjectTF.text;
     self.temporaryModel.complaintInfo.complaintIssue = self.complaintContansTextView.text;
     UIAlertView* alert=[[UIAlertView alloc]initWithTitle:nil message:@"已提交投诉" delegate:self cancelButtonTitle:@"OK"otherButtonTitles:nil,nil];
@@ -149,10 +193,79 @@
     [self presentViewController:self.imagePicker animated:YES completion:nil];
 }
 
+
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
     UIImage *image=[info objectForKey:UIImagePickerControllerOriginalImage];
     [self.imagePicker dismissViewControllerAnimated:YES completion:nil];
     //[self.uploadImages setObject:image forKey:[NSNumber numberWithInteger:self.curButton.tag]];;
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField           // became first responder
+{
+    if (textField == self.complaintOCategoryTF) {
+        self.textOKView.right = textField.right;
+        self.textOKView.bottom = textField.bottom;
+        self.textOKView.hidden = NO;
+    }
+}
+
+
+-(void)textFieldDidEndEditing:(UITextField *)textField{
+    self.textOKView.hidden = YES;
+
+}
+
+- (BOOL)textFieldShouldClear:(UITextField *)textField               // called when clear button pressed. return NO to ignore (no notifications)
+{
+    return YES;
+}
+- (BOOL)textFieldShouldReturn:(UITextField *)textField              // called when 'return' key pressed. return NO to ignore.
+{
+    [textField resignFirstResponder];
+    return YES;
+}
+
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+    [UIView animateWithDuration:0.30f animations:^{
+        self.view.top = -10;
+    }];
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView
+{
+    [UIView animateWithDuration:0.30f animations:^{
+        self.view.top = self.mainViewFramRectTop;
+    }];
+    
+}
+
+-(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString*)text
+{
+//    if ([text isEqualToString:@"\n"]) {
+//        [textView resignFirstResponder];
+//        return NO;
+//    }
+    return YES;
+}
+
+-(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
+    return 1;
+}
+-(NSInteger) pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
+    return [self.complaintCategoryPickerArray count];
+}
+-(NSString*) pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
+    return [self.complaintCategoryPickerArray objectAtIndex:row];
+}
+
+
+
+- (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component
+
+{
+    return 50.0;
+    
 }
 
 - (void)didReceiveMemoryWarning {
