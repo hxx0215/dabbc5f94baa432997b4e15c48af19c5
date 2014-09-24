@@ -36,6 +36,7 @@
 		B916F0E319C878AC00A849C7 /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = B916F0E219C878AC00A849C7 /* PushConfig.plist */; };
 		B916F0E719C8795F00A849C7 /* libPushSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B916F0E619C8795F00A849C7 /* libPushSDK.a */; };
 		B94B7A6519C9BF3E000112ED /* HNHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B94B7A6419C9BF3E000112ED /* HNHomeViewController.m */; };
+		B94C773A19D3082D0046AC58 /* CALayer+XibConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = B94C773919D3082D0046AC58 /* CALayer+XibConfiguration.m */; };
 		B94C854819C9CA770040D47E /* HNMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B94C854719C9CA770040D47E /* HNMessageModel.m */; };
 		B953CE0E19CAFBE000BD57DF /* HNLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B953CE0D19CAFBE000BD57DF /* HNLoginViewController.m */; };
 		B955579619D1A06A00FC0AAE /* HNNewConstructViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B955579419D1A06A00FC0AAE /* HNNewConstructViewController.m */; };
@@ -150,6 +151,8 @@
 		B916F0E619C8795F00A849C7 /* libPushSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libPushSDK.a; sourceTree = "<group>"; };
 		B94B7A6319C9BF3E000112ED /* HNHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNHomeViewController.h; path = Classes/HNHomeViewController.h; sourceTree = "<group>"; };
 		B94B7A6419C9BF3E000112ED /* HNHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNHomeViewController.m; path = Classes/HNHomeViewController.m; sourceTree = "<group>"; };
+		B94C773819D3082D0046AC58 /* CALayer+XibConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+XibConfiguration.h"; sourceTree = "<group>"; };
+		B94C773919D3082D0046AC58 /* CALayer+XibConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+XibConfiguration.m"; sourceTree = "<group>"; };
 		B94C854619C9CA770040D47E /* HNMessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNMessageModel.h; path = Classes/Message/HNMessageModel.h; sourceTree = "<group>"; };
 		B94C854719C9CA770040D47E /* HNMessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNMessageModel.m; path = Classes/Message/HNMessageModel.m; sourceTree = "<group>"; };
 		B953CE0C19CAFBE000BD57DF /* HNLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNLoginViewController.h; path = Classes/HNLoginViewController.h; sourceTree = "<group>"; };
@@ -592,6 +595,8 @@
 				B9B2BBF419CF1F3000839AED /* CTAssetsPickerController */,
 				B9DE55FB19C9C0EA00280EC7 /* UIView+AHKit.h */,
 				B9DE55FC19C9C0EA00280EC7 /* UIView+AHKit.m */,
+				B94C773819D3082D0046AC58 /* CALayer+XibConfiguration.h */,
+				B94C773919D3082D0046AC58 /* CALayer+XibConfiguration.m */,
 			);
 			name = "Third Party";
 			sourceTree = "<group>";
@@ -773,6 +778,7 @@
 				D3C07BC019CDAC7A003EA5E4 /* HNComplaintTableViewCell.m in Sources */,
 				B9B2BC1819CF1F3000839AED /* ALAsset+isEqual.m in Sources */,
 				B9D3DECB19CD0B2C0020CDC9 /* HNReportPurchaseViewController.m in Sources */,
+				B94C773A19D3082D0046AC58 /* CALayer+XibConfiguration.m in Sources */,
 				D3C07BC419CDC8A0003EA5E4 /* HNComplaintApplyViewController.m in Sources */,
 				B965E76019D04955004CD201 /* HNDeliverViewController.m in Sources */,
 				B9B2BC1D19CF1F3000839AED /* CTAssetsGroupViewController.m in Sources */,
@@ -908,7 +914,7 @@
 					"$(PROJECT_DIR)/lib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "da877219-839b-4844-a9bf-f0bca2fbd8f6";
+				PROVISIONING_PROFILE = "b51e7a41-46e5-490b-af96-7fd926334a6d";
 				WRAPPER_EXTENSION = app;
 			};
 			name = "ad hoc distribution test";
@@ -1016,7 +1022,7 @@
 					"$(PROJECT_DIR)/lib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "da877219-839b-4844-a9bf-f0bca2fbd8f6";
+				PROVISIONING_PROFILE = "b51e7a41-46e5-490b-af96-7fd926334a6d";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1036,7 +1042,7 @@
 					"$(PROJECT_DIR)/lib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "da877219-839b-4844-a9bf-f0bca2fbd8f6";
+				PROVISIONING_PROFILE = "b51e7a41-46e5-490b-af96-7fd926334a6d";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
