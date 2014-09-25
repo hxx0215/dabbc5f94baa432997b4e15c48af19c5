@@ -64,6 +64,18 @@
     modelComDetail.status =@"审核进度:已通过";
     modelComDetail.constructType = kCompanyDetail;
     [self.reportList addObject:modelComDetail];
+    
+    HNReportModel *modelOwnNew = [[HNReportModel alloc]init];
+    modelOwnNew.roomName =@"施工房号：业主自装";
+    modelOwnNew.status = @"审核进度：审核中";
+    modelOwnNew.constructType = kPersonalNew;
+    [self.reportList addObject:modelOwnNew];
+    
+    HNReportModel *modelOwnDetail = [[HNReportModel alloc] init];
+    modelOwnDetail.roomName = @"施工房号：业主自装";
+    modelOwnDetail.status = @"审核进度：已通过";
+    modelOwnDetail.constructType = kPersonalDetail;
+    [self.reportList addObject:modelOwnDetail];
 }
 
 - (void)viewWillAppear:(BOOL)animated{

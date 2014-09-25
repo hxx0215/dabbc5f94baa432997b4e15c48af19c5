@@ -8,6 +8,8 @@
             <connections>
                 <outlet property="backView" destination="Hef-4l-fmz" id="tl7-HU-1VH"/>
                 <outlet property="companyDataView" destination="gwz-tv-N0d" id="msm-QX-MKA"/>
+                <outlet property="contractWay" destination="Kvs-oc-VeF" id="Dyh-Qq-f6T"/>
+                <outlet property="dutyDataView" destination="4Ys-0O-WK5" id="ySS-dy-ukf"/>
                 <outlet property="ownerDataView" destination="veo-i8-mHi" id="lmc-az-hGG"/>
                 <outlet property="purchaseButton" destination="OLp-NG-7Yv" id="vYo-3j-OOk"/>
                 <outlet property="purchaseListView" destination="dio-cj-UO1" id="bww-g0-ObK"/>
@@ -24,6 +26,41 @@
                     <rect key="frame" x="0.0" y="8" width="320" height="827"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
+                        <view hidden="YES" contentMode="scaleToFill" id="4Ys-0O-WK5">
+                            <rect key="frame" x="0.0" y="37" width="320" height="120"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="施工负责人资料" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ZeI-sG-AJl">
+                                    <rect key="frame" x="8" y="8" width="119" height="21"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="姓名：李大术" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="T24-hb-6HS">
+                                    <rect key="frame" x="8" y="37" width="72" height="21"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="联系电话：1234567" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Mdq-fX-E8z">
+                                    <rect key="frame" x="8" y="66" width="109" height="21"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="身份证号：3020589174927339221" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rLI-tD-Q4K">
+                                    <rect key="frame" x="8" y="95" width="191" height="21"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="承包方式：公司承包" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Kvs-oc-VeF">
                             <rect key="frame" x="8" y="8" width="153" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

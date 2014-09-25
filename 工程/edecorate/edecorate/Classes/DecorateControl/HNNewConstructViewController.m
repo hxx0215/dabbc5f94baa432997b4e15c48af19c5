@@ -17,6 +17,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *uploadedLabel;
 @property (strong, nonatomic) IBOutlet UIView *companyDataView;
 @property (strong, nonatomic) IBOutlet UIView *ownerDataView;
+@property (strong, nonatomic) IBOutlet UILabel *contractWay;
+@property (strong, nonatomic) IBOutlet UIView *dutyDataView;
 @property (weak, nonatomic) UIButton *curButton;
 @property (strong, nonatomic) UIImagePickerController *imagePicker;
 @end
@@ -40,28 +42,50 @@
     {
         self.purchaseListView.hidden = NO;
         self.purchaseButton.hidden = YES;
-        __weak typeof (self) wself = self;
-        void (^ changeButtonTitle)(id) = ^(id obj){
-            if ([obj isKindOfClass:[UIButton class]])
-            {
-                typeof (self) sself = wself;
-                UIButton *btn = (UIButton *)obj;
-                [btn setTitle:NSLocalizedString(@"Look up", nil) forState:UIControlStateNormal];
-                [btn sizeToFit];
-                btn.width += 3;
-                [btn removeTarget:self action:@selector(upload:) forControlEvents:UIControlEventTouchUpInside];
-                [btn addTarget:self action:@selector(lookUpPic:) forControlEvents:UIControlEventTouchUpInside];
-                [sself addUploadedLabelWithTag:btn.tag];
-            }
-        };
-
+        [self changeMode:self.constructType];
+    }
+    if (kPersonalNew == self.constructType){
+        self.companyDataView.hidden = YES;
+        self.contractWay.text = @"承包方式：业主自装";
+        self.dutyDataView.hidden = NO;
+        self.ownerDataView.top = self.dutyDataView.bottom;
+        self.purchaseButton.top = self.ownerDataView.bottom;
+    }
+    if (kPersonalDetail == self.constructType){
+        self.companyDataView.hidden = YES;
+        self.contractWay.text = @"承包方式：业主自装";
+        self.dutyDataView.hidden = NO;
+        self.ownerDataView.top = self.dutyDataView.bottom;
+        self.purchaseListView.hidden = NO;
+        self.purchaseButton.hidden = YES;
+        self.purchaseListView.top = self.ownerDataView.bottom;
+        [self changeMode:self.constructType];
+    }
+}
+- (void)changeMode:(HNConstructType)type{
+    __weak typeof (self) wself = self;
+    void (^ changeButtonTitle)(id) = ^(id obj){
+        if ([obj isKindOfClass:[UIButton class]])
+        {
+            typeof (self) sself = wself;
+            UIButton *btn = (UIButton *)obj;
+            [btn setTitle:NSLocalizedString(@"Look up", nil) forState:UIControlStateNormal];
+            [btn sizeToFit];
+            btn.width += 3;
+            [btn removeTarget:self action:@selector(upload:) forControlEvents:UIControlEventTouchUpInside];
+            [btn addTarget:self action:@selector(lookUpPic:) forControlEvents:UIControlEventTouchUpInside];
+            [sself addUploadedLabelWithTag:btn.tag];
+        }
+    };
+    if (kPersonalDetail != type)
+    {
         [[self.companyDataView subviews] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop){
             changeButtonTitle(obj);
         }];
-        [[self.ownerDataView subviews] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop){
-            changeButtonTitle(obj);
-        }];
     }
+    [[self.ownerDataView subviews] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop){
+        changeButtonTitle(obj);
+    }];
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
