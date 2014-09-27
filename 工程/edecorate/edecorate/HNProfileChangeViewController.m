@@ -7,41 +7,41 @@
 //
 
 #import "HNProfileChangeViewController.h"
-#import "HNAreaPickerView.h"
+//#import "HNAreaPickerView.h"
 
-@interface HNProfileChangeViewController ()<UITextFieldDelegate, HNAreaPickerDelegate>
-
-@property (retain, nonatomic) IBOutlet UITextField *areaText;
-@property (retain, nonatomic) IBOutlet UITextField *cityText;
-@property (strong, nonatomic) NSString *areaValue, *cityValue;
-@property (strong, nonatomic) HNAreaPickerView *locatePicker;
-@property (strong, nonatomic) IBOutlet UILabel *nameTitleLabel;
-@property (strong, nonatomic) IBOutlet UILabel *categoryTitleLabel;
-@property (strong, nonatomic) IBOutlet UILabel *addressTitleLabel;
-@property (strong, nonatomic) IBOutlet UILabel *shopkeeperTitleLabel;
-@property (strong, nonatomic) IBOutlet UILabel *phoneTitleLabel;
-@property (strong, nonatomic) IBOutlet UILabel *onlineServiceTitleLabel;
-@property (strong, nonatomic) IBOutlet UILabel *nameLabel;
-@property (strong, nonatomic) IBOutlet UILabel *categoryLabel;
-@property (strong, nonatomic) IBOutlet UILabel *addressLabel;
-@property (strong, nonatomic) IBOutlet UILabel *shopkeeperLabel;
-@property (strong, nonatomic) IBOutlet UILabel *phoneLabel;
-@property (strong, nonatomic) IBOutlet UILabel *onlineServiceLabel;
+@interface HNProfileChangeViewController ()
+//
+//@property (retain, nonatomic) IBOutlet UITextField *areaText;
+//@property (retain, nonatomic) IBOutlet UITextField *cityText;
+//@property (strong, nonatomic) NSString *areaValue, *cityValue;
+////@property (strong, nonatomic) HNAreaPickerView *locatePicker;
+//@property (strong, nonatomic) IBOutlet UILabel *nameTitleLabel;
+//@property (strong, nonatomic) IBOutlet UILabel *categoryTitleLabel;
+//@property (strong, nonatomic) IBOutlet UILabel *addressTitleLabel;
+//@property (strong, nonatomic) IBOutlet UILabel *shopkeeperTitleLabel;
+//@property (strong, nonatomic) IBOutlet UILabel *phoneTitleLabel;
+//@property (strong, nonatomic) IBOutlet UILabel *onlineServiceTitleLabel;
+//@property (strong, nonatomic) IBOutlet UILabel *nameLabel;
+//@property (strong, nonatomic) IBOutlet UILabel *categoryLabel;
+//@property (strong, nonatomic) IBOutlet UILabel *addressLabel;
+//@property (strong, nonatomic) IBOutlet UILabel *shopkeeperLabel;
+//@property (strong, nonatomic) IBOutlet UILabel *phoneLabel;
+//@property (strong, nonatomic) IBOutlet UILabel *onlineServiceLabel;
 @end
 
 @implementation HNProfileChangeViewController
-@synthesize areaText;
-@synthesize cityText;
-@synthesize areaValue=_areaValue, cityValue=_cityValue;
-@synthesize locatePicker=_locatePicker;
+//@synthesize areaText;
+//@synthesize cityText;
+//@synthesize areaValue=_areaValue, cityValue=_cityValue;
+//@synthesize locatePicker=_locatePicker;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.areaText.delegate = self;
+    //self.areaText.delegate = self;
 }
 
-
+/*
 -(void)setAreaValue:(NSString *)areaValue
 {
     if (![_areaValue isEqualToString:areaValue]) {
@@ -104,7 +104,7 @@
     [super touchesBegan:touches withEvent:event];
     [self cancelLocatePicker];
 }
-
+*/
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

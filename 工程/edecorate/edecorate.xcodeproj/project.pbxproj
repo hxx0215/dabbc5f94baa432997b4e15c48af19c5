@@ -104,6 +104,8 @@
 		D33EEABD19D6FF5D00D6F106 /* city.plist in Resources */ = {isa = PBXBuildFile; fileRef = D33EEABB19D6FF5D00D6F106 /* city.plist */; };
 		D33EEAC119D7000E00D6F106 /* HNAreaPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = D33EEABF19D7000E00D6F106 /* HNAreaPickerView.m */; };
 		D33EEAC219D7000E00D6F106 /* HNAreaPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D33EEAC019D7000E00D6F106 /* HNAreaPickerView.xib */; };
+		D33EEAC619D70C8800D6F106 /* HNProfileChangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D33EEAC419D70C8800D6F106 /* HNProfileChangeViewController.m */; };
+		D33EEAC719D70C8800D6F106 /* HNProfileChangeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D33EEAC519D70C8800D6F106 /* HNProfileChangeViewController.xib */; };
 		D391EE8C19CD787D00DE3363 /* HNComplaintTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D391EE8B19CD787D00DE3363 /* HNComplaintTableViewController.m */; };
 		D39662F519CD4E6300EE49B8 /* HNTemporaryDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D39662F319CD4E6300EE49B8 /* HNTemporaryDetailsViewController.m */; };
 		D39662F619CD4E6300EE49B8 /* HNTemporaryDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D39662F419CD4E6300EE49B8 /* HNTemporaryDetailsViewController.xib */; };
@@ -299,6 +301,9 @@
 		D33EEABE19D7000E00D6F106 /* HNAreaPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNAreaPickerView.h; path = Classes/BusinessBackground/HNAreaPickerView.h; sourceTree = "<group>"; };
 		D33EEABF19D7000E00D6F106 /* HNAreaPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNAreaPickerView.m; path = Classes/BusinessBackground/HNAreaPickerView.m; sourceTree = "<group>"; };
 		D33EEAC019D7000E00D6F106 /* HNAreaPickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HNAreaPickerView.xib; path = Classes/BusinessBackground/HNAreaPickerView.xib; sourceTree = "<group>"; };
+		D33EEAC319D70C8800D6F106 /* HNProfileChangeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNProfileChangeViewController.h; sourceTree = "<group>"; };
+		D33EEAC419D70C8800D6F106 /* HNProfileChangeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNProfileChangeViewController.m; sourceTree = "<group>"; };
+		D33EEAC519D70C8800D6F106 /* HNProfileChangeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HNProfileChangeViewController.xib; sourceTree = "<group>"; };
 		D391EE8A19CD787D00DE3363 /* HNComplaintTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNComplaintTableViewController.h; sourceTree = "<group>"; };
 		D391EE8B19CD787D00DE3363 /* HNComplaintTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNComplaintTableViewController.m; sourceTree = "<group>"; };
 		D39662F219CD4E6300EE49B8 /* HNTemporaryDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNTemporaryDetailsViewController.h; sourceTree = "<group>"; };
@@ -735,6 +740,9 @@
 		D33EEA6619D6D9D700D6F106 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				D33EEAC319D70C8800D6F106 /* HNProfileChangeViewController.h */,
+				D33EEAC419D70C8800D6F106 /* HNProfileChangeViewController.m */,
+				D33EEAC519D70C8800D6F106 /* HNProfileChangeViewController.xib */,
 				D33EEA6719D6D9E600D6F106 /* HNProfileViewController.h */,
 				D33EEA6819D6D9E600D6F106 /* HNProfileViewController.m */,
 				D33EEA6919D6D9E600D6F106 /* HNProfileViewController.xib */,
@@ -857,6 +865,7 @@
 			files = (
 				D33EEA6B19D6D9E600D6F106 /* HNProfileViewController.xib in Resources */,
 				B9DE560419C9C40B00280EC7 /* Localizable.strings in Resources */,
+				D33EEAC719D70C8800D6F106 /* HNProfileChangeViewController.xib in Resources */,
 				D33EEABD19D6FF5D00D6F106 /* city.plist in Resources */,
 				D3C07BCA19CDC8CA003EA5E4 /* HNComplaintDetailsViewController.xib in Resources */,
 				B91A3AC119D6E6E9000F3823 /* MJRefresh.bundle in Resources */,
@@ -909,6 +918,7 @@
 				D3F90F1619CB1F0B000C95E4 /* HNTemporaryApplyViewController.m in Sources */,
 				B91A3ACC19D6F2FA000F3823 /* HNGoodsTableViewCell.m in Sources */,
 				D3CD90FE19CF13DE00E76AF4 /* HNRefundApplyViewController.m in Sources */,
+				D33EEAC619D70C8800D6F106 /* HNProfileChangeViewController.m in Sources */,
 				B91A3AC719D6E6E9000F3823 /* UIScrollView+MJRefresh.m in Sources */,
 				B916F0B819C8781D00A849C7 /* ViewController.m in Sources */,
 				B916F0B219C8781D00A849C7 /* AppDelegate.m in Sources */,

@@ -7,7 +7,7 @@
 //
 
 #import "HNProfileViewController.h"
-#import "HNProfileChangeViewController.h"
+//#import "HNProfileChangeViewController.h"
 #import "UIView+AHKit.h"
 #import "HNBusinessBackgroundModel.h"
 
@@ -59,9 +59,9 @@
 }
 
 - (IBAction)changButtonClick:(id)sender {
-    HNProfileChangeViewController *controller = [[HNProfileChangeViewController alloc] init];
-    controller.model = self.model;
-    [self.navigationController pushViewController:controller animated:YES];
+    //HNProfileChangeViewController *controller = [[HNProfileChangeViewController alloc] init];
+    //controller.model = self.model;
+    //[self.navigationController pushViewController:controller animated:YES];
 }
 
 - (void)labelWithTitle:(NSString *)title label:(UILabel*)lab
