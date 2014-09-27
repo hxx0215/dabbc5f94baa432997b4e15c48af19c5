@@ -6,10 +6,10 @@
 //
 //
 
-#import "VolumeViewController.h"
+#import "HNVolumeViewController.h"
 #include "UIView+AHKit.h"
 
-@interface VolumeViewController ()<UITextFieldDelegate>
+@interface HNVolumeViewController ()<UITextFieldDelegate>
 @property (strong, nonatomic) IBOutlet UISegmentedControl *viewSegmentedControl;
 @property (strong, nonatomic) IBOutlet UILabel *volumeNOTitleLabel;
 @property (strong, nonatomic) IBOutlet UILabel *volumePWTitleLabel;
@@ -18,10 +18,9 @@
 @property (strong, nonatomic) IBOutlet UITextField *volumePWTextField;
 @property (strong, nonatomic) IBOutlet UIButton *OKButton;
 @property (strong, nonatomic) IBOutlet UIButton *cancelButton;
-
 @end
 
-@implementation VolumeViewController
+@implementation HNVolumeViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

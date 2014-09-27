@@ -8,11 +8,11 @@
 
 #import "HNBusinessBKControlViewController.h"
 #import "UIView+AHKit.h"
-#import "VolumeViewController.h"
+#import "HNVolumeViewController.h"
 
 #import "HNBusinessListViewController.h"
 
-#import "ProfileViewController.h"
+#import "HNProfileViewController.h"
 
 
 @interface HNBusinessBKControlViewController ()
@@ -103,11 +103,11 @@
 - (IBAction)commentsClicked:(id)sender {
 }
 - (IBAction)profileClicked:(id)sender{
-    ProfileViewController* pc = [[ProfileViewController alloc]init];
+    HNProfileViewController* pc = [[HNProfileViewController alloc]init];
     [self.navigationController pushViewController:pc animated:YES];
 }
 - (IBAction)volumeClicked:(id)sender {
-    VolumeViewController* vc = [[VolumeViewController alloc]init];
+    HNVolumeViewController* vc = [[HNVolumeViewController alloc]init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
