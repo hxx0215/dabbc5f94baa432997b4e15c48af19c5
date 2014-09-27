@@ -92,6 +92,10 @@
 		D33EEA5F19D69F3200D6F106 /* HNBusinessBKControlViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D33EEA5D19D69F3200D6F106 /* HNBusinessBKControlViewController.xib */; };
 		D33EEA6419D6C2B700D6F106 /* VolumeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D33EEA6219D6C2B700D6F106 /* VolumeViewController.m */; };
 		D33EEA6519D6C2B700D6F106 /* VolumeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D33EEA6319D6C2B700D6F106 /* VolumeViewController.xib */; };
+		D33EEA6A19D6D9E600D6F106 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D33EEA6819D6D9E600D6F106 /* ProfileViewController.m */; };
+		D33EEA6B19D6D9E600D6F106 /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D33EEA6919D6D9E600D6F106 /* ProfileViewController.xib */; };
+		D33EEA6F19D6DE1A00D6F106 /* ProfileChangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D33EEA6D19D6DE1A00D6F106 /* ProfileChangeViewController.m */; };
+		D33EEA7019D6DE1A00D6F106 /* ProfileChangeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D33EEA6E19D6DE1A00D6F106 /* ProfileChangeViewController.xib */; };
 		D391EE8C19CD787D00DE3363 /* HNComplaintTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D391EE8B19CD787D00DE3363 /* HNComplaintTableViewController.m */; };
 		D39662F519CD4E6300EE49B8 /* HNTemporaryDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D39662F319CD4E6300EE49B8 /* HNTemporaryDetailsViewController.m */; };
 		D39662F619CD4E6300EE49B8 /* HNTemporaryDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D39662F419CD4E6300EE49B8 /* HNTemporaryDetailsViewController.xib */; };
@@ -269,6 +273,12 @@
 		D33EEA6119D6C2B700D6F106 /* VolumeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VolumeViewController.h; sourceTree = "<group>"; };
 		D33EEA6219D6C2B700D6F106 /* VolumeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VolumeViewController.m; sourceTree = "<group>"; };
 		D33EEA6319D6C2B700D6F106 /* VolumeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VolumeViewController.xib; sourceTree = "<group>"; };
+		D33EEA6719D6D9E600D6F106 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		D33EEA6819D6D9E600D6F106 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		D33EEA6919D6D9E600D6F106 /* ProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
+		D33EEA6C19D6DE1A00D6F106 /* ProfileChangeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileChangeViewController.h; sourceTree = "<group>"; };
+		D33EEA6D19D6DE1A00D6F106 /* ProfileChangeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileChangeViewController.m; sourceTree = "<group>"; };
+		D33EEA6E19D6DE1A00D6F106 /* ProfileChangeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileChangeViewController.xib; sourceTree = "<group>"; };
 		D391EE8A19CD787D00DE3363 /* HNComplaintTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNComplaintTableViewController.h; sourceTree = "<group>"; };
 		D391EE8B19CD787D00DE3363 /* HNComplaintTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNComplaintTableViewController.m; sourceTree = "<group>"; };
 		D39662F219CD4E6300EE49B8 /* HNTemporaryDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNTemporaryDetailsViewController.h; sourceTree = "<group>"; };
@@ -485,7 +495,11 @@
 		B94B7A6119C9BE4E000112ED /* BusinessBackground */ = {
 			isa = PBXGroup;
 			children = (
+
 				B91A3AA719D6DFFD000F3823 /* Goods */,
+
+				D33EEA6619D6D9D700D6F106 /* Profile */,
+
 				D33EEA6019D6C29100D6F106 /* volume */,
 				D33EEA5B19D69F3200D6F106 /* HNBusinessBKControlViewController.h */,
 				D33EEA5C19D69F3200D6F106 /* HNBusinessBKControlViewController.m */,
@@ -686,6 +700,19 @@
 			name = volume;
 			sourceTree = "<group>";
 		};
+		D33EEA6619D6D9D700D6F106 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				D33EEA6719D6D9E600D6F106 /* ProfileViewController.h */,
+				D33EEA6819D6D9E600D6F106 /* ProfileViewController.m */,
+				D33EEA6919D6D9E600D6F106 /* ProfileViewController.xib */,
+				D33EEA6C19D6DE1A00D6F106 /* ProfileChangeViewController.h */,
+				D33EEA6D19D6DE1A00D6F106 /* ProfileChangeViewController.m */,
+				D33EEA6E19D6DE1A00D6F106 /* ProfileChangeViewController.xib */,
+			);
+			name = Profile;
+			sourceTree = "<group>";
+		};
 		D3FAA5BC19D0703A0062B912 /* Complaint */ = {
 			isa = PBXGroup;
 			children = (
@@ -799,10 +826,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D33EEA6B19D6D9E600D6F106 /* ProfileViewController.xib in Resources */,
 				B9DE560419C9C40B00280EC7 /* Localizable.strings in Resources */,
 				D3C07BCA19CDC8CA003EA5E4 /* HNComplaintDetailsViewController.xib in Resources */,
 				B91A3AC119D6E6E9000F3823 /* MJRefresh.bundle in Resources */,
 				D33BBD1519CC711700AA1039 /* HNTemporaryApplyView.xib in Resources */,
+				D33EEA7019D6DE1A00D6F106 /* ProfileChangeViewController.xib in Resources */,
 				D39662F619CD4E6300EE49B8 /* HNTemporaryDetailsViewController.xib in Resources */,
 				B916F0E319C878AC00A849C7 /* PushConfig.plist in Resources */,
 				D3CD910419CF141C00E76AF4 /* HNRefundDetailViewController.xib in Resources */,
@@ -850,7 +879,10 @@
 				B916F0B819C8781D00A849C7 /* ViewController.m in Sources */,
 				B916F0B219C8781D00A849C7 /* AppDelegate.m in Sources */,
 				D3CD90FA19CF09E000E76AF4 /* HNRefundTableViewCell.m in Sources */,
+
 				B91A3AC319D6E6E9000F3823 /* MJRefreshConst.m in Sources */,
+				D33EEA6F19D6DE1A00D6F106 /* ProfileChangeViewController.m in Sources */,
+
 				B9D3DEDA19CD235A0020CDC9 /* HNCheckTableViewCell.m in Sources */,
 				B9B2BC1719CF1F3000839AED /* ALAsset+assetType.m in Sources */,
 				D39662F519CD4E6300EE49B8 /* HNTemporaryDetailsViewController.m in Sources */,
@@ -873,6 +905,7 @@
 				B9B2BC2219CF1F3000839AED /* CTAssetsSupplementaryView.m in Sources */,
 				3732B12C19CFC46E00ADF3F5 /* HNOfficePassesDetailsViewController.m in Sources */,
 				D3C07BC019CDAC7A003EA5E4 /* HNComplaintTableViewCell.m in Sources */,
+				D33EEA6A19D6D9E600D6F106 /* ProfileViewController.m in Sources */,
 				B9B2BC1819CF1F3000839AED /* ALAsset+isEqual.m in Sources */,
 				B9D3DECB19CD0B2C0020CDC9 /* HNReportPurchaseViewController.m in Sources */,
 				B94C773A19D3082D0046AC58 /* CALayer+XibConfiguration.m in Sources */,
