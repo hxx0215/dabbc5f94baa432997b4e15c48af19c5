@@ -9,13 +9,16 @@
 #import "HNBusinessListViewController.h"
 #import "MJRefresh.h"
 #import "UIView+AHKit.h"
+
 #import "HNGoodsTableViewCell.h"
 #import "HNGoodsViewController.h"
+#import "HNGoodsHeaderView.h"
 
 @interface HNBusinessListViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, assign)HNBusinessType businessType;
 @property (nonatomic, strong)UITableView *tableView;
 @property (nonatomic, strong)NSMutableArray *businessList;
+@property (nonatomic, strong)UIView *headerView;
 @end
 
 static NSString *reuseId = @"businessCell";
@@ -23,7 +26,7 @@ static NSString *reuseId = @"businessCell";
 
 - (instancetype)initWithType:(HNBusinessType)type{
     self = [super init];
-    if (!self){
+    if (self){
         self.businessType = type;
     }
     return self;
@@ -47,11 +50,10 @@ static NSString *reuseId = @"businessCell";
     }];
     self.tableView.headerRefreshingText = @"刷新中";
     
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 40)];
-    headerView.backgroundColor = [UIColor grayColor];
-    [self.view addSubview:headerView];
+    [self initHeaderViewWithType:self.businessType];
     
-    self.tableView.top = headerView.bottom;
+    
+    self.tableView.top = self.headerView.bottom;
     self.tableView.height -= 40;
     
     [self loadCellWithType:self.businessType];
@@ -64,6 +66,17 @@ static NSString *reuseId = @"businessCell";
             [self.tableView registerNib:nib forCellReuseIdentifier:reuseId];
         }
             break;
+        default:
+            break;
+    }
+}
+- (void)initHeaderViewWithType:(HNBusinessType)type{
+    switch (type){
+        case kGoods:
+        {
+            self.headerView = [[HNGoodsHeaderView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 64)];
+            [self.view addSubview:self.headerView];
+        }
         default:
             break;
     }
@@ -94,6 +107,7 @@ static NSString *reuseId = @"businessCell";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     switch (self.businessType){
         case kGoods:
         {
