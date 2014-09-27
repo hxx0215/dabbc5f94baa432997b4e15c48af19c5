@@ -44,6 +44,8 @@
 		B91A3AC619D6E6E9000F3823 /* UIScrollView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = B91A3ABC19D6E6E9000F3823 /* UIScrollView+MJExtension.m */; };
 		B91A3AC719D6E6E9000F3823 /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = B91A3ABE19D6E6E9000F3823 /* UIScrollView+MJRefresh.m */; };
 		B91A3AC819D6E6E9000F3823 /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = B91A3AC019D6E6E9000F3823 /* UIView+MJExtension.m */; };
+		B91A3ACC19D6F2FA000F3823 /* HNGoodsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B91A3ACA19D6F2FA000F3823 /* HNGoodsTableViewCell.m */; };
+		B91A3ACD19D6F2FA000F3823 /* HNGoodsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B91A3ACB19D6F2FA000F3823 /* HNGoodsTableViewCell.xib */; };
 		B94B7A6519C9BF3E000112ED /* HNHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B94B7A6419C9BF3E000112ED /* HNHomeViewController.m */; };
 		B94C773A19D3082D0046AC58 /* CALayer+XibConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = B94C773919D3082D0046AC58 /* CALayer+XibConfiguration.m */; };
 		B94C854819C9CA770040D47E /* HNMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B94C854719C9CA770040D47E /* HNMessageModel.m */; };
@@ -184,6 +186,9 @@
 		B91A3ABE19D6E6E9000F3823 /* UIScrollView+MJRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+MJRefresh.m"; sourceTree = "<group>"; };
 		B91A3ABF19D6E6E9000F3823 /* UIView+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MJExtension.h"; sourceTree = "<group>"; };
 		B91A3AC019D6E6E9000F3823 /* UIView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJExtension.m"; sourceTree = "<group>"; };
+		B91A3AC919D6F2FA000F3823 /* HNGoodsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNGoodsTableViewCell.h; path = Classes/BusinessBackground/HNGoodsTableViewCell.h; sourceTree = "<group>"; };
+		B91A3ACA19D6F2FA000F3823 /* HNGoodsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNGoodsTableViewCell.m; path = Classes/BusinessBackground/HNGoodsTableViewCell.m; sourceTree = "<group>"; };
+		B91A3ACB19D6F2FA000F3823 /* HNGoodsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HNGoodsTableViewCell.xib; path = Classes/BusinessBackground/HNGoodsTableViewCell.xib; sourceTree = "<group>"; };
 		B94B7A6319C9BF3E000112ED /* HNHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNHomeViewController.h; path = Classes/HNHomeViewController.h; sourceTree = "<group>"; };
 		B94B7A6419C9BF3E000112ED /* HNHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNHomeViewController.m; path = Classes/HNHomeViewController.m; sourceTree = "<group>"; };
 		B94C773819D3082D0046AC58 /* CALayer+XibConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+XibConfiguration.h"; sourceTree = "<group>"; };
@@ -447,6 +452,9 @@
 			children = (
 				B91A3AAD19D6E1B6000F3823 /* HNBusinessListViewController.h */,
 				B91A3AAE19D6E1B6000F3823 /* HNBusinessListViewController.m */,
+				B91A3AC919D6F2FA000F3823 /* HNGoodsTableViewCell.h */,
+				B91A3ACA19D6F2FA000F3823 /* HNGoodsTableViewCell.m */,
+				B91A3ACB19D6F2FA000F3823 /* HNGoodsTableViewCell.xib */,
 			);
 			name = Goods;
 			sourceTree = "<group>";
@@ -495,11 +503,8 @@
 		B94B7A6119C9BE4E000112ED /* BusinessBackground */ = {
 			isa = PBXGroup;
 			children = (
-
 				B91A3AA719D6DFFD000F3823 /* Goods */,
-
 				D33EEA6619D6D9D700D6F106 /* Profile */,
-
 				D33EEA6019D6C29100D6F106 /* volume */,
 				D33EEA5B19D69F3200D6F106 /* HNBusinessBKControlViewController.h */,
 				D33EEA5C19D69F3200D6F106 /* HNBusinessBKControlViewController.m */,
@@ -832,6 +837,7 @@
 				B91A3AC119D6E6E9000F3823 /* MJRefresh.bundle in Resources */,
 				D33BBD1519CC711700AA1039 /* HNTemporaryApplyView.xib in Resources */,
 				D33EEA7019D6DE1A00D6F106 /* ProfileChangeViewController.xib in Resources */,
+				B91A3ACD19D6F2FA000F3823 /* HNGoodsTableViewCell.xib in Resources */,
 				D39662F619CD4E6300EE49B8 /* HNTemporaryDetailsViewController.xib in Resources */,
 				B916F0E319C878AC00A849C7 /* PushConfig.plist in Resources */,
 				D3CD910419CF141C00E76AF4 /* HNRefundDetailViewController.xib in Resources */,
@@ -874,15 +880,14 @@
 				B9B2BC2319CF1F3000839AED /* CTAssetsViewCell.m in Sources */,
 				B9882DF519CB079A0093F0F4 /* HNReportTableViewCell.m in Sources */,
 				D3F90F1619CB1F0B000C95E4 /* HNTemporaryApplyViewController.m in Sources */,
+				B91A3ACC19D6F2FA000F3823 /* HNGoodsTableViewCell.m in Sources */,
 				D3CD90FE19CF13DE00E76AF4 /* HNRefundApplyViewController.m in Sources */,
 				B91A3AC719D6E6E9000F3823 /* UIScrollView+MJRefresh.m in Sources */,
 				B916F0B819C8781D00A849C7 /* ViewController.m in Sources */,
 				B916F0B219C8781D00A849C7 /* AppDelegate.m in Sources */,
 				D3CD90FA19CF09E000E76AF4 /* HNRefundTableViewCell.m in Sources */,
-
 				B91A3AC319D6E6E9000F3823 /* MJRefreshConst.m in Sources */,
 				D33EEA6F19D6DE1A00D6F106 /* ProfileChangeViewController.m in Sources */,
-
 				B9D3DEDA19CD235A0020CDC9 /* HNCheckTableViewCell.m in Sources */,
 				B9B2BC1719CF1F3000839AED /* ALAsset+assetType.m in Sources */,
 				D39662F519CD4E6300EE49B8 /* HNTemporaryDetailsViewController.m in Sources */,
