@@ -48,6 +48,7 @@
 		B91A3ACD19D6F2FA000F3823 /* HNGoodsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B91A3ACB19D6F2FA000F3823 /* HNGoodsTableViewCell.xib */; };
 		B91A3AD119D6F9D4000F3823 /* HNGoodsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B91A3ACF19D6F9D4000F3823 /* HNGoodsViewController.m */; };
 		B91A3AD219D6F9D4000F3823 /* HNGoodsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B91A3AD019D6F9D4000F3823 /* HNGoodsViewController.xib */; };
+		B91A3AD519D703C5000F3823 /* HNGoodsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B91A3AD419D703C5000F3823 /* HNGoodsHeaderView.m */; };
 		B94B7A6519C9BF3E000112ED /* HNHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B94B7A6419C9BF3E000112ED /* HNHomeViewController.m */; };
 		B94C773A19D3082D0046AC58 /* CALayer+XibConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = B94C773919D3082D0046AC58 /* CALayer+XibConfiguration.m */; };
 		B94C854819C9CA770040D47E /* HNMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B94C854719C9CA770040D47E /* HNMessageModel.m */; };
@@ -199,6 +200,8 @@
 		B91A3ACE19D6F9D4000F3823 /* HNGoodsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNGoodsViewController.h; path = Classes/BusinessBackground/HNGoodsViewController.h; sourceTree = "<group>"; };
 		B91A3ACF19D6F9D4000F3823 /* HNGoodsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNGoodsViewController.m; path = Classes/BusinessBackground/HNGoodsViewController.m; sourceTree = "<group>"; };
 		B91A3AD019D6F9D4000F3823 /* HNGoodsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HNGoodsViewController.xib; path = Classes/BusinessBackground/HNGoodsViewController.xib; sourceTree = "<group>"; };
+		B91A3AD319D703C5000F3823 /* HNGoodsHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNGoodsHeaderView.h; path = Classes/BusinessBackground/HNGoodsHeaderView.h; sourceTree = "<group>"; };
+		B91A3AD419D703C5000F3823 /* HNGoodsHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNGoodsHeaderView.m; path = Classes/BusinessBackground/HNGoodsHeaderView.m; sourceTree = "<group>"; };
 		B94B7A6319C9BF3E000112ED /* HNHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNHomeViewController.h; path = Classes/HNHomeViewController.h; sourceTree = "<group>"; };
 		B94B7A6419C9BF3E000112ED /* HNHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNHomeViewController.m; path = Classes/HNHomeViewController.m; sourceTree = "<group>"; };
 		B94C773819D3082D0046AC58 /* CALayer+XibConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+XibConfiguration.h"; sourceTree = "<group>"; };
@@ -467,6 +470,8 @@
 		B91A3AA719D6DFFD000F3823 /* Goods */ = {
 			isa = PBXGroup;
 			children = (
+				B91A3AD319D703C5000F3823 /* HNGoodsHeaderView.h */,
+				B91A3AD419D703C5000F3823 /* HNGoodsHeaderView.m */,
 				B91A3ACE19D6F9D4000F3823 /* HNGoodsViewController.h */,
 				B91A3ACF19D6F9D4000F3823 /* HNGoodsViewController.m */,
 				B91A3AD019D6F9D4000F3823 /* HNGoodsViewController.xib */,
@@ -967,6 +972,7 @@
 				B9B2BC1919CF1F3000839AED /* ALAssetsGroup+isEqual.m in Sources */,
 				B9B2BC2619CF1F3000839AED /* NSDateFormatter+timeIntervalFormatter.m in Sources */,
 				B91A3AC519D6E6E9000F3823 /* MJRefreshHeaderView.m in Sources */,
+				B91A3AD519D703C5000F3823 /* HNGoodsHeaderView.m in Sources */,
 				D3CD910319CF141C00E76AF4 /* HNRefundDetailViewController.m in Sources */,
 				D391EE8C19CD787D00DE3363 /* HNComplaintTableViewController.m in Sources */,
 				B9B2BC1B19CF1F3000839AED /* CTAssetScrollView.m in Sources */,
