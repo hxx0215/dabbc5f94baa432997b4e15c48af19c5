@@ -104,3 +104,10 @@
 "Consumer password" = "消费密码";
 "Consumer verification" = "消费验证";
 "Verify effective" = "验证是否有效";
+
+"Name" = "名称";
+"Category" = "所属分类";
+"Address" = "地址";
+"Shopkeeper" = "店主";
+"Online Service (QQ)" = "在线客服(QQ)";
+"Change2" = "更改";

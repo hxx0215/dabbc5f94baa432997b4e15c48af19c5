@@ -9,6 +9,7 @@
 #import "HNBusinessBKControlViewController.h"
 #import "UIView+AHKit.h"
 #import "VolumeViewController.h"
+#import "ProfileViewController.h"
 
 @interface HNBusinessBKControlViewController ()
 @property (strong, nonatomic) IBOutlet UIButton *messagePayingButton;
@@ -96,6 +97,8 @@
 - (IBAction)commentsClicked:(id)sender {
 }
 - (IBAction)profileClicked:(id)sender{
+    ProfileViewController* pc = [[ProfileViewController alloc]init];
+    [self.navigationController pushViewController:pc animated:YES];
 }
 - (IBAction)volumeClicked:(id)sender {
     VolumeViewController* vc = [[VolumeViewController alloc]init];
