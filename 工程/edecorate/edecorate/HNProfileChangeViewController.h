@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-//#import "HNBusinessBackgroundModel.h"
+#import "HNBusinessBackgroundModel.h"
 
 @interface HNProfileChangeViewController : UIViewController
-//@property (strong, nonatomic) IBOutlet HNBusinessBKProfileModel *model;
+@property (strong, nonatomic) HNBusinessBKProfileModel *model;
 @end
