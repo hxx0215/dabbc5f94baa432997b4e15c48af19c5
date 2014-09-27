@@ -79,3 +79,17 @@
 "Uploaded" = "Uploaded";
 
 "Look up" = "Look up";
+
+//businessBK
+"Business Background" = "Business Background";
+"Pending payment" = "Pending payment";
+"To be shipped" = "To be shipped";
+"Shipped" = "Shipped";
+"Successful transaction" = "Successful transaction";
+
+"My merchandise" = "My merchandise";
+"Order Management" = "Order Management";
+"Returns Management" = "Returns Management";
+"Comments" = "Comments";
+"My Profile" = "My Profile";
+"Consumption volume verification" = "Consumption volume verification";

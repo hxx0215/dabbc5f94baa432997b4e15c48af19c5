@@ -10,6 +10,8 @@
 #import "UIView+AHKit.h"
 #import "HNDecorateControlViewController.h"
 #import "HNMessageViewController.h"
+#include "HNBusinessBKControlViewController.h"
+
 #define hSpace 40
 #define tSpacePer 0.1
 #define decorTop 50
@@ -86,6 +88,8 @@
 }
 
 - (void)businessBackgroundButton_Clicked:(id)sender{
+    HNBusinessBKControlViewController* bc = [[HNBusinessBKControlViewController alloc]init];
+    [self.navigationController pushViewController:bc animated:YES];
     NSLog(@"busi");
 }
 - (void)messageButton_Clicked:(id)sender{

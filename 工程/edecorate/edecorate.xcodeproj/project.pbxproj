@@ -79,6 +79,8 @@
 		B9DE560419C9C40B00280EC7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B9DE560619C9C40B00280EC7 /* Localizable.strings */; };
 		B9DE560D19C9C5D300280EC7 /* HNMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9DE560C19C9C5D300280EC7 /* HNMessageViewController.m */; };
 		D33BBD1519CC711700AA1039 /* HNTemporaryApplyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D33BBD1419CC711700AA1039 /* HNTemporaryApplyView.xib */; };
+		D33EEA5E19D69F3200D6F106 /* HNBusinessBKControlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D33EEA5C19D69F3200D6F106 /* HNBusinessBKControlViewController.m */; };
+		D33EEA5F19D69F3200D6F106 /* HNBusinessBKControlViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D33EEA5D19D69F3200D6F106 /* HNBusinessBKControlViewController.xib */; };
 		D391EE8C19CD787D00DE3363 /* HNComplaintTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D391EE8B19CD787D00DE3363 /* HNComplaintTableViewController.m */; };
 		D39662F519CD4E6300EE49B8 /* HNTemporaryDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D39662F319CD4E6300EE49B8 /* HNTemporaryDetailsViewController.m */; };
 		D39662F619CD4E6300EE49B8 /* HNTemporaryDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D39662F419CD4E6300EE49B8 /* HNTemporaryDetailsViewController.xib */; };
@@ -232,6 +234,9 @@
 		B9DE560B19C9C5D300280EC7 /* HNMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNMessageViewController.h; path = Classes/Message/HNMessageViewController.h; sourceTree = "<group>"; };
 		B9DE560C19C9C5D300280EC7 /* HNMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNMessageViewController.m; path = Classes/Message/HNMessageViewController.m; sourceTree = "<group>"; };
 		D33BBD1419CC711700AA1039 /* HNTemporaryApplyView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HNTemporaryApplyView.xib; sourceTree = "<group>"; };
+		D33EEA5B19D69F3200D6F106 /* HNBusinessBKControlViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNBusinessBKControlViewController.h; sourceTree = "<group>"; };
+		D33EEA5C19D69F3200D6F106 /* HNBusinessBKControlViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNBusinessBKControlViewController.m; sourceTree = "<group>"; };
+		D33EEA5D19D69F3200D6F106 /* HNBusinessBKControlViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HNBusinessBKControlViewController.xib; sourceTree = "<group>"; };
 		D391EE8A19CD787D00DE3363 /* HNComplaintTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNComplaintTableViewController.h; sourceTree = "<group>"; };
 		D391EE8B19CD787D00DE3363 /* HNComplaintTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNComplaintTableViewController.m; sourceTree = "<group>"; };
 		D39662F219CD4E6300EE49B8 /* HNTemporaryDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNTemporaryDetailsViewController.h; sourceTree = "<group>"; };
@@ -416,6 +421,9 @@
 		B94B7A6119C9BE4E000112ED /* BusinessBackground */ = {
 			isa = PBXGroup;
 			children = (
+				D33EEA5B19D69F3200D6F106 /* HNBusinessBKControlViewController.h */,
+				D33EEA5C19D69F3200D6F106 /* HNBusinessBKControlViewController.m */,
+				D33EEA5D19D69F3200D6F106 /* HNBusinessBKControlViewController.xib */,
 			);
 			name = BusinessBackground;
 			sourceTree = "<group>";
@@ -725,6 +733,7 @@
 				D3C07BC519CDC8A0003EA5E4 /* HNComplaintApplyViewController.xib in Resources */,
 				B9B2BC1F19CF1F3000839AED /* CTAssetsPicker.xcassets in Resources */,
 				3732B12D19CFC46E00ADF3F5 /* HNOfficePassesDetailsViewController.xib in Resources */,
+				D33EEA5F19D69F3200D6F106 /* HNBusinessBKControlViewController.xib in Resources */,
 				B916F0AC19C8781D00A849C7 /* InfoPlist.strings in Resources */,
 				B9D3DECC19CD0B2C0020CDC9 /* HNReportPurchaseViewController.xib in Resources */,
 				3732B13219D0182100ADF3F5 /* HNOfficePassesApplyViewController.xib in Resources */,
@@ -769,6 +778,7 @@
 				B9B2BC2419CF1F3000839AED /* CTAssetsViewController.m in Sources */,
 				B9B2BC1E19CF1F3000839AED /* CTAssetsPageViewController.m in Sources */,
 				B9DE55FD19C9C0EA00280EC7 /* UIView+AHKit.m in Sources */,
+				D33EEA5E19D69F3200D6F106 /* HNBusinessBKControlViewController.m in Sources */,
 				B9B2BC2519CF1F3000839AED /* CTAssetsViewControllerTransition.m in Sources */,
 				B953CE0E19CAFBE000BD57DF /* HNLoginViewController.m in Sources */,
 				B94B7A6519C9BF3E000112ED /* HNHomeViewController.m in Sources */,

@@ -80,3 +80,19 @@
 "Uploaded" = "已上传";
 
 "Look up" = "查看";
+
+
+//businessBK
+
+"Business Background" = "商家后台管理";
+"Pending payment" = "待付款";
+"To be shipped" = "待发货";
+"Shipped" = "已发货";
+"Successful transaction" = "交易成功";
+
+"My merchandise" = "我的商品";
+"Order Management" = "订单管理";
+"Returns Management" = "退换货管理";
+"Comments" = "评论留言";
+"My Profile" = "我的资料";
+"Consumption volume verification" = "消费卷验证";
