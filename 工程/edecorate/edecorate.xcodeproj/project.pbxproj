@@ -864,13 +864,10 @@
 				D3C07BCA19CDC8CA003EA5E4 /* HNComplaintDetailsViewController.xib in Resources */,
 				B91A3AC119D6E6E9000F3823 /* MJRefresh.bundle in Resources */,
 				D33BBD1519CC711700AA1039 /* HNTemporaryApplyView.xib in Resources */,
-<<<<<<< HEAD
 				D33EEABC19D6FF5D00D6F106 /* area.plist in Resources */,
 				D33EEA7019D6DE1A00D6F106 /* HNProfileChangeViewController.xib in Resources */,
-=======
 				D33EEA7019D6DE1A00D6F106 /* ProfileChangeViewController.xib in Resources */,
 				B91A3ACD19D6F2FA000F3823 /* HNGoodsTableViewCell.xib in Resources */,
->>>>>>> 72e5fbb447f2f0c933a43bf4e84946b694bbc3f3
 				D39662F619CD4E6300EE49B8 /* HNTemporaryDetailsViewController.xib in Resources */,
 				B916F0E319C878AC00A849C7 /* PushConfig.plist in Resources */,
 				D3CD910419CF141C00E76AF4 /* HNRefundDetailViewController.xib in Resources */,
@@ -922,11 +919,8 @@
 				B916F0B219C8781D00A849C7 /* AppDelegate.m in Sources */,
 				D3CD90FA19CF09E000E76AF4 /* HNRefundTableViewCell.m in Sources */,
 				B91A3AC319D6E6E9000F3823 /* MJRefreshConst.m in Sources */,
-<<<<<<< HEAD
 				D33EEA6F19D6DE1A00D6F106 /* HNProfileChangeViewController.m in Sources */,
-=======
 				D33EEA6F19D6DE1A00D6F106 /* ProfileChangeViewController.m in Sources */,
->>>>>>> 72e5fbb447f2f0c933a43bf4e84946b694bbc3f3
 				B9D3DEDA19CD235A0020CDC9 /* HNCheckTableViewCell.m in Sources */,
 				B9B2BC1719CF1F3000839AED /* ALAsset+assetType.m in Sources */,
 				D39662F519CD4E6300EE49B8 /* HNTemporaryDetailsViewController.m in Sources */,
