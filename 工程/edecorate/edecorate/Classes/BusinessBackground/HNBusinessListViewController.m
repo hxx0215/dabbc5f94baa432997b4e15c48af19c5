@@ -10,6 +10,7 @@
 #import "MJRefresh.h"
 #import "UIView+AHKit.h"
 #import "HNGoodsTableViewCell.h"
+#import "HNGoodsViewController.h"
 
 @interface HNBusinessListViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, assign)HNBusinessType businessType;
@@ -93,7 +94,19 @@ static NSString *reuseId = @"businessCell";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [tableView headerEndRefreshing];
+    switch (self.businessType){
+        case kGoods:
+        {
+            HNGoodsViewController *goods = [[HNGoodsViewController alloc] init];
+            [self.navigationController pushViewController:goods animated:YES];
+        }
+            break;
+        default:
+        {
+            
+        }
+            break;
+    }
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     switch (self.businessType){
