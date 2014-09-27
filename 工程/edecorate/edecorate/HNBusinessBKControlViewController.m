@@ -7,7 +7,8 @@
 //
 
 #import "HNBusinessBKControlViewController.h"
-#include "UIView+AHKit.h"
+#import "UIView+AHKit.h"
+#import "VolumeViewController.h"
 
 @interface HNBusinessBKControlViewController ()
 @property (strong, nonatomic) IBOutlet UIButton *messagePayingButton;
@@ -97,6 +98,8 @@
 - (IBAction)profileClicked:(id)sender{
 }
 - (IBAction)volumeClicked:(id)sender {
+    VolumeViewController* vc = [[VolumeViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 
