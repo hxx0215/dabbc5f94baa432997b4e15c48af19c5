@@ -9,6 +9,7 @@
 #import "HNBusinessBKControlViewController.h"
 #import "UIView+AHKit.h"
 #import "VolumeViewController.h"
+#import "HNBusinessListViewController.h"
 
 @interface HNBusinessBKControlViewController ()
 @property (strong, nonatomic) IBOutlet UIButton *messagePayingButton;
@@ -56,7 +57,7 @@
 
 - (UIButton *)messageButtonWithTitle:(NSString *)title button:(UIButton*)btn numMessage:(NSInteger)num index:(NSInteger)colom
 {
-    NSString *str = [[NSString alloc]initWithFormat:@"%@\n%ld",title,num];
+    NSString *str = [[NSString alloc]initWithFormat:@"%@\n%d",title,num];
     [btn setTitle:str forState:UIControlStateNormal];
     [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     btn.width = self.view.width/4;
@@ -88,6 +89,8 @@
 
 
 - (IBAction)merchandiseClicked:(id)sender {
+    HNBusinessListViewController *merchandise = [[HNBusinessListViewController alloc] initWithType:kGoods];
+    [self.navigationController pushViewController:merchandise animated:YES];
 }
 - (IBAction)orderClicked:(id)sender {
 }
