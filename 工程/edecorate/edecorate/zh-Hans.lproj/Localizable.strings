@@ -10,6 +10,9 @@
 "Business Background" = "商家后台管理";
 "Message" = "消息";
 
+"OK" = "确定";
+"Cancel" = "取消";
+
 //decoration
 "Reported that construction decoration" = "装修报建";
 "Decoration acceptance" = "装修验收";
@@ -96,3 +99,8 @@
 "Comments" = "评论留言";
 "My Profile" = "我的资料";
 "Consumption volume verification" = "消费卷验证";
+
+"Volume No." = "卷号";
+"Consumer password" = "消费密码";
+"Consumer verification" = "消费验证";
+"Verify effective" = "验证是否有效";

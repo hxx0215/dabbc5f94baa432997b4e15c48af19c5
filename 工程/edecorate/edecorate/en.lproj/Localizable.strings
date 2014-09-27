@@ -10,6 +10,8 @@
 "Business Background" = "Business Background";
 "Message" = "Message";
 
+"OK" = "OK";
+"Cancel" = "Cancel";
 //Decoration
 "Reported that construction decoration" = "Decoration Reported";
 "Decoration acceptance" = "Decoration Acceptance";
@@ -93,3 +95,8 @@
 "Comments" = "Comments";
 "My Profile" = "My Profile";
 "Consumption volume verification" = "Consumption volume verification";
+
+"Volume No." = "Volume No.";
+"Consumer password" = "Consumer password";
+"Consumer verification" = "Consumer verification";
+"Verify effective" = "Verify effective";
