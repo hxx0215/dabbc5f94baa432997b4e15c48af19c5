@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VolumeViewController">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HNVolumeViewController">
             <connections>
                 <outlet property="OKButton" destination="aYu-Hc-pCR" id="WeQ-YI-VX1"/>
                 <outlet property="cancelButton" destination="G5D-tf-HUi" id="aLF-5B-ovx"/>

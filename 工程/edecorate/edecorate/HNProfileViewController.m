@@ -6,12 +6,12 @@
 //
 //
 
-#import "ProfileViewController.h"
-#import "ProfileChangeViewController.h"
+#import "HNProfileViewController.h"
+#import "HNProfileChangeViewController.h"
 #import "UIView+AHKit.h"
+#import "HNBusinessBackgroundModel.h"
 
-
-@interface ProfileViewController ()
+@interface HNProfileViewController ()
 @property (strong, nonatomic) IBOutlet UILabel *nameTitleLabel;
 @property (strong, nonatomic) IBOutlet UILabel *categoryTitleLabel;
 @property (strong, nonatomic) IBOutlet UILabel *addressTitleLabel;
@@ -27,9 +27,11 @@
 
 @property (strong, nonatomic) IBOutlet UIButton *changeButton;
 
+@property (strong, nonatomic) IBOutlet HNBusinessBKProfileModel *model;
+
 @end
 
-@implementation ProfileViewController
+@implementation HNProfileViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -41,14 +43,24 @@
     [self labelWithTitle:NSLocalizedString(@"Phone", nil) label:self.phoneTitleLabel];
     [self labelWithTitle:NSLocalizedString(@"Online Service (QQ)", nil) label:self.onlineServiceTitleLabel];
     
+    self.model = [[HNBusinessBKProfileModel alloc]init];
+    [self labelWithTitle:self.model.name leftLabel:self.nameTitleLabel label:self.nameLabel];
+    [self labelWithTitle:self.model.category leftLabel:self.categoryTitleLabel label:self.categoryLabel];
+    [self labelWithTitle:self.model.address leftLabel:self.addressTitleLabel label:self.addressLabel];
+    [self labelWithTitle:self.model.shopkeeper leftLabel:self.shopkeeperTitleLabel label:self.shopkeeperLabel];
+    [self labelWithTitle:self.model.phone leftLabel:self.phoneTitleLabel label:self.phoneLabel];
+    [self labelWithTitle:self.model.onlineService leftLabel:self.onlineServiceTitleLabel label:self.onlineServiceLabel];
+    
     self.changeButton.layer.borderWidth = 1.0;
     self.changeButton.layer.borderColor = [UIColor blackColor].CGColor;
     [self.changeButton setTitle:NSLocalizedString(@"Change2", nil) forState:UIControlStateNormal];
+
     
 }
 
 - (IBAction)changButtonClick:(id)sender {
-    ProfileChangeViewController *controller = [[ProfileChangeViewController alloc] init];
+    HNProfileChangeViewController *controller = [[HNProfileChangeViewController alloc] init];
+    controller.model = self.model;
     [self.navigationController pushViewController:controller animated:YES];
 }
 
@@ -58,6 +70,17 @@
     [lab sizeToFit];
     lab.font = [UIFont systemFontOfSize:12];
     lab.numberOfLines = 2;
+    
+    lab.layer.borderColor = [UIColor blackColor].CGColor;
+}
+
+- (void)labelWithTitle:(NSString *)title leftLabel:(UILabel*)leftlab label:(UILabel*)lab
+{
+    [lab setText:title];
+    [lab sizeToFit];
+    lab.font = [UIFont systemFontOfSize:11];
+    lab.numberOfLines = 2;
+    lab.left = leftlab.left+leftlab.width;
     
     lab.layer.borderColor = [UIColor blackColor].CGColor;
 }

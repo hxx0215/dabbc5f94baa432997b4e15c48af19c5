@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProfileViewController">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HNProfileViewController">
             <connections>
                 <outlet property="addressLabel" destination="xGb-uV-TRJ" id="9Qf-3v-JC2"/>
                 <outlet property="addressTitleLabel" destination="d1f-e4-oEm" id="4m4-nm-Lkv"/>

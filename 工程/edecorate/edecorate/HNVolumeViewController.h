@@ -1,5 +1,5 @@
 //
-//  ProfileViewController.h
+//  VolumeViewController.h
 //  edecorate
 //
 //  Created by 刘向宏 on 14-9-27.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ProfileViewController : UIViewController
+@interface HNVolumeViewController : UIViewController
 
 @end
