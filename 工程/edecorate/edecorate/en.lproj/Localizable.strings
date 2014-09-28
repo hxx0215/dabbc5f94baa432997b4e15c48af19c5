@@ -109,3 +109,23 @@
 "Change2" = "Change";
 "Postal Code" = "Postal Code";
 "Street address" = "Street address";
+
+"Order details" = "Order details";
+"Order number" = "Order number";
+"Refund number" = "Refund number";
+"Time to apply for a refund" = "Time to apply for a refund";
+"Refund Type" = "Refund Type";
+"Refund status" = "Refund status";
+"Buyers" = "Buyers";
+"Refund Amount" = "Refund Amount";
+"Refund Reason" = "Refund Reason";
+"Refund Description" = "Refund Description";
+"Product Information" = "Product Information";
+"Refund Record" = "Refund Record";
+"Agree to a refund" = "Agree to a refund";
+"Refused to refund" = "Refused to refund";
+"Product Name" = "Product Name";
+"Refund" = "Refund";
+"Returns" = "Returns";
+"Repair" = "Repair";
+"Replacement" = "Replacement";

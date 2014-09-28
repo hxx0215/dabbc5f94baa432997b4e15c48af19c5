@@ -7,6 +7,27 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HNReimburseViewController">
             <connections>
                 <outlet property="acceptButton" destination="Fhf-wi-reG" id="vQT-gS-NIU"/>
+                <outlet property="buyersLabel" destination="LWt-xi-vjZ" id="zxN-M7-FjQ"/>
+                <outlet property="buyersTitleLabel" destination="EXc-sE-RBg" id="40W-uq-pXA"/>
+                <outlet property="orderNumberLabel" destination="pxg-Ym-NTa" id="g18-QF-NHZ"/>
+                <outlet property="orderNumberTitleLabel" destination="VcD-v7-M4L" id="zfF-pu-g5D"/>
+                <outlet property="productInformationTitleLabel" destination="AAQ-2H-Aew" id="vKC-uO-JLb"/>
+                <outlet property="refundAmountLabel" destination="iIc-f3-vYL" id="7Kt-IU-lFg"/>
+                <outlet property="refundAmountTitleLabel" destination="BqC-IA-IhP" id="DXN-jd-iv6"/>
+                <outlet property="refundDescriptionLabel" destination="sft-bI-SSY" id="RZ6-51-81o"/>
+                <outlet property="refundDescriptionTitleLabel" destination="8MD-Eh-qeH" id="Tbo-wn-E7B"/>
+                <outlet property="refundFlagLabel" destination="BQx-lG-a1a" id="dQW-1h-2xs"/>
+                <outlet property="refundNumberLabel" destination="0yy-mU-lGn" id="83Q-f2-G2F"/>
+                <outlet property="refundNumberTitleLabel" destination="ytI-mA-KJ0" id="pOR-H9-hSB"/>
+                <outlet property="refundReasonLabel" destination="5mu-3P-Eky" id="VWu-Rs-e5L"/>
+                <outlet property="refundReasonTitleLabel" destination="RlP-8u-1J6" id="zhr-Pa-EXq"/>
+                <outlet property="refundRecordTitleLabel" destination="mZz-Xp-h2m" id="gZq-Kg-3fO"/>
+                <outlet property="refundStatusLabel" destination="KkR-VB-GaD" id="qBd-fj-nGN"/>
+                <outlet property="refundStatusTitleLabel" destination="pVj-tt-d0W" id="eCu-ct-hRG"/>
+                <outlet property="refundTimeLabel" destination="3XW-Vj-UOP" id="Il0-jb-k7R"/>
+                <outlet property="refundTimeTitlesLabel" destination="z1J-AA-Iho" id="z2X-w4-GlB"/>
+                <outlet property="refundTypeLabel" destination="jCd-ho-XiO" id="e0d-HU-LXZ"/>
+                <outlet property="refundTypeTitleLabel" destination="cf0-iJ-axj" id="9qz-sI-hqS"/>
                 <outlet property="rejectButton" destination="qWI-Ur-rnf" id="RFN-hL-Air"/>
                 <outlet property="scrollView" destination="M5V-9g-NVU" id="kjM-NH-l3M"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -98,13 +119,6 @@
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="商品信息" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Vod-lj-66G">
-                            <rect key="frame" x="8" y="269" width="68" height="21"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3XW-Vj-UOP">
                             <rect key="frame" x="118" y="66" width="42" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -113,7 +127,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="退款记录" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mZz-Xp-h2m">
-                            <rect key="frame" x="8" y="420" width="68" height="21"/>
+                            <rect key="frame" x="8" y="389" width="68" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -169,7 +183,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" id="i99-QW-ICR">
-                            <rect key="frame" x="0.0" y="298" width="320" height="112"/>
+                            <rect key="frame" x="0.0" y="269" width="320" height="112"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="商品信息" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="AAQ-2H-Aew">
@@ -221,6 +235,13 @@
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="申请退款" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BQx-lG-a1a">
+                            <rect key="frame" x="244" y="8" width="68" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Fhf-wi-reG">
                             <rect key="frame" x="73" y="497" width="60" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

@@ -113,3 +113,23 @@
 "Change2" = "更改";
 "Postal Code" = "邮政编码";
 "Street address" = "街道地址";
+
+"Order details" = "订单详情";
+"Order number" = "订单单号";
+"Refund number" = "退款单号";
+"Time to apply for a refund" = "申请退款时间";
+"Refund Type" = "退款申请类型";
+"Refund status" = "退款状态";
+"Buyers" = "买家";
+"Refund Amount" = "退款金额";
+"Refund Reason" = "退款原因";
+"Refund Description" = "退款说明";
+"Product Information" = "商品信息";
+"Refund Record" = "退款记录";
+"Agree to a refund" = "同意退款";
+"Refused to refund" = "拒绝退款";
+"Product Name" = "商品名称";
+"Refund" = "退款";
+"Returns" = "退货";
+"Repair" = "报修";
+"Replacement" = "换货";
