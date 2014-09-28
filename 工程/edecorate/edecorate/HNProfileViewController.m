@@ -55,6 +55,7 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     [self labelWithTitle:self.model.name leftLabel:self.nameTitleLabel label:self.nameLabel];
     [self labelWithTitle:self.model.category leftLabel:self.categoryTitleLabel label:self.categoryLabel];
     [self labelWithTitle:self.model.address leftLabel:self.addressTitleLabel label:self.addressLabel];

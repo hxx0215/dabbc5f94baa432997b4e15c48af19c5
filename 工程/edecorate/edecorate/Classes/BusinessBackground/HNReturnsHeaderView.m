@@ -14,12 +14,9 @@
 - (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self){
-        self.search = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, 44)];
-        self.categoryButton = [self createButtonWithTitle:NSLocalizedString(@"All Categories", nil)];
+        self.search = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, frame.size.width-60, 44)];
         self.statusButton = [self createButtonWithTitle:NSLocalizedString(@"All Goods", nil)];
-        self.categoryButton.top = self.search.bottom;
-        self.statusButton.top = self.search.bottom;
-        self.statusButton.right = frame.size.width;
+        self.statusButton.frame = CGRectMake(self.search.right,self.search.top,60,self.search.height);
         [self addSubview:self.search];
         [self.statusButton addTarget:self action:@selector(algoods:) forControlEvents:UIControlEventTouchUpInside];
     }

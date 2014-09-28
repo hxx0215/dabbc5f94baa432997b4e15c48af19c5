@@ -7,9 +7,12 @@
 //
 
 #import "HNReimburseViewController.h"
+#include "UIView+AHKit.h"
 
 @interface HNReimburseViewController ()
-
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (strong, nonatomic) IBOutlet UIButton *acceptButton;
+@property (strong, nonatomic) IBOutlet UIButton *rejectButton;
 @end
 
 @implementation HNReimburseViewController
@@ -17,6 +20,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.scrollView.frame = self.view.bounds;
+    self.scrollView.contentSize = CGSizeMake(self.view.width, self.acceptButton.bottom+20);
+    
+}
+
+- (IBAction)acceptButtonClick:(id)sender
+{
+}
+- (IBAction)rejectButtonClick:(id)sender
+{
 }
 
 - (void)didReceiveMemoryWarning {
