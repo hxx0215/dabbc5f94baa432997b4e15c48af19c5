@@ -86,6 +86,8 @@
     lab.font = [UIFont systemFontOfSize:11];
     lab.numberOfLines = 2;
     lab.left = leftlab.left+leftlab.width;
+    lab.top = leftlab.top;
+    lab.height = leftlab.height;
     
     lab.layer.borderColor = [UIColor blackColor].CGColor;
 }

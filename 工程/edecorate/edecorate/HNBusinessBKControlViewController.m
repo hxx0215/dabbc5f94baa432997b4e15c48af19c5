@@ -101,6 +101,9 @@
     [self.navigationController pushViewController:order animated:YES];
 }
 - (IBAction)returnsClicked:(id)sender {
+    HNBusinessListViewController *comment=[[HNBusinessListViewController alloc] initWithType:kReturnGoods];
+    [self.navigationController pushViewController:comment animated:YES];
+
 }
 - (IBAction)commentsClicked:(id)sender {
     HNBusinessListViewController *comment=[[HNBusinessListViewController alloc] initWithType:kComment];
