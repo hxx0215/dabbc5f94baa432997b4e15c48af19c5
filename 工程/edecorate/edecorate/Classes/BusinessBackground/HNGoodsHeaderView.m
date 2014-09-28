@@ -19,6 +19,7 @@
         self.statusButton.top = self.search.bottom;
         self.statusButton.right = frame.size.width;
         [self addSubview:self.search];
+        [self.statusButton addTarget:self action:@selector(algoods:) forControlEvents:UIControlEventTouchUpInside];
     }
     return self;
 }
@@ -29,5 +30,8 @@
     [btn sizeToFit];
     [self addSubview:btn];
     return btn;
+}
+- (void)algoods:(id)sender{
+    NSLog(@"ALL goods");
 }
 @end

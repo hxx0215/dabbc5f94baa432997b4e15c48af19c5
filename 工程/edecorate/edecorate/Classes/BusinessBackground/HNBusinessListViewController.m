@@ -74,7 +74,7 @@ static NSString *reuseId = @"businessCell";
     switch (type){
         case kGoods:
         {
-            self.headerView = [[HNGoodsHeaderView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 64)];
+            self.headerView = [[HNGoodsHeaderView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 74)];
             [self.view addSubview:self.headerView];
         }
         default:
