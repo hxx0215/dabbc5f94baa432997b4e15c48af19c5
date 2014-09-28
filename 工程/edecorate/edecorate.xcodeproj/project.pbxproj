@@ -94,6 +94,8 @@
 		B9D72D5019D83E440011CF83 /* HNOrderHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D72D4F19D83E440011CF83 /* HNOrderHeaderView.m */; };
 		B9D72D5419D840960011CF83 /* HNOrderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D72D5219D840960011CF83 /* HNOrderTableViewCell.m */; };
 		B9D72D5519D840960011CF83 /* HNOrderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9D72D5319D840960011CF83 /* HNOrderTableViewCell.xib */; };
+		B9D72D5919D846FC0011CF83 /* HNOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D72D5719D846FC0011CF83 /* HNOrderViewController.m */; };
+		B9D72D5A19D846FC0011CF83 /* HNOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9D72D5819D846FC0011CF83 /* HNOrderViewController.xib */; };
 		B9DE55FD19C9C0EA00280EC7 /* UIView+AHKit.m in Sources */ = {isa = PBXBuildFile; fileRef = B9DE55FC19C9C0EA00280EC7 /* UIView+AHKit.m */; };
 		B9DE560119C9C26700280EC7 /* HNDecorateControlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9DE560019C9C26700280EC7 /* HNDecorateControlViewController.m */; };
 		B9DE560419C9C40B00280EC7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B9DE560619C9C40B00280EC7 /* Localizable.strings */; };
@@ -289,6 +291,9 @@
 		B9D72D5119D840960011CF83 /* HNOrderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNOrderTableViewCell.h; path = Classes/BusinessBackground/HNOrderTableViewCell.h; sourceTree = "<group>"; };
 		B9D72D5219D840960011CF83 /* HNOrderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNOrderTableViewCell.m; path = Classes/BusinessBackground/HNOrderTableViewCell.m; sourceTree = "<group>"; };
 		B9D72D5319D840960011CF83 /* HNOrderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HNOrderTableViewCell.xib; path = Classes/BusinessBackground/HNOrderTableViewCell.xib; sourceTree = "<group>"; };
+		B9D72D5619D846FC0011CF83 /* HNOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNOrderViewController.h; path = Classes/BusinessBackground/HNOrderViewController.h; sourceTree = "<group>"; };
+		B9D72D5719D846FC0011CF83 /* HNOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNOrderViewController.m; path = Classes/BusinessBackground/HNOrderViewController.m; sourceTree = "<group>"; };
+		B9D72D5819D846FC0011CF83 /* HNOrderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HNOrderViewController.xib; path = Classes/BusinessBackground/HNOrderViewController.xib; sourceTree = "<group>"; };
 		B9DE55FB19C9C0EA00280EC7 /* UIView+AHKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+AHKit.h"; path = "Third Party/UIView+AHKit.h"; sourceTree = "<group>"; };
 		B9DE55FC19C9C0EA00280EC7 /* UIView+AHKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+AHKit.m"; path = "Third Party/UIView+AHKit.m"; sourceTree = "<group>"; };
 		B9DE55FF19C9C26700280EC7 /* HNDecorateControlViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNDecorateControlViewController.h; path = Classes/DecorateControl/HNDecorateControlViewController.h; sourceTree = "<group>"; };
@@ -721,6 +726,9 @@
 		B9D72D4D19D83DBC0011CF83 /* Order */ = {
 			isa = PBXGroup;
 			children = (
+				B9D72D5619D846FC0011CF83 /* HNOrderViewController.h */,
+				B9D72D5719D846FC0011CF83 /* HNOrderViewController.m */,
+				B9D72D5819D846FC0011CF83 /* HNOrderViewController.xib */,
 				B9D72D4E19D83E440011CF83 /* HNOrderHeaderView.h */,
 				B9D72D4F19D83E440011CF83 /* HNOrderHeaderView.m */,
 				B9D72D5119D840960011CF83 /* HNOrderTableViewCell.h */,
@@ -905,6 +913,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9D72D5A19D846FC0011CF83 /* HNOrderViewController.xib in Resources */,
 				D33EEA6B19D6D9E600D6F106 /* HNProfileViewController.xib in Resources */,
 				B9DE560419C9C40B00280EC7 /* Localizable.strings in Resources */,
 				D33EEAC719D70C8800D6F106 /* HNProfileChangeViewController.xib in Resources */,
@@ -1020,6 +1029,7 @@
 				B91A3AD519D703C5000F3823 /* HNGoodsHeaderView.m in Sources */,
 				B9D72D5019D83E440011CF83 /* HNOrderHeaderView.m in Sources */,
 				D3CD910319CF141C00E76AF4 /* HNRefundDetailViewController.m in Sources */,
+				B9D72D5919D846FC0011CF83 /* HNOrderViewController.m in Sources */,
 				D391EE8C19CD787D00DE3363 /* HNComplaintTableViewController.m in Sources */,
 				B9B2BC1B19CF1F3000839AED /* CTAssetScrollView.m in Sources */,
 				B9882DF219CB06D90093F0F4 /* HNDecorateReportViewController.m in Sources */,

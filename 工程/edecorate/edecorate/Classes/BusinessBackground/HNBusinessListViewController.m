@@ -19,6 +19,7 @@
 
 #import "HNOrderHeaderView.h"
 #import "HNOrderTableViewCell.h"
+#import "HNOrderViewController.h"
 
 @interface HNBusinessListViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, assign)HNBusinessType businessType;
@@ -150,6 +151,12 @@ static NSString *reuseId = @"businessCell";
         {
             HNGoodsViewController *goods = [[HNGoodsViewController alloc] init];
             [self.navigationController pushViewController:goods animated:YES];
+        }
+            break;
+        case kOrder:
+        {
+            HNOrderViewController *order = [[HNOrderViewController alloc] init];
+            [self.navigationController pushViewController:order animated:YES];
         }
             break;
         default:
