@@ -82,10 +82,9 @@
     if (self.pickerStyle == HNAreaPickerWithStateAndCityAndDistrict) {
         return 3;
     }
-    return 3;
-//    else{
-//        return 2;
-//    }
+    else{
+        return 2;
+    }
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
