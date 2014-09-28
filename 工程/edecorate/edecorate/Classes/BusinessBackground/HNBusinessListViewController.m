@@ -21,6 +21,9 @@
 #import "HNCommentsTableViewCell.h"
 #import "HNCommentsHeaderView.h"
 
+#import "HNOrderHeaderView.h"
+#import "HNOrderTableViewCell.h"
+
 @interface HNBusinessListViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, assign)HNBusinessType businessType;
 @property (nonatomic, strong)UITableView *tableView;
@@ -61,7 +64,7 @@ static NSString *reuseId = @"businessCell";
     
     
     self.tableView.top = self.headerView.bottom;
-    self.tableView.height -= 40;
+    self.tableView.height -= self.headerView.height;
     
     [self loadCellWithType:self.businessType];
 }
@@ -85,6 +88,11 @@ static NSString *reuseId = @"businessCell";
             [self.tableView registerNib:nib forCellReuseIdentifier:reuseId];
         }
             break;
+        case kOrder:
+        {
+            UINib *nib = [UINib nibWithNibName:NSStringFromClass([HNOrderTableViewCell class]) bundle:nil];
+            [self.tableView registerNib:nib forCellReuseIdentifier:reuseId];
+        }
         default:
             break;
     }
@@ -94,7 +102,7 @@ static NSString *reuseId = @"businessCell";
         case kGoods:
         {
             self.headerView = [[HNGoodsHeaderView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 74)];
-            [self.view addSubview:self.headerView];
+            
         }
             break;
         case kReturnGoods:
@@ -107,12 +115,16 @@ static NSString *reuseId = @"businessCell";
         case kComment:
         {
             self.headerView=[[HNCommentsHeaderView alloc] initWithFrame:CGRectMake(0,0, self.view.width, 74)];
-            [self.view addSubview:self.headerView];
         }
             break;
+        case kOrder:
+        {
+            self.headerView = [[HNOrderHeaderView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, 44)];
+        }
         default:
             break;
     }
+    [self.view addSubview:self.headerView];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -142,6 +154,10 @@ static NSString *reuseId = @"businessCell";
             cell=cCell;
         }
             break;
+        case kOrder:{
+            HNOrderTableViewCell *tCell = [tableView dequeueReusableCellWithIdentifier:reuseId];
+            cell = tCell;
+        }
         default:
             break;
     }
@@ -183,7 +199,9 @@ static NSString *reuseId = @"businessCell";
             return [HNReturnsTableViewCell cellHeight];
             break;
             
-            
+        case kOrder:
+            return 112;
+            break;
         default:
             return 44;
             break;

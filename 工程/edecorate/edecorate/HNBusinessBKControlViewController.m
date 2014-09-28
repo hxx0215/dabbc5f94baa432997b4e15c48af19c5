@@ -97,6 +97,8 @@
     [self.navigationController pushViewController:merchandise animated:YES];
 }
 - (IBAction)orderClicked:(id)sender {
+    HNBusinessListViewController *order = [[HNBusinessListViewController alloc] initWithType:kOrder];
+    [self.navigationController pushViewController:order animated:YES];
 }
 - (IBAction)returnsClicked:(id)sender {
     HNBusinessListViewController *comment=[[HNBusinessListViewController alloc] initWithType:kReturnGoods];
