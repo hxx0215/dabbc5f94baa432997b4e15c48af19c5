@@ -14,6 +14,10 @@
 #import "HNGoodsViewController.h"
 #import "HNGoodsHeaderView.h"
 
+#import "HNReturnsHeaderView.h"
+#import "HNReimburseViewController.h"
+#import "HNReturnsTableViewCell.h"
+
 #import "HNCommentsTableViewCell.h"
 #import "HNCommentsHeaderView.h"
 
@@ -69,6 +73,12 @@ static NSString *reuseId = @"businessCell";
             [self.tableView registerNib:nib forCellReuseIdentifier:reuseId];
         }
             break;
+        case kReturnGoods:
+        {
+            UINib *nib=[UINib nibWithNibName:NSStringFromClass([HNReturnsTableViewCell class]) bundle:nil];
+            [self.tableView registerNib:nib forCellReuseIdentifier:reuseId];
+        }
+            break;
         case kComment:
         {
             UINib *nib=[UINib nibWithNibName:NSStringFromClass([HNCommentsTableViewCell class]) bundle:nil];
@@ -87,6 +97,13 @@ static NSString *reuseId = @"businessCell";
             [self.view addSubview:self.headerView];
         }
             break;
+        case kReturnGoods:
+        {
+            self.headerView = [[HNReturnsHeaderView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 74)];
+            [self.view addSubview:self.headerView];
+            break;
+        }
+
         case kComment:
         {
             self.headerView=[[HNCommentsHeaderView alloc] initWithFrame:CGRectMake(0,0, self.view.width, 74)];
@@ -115,6 +132,11 @@ static NSString *reuseId = @"businessCell";
             cell = tCell;
         }
             break;
+        case kReturnGoods:{
+            HNReturnsTableViewCell *cCell=[tableView dequeueReusableCellWithIdentifier:reuseId];
+            cell=cCell;
+        }
+            break;
         case kComment:{
             HNCommentsTableViewCell *cCell=[tableView dequeueReusableCellWithIdentifier:reuseId];
             cell=cCell;
@@ -136,6 +158,12 @@ static NSString *reuseId = @"businessCell";
             [self.navigationController pushViewController:goods animated:YES];
         }
             break;
+        case kReturnGoods:
+        {
+            HNReimburseViewController *reumburse = [[HNReimburseViewController alloc] init];
+            [self.navigationController pushViewController:reumburse animated:YES];
+        }
+            break;
         default:
         {
             
@@ -151,6 +179,11 @@ static NSString *reuseId = @"businessCell";
         case kComment:
             return 120;
             break;
+        case kReturnGoods:
+            return [HNReturnsTableViewCell cellHeight];
+            break;
+            
+            
         default:
             return 44;
             break;
