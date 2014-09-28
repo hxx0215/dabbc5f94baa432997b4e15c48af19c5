@@ -91,6 +91,9 @@
 		B9D3DEDE19CD25430020CDC9 /* HNCheckDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D3DEDC19CD25430020CDC9 /* HNCheckDetailViewController.m */; };
 		B9D3DEDF19CD25430020CDC9 /* HNCheckDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9D3DEDD19CD25430020CDC9 /* HNCheckDetailViewController.xib */; };
 		B9D3DEE619CD65500020CDC9 /* HNCheckDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D3DEE519CD65500020CDC9 /* HNCheckDetailView.m */; };
+		B9D72D5019D83E440011CF83 /* HNOrderHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D72D4F19D83E440011CF83 /* HNOrderHeaderView.m */; };
+		B9D72D5419D840960011CF83 /* HNOrderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D72D5219D840960011CF83 /* HNOrderTableViewCell.m */; };
+		B9D72D5519D840960011CF83 /* HNOrderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9D72D5319D840960011CF83 /* HNOrderTableViewCell.xib */; };
 		B9DE55FD19C9C0EA00280EC7 /* UIView+AHKit.m in Sources */ = {isa = PBXBuildFile; fileRef = B9DE55FC19C9C0EA00280EC7 /* UIView+AHKit.m */; };
 		B9DE560119C9C26700280EC7 /* HNDecorateControlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9DE560019C9C26700280EC7 /* HNDecorateControlViewController.m */; };
 		B9DE560419C9C40B00280EC7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B9DE560619C9C40B00280EC7 /* Localizable.strings */; };
@@ -281,6 +284,11 @@
 		B9D3DEDD19CD25430020CDC9 /* HNCheckDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HNCheckDetailViewController.xib; path = Classes/DecorateControl/HNCheckDetailViewController.xib; sourceTree = "<group>"; };
 		B9D3DEE419CD65500020CDC9 /* HNCheckDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNCheckDetailView.h; path = Classes/DecorateControl/HNCheckDetailView.h; sourceTree = "<group>"; };
 		B9D3DEE519CD65500020CDC9 /* HNCheckDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNCheckDetailView.m; path = Classes/DecorateControl/HNCheckDetailView.m; sourceTree = "<group>"; };
+		B9D72D4E19D83E440011CF83 /* HNOrderHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNOrderHeaderView.h; path = Classes/BusinessBackground/HNOrderHeaderView.h; sourceTree = "<group>"; };
+		B9D72D4F19D83E440011CF83 /* HNOrderHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNOrderHeaderView.m; path = Classes/BusinessBackground/HNOrderHeaderView.m; sourceTree = "<group>"; };
+		B9D72D5119D840960011CF83 /* HNOrderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNOrderTableViewCell.h; path = Classes/BusinessBackground/HNOrderTableViewCell.h; sourceTree = "<group>"; };
+		B9D72D5219D840960011CF83 /* HNOrderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNOrderTableViewCell.m; path = Classes/BusinessBackground/HNOrderTableViewCell.m; sourceTree = "<group>"; };
+		B9D72D5319D840960011CF83 /* HNOrderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HNOrderTableViewCell.xib; path = Classes/BusinessBackground/HNOrderTableViewCell.xib; sourceTree = "<group>"; };
 		B9DE55FB19C9C0EA00280EC7 /* UIView+AHKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+AHKit.h"; path = "Third Party/UIView+AHKit.h"; sourceTree = "<group>"; };
 		B9DE55FC19C9C0EA00280EC7 /* UIView+AHKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+AHKit.m"; path = "Third Party/UIView+AHKit.m"; sourceTree = "<group>"; };
 		B9DE55FF19C9C26700280EC7 /* HNDecorateControlViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNDecorateControlViewController.h; path = Classes/DecorateControl/HNDecorateControlViewController.h; sourceTree = "<group>"; };
@@ -546,6 +554,7 @@
 		B94B7A6119C9BE4E000112ED /* BusinessBackground */ = {
 			isa = PBXGroup;
 			children = (
+				B9D72D4D19D83DBC0011CF83 /* Order */,
 				37F9D7E219D87B6B005CB18B /* Comments */,
 				B91A3AA719D6DFFD000F3823 /* Goods */,
 				D33EEA6619D6D9D700D6F106 /* Profile */,
@@ -707,6 +716,18 @@
 				D33EEABB19D6FF5D00D6F106 /* city.plist */,
 			);
 			name = Share;
+			sourceTree = "<group>";
+		};
+		B9D72D4D19D83DBC0011CF83 /* Order */ = {
+			isa = PBXGroup;
+			children = (
+				B9D72D4E19D83E440011CF83 /* HNOrderHeaderView.h */,
+				B9D72D4F19D83E440011CF83 /* HNOrderHeaderView.m */,
+				B9D72D5119D840960011CF83 /* HNOrderTableViewCell.h */,
+				B9D72D5219D840960011CF83 /* HNOrderTableViewCell.m */,
+				B9D72D5319D840960011CF83 /* HNOrderTableViewCell.xib */,
+			);
+			name = Order;
 			sourceTree = "<group>";
 		};
 		B9DE55FE19C9C12C00280EC7 /* Resources */ = {
@@ -906,6 +927,7 @@
 				D33EEA6519D6C2B700D6F106 /* HNVolumeViewController.xib in Resources */,
 				B916F0AC19C8781D00A849C7 /* InfoPlist.strings in Resources */,
 				D33EEAC219D7000E00D6F106 /* HNAreaPickerView.xib in Resources */,
+				B9D72D5519D840960011CF83 /* HNOrderTableViewCell.xib in Resources */,
 				B9D3DECC19CD0B2C0020CDC9 /* HNReportPurchaseViewController.xib in Resources */,
 				3732B13219D0182100ADF3F5 /* HNOfficePassesApplyViewController.xib in Resources */,
 				B91A3AD219D6F9D4000F3823 /* HNGoodsViewController.xib in Resources */,
@@ -985,6 +1007,7 @@
 				B9D3DEDE19CD25430020CDC9 /* HNCheckDetailViewController.m in Sources */,
 				B9DE560119C9C26700280EC7 /* HNDecorateControlViewController.m in Sources */,
 				B9882DFB19CB152F0093F0F4 /* HNNewCompanyReportView.m in Sources */,
+				B9D72D5419D840960011CF83 /* HNOrderTableViewCell.m in Sources */,
 				B9B2BC1619CF1F3000839AED /* ALAsset+accessibilityLabel.m in Sources */,
 				37C8C3E019CC22470020458C /* HNOfficePassesViewController.m in Sources */,
 				D3C07BC919CDC8CA003EA5E4 /* HNComplaintDetailsViewController.m in Sources */,
@@ -995,6 +1018,7 @@
 				B9B2BC2619CF1F3000839AED /* NSDateFormatter+timeIntervalFormatter.m in Sources */,
 				B91A3AC519D6E6E9000F3823 /* MJRefreshHeaderView.m in Sources */,
 				B91A3AD519D703C5000F3823 /* HNGoodsHeaderView.m in Sources */,
+				B9D72D5019D83E440011CF83 /* HNOrderHeaderView.m in Sources */,
 				D3CD910319CF141C00E76AF4 /* HNRefundDetailViewController.m in Sources */,
 				D391EE8C19CD787D00DE3363 /* HNComplaintTableViewController.m in Sources */,
 				B9B2BC1B19CF1F3000839AED /* CTAssetScrollView.m in Sources */,
