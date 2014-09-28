@@ -86,6 +86,7 @@ static NSString *reuseId = @"businessCell";
             self.headerView = [[HNGoodsHeaderView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 74)];
             [self.view addSubview:self.headerView];
         }
+            break;
         case kComment:
         {
             self.headerView=[[HNCommentsHeaderView alloc] initWithFrame:CGRectMake(0,0, self.view.width, 74)];
