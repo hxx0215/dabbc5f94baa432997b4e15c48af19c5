@@ -13,14 +13,32 @@
 @property (strong, nonatomic) IBOutlet UIButton *OKButton;
 @property (strong, nonatomic) IBOutlet UIButton *cancelButton;
 
-@property (strong, nonatomic) IBOutlet UITextView *textView;
+@property (strong, nonatomic) IBOutlet UITextView *remarksTextView;
+
+@property (strong, nonatomic) IBOutlet UILabel *addressTitleLabel;
+@property (strong, nonatomic) IBOutlet UILabel *consigneeTitleLabel;
+@property (strong, nonatomic) IBOutlet UILabel *phoneTitleLabel;
+@property (strong, nonatomic) IBOutlet UILabel *remarksTitleLabel;
+
+@property (strong, nonatomic) IBOutlet UILabel *addressLabel;
+@property (strong, nonatomic) IBOutlet UILabel *consigneeLabel;
+@property (strong, nonatomic) IBOutlet UILabel *phoneLabel;
 @end
 
+/*
+ "Return Address" = "Return Address";
+ "Consignee" = "Consignee";
+ "Remarks" = "Remarks";
+ */
 @implementation HNAcceptReturnGoodViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [self labelWithTitle:NSLocalizedString(@"Return Address", nil) label:self.addressTitleLabel];
+    [self labelWithTitle:NSLocalizedString(@"Consignee", nil) label:self.consigneeTitleLabel];
+    [self labelWithTitle:NSLocalizedString(@"Phone", nil) label:self.phoneTitleLabel];
+    [self labelWithTitle:NSLocalizedString(@"Remarks", nil) label:self.remarksTitleLabel];
     
     self.OKButton.layer.borderWidth = 1.0;
     self.OKButton.layer.borderColor = [UIColor blackColor].CGColor;
@@ -31,8 +49,23 @@
     self.cancelButton.width = 45;
     [self.cancelButton setTitle:NSLocalizedString(@"Cancel", nil) forState:UIControlStateNormal];
     
-    self.textView.layer.borderWidth = 1.0;
-    self.textView.layer.borderColor = [UIColor blackColor].CGColor;
+    self.remarksTextView.layer.borderWidth = 1.0;
+    self.remarksTextView.layer.borderColor = [UIColor blackColor].CGColor;
+    
+    self.navigationItem.title = NSLocalizedString(@"Agreed to return", nil);
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self updateData];
+    
+}
+
+-(void)updateData
+{
+    [self labelWithTitle:@"123" leftLabel:self.addressTitleLabel label:self.addressLabel];
+    [self labelWithTitle:@"123" leftLabel:self.consigneeTitleLabel label:self.consigneeLabel];
+    [self labelWithTitle:@"123" leftLabel:self.phoneTitleLabel label:self.phoneLabel];
 }
 
 - (void)labelWithTitle:(NSString *)title label:(UILabel*)lab
@@ -45,6 +78,18 @@
     lab.layer.borderColor = [UIColor blackColor].CGColor;
 }
 
+- (void)labelWithTitle:(NSString *)title leftLabel:(UILabel*)leftlab label:(UILabel*)lab
+{
+    [lab setText:title];
+    [lab sizeToFit];
+    lab.font = [UIFont systemFontOfSize:11];
+    lab.numberOfLines = 2;
+    lab.left = leftlab.left+leftlab.width;
+    lab.top = leftlab.top;
+    lab.height = leftlab.height;
+    
+    lab.layer.borderColor = [UIColor blackColor].CGColor;
+}
 
 - (IBAction)OKButtonClick:(id)sender
 {

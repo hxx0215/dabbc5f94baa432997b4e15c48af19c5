@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
-        <deployment defaultVersion="1808" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HNAcceptReturnGoodViewController">
             <connections>
                 <outlet property="OKButton" destination="v58-wN-ZfW" id="fNe-9A-QTq"/>
+                <outlet property="addressLabel" destination="NVV-Ch-dyl" id="qgb-Te-SBK"/>
+                <outlet property="addressTitleLabel" destination="2oT-Jf-2XP" id="3rr-0E-d73"/>
                 <outlet property="cancelButton" destination="Z3G-rI-fqJ" id="O0y-E7-fm7"/>
-                <outlet property="textView" destination="O4l-4i-cQi" id="rOZ-e3-rGf"/>
+                <outlet property="consigneeLabel" destination="0QB-pM-Dmb" id="dnK-cv-glN"/>
+                <outlet property="consigneeTitleLabel" destination="XMk-KL-JnC" id="dm0-9L-Qhq"/>
+                <outlet property="phoneLabel" destination="H8R-C0-9QP" id="bDg-vT-6TG"/>
+                <outlet property="phoneTitleLabel" destination="3bX-H3-IF3" id="pdY-Ww-Kbr"/>
+                <outlet property="remarksTextView" destination="O4l-4i-cQi" id="Zf2-dd-MA2"/>
+                <outlet property="remarksTitleLabel" destination="ngS-6T-OrX" id="lYs-T8-Cr2"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

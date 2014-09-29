@@ -126,6 +126,7 @@
 		D39662F619CD4E6300EE49B8 /* HNTemporaryDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D39662F419CD4E6300EE49B8 /* HNTemporaryDetailsViewController.xib */; };
 		D3A96D8E19D98BE80059CF62 /* HNAcceptReturnGoodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A96D8C19D98BE80059CF62 /* HNAcceptReturnGoodViewController.m */; };
 		D3A96D8F19D98BE80059CF62 /* HNAcceptReturnGoodViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3A96D8D19D98BE80059CF62 /* HNAcceptReturnGoodViewController.xib */; };
+		D3A96D9219D9A1990059CF62 /* HNCommentsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A96D9119D9A1990059CF62 /* HNCommentsCell.m */; };
 		D3C07BBD19CD60AF003EA5E4 /* HNTemporaryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C07BBC19CD60AF003EA5E4 /* HNTemporaryModel.m */; };
 		D3C07BC019CDAC7A003EA5E4 /* HNComplaintTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C07BBF19CDAC7A003EA5E4 /* HNComplaintTableViewCell.m */; };
 		D3C07BC419CDC8A0003EA5E4 /* HNComplaintApplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C07BC219CDC8A0003EA5E4 /* HNComplaintApplyViewController.m */; };
@@ -353,6 +354,8 @@
 		D3A96D8B19D98BE80059CF62 /* HNAcceptReturnGoodViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNAcceptReturnGoodViewController.h; path = Classes/BusinessBackground/HNAcceptReturnGoodViewController.h; sourceTree = "<group>"; };
 		D3A96D8C19D98BE80059CF62 /* HNAcceptReturnGoodViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNAcceptReturnGoodViewController.m; path = Classes/BusinessBackground/HNAcceptReturnGoodViewController.m; sourceTree = "<group>"; };
 		D3A96D8D19D98BE80059CF62 /* HNAcceptReturnGoodViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HNAcceptReturnGoodViewController.xib; path = Classes/BusinessBackground/HNAcceptReturnGoodViewController.xib; sourceTree = "<group>"; };
+		D3A96D9019D9A1990059CF62 /* HNCommentsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNCommentsCell.h; path = Classes/BusinessBackground/HNCommentsCell.h; sourceTree = "<group>"; };
+		D3A96D9119D9A1990059CF62 /* HNCommentsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNCommentsCell.m; path = Classes/BusinessBackground/HNCommentsCell.m; sourceTree = "<group>"; };
 		D3C07BBB19CD60AF003EA5E4 /* HNTemporaryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNTemporaryModel.h; sourceTree = "<group>"; };
 		D3C07BBC19CD60AF003EA5E4 /* HNTemporaryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNTemporaryModel.m; sourceTree = "<group>"; };
 		D3C07BBE19CDAC7A003EA5E4 /* HNComplaintTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNComplaintTableViewCell.h; sourceTree = "<group>"; };
@@ -427,6 +430,8 @@
 				37724D7419D8F69700A9B7EC /* HNCommentsDetailViewController.h */,
 				37724D7519D8F69700A9B7EC /* HNCommentsDetailViewController.m */,
 				37724D7619D8F69700A9B7EC /* HNCommentsDetailViewController.xib */,
+				D3A96D9019D9A1990059CF62 /* HNCommentsCell.h */,
+				D3A96D9119D9A1990059CF62 /* HNCommentsCell.m */,
 			);
 			name = Comments;
 			sourceTree = "<group>";
@@ -1042,6 +1047,7 @@
 				B91A3AC219D6E6E9000F3823 /* MJRefreshBaseView.m in Sources */,
 				D33EEA6419D6C2B700D6F106 /* HNVolumeViewController.m in Sources */,
 				B9DE55FD19C9C0EA00280EC7 /* UIView+AHKit.m in Sources */,
+				D3A96D9219D9A1990059CF62 /* HNCommentsCell.m in Sources */,
 				D33EEA5E19D69F3200D6F106 /* HNBusinessBKControlViewController.m in Sources */,
 				D38E009419D84D20000F5263 /* HNReturnsHeaderView.m in Sources */,
 				B91A3AAF19D6E1B6000F3823 /* HNBusinessListViewController.m in Sources */,

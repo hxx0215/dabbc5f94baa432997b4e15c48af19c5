@@ -7,12 +7,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HNCommentsDetailViewController">
             <connections>
-                <outlet property="CommentName" destination="IWI-fD-cVm" id="hT8-fy-mOS"/>
-                <outlet property="CommentRemarks" destination="AoV-IX-Sg6" id="Oq6-Yq-Kg7"/>
-                <outlet property="GoodsCount" destination="ZNI-Zs-k1a" id="Ayx-Nj-jv6"/>
-                <outlet property="GoodsName" destination="IWI-fD-cVm" id="5vi-jN-dC3"/>
-                <outlet property="GoodsPrice" destination="tVR-tS-sks" id="HgM-tI-c5G"/>
-                <outlet property="GoodsRemarks" destination="0fE-lp-6VH" id="Adk-Tl-wbM"/>
+                <outlet property="CommentNameLable" destination="0fE-lp-6VH" id="BU8-94-npD"/>
+                <outlet property="CommentRemarksLable" destination="AoV-IX-Sg6" id="Y7c-x1-nQ8"/>
+                <outlet property="GoodsCountLable" destination="ZNI-Zs-k1a" id="G8Q-AJ-TqL"/>
+                <outlet property="GoodsNameLable" destination="IWI-fD-cVm" id="3p4-j9-Xb6"/>
+                <outlet property="GoodsPriceLable" destination="tVR-tS-sks" id="fbu-4G-nqm"/>
+                <outlet property="GoodsRemarksLable" destination="JXR-H4-NG1" id="vJh-UT-Te0"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="h7X-Ba-8Xb"/>
             </connections>
         </placeholder>
