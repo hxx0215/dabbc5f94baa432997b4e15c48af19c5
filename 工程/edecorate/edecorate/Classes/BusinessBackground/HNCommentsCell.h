@@ -10,7 +10,8 @@
 @class HNCommentsCell;
 @protocol HNCommentsDelegate <NSObject>
 
-- (void)CommentsNewDid:(HNCommentsCell*)commentsCell;
+- (void)CommentsNewWillDid:(HNCommentsCell*)commentsCell;
+- (void)CommentsNewDid:(HNCommentsCell*)commentsCell contentString:(NSString*)content;
 - (void)CommentsDeleteDid:(HNCommentsCell*)commentsCell;
 - (void)CommentsHideDid:(HNCommentsCell*)commentsCell;
 
@@ -19,4 +20,5 @@
 @interface HNCommentsCell : UIView
 @property (nonatomic, retain) id <HNCommentsDelegate> delegate;
 - (id)initWithFrame:(CGRect)frame;
+-(void)commentsName:(NSString*)name commentsContent:(NSString*)content;
 @end

@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface HNCommentsDetailViewController : UIViewController
-
+@property (nonatomic)NSInteger index;
 @end
