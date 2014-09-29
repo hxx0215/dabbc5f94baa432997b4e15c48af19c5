@@ -19,11 +19,10 @@
 
 - (id)initWithFrame:(CGRect)frame
 {
-    self = [super init];
-    self.frame = frame;
+    self = [super initWithFrame:frame];
     self.CommentButton = [self buttonWithTitle:@"回复" selector:@selector(commentClick)];
-    self.hideButton = [self buttonWithTitle:@"回复" selector:@selector(hideClick)];
-    self.deleteButton = [self buttonWithTitle:@"回复" selector:@selector(deleteClick)];
+    self.hideButton = [self buttonWithTitle:@"隐藏" selector:@selector(hideClick)];
+    self.deleteButton = [self buttonWithTitle:@"删除" selector:@selector(deleteClick)];
     return self;
 }
 
