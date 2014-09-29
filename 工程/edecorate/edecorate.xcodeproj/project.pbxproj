@@ -61,6 +61,8 @@
 		B955579619D1A06A00FC0AAE /* HNNewConstructViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B955579419D1A06A00FC0AAE /* HNNewConstructViewController.m */; };
 		B955579719D1A06A00FC0AAE /* HNNewConstructViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B955579519D1A06A00FC0AAE /* HNNewConstructViewController.xib */; };
 		B95D15BF19D9A28200689B4D /* CustomIOS7AlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = B95D15BE19D9A28200689B4D /* CustomIOS7AlertView.m */; };
+		B95D15C419D9AE4B00689B4D /* HNEditPriceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B95D15C219D9AE4B00689B4D /* HNEditPriceViewController.m */; };
+		B95D15C519D9AE4B00689B4D /* HNEditPriceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B95D15C319D9AE4B00689B4D /* HNEditPriceViewController.xib */; };
 		B965E76019D04955004CD201 /* HNDeliverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B965E75F19D04955004CD201 /* HNDeliverViewController.m */; };
 		B965E76919D04CDA004CD201 /* HNDeliverDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B965E76719D04CDA004CD201 /* HNDeliverDetailViewController.m */; };
 		B965E76A19D04CDA004CD201 /* HNDeliverDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B965E76819D04CDA004CD201 /* HNDeliverDetailViewController.xib */; };
@@ -242,6 +244,9 @@
 		B955579519D1A06A00FC0AAE /* HNNewConstructViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HNNewConstructViewController.xib; path = Classes/DecorateControl/HNNewConstructViewController.xib; sourceTree = "<group>"; };
 		B95D15BD19D9A28200689B4D /* CustomIOS7AlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomIOS7AlertView.h; sourceTree = "<group>"; };
 		B95D15BE19D9A28200689B4D /* CustomIOS7AlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomIOS7AlertView.m; sourceTree = "<group>"; };
+		B95D15C119D9AE4B00689B4D /* HNEditPriceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNEditPriceViewController.h; path = Classes/BusinessBackground/HNEditPriceViewController.h; sourceTree = "<group>"; };
+		B95D15C219D9AE4B00689B4D /* HNEditPriceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNEditPriceViewController.m; path = Classes/BusinessBackground/HNEditPriceViewController.m; sourceTree = "<group>"; };
+		B95D15C319D9AE4B00689B4D /* HNEditPriceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HNEditPriceViewController.xib; path = Classes/BusinessBackground/HNEditPriceViewController.xib; sourceTree = "<group>"; };
 		B965E75E19D04955004CD201 /* HNDeliverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNDeliverViewController.h; path = Classes/DecorateControl/HNDeliverViewController.h; sourceTree = "<group>"; };
 		B965E75F19D04955004CD201 /* HNDeliverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNDeliverViewController.m; path = Classes/DecorateControl/HNDeliverViewController.m; sourceTree = "<group>"; };
 		B965E76619D04CDA004CD201 /* HNDeliverDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNDeliverDetailViewController.h; path = Classes/DecorateControl/HNDeliverDetailViewController.h; sourceTree = "<group>"; };
@@ -778,6 +783,9 @@
 				B9D72D5119D840960011CF83 /* HNOrderTableViewCell.h */,
 				B9D72D5219D840960011CF83 /* HNOrderTableViewCell.m */,
 				B9D72D5319D840960011CF83 /* HNOrderTableViewCell.xib */,
+				B95D15C119D9AE4B00689B4D /* HNEditPriceViewController.h */,
+				B95D15C219D9AE4B00689B4D /* HNEditPriceViewController.m */,
+				B95D15C319D9AE4B00689B4D /* HNEditPriceViewController.xib */,
 			);
 			name = Order;
 			sourceTree = "<group>";
@@ -980,6 +988,7 @@
 				D33EEA6B19D6D9E600D6F106 /* HNProfileViewController.xib in Resources */,
 				D38E009119D84BE0000F5263 /* HNReimburseViewController.xib in Resources */,
 				B9DE560419C9C40B00280EC7 /* Localizable.strings in Resources */,
+				B95D15C519D9AE4B00689B4D /* HNEditPriceViewController.xib in Resources */,
 				D33EEAC719D70C8800D6F106 /* HNProfileChangeViewController.xib in Resources */,
 				D33EEABD19D6FF5D00D6F106 /* city.plist in Resources */,
 				D3C07BCA19CDC8CA003EA5E4 /* HNComplaintDetailsViewController.xib in Resources */,
@@ -1068,6 +1077,7 @@
 				B9B2BC2519CF1F3000839AED /* CTAssetsViewControllerTransition.m in Sources */,
 				B953CE0E19CAFBE000BD57DF /* HNLoginViewController.m in Sources */,
 				B94B7A6519C9BF3E000112ED /* HNHomeViewController.m in Sources */,
+				B95D15C419D9AE4B00689B4D /* HNEditPriceViewController.m in Sources */,
 				B91A3AC619D6E6E9000F3823 /* UIScrollView+MJExtension.m in Sources */,
 				B9B2BC2019CF1F3000839AED /* CTAssetsPickerConstants.m in Sources */,
 				B91A3AC819D6E6E9000F3823 /* UIView+MJExtension.m in Sources */,
