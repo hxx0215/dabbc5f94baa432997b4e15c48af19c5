@@ -10,12 +10,12 @@
 
 @interface HNCommentsDetailViewController ()
 
-//@property(nonatomic,strong)IBOutlet UILabel *GoodsName;
-//@property(nonatomic,strong)IBOutlet UILabel *GoodsPrice;
-//@property(nonatomic,strong)IBOutlet UILabel *GoodsCount;
-//@property(nonatomic,strong)IBOutlet UILabel *GoodsRemarks;
-//@property(nonatomic,strong)IBOutlet UILabel *CommentName;
-//@property(nonatomic,strong)IBOutlet UILabel *CommentRemarks;
+@property(nonatomic,strong)IBOutlet UILabel *GoodsName;
+@property(nonatomic,strong)IBOutlet UILabel *GoodsPrice;
+@property(nonatomic,strong)IBOutlet UILabel *GoodsCount;
+@property(nonatomic,strong)IBOutlet UILabel *GoodsRemarks;
+@property(nonatomic,strong)IBOutlet UILabel *CommentName;
+@property(nonatomic,strong)IBOutlet UILabel *CommentRemarks;
 @end
 
 @implementation HNCommentsDetailViewController
@@ -23,15 +23,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor=[UIColor whiteColor];
-    //[self labelWithTitle:@"商品名称a"  label:self.GoodsName];
-    //[self labelWithTitle:@"￥10.00"   label:self.GoodsPrice];
-//    [self labelWithTitle:@"1"  label:self.GoodsCount];
-//    [self labelWithTitle:@"你值得拥有"  label:self.GoodsRemarks];
-//    
-//    [self labelWithTitle:@"希腊胡"  label:self.CommentName];
-//    [self labelWithTitle:@"你值得拥有"  label:self.CommentRemarks];
+    [self labelWithTitle:@"商品名称a"  label:self.GoodsName];
+    [self labelWithTitle:@"￥10.00"   label:self.GoodsPrice];
+    [self labelWithTitle:@"1"  label:self.GoodsCount];
+    [self labelWithTitle:@"你值得拥有"  label:self.GoodsRemarks];
+    
+    [self labelWithTitle:@"希腊胡"  label:self.CommentName];
+    [self labelWithTitle:@"你值得拥有"  label:self.CommentRemarks];
  
-    //self.navigationController.title=@"评论详情";
+    self.navigationController.title=@"评论详情";
   
     
     // Do any additional setup after loading the view from its nib.

@@ -8,6 +8,7 @@
 
 #import "HNReimburseViewController.h"
 #include "UIView+AHKit.h"
+#include "HNAcceptReturnGoodViewController.h"
 
 @interface HNReimburseViewController ()
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
@@ -38,6 +39,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *refundRecordTitleLabel;
 
 @property (strong, nonatomic) IBOutlet UILabel *refundFlagLabel;
+@property (strong, nonatomic) IBOutlet UILabel *tipsLabel;
 
 /*
 "Order details" = "订单详情";
@@ -80,6 +82,14 @@
     
     //[self labelWithTitle:NSLocalizedString(@"Product Information", nil) label:self.productInformationTitleLabel];
     [self labelWithTitle:NSLocalizedString(@"Refund Record", nil) label:self.refundRecordTitleLabel];
+    self.tipsLabel.font = [UIFont systemFontOfSize:12];
+    
+    self.acceptButton.layer.borderWidth = 1.0;
+    self.acceptButton.layer.borderColor = [UIColor blackColor].CGColor;
+    [self.acceptButton setTitle:NSLocalizedString(@"Agree to a refund", nil) forState:UIControlStateNormal];
+    self.rejectButton.layer.borderWidth = 1.0;
+    self.rejectButton.layer.borderColor = [UIColor blackColor].CGColor;
+    [self.rejectButton setTitle:NSLocalizedString(@"Refused to refund", nil) forState:UIControlStateNormal];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -129,9 +139,13 @@
 
 - (IBAction)acceptButtonClick:(id)sender
 {
+    HNAcceptReturnGoodViewController *ac = [[HNAcceptReturnGoodViewController alloc]init];
+    [self.navigationController pushViewController:ac animated:YES];
 }
+
 - (IBAction)rejectButtonClick:(id)sender
 {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
