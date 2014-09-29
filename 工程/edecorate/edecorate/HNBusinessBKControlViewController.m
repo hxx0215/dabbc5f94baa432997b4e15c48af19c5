@@ -101,6 +101,8 @@
 - (IBAction)returnsClicked:(id)sender {
 }
 - (IBAction)commentsClicked:(id)sender {
+    HNBusinessListViewController *comment=[[HNBusinessListViewController alloc] initWithType:kComment];
+    [self.navigationController pushViewController:comment animated:YES];
 }
 - (IBAction)profileClicked:(id)sender{
     HNProfileViewController* pc = [[HNProfileViewController alloc]init];

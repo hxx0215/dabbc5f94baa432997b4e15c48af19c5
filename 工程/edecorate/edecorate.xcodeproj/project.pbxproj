@@ -13,6 +13,9 @@
 		3732B13219D0182100ADF3F5 /* HNOfficePassesApplyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3732B13019D0182100ADF3F5 /* HNOfficePassesApplyViewController.xib */; };
 		37C8C3E019CC22470020458C /* HNOfficePassesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C8C3DF19CC22470020458C /* HNOfficePassesViewController.m */; };
 		37D2354519D1171400295572 /* HNOfficePassedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D2354419D1171400295572 /* HNOfficePassedTableViewCell.m */; };
+		37F9D80019D8B481005CB18B /* HNCommentsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F9D7FF19D8B481005CB18B /* HNCommentsHeaderView.m */; };
+		37F9D80419D8B5E1005CB18B /* HNCommentsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F9D80219D8B5E1005CB18B /* HNCommentsTableViewCell.m */; };
+		37F9D80519D8B5E1005CB18B /* HNCommentsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37F9D80319D8B5E1005CB18B /* HNCommentsTableViewCell.xib */; };
 		B916F0A219C8781D00A849C7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B916F0A119C8781D00A849C7 /* Foundation.framework */; };
 		B916F0A419C8781D00A849C7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B916F0A319C8781D00A849C7 /* CoreGraphics.framework */; };
 		B916F0A619C8781D00A849C7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B916F0A519C8781D00A849C7 /* UIKit.framework */; };
@@ -148,6 +151,11 @@
 		37C8C3DF19CC22470020458C /* HNOfficePassesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNOfficePassesViewController.m; sourceTree = "<group>"; };
 		37D2354319D1171400295572 /* HNOfficePassedTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNOfficePassedTableViewCell.h; sourceTree = "<group>"; };
 		37D2354419D1171400295572 /* HNOfficePassedTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNOfficePassedTableViewCell.m; sourceTree = "<group>"; };
+		37F9D7FE19D8B481005CB18B /* HNCommentsHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNCommentsHeaderView.h; sourceTree = "<group>"; };
+		37F9D7FF19D8B481005CB18B /* HNCommentsHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNCommentsHeaderView.m; sourceTree = "<group>"; };
+		37F9D80119D8B5E1005CB18B /* HNCommentsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNCommentsTableViewCell.h; sourceTree = "<group>"; };
+		37F9D80219D8B5E1005CB18B /* HNCommentsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNCommentsTableViewCell.m; sourceTree = "<group>"; };
+		37F9D80319D8B5E1005CB18B /* HNCommentsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HNCommentsTableViewCell.xib; sourceTree = "<group>"; };
 		B916F09E19C8781D00A849C7 /* edecorate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = edecorate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B916F0A119C8781D00A849C7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B916F0A319C8781D00A849C7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -372,6 +380,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		37F9D7E219D87B6B005CB18B /* Comments */ = {
+			isa = PBXGroup;
+			children = (
+				37F9D7FE19D8B481005CB18B /* HNCommentsHeaderView.h */,
+				37F9D7FF19D8B481005CB18B /* HNCommentsHeaderView.m */,
+				37F9D80119D8B5E1005CB18B /* HNCommentsTableViewCell.h */,
+				37F9D80219D8B5E1005CB18B /* HNCommentsTableViewCell.m */,
+				37F9D80319D8B5E1005CB18B /* HNCommentsTableViewCell.xib */,
+			);
+			name = Comments;
+			sourceTree = "<group>";
+		};
 		B916F09519C8781D00A849C7 = {
 			isa = PBXGroup;
 			children = (
@@ -526,6 +546,7 @@
 		B94B7A6119C9BE4E000112ED /* BusinessBackground */ = {
 			isa = PBXGroup;
 			children = (
+				37F9D7E219D87B6B005CB18B /* Comments */,
 				B91A3AA719D6DFFD000F3823 /* Goods */,
 				D33EEA6619D6D9D700D6F106 /* Profile */,
 				D33EEA6019D6C29100D6F106 /* volume */,
@@ -878,6 +899,7 @@
 				B955579719D1A06A00FC0AAE /* HNNewConstructViewController.xib in Resources */,
 				B916F0BA19C8781D00A849C7 /* Images.xcassets in Resources */,
 				D3C07BC519CDC8A0003EA5E4 /* HNComplaintApplyViewController.xib in Resources */,
+				37F9D80519D8B5E1005CB18B /* HNCommentsTableViewCell.xib in Resources */,
 				B9B2BC1F19CF1F3000839AED /* CTAssetsPicker.xcassets in Resources */,
 				3732B12D19CFC46E00ADF3F5 /* HNOfficePassesDetailsViewController.xib in Resources */,
 				D33EEA5F19D69F3200D6F106 /* HNBusinessBKControlViewController.xib in Resources */,
@@ -947,6 +969,7 @@
 				B9B2BC2019CF1F3000839AED /* CTAssetsPickerConstants.m in Sources */,
 				B91A3AC819D6E6E9000F3823 /* UIView+MJExtension.m in Sources */,
 				B9B2BC2219CF1F3000839AED /* CTAssetsSupplementaryView.m in Sources */,
+				37F9D80419D8B5E1005CB18B /* HNCommentsTableViewCell.m in Sources */,
 				3732B12C19CFC46E00ADF3F5 /* HNOfficePassesDetailsViewController.m in Sources */,
 				D3C07BC019CDAC7A003EA5E4 /* HNComplaintTableViewCell.m in Sources */,
 				D33EEA6A19D6D9E600D6F106 /* HNProfileViewController.m in Sources */,
@@ -956,6 +979,7 @@
 				D3C07BC419CDC8A0003EA5E4 /* HNComplaintApplyViewController.m in Sources */,
 				B965E76019D04955004CD201 /* HNDeliverViewController.m in Sources */,
 				B9B2BC1D19CF1F3000839AED /* CTAssetsGroupViewController.m in Sources */,
+				37F9D80019D8B481005CB18B /* HNCommentsHeaderView.m in Sources */,
 				B9D3DEE619CD65500020CDC9 /* HNCheckDetailView.m in Sources */,
 				D3F90F1019CB13CA000C95E4 /* HNTemporaryFireViewController.m in Sources */,
 				B9D3DEDE19CD25430020CDC9 /* HNCheckDetailViewController.m in Sources */,

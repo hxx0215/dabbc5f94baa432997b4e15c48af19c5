@@ -14,6 +14,9 @@
 #import "HNGoodsViewController.h"
 #import "HNGoodsHeaderView.h"
 
+#import "HNCommentsTableViewCell.h"
+#import "HNCommentsHeaderView.h"
+
 @interface HNBusinessListViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, assign)HNBusinessType businessType;
 @property (nonatomic, strong)UITableView *tableView;
@@ -66,6 +69,12 @@ static NSString *reuseId = @"businessCell";
             [self.tableView registerNib:nib forCellReuseIdentifier:reuseId];
         }
             break;
+        case kComment:
+        {
+            UINib *nib=[UINib nibWithNibName:NSStringFromClass([HNCommentsTableViewCell class]) bundle:nil];
+            [self.tableView registerNib:nib forCellReuseIdentifier:reuseId];
+        }
+            break;
         default:
             break;
     }
@@ -77,6 +86,12 @@ static NSString *reuseId = @"businessCell";
             self.headerView = [[HNGoodsHeaderView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 74)];
             [self.view addSubview:self.headerView];
         }
+        case kComment:
+        {
+            self.headerView=[[HNCommentsHeaderView alloc] initWithFrame:CGRectMake(0,0, self.view.width, 74)];
+            [self.view addSubview:self.headerView];
+        }
+            break;
         default:
             break;
     }
@@ -97,6 +112,11 @@ static NSString *reuseId = @"businessCell";
         case kGoods:{
             HNGoodsTableViewCell *tCell = [tableView dequeueReusableCellWithIdentifier:reuseId];
             cell = tCell;
+        }
+            break;
+        case kComment:{
+            HNCommentsTableViewCell *cCell=[tableView dequeueReusableCellWithIdentifier:reuseId];
+            cell=cCell;
         }
             break;
         default:
@@ -126,6 +146,9 @@ static NSString *reuseId = @"businessCell";
     switch (self.businessType){
         case kGoods:
             return 80;
+            break;
+        case kComment:
+            return 120;
             break;
         default:
             return 44;

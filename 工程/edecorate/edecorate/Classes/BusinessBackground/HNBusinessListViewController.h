@@ -11,7 +11,7 @@ typedef enum HNBusinessType{
     kGoods = 0,
     kOrder,
     kReturnGoods,
-    kComment,
+    kComment=3,
     kProfile,
     kCoupons
 }HNBusinessType;
