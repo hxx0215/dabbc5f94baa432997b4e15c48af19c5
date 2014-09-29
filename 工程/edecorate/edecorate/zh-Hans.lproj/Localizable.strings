@@ -133,3 +133,8 @@
 "Returns" = "退货";
 "Repair" = "报修";
 "Replacement" = "换货";
+
+"Return Address" = "退货地址";
+"Consignee" = "收货人";
+"Remarks" = "备注";
+"Agreed to return" = "同意退货";

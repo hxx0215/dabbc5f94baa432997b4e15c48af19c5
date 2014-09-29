@@ -90,6 +90,8 @@
     self.rejectButton.layer.borderWidth = 1.0;
     self.rejectButton.layer.borderColor = [UIColor blackColor].CGColor;
     [self.rejectButton setTitle:NSLocalizedString(@"Refused to refund", nil) forState:UIControlStateNormal];
+    
+    self.navigationItem.title = NSLocalizedString(@"Order details", nil);
 }
 
 - (void)viewWillAppear:(BOOL)animated{
