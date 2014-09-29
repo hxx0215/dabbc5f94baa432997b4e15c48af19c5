@@ -10,4 +10,7 @@
 
 @interface HNCommentsTableViewCell : UITableViewCell
 
+-(void) SetTableByType:(int)type;
+
+
 @end
