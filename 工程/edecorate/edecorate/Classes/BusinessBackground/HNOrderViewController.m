@@ -9,6 +9,7 @@
 #import "HNOrderViewController.h"
 #import "UIView+AHKit.h"
 #import "CustomIOS7AlertView.h"
+#import "HNEditPriceViewController.h"
 
 @interface HNOrderViewController ()
 @property (strong, nonatomic) IBOutlet UIScrollView *backView;
@@ -42,6 +43,10 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)changePrice:(id)sender {
+    HNEditPriceViewController *editor = [[HNEditPriceViewController alloc] init];
+    [self.navigationController pushViewController:editor animated:YES];
+}
+- (IBAction)cancelOrder:(id)sender {
     CustomIOS7AlertView *alertView = [[CustomIOS7AlertView alloc] init];
     alertView.parentView = self.navigationController.view;
     alertView.containerView  = self.alertContent;
