@@ -20,6 +20,7 @@
 
 #import "HNCommentsTableViewCell.h"
 #import "HNCommentsHeaderView.h"
+#import "HNCommentsDetailViewController.h"
 
 #import "HNOrderHeaderView.h"
 #import "HNOrderTableViewCell.h"
@@ -94,6 +95,7 @@ static NSString *reuseId = @"businessCell";
             UINib *nib = [UINib nibWithNibName:NSStringFromClass([HNOrderTableViewCell class]) bundle:nil];
             [self.tableView registerNib:nib forCellReuseIdentifier:reuseId];
         }
+            break;
         default:
             break;
     }
@@ -187,6 +189,12 @@ static NSString *reuseId = @"businessCell";
             HNReimburseViewController *reumburse = [[HNReimburseViewController alloc] init];
             [self.navigationController pushViewController:reumburse animated:YES];
 
+        }
+            break;
+        case kComment:
+        {
+            HNCommentsDetailViewController *commentDetail=[[HNCommentsDetailViewController alloc] init];
+            [self.navigationController pushViewController:commentDetail animated:YES];
         }
             break;
         default:

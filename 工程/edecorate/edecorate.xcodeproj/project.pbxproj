@@ -11,6 +11,8 @@
 		3732B12D19CFC46E00ADF3F5 /* HNOfficePassesDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3732B12B19CFC46E00ADF3F5 /* HNOfficePassesDetailsViewController.xib */; };
 		3732B13119D0182100ADF3F5 /* HNOfficePassesApplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3732B12F19D0182100ADF3F5 /* HNOfficePassesApplyViewController.m */; };
 		3732B13219D0182100ADF3F5 /* HNOfficePassesApplyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3732B13019D0182100ADF3F5 /* HNOfficePassesApplyViewController.xib */; };
+		37724D7719D8F69700A9B7EC /* HNCommentsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37724D7519D8F69700A9B7EC /* HNCommentsDetailViewController.m */; };
+		37724D7819D8F69700A9B7EC /* HNCommentsDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37724D7619D8F69700A9B7EC /* HNCommentsDetailViewController.xib */; };
 		37C8C3E019CC22470020458C /* HNOfficePassesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C8C3DF19CC22470020458C /* HNOfficePassesViewController.m */; };
 		37D2354519D1171400295572 /* HNOfficePassedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D2354419D1171400295572 /* HNOfficePassedTableViewCell.m */; };
 		37F9D80019D8B481005CB18B /* HNCommentsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F9D7FF19D8B481005CB18B /* HNCommentsHeaderView.m */; };
@@ -157,6 +159,9 @@
 		3732B12E19D0182100ADF3F5 /* HNOfficePassesApplyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNOfficePassesApplyViewController.h; sourceTree = "<group>"; };
 		3732B12F19D0182100ADF3F5 /* HNOfficePassesApplyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNOfficePassesApplyViewController.m; sourceTree = "<group>"; };
 		3732B13019D0182100ADF3F5 /* HNOfficePassesApplyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HNOfficePassesApplyViewController.xib; sourceTree = "<group>"; };
+		37724D7419D8F69700A9B7EC /* HNCommentsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNCommentsDetailViewController.h; sourceTree = "<group>"; };
+		37724D7519D8F69700A9B7EC /* HNCommentsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNCommentsDetailViewController.m; sourceTree = "<group>"; };
+		37724D7619D8F69700A9B7EC /* HNCommentsDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HNCommentsDetailViewController.xib; sourceTree = "<group>"; };
 		37C8C3DE19CC22470020458C /* HNOfficePassesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNOfficePassesViewController.h; sourceTree = "<group>"; };
 		37C8C3DF19CC22470020458C /* HNOfficePassesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNOfficePassesViewController.m; sourceTree = "<group>"; };
 		37D2354319D1171400295572 /* HNOfficePassedTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNOfficePassedTableViewCell.h; sourceTree = "<group>"; };
@@ -414,6 +419,9 @@
 				37F9D80119D8B5E1005CB18B /* HNCommentsTableViewCell.h */,
 				37F9D80219D8B5E1005CB18B /* HNCommentsTableViewCell.m */,
 				37F9D80319D8B5E1005CB18B /* HNCommentsTableViewCell.xib */,
+				37724D7419D8F69700A9B7EC /* HNCommentsDetailViewController.h */,
+				37724D7519D8F69700A9B7EC /* HNCommentsDetailViewController.m */,
+				37724D7619D8F69700A9B7EC /* HNCommentsDetailViewController.xib */,
 			);
 			name = Comments;
 			sourceTree = "<group>";
@@ -963,6 +971,7 @@
 				B9B2BC1F19CF1F3000839AED /* CTAssetsPicker.xcassets in Resources */,
 				D38E009919D84EFC000F5263 /* HNReturnsTableViewCell.xib in Resources */,
 				3732B12D19CFC46E00ADF3F5 /* HNOfficePassesDetailsViewController.xib in Resources */,
+				37724D7819D8F69700A9B7EC /* HNCommentsDetailViewController.xib in Resources */,
 				D33EEA5F19D69F3200D6F106 /* HNBusinessBKControlViewController.xib in Resources */,
 				D33EEA6519D6C2B700D6F106 /* HNVolumeViewController.xib in Resources */,
 				B916F0AC19C8781D00A849C7 /* InfoPlist.strings in Resources */,
@@ -1041,6 +1050,7 @@
 				B9B2BC1819CF1F3000839AED /* ALAsset+isEqual.m in Sources */,
 				B9D3DECB19CD0B2C0020CDC9 /* HNReportPurchaseViewController.m in Sources */,
 				B94C773A19D3082D0046AC58 /* CALayer+XibConfiguration.m in Sources */,
+				37724D7719D8F69700A9B7EC /* HNCommentsDetailViewController.m in Sources */,
 				D3C07BC419CDC8A0003EA5E4 /* HNComplaintApplyViewController.m in Sources */,
 				B965E76019D04955004CD201 /* HNDeliverViewController.m in Sources */,
 				B9B2BC1D19CF1F3000839AED /* CTAssetsGroupViewController.m in Sources */,

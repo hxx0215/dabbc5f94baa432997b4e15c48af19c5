@@ -8,6 +8,7 @@
 
 #import "HNCommentsHeaderView.h"
 #import "UIView+AHKit.h"
+#import "HNCommentsTableViewCell.h"
 
 
 
@@ -24,14 +25,33 @@
         self.segment.segmentedControlStyle = UISegmentedControlStylePlain;//设置样式
         
         self.search = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 35, frame.size.width, 44)];
-        //self.search = [[UISearchBar alloc] init];  self.segment.size.height
-        //self.search.top=self.segment.bottom;
-        //self.segment.top=self.search.bottom;
+        [self.segment addTarget:self action:@selector(segmentClick:)forControlEvents:UIControlEventValueChanged];
         [self addSubview:self.segment];
         [self addSubview:self.search];
+        //调用HNCommentsTableViewCell.h的SetTableByType方法，默认设置table为评论的列表
+      //  HNCommentsTableViewCell *table=[[HNCommentsTableViewCell alloc] init];
+        //[table SetTableByType:0];
       
     }
     return self;
+}
+
+- (void)segmentClick:(id)sender {
+    
+    NSInteger Index = self.segment.selectedSegmentIndex;
+    switch (Index)
+    {
+        case 0:
+//            HNCommentsTableViewCell *table=[[HNCommentsTableViewCell alloc] init];
+//            [table SetTableByType:0];
+            break;
+        case 1:
+//            HNCommentsTableViewCell *table=[[HNCommentsTableViewCell alloc] init];
+//            [table SetTableByType:1];
+            break;
+        default:
+            break;
+    }
 }
 
 @end

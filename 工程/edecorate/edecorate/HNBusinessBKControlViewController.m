@@ -107,6 +107,7 @@
 }
 - (IBAction)commentsClicked:(id)sender {
     HNBusinessListViewController *comment=[[HNBusinessListViewController alloc] initWithType:kComment];
+    //HNCommentsAndMessageViewController* comments=[[HNCommentsAndMessageViewController alloc] init];
     [self.navigationController pushViewController:comment animated:YES];
 }
 - (IBAction)profileClicked:(id)sender{
