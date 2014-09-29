@@ -31,6 +31,7 @@
                 <outlet property="refundTypeTitleLabel" destination="cf0-iJ-axj" id="9qz-sI-hqS"/>
                 <outlet property="rejectButton" destination="qWI-Ur-rnf" id="RFN-hL-Air"/>
                 <outlet property="scrollView" destination="M5V-9g-NVU" id="kjM-NH-l3M"/>
+                <outlet property="tipsLabel" destination="Koh-eS-l8Y" id="don-Pj-fPc"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
