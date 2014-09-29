@@ -9,8 +9,9 @@
 #import "HNReimburseViewController.h"
 #include "UIView+AHKit.h"
 #include "HNAcceptReturnGoodViewController.h"
+#import "CustomIOS7AlertView.h"
 
-@interface HNReimburseViewController ()
+@interface HNReimburseViewController ()<CustomIOS7AlertViewDelegate>
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UIButton *acceptButton;
 @property (strong, nonatomic) IBOutlet UIButton *rejectButton;
@@ -40,6 +41,10 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *refundFlagLabel;
 @property (strong, nonatomic) IBOutlet UILabel *tipsLabel;
+
+@property (strong, nonatomic) UIView *alertContent;
+@property (strong, nonatomic) UITextView *cancelMemo;
+@property (strong, nonatomic) UILabel *cancelLabel;
 
 /*
 "Order details" = "订单详情";
@@ -147,7 +152,35 @@
 
 - (IBAction)rejectButtonClick:(id)sender
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    CustomIOS7AlertView *alertView = [[CustomIOS7AlertView alloc] init];
+    alertView.delegate = self;
+    alertView.parentView = self.navigationController.view;
+    alertView.containerView  = self.alertContent;
+    [alertView setButtonTitles:@[NSLocalizedString(@"OK", nil),NSLocalizedString(@"Cancel", nil)]];
+    [alertView show];
+    
+    //[self.navigationController popViewControllerAnimated:YES];
+    
+}
+- (void)customIOS7dialogButtonTouchUpInside:(id)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    [alertView close];
+    if (buttonIndex == 0) {
+        [self.navigationController popViewControllerAnimated:YES];
+    };
+}
+
+- (UIView *)alertContent{
+    if (!_alertContent){
+        _alertContent = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 280, 200)];
+        self.cancelLabel = [[UILabel alloc] init];
+        self.cancelLabel.text = NSLocalizedString(@"Refused to refund", nil);
+        [self.cancelLabel sizeToFit];
+        [_alertContent addSubview:self.cancelLabel];
+        self.cancelMemo = [[UITextView alloc] initWithFrame:CGRectMake(10, 30, 260, 160)];
+        [_alertContent addSubview:self.cancelMemo];
+    }
+    return _alertContent;
 }
 
 - (void)didReceiveMemoryWarning {
