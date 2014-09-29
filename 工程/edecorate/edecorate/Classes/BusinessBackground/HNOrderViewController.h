@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
+typedef enum HNOrderType{
+    kWaiting=0,
+    kUnsolved,
+    kSended,
+    kDone
+}HNOrderType;
 @interface HNOrderViewController : UIViewController
-
+- (instancetype)initWithType:(HNOrderType)type;
 @end
