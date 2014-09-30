@@ -17,6 +17,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    UIBarButtonItem *done = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Done", nil) style:UIBarButtonItemStyleDone target:self action:@selector(done:)];
+    self.navigationItem.rightBarButtonItem = done;
+    UIBarButtonItem *cancel = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel", nil) style:UIBarButtonItemStyleDone target:self action:@selector(cancel:)];
+    self.navigationItem.leftBarButtonItem = cancel;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -24,6 +28,15 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)done:(id)sender{
+    
+}
+- (void)cancel:(id)sender{
+    self.navigationController.view.userInteractionEnabled = NO;
+    [self dismissViewControllerAnimated:YES completion:^{
+        self.navigationController.view.userInteractionEnabled = YES;
+    }];
+}
 /*
 #pragma mark - Navigation
 

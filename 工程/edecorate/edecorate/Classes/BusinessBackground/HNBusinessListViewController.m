@@ -180,7 +180,7 @@ static NSString *reuseId = @"businessCell";
 
         case kOrder:
         {
-            HNOrderViewController *order = [[HNOrderViewController alloc] init];
+            HNOrderViewController *order = [[HNOrderViewController alloc] initWithType:kWaiting];
             [self.navigationController pushViewController:order animated:YES];
         }
             break;

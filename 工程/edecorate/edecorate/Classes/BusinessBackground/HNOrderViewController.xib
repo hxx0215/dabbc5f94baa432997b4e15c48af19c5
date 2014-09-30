@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
-        <deployment defaultVersion="1808" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HNOrderViewController">
             <connections>
+                <outlet property="actionView" destination="AGy-IT-aR7" id="cCm-7P-naT"/>
                 <outlet property="backView" destination="ZCP-cO-iXW" id="XHX-xz-ZxX"/>
+                <outlet property="cancelOrderButton" destination="y5T-3b-hkX" id="jF2-9h-A5V"/>
+                <outlet property="changePriceButton" destination="l3H-82-dVu" id="80o-fM-gph"/>
+                <outlet property="deliverButton" destination="wol-5O-N9w" id="VIU-iP-J9Y"/>
+                <outlet property="logisticsView" destination="QtI-T8-lzA" id="kCQ-iH-fuf"/>
+                <outlet property="orderMessageView" destination="ngT-6g-9xI" id="jDM-wX-epa"/>
+                <outlet property="receiveView" destination="DmF-1x-iLh" id="h8M-ix-1se"/>
+                <outlet property="remainTime" destination="1oY-vQ-gec" id="UXc-tJ-hr1"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -250,6 +257,9 @@
                                     <state key="normal" title="发货">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <connections>
+                                        <action selector="deliver:" destination="-1" eventType="touchUpInside" id="XP8-Gm-Dvy"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
