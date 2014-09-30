@@ -136,6 +136,15 @@ static NSString *reuseId = @"businessCell";
 
 #pragma mark UITableViewDelegate & UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    switch (self.businessType){
+        case kReturnGoods:
+            return 2;
+            break;
+        default:
+            return 1;
+            break;
+            
+    }
     return 1;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -186,7 +195,12 @@ static NSString *reuseId = @"businessCell";
             break;
         case kReturnGoods:
         {
+            HNBusinessBKReturnsModel *model = [[HNBusinessBKReturnsModel alloc]init];
+            if (indexPath.row!=0) {
+                model.returnsType = kReplaceGood;
+            }
             HNReimburseViewController *reumburse = [[HNReimburseViewController alloc] init];
+            reumburse.model = model;
             [self.navigationController pushViewController:reumburse animated:YES];
 
         }

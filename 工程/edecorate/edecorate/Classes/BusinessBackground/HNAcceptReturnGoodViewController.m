@@ -98,6 +98,11 @@
 
 - (IBAction)OKButtonClick:(id)sender
 {
+    self.model.returnsType = kReturnMoney;
+    self.navigationController.view.userInteractionEnabled = NO;
+    [self dismissViewControllerAnimated:YES completion:^{
+        self.navigationController.view.userInteractionEnabled = YES;
+    }];
 }
 
 - (IBAction)CancelButtonClick:(id)sender

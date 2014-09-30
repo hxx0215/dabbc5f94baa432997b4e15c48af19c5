@@ -116,7 +116,13 @@
 }
 - (IBAction)volumeClicked:(id)sender {
     HNVolumeViewController* vc = [[HNVolumeViewController alloc]init];
-    [self.navigationController pushViewController:vc animated:YES];
+    //[self.navigationController pushViewController:vc animated:YES];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+    nav.navigationBar.translucent = NO;
+    [self.navigationController.view setUserInteractionEnabled:NO];
+    [self presentViewController:nav animated:YES completion:^{
+        [self.navigationController.view setUserInteractionEnabled:YES];
+    }];
 }
 
 

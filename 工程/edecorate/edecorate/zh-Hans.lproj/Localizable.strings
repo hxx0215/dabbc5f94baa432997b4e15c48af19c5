@@ -126,8 +126,8 @@
 "Refund Description" = "退款说明";
 "Product Information" = "商品信息";
 "Refund Record" = "退款记录";
-"Agree to a refund" = "同意退款";
-"Refused to refund" = "拒绝退款";
+"Agree to a refund" = "同意退货";
+"Refused to refund" = "拒绝退货";
 "Product Name" = "商品名称";
 "Refund" = "退款";
 "Returns" = "退货";
@@ -138,3 +138,6 @@
 "Consignee" = "收货人";
 "Remarks" = "备注";
 "Agreed to return" = "同意退货";
+"Receive a return, agree to a refund" = "收到退货，同意退款";
+"Refused to refund Money" = "拒绝退款";
+"Receive a return, re-send" = "收到退货，重新发送";

@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HNBusinessBackgroundModel.h"
 
 @interface HNReimburseViewController : UIViewController
-
+@property (strong, nonatomic) HNBusinessBKReturnsModel* model;
 @end

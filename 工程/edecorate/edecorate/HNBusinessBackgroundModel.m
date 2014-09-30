@@ -8,6 +8,15 @@
 
 #import "HNBusinessBackgroundModel.h"
 
+@implementation HNBusinessBKReturnsModel
+-(id)init
+{
+    self = [super init];
+    self.returnsType = kReturnGood;
+    return self;
+}
+@end
+
 @implementation HNBusinessBackgroundModel
 -(id)init
 {

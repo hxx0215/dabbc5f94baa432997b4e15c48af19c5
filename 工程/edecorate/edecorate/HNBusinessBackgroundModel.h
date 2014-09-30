@@ -12,6 +12,17 @@
 @interface HNBusinessBackgroundModel : NSObject
 @end
 
+typedef enum HNReturnsType{
+    kReturnGood=0,
+    kReturnMoney,
+    kReplaceGood,
+    kRedeliver
+}HNReturnsType;
+
+@interface HNBusinessBKReturnsModel : NSObject
+@property(nonatomic) HNReturnsType returnsType;
+@end
+
 @interface HNBusinessBKProfileModel : NSObject
 @property (strong, nonatomic) NSString* name;
 @property (strong, nonatomic) NSString* category;

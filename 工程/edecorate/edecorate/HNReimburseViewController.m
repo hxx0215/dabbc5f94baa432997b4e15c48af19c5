@@ -41,10 +41,13 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *refundFlagLabel;
 @property (strong, nonatomic) IBOutlet UILabel *tipsLabel;
+@property (strong, nonatomic) IBOutlet UILabel *tips2Label;
 
 @property (strong, nonatomic) UIView *alertContent;
 @property (strong, nonatomic) UITextView *cancelMemo;
 @property (strong, nonatomic) UILabel *cancelLabel;
+
+@property (strong, nonatomic) UITextField *moneyTextField;
 
 /*
 "Order details" = "订单详情";
@@ -88,36 +91,79 @@
     //[self labelWithTitle:NSLocalizedString(@"Product Information", nil) label:self.productInformationTitleLabel];
     [self labelWithTitle:NSLocalizedString(@"Refund Record", nil) label:self.refundRecordTitleLabel];
     self.tipsLabel.font = [UIFont systemFontOfSize:12];
+    self.tips2Label.font = [UIFont systemFontOfSize:12];
+    self.tips2Label.text = @"";
     
     self.acceptButton.layer.borderWidth = 1.0;
     self.acceptButton.layer.borderColor = [UIColor blackColor].CGColor;
-    [self.acceptButton setTitle:NSLocalizedString(@"Agree to a refund", nil) forState:UIControlStateNormal];
     self.rejectButton.layer.borderWidth = 1.0;
     self.rejectButton.layer.borderColor = [UIColor blackColor].CGColor;
-    [self.rejectButton setTitle:NSLocalizedString(@"Refused to refund", nil) forState:UIControlStateNormal];
-    
     self.navigationItem.title = NSLocalizedString(@"Order details", nil);
+    
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self updateData];
-    
     self.scrollView.frame = self.view.bounds;
     self.scrollView.contentSize = CGSizeMake(self.view.width, self.acceptButton.bottom+20);
 }
 
 -(void)updateData
 {
-    [self labelWithTitle:@"123" leftLabel:self.orderNumberTitleLabel label:self.orderNumberLabel];
-    [self labelWithTitle:@"123" leftLabel:self.refundNumberTitleLabel label:self.refundNumberLabel];
-    [self labelWithTitle:@"123" leftLabel:self.refundTimeTitlesLabel label:self.refundTimeLabel];
-    [self labelWithTitle:@"123" leftLabel:self.refundTypeTitleLabel label:self.refundTypeLabel];
-    [self labelWithTitle:@"123" leftLabel:self.refundStatusTitleLabel label:self.refundStatusLabel];
-    [self labelWithTitle:@"123" leftLabel:self.buyersTitleLabel label:self.buyersLabel];
-    [self labelWithTitle:@"123" leftLabel:self.refundAmountTitleLabel label:self.refundAmountLabel];
-    [self labelWithTitle:@"123" leftLabel:self.refundReasonTitleLabel label:self.refundReasonLabel];
-    [self labelWithTitle:@"123" leftLabel:self.refundDescriptionTitleLabel label:self.refundDescriptionLabel];
+    switch (self.model.returnsType) {
+        case kReturnGood:
+        {
+            [self labelWithTitle:@"买家收到货物，退货且退款" leftLabel:self.refundTypeTitleLabel label:self.refundTypeLabel];
+            [self labelWithTitle:@"买家申请退款，等待卖家同意" leftLabel:self.refundStatusTitleLabel label:self.refundStatusLabel];
+            
+            [self.acceptButton setTitle:NSLocalizedString(@"Agree to a refund", nil) forState:UIControlStateNormal];
+            [self.rejectButton setTitle:NSLocalizedString(@"Refused to refund", nil) forState:UIControlStateNormal];
+        }
+            break;
+        case kReturnMoney:
+        {
+            [self labelWithTitle:@"买家收到货物，退货且退款" leftLabel:self.refundTypeTitleLabel label:self.refundTypeLabel];
+            [self labelWithTitle:@"买家申请退款，卖家已收到退货，等待卖家同意" leftLabel:self.refundStatusTitleLabel label:self.refundStatusLabel];
+            self.tips2Label.text = @"卖家(XXX)于2014/10/01 11:20:34同意了退款申请";
+            [self.tips2Label sizeToFit];
+            [self.acceptButton setTitle:NSLocalizedString(@"Receive a return, agree to a refund", nil) forState:UIControlStateNormal];
+            [self.rejectButton setTitle:NSLocalizedString(@"Refused to refund Money", nil) forState:UIControlStateNormal];
+        }
+            
+            break;
+        case kReplaceGood:
+        {
+            [self labelWithTitle:@"买家收到货物，换货" leftLabel:self.refundTypeTitleLabel label:self.refundTypeLabel];
+            [self labelWithTitle:@"买家申请换货，等待卖家同意" leftLabel:self.refundStatusTitleLabel label:self.refundStatusLabel];
+            
+            [self.acceptButton setTitle:NSLocalizedString(@"Agree to a refund", nil) forState:UIControlStateNormal];
+            [self.rejectButton setTitle:NSLocalizedString(@"Refused to refund", nil) forState:UIControlStateNormal];
+        }
+            break;
+        case kRedeliver:
+        {
+            [self labelWithTitle:@"买家收到货物，换货" leftLabel:self.refundTypeTitleLabel label:self.refundTypeLabel];
+            [self labelWithTitle:@"买家申请换货，卖家已收到退货，等待卖家重新发货" leftLabel:self.refundStatusTitleLabel label:self.refundStatusLabel];
+            self.tips2Label.text = @"卖家(XXX)于2014/10/01 11:20:34同意了换货申请";
+            [self.tips2Label sizeToFit];
+            [self.acceptButton setTitle:NSLocalizedString(@"Receive a return, re-send", nil) forState:UIControlStateNormal];
+            [self.rejectButton setTitle:NSLocalizedString(@"Refused to refund", nil) forState:UIControlStateNormal];
+        }
+            break;
+        default:
+            break;
+    }
+
+    [self labelWithTitle:@"12345000000" leftLabel:self.orderNumberTitleLabel label:self.orderNumberLabel];
+    [self labelWithTitle:@"12345000012" leftLabel:self.refundNumberTitleLabel label:self.refundNumberLabel];
+    [self labelWithTitle:@"2014/10／01 14:20" leftLabel:self.refundTimeTitlesLabel label:self.refundTimeLabel];
+    
+    [self labelWithTitle:@"熊主管" leftLabel:self.buyersTitleLabel label:self.buyersLabel];
+    [self labelWithTitle:@"20" leftLabel:self.refundAmountTitleLabel label:self.refundAmountLabel];
+    [self labelWithTitle:@"没钱" leftLabel:self.refundReasonTitleLabel label:self.refundReasonLabel];
+    [self labelWithTitle:@"快点" leftLabel:self.refundDescriptionTitleLabel label:self.refundDescriptionLabel];
 }
 
 
@@ -146,14 +192,53 @@
 
 - (IBAction)acceptButtonClick:(id)sender
 {
-    HNAcceptReturnGoodViewController *ac = [[HNAcceptReturnGoodViewController alloc]init];
-    //[self.navigationController pushViewController:ac animated:YES];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:ac];
-    nav.navigationBar.translucent = NO;
-    [self.navigationController.view setUserInteractionEnabled:NO];
-    [self presentViewController:nav animated:YES completion:^{
-        [self.navigationController.view setUserInteractionEnabled:YES];
-    }];
+    switch (self.model.returnsType) {
+        case kReturnGood:
+        {
+            HNAcceptReturnGoodViewController *ac = [[HNAcceptReturnGoodViewController alloc]init];
+            ac.model = self.model;
+            //[self.navigationController pushViewController:ac animated:YES];
+            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:ac];
+            nav.navigationBar.translucent = NO;
+            [self.navigationController.view setUserInteractionEnabled:NO];
+            [self presentViewController:nav animated:YES completion:^{
+                [self.navigationController.view setUserInteractionEnabled:YES];
+            }];
+        }
+            break;
+        case kReturnMoney:
+        {
+            UIView* view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 280, 80)];
+            self.cancelLabel = [[UILabel alloc] init];
+            self.cancelLabel.text = NSLocalizedString(@"退款金额", nil);
+            [self.cancelLabel sizeToFit];
+            [view addSubview:self.cancelLabel];
+            self.moneyTextField = [[UITextField alloc] initWithFrame:CGRectMake(10, 30, 260, 60)];
+            self.moneyTextField.backgroundColor = [UIColor whiteColor];
+            [view addSubview:self.moneyTextField];
+            
+            CustomIOS7AlertView *alertView = [[CustomIOS7AlertView alloc] init];
+            alertView.delegate = self;
+            alertView.parentView = self.navigationController.view;
+            alertView.containerView  = view;
+            [alertView setButtonTitles:@[NSLocalizedString(@"OK", nil),NSLocalizedString(@"Cancel", nil)]];
+            [alertView show];
+        }
+            break;
+        case kReplaceGood:
+        {
+            self.model.returnsType = kRedeliver;
+            [self updateData];
+        }
+            break;
+        case kRedeliver:
+        {
+        }
+            break;
+            
+        default:
+            break;
+    }
 }
 
 - (IBAction)rejectButtonClick:(id)sender
@@ -180,7 +265,32 @@
     if (!_alertContent){
         _alertContent = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 280, 200)];
         self.cancelLabel = [[UILabel alloc] init];
-        self.cancelLabel.text = NSLocalizedString(@"Refused to refund", nil);
+        switch (self.model.returnsType) {
+            case kReturnGood:
+            {
+                self.cancelLabel.text = NSLocalizedString(@"拒绝退货说明", nil);
+            }
+                break;
+            case kReturnMoney:
+            {
+                self.cancelLabel.text = NSLocalizedString(@"拒绝退款说明", nil);
+            }
+                break;
+            case kReplaceGood:
+            {
+                self.cancelLabel.text = NSLocalizedString(@"拒绝换货说明", nil);
+            }
+                break;
+            case kRedeliver:
+            {
+                self.cancelLabel.text = NSLocalizedString(@"拒绝重发说明", nil);
+            }
+                break;
+                
+            default:
+                break;
+        }
+
         [self.cancelLabel sizeToFit];
         [_alertContent addSubview:self.cancelLabel];
         self.cancelMemo = [[UITextView alloc] initWithFrame:CGRectMake(10, 30, 260, 160)];
