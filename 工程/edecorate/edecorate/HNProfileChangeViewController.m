@@ -79,6 +79,11 @@
     self.textOKView.hidden = YES;
     [self.view addSubview:self.textOKView];
     [button addTarget:self action:@selector(OKTextClick) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *done = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"OK", nil) style:UIBarButtonItemStyleDone target:self action:@selector(OKButtonClick:)];
+    self.navigationItem.rightBarButtonItem = done;
+    UIBarButtonItem *cancel = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel", nil) style:UIBarButtonItemStyleDone target:self action:@selector(CancelButtonClick:)];
+    self.navigationItem.leftBarButtonItem = cancel;
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -126,12 +131,20 @@
     self.model.shopkeeper = self.shopkeeperTextField.text;
     self.model.phone = self.phoneTextField.text;
     self.model.onlineService = self.onlineServiceTextField.text;
-    [self.navigationController popViewControllerAnimated:YES];
+    //[self.navigationController popViewControllerAnimated:YES];
+    self.navigationController.view.userInteractionEnabled = NO;
+    [self dismissViewControllerAnimated:YES completion:^{
+        self.navigationController.view.userInteractionEnabled = YES;
+    }];
 }
 
 - (IBAction)CancelButtonClick:(id)sender
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    //[self.navigationController popViewControllerAnimated:YES];
+    self.navigationController.view.userInteractionEnabled = NO;
+    [self dismissViewControllerAnimated:YES completion:^{
+        self.navigationController.view.userInteractionEnabled = YES;
+    }];
 }
 
 

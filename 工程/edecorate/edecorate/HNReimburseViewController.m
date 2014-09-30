@@ -147,7 +147,13 @@
 - (IBAction)acceptButtonClick:(id)sender
 {
     HNAcceptReturnGoodViewController *ac = [[HNAcceptReturnGoodViewController alloc]init];
-    [self.navigationController pushViewController:ac animated:YES];
+    //[self.navigationController pushViewController:ac animated:YES];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:ac];
+    nav.navigationBar.translucent = NO;
+    [self.navigationController.view setUserInteractionEnabled:NO];
+    [self presentViewController:nav animated:YES completion:^{
+        [self.navigationController.view setUserInteractionEnabled:YES];
+    }];
 }
 
 - (IBAction)rejectButtonClick:(id)sender

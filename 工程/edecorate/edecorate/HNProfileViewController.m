@@ -67,7 +67,13 @@
 - (IBAction)changButtonClick:(id)sender {
     HNProfileChangeViewController *controller = [[HNProfileChangeViewController alloc] init];
     controller.model = self.model;
-    [self.navigationController pushViewController:controller animated:YES];
+    //[self.navigationController pushViewController:controller animated:YES];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:controller];
+    nav.navigationBar.translucent = NO;
+    [self.navigationController.view setUserInteractionEnabled:NO];
+    [self presentViewController:nav animated:YES completion:^{
+        [self.navigationController.view setUserInteractionEnabled:YES];
+    }];
 }
 
 - (void)labelWithTitle:(NSString *)title label:(UILabel*)lab
@@ -83,8 +89,9 @@
 - (void)labelWithTitle:(NSString *)title leftLabel:(UILabel*)leftlab label:(UILabel*)lab
 {
     [lab setText:title];
+    lab.width = self.view.width-leftlab.right;
     [lab sizeToFit];
-    lab.font = [UIFont systemFontOfSize:11];
+    lab.font = [UIFont systemFontOfSize:12];
     lab.numberOfLines = 2;
     lab.left = leftlab.left+leftlab.width;
     lab.top = leftlab.top;
