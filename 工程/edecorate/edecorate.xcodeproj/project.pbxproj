@@ -70,6 +70,7 @@
 		B9882DF519CB079A0093F0F4 /* HNReportTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B9882DF419CB079A0093F0F4 /* HNReportTableViewCell.m */; };
 		B9882DF819CB11920093F0F4 /* HNNewReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9882DF719CB11920093F0F4 /* HNNewReportViewController.m */; };
 		B9882DFB19CB152F0093F0F4 /* HNNewCompanyReportView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9882DFA19CB152F0093F0F4 /* HNNewCompanyReportView.m */; };
+		B9AD9E0819DEC90D00D82439 /* NSString+Crypt.m in Sources */ = {isa = PBXBuildFile; fileRef = B9AD9E0719DEC90D00D82439 /* NSString+Crypt.m */; };
 		B9B2BBF119CF1F1000839AED /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B2BBF019CF1F1000839AED /* AssetsLibrary.framework */; };
 		B9B2BBF319CF1F1D00839AED /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B2BBF219CF1F1D00839AED /* MediaPlayer.framework */; };
 		B9B2BC1619CF1F3000839AED /* ALAsset+accessibilityLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = B9B2BBF619CF1F3000839AED /* ALAsset+accessibilityLabel.m */; };
@@ -280,6 +281,8 @@
 		B9882DF719CB11920093F0F4 /* HNNewReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNNewReportViewController.m; path = Classes/DecorateControl/HNNewReportViewController.m; sourceTree = "<group>"; };
 		B9882DF919CB152F0093F0F4 /* HNNewCompanyReportView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNNewCompanyReportView.h; path = Classes/DecorateControl/HNNewCompanyReportView.h; sourceTree = "<group>"; };
 		B9882DFA19CB152F0093F0F4 /* HNNewCompanyReportView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNNewCompanyReportView.m; path = Classes/DecorateControl/HNNewCompanyReportView.m; sourceTree = "<group>"; };
+		B9AD9E0619DEC90D00D82439 /* NSString+Crypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Crypt.h"; sourceTree = "<group>"; };
+		B9AD9E0719DEC90D00D82439 /* NSString+Crypt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Crypt.m"; sourceTree = "<group>"; };
 		B9B2BBF019CF1F1000839AED /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		B9B2BBF219CF1F1D00839AED /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		B9B2BBF519CF1F3000839AED /* ALAsset+accessibilityLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALAsset+accessibilityLabel.h"; sourceTree = "<group>"; };
@@ -830,6 +833,8 @@
 				D33EEAC019D7000E00D6F106 /* HNAreaPickerView.xib */,
 				D33EEABA19D6FF5D00D6F106 /* area.plist */,
 				D33EEABB19D6FF5D00D6F106 /* city.plist */,
+				B9AD9E0619DEC90D00D82439 /* NSString+Crypt.h */,
+				B9AD9E0719DEC90D00D82439 /* NSString+Crypt.m */,
 			);
 			name = Share;
 			sourceTree = "<group>";
@@ -1258,6 +1263,7 @@
 				B9E0667A19DCDCB100893DBD /* AFNetworkActivityIndicatorManager.m in Sources */,
 				B9E0667119DCDCB100893DBD /* AFHTTPRequestOperation.m in Sources */,
 				B9D72D5919D846FC0011CF83 /* HNOrderViewController.m in Sources */,
+				B9AD9E0819DEC90D00D82439 /* NSString+Crypt.m in Sources */,
 				D391EE8C19CD787D00DE3363 /* HNComplaintTableViewController.m in Sources */,
 				B9B2BC1B19CF1F3000839AED /* CTAssetScrollView.m in Sources */,
 				B9882DF219CB06D90093F0F4 /* HNDecorateReportViewController.m in Sources */,

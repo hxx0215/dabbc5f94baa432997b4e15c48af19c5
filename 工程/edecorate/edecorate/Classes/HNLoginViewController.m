@@ -9,7 +9,7 @@
 #import "HNLoginViewController.h"
 #import "UIView+AHKit.h"
 #import "HNHomeViewController.h"
-
+#import "NSString+Crypt.h"
 
 @interface HNLoginViewController()
 @property (nonatomic, strong)UILabel *userLabel;
@@ -91,7 +91,10 @@
     NSString *retStr = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
     
     NSLog(@"end%@",retStr);
-
+    NSString *str =[NSString encodeToPercentEscapeString:@"{\"username\":\"admin\",\"password\":\"123456\"}"];
+    NSLog(@"%@",[str encryptWithDES]);
+    NSLog(@"sign:%@",[NSString createSignWithMethod:@"get.user.login" Params:[str encryptWithDES]]);
+    NSLog(@"%@",[[str encryptWithDES] decryptWithDES]);
     [self loginSuccess];
 }
 
