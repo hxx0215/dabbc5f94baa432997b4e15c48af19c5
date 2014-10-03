@@ -10,6 +10,7 @@
 #import "UIView+AHKit.h"
 #import "HNHomeViewController.h"
 
+
 @interface HNLoginViewController()
 @property (nonatomic, strong)UILabel *userLabel;
 @property (nonatomic, strong)UILabel *passwordLabel;
@@ -82,6 +83,15 @@
 }
 
 - (void)login:(id)sender{
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    request.URL = [NSURL URLWithString:@"http://113.105.159.115:5030/?Method=get.user.login&Params=CB914058227D8DE180A6D6145A791286164DFFDDB57719A1E68895C3772AC876B0B17A8CFFF97DE7DE1B8AED2ADD23B2E1CB9BA1646FBDA3680BADAA3985BE7F6506613E479DB992&Sign=352121BF8C4788B877FF6A5FF34380C4"];
+    NSString *contentType = @"text/html";
+    [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
+    NSData *returnData=[NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+    NSString *retStr = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
+    
+    NSLog(@"end%@",retStr);
+
     [self loginSuccess];
 }
 
