@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "HNBusinessBackgroundModel.h"
 @interface HNAcceptReturnGoodViewController : UIViewController
-
+@property (strong, nonatomic) HNBusinessBKReturnsModel* model;
 @end

@@ -39,16 +39,23 @@
     self.OKButton.layer.borderWidth = 1.0;
     self.OKButton.layer.borderColor = [UIColor blackColor].CGColor;
     self.OKButton.width = 45;
+    self.OKButton.hidden = YES;
     [self.OKButton setTitle:NSLocalizedString(@"OK", nil) forState:UIControlStateNormal];
     self.cancelButton.layer.borderWidth = 1.0;
     self.cancelButton.layer.borderColor = [UIColor blackColor].CGColor;
     self.cancelButton.width = 45;
     [self.cancelButton setTitle:NSLocalizedString(@"Cancel", nil) forState:UIControlStateNormal];
+    self.cancelButton.hidden = YES;
     
     
     [self.viewSegmentedControl addTarget:self action:@selector(segmentClick:)forControlEvents:UIControlEventValueChanged];
     
     self.volumeStatusLabel.text = nil;
+    
+    UIBarButtonItem *done = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"OK", nil) style:UIBarButtonItemStyleDone target:self action:@selector(OKButtonClick:)];
+    self.navigationItem.rightBarButtonItem = done;
+    UIBarButtonItem *cancel = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel", nil) style:UIBarButtonItemStyleDone target:self action:@selector(CancelButtonClick:)];
+    self.navigationItem.leftBarButtonItem = cancel;
 }
 
 - (void)labelWithTitle:(NSString *)title label:(UILabel*)lab
@@ -80,7 +87,11 @@
 
 - (IBAction)CancelButtonClick:(id)sender
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    //[self.navigationController popViewControllerAnimated:YES];
+    self.navigationController.view.userInteractionEnabled = NO;
+    [self dismissViewControllerAnimated:YES completion:^{
+        self.navigationController.view.userInteractionEnabled = YES;
+    }];
 }
 
 - (IBAction)segmentClick:(id)sender {

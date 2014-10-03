@@ -7,12 +7,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HNProfileChangeViewController">
             <connections>
-                <outlet property="OKButton" destination="l2D-nY-W2t" id="Jeb-DP-MZr"/>
                 <outlet property="addressTextField" destination="3Od-nB-iU6" id="MXY-6V-wwu"/>
                 <outlet property="addressTitleLabel" destination="8Rd-4C-mmM" id="IP4-C0-X5P"/>
                 <outlet property="areaAddressTextField" destination="bMk-sF-8bk" id="cAQ-0C-zeh"/>
                 <outlet property="areaTitleLabel" destination="Jys-ih-RAx" id="2xJ-Th-7JR"/>
-                <outlet property="cancelButton" destination="oZh-Pm-Ej5" id="h1F-FD-VLY"/>
                 <outlet property="categoryTextField" destination="8Fk-ts-rmk" id="Ev8-KC-vCP"/>
                 <outlet property="categoryTitleLabel" destination="nlf-Ro-PHX" id="NA6-AM-7yr"/>
                 <outlet property="nameTextField" destination="OJ8-my-9sw" id="6m5-bv-HkS"/>
@@ -161,26 +159,6 @@
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="l2D-nY-W2t">
-                    <rect key="frame" x="88" y="324" width="30" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="z">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="OKButtonClick:" destination="-1" eventType="touchUpInside" id="8XF-gR-spC"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="oZh-Pm-Ej5">
-                    <rect key="frame" x="189" y="324" width="46" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Button">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="CancelButtonClick:" destination="-1" eventType="touchUpInside" id="Hfe-8J-xWe"/>
-                    </connections>
-                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <point key="canvasLocation" x="140" y="155"/>

@@ -40,19 +40,24 @@
     [self labelWithTitle:NSLocalizedString(@"Phone", nil) label:self.phoneTitleLabel];
     [self labelWithTitle:NSLocalizedString(@"Remarks", nil) label:self.remarksTitleLabel];
     
-    self.OKButton.layer.borderWidth = 1.0;
-    self.OKButton.layer.borderColor = [UIColor blackColor].CGColor;
-    self.OKButton.width = 45;
-    [self.OKButton setTitle:NSLocalizedString(@"OK", nil) forState:UIControlStateNormal];
-    self.cancelButton.layer.borderWidth = 1.0;
-    self.cancelButton.layer.borderColor = [UIColor blackColor].CGColor;
-    self.cancelButton.width = 45;
-    [self.cancelButton setTitle:NSLocalizedString(@"Cancel", nil) forState:UIControlStateNormal];
+//    self.OKButton.layer.borderWidth = 1.0;
+//    self.OKButton.layer.borderColor = [UIColor blackColor].CGColor;
+//    self.OKButton.width = 45;
+//    [self.OKButton setTitle:NSLocalizedString(@"OK", nil) forState:UIControlStateNormal];
+//    self.cancelButton.layer.borderWidth = 1.0;
+//    self.cancelButton.layer.borderColor = [UIColor blackColor].CGColor;
+//    self.cancelButton.width = 45;
+//    [self.cancelButton setTitle:NSLocalizedString(@"Cancel", nil) forState:UIControlStateNormal];
     
     self.remarksTextView.layer.borderWidth = 1.0;
     self.remarksTextView.layer.borderColor = [UIColor blackColor].CGColor;
     
     self.navigationItem.title = NSLocalizedString(@"Agreed to return", nil);
+    
+    UIBarButtonItem *done = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"OK", nil) style:UIBarButtonItemStyleDone target:self action:@selector(OKButtonClick:)];
+    self.navigationItem.rightBarButtonItem = done;
+    UIBarButtonItem *cancel = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel", nil) style:UIBarButtonItemStyleDone target:self action:@selector(CancelButtonClick:)];
+    self.navigationItem.leftBarButtonItem = cancel;
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -93,11 +98,20 @@
 
 - (IBAction)OKButtonClick:(id)sender
 {
+    self.model.returnsType = kReturnMoney;
+    self.navigationController.view.userInteractionEnabled = NO;
+    [self dismissViewControllerAnimated:YES completion:^{
+        self.navigationController.view.userInteractionEnabled = YES;
+    }];
 }
 
 - (IBAction)CancelButtonClick:(id)sender
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    //[self.navigationController popViewControllerAnimated:YES];
+    self.navigationController.view.userInteractionEnabled = NO;
+    [self dismissViewControllerAnimated:YES completion:^{
+        self.navigationController.view.userInteractionEnabled = YES;
+    }];
 }
 
 
