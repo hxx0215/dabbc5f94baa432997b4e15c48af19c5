@@ -163,4 +163,14 @@
     NSString *ret = [[NSString alloc] initWithData:myData encoding:NSASCIIStringEncoding];
     return ret;
 }
++ (NSString *)decodeFromPercentEscapeString: (NSString *) input
+{
+    NSMutableString *outputStr = [NSMutableString stringWithString:input];
+    [outputStr replaceOccurrencesOfString:@"+"
+                               withString:@" "
+                                  options:NSLiteralSearch
+                                    range:NSMakeRange(0, [outputStr length])];
+    
+    return [outputStr stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+}
 @end

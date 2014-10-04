@@ -10,6 +10,7 @@
 
 @interface NSString (Crypt)
 + (NSString *)encodeToPercentEscapeString:(NSString *)input;
++ (NSString *)decodeFromPercentEscapeString: (NSString *) input;
 - (NSString *)encryptWithDES;
 - (NSString *)decryptWithDES;
 + (NSString *)createSignWithMethod:(NSString *)method Params:(NSString *)params;

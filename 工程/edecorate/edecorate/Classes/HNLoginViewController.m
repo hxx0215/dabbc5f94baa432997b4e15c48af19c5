@@ -94,7 +94,8 @@
     NSString *str =[NSString encodeToPercentEscapeString:@"{\"username\":\"admin\",\"password\":\"123456\"}"];
     NSLog(@"%@",[str encryptWithDES]);
     NSLog(@"sign:%@",[NSString createSignWithMethod:@"get.user.login" Params:[str encryptWithDES]]);
-    NSLog(@"%@",[[str encryptWithDES] decryptWithDES]);
+    
+    NSLog(@"%@",[@"{\"username\":\"admin\",\"password\":\"123456\"}" isEqualToString:[NSString decodeFromPercentEscapeString:[[str encryptWithDES] decryptWithDES]]]? @"Yes":@"NO");
     [self loginSuccess];
 }
 
