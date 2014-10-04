@@ -71,6 +71,7 @@
 		B9882DF819CB11920093F0F4 /* HNNewReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9882DF719CB11920093F0F4 /* HNNewReportViewController.m */; };
 		B9882DFB19CB152F0093F0F4 /* HNNewCompanyReportView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9882DFA19CB152F0093F0F4 /* HNNewCompanyReportView.m */; };
 		B9AD9E0819DEC90D00D82439 /* NSString+Crypt.m in Sources */ = {isa = PBXBuildFile; fileRef = B9AD9E0719DEC90D00D82439 /* NSString+Crypt.m */; };
+		B9AD9E0B19E01A7900D82439 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = B9AD9E0A19E01A7900D82439 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		B9B2BBF119CF1F1000839AED /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B2BBF019CF1F1000839AED /* AssetsLibrary.framework */; };
 		B9B2BBF319CF1F1D00839AED /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B2BBF219CF1F1D00839AED /* MediaPlayer.framework */; };
 		B9B2BC1619CF1F3000839AED /* ALAsset+accessibilityLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = B9B2BBF619CF1F3000839AED /* ALAsset+accessibilityLabel.m */; };
@@ -283,6 +284,8 @@
 		B9882DFA19CB152F0093F0F4 /* HNNewCompanyReportView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNNewCompanyReportView.m; path = Classes/DecorateControl/HNNewCompanyReportView.m; sourceTree = "<group>"; };
 		B9AD9E0619DEC90D00D82439 /* NSString+Crypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Crypt.h"; sourceTree = "<group>"; };
 		B9AD9E0719DEC90D00D82439 /* NSString+Crypt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Crypt.m"; sourceTree = "<group>"; };
+		B9AD9E0919E01A7900D82439 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
+		B9AD9E0A19E01A7900D82439 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
 		B9B2BBF019CF1F1000839AED /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		B9B2BBF219CF1F1D00839AED /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		B9B2BBF519CF1F3000839AED /* ALAsset+accessibilityLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALAsset+accessibilityLabel.h"; sourceTree = "<group>"; };
@@ -948,6 +951,8 @@
 		B9F295E319C9A961003242DF /* Third Party */ = {
 			isa = PBXGroup;
 			children = (
+				B9AD9E0919E01A7900D82439 /* JSONKit.h */,
+				B9AD9E0A19E01A7900D82439 /* JSONKit.m */,
 				B9E0664A19DCDC9600893DBD /* AFNetworking */,
 				B95D15C019D9A28600689B4D /* Alert */,
 				B91A3AB019D6E6E9000F3823 /* MJRefresh */,
@@ -1217,6 +1222,7 @@
 				B91A3AC619D6E6E9000F3823 /* UIScrollView+MJExtension.m in Sources */,
 				B9B2BC2019CF1F3000839AED /* CTAssetsPickerConstants.m in Sources */,
 				B91A3AC819D6E6E9000F3823 /* UIView+MJExtension.m in Sources */,
+				B9AD9E0B19E01A7900D82439 /* JSONKit.m in Sources */,
 				B9B2BC2219CF1F3000839AED /* CTAssetsSupplementaryView.m in Sources */,
 				37F9D80419D8B5E1005CB18B /* HNCommentsTableViewCell.m in Sources */,
 				B9E0667C19DCDCB100893DBD /* UIAlertView+AFNetworking.m in Sources */,

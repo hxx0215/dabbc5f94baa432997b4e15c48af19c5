@@ -14,4 +14,5 @@
 - (NSString *)encryptWithDES;
 - (NSString *)decryptWithDES;
 + (NSString *)createSignWithMethod:(NSString *)method Params:(NSString *)params;
++ (NSString *)createResponseURLWithMethod:(NSString *)method Params:(NSString *)params;
 @end

@@ -10,8 +10,20 @@
 #import <CommonCrypto/CommonCryptor.h>
 #import <CommonCrypto/CommonDigest.h>
 #define KeyStr @"SDFL#)@F"
+#define baseURL @"http://113.105.159.115:5030/"
 
 @implementation NSString (Crypt)
++(NSString *)createResponseURLWithMethod:(NSString *)method Params:(NSString *)params{
+    NSString *retStr;
+    NSString *paramsStr = [[NSString encodeToPercentEscapeString:params] encryptWithDES];
+    NSString *sign = [NSString createSignWithMethod:method Params:paramsStr];
+    if (params && [params length]>0){
+        retStr = [NSString stringWithFormat:@"%@?Method=%@&Params=%@&Sign=%@",baseURL,method,paramsStr,sign];
+    }
+    else
+        retStr = [NSString stringWithFormat:@"%@?Method=%@&Sign=%@",baseURL,method,sign];
+    return retStr;
+}
 + (NSString *)encodeToPercentEscapeString:(NSString *)input{
     NSString *outputStr = (NSString *)
     CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,

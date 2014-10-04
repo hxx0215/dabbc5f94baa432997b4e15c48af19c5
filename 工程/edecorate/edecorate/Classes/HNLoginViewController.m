@@ -10,6 +10,14 @@
 #import "UIView+AHKit.h"
 #import "HNHomeViewController.h"
 #import "NSString+Crypt.h"
+#import "JSONKit.h"
+
+@interface HNLoginModel: NSObject
+@property (nonatomic, strong)NSString *username;
+@property (nonatomic, strong)NSString *password;
+@end
+@implementation HNLoginModel
+@end
 
 @interface HNLoginViewController()
 @property (nonatomic, strong)UILabel *userLabel;
@@ -55,7 +63,8 @@
     [self.view addSubview:self.userTextField];
     [self.view addSubview:self.passwordTextField];
     [self.view addSubview:self.loginButton];
-    
+    self.userTextField.text = @"admin";
+    self.passwordTextField.text = @"123456";
     [self setMyInterface];
 }
 
@@ -81,22 +90,38 @@
     self.loginButton.top = self.passwordLabel.bottom + 20;
     self.loginButton.left = self.userLabel.left;
 }
-
+- (NSDictionary *)encodeWithLoginModel:(HNLoginModel *)model{
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:model.username,@"username",model.password,@"password", nil];
+    return dic;
+}
 - (void)login:(id)sender{
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    request.URL = [NSURL URLWithString:@"http://113.105.159.115:5030/?Method=get.user.login&Params=CB914058227D8DE180A6D6145A791286164DFFDDB57719A1E68895C3772AC876B0B17A8CFFF97DE7DE1B8AED2ADD23B2E1CB9BA1646FBDA3680BADAA3985BE7F6506613E479DB992&Sign=352121BF8C4788B877FF6A5FF34380C4"];
+    HNLoginModel *model = [[HNLoginModel alloc] init];
+    model.username = self.userTextField.text;
+    model.password = self.passwordTextField.text;
+    NSString *jsonStr = [[self encodeWithLoginModel:model] JSONString];
+    request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"get.user.login" Params:jsonStr]];
+    //@"http://113.105.159.115:5030/?Method=get.user.login&Params=CB914058227D8DE180A6D6145A791286164DFFDDB57719A1E68895C3772AC876B0B17A8CFFF97DE7DE1B8AED2ADD23B2E1CB9BA1646FBDA3680BADAA3985BE7F6506613E479DB992&Sign=352121BF8C4788B877FF6A5FF34380C4"
     NSString *contentType = @"text/html";
     [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
     NSData *returnData=[NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
     NSString *retStr = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
     
-    NSLog(@"end%@",retStr);
-    NSString *str =[NSString encodeToPercentEscapeString:@"{\"username\":\"admin\",\"password\":\"123456\"}"];
-    NSLog(@"%@",[str encryptWithDES]);
-    NSLog(@"sign:%@",[NSString createSignWithMethod:@"get.user.login" Params:[str encryptWithDES]]);
-    
-    NSLog(@"%@",[@"{\"username\":\"admin\",\"password\":\"123456\"}" isEqualToString:[NSString decodeFromPercentEscapeString:[[str encryptWithDES] decryptWithDES]]]? @"Yes":@"NO");
-    [self loginSuccess];
+//    NSLog(@"end%@",retStr);
+//    NSString *str =[NSString encodeToPercentEscapeString:@"{\"username\":\"admin\",\"password\":\"123456\"}"];
+//    NSLog(@"%@",[str encryptWithDES]);
+//    NSLog(@"sign:%@",[NSString createSignWithMethod:@"get.user.login" Params:[str encryptWithDES]]);
+//    
+//    NSLog(@"%@",[@"{\"username\":\"admin\",\"password\":\"123456\"}" isEqualToString:[NSString decodeFromPercentEscapeString:[[str encryptWithDES] decryptWithDES]]]? @"Yes":@"NO");
+    NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
+//    NSLog(@"%@",[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]]);
+//    NSLog(@"%@",[[[[retJson objectFromJSONString] objectForKey:@"data"] objectAtIndex:0] objectForKey:@"msg"]);
+    if ([[[[[retJson objectFromJSONString] objectForKey:@"data"] objectAtIndex:0] objectForKey:@"msg"] isEqualToString:@"登录成功"])//之后需要换成status
+        [self loginSuccess];
+    else{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login Fail", nil) message:NSLocalizedString(@"Please input correct username and password", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+        [alert show];
+    }
 }
 
 - (void)loginSuccess{
