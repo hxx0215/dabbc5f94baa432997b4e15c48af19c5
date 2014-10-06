@@ -49,6 +49,7 @@
     self.userTextField.layer.borderWidth = 1.0;
     self.passwordTextField =[[UITextField alloc] initWithFrame:self.userTextField.bounds];
     self.passwordTextField.layer.borderColor = [UIColor grayColor].CGColor;
+    self.passwordTextField.secureTextEntry = YES;
     self.passwordTextField.layer.borderWidth = 1.0;
     
     self.loginButton = [UIButton buttonWithType:UIButtonTypeCustom];
