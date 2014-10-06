@@ -11,6 +11,7 @@
 #import "HNHomeViewController.h"
 #import "NSString+Crypt.h"
 #import "JSONKit.h"
+#import "MBProgressHUD.h"
 
 @interface HNLoginModel: NSObject
 @property (nonatomic, strong)NSString *username;
@@ -96,6 +97,8 @@
     return dic;
 }
 - (void)login:(id)sender{
+    MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = NSLocalizedString(@"Loading", nil);
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     HNLoginModel *model = [[HNLoginModel alloc] init];
     model.username = self.userTextField.text;
@@ -105,24 +108,37 @@
     //@"http://113.105.159.115:5030/?Method=get.user.login&Params=CB914058227D8DE180A6D6145A791286164DFFDDB57719A1E68895C3772AC876B0B17A8CFFF97DE7DE1B8AED2ADD23B2E1CB9BA1646FBDA3680BADAA3985BE7F6506613E479DB992&Sign=352121BF8C4788B877FF6A5FF34380C4"
     NSString *contentType = @"text/html";
     [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
-    NSData *returnData=[NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-    NSString *retStr = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
-    
+//    NSData *returnData=[NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];同步调用
+
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        if (data)
+        {
+            NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
+            if ([[[[[retJson objectFromJSONString] objectForKey:@"data"] objectAtIndex:0] objectForKey:@"msg"] isEqualToString:@"登录成功"])//之后需要换成status
+                [self loginSuccess];
+            else{
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login Fail", nil) message:NSLocalizedString(@"Please input correct username and password", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+                [alert show];
+            }
+        }
+        else{
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection Error", nil) message:NSLocalizedString(@"Please check your network.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+            [alert show];
+        }
+        
+    }];
 //    NSLog(@"end%@",retStr);
 //    NSString *str =[NSString encodeToPercentEscapeString:@"{\"username\":\"admin\",\"password\":\"123456\"}"];
 //    NSLog(@"%@",[str encryptWithDES]);
 //    NSLog(@"sign:%@",[NSString createSignWithMethod:@"get.user.login" Params:[str encryptWithDES]]);
 //    
 //    NSLog(@"%@",[@"{\"username\":\"admin\",\"password\":\"123456\"}" isEqualToString:[NSString decodeFromPercentEscapeString:[[str encryptWithDES] decryptWithDES]]]? @"Yes":@"NO");
-    NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
+    
 //    NSLog(@"%@",[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]]);
 //    NSLog(@"%@",[[[[retJson objectFromJSONString] objectForKey:@"data"] objectAtIndex:0] objectForKey:@"msg"]);
-    if ([[[[[retJson objectFromJSONString] objectForKey:@"data"] objectAtIndex:0] objectForKey:@"msg"] isEqualToString:@"登录成功"])//之后需要换成status
-        [self loginSuccess];
-    else{
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login Fail", nil) message:NSLocalizedString(@"Please input correct username and password", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
-        [alert show];
-    }
+
 }
 
 - (void)loginSuccess{

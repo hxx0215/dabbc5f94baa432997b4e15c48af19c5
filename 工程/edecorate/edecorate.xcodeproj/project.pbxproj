@@ -54,6 +54,7 @@
 		B91A3AD119D6F9D4000F3823 /* HNGoodsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B91A3ACF19D6F9D4000F3823 /* HNGoodsViewController.m */; };
 		B91A3AD219D6F9D4000F3823 /* HNGoodsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B91A3AD019D6F9D4000F3823 /* HNGoodsViewController.xib */; };
 		B91A3AD519D703C5000F3823 /* HNGoodsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B91A3AD419D703C5000F3823 /* HNGoodsHeaderView.m */; };
+		B91BFCFC19E2C89A00FD468F /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = B91BFCFB19E2C89A00FD468F /* MBProgressHUD.m */; };
 		B94B7A6519C9BF3E000112ED /* HNHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B94B7A6419C9BF3E000112ED /* HNHomeViewController.m */; };
 		B94C773A19D3082D0046AC58 /* CALayer+XibConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = B94C773919D3082D0046AC58 /* CALayer+XibConfiguration.m */; };
 		B94C854819C9CA770040D47E /* HNMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B94C854719C9CA770040D47E /* HNMessageModel.m */; };
@@ -253,6 +254,8 @@
 		B91A3AD019D6F9D4000F3823 /* HNGoodsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HNGoodsViewController.xib; path = Classes/BusinessBackground/HNGoodsViewController.xib; sourceTree = "<group>"; };
 		B91A3AD319D703C5000F3823 /* HNGoodsHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNGoodsHeaderView.h; path = Classes/BusinessBackground/HNGoodsHeaderView.h; sourceTree = "<group>"; };
 		B91A3AD419D703C5000F3823 /* HNGoodsHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNGoodsHeaderView.m; path = Classes/BusinessBackground/HNGoodsHeaderView.m; sourceTree = "<group>"; };
+		B91BFCFA19E2C89A00FD468F /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		B91BFCFB19E2C89A00FD468F /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		B94B7A6319C9BF3E000112ED /* HNHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNHomeViewController.h; path = Classes/HNHomeViewController.h; sourceTree = "<group>"; };
 		B94B7A6419C9BF3E000112ED /* HNHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNHomeViewController.m; path = Classes/HNHomeViewController.m; sourceTree = "<group>"; };
 		B94C773819D3082D0046AC58 /* CALayer+XibConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+XibConfiguration.h"; sourceTree = "<group>"; };
@@ -951,6 +954,8 @@
 		B9F295E319C9A961003242DF /* Third Party */ = {
 			isa = PBXGroup;
 			children = (
+				B91BFCFA19E2C89A00FD468F /* MBProgressHUD.h */,
+				B91BFCFB19E2C89A00FD468F /* MBProgressHUD.m */,
 				B9AD9E0919E01A7900D82439 /* JSONKit.h */,
 				B9AD9E0A19E01A7900D82439 /* JSONKit.m */,
 				B9E0664A19DCDC9600893DBD /* AFNetworking */,
@@ -1255,6 +1260,7 @@
 				B9E0667F19DCDCB100893DBD /* UIProgressView+AFNetworking.m in Sources */,
 				D3C07BC919CDC8CA003EA5E4 /* HNComplaintDetailsViewController.m in Sources */,
 				B9E0668019DCDCB100893DBD /* UIRefreshControl+AFNetworking.m in Sources */,
+				B91BFCFC19E2C89A00FD468F /* MBProgressHUD.m in Sources */,
 				B9E0667619DCDCB100893DBD /* AFURLConnectionOperation.m in Sources */,
 				D3CD90F719CF09B500E76AF4 /* HNRefundTableViewController.m in Sources */,
 				B9882DF819CB11920093F0F4 /* HNNewReportViewController.m in Sources */,
