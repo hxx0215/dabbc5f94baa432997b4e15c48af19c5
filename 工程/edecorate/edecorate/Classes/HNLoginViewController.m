@@ -12,6 +12,7 @@
 #import "NSString+Crypt.h"
 #import "JSONKit.h"
 #import "MBProgressHUD.h"
+#import "HNLoginData.h"
 
 @interface HNLoginModel: NSObject
 @property (nonatomic, strong)NSString *username;
@@ -116,8 +117,9 @@
         {
             NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
-            if ([[[[[retJson objectFromJSONString] objectForKey:@"data"] objectAtIndex:0] objectForKey:@"msg"] isEqualToString:@"登录成功"])//之后需要换成status
+            if ([[HNLoginData shared] updateData:[[[retJson objectFromJSONString] objectForKey:@"data"] objectAtIndex:0]] && [[HNLoginData shared].msg isEqualToString:@"登录成功"]){//之后需要替换成status
                 [self loginSuccess];
+            }
             else{
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login Fail", nil) message:NSLocalizedString(@"Please input correct username and password", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
                 [alert show];

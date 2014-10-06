@@ -55,6 +55,7 @@
 		B91A3AD219D6F9D4000F3823 /* HNGoodsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B91A3AD019D6F9D4000F3823 /* HNGoodsViewController.xib */; };
 		B91A3AD519D703C5000F3823 /* HNGoodsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B91A3AD419D703C5000F3823 /* HNGoodsHeaderView.m */; };
 		B91BFCFC19E2C89A00FD468F /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = B91BFCFB19E2C89A00FD468F /* MBProgressHUD.m */; };
+		B91BFCFF19E2D11F00FD468F /* HNLoginData.m in Sources */ = {isa = PBXBuildFile; fileRef = B91BFCFE19E2D11F00FD468F /* HNLoginData.m */; };
 		B94B7A6519C9BF3E000112ED /* HNHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B94B7A6419C9BF3E000112ED /* HNHomeViewController.m */; };
 		B94C773A19D3082D0046AC58 /* CALayer+XibConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = B94C773919D3082D0046AC58 /* CALayer+XibConfiguration.m */; };
 		B94C854819C9CA770040D47E /* HNMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B94C854719C9CA770040D47E /* HNMessageModel.m */; };
@@ -256,6 +257,8 @@
 		B91A3AD419D703C5000F3823 /* HNGoodsHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNGoodsHeaderView.m; path = Classes/BusinessBackground/HNGoodsHeaderView.m; sourceTree = "<group>"; };
 		B91BFCFA19E2C89A00FD468F /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		B91BFCFB19E2C89A00FD468F /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		B91BFCFD19E2D11F00FD468F /* HNLoginData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNLoginData.h; path = Classes/HNLoginData.h; sourceTree = "<group>"; };
+		B91BFCFE19E2D11F00FD468F /* HNLoginData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNLoginData.m; path = Classes/HNLoginData.m; sourceTree = "<group>"; };
 		B94B7A6319C9BF3E000112ED /* HNHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNHomeViewController.h; path = Classes/HNHomeViewController.h; sourceTree = "<group>"; };
 		B94B7A6419C9BF3E000112ED /* HNHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNHomeViewController.m; path = Classes/HNHomeViewController.m; sourceTree = "<group>"; };
 		B94C773819D3082D0046AC58 /* CALayer+XibConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+XibConfiguration.h"; sourceTree = "<group>"; };
@@ -941,6 +944,8 @@
 				B94B7A6419C9BF3E000112ED /* HNHomeViewController.m */,
 				B953CE0C19CAFBE000BD57DF /* HNLoginViewController.h */,
 				B953CE0D19CAFBE000BD57DF /* HNLoginViewController.m */,
+				B91BFCFD19E2D11F00FD468F /* HNLoginData.h */,
+				B91BFCFE19E2D11F00FD468F /* HNLoginData.m */,
 				B94B7A6219C9BE73000112ED /* Message */,
 				B94B7A6119C9BE4E000112ED /* BusinessBackground */,
 				B94B7A6019C9BE25000112ED /* DecorateControl */,
@@ -1236,6 +1241,7 @@
 				D3C07BC019CDAC7A003EA5E4 /* HNComplaintTableViewCell.m in Sources */,
 				D38E009019D84BE0000F5263 /* HNReimburseViewController.m in Sources */,
 				B9E0667519DCDCB100893DBD /* AFSecurityPolicy.m in Sources */,
+				B91BFCFF19E2D11F00FD468F /* HNLoginData.m in Sources */,
 				D33EEA6A19D6D9E600D6F106 /* HNProfileViewController.m in Sources */,
 				B9B2BC1819CF1F3000839AED /* ALAsset+isEqual.m in Sources */,
 				B9D3DECB19CD0B2C0020CDC9 /* HNReportPurchaseViewController.m in Sources */,

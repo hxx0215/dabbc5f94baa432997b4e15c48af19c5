@@ -10,6 +10,7 @@
 #import "HNReportTableViewCell.h"
 #import "HNNewReportViewController.h"
 #import "HNNewConstructViewController.h"
+#import "MJRefresh.h"
 
 @interface HNReportModel : NSObject
 @property (nonatomic, strong)NSString *roomName;
@@ -18,7 +19,11 @@
 @end
 @implementation HNReportModel
 @end
+@interface HNReportSendModel : NSObject
 
+@end
+@implementation HNReportSendModel
+@end
 
 @interface HNDecorateReportViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -113,5 +118,9 @@
     HNReportModel *model = (HNReportModel *)self.reportList[indexPath.row];
     HNNewConstructViewController *constructViewController = [[HNNewConstructViewController alloc]initWithConstructType:model.constructType];
     [self.navigationController pushViewController:constructViewController animated:YES];
+}
+
+- (void)refreshData{
+    
 }
 @end
