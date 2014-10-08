@@ -20,6 +20,13 @@
 //@end
 //@implementation HNOfficePassModel
 //@end
+@interface HNGetPassListModel: NSObject
+@property (nonatomic, strong)NSString *shopid;
+//@property (nonatomic, strong)long *pageindex;
+//@property (nonatomic, strong)NSInteger *pagesize;
+@end
+@implementation HNGetPassListModel
+@end
 
 
 @interface HNOfficePassesViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -43,9 +50,9 @@
     [self.view addSubview:self.tTableView];
     
     self.navigationItem.title=@"办理出入证";
-    [self GetPassList:@"admin"];
-   // self.modelList=[[NSMutableArray alloc] init];
-    
+    [self GetPassList:@"admin" byPage:@"1" AndRow:@"8"];
+//    self.modelList=[[NSMutableArray alloc] init];
+//    
 //    HNTemporaryModel *tModel=[[HNTemporaryModel alloc] init];
 //    tModel.roomName=@"施工房号：大富大贵花园A座001";
 //    tModel.status = TemporaryStatusCustom;
@@ -57,17 +64,19 @@
 //    [self.modelList addObject:TModel2];
 }
 
-- (NSDictionary *)encodeWithPassModel:(NSString *)shopid{
-    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:shopid,@"mshopid", nil];
+- (NSDictionary *)encodeWithPassModel:(NSString *)shopid Andpageindex:(NSString *)pageindex Andpagesize:(NSString *)pagesize{
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:shopid,@"mshopid", pageindex,@"pageindex",pagesize,@"pagesize", nil];
+    //NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:pageindex,@"pageindex",pagesize,@"pagesize", nil];
+
     return dic;
 }
 //获取出入证列表:调用接口
--(void)GetPassList:(NSString *)myshopid{
+-(void)GetPassList:(NSString *)myshopid byPage:(NSString *)page AndRow:(NSString *)rows{
     MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = NSLocalizedString(@"Loading", nil);
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     //拼传输参数(json)
-    NSString *RequestJsonStr=[[self encodeWithPassModel:myshopid] JSONString];
+    NSString *RequestJsonStr=[[self encodeWithPassModel:myshopid Andpageindex:page Andpagesize:rows] JSONString];
     request.URL=[NSURL URLWithString:[NSString createResponseURLWithMethod:@"get.pass.list" Params:RequestJsonStr]];
     NSString *contentType=@"text/html";
     [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
@@ -77,7 +86,13 @@
         if (data) {
             NSString *returnStr=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             NSString *returnJson=[NSString decodeFromPercentEscapeString:[returnStr decryptWithDES]];
-            if(YES)
+            //解析returnJson
+            NSLog(@"returnJson:%@",returnJson);
+            //NSDictionary *dic=[returnJson objectFromJSONStringWithParseOptions:JKParseOptionLooseUnicode];
+            NSDictionary *dic=[returnJson objectFromJSONString];
+            NSLog(@"verification:%@",[dic objectForKey:@"verification"]);
+            NSLog(@"total:%@",[dic objectForKey:@"total"]);
+            if([dic objectForKey:@"verification"])
             {
                 //查询成功
                 UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"测试提示" message:returnJson delegate:nil cancelButtonTitle:NSLocalizedString(@"OK",nil) otherButtonTitles:nil];
