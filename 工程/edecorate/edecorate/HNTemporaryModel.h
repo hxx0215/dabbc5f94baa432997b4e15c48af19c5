@@ -27,6 +27,7 @@ typedef NS_ENUM(NSInteger, HNTemporaryStatus)
 @property (nonatomic, strong)NSString *owners;
 @property (nonatomic, strong)NSString *ownersPhoneNumber;
 @property (nonatomic, strong)NSString *constructionUnit;
+-(BOOL)updateData:(NSDictionary *)dic;
 @end
 
 @interface HNDataInfoModel : NSObject
@@ -39,12 +40,14 @@ typedef NS_ENUM(NSInteger, HNTemporaryStatus)
 @property (nonatomic, strong)NSString *operatorPerson;
 @property (nonatomic, strong)NSString *phone;
 @property (nonatomic, strong)NSString *validDocuments;
+-(BOOL)updateData:(NSDictionary *)dic;
 @end
 
 @interface HNComplaintModel : NSObject
 @property (nonatomic, strong)NSString *complaintCategory;
 @property (nonatomic, strong)NSString *complaintObject;
 @property (nonatomic, strong)NSString *complaintIssue;
+-(BOOL)updateData:(NSDictionary *)dic;
 @end
 
 @interface HNTemporaryModel : NSObject
@@ -53,6 +56,15 @@ typedef NS_ENUM(NSInteger, HNTemporaryStatus)
 @property (nonatomic, strong)HNDataInfoModel *dataInfo;
 @property (nonatomic, strong)HNComplaintModel *complaintInfo;
 @property (nonatomic)HNTemporaryStatus status;
+-(BOOL)updateData:(NSDictionary *)dic;
+@end
+
+@interface HNTemporaryData : NSObject
+@property (nonatomic, strong)NSString *mshopid;
+@property (nonatomic, strong)NSNumber *total;
+@property (nonatomic, strong)NSString *error;
+@property (nonatomic, strong)NSMutableArray *modelList;
+-(BOOL)updateData:(NSDictionary *)dic;
 @end
 
 #endif
