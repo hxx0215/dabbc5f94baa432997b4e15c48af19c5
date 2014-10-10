@@ -1401,7 +1401,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "da877219-839b-4844-a9bf-f0bca2fbd8f6";
+				PROVISIONING_PROFILE = "b51e7a41-46e5-490b-af96-7fd926334a6d";
 				WRAPPER_EXTENSION = app;
 			};
 			name = "ad hoc distribution test";
@@ -1509,7 +1509,7 @@
 					"$(PROJECT_DIR)/lib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "da877219-839b-4844-a9bf-f0bca2fbd8f6";
+				PROVISIONING_PROFILE = "b51e7a41-46e5-490b-af96-7fd926334a6d";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1529,7 +1529,7 @@
 					"$(PROJECT_DIR)/lib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "da877219-839b-4844-a9bf-f0bca2fbd8f6";
+				PROVISIONING_PROFILE = "b51e7a41-46e5-490b-af96-7fd926334a6d";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

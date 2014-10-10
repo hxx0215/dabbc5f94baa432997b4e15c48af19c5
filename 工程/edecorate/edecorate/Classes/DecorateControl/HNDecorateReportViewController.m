@@ -11,16 +11,18 @@
 #import "HNNewReportViewController.h"
 #import "HNNewConstructViewController.h"
 #import "MJRefresh.h"
+#import "HNLoginData.h"
 
 @interface HNReportModel : NSObject
 @property (nonatomic, strong)NSString *roomName;
 @property (nonatomic, strong)NSString *status;
 @property (nonatomic, assign)HNConstructType constructType;
+@property (nonatomic, strong)NSString *declareId;
 @end
 @implementation HNReportModel
 @end
 @interface HNReportSendModel : NSObject
-
+@property (nonatomic, strong)NSString *mshopid;
 @end
 @implementation HNReportSendModel
 @end
@@ -30,6 +32,7 @@
 @property (nonatomic, strong)UITableView *rTableView;
 @property (nonatomic, strong)NSMutableArray *reportList;
 @property (nonatomic, strong)UIBarButtonItem *reportButton;
+@property (nonatomic, strong)NSDictionary *statusMap;
 @end
 
 @implementation HNDecorateReportViewController
@@ -53,9 +56,14 @@
     self.rTableView.delegate = self;
     self.rTableView.dataSource = self;
     [self.view addSubview:self.rTableView];
-    
+    __weak typeof(self) wself = self;
+    [self.rTableView addHeaderWithCallback:^{
+        typeof(self) sself = wself;
+        [sself refreshData];
+    }];
 //    self.reportButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Report", nil) style:UIBarButtonItemStylePlain target:self action:@selector(reportButton_Clicked:)];
 //    self.navigationItem.rightBarButtonItem = self.reportButton;
+    self.statusMap = @{@"0": @"审核进度:未审核",@"1": @"审核进度:已审核",@"-1":@"审核进度:审核未通过"};
     
     self.reportList = [[NSMutableArray alloc] init];
     HNReportModel *tModel = [[HNReportModel alloc] init];
@@ -119,8 +127,40 @@
     HNNewConstructViewController *constructViewController = [[HNNewConstructViewController alloc]initWithConstructType:model.constructType];
     [self.navigationController pushViewController:constructViewController animated:YES];
 }
-
+- (NSDictionary *)encodeSendModel:(HNReportSendModel*)model{
+    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:model.mshopid,@"mshopid", nil];
+    return dic;
+}
 - (void)refreshData{
-    
+    HNReportSendModel *model = [[HNReportSendModel alloc] init];
+    model.mshopid = [HNLoginData shared].mshopid;
+    NSString *sendJson = [[self encodeSendModel:model] JSONString];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"get.decoration.declare" Params:sendJson]];
+    NSString *contentType = @"text/html";
+    [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
+        [self.rTableView headerEndRefreshing];
+        if (data)
+        {
+            NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
+            NSDictionary *retDic = [retJson objectFromJSONString];
+            NSInteger count = [[retDic objectForKey:@"total"] integerValue];
+            NSArray *dataArr = [retDic objectForKey:@"data"];
+            [self.reportList removeAllObjects];
+            for (int i=0; i<count; i++) {
+                HNReportModel *model = [[HNReportModel alloc] init];
+                model.status = self.statusMap[[dataArr[i] objectForKey:@"assessorstate"]];
+                model.roomName = [NSString stringWithFormat:@"施工房号:%@",[dataArr[i] objectForKey:@"roomnumber"]];
+                model.declareId = [dataArr[i] objectForKey:@"declareId"];
+                [self.reportList addObject:model];
+            }
+            [self.rTableView reloadData];
+        }else{
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection Error", nil) message:NSLocalizedString(@"Please check your network.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+            [alert show];
+        }
+    }];
 }
 @end
