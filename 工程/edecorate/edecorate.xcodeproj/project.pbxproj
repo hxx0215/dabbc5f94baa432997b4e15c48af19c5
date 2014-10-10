@@ -167,6 +167,7 @@
 		D3CD90FF19CF13DE00E76AF4 /* HNRefundApplyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3CD90FD19CF13DE00E76AF4 /* HNRefundApplyViewController.xib */; };
 		D3CD910319CF141C00E76AF4 /* HNRefundDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3CD910119CF141C00E76AF4 /* HNRefundDetailViewController.m */; };
 		D3CD910419CF141C00E76AF4 /* HNRefundDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3CD910219CF141C00E76AF4 /* HNRefundDetailViewController.xib */; };
+		D3F4B5A319E82C93001CA79C /* HNDeliverData.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F4B5A219E82C93001CA79C /* HNDeliverData.m */; };
 		D3F90F1019CB13CA000C95E4 /* HNTemporaryFireViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F90F0F19CB13CA000C95E4 /* HNTemporaryFireViewController.m */; };
 		D3F90F1319CB1474000C95E4 /* HNTemporaryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F90F1219CB1474000C95E4 /* HNTemporaryTableViewCell.m */; };
 		D3F90F1619CB1F0B000C95E4 /* HNTemporaryApplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F90F1519CB1F0B000C95E4 /* HNTemporaryApplyViewController.m */; };
@@ -458,6 +459,8 @@
 		D3CD910019CF141C00E76AF4 /* HNRefundDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNRefundDetailViewController.h; sourceTree = "<group>"; };
 		D3CD910119CF141C00E76AF4 /* HNRefundDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNRefundDetailViewController.m; sourceTree = "<group>"; };
 		D3CD910219CF141C00E76AF4 /* HNRefundDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HNRefundDetailViewController.xib; sourceTree = "<group>"; };
+		D3F4B5A119E82C93001CA79C /* HNDeliverData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNDeliverData.h; path = Classes/DecorateControl/HNDeliverData.h; sourceTree = "<group>"; };
+		D3F4B5A219E82C93001CA79C /* HNDeliverData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNDeliverData.m; path = Classes/DecorateControl/HNDeliverData.m; sourceTree = "<group>"; };
 		D3F90F0E19CB13CA000C95E4 /* HNTemporaryFireViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNTemporaryFireViewController.h; sourceTree = "<group>"; };
 		D3F90F0F19CB13CA000C95E4 /* HNTemporaryFireViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNTemporaryFireViewController.m; sourceTree = "<group>"; };
 		D3F90F1119CB1474000C95E4 /* HNTemporaryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNTemporaryTableViewCell.h; sourceTree = "<group>"; };
@@ -771,6 +774,8 @@
 				B965E76819D04CDA004CD201 /* HNDeliverDetailViewController.xib */,
 				B965E75E19D04955004CD201 /* HNDeliverViewController.h */,
 				B965E75F19D04955004CD201 /* HNDeliverViewController.m */,
+				D3F4B5A119E82C93001CA79C /* HNDeliverData.h */,
+				D3F4B5A219E82C93001CA79C /* HNDeliverData.m */,
 			);
 			name = Deliver;
 			sourceTree = "<group>";
@@ -1232,6 +1237,7 @@
 				B91A3AC619D6E6E9000F3823 /* UIScrollView+MJExtension.m in Sources */,
 				B9B2BC2019CF1F3000839AED /* CTAssetsPickerConstants.m in Sources */,
 				B91A3AC819D6E6E9000F3823 /* UIView+MJExtension.m in Sources */,
+				D3F4B5A319E82C93001CA79C /* HNDeliverData.m in Sources */,
 				B9AD9E0B19E01A7900D82439 /* JSONKit.m in Sources */,
 				B9B2BC2219CF1F3000839AED /* CTAssetsSupplementaryView.m in Sources */,
 				37F9D80419D8B5E1005CB18B /* HNCommentsTableViewCell.m in Sources */,

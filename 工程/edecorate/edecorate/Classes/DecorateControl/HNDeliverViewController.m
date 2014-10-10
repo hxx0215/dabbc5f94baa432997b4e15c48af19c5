@@ -9,13 +9,12 @@
 #import "HNDeliverViewController.h"
 #import "HNReportTableViewCell.h"
 #import "HNDeliverDetailViewController.h"
+#import "NSString+Crypt.h"
+#import "JSONKit.h"
+#import "MBProgressHUD.h"
+#import "HNLoginData.h"
+#import "HNDeliverData.h"
 
-@interface HNDeliverModel : NSObject
-@property (nonatomic, strong)NSString *roomName;
-@property (nonatomic, strong)NSString *status;
-@end
-@implementation HNDeliverModel
-@end
 @interface HNDeliverViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong)UITableView *dTableView;
 @property (nonatomic, strong)NSMutableArray *deliverList;
@@ -35,13 +34,54 @@
     [self.view addSubview:self.dTableView];
     
     self.deliverList = [[NSMutableArray alloc] init];
-    
-    HNDeliverModel *model = [[HNDeliverModel alloc] init];
-    model.roomName =@"小区名房间号";
-    model.status = @"验收进度";
-    
-    [self.deliverList addObject:model];
+
+    [self loadMyData];
 }
+
+-(void)loadMyData
+{
+    MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = NSLocalizedString(@"Loading", nil);
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    //HNLoginModel *model = [[HNLoginModel alloc] init];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[HNLoginData shared].mshopid,@"mshopid", nil];
+    NSString *jsonStr = [dic JSONString];
+    request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"get.install.list" Params:jsonStr]];
+    NSString *contentType = @"text/html";
+    [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        if (data)
+        {
+            NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
+            NSLog(@"%@",retJson);
+            NSDictionary* dic = [retJson objectFromJSONString];
+            NSNumber* total = [dic objectForKey:@"total"];
+            NSArray* array = [dic objectForKey:@"data"];
+            for (int i = 0; i<total.intValue; i++) {
+                NSDictionary *dicData = [array objectAtIndex:i];
+                HNDeliverData *tModel = [[HNDeliverData alloc] init];
+                [tModel updateData:dicData];
+                [self.deliverList addObject:tModel];
+            }
+            if (total.intValue){//之后需要替换成status
+                [self.dTableView reloadData];
+            }
+            else
+            {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login Fail", nil) message:NSLocalizedString(@"Please input correct username and password", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+                [alert show];
+            }
+        }
+        else{
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection Error", nil) message:NSLocalizedString(@"Please check your network.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+            [alert show];
+        }
+        
+    }];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -60,9 +100,17 @@
     if (!cell){
         cell = [[HNReportTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identify];
     }
-    HNDeliverModel *model = self.deliverList[indexPath.row];
-    [cell setRoomName:model.roomName];
-    [cell setStatus:model.status];
+    HNDeliverData *model = self.deliverList[indexPath.row];
+    [cell setRoomName:model.roomnumber];
+//    switch (model.status) {
+//        case <#constant#>:
+//            <#statements#>
+//            break;
+//            
+//        default:
+//            break;
+//    }
+    [cell setStatus:model.state];
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
