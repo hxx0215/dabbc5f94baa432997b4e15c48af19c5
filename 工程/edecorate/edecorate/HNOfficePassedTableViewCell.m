@@ -7,13 +7,14 @@
 //
 
 #import "HNOfficePassedTableViewCell.h"
+#import "HNPassData.h"
 
 
 @interface HNOfficePassedTableViewCell()
 
 @property (nonatomic, strong)UILabel *roomLabel;
 @property (nonatomic, strong)UILabel *statusLabel;
-@property (nonatomic, strong)HNTemporaryModel* temporaryModel;
+@property (nonatomic, strong)HNPassData* temporaryModel;
 
 @end
 
@@ -23,7 +24,7 @@
     // Initialization code
 }
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withModel:(HNTemporaryModel*)model
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withModel:(HNPassData*)model
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
@@ -36,8 +37,8 @@
         [self.contentView addSubview:self.roomLabel];
         [self.contentView addSubview:self.statusLabel];
         self.temporaryModel = model;
-        self.roomLabel.text = model.roomName;
-        [self setStatus:model.status];
+        self.roomLabel.text = model.roomnumber;
+        //[self setStatus:model.status];
         
         self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
@@ -46,7 +47,7 @@
 
 -(void)update
 {
-    [self setStatus:self.temporaryModel.status];
+    //[self setStatus:self.temporaryModel.status];
 }
 
 
@@ -58,7 +59,7 @@
 
 -(void)updateMyCell
 {
-    [self setStatus:self.temporaryModel.status];
+    //[self setStatus:self.temporaryModel.status];
 }
 
 - (void)setRoomName:(NSString *)roomname{
