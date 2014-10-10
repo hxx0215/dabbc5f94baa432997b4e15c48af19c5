@@ -10,12 +10,15 @@
 #import "HNTemporaryTableViewCell.h"
 #import "HNTemporaryApplyViewController.h"
 #import "HNTemporaryDetailsViewController.h"
-
+#import "NSString+Crypt.h"
+#import "JSONKit.h"
+#import "MBProgressHUD.h"
+#import "HNLoginData.h"
 
 @interface HNTemporaryFireViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong)UITableView *tTableView;
-@property (nonatomic, strong)NSMutableArray *modelList;
+@property (nonatomic, strong)HNTemporaryData *model;
 @property (nonatomic)HNTemporaryType temporaryType;
 @property (nonatomic, strong)HNTemporaryTableViewCell* temporaryTableViewCell;
 @end
@@ -51,11 +54,67 @@
     
     self.navigationItem.title = [self getTitleString];
     
-    self.modelList = [[NSMutableArray alloc] init];
-    HNTemporaryModel *tModel = [[HNTemporaryModel alloc] init];
-    tModel.roomName = @"施工房号：XXXX";
-    tModel.status = TemporaryStatusCustom;
-    [self.modelList addObject:tModel];
+
+    
+    switch (self.temporaryType) {
+        case FIRE:
+            [self loadFire];
+            break;
+        case POWER:
+            
+            break;
+            
+        default:
+            break;
+    }
+    
+}
+
+-(void)loadFire
+{
+    MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = NSLocalizedString(@"Loading", nil);
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    self.model = [[HNTemporaryData alloc] init];
+    self.model.mshopid = [HNLoginData shared].mshopid;
+    //model.username = self.userTextField.text;
+    //model.password = self.passwordTextField.text;
+    NSString *jsonStr = [[self encodeWithTemporaryModel:self.model] JSONString];
+    request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"get.temporary.fire" Params:jsonStr]];
+    NSString *contentType = @"text/html";
+    [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
+    
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        if (data)
+        {
+            NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
+            NSLog(@"%@",retJson);
+            NSDictionary* dic = [retJson objectFromJSONString];
+            [self.model updateData:dic];
+            NSLog(@"%@",self.model.error);
+            if (self.model.total.intValue){//之后需要替换成status
+                [self.tTableView reloadData];
+            }
+            else
+            {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Loading Fail", nil) message:NSLocalizedString(@"Please try again", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+                [alert show];
+            }
+        }
+        else{
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection Error", nil) message:NSLocalizedString(@"Please check your network.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+            [alert show];
+        }
+        
+    }];
+
+}
+
+- (NSDictionary *)encodeWithTemporaryModel:(HNTemporaryData *)model{
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:model.mshopid,@"mshopid", nil];
+    return dic;
 }
 
 -(NSString*)getTitleString
@@ -83,14 +142,15 @@
     return 75.0;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [self.modelList count];
+    NSLog(@"[self.model.modelList count] :%ld",[self.model.modelList count]);
+    return [self.model.modelList count];
 }
 
 - (HNTemporaryTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *reuseIdentifier = @"temporaryCell";
     HNTemporaryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
     if (!cell){
-        HNTemporaryModel *model =self.modelList[indexPath.row];
+        HNTemporaryModel *model =self.model.modelList[indexPath.row];
         cell = [[HNTemporaryTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier withModel:model];
     }
     
@@ -102,7 +162,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     self.temporaryTableViewCell = (HNTemporaryTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
     NSInteger row = indexPath.row;
-    HNTemporaryModel* model = self.modelList[row];
+    HNTemporaryModel* model = self.model.modelList[row];
     if(model.status==TemporaryStatusCustom)
     {
         HNTemporaryApplyViewController* tac = [[HNTemporaryApplyViewController alloc]initWithModel:model];
