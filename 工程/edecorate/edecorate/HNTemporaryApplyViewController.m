@@ -379,6 +379,52 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
     UIImage *image=[info objectForKey:UIImagePickerControllerOriginalImage];
     [self.imagePicker dismissViewControllerAnimated:YES completion:nil];
+    
+    CGFloat scaleSize = 0.01f;
+    UIGraphicsBeginImageContext(CGSizeMake(image.size.width * scaleSize, image.size.height * scaleSize));
+    [image drawInRect:CGRectMake(0, 0, image.size.width * scaleSize, image.size.height * scaleSize)];
+    UIImage *scaledImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    NSData *_data = UIImageJPEGRepresentation(scaledImage, 1.0f);
+    NSString *_encodedImageStr = [_data base64EncodedStringWithOptions:0];
+    MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = NSLocalizedString(@"Loading", nil);
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"testImage.jpg",@"name", _encodedImageStr,@"img",nil];
+    NSString *jsonStr = [dic JSONString];
+    
+    request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"set.picture.add" Params:jsonStr]];
+    //{"name":"1.png","img":"1"}
+    NSString *contentType = @"text/html";
+    [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        if (data)
+        {
+            NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
+            NSLog(@"%@",retJson);
+            NSDictionary* dic = [retJson objectFromJSONString];
+            int commitStatus = 1;
+            if (commitStatus)
+            {
+                UIAlertView* alert=[[UIAlertView alloc]initWithTitle:nil message:@"已提交审核" delegate:self cancelButtonTitle:@"OK"otherButtonTitles:nil,nil];
+                alert.tag=1;
+                [alert show];
+            }
+            else
+            {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Loading Fail", nil) message:NSLocalizedString(@"Please try again", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+                [alert show];
+            }
+        }
+        else{
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection Error", nil) message:NSLocalizedString(@"Please check your network.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+            [alert show];
+        }
+        
+    }];
+
     //[self.uploadImages setObject:image forKey:[NSNumber numberWithInteger:self.curButton.tag]];;
 }
 -(void)viewDidAppear:(BOOL)animated
