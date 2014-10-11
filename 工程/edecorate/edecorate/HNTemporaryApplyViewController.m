@@ -8,6 +8,11 @@
 
 #import "HNTemporaryApplyViewController.h"
 #import "UIView+AHKit.h"
+#import "NSString+Crypt.h"
+#import "JSONKit.h"
+#import "MBProgressHUD.h"
+#import "HNLoginData.h"
+
 /*
  "House Information" = "房屋信息";
  "Owners" = "业主";
@@ -206,9 +211,43 @@
 
 - (IBAction)commit:(id)sender
 {
-    UIAlertView* alert=[[UIAlertView alloc]initWithTitle:nil message:@"已提交审核" delegate:self cancelButtonTitle:@"OK"otherButtonTitles:nil,nil];
-    alert.tag=1;
-    [alert show];
+    MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = NSLocalizedString(@"Loading", nil);
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    NSString *jsonStr = [[self encodeWithTemporaryModel:self.temporaryModel] JSONString];
+    request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"set.temporary.fire" Params:jsonStr]];
+    NSString *contentType = @"text/html";
+    [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
+    
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        if (data)
+        {
+            NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
+            NSLog(@"%@",retJson);
+            NSDictionary* dic = [retJson objectFromJSONString];
+            int commitStatus = 1;
+            if (commitStatus)
+            {
+                UIAlertView* alert=[[UIAlertView alloc]initWithTitle:nil message:@"已提交审核" delegate:self cancelButtonTitle:@"OK"otherButtonTitles:nil,nil];
+                alert.tag=1;
+                [alert show];
+            }
+            else
+            {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Loading Fail", nil) message:NSLocalizedString(@"Please try again", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+                [alert show];
+            }
+        }
+        else{
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection Error", nil) message:NSLocalizedString(@"Please check your network.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+            [alert show];
+        }
+        
+    }];
+
+
 }
 
 - (IBAction)noticeFireClicked:(id)sender
@@ -216,7 +255,15 @@
     UIAlertView* alert=[[UIAlertView alloc]initWithTitle:nil message:@"用火须知" delegate:self cancelButtonTitle:@"OK"otherButtonTitles:nil,nil];
     alert.tag = 2;
     [alert show];
+
 }
+
+- (NSDictionary *)encodeWithTemporaryModel:(HNTemporaryModel *)model{
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:_temporaryModel.declareId,@"declareId", _temporaryModel.dataInfo.fireUnits,@"fireEnterprise",_temporaryModel.dataInfo.useOfFireBy,@"fireCause",_temporaryModel.dataInfo.fireTools,@"fireTool",_temporaryModel.dataInfo.fireLoad,@"fireLoad",_temporaryModel.dataInfo.startTime,@"fireBTime",_temporaryModel.dataInfo.endTime,@"fireETime",_temporaryModel.dataInfo.operatorPerson,@"fireOperator",_temporaryModel.dataInfo.phone,@"firePhone",_temporaryModel.dataInfo.validDocuments,@"PapersImg",nil];
+    return dic;
+    
+}
+
 - (IBAction)beginEdit:(id)sender {
     NSLog(@"beginEdit");
     

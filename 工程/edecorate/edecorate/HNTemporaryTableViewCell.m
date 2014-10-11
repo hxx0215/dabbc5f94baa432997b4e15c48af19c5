@@ -20,10 +20,11 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-        self.roomLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width * 0.8, 30)];
+
+        self.roomLabel = [[UILabel alloc] init];
         self.roomLabel.numberOfLines = 2;
         self.roomLabel.font = [UIFont systemFontOfSize:15];
-        self.statusLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.roomLabel.frame) + 8, self.bounds.size.width * 0.8, 35)];
+        self.statusLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, /*CGRectGetMaxY(self.roomLabel.frame)*/30 + 8, self.bounds.size.width * 0.8, 30)];
         self.statusLabel.font = [UIFont systemFontOfSize:28];
         [self.contentView addSubview:self.roomLabel];
         [self.contentView addSubview:self.statusLabel];
@@ -65,9 +66,13 @@
             break;
         default:
             self.statusLabel.text = @"";
-            self.roomLabel.font = [UIFont systemFontOfSize:20];
             break;
     }
+    CGFloat pos = 0;
+    if (status == TemporaryStatusCustom) {
+        pos = 20;
+    }
+    self.roomLabel.frame = CGRectMake(0, pos, self.bounds.size.width * 0.8, 35);
 }
 @end
 

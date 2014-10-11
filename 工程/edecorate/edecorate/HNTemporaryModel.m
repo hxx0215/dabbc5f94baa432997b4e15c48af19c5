@@ -56,6 +56,7 @@
 -(BOOL)updateData:(NSDictionary *)dic{
     if (!dic)
         return NO;
+    
     [self setValue:[dic objectForKey:@"fireEnterprise"] forKey:@"fireUnits"];
     [self setValue:[dic objectForKey:@"fireCause"] forKey:@"useOfFireBy"];
     [self setValue:[dic objectForKey:@"fireTool"] forKey:@"fireTools"];
@@ -100,6 +101,8 @@
 -(BOOL)updateData:(NSDictionary *)dic{
     if (!dic)
         return NO;
+    [self setValue:[dic objectForKey:@"fireId"] forKey:@"fireId"];
+    [self setValue:[dic objectForKey:@"declareId"] forKey:@"declareId"];
     self.roomName = [dic objectForKey:@"roomnumber"];
     NSNumber* number = [dic objectForKey:@"IsCheck"];
     switch (number.intValue) {
@@ -112,6 +115,9 @@
             
         default:
             break;
+    }
+    if ([self.fireId isEqualToString:@"7"]) {
+        self.status = TemporaryStatusCustom;
     }
     [self.huseInfo updateData:dic];
     [self.dataInfo updateData:dic];

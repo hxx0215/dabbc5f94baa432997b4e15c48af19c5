@@ -51,6 +51,8 @@ typedef NS_ENUM(NSInteger, HNTemporaryStatus)
 @end
 
 @interface HNTemporaryModel : NSObject
+@property (nonatomic, strong)NSString *declareId;
+@property (nonatomic, strong)NSString *fireId;
 @property (nonatomic, strong)NSString *roomName;
 @property (nonatomic, strong)HNHouseInfoModel *huseInfo;
 @property (nonatomic, strong)HNDataInfoModel *dataInfo;
