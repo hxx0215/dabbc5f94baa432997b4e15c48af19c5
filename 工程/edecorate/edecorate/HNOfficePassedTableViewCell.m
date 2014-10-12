@@ -38,16 +38,11 @@
         [self.contentView addSubview:self.statusLabel];
         self.temporaryModel = model;
         self.roomLabel.text = model.roomnumber;
-        //[self setStatus:model.status];
+        [self setStatus];
         
         self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     return self;
-}
-
--(void)update
-{
-    //[self setStatus:self.temporaryModel.status];
 }
 
 
@@ -59,32 +54,32 @@
 
 -(void)updateMyCell
 {
-    //[self setStatus:self.temporaryModel.status];
+    [self setStatus];
 }
 
 - (void)setRoomName:(NSString *)roomname{
     self.roomLabel.text = roomname;
 }
 
-- (void)setStatus:(HNTemporaryStatus)status
+- (void)setStatus
 {
     
     self.roomLabel.font = [UIFont systemFontOfSize:15];
     
-    switch (status) {
-        case TemporaryStatusApplying:
-            self.statusLabel.text = @"正在审核";
-            break;
-        case TemporaryStatusPassed:
+    if ([self.temporaryModel.CARDId isEqualToString:@"0"]) {
+        self.statusLabel.text = @"";
+        self.roomLabel.font = [UIFont systemFontOfSize:20];
+    }
+    else
+    {
+        if ([self.temporaryModel.assessorState isEqualToString:@"1"]) {
             self.statusLabel.text = @"审核通过";
-            break;
-        case TemporaryStatusNotPassed:
-            self.statusLabel.text = @"审核失败";
-            break;
-        default:
-            self.statusLabel.text = @"";
-            self.roomLabel.font = [UIFont systemFontOfSize:20];
-            break;
+            
+        }
+        else
+        {
+            self.statusLabel.text = @"正在审核";
+        }
     }
 }
 

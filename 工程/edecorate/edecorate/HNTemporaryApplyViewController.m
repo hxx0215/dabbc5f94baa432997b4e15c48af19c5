@@ -386,7 +386,8 @@
     UIImage *scaledImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     NSData *_data = UIImageJPEGRepresentation(scaledImage, 1.0f);
-    NSString *_encodedImageStr = [_data base64EncodedStringWithOptions:0];
+    NSString *_encodedImageStr = [_data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    NSLog(@"%@",_encodedImageStr);
     MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = NSLocalizedString(@"Loading", nil);
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
@@ -401,16 +402,13 @@
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         if (data)
         {
-            NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSString *retStr = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
             NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
             NSLog(@"%@",retJson);
             NSDictionary* dic = [retJson objectFromJSONString];
             int commitStatus = 1;
             if (commitStatus)
             {
-                UIAlertView* alert=[[UIAlertView alloc]initWithTitle:nil message:@"已提交审核" delegate:self cancelButtonTitle:@"OK"otherButtonTitles:nil,nil];
-                alert.tag=1;
-                [alert show];
             }
             else
             {

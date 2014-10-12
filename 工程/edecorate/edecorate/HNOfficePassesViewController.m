@@ -58,13 +58,6 @@
     [self loadMyData];
 }
 
-- (NSDictionary *)encodeWithPassModel:(NSString *)shopid Andpageindex:(NSString *)pageindex Andpagesize:(NSString *)pagesize{
-    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:shopid,@"mshopid", pageindex,@"pageindex",pagesize,@"pagesize", nil];
-    //NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:pageindex,@"pageindex",pagesize,@"pagesize", nil];
-
-    return dic;
-}
-
 
 -(void)loadMyData
 {
@@ -73,8 +66,9 @@
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     //HNLoginModel *model = [[HNLoginModel alloc] init];
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[HNLoginData shared].mshopid,@"mshopid", nil];
+    NSLog(@"%@",[HNLoginData shared].mshopid);
     NSString *jsonStr = [dic JSONString];
-    request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"get.install.list" Params:jsonStr]];
+    request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"get.pass.list" Params:jsonStr]];
     NSString *contentType = @"text/html";
     [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
@@ -109,48 +103,6 @@
         
     }];
 }
-
-
-////获取出入证列表:调用接口
-//-(void)GetPassList:(NSString *)myshopid byPage:(NSString *)page AndRow:(NSString *)rows{
-//    MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
-//    hud.labelText = NSLocalizedString(@"Loading", nil);
-//    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-//    //拼传输参数(json)
-//    NSString *RequestJsonStr=[[self encodeWithPassModel:myshopid Andpageindex:page Andpagesize:rows] JSONString];
-//    request.URL=[NSURL URLWithString:[NSString createResponseURLWithMethod:@"get.pass.list" Params:RequestJsonStr]];
-//    NSString *contentType=@"text/html";
-//    [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
-//    //开始异步调用
-//    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-//        [MBProgressHUD hideHUDForView:self.view animated:YES];
-//        if (data) {
-//            NSString *returnStr=[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-//            NSString *returnJson=[NSString decodeFromPercentEscapeString:[returnStr decryptWithDES]];
-//            //解析returnJson
-//            NSLog(@"returnJson:%@",returnJson);
-//            //NSDictionary *dic=[returnJson objectFromJSONStringWithParseOptions:JKParseOptionLooseUnicode];
-//            NSDictionary *dic=[returnJson objectFromJSONString];
-//            NSLog(@"verification:%@",[dic objectForKey:@"verification"]);
-//            NSLog(@"total:%@",[dic objectForKey:@"total"]);
-//            if([dic objectForKey:@"verification"])
-//            {
-//                //查询成功
-//                UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"测试提示" message:returnJson delegate:nil cancelButtonTitle:NSLocalizedString(@"OK",nil) otherButtonTitles:nil];
-//                [alert show];
-//            }else
-//            {
-//                //查询失败
-//                UIAlertView *alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection Error", nil) message:NSLocalizedString(@"错误1", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK",nil) otherButtonTitles:nil];
-//                [alert show];
-//            }
-//        }else
-//        {
-//            UIAlertView *alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection Error", nil) message:NSLocalizedString(@"请检查网络是否连接", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK",nil) otherButtonTitles:nil];
-//            [alert show];
-//        }
-//    }];
-//}
 
 -(void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];

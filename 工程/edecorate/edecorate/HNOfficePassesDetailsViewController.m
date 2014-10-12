@@ -38,7 +38,7 @@
 
 @implementation HNOfficePassesDetailsViewController
 
--(id)initWithModel:(HNTemporaryModel *)model
+-(id)initWithModel:(HNPassData *)model
 {
     self = [super init];
     self.temporaryModel = model;
@@ -49,13 +49,13 @@
     [super viewDidLoad];
     self.view.backgroundColor=[UIColor whiteColor];
     self.navigationItem.title=@"详情";
-    [self labelWithTitle:@"深圳南三区么么大厦1层23楼" label:self.houseInfo];
-    [self labelWithTitle:@"吴先生" label:self.houseOnwer];
-    [self labelWithTitle:@"13888889999" label:self.houseOnwerMobile];
+    [self labelWithTitle:self.temporaryModel.roomnumber label:self.houseInfo];
+    [self labelWithTitle:self.temporaryModel.ownername label:self.houseOnwer];
+    [self labelWithTitle:self.temporaryModel.ownerphone label:self.houseOnwerMobile];
     
-    [self labelWithTitle:@"XX装修公司" label:self.decorationCompany];
-    [self labelWithTitle:@"李大" label:self.decorationChargeMan];
-    [self labelWithTitle:@"13511112222" label:self.decorationChargeMobile];
+    [self labelWithTitle:self.temporaryModel.shopname label:self.decorationCompany];
+    [self labelWithTitle:self.temporaryModel.principal label:self.decorationChargeMan];
+    [self labelWithTitle:self.temporaryModel.EnterprisePhone label:self.decorationChargeMobile];
     
     [self labelWithTitle:@"王二小" label:self.decortionMan];
     [self labelWithTitle:@"18999999999" label:self.decorationManMobile];
