@@ -102,20 +102,26 @@
     }
     HNDeliverData *model = self.deliverList[indexPath.row];
     [cell setRoomName:model.roomnumber];
-//    switch (model.status) {
-//        case <#constant#>:
-//            <#statements#>
-//            break;
-//            
-//        default:
-//            break;
-//    }
-    [cell setStatus:model.state];
+    //申请状态（0未审核，1已审核，-1审核未通过）
+    switch (model.state.intValue) {
+        case 0:
+            [cell setStatus:@"未审核"];
+            break;
+        case 1:
+            [cell setStatus:@"已审核"];
+            break;
+        case -1:
+            [cell setStatus:@"审核未通过"];
+            break;
+            
+        default:
+            break;
+    }
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    HNDeliverDetailViewController *detail = [[HNDeliverDetailViewController alloc] init];
+    HNDeliverDetailViewController *detail = [[HNDeliverDetailViewController alloc] initWithModel:self.deliverList[indexPath.row]];
     [self.navigationController pushViewController:detail animated:YES];
 }
 

@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HNDeliverData.h"
 
 @interface HNDeliverDetailViewController : UIViewController
-
+@property (nonatomic, strong)HNDeliverData* deliverModel;
+-(id)initWithModel:(HNDeliverData *)model;
 @end

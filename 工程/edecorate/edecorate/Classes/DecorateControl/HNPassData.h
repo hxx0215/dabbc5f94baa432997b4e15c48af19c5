@@ -25,7 +25,7 @@
 -(BOOL)updateData:(NSDictionary *)dic;
 @end
 
-@interface HNProposerData : NSObject
+@interface HNPassProposerData : NSObject
 @property (nonatomic, strong)NSString *name;
 @property (nonatomic, strong)NSString *sad;
 @property (nonatomic, strong)NSString *phone;//
@@ -39,7 +39,7 @@
 
 //"出入证缴费项详情JSON【已申请的详情项】
 //（name：缴费项名称，price:缴费金额，numer：数量，totalMoney：总金额，useUnit：单位）"
-@interface HNNeedItem : NSObject
+@interface HNPassNeedItem : NSObject
 @property (nonatomic, strong)NSString *name;
 @property (nonatomic, strong)NSString *price;
 @property (nonatomic, strong)NSString *numer;//
@@ -50,7 +50,7 @@
 
 //"出入证缴费项json  【申请时选择】
 //(name:名称，price:单价，userUnit:单位，explain:说明，IsSubmit:是否必交，Isrefund:是否可退，sort:排序)"
-@interface HNManageItem : NSObject
+@interface HNPassManageItem : NSObject
 @property (nonatomic, strong)NSString *name;
 @property (nonatomic, strong)NSString *price;
 @property (nonatomic, strong)NSString *userUnit;//

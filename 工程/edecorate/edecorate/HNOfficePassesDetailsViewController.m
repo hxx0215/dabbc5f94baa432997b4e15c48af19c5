@@ -58,7 +58,7 @@
     [self labelWithTitle:self.temporaryModel.EnterprisePhone label:self.decorationChargeMobile];
     
     if ([self.temporaryModel.proposerItems count]) {
-        HNProposerData* proposerData= self.temporaryModel.proposerItems[0];
+        HNPassProposerData* proposerData= self.temporaryModel.proposerItems[0];
         [self labelWithTitle:proposerData.name label:self.decortionMan];
         [self labelWithTitle:proposerData.phone label:self.decorationManMobile];
         [self labelWithTitle:proposerData.IDcard  label:self.decorationIdCardNo];

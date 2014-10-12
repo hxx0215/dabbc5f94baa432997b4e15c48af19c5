@@ -16,6 +16,12 @@
 
 @implementation HNDeliverDetailViewController
 
+-(id)initWithModel:(HNDeliverData *)model{
+    self = [super init];
+    self.deliverModel = model;
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.

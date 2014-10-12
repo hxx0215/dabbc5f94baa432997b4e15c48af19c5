@@ -19,11 +19,12 @@
     [self setValue:[dic objectForKey:@"ownername"] forKey:@"ownername"];
     [self setValue:[dic objectForKey:@"ownerphone"] forKey:@"ownerphone"];
     [self setValue:[dic objectForKey:@"assessorState"] forKey:@"assessorState"];
+    
     self.proposerItems = [[NSMutableArray alloc] init];
     NSArray* array = [dic objectForKey:@"proposerItem"];
     for (int i=0; i<[array count]; i++) {
         NSDictionary *dicData = [array objectAtIndex:i];
-        HNProposerData *tModel = [[HNProposerData alloc] init];
+        HNPassProposerData *tModel = [[HNPassProposerData alloc] init];
         [tModel updateData:dicData];
         [self.proposerItems addObject:tModel];
     }
@@ -36,7 +37,7 @@
     array = [dic objectForKey:@"needItem"];
     for (int i=0; i<[array count]; i++) {
         NSDictionary *dicData = [array objectAtIndex:i];
-        HNNeedItem *tModel = [[HNNeedItem alloc] init];
+        HNPassNeedItem *tModel = [[HNPassNeedItem alloc] init];
         [tModel updateData:dicData];
         [self.needItems addObject:tModel];
     }
@@ -45,7 +46,7 @@
     array = [dic objectForKey:@"manageItem"];
     for (int i=0; i<[array count]; i++) {
         NSDictionary *dicData = [array objectAtIndex:i];
-        HNManageItem *tModel = [[HNManageItem alloc] init];
+        HNPassManageItem *tModel = [[HNPassManageItem alloc] init];
         [tModel updateData:dicData];
         [self.manageItems addObject:tModel];
     }
@@ -53,7 +54,7 @@
 }
 @end
 
-@implementation HNProposerData
+@implementation HNPassProposerData
 -(BOOL)updateData:(NSDictionary *)dic
 {
     if (!dic)
@@ -69,7 +70,7 @@
 }
 @end
 
-@implementation HNNeedItem
+@implementation HNPassNeedItem
 -(BOOL)updateData:(NSDictionary *)dic
 {
     if (!dic)
@@ -84,7 +85,7 @@
 @end
 
 
-@implementation HNManageItem
+@implementation HNPassManageItem
 -(BOOL)updateData:(NSDictionary *)dic
 {
     if (!dic)
