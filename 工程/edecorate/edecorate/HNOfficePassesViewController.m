@@ -134,7 +134,7 @@
 }
 
 
--(void) tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{
+-(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     HNPassData* model = self.modelList[indexPath.row];
 //    if(model.status==TemporaryStatusCustom)

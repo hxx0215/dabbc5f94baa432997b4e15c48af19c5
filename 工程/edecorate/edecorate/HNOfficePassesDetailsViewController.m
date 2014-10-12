@@ -57,11 +57,15 @@
     [self labelWithTitle:self.temporaryModel.principal label:self.decorationChargeMan];
     [self labelWithTitle:self.temporaryModel.EnterprisePhone label:self.decorationChargeMobile];
     
-    [self labelWithTitle:@"王二小" label:self.decortionMan];
-    [self labelWithTitle:@"18999999999" label:self.decorationManMobile];
-    [self labelWithTitle:@"430726198910010522" label:self.decorationIdCardNo];
-    [self labelWithTitle:@"已上传" label:self.decorationIdCardPic];
-    [self labelWithTitle:@"已上传" label:self.decorationPic];
+    if ([self.temporaryModel.proposerItems count]) {
+        HNProposerData* proposerData= self.temporaryModel.proposerItems[0];
+        [self labelWithTitle:proposerData.name label:self.decortionMan];
+        [self labelWithTitle:proposerData.phone label:self.decorationManMobile];
+        [self labelWithTitle:proposerData.IDcard  label:self.decorationIdCardNo];
+        [self labelWithTitle:proposerData.Icon label:self.decorationIdCardPic];
+        [self labelWithTitle:proposerData.isTransaction label:self.decorationPic];
+    }
+    
  
     int officepassPerFee=10,depositFee=30;
     int officepassCount=1,depositCount=1;

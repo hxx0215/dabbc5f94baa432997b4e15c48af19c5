@@ -19,12 +19,83 @@
     [self setValue:[dic objectForKey:@"ownername"] forKey:@"ownername"];
     [self setValue:[dic objectForKey:@"ownerphone"] forKey:@"ownerphone"];
     [self setValue:[dic objectForKey:@"assessorState"] forKey:@"assessorState"];
-    //[self setValue:[dic objectForKey:@"proposerItem"] forKey:@"proposerItem"];
+    self.proposerItems = [[NSMutableArray alloc] init];
+    NSArray* array = [dic objectForKey:@"proposerItem"];
+    for (int i=0; i<[array count]; i++) {
+        NSDictionary *dicData = [array objectAtIndex:i];
+        HNProposerData *tModel = [[HNProposerData alloc] init];
+        [tModel updateData:dicData];
+        [self.proposerItems addObject:tModel];
+    }
+    
     [self setValue:[dic objectForKey:@"principal"] forKey:@"principal"];
     [self setValue:[dic objectForKey:@"EnterprisePhone"] forKey:@"EnterprisePhone"];
     [self setValue:[dic objectForKey:@"population"] forKey:@"population"];
-    //[self setValue:[dic objectForKey:@"needItem"] forKey:@"needItem"];
-    //[self setValue:[dic objectForKey:@"manageItem"] forKey:@"manageItem"];
+    
+    self.needItems = [[NSMutableArray alloc] init];
+    array = [dic objectForKey:@"needItem"];
+    for (int i=0; i<[array count]; i++) {
+        NSDictionary *dicData = [array objectAtIndex:i];
+        HNNeedItem *tModel = [[HNNeedItem alloc] init];
+        [tModel updateData:dicData];
+        [self.needItems addObject:tModel];
+    }
+    
+    self.manageItems = [[NSMutableArray alloc] init];
+    array = [dic objectForKey:@"manageItem"];
+    for (int i=0; i<[array count]; i++) {
+        NSDictionary *dicData = [array objectAtIndex:i];
+        HNManageItem *tModel = [[HNManageItem alloc] init];
+        [tModel updateData:dicData];
+        [self.manageItems addObject:tModel];
+    }
+    return YES;
+}
+@end
+
+@implementation HNProposerData
+-(BOOL)updateData:(NSDictionary *)dic
+{
+    if (!dic)
+        return NO;
+    [self setValue:[dic objectForKey:@"name"] forKey:@"name"];
+    [self setValue:[dic objectForKey:@"sad"] forKey:@"sad"];
+    [self setValue:[dic objectForKey:@"phone"] forKey:@"phone"];
+    [self setValue:[dic objectForKey:@"IDcard"] forKey:@"IDcard"];
+    [self setValue:[dic objectForKey:@"IDcardImg"] forKey:@"IDcardImg"];
+    [self setValue:[dic objectForKey:@"Icon"] forKey:@"Icon"];
+    [self setValue:[dic objectForKey:@"isTransaction"] forKey:@"isTransaction"];
+    return YES;
+}
+@end
+
+@implementation HNNeedItem
+-(BOOL)updateData:(NSDictionary *)dic
+{
+    if (!dic)
+        return NO;
+    [self setValue:[dic objectForKey:@"name"] forKey:@"name"];
+    [self setValue:[dic objectForKey:@"sad"] forKey:@"price"];
+    [self setValue:[dic objectForKey:@"phone"] forKey:@"numer"];
+    [self setValue:[dic objectForKey:@"IDcard"] forKey:@"totalMoney"];
+    [self setValue:[dic objectForKey:@"IDcardImg"] forKey:@"useUnit"];
+    return YES;
+}
+@end
+
+
+@implementation HNManageItem
+-(BOOL)updateData:(NSDictionary *)dic
+{
+    if (!dic)
+        return NO;
+    [self setValue:[dic objectForKey:@"name"] forKey:@"name"];
+    [self setValue:[dic objectForKey:@"sad"] forKey:@"price"];
+    [self setValue:[dic objectForKey:@"phone"] forKey:@"userUnit"];
+    [self setValue:[dic objectForKey:@"IDcard"] forKey:@"explain"];
+    [self setValue:[dic objectForKey:@"IDcardImg"] forKey:@"IsSubmit"];
+    [self setValue:[dic objectForKey:@"Icon"] forKey:@"Isrefund"];
+    [self setValue:[dic objectForKey:@"isTransaction"] forKey:@"sort"];
     return YES;
 }
 @end
