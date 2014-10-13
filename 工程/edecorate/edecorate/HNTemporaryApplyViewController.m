@@ -380,18 +380,16 @@
     UIImage *image=[info objectForKey:UIImagePickerControllerOriginalImage];
     [self.imagePicker dismissViewControllerAnimated:YES completion:nil];
     
-    CGFloat scaleSize = 0.01f;
+    CGFloat scaleSize = 0.5f;
     UIGraphicsBeginImageContext(CGSizeMake(image.size.width * scaleSize, image.size.height * scaleSize));
     [image drawInRect:CGRectMake(0, 0, image.size.width * scaleSize, image.size.height * scaleSize)];
     UIImage *scaledImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     NSData *_data = UIImageJPEGRepresentation(scaledImage, 1.0f);
     NSString *_encodedImageStr = [_data base64EncodedStringWithOptions:1];
-    NSLog(@"%@",_encodedImageStr);
+    
     MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = NSLocalizedString(@"Loading", nil);
-    
-    
     
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"testImage.jpg",@"name",nil];
     NSString *jsonStr = [dic JSONString];
@@ -399,8 +397,7 @@
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:URL cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
     
     [request setHTTPMethod:@"POST"];
-    NSData *data = [_encodedImageStr dataUsingEncoding:NSUTF8StringEncoding];
-    
+    NSData *data = [[NSData alloc]initWithBase64EncodedString:_encodedImageStr options:1];
     [request setHTTPBody:data];
     NSString *contentType = @"text/html";
     [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
