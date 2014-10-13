@@ -386,23 +386,29 @@
     UIImage *scaledImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     NSData *_data = UIImageJPEGRepresentation(scaledImage, 1.0f);
-    NSString *_encodedImageStr = [_data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    NSString *_encodedImageStr = [_data base64EncodedStringWithOptions:1];
     NSLog(@"%@",_encodedImageStr);
     MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = NSLocalizedString(@"Loading", nil);
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"testImage.jpg",@"name", _encodedImageStr,@"img",nil];
-    NSString *jsonStr = [dic JSONString];
     
-    request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"set.picture.add" Params:jsonStr]];
-    //{"name":"1.png","img":"1"}
+    
+    
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"testImage.jpg",@"name",nil];
+    NSString *jsonStr = [dic JSONString];
+    NSURL *URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"set.picture.add" Params:jsonStr]];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:URL cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
+    
+    [request setHTTPMethod:@"POST"];
+    NSData *data = [_encodedImageStr dataUsingEncoding:NSUTF8StringEncoding];
+    
+    [request setHTTPBody:data];
     NSString *contentType = @"text/html";
     [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         if (data)
         {
-            NSString *retStr = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
+            NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
             NSLog(@"%@",retJson);
             NSDictionary* dic = [retJson objectFromJSONString];
