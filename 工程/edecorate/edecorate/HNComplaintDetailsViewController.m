@@ -85,9 +85,9 @@
     [self labelWithTitle:NSLocalizedString(@"Evidence", nil) label:self.evidenceTitleLable];
     [self labelWithTitle:NSLocalizedString(@"Uploaded", nil) label:self.uploadStatusLable];
     
-    [self labelWithTitle:self.temporaryModel.complaintInfo.complaintCategory label:self.complaintCategoryLable];
-    [self labelWithTitle:self.temporaryModel.complaintInfo.complaintObject label:self.complaintObjectLable];
-    [self.complaintIssueLable setText:self.temporaryModel.complaintInfo.complaintIssue];
+//    [self labelWithTitle:self.temporaryModel.complaintInfo.complaintCategory label:self.complaintCategoryLable];
+//    [self labelWithTitle:self.temporaryModel.complaintInfo.complaintObject label:self.complaintObjectLable];
+//    [self.complaintIssueLable setText:self.temporaryModel.complaintInfo.complaintIssue];
     self.complaintIssueLable.font = [UIFont systemFontOfSize:12];
     [self.complaintIssueLable sizeToFit];
     self.complaintIssueLable.numberOfLines = 4;

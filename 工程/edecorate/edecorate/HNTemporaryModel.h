@@ -9,7 +9,11 @@
 #define TEMPORARYMODEL
 #import <Foundation/Foundation.h>
 
-
+typedef NS_ENUM(NSInteger, HNTemporaryType)
+{
+    FIRE,
+    POWER
+};
 
 typedef NS_ENUM(NSInteger, HNTemporaryStatus)
 {
@@ -20,7 +24,7 @@ typedef NS_ENUM(NSInteger, HNTemporaryStatus)
     
 };
 
-@interface HNHouseInfoModel : NSObject
+@interface HNTemporaryHouseInfoModel : NSObject
 @property (nonatomic, strong)NSString *houseInf;
 @property (nonatomic, strong)NSString *constructionPerson;
 @property (nonatomic, strong)NSString *constructionPersonPhoneNumber;
@@ -30,7 +34,7 @@ typedef NS_ENUM(NSInteger, HNTemporaryStatus)
 -(BOOL)updateData:(NSDictionary *)dic;
 @end
 
-@interface HNDataInfoModel : NSObject
+@interface HNTemporaryFireDataInfoModel : NSObject
 @property (nonatomic, strong)NSString *fireUnits;
 @property (nonatomic, strong)NSString *useOfFireBy;
 @property (nonatomic, strong)NSString *fireTools;
@@ -54,18 +58,49 @@ typedef NS_ENUM(NSInteger, HNTemporaryStatus)
 @property (nonatomic, strong)NSString *declareId;
 @property (nonatomic, strong)NSString *fireId;
 @property (nonatomic, strong)NSString *roomName;
-@property (nonatomic, strong)HNHouseInfoModel *huseInfo;
-@property (nonatomic, strong)HNDataInfoModel *dataInfo;
-@property (nonatomic, strong)HNComplaintModel *complaintInfo;
+@property (nonatomic, strong)HNTemporaryHouseInfoModel *huseInfo;
+@property (nonatomic, strong)HNTemporaryFireDataInfoModel *dataInfo;
 @property (nonatomic)HNTemporaryStatus status;
 -(BOOL)updateData:(NSDictionary *)dic;
 @end
+
+
+
+//*******
+
+
+@interface HNTemporaryElectroDataInfoModel : NSObject
+@property (nonatomic, strong)NSString *electroEnterprise;
+@property (nonatomic, strong)NSString *electroCause;
+@property (nonatomic, strong)NSString *electroTool;
+@property (nonatomic, strong)NSString *electroLoad;
+@property (nonatomic, strong)NSString *electroBTime;
+@property (nonatomic, strong)NSString *electroETime;
+@property (nonatomic, strong)NSString *electroOperator;
+@property (nonatomic, strong)NSString *electroPhone;
+@property (nonatomic, strong)NSString *PapersImg;
+-(BOOL)updateData:(NSDictionary *)dic;
+@end
+
+@interface HNTemporaryElectroModel : NSObject
+@property (nonatomic, strong)NSString *declareId;
+@property (nonatomic, strong)NSString *electroId;
+@property (nonatomic, strong)NSString *roomName;
+@property (nonatomic, strong)HNTemporaryHouseInfoModel *huseInfo;
+@property (nonatomic, strong)HNTemporaryElectroDataInfoModel *dataInfo;
+@property (nonatomic)HNTemporaryStatus status;
+
+-(BOOL)updateData:(NSDictionary *)dic;
+@end
+
+
 
 @interface HNTemporaryData : NSObject
 @property (nonatomic, strong)NSString *mshopid;
 @property (nonatomic, strong)NSNumber *total;
 @property (nonatomic, strong)NSString *error;
 @property (nonatomic, strong)NSMutableArray *modelList;
+@property (nonatomic) HNTemporaryType type;
 -(BOOL)updateData:(NSDictionary *)dic;
 @end
 

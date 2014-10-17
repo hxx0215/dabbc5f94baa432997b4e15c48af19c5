@@ -143,6 +143,7 @@
 		D33EEAC219D7000E00D6F106 /* HNAreaPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D33EEAC019D7000E00D6F106 /* HNAreaPickerView.xib */; };
 		D33EEAC619D70C8800D6F106 /* HNProfileChangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D33EEAC419D70C8800D6F106 /* HNProfileChangeViewController.m */; };
 		D33EEAC719D70C8800D6F106 /* HNProfileChangeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D33EEAC519D70C8800D6F106 /* HNProfileChangeViewController.xib */; };
+		D35EE4DE19EECFC100D889A3 /* HNHttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = D35EE4DD19EECFC100D889A3 /* HNHttpRequest.m */; };
 		D38E009019D84BE0000F5263 /* HNReimburseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D38E008E19D84BE0000F5263 /* HNReimburseViewController.m */; };
 		D38E009119D84BE0000F5263 /* HNReimburseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38E008F19D84BE0000F5263 /* HNReimburseViewController.xib */; };
 		D38E009419D84D20000F5263 /* HNReturnsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D38E009319D84D20000F5263 /* HNReturnsHeaderView.m */; };
@@ -420,6 +421,8 @@
 		D33EEAC319D70C8800D6F106 /* HNProfileChangeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNProfileChangeViewController.h; sourceTree = "<group>"; };
 		D33EEAC419D70C8800D6F106 /* HNProfileChangeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNProfileChangeViewController.m; sourceTree = "<group>"; };
 		D33EEAC519D70C8800D6F106 /* HNProfileChangeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HNProfileChangeViewController.xib; sourceTree = "<group>"; };
+		D35EE4DC19EECFC100D889A3 /* HNHttpRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNHttpRequest.h; sourceTree = "<group>"; };
+		D35EE4DD19EECFC100D889A3 /* HNHttpRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNHttpRequest.m; sourceTree = "<group>"; };
 		D38E008D19D84BE0000F5263 /* HNReimburseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNReimburseViewController.h; sourceTree = "<group>"; };
 		D38E008E19D84BE0000F5263 /* HNReimburseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNReimburseViewController.m; sourceTree = "<group>"; };
 		D38E008F19D84BE0000F5263 /* HNReimburseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HNReimburseViewController.xib; sourceTree = "<group>"; };
@@ -854,6 +857,8 @@
 				D33EEABB19D6FF5D00D6F106 /* city.plist */,
 				B9AD9E0619DEC90D00D82439 /* NSString+Crypt.h */,
 				B9AD9E0719DEC90D00D82439 /* NSString+Crypt.m */,
+				D35EE4DC19EECFC100D889A3 /* HNHttpRequest.h */,
+				D35EE4DD19EECFC100D889A3 /* HNHttpRequest.m */,
 			);
 			name = Share;
 			sourceTree = "<group>";
@@ -1246,6 +1251,7 @@
 				D3F4B5A319E82C93001CA79C /* HNDeliverData.m in Sources */,
 				B9AD9E0B19E01A7900D82439 /* JSONKit.m in Sources */,
 				B9B2BC2219CF1F3000839AED /* CTAssetsSupplementaryView.m in Sources */,
+				D35EE4DE19EECFC100D889A3 /* HNHttpRequest.m in Sources */,
 				37F9D80419D8B5E1005CB18B /* HNCommentsTableViewCell.m in Sources */,
 				B9E0667C19DCDCB100893DBD /* UIAlertView+AFNetworking.m in Sources */,
 				B9E0667B19DCDCB100893DBD /* UIActivityIndicatorView+AFNetworking.m in Sources */,

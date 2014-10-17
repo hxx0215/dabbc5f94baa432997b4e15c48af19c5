@@ -172,9 +172,9 @@
 
 - (IBAction)commit:(id)sender
 {
-    self.temporaryModel.complaintInfo.complaintCategory = self.complaintOCategoryTF.text;
-    self.temporaryModel.complaintInfo.complaintObject = self.complaintObjectTF.text;
-    self.temporaryModel.complaintInfo.complaintIssue = self.complaintContansTextView.text;
+//    self.temporaryModel.complaintInfo.complaintCategory = self.complaintOCategoryTF.text;
+//    self.temporaryModel.complaintInfo.complaintObject = self.complaintObjectTF.text;
+//    self.temporaryModel.complaintInfo.complaintIssue = self.complaintContansTextView.text;
     UIAlertView* alert=[[UIAlertView alloc]initWithTitle:nil message:@"已提交投诉" delegate:self cancelButtonTitle:@"OK"otherButtonTitles:nil,nil];
     alert.tag=1;
     [alert show];

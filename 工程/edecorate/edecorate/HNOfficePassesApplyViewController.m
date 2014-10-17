@@ -9,6 +9,10 @@
 #import "HNOfficePassesApplyViewController.h"
 #import "HNOfficePassesViewController.h"
 #import "UIView+AHKit.h"
+#import "NSString+Crypt.h"
+#import "JSONKit.h"
+#import "MBProgressHUD.h"
+#import "HNLoginData.h"
 
 @interface HNOfficePassesApplyViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
@@ -45,7 +49,7 @@
 
 @implementation HNOfficePassesApplyViewController
 
--(id)initWithModel:(HNTemporaryModel *)model
+-(id)initWithModel:(HNPassData *)model
 {
     self = [super init];
     self.temporaryModel = model;
@@ -112,16 +116,54 @@
 
 - (IBAction)checkOut:(id)sender
 {
-    UIAlertView* alert=[[UIAlertView alloc]initWithTitle:nil message:NSLocalizedString(@"支付成功，您的申请已提交审核，请在审核通过够到物业管理处领取证件", nil) delegate:self cancelButtonTitle:@"关闭" otherButtonTitles:nil,nil];
-    alert.tag=1;
-    [alert show];
+    MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = NSLocalizedString(@"Loading", nil);
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    NSString *jsonStr = [[self encodeWithTemporaryModel] JSONString];
+    request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"set.pass.list" Params:jsonStr]];
+    NSString *contentType = @"text/html";
+    [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
     
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        if (data)
+        {
+            NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
+            NSLog(@"%@",retJson);
+            NSDictionary* dic = [retJson objectFromJSONString];
+            int commitStatus = 1;
+            if (commitStatus)
+            {
+                UIAlertView* alert=[[UIAlertView alloc]initWithTitle:nil message:NSLocalizedString(@"支付成功，您的申请已提交审核，请在审核通过够到物业管理处领取证件", nil) delegate:self cancelButtonTitle:@"关闭" otherButtonTitles:nil,nil];
+                alert.tag=1;
+                [alert show];
+            }
+            else
+            {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Loading Fail", nil) message:NSLocalizedString(@"Please try again", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+                [alert show];
+            }
+        }
+        else{
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection Error", nil) message:NSLocalizedString(@"Please check your network.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+            [alert show];
+        }
+        
+    }];
+}
+
+- (NSDictionary *)encodeWithTemporaryModel{
+//    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:self.temporaryModel.declareId,@"declareId", _temporaryModel.headcount,@"headcount",_temporaryModel.proposerId,@"proposerId",_temporaryModel.proposer,@"proposer",_temporaryModel.needItem,@"needItem",nil];
+    //return dic;
+    return nil;
     
 }
+
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if(alertView.tag==1)
-        self.temporaryModel.status = TemporaryStatusApplying;
+    //if(alertView.tag==1)
+        //self.temporaryModel.status = TemporaryStatusApplying;
         [self.navigationController popViewControllerAnimated:YES];
 }
 

@@ -137,12 +137,12 @@
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     HNPassData* model = self.modelList[indexPath.row];
-//    if(model.status==TemporaryStatusCustom)
-//    {
-//        HNOfficePassesApplyViewController* officePasseesApply=[[HNOfficePassesApplyViewController alloc] initWithModel:model];
-//        [self.navigationController pushViewController:officePasseesApply animated:YES];
-//    }
-//    else
+    if([model.CARDId isEqualToString:@""])
+    {
+        HNOfficePassesApplyViewController* officePasseesApply=[[HNOfficePassesApplyViewController alloc] initWithModel:model];
+        [self.navigationController pushViewController:officePasseesApply animated:YES];
+    }
+    else
     {
         HNOfficePassesDetailsViewController *officeDetails=[[HNOfficePassesDetailsViewController alloc]  initWithModel:model];
         [self.navigationController pushViewController:officeDetails animated:YES];

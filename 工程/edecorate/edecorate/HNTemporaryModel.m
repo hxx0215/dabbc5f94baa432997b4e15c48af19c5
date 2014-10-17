@@ -8,7 +8,7 @@
 
 #import "HNTemporaryModel.h"
 
-@implementation HNHouseInfoModel
+@implementation HNTemporaryHouseInfoModel
 -(id)init
 {
     self = [super init];
@@ -35,7 +35,7 @@
 }
 @end
 
-@implementation HNDataInfoModel
+@implementation HNTemporaryFireDataInfoModel
 -(id)init
 {
     self = [super init];
@@ -92,9 +92,8 @@
 -(id)init
 {
     self = [super init];
-    self.huseInfo = [[HNHouseInfoModel alloc] init];
-    self.dataInfo = [[HNDataInfoModel alloc] init];
-    self.complaintInfo = [[HNComplaintModel alloc] init];
+    self.huseInfo = [[HNTemporaryHouseInfoModel alloc] init];
+    self.dataInfo = [[HNTemporaryFireDataInfoModel alloc] init];
     
     return self;
 }
@@ -125,6 +124,66 @@
 }
 @end
 
+
+
+//*********
+
+@implementation HNTemporaryElectroDataInfoModel
+
+-(BOOL)updateData:(NSDictionary *)dic{
+    if (!dic)
+        return NO;
+    
+    [self setValue:[dic objectForKey:@"electroEnterprise"] forKey:@"electroEnterprise"];
+    [self setValue:[dic objectForKey:@"electroCause"] forKey:@"electroCause"];
+    [self setValue:[dic objectForKey:@"electroTool"] forKey:@"electroTool"];
+    [self setValue:[dic objectForKey:@"electroLoad"] forKey:@"electroLoad"];
+    [self setValue:[dic objectForKey:@"electroBTime"] forKey:@"electroBTime"];
+    [self setValue:[dic objectForKey:@"electroETime"] forKey:@"electroETime"];
+    [self setValue:[dic objectForKey:@"electroOperator"] forKey:@"electroOperator"];
+    [self setValue:[dic objectForKey:@"electroPhone"] forKey:@"electroPhone"];
+    [self setValue:[dic objectForKey:@"PapersImg"] forKey:@"PapersImg"];
+    return YES;
+}
+@end
+
+@implementation HNTemporaryElectroModel
+-(id)init
+{
+    self = [super init];
+    self.huseInfo = [[HNTemporaryHouseInfoModel alloc] init];
+    self.dataInfo = [[HNTemporaryElectroDataInfoModel alloc] init];
+    
+    return self;
+}
+-(BOOL)updateData:(NSDictionary *)dic{
+    if (!dic)
+        return NO;
+    [self setValue:[dic objectForKey:@"electroId"] forKey:@"electroId"];
+    [self setValue:[dic objectForKey:@"declareId"] forKey:@"declareId"];
+    self.roomName = [dic objectForKey:@"roomnumber"];
+    NSNumber* number = [dic objectForKey:@"IsCheck"];
+    switch (number.intValue) {
+        case 0:
+            self.status = TemporaryStatusApplying;
+            break;
+        case 1:
+            self.status = TemporaryStatusPassed;
+            break;
+            
+        default:
+            break;
+    }
+    if ([self.electroId isEqualToString:@""]) {
+        self.status = TemporaryStatusCustom;
+    }
+    [self.huseInfo updateData:dic];
+    [self.dataInfo updateData:dic];
+    return YES;
+}
+@end
+
+
 @implementation HNTemporaryData
 
 -(BOOL)updateData:(NSDictionary *)dic{
@@ -136,9 +195,26 @@
     NSArray* array = [dic objectForKey:@"data"];
     for (int i = 0; i<self.total.intValue; i++) {
         NSDictionary *dicData = [array objectAtIndex:i];
-        HNTemporaryModel *tModel = [[HNTemporaryModel alloc] init];
-        [tModel updateData:dicData];
-        [self.modelList addObject:tModel];
+        switch (self.type) {
+            case POWER:
+            {
+                HNTemporaryElectroModel *tModel = [[HNTemporaryElectroModel alloc] init];
+                [tModel updateData:dicData];
+                [self.modelList addObject:tModel];
+            }
+                break;
+                
+            case FIRE:
+            {
+                HNTemporaryModel *tModel = [[HNTemporaryModel alloc] init];
+                [tModel updateData:dicData];
+                [self.modelList addObject:tModel];
+            }
+                break;
+            default:
+                break;
+        }
+        
     }
     
     

@@ -55,7 +55,9 @@
     self.navigationItem.title = [self getTitleString];
     
 
-    
+    self.model = [[HNTemporaryData alloc] init];
+    self.model.mshopid = [HNLoginData shared].mshopid;
+    self.model.type = self.temporaryType;
     switch (self.temporaryType) {
         case FIRE:
             [self loadFire];
@@ -75,9 +77,7 @@
     MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = NSLocalizedString(@"Loading", nil);
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    self.model = [[HNTemporaryData alloc] init];
-    self.model.mshopid = [HNLoginData shared].mshopid;
-    NSString *jsonStr = [[self encodeWithTemporaryModel:self.model] JSONString];
+    NSString *jsonStr = [[self encodeWithTemporaryModel:self.model.mshopid] JSONString];
     request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"get.temporary.fire" Params:jsonStr]];
     NSString *contentType = @"text/html";
     [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
@@ -115,10 +115,8 @@
     MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = NSLocalizedString(@"Loading", nil);
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    self.model = [[HNTemporaryData alloc] init];
-    self.model.mshopid = [HNLoginData shared].mshopid;
-    NSString *jsonStr = [[self encodeWithTemporaryModel:self.model] JSONString];
-    request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"get.temporary.power" Params:jsonStr]];
+    NSString *jsonStr = [[self encodeWithTemporaryModel:self.model.mshopid] JSONString];
+    request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"get.temporary.electro" Params:jsonStr]];
     NSString *contentType = @"text/html";
     [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
     
@@ -131,7 +129,6 @@
             NSLog(@"%@",retJson);
             NSDictionary* dic = [retJson objectFromJSONString];
             [self.model updateData:dic];
-            NSLog(@"%@",self.model.error);
             if (self.model.total.intValue){//之后需要替换成status
                 [self.tTableView reloadData];
             }
@@ -150,8 +147,8 @@
     
 }
 
-- (NSDictionary *)encodeWithTemporaryModel:(HNTemporaryData *)model{
-    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:model.mshopid,@"mshopid", nil];
+- (NSDictionary *)encodeWithTemporaryModel:(NSString *)shopid{
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:shopid,@"mshopid", nil];
     return dic;
 }
 
