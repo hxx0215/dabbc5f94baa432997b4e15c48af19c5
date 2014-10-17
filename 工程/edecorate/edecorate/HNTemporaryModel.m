@@ -93,6 +93,14 @@
 {
     self = [super init];
     self.huseInfo = [[HNTemporaryHouseInfoModel alloc] init];
+    return self;
+}
+@end
+
+@implementation HNTemporaryFireModel
+-(id)init
+{
+    self = [super init];
     self.dataInfo = [[HNTemporaryFireDataInfoModel alloc] init];
     
     return self;
@@ -151,7 +159,6 @@
 -(id)init
 {
     self = [super init];
-    self.huseInfo = [[HNTemporaryHouseInfoModel alloc] init];
     self.dataInfo = [[HNTemporaryElectroDataInfoModel alloc] init];
     
     return self;
@@ -200,14 +207,16 @@
             {
                 HNTemporaryElectroModel *tModel = [[HNTemporaryElectroModel alloc] init];
                 [tModel updateData:dicData];
+                tModel.type = self.type;
                 [self.modelList addObject:tModel];
             }
                 break;
                 
             case FIRE:
             {
-                HNTemporaryModel *tModel = [[HNTemporaryModel alloc] init];
+                HNTemporaryFireModel *tModel = [[HNTemporaryFireModel alloc] init];
                 [tModel updateData:dicData];
+                tModel.type = self.type;
                 [self.modelList addObject:tModel];
             }
                 break;

@@ -56,14 +56,17 @@ typedef NS_ENUM(NSInteger, HNTemporaryStatus)
 
 @interface HNTemporaryModel : NSObject
 @property (nonatomic, strong)NSString *declareId;
-@property (nonatomic, strong)NSString *fireId;
 @property (nonatomic, strong)NSString *roomName;
 @property (nonatomic, strong)HNTemporaryHouseInfoModel *huseInfo;
-@property (nonatomic, strong)HNTemporaryFireDataInfoModel *dataInfo;
 @property (nonatomic)HNTemporaryStatus status;
--(BOOL)updateData:(NSDictionary *)dic;
+@property (nonatomic) HNTemporaryType type;
 @end
 
+@interface HNTemporaryFireModel : HNTemporaryModel
+@property (nonatomic, strong)NSString *fireId;
+@property (nonatomic, strong)HNTemporaryFireDataInfoModel *dataInfo;
+-(BOOL)updateData:(NSDictionary *)dic;
+@end
 
 
 //*******
@@ -82,17 +85,11 @@ typedef NS_ENUM(NSInteger, HNTemporaryStatus)
 -(BOOL)updateData:(NSDictionary *)dic;
 @end
 
-@interface HNTemporaryElectroModel : NSObject
-@property (nonatomic, strong)NSString *declareId;
+@interface HNTemporaryElectroModel : HNTemporaryModel
 @property (nonatomic, strong)NSString *electroId;
-@property (nonatomic, strong)NSString *roomName;
-@property (nonatomic, strong)HNTemporaryHouseInfoModel *huseInfo;
 @property (nonatomic, strong)HNTemporaryElectroDataInfoModel *dataInfo;
-@property (nonatomic)HNTemporaryStatus status;
-
 -(BOOL)updateData:(NSDictionary *)dic;
 @end
-
 
 
 @interface HNTemporaryData : NSObject

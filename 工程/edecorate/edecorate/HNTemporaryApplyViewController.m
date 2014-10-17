@@ -123,12 +123,27 @@
     
     [self labelWithTitle:self.temporaryModel.huseInfo.constructionPersonPhoneNumber  label:self.constructionPersonPhoneNumberLabel];
     
+    if(self.temporaryModel.type==FIRE)
+    {
+        [self labelWithTitle:NSLocalizedString(@"Fire Apply", nil) label:self.temporaryApplyMainLable];
+        [self labelWithTitle:NSLocalizedString(@"Fire units", nil) label:self.fireunitsTitleLabel];
+        [self labelWithTitle:NSLocalizedString(@"Use of fire by", nil) label:self.useOfFireByTitleLabel];
+        [self labelWithTitle:NSLocalizedString(@"Fire tools", nil) label:self.fireToolsTitleLabel];
+        [self labelWithTitle:NSLocalizedString(@"Fire load", nil) label:self.fireLoadTitleLabel];
+        [self.noticeFireButton setTitle:NSLocalizedString(@"Notice the use of fire", nil) forState:UIControlStateNormal];
+        
     
-    [self labelWithTitle:NSLocalizedString(@"Fire Apply", nil) label:self.temporaryApplyMainLable];
-    [self labelWithTitle:NSLocalizedString(@"Fire units", nil) label:self.fireunitsTitleLabel];
-    [self labelWithTitle:NSLocalizedString(@"Use of fire by", nil) label:self.useOfFireByTitleLabel];
-    [self labelWithTitle:NSLocalizedString(@"Fire tools", nil) label:self.fireToolsTitleLabel];
-    [self labelWithTitle:NSLocalizedString(@"Fire load", nil) label:self.fireLoadTitleLabel];
+    }else{
+        [self labelWithTitle:NSLocalizedString(@"Electro Apply", nil) label:self.temporaryApplyMainLable];
+        [self labelWithTitle:NSLocalizedString(@"Electro units", nil) label:self.fireunitsTitleLabel];
+        [self labelWithTitle:NSLocalizedString(@"Use of electro by", nil) label:self.useOfFireByTitleLabel];
+        [self labelWithTitle:NSLocalizedString(@"Electro tools", nil) label:self.fireToolsTitleLabel];
+        [self labelWithTitle:NSLocalizedString(@"Electro load", nil) label:self.fireLoadTitleLabel];
+        [self.noticeFireButton setTitle:NSLocalizedString(@"Notice the use of electro", nil) forState:UIControlStateNormal];
+        
+    }
+    [self.noticeFireButton sizeToFit];
+    
     [self labelWithTitle:NSLocalizedString(@"Start Time", nil) label:self.startTimeTitleLabel];
     [self labelWithTitle:NSLocalizedString(@"End Time", nil) label:self.endTimeTitleLabel];
     [self labelWithTitle:NSLocalizedString(@"Operator", nil) label:self.operatorTitleLabel];
@@ -157,8 +172,7 @@
     self.validDocumentsTF.delegate = self;
     
     //@property (strong, nonatomic) IBOutlet UIButton *commitButton;
-    [self.noticeFireButton setTitle:NSLocalizedString(@"Notice the use of fire", nil) forState:UIControlStateNormal];
-    [self.noticeFireButton sizeToFit];
+    
 
     [self.uploadButton setTitle:NSLocalizedString(@"Upload", nil) forState:UIControlStateNormal];
     [self.uploadButton sizeToFit];
@@ -259,7 +273,8 @@
 }
 
 - (NSDictionary *)encodeWithTemporaryModel:(HNTemporaryModel *)model{
-    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:_temporaryModel.declareId,@"declareId", _temporaryModel.dataInfo.fireUnits,@"fireEnterprise",_temporaryModel.dataInfo.useOfFireBy,@"fireCause",_temporaryModel.dataInfo.fireTools,@"fireTool",_temporaryModel.dataInfo.fireLoad,@"fireLoad",_temporaryModel.dataInfo.startTime,@"fireBTime",_temporaryModel.dataInfo.endTime,@"fireETime",_temporaryModel.dataInfo.operatorPerson,@"fireOperator",_temporaryModel.dataInfo.phone,@"firePhone",_temporaryModel.dataInfo.validDocuments,@"PapersImg",nil];
+    HNTemporaryFireModel* fmodel = (HNTemporaryFireModel*)model;
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:fmodel.declareId,@"declareId", fmodel.dataInfo.fireUnits,@"fireEnterprise",fmodel.dataInfo.useOfFireBy,@"fireCause",fmodel.dataInfo.fireTools,@"fireTool",fmodel.dataInfo.fireLoad,@"fireLoad",fmodel.dataInfo.startTime,@"fireBTime",fmodel.dataInfo.endTime,@"fireETime",fmodel.dataInfo.operatorPerson,@"fireOperator",fmodel.dataInfo.phone,@"firePhone",fmodel.dataInfo.validDocuments,@"PapersImg",nil];
     return dic;
     
 }
@@ -286,33 +301,34 @@
 - (IBAction)editEnd:(id)sender {
     NSLog(@"editEnd");
     UITextField *tf = (UITextField *)sender;
+    HNTemporaryFireModel* fmodel = self.temporaryModel;
     switch (tf.tag) {
         case 0:
-            self.temporaryModel.dataInfo.fireUnits = tf.text;
+            fmodel.dataInfo.fireUnits = tf.text;
             break;
         case 1:
-            self.temporaryModel.dataInfo.useOfFireBy = tf.text;
+            fmodel.dataInfo.useOfFireBy = tf.text;
             break;
         case 2:
-            self.temporaryModel.dataInfo.fireTools = tf.text;
+            fmodel.dataInfo.fireTools = tf.text;
             break;
         case 3:
-            self.temporaryModel.dataInfo.fireLoad = tf.text;
+            fmodel.dataInfo.fireLoad = tf.text;
             break;
         case 4:
-            self.temporaryModel.dataInfo.startTime = tf.text;
+            fmodel.dataInfo.startTime = tf.text;
             break;
         case 5:
-            self.temporaryModel.dataInfo.endTime = tf.text;
+            fmodel.dataInfo.endTime = tf.text;
             break;
         case 6:
-            self.temporaryModel.dataInfo.operatorPerson = tf.text;
+            fmodel.dataInfo.operatorPerson = tf.text;
             break;
         case 7:
-            self.temporaryModel.dataInfo.phone = tf.text;
+            fmodel.dataInfo.phone = tf.text;
             break;
         case 8:
-            self.temporaryModel.dataInfo.validDocuments = tf.text;
+            fmodel.dataInfo.validDocuments = tf.text;
             break;
             
         default:
