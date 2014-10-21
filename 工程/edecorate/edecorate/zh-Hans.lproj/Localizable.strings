@@ -147,3 +147,6 @@
 "Receive a return, agree to a refund" = "收到退货，同意退款";
 "Refused to refund Money" = "拒绝退款";
 "Receive a return, re-send" = "收到退货，重新发送";
+
+"User" = "用户名";
+"Password" = "密码";

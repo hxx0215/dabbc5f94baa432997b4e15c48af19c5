@@ -32,7 +32,7 @@
 //    HNHomeViewController *homeViewController = [[HNHomeViewController alloc] init];
     HNLoginViewController *loginViewController = [[HNLoginViewController alloc] init];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginViewController];
-    self.window.rootViewController = loginViewController;
+    self.window.rootViewController = nav;
     nav.navigationBar.translucent = NO;
 //    _infoLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 90, 320, 200)];
 //    [_infoLabel setBackgroundColor:[UIColor clearColor]];

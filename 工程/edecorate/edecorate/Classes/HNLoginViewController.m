@@ -13,6 +13,7 @@
 #import "JSONKit.h"
 #import "MBProgressHUD.h"
 #import "HNLoginData.h"
+#import "HNLoginView.h"
 
 @interface HNLoginModel: NSObject
 @property (nonatomic, strong)NSString *username;
@@ -28,6 +29,7 @@
 @property (nonatomic, strong)UITextField *passwordTextField;
 @property (nonatomic, strong)UIButton *loginButton;
 @property (nonatomic, strong)UIImageView *backImage;
+@property (nonatomic, strong)HNLoginView *loginView;
 @end
 @implementation HNLoginViewController
 - (instancetype)init{
@@ -64,12 +66,14 @@
 
     self.backImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"loginback.jpg"]];
 
+    self.loginView = [[HNLoginView alloc] initWithFrame:CGRectMake(18, 18, self.view.width - 36, 81)];
     
     [self.view addSubview:self.backImage];
-    [self.view addSubview:self.userLabel];
-    [self.view addSubview:self.passwordLabel];
-    [self.view addSubview:self.userTextField];
-    [self.view addSubview:self.passwordTextField];
+    [self.view addSubview:self.loginView];
+//    [self.view addSubview:self.userLabel];
+//    [self.view addSubview:self.passwordLabel];
+//    [self.view addSubview:self.userTextField];
+//    [self.view addSubview:self.passwordTextField];
     [self.view addSubview:self.loginButton];
     self.userTextField.text = @"admin";
     self.passwordTextField.text = @"123456";
