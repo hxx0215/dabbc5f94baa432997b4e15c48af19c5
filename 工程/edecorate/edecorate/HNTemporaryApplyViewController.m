@@ -402,7 +402,7 @@
     UIImage *scaledImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     NSData *_data = UIImageJPEGRepresentation(scaledImage, 1.0f);
-    NSString *_encodedImageStr = [_data base64EncodedStringWithOptions:1];
+    //NSString *_encodedImageStr = [_data base64EncodedStringWithOptions:1];
     
     MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = NSLocalizedString(@"Loading", nil);
@@ -413,8 +413,8 @@
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:URL cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
     
     [request setHTTPMethod:@"POST"];
-    NSData *data = [[NSData alloc]initWithBase64EncodedString:_encodedImageStr options:1];
-    [request setHTTPBody:data];
+    //NSData *data = [[NSData alloc]initWithBase64EncodedString:_encodedImageStr options:1];
+    [request setHTTPBody:_data];
     NSString *contentType = @"text/html";
     [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
