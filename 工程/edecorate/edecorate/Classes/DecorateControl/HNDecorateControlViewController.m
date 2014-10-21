@@ -53,37 +53,61 @@
 
 @implementation HNDecorateControlViewController
 
-#define HSPACE 50
-#define WSPACE 15
+
+#define HSPACE 126
+#define WLEFT 5
+#define WRIGHT 20
+#define WSPACE 10
 #define TSPACEPER 0.1
-#define BTNHEIGHT 50
-#define STARTTOP 50
+#define STARTTOP 266
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
-    self.decorateReportedConstruction = [self createButtonWithTitle:NSLocalizedString(@"Reported that construction decoration", nil) selector:@selector(decorateReportedConstructionButton_Clicked:) row:0 coloum:0];
-    self.decorateAcceptance = [self createButtonWithTitle:NSLocalizedString(@"Decoration acceptance", nil) selector:@selector(decorateAcceptanceButton_Clicked:) row:0 coloum:1];
-    self.officePasses = [self createButtonWithTitle:NSLocalizedString(@"Office passes", nil) selector:@selector(officePassesButton_Clicked:) row:0 coloum:2];
-    self.temporaryFire = [self createButtonWithTitle:NSLocalizedString(@"Temporary fire", nil) selector:@selector(temporaryFireConstructionButton_Clicked:) row:1 coloum:0];
-    self.temporaryPower = [self createButtonWithTitle:NSLocalizedString(@"Temporary power", nil) selector:@selector(temporaryPowerButton_Clicked:) row:1 coloum:1];
-    self.deliveryAndInstallation = [self createButtonWithTitle:NSLocalizedString(@"Delivery&Installation", nil) selector:@selector(deliveryAndInstallationButton_Clicked:) row:1 coloum:2];
-    self.depositRefund = [self createButtonWithTitle:NSLocalizedString(@"Deposit refund", nil) selector:@selector(depositRefundButton_Clicked:) row:2 coloum:0];
-    self.IHaveAComplaint = [self createButtonWithTitle:NSLocalizedString(@"I have a complaint", nil) selector:@selector(IHaveAComplaintButton_Clicked:) row:2 coloum:1];
+    self.decorateReportedConstruction = [self createButtonWithTitle:NSLocalizedString(@"Reported that construction decoration", nil) selector:@selector(decorateReportedConstructionButton_Clicked:) row:0 coloum:0 image:[UIImage imageNamed:@"装修报建.png"] imageClick:[UIImage imageNamed:@"装修报建点击.png"]];
+    
+    self.decorateAcceptance = [self createButtonWithTitle:NSLocalizedString(@"Decoration acceptance", nil) selector:@selector(decorateAcceptanceButton_Clicked:) row:0 coloum:1 image:[UIImage imageNamed:@"装修验收.png"] imageClick:[UIImage imageNamed:@"装修验收点击.png"]];
+    self.officePasses = [self createButtonWithTitle:NSLocalizedString(@"Office passes", nil) selector:@selector(officePassesButton_Clicked:) row:0 coloum:2 image:[UIImage imageNamed:@"办出入证.png"] imageClick:[UIImage imageNamed:@"办出入证点击.png"]];
+    self.temporaryFire = [self createButtonWithTitle:NSLocalizedString(@"Temporary fire", nil) selector:@selector(temporaryFireConstructionButton_Clicked:) row:0 coloum:3 image:[UIImage imageNamed:@"临时用火.png"] imageClick:[UIImage imageNamed:@"临时用火点击.png"]];
+    self.temporaryPower = [self createButtonWithTitle:NSLocalizedString(@"Temporary power", nil) selector:@selector(temporaryPowerButton_Clicked:) row:1 coloum:0 image:[UIImage imageNamed:@"临时用电.png"] imageClick:[UIImage imageNamed:@"临时用电点击.png"]];
+    self.deliveryAndInstallation = [self createButtonWithTitle:NSLocalizedString(@"Delivery&Installation", nil) selector:@selector(deliveryAndInstallationButton_Clicked:) row:1 coloum:1 image:[UIImage imageNamed:@"送货安装.png"] imageClick:[UIImage imageNamed:@"送货安装点击.png"]];
+    self.depositRefund = [self createButtonWithTitle:NSLocalizedString(@"Deposit refund", nil) selector:@selector(depositRefundButton_Clicked:) row:1 coloum:2 image:[UIImage imageNamed:@"押金退款.png"] imageClick:[UIImage imageNamed:@"押金退款点击.png"]];
+    self.IHaveAComplaint = [self createButtonWithTitle:NSLocalizedString(@"I have a complaint", nil) selector:@selector(IHaveAComplaintButton_Clicked:) row:1 coloum:3 image:[UIImage imageNamed:@"我要投诉.png"] imageClick:[UIImage imageNamed:@"我要投诉点击.png"]];
 }
 
-- (UIButton *)createButtonWithTitle:(NSString *)title selector:(SEL)selector row:(int)ro coloum:(int)col{
+- (UIButton *)createButtonWithTitle:(NSString *)title selector:(SEL)selector row:(int)ro coloum:(int)col image:(UIImage* )image imageClick:(UIImage* )imageClick{
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     [btn setTitle:title forState:UIControlStateNormal];
     [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    btn.titleLabel.font = [UIFont systemFontOfSize:12];
+    [btn.titleLabel sizeToFit];
+    [btn setImage:image forState:UIControlStateNormal];
+    [btn setImage:imageClick forState:UIControlStateSelected];
+//    [btn.titleLabel setContentMode:UIViewContentModeCenter];
+//    [btn setTitleEdgeInsets:UIEdgeInsetsMake(0,
+//                                              -image.size.width,
+//                                              0.0,
+//                                              0.0)];
+//    
     [btn sizeToFit];
-    btn.width = (self.view.width - 5 * WSPACE)/3;
-    btn.height = BTNHEIGHT;
-    btn.left = WSPACE+(btn.width+WSPACE)*col;
-    btn.top = HSPACE+(BTNHEIGHT+HSPACE)*ro;
-    btn.layer.borderWidth = 1.0;
-    btn.layer.borderColor = [UIColor blackColor].CGColor;
+    // get the size of the elements here for readability
+    CGSize imageSize = btn.imageView.frame.size;
+    CGSize titleSize = btn.titleLabel.frame.size;
+    // get the height they will take up as a unit
+    CGFloat totalHeight = (imageSize.height + titleSize.height + 4);
+    // raise the image and push it right to center it
+    btn.imageEdgeInsets = UIEdgeInsetsMake(- (totalHeight - imageSize.height), 0.0, 0.0, - titleSize.width);
+    // lower the text and push it left to center it
+    btn.titleEdgeInsets = UIEdgeInsetsMake(0.0, - image.size.width, - (totalHeight - titleSize.height),0.0);
+
+    
+    //btn.width = (self.view.width - 3 * WSPACE - WLEFT - WRIGHT)/4;
+    //btn.height = btn.width;
+    btn.left = (image.size.width+WSPACE)*col;
+    btn.top = HSPACE+(image.size.width+HSPACE)*ro;
+    //btn.layer.borderWidth = 1.0;
+    //btn.layer.borderColor = [UIColor blackColor].CGColor;
     [btn addTarget:self action:selector forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn];
     return btn;
