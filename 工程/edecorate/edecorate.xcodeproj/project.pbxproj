@@ -65,6 +65,7 @@
 		B95D15BF19D9A28200689B4D /* CustomIOS7AlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = B95D15BE19D9A28200689B4D /* CustomIOS7AlertView.m */; };
 		B95D15C419D9AE4B00689B4D /* HNEditPriceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B95D15C219D9AE4B00689B4D /* HNEditPriceViewController.m */; };
 		B95D15C519D9AE4B00689B4D /* HNEditPriceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B95D15C319D9AE4B00689B4D /* HNEditPriceViewController.xib */; };
+		B965862E19F68DB800EB4766 /* loginback@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B965862D19F68DB800EB4766 /* loginback@2x.jpg */; };
 		B965E76019D04955004CD201 /* HNDeliverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B965E75F19D04955004CD201 /* HNDeliverViewController.m */; };
 		B965E76919D04CDA004CD201 /* HNDeliverDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B965E76719D04CDA004CD201 /* HNDeliverDetailViewController.m */; };
 		B965E76A19D04CDA004CD201 /* HNDeliverDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B965E76819D04CDA004CD201 /* HNDeliverDetailViewController.xib */; };
@@ -278,6 +279,7 @@
 		B95D15C119D9AE4B00689B4D /* HNEditPriceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNEditPriceViewController.h; path = Classes/BusinessBackground/HNEditPriceViewController.h; sourceTree = "<group>"; };
 		B95D15C219D9AE4B00689B4D /* HNEditPriceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNEditPriceViewController.m; path = Classes/BusinessBackground/HNEditPriceViewController.m; sourceTree = "<group>"; };
 		B95D15C319D9AE4B00689B4D /* HNEditPriceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HNEditPriceViewController.xib; path = Classes/BusinessBackground/HNEditPriceViewController.xib; sourceTree = "<group>"; };
+		B965862D19F68DB800EB4766 /* loginback@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "loginback@2x.jpg"; sourceTree = "<group>"; };
 		B965E75E19D04955004CD201 /* HNDeliverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNDeliverViewController.h; path = Classes/DecorateControl/HNDeliverViewController.h; sourceTree = "<group>"; };
 		B965E75F19D04955004CD201 /* HNDeliverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNDeliverViewController.m; path = Classes/DecorateControl/HNDeliverViewController.m; sourceTree = "<group>"; };
 		B965E76619D04CDA004CD201 /* HNDeliverDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNDeliverDetailViewController.h; path = Classes/DecorateControl/HNDeliverDetailViewController.h; sourceTree = "<group>"; };
@@ -718,6 +720,22 @@
 			name = Alert;
 			sourceTree = "<group>";
 		};
+		B965862B19F68CBD00EB4766 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				B965862C19F68D4C00EB4766 /* Login */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		B965862C19F68D4C00EB4766 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				B965862D19F68DB800EB4766 /* loginback@2x.jpg */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
 		B965E76119D04B95004CD201 /* Report */ = {
 			isa = PBXGroup;
 			children = (
@@ -887,6 +905,7 @@
 		B9DE55FE19C9C12C00280EC7 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B965862B19F68CBD00EB4766 /* Images */,
 				B9DE560619C9C40B00280EC7 /* Localizable.strings */,
 			);
 			name = Resources;
@@ -1168,6 +1187,7 @@
 				B9B2BC1F19CF1F3000839AED /* CTAssetsPicker.xcassets in Resources */,
 				D38E009919D84EFC000F5263 /* HNReturnsTableViewCell.xib in Resources */,
 				3732B12D19CFC46E00ADF3F5 /* HNOfficePassesDetailsViewController.xib in Resources */,
+				B965862E19F68DB800EB4766 /* loginback@2x.jpg in Resources */,
 				37724D7819D8F69700A9B7EC /* HNCommentsDetailViewController.xib in Resources */,
 				D33EEA5F19D69F3200D6F106 /* HNBusinessBKControlViewController.xib in Resources */,
 				D33EEA6519D6C2B700D6F106 /* HNVolumeViewController.xib in Resources */,

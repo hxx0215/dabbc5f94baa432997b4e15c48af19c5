@@ -27,6 +27,7 @@
 @property (nonatomic, strong)UITextField *userTextField;
 @property (nonatomic, strong)UITextField *passwordTextField;
 @property (nonatomic, strong)UIButton *loginButton;
+@property (nonatomic, strong)UIImageView *backImage;
 @end
 @implementation HNLoginViewController
 - (instancetype)init{
@@ -60,7 +61,11 @@
     [self.loginButton addTarget:self action:@selector(login:) forControlEvents:UIControlEventTouchUpInside];
     self.loginButton.layer.borderWidth = 1.0;
     self.loginButton.layer.borderColor = [UIColor lightGrayColor].CGColor;
+
+    self.backImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"loginback.jpg"]];
+
     
+    [self.view addSubview:self.backImage];
     [self.view addSubview:self.userLabel];
     [self.view addSubview:self.passwordLabel];
     [self.view addSubview:self.userTextField];
