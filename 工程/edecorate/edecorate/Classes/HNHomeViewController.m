@@ -53,7 +53,7 @@
     [btn setTitle:title forState:UIControlStateNormal];
     [btn setTitleColor:color forState:UIControlStateNormal];
     btn.titleLabel.font = [UIFont systemFontOfSize:20];
-    
+    btn.layer.cornerRadius = 5.0;
 //    UIImage* image = [UIImage imageNamed:@"按键点击.9.png"];
 //    [btn setImage:image forState:UIControlStateNormal];
     //[btn sizeToFit];
@@ -61,8 +61,10 @@
     btn.height = btnHeight;
     btn.left = WSpace;
     btn.layer.borderWidth = 1.0;
-    btn.layer.borderColor = [UIColor blackColor].CGColor;
+    btn.layer.borderColor = [UIColor colorWithWhite:173.0/255.0 alpha:1.0].CGColor;
+    [btn addTarget:self action:@selector(highlightButton:) forControlEvents:UIControlEventTouchDown];
     [btn addTarget:self action:selector forControlEvents:UIControlEventTouchUpInside];
+    [btn addTarget:self action:@selector(normalButton:) forControlEvents:UIControlEventTouchUpOutside];
     return btn;
 }
 
@@ -83,20 +85,28 @@
     else{
     }
 }
-
-- (void)decorateControlButton_Clicked:(id)sender{
+- (void)highlightButton:(UIButton *)sender{
+    [sender setBackgroundColor:[UIColor colorWithWhite:224.0/255.0 alpha:1.0]];
+}
+- (void)normalButton:(UIButton *)sender{
+    [sender setBackgroundColor:[UIColor whiteColor]];
+}
+- (void)decorateControlButton_Clicked:(UIButton *)sender{
     NSLog(@"decor");
+    [sender setBackgroundColor:[UIColor whiteColor]];
     HNDecorateControlViewController* DC = [[HNDecorateControlViewController alloc]init];
 //    [self presentViewController:DC animated:YES completion:^{}];
     [self.navigationController pushViewController:DC animated:YES];
 }
 
-- (void)businessBackgroundButton_Clicked:(id)sender{
+- (void)businessBackgroundButton_Clicked:(UIButton *)sender{
+    [sender setBackgroundColor:[UIColor whiteColor]];
     HNBusinessBKControlViewController* bc = [[HNBusinessBKControlViewController alloc]init];
     [self.navigationController pushViewController:bc animated:YES];
     NSLog(@"busi");
 }
-- (void)messageButton_Clicked:(id)sender{
+- (void)messageButton_Clicked:(UIButton *)sender{
+    [sender setBackgroundColor:[UIColor whiteColor]];
     if (!self.messageViewController){
         self.messageViewController = [[HNMessageViewController alloc] init];
     }
@@ -105,5 +115,20 @@
 
 - (void)settingButton_Clicked:(id)sender{
     NSLog(@"setting");
+}
+
+
+-  (UIImage *)imageWithColor:(UIColor *)color {
+    CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
 }
 @end
