@@ -54,12 +54,12 @@
 @implementation HNDecorateControlViewController
 
 
-#define HSPACE 126
-#define WLEFT 5
-#define WRIGHT 20
-#define WSPACE 10
+#define HSPACE 126/2
+#define WLEFT 30/2
+#define WRIGHT 30/2
+#define WSPACE 44/2
 #define TSPACEPER 0.1
-#define STARTTOP 266
+#define STARTTOP 266/2
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -78,34 +78,23 @@
 
 - (UIButton *)createButtonWithTitle:(NSString *)title selector:(SEL)selector row:(int)ro coloum:(int)col image:(UIImage* )image imageClick:(UIImage* )imageClick{
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btn setTitle:title forState:UIControlStateNormal];
-    [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    btn.titleLabel.font = [UIFont systemFontOfSize:12];
-    [btn.titleLabel sizeToFit];
     [btn setImage:image forState:UIControlStateNormal];
     [btn setImage:imageClick forState:UIControlStateSelected];
-//    [btn.titleLabel setContentMode:UIViewContentModeCenter];
-//    [btn setTitleEdgeInsets:UIEdgeInsetsMake(0,
-//                                              -image.size.width,
-//                                              0.0,
-//                                              0.0)];
-//    
+    [btn.titleLabel setContentMode:UIViewContentModeCenter];
     [btn sizeToFit];
-    // get the size of the elements here for readability
-    CGSize imageSize = btn.imageView.frame.size;
-    CGSize titleSize = btn.titleLabel.frame.size;
-    // get the height they will take up as a unit
-    CGFloat totalHeight = (imageSize.height + titleSize.height + 4);
-    // raise the image and push it right to center it
-    btn.imageEdgeInsets = UIEdgeInsetsMake(- (totalHeight - imageSize.height), 0.0, 0.0, - titleSize.width);
-    // lower the text and push it left to center it
-    btn.titleEdgeInsets = UIEdgeInsetsMake(0.0, - image.size.width, - (totalHeight - titleSize.height),0.0);
-
+    CGFloat f = (self.view.width - image.size.width*4)/5;
+    btn.left = f+(f+image.size.width)*col;
+    btn.top = STARTTOP+(image.size.width+HSPACE)*ro;
     
-    //btn.width = (self.view.width - 3 * WSPACE - WLEFT - WRIGHT)/4;
-    //btn.height = btn.width;
-    btn.left = (image.size.width+WSPACE)*col;
-    btn.top = HSPACE+(image.size.width+HSPACE)*ro;
+    UILabel* label = [[UILabel alloc]initWithFrame:CGRectMake(0, image.size.height, image.size.width, 20)];
+    
+    [btn addSubview:label];
+    label.text = title;
+    label.textAlignment = NSTextAlignmentCenter;
+    label.textColor = [UIColor blackColor];
+    label.font = [UIFont systemFontOfSize:12];
+    
+    
     //btn.layer.borderWidth = 1.0;
     //btn.layer.borderColor = [UIColor blackColor].CGColor;
     [btn addTarget:self action:selector forControlEvents:UIControlEventTouchUpInside];
