@@ -23,13 +23,13 @@
 @end
 
 @interface HNLoginViewController()
-@property (nonatomic, strong)UILabel *userLabel;
-@property (nonatomic, strong)UILabel *passwordLabel;
-@property (nonatomic, strong)UITextField *userTextField;
-@property (nonatomic, strong)UITextField *passwordTextField;
+
 @property (nonatomic, strong)UIButton *loginButton;
 @property (nonatomic, strong)UIImageView *backImage;
 @property (nonatomic, strong)HNLoginView *loginView;
+@property (nonatomic, strong)UIButton *remember;
+@property (nonatomic, strong)UILabel *rememberLabel;
+@property (nonatomic, strong)UIButton *forget;
 @end
 @implementation HNLoginViewController
 - (instancetype)init{
@@ -42,77 +42,83 @@
 
 - (void)viewDidLoad{
     self.view.backgroundColor = [UIColor whiteColor];
-    self.userLabel = [[UILabel alloc] init];
-    self.userLabel.text = NSLocalizedString(@"User :", nil);
-    [self.userLabel sizeToFit];
-    self.passwordLabel = [[UILabel alloc] init];
-    self.passwordLabel.text = NSLocalizedString(@"Password :", nil);
-    [self.passwordLabel sizeToFit];
-    
-    self.userTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 200, self.userLabel.height)];
-    self.userTextField.layer.borderColor = [UIColor grayColor].CGColor;
-    self.userTextField.layer.borderWidth = 1.0;
-    self.passwordTextField =[[UITextField alloc] initWithFrame:self.userTextField.bounds];
-    self.passwordTextField.layer.borderColor = [UIColor grayColor].CGColor;
-    self.passwordTextField.secureTextEntry = YES;
-    self.passwordTextField.layer.borderWidth = 1.0;
-    
-    self.loginButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.loginButton setTitle:NSLocalizedString(@"Login", nil) forState:UIControlStateNormal];
-    [self.loginButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-    [self.loginButton addTarget:self action:@selector(login:) forControlEvents:UIControlEventTouchUpInside];
-    self.loginButton.layer.borderWidth = 1.0;
-    self.loginButton.layer.borderColor = [UIColor lightGrayColor].CGColor;
-
-    self.backImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"loginback.jpg"]];
+    self.title = NSLocalizedString(@"Login", nil);
+    self.backImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"loginback.png"]];
 
     self.loginView = [[HNLoginView alloc] initWithFrame:CGRectMake(18, 18, self.view.width - 36, 81)];
     
-    [self.view addSubview:self.backImage];
+    self.remember = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.remember setBackgroundImage:[UIImage imageNamed:@"remember.png"] forState:UIControlStateNormal];
+    [self.remember setImage:[UIImage imageNamed:@"rememberit.png"] forState:UIControlStateSelected];
+    [self.remember addTarget:self action:@selector(rememberPassword:) forControlEvents:UIControlEventTouchUpInside];
+    [self.remember sizeToFit];
+    self.remember.top = self.loginView.bottom + 9;
+    self.remember.left = self.loginView.left;
+    self.rememberLabel = [[UILabel alloc] init];
+    self.rememberLabel.text = NSLocalizedString(@"Remember", nil);
+    [self.rememberLabel sizeToFit];
+    self.rememberLabel.textColor = [UIColor colorWithWhite:102.0/255.0 alpha:1.0];
+    self.rememberLabel.centerY = self.remember.centerY;
+    self.rememberLabel.left = self.remember.right;
+    
+    self.forget = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.forget setTitle:NSLocalizedString(@"Forget Password?", nil) forState:UIControlStateNormal];
+    [self.forget setTitleColor:[UIColor colorWithRed:45.0/255.0 green:138.0/255.0 blue:204.0/255.0 alpha:1.0] forState:UIControlStateNormal];
+    [self.forget addTarget:self action:@selector(fogetPassword:) forControlEvents:UIControlEventTouchUpInside];
+    [self.forget sizeToFit];
+    self.forget.right = self.loginView.right;
+    self.forget.centerY = self.rememberLabel.centerY;
+    
+    self.loginButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.loginButton.frame = CGRectMake(0, 0, self.view.width - 36, 40);
+    self.loginButton.top = self.remember.bottom + 9;
+    self.loginButton.centerX = self.view.width / 2;
+    [self.loginButton setTitle:NSLocalizedString(@"Login", nil) forState:UIControlStateNormal];
+    [self.loginButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.loginButton addTarget:self action:@selector(login:) forControlEvents:UIControlEventTouchUpInside];
+    self.loginButton.layer.cornerRadius = 5.0;
+    [self.loginButton setBackgroundColor:[UIColor colorWithRed:0.0 green:152.0/255.0 blue:233.0/255.0 alpha:1.0]];
+    
     [self.view addSubview:self.loginView];
-//    [self.view addSubview:self.userLabel];
-//    [self.view addSubview:self.passwordLabel];
-//    [self.view addSubview:self.userTextField];
-//    [self.view addSubview:self.passwordTextField];
+    [self.view addSubview:self.remember];
+    [self.view addSubview:self.rememberLabel];
+    [self.view addSubview:self.forget];
+
     [self.view addSubview:self.loginButton];
-    self.userTextField.text = @"admin";
-    self.passwordTextField.text = @"123456";
-    [self setMyInterface];
+    self.loginView.userName.text = @"admin";
+    self.loginView.password.text = @"123456";
+
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self setMyInterface];
+//    [self.view insertSubview:self.backImage atIndex:100];
+    [self.view insertSubview:self.backImage belowSubview:self.loginView];
+
+}
+- (void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    [self.backImage removeFromSuperview];
 }
 
-- (void)setMyInterface{
-    self.userLabel.top = 0.2 *self.view.height;
-    self.userLabel.left = (self.view.width - self.userLabel.width - self.passwordTextField.width) / 2;
-    self.userTextField.top = self.userLabel.top;
-    self.userTextField.right = self.view.width - self.userLabel.left;
-    
-    self.passwordLabel.top = self.userLabel.bottom + 20;
-    self.passwordLabel.left = self.userLabel.left;
-    self.passwordTextField.top = self.passwordLabel.top;
-    self.passwordTextField.width = self.userTextField.right - self.passwordLabel.right;
-    self.passwordTextField.right = self.userTextField.right;
-    
-    self.loginButton.width = self.userTextField.right - self.userLabel.left;
-    self.loginButton.height = self.userLabel.height + 20;
-    self.loginButton.top = self.passwordLabel.bottom + 20;
-    self.loginButton.left = self.userLabel.left;
-}
 - (NSDictionary *)encodeWithLoginModel:(HNLoginModel *)model{
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:model.username,@"username",model.password,@"password", nil];
     return dic;
+}
+
+- (void)fogetPassword:(id)sender{
+    NSLog(@"foget password");
+}
+- (void)rememberPassword:(UIButton *)sender{
+    sender.selected = !sender.selected;
 }
 - (void)login:(id)sender{
     MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = NSLocalizedString(@"Loading", nil);
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     HNLoginModel *model = [[HNLoginModel alloc] init];
-    model.username = self.userTextField.text;
-    model.password = self.passwordTextField.text;
+    model.username = self.loginView.userName.text;
+    model.password = self.loginView.password.text;
     NSString *jsonStr = [[self encodeWithLoginModel:model] JSONString];
     request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"get.user.login" Params:jsonStr]];
     //@"http://113.105.159.115:5030/?Method=get.user.login&Params=CB914058227D8DE180A6D6145A791286164DFFDDB57719A1E68895C3772AC876B0B17A8CFFF97DE7DE1B8AED2ADD23B2E1CB9BA1646FBDA3680BADAA3985BE7F6506613E479DB992&Sign=352121BF8C4788B877FF6A5FF34380C4"

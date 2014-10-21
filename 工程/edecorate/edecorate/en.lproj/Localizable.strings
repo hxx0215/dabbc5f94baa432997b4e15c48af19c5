@@ -146,3 +146,8 @@
 
 "User" = "User";
 "Password" = "Password";
+"User/Email/Mobile" = "User/Email/Mobile";
+"Input Password" = "Input Password";
+"Remember" = "Remember";
+"Forget Password?" = "Forget Password?";
+"Login" = "Login";
