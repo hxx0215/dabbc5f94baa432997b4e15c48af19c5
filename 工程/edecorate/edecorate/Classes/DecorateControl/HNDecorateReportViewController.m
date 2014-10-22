@@ -102,7 +102,7 @@
 }
 # pragma mark - tableViewDelegate & tableViewDataSource
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 75.0;
+    return 69.0;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return [self.reportList count];
@@ -177,7 +177,7 @@
                 for (int i=0; i<count; i++) {
                     HNReportModel *model = [[HNReportModel alloc] init];
                     model.status = self.statusMap[[dataArr[i] objectForKey:@"assessorstate"]];
-                    model.roomName = [NSString stringWithFormat:@"施工房号:%@",[dataArr[i] objectForKey:@"roomnumber"]];
+                    model.roomName = [NSString stringWithFormat:@"%@",[dataArr[i] objectForKey:@"roomnumber"]];
                     model.declareId = [dataArr[i] objectForKey:@"declareId"];
                     [self.reportList addObject:model];
                 }
