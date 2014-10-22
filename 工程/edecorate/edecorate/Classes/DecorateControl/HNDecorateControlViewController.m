@@ -82,9 +82,10 @@
     [btn setImage:imageClick forState:UIControlStateSelected];
     [btn.titleLabel setContentMode:UIViewContentModeCenter];
     [btn sizeToFit];
-    CGFloat f = (self.view.width - image.size.width*4)/5;
+    CGFloat f = (self.view.width - image.size.width*4)/5.0;
+    CGFloat hf = (self.view.bounds.size.height -100 - image.size.width*2 - HSPACE-40)/2.0;
     btn.left = f+(f+image.size.width)*col;
-    btn.top = STARTTOP+(image.size.width+HSPACE)*ro;
+    btn.top = hf+(image.size.width+20+HSPACE)*ro;
     
     UILabel* label = [[UILabel alloc]initWithFrame:CGRectMake(0, image.size.height, image.size.width, 20)];
     

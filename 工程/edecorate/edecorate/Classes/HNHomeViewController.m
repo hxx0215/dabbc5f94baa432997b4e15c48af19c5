@@ -45,6 +45,7 @@
     [self.view addSubview:self.messageButton];
     
     self.settingButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Setting", nil) style:UIBarButtonItemStylePlain target:self action:@selector(settingButton_Clicked:)];
+    [self.settingButton setImage:[UIImage imageNamed:@"设置_11.png"]];
     self.navigationItem.rightBarButtonItem = self.settingButton;
 }
 
