@@ -122,9 +122,15 @@
     HNPurchaseViewController *pur = [[HNPurchaseViewController alloc] init];
     HNPurchaseItem *item = [[HNPurchaseItem alloc] init];
     item.title = @"装修保证金";
+    item.price = 2000.0;
+    item.single = 0;
     pur.mustPay = @[item];
     HNPurchaseItem *oItem = [[HNPurchaseItem alloc] init];
     oItem.title = @"装修垃圾下楼费";
+    oItem.single = 1;
+    oItem.nums = 3;
+    oItem.unitPrice = 300.0;
+    oItem.price = oItem.nums * oItem.unitPrice;
     pur.optionPay = @[oItem];
     [self.navigationController pushViewController:pur animated:YES];
 }

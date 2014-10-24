@@ -8,6 +8,7 @@
 
 #import "HNPurchaseViewController.h"
 #import "HNPurchaseItem.h"
+#import "HNPurchaseTableViewCell.h"
 
 @interface HNPurchaseViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong)UITableView *tableView;
@@ -70,17 +71,43 @@
     else
         return 0;
 }
-
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 0){
+        HNPurchaseItem *item = self.mustPay[indexPath.row];
+        if (0 == item.single)
+            return 45.0;
+        else return 60.0;
+    }
+    else{
+        HNPurchaseItem *item = self.optionPay[indexPath.row];
+        if (0 == item.single)
+            return 45.0;
+        else return 60.0;
+    }
+}
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath   {
     static NSString *identy = @"purchaseIdenty";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
+    HNPurchaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
     if (!cell){
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identy];
+        cell = [[HNPurchaseTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identy];
     }
+    HNPurchaseItem *item = nil;
     if (indexPath.section == 0)
-        cell.textLabel.text = [self.mustPay[indexPath.row] title];
-    else
-        cell.textLabel.text = [self.optionPay[indexPath.row] title];
+    {
+//        cell.textLabel.text = [self.mustPay[indexPath.row] title];
+        item = self.mustPay[indexPath.row];
+        cell.detail.textColor = [UIColor colorWithWhite:128.0/255.0 alpha:1.0];
+        cell.checkButton.hidden = YES;
+    }
+    else{
+        item = self.optionPay[indexPath.row];
+        cell.detail.textColor = [UIColor colorWithRed:45.0/255.0 green:138.05 blue:204.0 alpha:1.0];
+        cell.checkButton.hidden = NO;
+    }
+    cell.title.text = item.title;
+    cell.price.text = [NSString stringWithFormat:@"%.2f",item.price];
+    cell.single = item.single;
+    cell.detail.text = [NSString stringWithFormat:@"单价%.2f    数量%d",item.unitPrice,item.nums];
     return cell;
 }
 - (void)checkAll:(UIButton *)sender{
