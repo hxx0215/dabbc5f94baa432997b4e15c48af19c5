@@ -48,6 +48,13 @@
         view.backgroundColor = [UIColor colorWithRed:5.0/255.0 green:155.0/255.0 blue:239.0/255.0 alpha:1.0];
         label.text = NSLocalizedString(@"可选项目(单位:元)", nil);
         UIButton *checkBox = [UIButton buttonWithType:UIButtonTypeCustom];
+        [checkBox setBackgroundImage:[UIImage imageNamed:@"purchasechekbox.png"] forState:UIControlStateNormal];
+        [checkBox setImage:[UIImage imageNamed:@"purchasecheck.png"] forState:UIControlStateSelected];
+        [checkBox addTarget:self action:@selector(checkAll:) forControlEvents:UIControlEventTouchUpInside];
+        [checkBox sizeToFit];
+        [view addSubview:checkBox];
+        checkBox.left = 4;
+        checkBox.centerY = label.centerY;
     }
     return view;
 }
@@ -75,5 +82,8 @@
     else
         cell.textLabel.text = [self.optionPay[indexPath.row] title];
     return cell;
+}
+- (void)checkAll:(UIButton *)sender{
+    sender.selected = !sender.selected;
 }
 @end

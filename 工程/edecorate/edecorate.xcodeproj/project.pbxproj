@@ -21,7 +21,7 @@
 		B90C417919FA2674004EBC2B /* HNPurchaseItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B90C417819FA2674004EBC2B /* HNPurchaseItem.m */; };
 		B90C417C19FA282A004EBC2B /* HNPurchaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B90C417B19FA282A004EBC2B /* HNPurchaseViewController.m */; };
 		B90C418019FA3365004EBC2B /* purchasecheck@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B90C417E19FA3365004EBC2B /* purchasecheck@2x.png */; };
-		B90C418119FA3365004EBC2B /* purchasechekbox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B90C417F19FA3365004EBC2B /* purchasechekbox@2x.png */; };
+		B90C418119FA3365004EBC2B /* purchasecheckbox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B90C417F19FA3365004EBC2B /* purchasecheckbox@2x.png */; };
 		B916F0A219C8781D00A849C7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B916F0A119C8781D00A849C7 /* Foundation.framework */; };
 		B916F0A419C8781D00A849C7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B916F0A319C8781D00A849C7 /* CoreGraphics.framework */; };
 		B916F0A619C8781D00A849C7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B916F0A519C8781D00A849C7 /* UIKit.framework */; };
@@ -220,7 +220,7 @@
 		B90C417A19FA282A004EBC2B /* HNPurchaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNPurchaseViewController.h; path = Classes/DecorateControl/HNPurchaseViewController.h; sourceTree = "<group>"; };
 		B90C417B19FA282A004EBC2B /* HNPurchaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNPurchaseViewController.m; path = Classes/DecorateControl/HNPurchaseViewController.m; sourceTree = "<group>"; };
 		B90C417E19FA3365004EBC2B /* purchasecheck@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "purchasecheck@2x.png"; sourceTree = "<group>"; };
-		B90C417F19FA3365004EBC2B /* purchasechekbox@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "purchasechekbox@2x.png"; sourceTree = "<group>"; };
+		B90C417F19FA3365004EBC2B /* purchasecheckbox@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "purchasecheckbox@2x.png"; sourceTree = "<group>"; };
 		B916F09E19C8781D00A849C7 /* edecorate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = edecorate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B916F0A119C8781D00A849C7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B916F0A319C8781D00A849C7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -556,7 +556,7 @@
 			isa = PBXGroup;
 			children = (
 				B90C417E19FA3365004EBC2B /* purchasecheck@2x.png */,
-				B90C417F19FA3365004EBC2B /* purchasechekbox@2x.png */,
+				B90C417F19FA3365004EBC2B /* purchasecheckbox@2x.png */,
 			);
 			name = Purchase;
 			sourceTree = "<group>";
@@ -1219,7 +1219,7 @@
 			files = (
 				B9D72D5A19D846FC0011CF83 /* HNOrderViewController.xib in Resources */,
 				D33EEA6B19D6D9E600D6F106 /* HNProfileViewController.xib in Resources */,
-				B90C418119FA3365004EBC2B /* purchasechekbox@2x.png in Resources */,
+				B90C418119FA3365004EBC2B /* purchasecheckbox@2x.png in Resources */,
 				D38E009119D84BE0000F5263 /* HNReimburseViewController.xib in Resources */,
 				B9DE560419C9C40B00280EC7 /* Localizable.strings in Resources */,
 				B95D15C519D9AE4B00689B4D /* HNEditPriceViewController.xib in Resources */,
