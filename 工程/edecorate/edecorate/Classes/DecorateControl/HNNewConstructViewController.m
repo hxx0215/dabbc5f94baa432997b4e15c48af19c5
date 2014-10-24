@@ -9,6 +9,8 @@
 #import "HNNewConstructViewController.h"
 #import "UIView+AHKit.h"
 #import "HNReportPurchaseViewController.h"
+#import "HNPurchaseViewController.h"
+#import "HNPurchaseItem.h"
 
 @interface HNNewConstructViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (strong, nonatomic) IBOutlet UIScrollView *backView;
@@ -115,8 +117,16 @@
     }
 }
 - (IBAction)purchase:(id)sender {
-    HNReportPurchaseViewController *purchaseViewController = [[HNReportPurchaseViewController alloc] init];
-    [self.navigationController pushViewController:purchaseViewController animated:YES];
+//    HNReportPurchaseViewController *purchaseViewController = [[HNReportPurchaseViewController alloc] init];
+//    [self.navigationController pushViewController:purchaseViewController animated:YES];
+    HNPurchaseViewController *pur = [[HNPurchaseViewController alloc] init];
+    HNPurchaseItem *item = [[HNPurchaseItem alloc] init];
+    item.title = @"装修保证金";
+    pur.mustPay = @[item];
+    HNPurchaseItem *oItem = [[HNPurchaseItem alloc] init];
+    oItem.title = @"装修垃圾下楼费";
+    pur.optionPay = @[oItem];
+    [self.navigationController pushViewController:pur animated:YES];
 }
 - (IBAction)upload:(UIButton *)sender {
     self.curButton = sender;

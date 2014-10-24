@@ -13,6 +13,7 @@
 #import "MJRefresh.h"
 #import "HNLoginData.h"
 #import "MBProgressHUD.h"
+//#import "HNConstructViewController.h"
 
 @interface HNReportModel : NSObject
 @property (nonatomic, strong)NSString *roomName;
@@ -122,7 +123,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
+//    HNConstructViewController *vc = [[HNConstructViewController alloc] init];
+//    vc.constructType = [self.reportList[indexPath.row] constructType];
+//    [self.navigationController pushViewController:vc animated:YES];
+    HNReportModel *model = (HNReportModel *)self.reportList[indexPath.row];
+    HNNewConstructViewController *constructViewController = [[HNNewConstructViewController alloc]initWithConstructType:model.constructType];
+    [self.navigationController pushViewController:constructViewController animated:YES];
+    return;
 //    HNNewReportViewController *newReportViewController = [[HNNewReportViewController alloc] init];
 //    [self.navigationController pushViewController:newReportViewController animated:YES];
     MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -141,10 +148,7 @@
         NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
         NSLog(@"%@",retJson);
     }];
-    return;
-    HNReportModel *model = (HNReportModel *)self.reportList[indexPath.row];
-    HNNewConstructViewController *constructViewController = [[HNNewConstructViewController alloc]initWithConstructType:model.constructType];
-    [self.navigationController pushViewController:constructViewController animated:YES];
+
 }
 - (NSDictionary *)encodeDetailModel:(HNReportSendModel *)model{
     return @{@"mshopid": model.mshopid,@"declareId":model.declareId};

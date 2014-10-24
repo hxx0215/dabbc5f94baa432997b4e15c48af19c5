@@ -18,6 +18,10 @@
 		37F9D80019D8B481005CB18B /* HNCommentsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F9D7FF19D8B481005CB18B /* HNCommentsHeaderView.m */; };
 		37F9D80419D8B5E1005CB18B /* HNCommentsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F9D80219D8B5E1005CB18B /* HNCommentsTableViewCell.m */; };
 		37F9D80519D8B5E1005CB18B /* HNCommentsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37F9D80319D8B5E1005CB18B /* HNCommentsTableViewCell.xib */; };
+		B90C417919FA2674004EBC2B /* HNPurchaseItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B90C417819FA2674004EBC2B /* HNPurchaseItem.m */; };
+		B90C417C19FA282A004EBC2B /* HNPurchaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B90C417B19FA282A004EBC2B /* HNPurchaseViewController.m */; };
+		B90C418019FA3365004EBC2B /* purchasecheck@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B90C417E19FA3365004EBC2B /* purchasecheck@2x.png */; };
+		B90C418119FA3365004EBC2B /* purchasechekbox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B90C417F19FA3365004EBC2B /* purchasechekbox@2x.png */; };
 		B916F0A219C8781D00A849C7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B916F0A119C8781D00A849C7 /* Foundation.framework */; };
 		B916F0A419C8781D00A849C7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B916F0A319C8781D00A849C7 /* CoreGraphics.framework */; };
 		B916F0A619C8781D00A849C7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B916F0A519C8781D00A849C7 /* UIKit.framework */; };
@@ -71,6 +75,7 @@
 		B965863E19F6A56000EB4766 /* rememberit@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B965863D19F6A56000EB4766 /* rememberit@2x.png */; };
 		B965864219F7E38E00EB4766 /* accept@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B965864019F7E38E00EB4766 /* accept@2x.png */; };
 		B965864319F7E38E00EB4766 /* unsubmit@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B965864119F7E38E00EB4766 /* unsubmit@2x.png */; };
+		B965864619F9387700EB4766 /* HNConstructViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B965864519F9387700EB4766 /* HNConstructViewController.m */; };
 		B965E76019D04955004CD201 /* HNDeliverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B965E75F19D04955004CD201 /* HNDeliverViewController.m */; };
 		B965E76919D04CDA004CD201 /* HNDeliverDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B965E76719D04CDA004CD201 /* HNDeliverDetailViewController.m */; };
 		B965E76A19D04CDA004CD201 /* HNDeliverDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B965E76819D04CDA004CD201 /* HNDeliverDetailViewController.xib */; };
@@ -210,6 +215,12 @@
 		37F9D80119D8B5E1005CB18B /* HNCommentsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNCommentsTableViewCell.h; sourceTree = "<group>"; };
 		37F9D80219D8B5E1005CB18B /* HNCommentsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNCommentsTableViewCell.m; sourceTree = "<group>"; };
 		37F9D80319D8B5E1005CB18B /* HNCommentsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HNCommentsTableViewCell.xib; sourceTree = "<group>"; };
+		B90C417719FA2674004EBC2B /* HNPurchaseItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNPurchaseItem.h; path = Classes/DecorateControl/HNPurchaseItem.h; sourceTree = "<group>"; };
+		B90C417819FA2674004EBC2B /* HNPurchaseItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNPurchaseItem.m; path = Classes/DecorateControl/HNPurchaseItem.m; sourceTree = "<group>"; };
+		B90C417A19FA282A004EBC2B /* HNPurchaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNPurchaseViewController.h; path = Classes/DecorateControl/HNPurchaseViewController.h; sourceTree = "<group>"; };
+		B90C417B19FA282A004EBC2B /* HNPurchaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNPurchaseViewController.m; path = Classes/DecorateControl/HNPurchaseViewController.m; sourceTree = "<group>"; };
+		B90C417E19FA3365004EBC2B /* purchasecheck@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "purchasecheck@2x.png"; sourceTree = "<group>"; };
+		B90C417F19FA3365004EBC2B /* purchasechekbox@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "purchasechekbox@2x.png"; sourceTree = "<group>"; };
 		B916F09E19C8781D00A849C7 /* edecorate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = edecorate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B916F0A119C8781D00A849C7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B916F0A319C8781D00A849C7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -291,6 +302,8 @@
 		B965863D19F6A56000EB4766 /* rememberit@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rememberit@2x.png"; sourceTree = "<group>"; };
 		B965864019F7E38E00EB4766 /* accept@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "accept@2x.png"; sourceTree = "<group>"; };
 		B965864119F7E38E00EB4766 /* unsubmit@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unsubmit@2x.png"; sourceTree = "<group>"; };
+		B965864419F9387700EB4766 /* HNConstructViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNConstructViewController.h; path = Classes/DecorateControl/HNConstructViewController.h; sourceTree = "<group>"; };
+		B965864519F9387700EB4766 /* HNConstructViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNConstructViewController.m; path = Classes/DecorateControl/HNConstructViewController.m; sourceTree = "<group>"; };
 		B965E75E19D04955004CD201 /* HNDeliverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNDeliverViewController.h; path = Classes/DecorateControl/HNDeliverViewController.h; sourceTree = "<group>"; };
 		B965E75F19D04955004CD201 /* HNDeliverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNDeliverViewController.m; path = Classes/DecorateControl/HNDeliverViewController.m; sourceTree = "<group>"; };
 		B965E76619D04CDA004CD201 /* HNDeliverDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNDeliverDetailViewController.h; path = Classes/DecorateControl/HNDeliverDetailViewController.h; sourceTree = "<group>"; };
@@ -539,6 +552,15 @@
 			name = Comments;
 			sourceTree = "<group>";
 		};
+		B90C417D19FA3321004EBC2B /* Purchase */ = {
+			isa = PBXGroup;
+			children = (
+				B90C417E19FA3365004EBC2B /* purchasecheck@2x.png */,
+				B90C417F19FA3365004EBC2B /* purchasechekbox@2x.png */,
+			);
+			name = Purchase;
+			sourceTree = "<group>";
+		};
 		B916F09519C8781D00A849C7 = {
 			isa = PBXGroup;
 			children = (
@@ -734,6 +756,7 @@
 		B965862B19F68CBD00EB4766 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				B90C417D19FA3321004EBC2B /* Purchase */,
 				B965863F19F7E37E00EB4766 /* Report */,
 				B965862C19F68D4C00EB4766 /* Login */,
 			);
@@ -762,6 +785,8 @@
 		B965E76119D04B95004CD201 /* Report */ = {
 			isa = PBXGroup;
 			children = (
+				B965864419F9387700EB4766 /* HNConstructViewController.h */,
+				B965864519F9387700EB4766 /* HNConstructViewController.m */,
 				B955579319D1A06A00FC0AAE /* HNNewConstructViewController.h */,
 				B955579419D1A06A00FC0AAE /* HNNewConstructViewController.m */,
 				B955579519D1A06A00FC0AAE /* HNNewConstructViewController.xib */,
@@ -771,6 +796,10 @@
 				B9882DFA19CB152F0093F0F4 /* HNNewCompanyReportView.m */,
 				B9882DF619CB11920093F0F4 /* HNNewReportViewController.h */,
 				B9882DF719CB11920093F0F4 /* HNNewReportViewController.m */,
+				B90C417719FA2674004EBC2B /* HNPurchaseItem.h */,
+				B90C417819FA2674004EBC2B /* HNPurchaseItem.m */,
+				B90C417A19FA282A004EBC2B /* HNPurchaseViewController.h */,
+				B90C417B19FA282A004EBC2B /* HNPurchaseViewController.m */,
 				B9D3DEC819CD0B2C0020CDC9 /* HNReportPurchaseViewController.h */,
 				B9D3DEC919CD0B2C0020CDC9 /* HNReportPurchaseViewController.m */,
 				B9D3DECA19CD0B2C0020CDC9 /* HNReportPurchaseViewController.xib */,
@@ -1190,6 +1219,7 @@
 			files = (
 				B9D72D5A19D846FC0011CF83 /* HNOrderViewController.xib in Resources */,
 				D33EEA6B19D6D9E600D6F106 /* HNProfileViewController.xib in Resources */,
+				B90C418119FA3365004EBC2B /* purchasechekbox@2x.png in Resources */,
 				D38E009119D84BE0000F5263 /* HNReimburseViewController.xib in Resources */,
 				B9DE560419C9C40B00280EC7 /* Localizable.strings in Resources */,
 				B95D15C519D9AE4B00689B4D /* HNEditPriceViewController.xib in Resources */,
@@ -1208,6 +1238,7 @@
 				D3CD910419CF141C00E76AF4 /* HNRefundDetailViewController.xib in Resources */,
 				B955579719D1A06A00FC0AAE /* HNNewConstructViewController.xib in Resources */,
 				B916F0BA19C8781D00A849C7 /* Images.xcassets in Resources */,
+				B90C418019FA3365004EBC2B /* purchasecheck@2x.png in Resources */,
 				D3C07BC519CDC8A0003EA5E4 /* HNComplaintApplyViewController.xib in Resources */,
 				37F9D80519D8B5E1005CB18B /* HNCommentsTableViewCell.xib in Resources */,
 				B9B2BC1F19CF1F3000839AED /* CTAssetsPicker.xcassets in Resources */,
@@ -1274,6 +1305,7 @@
 				B9B2BC1A19CF1F3000839AED /* CTAssetItemViewController.m in Sources */,
 				D3CD90F419CED1FA00E76AF4 /* HNCommbox.m in Sources */,
 				B9B2BC2419CF1F3000839AED /* CTAssetsViewController.m in Sources */,
+				B90C417C19FA282A004EBC2B /* HNPurchaseViewController.m in Sources */,
 				B9E0667D19DCDCB100893DBD /* UIButton+AFNetworking.m in Sources */,
 				B95D15BF19D9A28200689B4D /* CustomIOS7AlertView.m in Sources */,
 				D33EEAC119D7000E00D6F106 /* HNAreaPickerView.m in Sources */,
@@ -1282,6 +1314,7 @@
 				B91A3AD119D6F9D4000F3823 /* HNGoodsViewController.m in Sources */,
 				B91A3AC219D6E6E9000F3823 /* MJRefreshBaseView.m in Sources */,
 				D33EEA6419D6C2B700D6F106 /* HNVolumeViewController.m in Sources */,
+				B965864619F9387700EB4766 /* HNConstructViewController.m in Sources */,
 				B9E0667719DCDCB100893DBD /* AFURLRequestSerialization.m in Sources */,
 				B9DE55FD19C9C0EA00280EC7 /* UIView+AHKit.m in Sources */,
 				D3A96D9219D9A1990059CF62 /* HNCommentsCell.m in Sources */,
@@ -1356,6 +1389,7 @@
 				B955579619D1A06A00FC0AAE /* HNNewConstructViewController.m in Sources */,
 				3732B13119D0182100ADF3F5 /* HNOfficePassesApplyViewController.m in Sources */,
 				37D2354519D1171400295572 /* HNOfficePassedTableViewCell.m in Sources */,
+				B90C417919FA2674004EBC2B /* HNPurchaseItem.m in Sources */,
 				D3F90F1319CB1474000C95E4 /* HNTemporaryTableViewCell.m in Sources */,
 				B9B2BC2119CF1F3000839AED /* CTAssetsPickerController.m in Sources */,
 				B94C854819C9CA770040D47E /* HNMessageModel.m in Sources */,
