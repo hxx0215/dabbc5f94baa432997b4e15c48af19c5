@@ -10,6 +10,11 @@
 #import "HNComplaintTableViewCell.h"
 #import "HNComplaintApplyViewController.h"
 #import "HNComplaintDetailsViewController.h"
+#import "MBProgressHUD.h"
+#import "JSONKit.h"
+#import "NSString+Crypt.h"
+#import "HNLoginData.h"
+#import "HNComplaintData.h"
 
 @interface HNComplaintTableViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong)UITableView *tTableView;
@@ -47,7 +52,55 @@
     tModel.roomName = @"施工房号：XXXX";
     tModel.status = TemporaryStatusCustom;
     [self.modelList addObject:tModel];
+    [self loadMyData];
 }
+
+
+-(void)loadMyData
+{
+    MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = NSLocalizedString(@"Loading", nil);
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    //HNLoginModel *model = [[HNLoginModel alloc] init];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[HNLoginData shared].mshopid,@"mshopid", nil];
+    NSLog(@"%@",[HNLoginData shared].mshopid);
+    NSString *jsonStr = [dic JSONString];
+    request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"get.deposit.refund" Params:jsonStr]];
+    NSString *contentType = @"text/html";
+    [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        if (data)
+        {
+            NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
+            NSLog(@"%@",retJson);
+            NSDictionary* dic = [retJson objectFromJSONString];
+            NSNumber* total = [dic objectForKey:@"total"];
+            NSArray* array = [dic objectForKey:@"data"];
+            for (int i = 0; i<total.intValue; i++) {
+                NSDictionary *dicData = [array objectAtIndex:i];
+//                HNPassData *tModel = [[HNPassData alloc] init];
+//                [tModel updateData:dicData];
+//                [self.modelList addObject:tModel];
+            }
+            if (total.intValue){//之后需要替换成status
+                [self.tTableView reloadData];
+            }
+            else
+            {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login Fail", nil) message:NSLocalizedString(@"Please input correct username and password", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+                [alert show];
+            }
+        }
+        else{
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection Error", nil) message:NSLocalizedString(@"Please check your network.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+            [alert show];
+        }
+        
+    }];
+}
+
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];

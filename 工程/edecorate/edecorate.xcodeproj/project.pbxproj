@@ -164,6 +164,8 @@
 		D391EE8C19CD787D00DE3363 /* HNComplaintTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D391EE8B19CD787D00DE3363 /* HNComplaintTableViewController.m */; };
 		D39662F519CD4E6300EE49B8 /* HNTemporaryDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D39662F319CD4E6300EE49B8 /* HNTemporaryDetailsViewController.m */; };
 		D39662F619CD4E6300EE49B8 /* HNTemporaryDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D39662F419CD4E6300EE49B8 /* HNTemporaryDetailsViewController.xib */; };
+		D3A2D31019FB960600425BE1 /* HNComplaintData.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A2D30F19FB960600425BE1 /* HNComplaintData.m */; };
+		D3A2D31319FB98A100425BE1 /* HNRefundData.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A2D31219FB98A100425BE1 /* HNRefundData.m */; };
 		D3A96D8E19D98BE80059CF62 /* HNAcceptReturnGoodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A96D8C19D98BE80059CF62 /* HNAcceptReturnGoodViewController.m */; };
 		D3A96D8F19D98BE80059CF62 /* HNAcceptReturnGoodViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3A96D8D19D98BE80059CF62 /* HNAcceptReturnGoodViewController.xib */; };
 		D3A96D9219D9A1990059CF62 /* HNCommentsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A96D9119D9A1990059CF62 /* HNCommentsCell.m */; };
@@ -465,6 +467,10 @@
 		D39662F219CD4E6300EE49B8 /* HNTemporaryDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNTemporaryDetailsViewController.h; sourceTree = "<group>"; };
 		D39662F319CD4E6300EE49B8 /* HNTemporaryDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNTemporaryDetailsViewController.m; sourceTree = "<group>"; };
 		D39662F419CD4E6300EE49B8 /* HNTemporaryDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HNTemporaryDetailsViewController.xib; sourceTree = "<group>"; };
+		D3A2D30E19FB960600425BE1 /* HNComplaintData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNComplaintData.h; path = Classes/DecorateControl/HNComplaintData.h; sourceTree = "<group>"; };
+		D3A2D30F19FB960600425BE1 /* HNComplaintData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNComplaintData.m; path = Classes/DecorateControl/HNComplaintData.m; sourceTree = "<group>"; };
+		D3A2D31119FB98A100425BE1 /* HNRefundData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNRefundData.h; path = Classes/DecorateControl/HNRefundData.h; sourceTree = "<group>"; };
+		D3A2D31219FB98A100425BE1 /* HNRefundData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNRefundData.m; path = Classes/DecorateControl/HNRefundData.m; sourceTree = "<group>"; };
 		D3A96D8B19D98BE80059CF62 /* HNAcceptReturnGoodViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNAcceptReturnGoodViewController.h; path = Classes/BusinessBackground/HNAcceptReturnGoodViewController.h; sourceTree = "<group>"; };
 		D3A96D8C19D98BE80059CF62 /* HNAcceptReturnGoodViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNAcceptReturnGoodViewController.m; path = Classes/BusinessBackground/HNAcceptReturnGoodViewController.m; sourceTree = "<group>"; };
 		D3A96D8D19D98BE80059CF62 /* HNAcceptReturnGoodViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HNAcceptReturnGoodViewController.xib; path = Classes/BusinessBackground/HNAcceptReturnGoodViewController.xib; sourceTree = "<group>"; };
@@ -1122,6 +1128,8 @@
 				D3C07BBF19CDAC7A003EA5E4 /* HNComplaintTableViewCell.m */,
 				D391EE8A19CD787D00DE3363 /* HNComplaintTableViewController.h */,
 				D391EE8B19CD787D00DE3363 /* HNComplaintTableViewController.m */,
+				D3A2D30E19FB960600425BE1 /* HNComplaintData.h */,
+				D3A2D30F19FB960600425BE1 /* HNComplaintData.m */,
 			);
 			name = Complaint;
 			sourceTree = "<group>";
@@ -1139,6 +1147,8 @@
 				D3CD90F919CF09E000E76AF4 /* HNRefundTableViewCell.m */,
 				D3CD90F519CF09B500E76AF4 /* HNRefundTableViewController.h */,
 				D3CD90F619CF09B500E76AF4 /* HNRefundTableViewController.m */,
+				D3A2D31119FB98A100425BE1 /* HNRefundData.h */,
+				D3A2D31219FB98A100425BE1 /* HNRefundData.m */,
 			);
 			name = Refund;
 			sourceTree = "<group>";
@@ -1373,6 +1383,7 @@
 				B9E0667F19DCDCB100893DBD /* UIProgressView+AFNetworking.m in Sources */,
 				D3C07BC919CDC8CA003EA5E4 /* HNComplaintDetailsViewController.m in Sources */,
 				B9E0668019DCDCB100893DBD /* UIRefreshControl+AFNetworking.m in Sources */,
+				D3A2D31319FB98A100425BE1 /* HNRefundData.m in Sources */,
 				B91BFCFC19E2C89A00FD468F /* MBProgressHUD.m in Sources */,
 				B9E0667619DCDCB100893DBD /* AFURLConnectionOperation.m in Sources */,
 				D3CD90F719CF09B500E76AF4 /* HNRefundTableViewController.m in Sources */,
@@ -1393,6 +1404,7 @@
 				B9B2BC1B19CF1F3000839AED /* CTAssetScrollView.m in Sources */,
 				B9882DF219CB06D90093F0F4 /* HNDecorateReportViewController.m in Sources */,
 				B955579619D1A06A00FC0AAE /* HNNewConstructViewController.m in Sources */,
+				D3A2D31019FB960600425BE1 /* HNComplaintData.m in Sources */,
 				3732B13119D0182100ADF3F5 /* HNOfficePassesApplyViewController.m in Sources */,
 				37D2354519D1171400295572 /* HNOfficePassedTableViewCell.m in Sources */,
 				B90C417919FA2674004EBC2B /* HNPurchaseItem.m in Sources */,
