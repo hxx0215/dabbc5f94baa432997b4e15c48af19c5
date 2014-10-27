@@ -396,26 +396,34 @@
     UIImage *image=[info objectForKey:UIImagePickerControllerOriginalImage];
     [self.imagePicker dismissViewControllerAnimated:YES completion:nil];
     
+    UIImage *images = [UIImage imageNamed:@"押金退款.png"];
+    //得到图片的data
+    NSData* datas = UIImagePNGRepresentation(images);
+    
     CGFloat scaleSize = 0.5f;
     UIGraphicsBeginImageContext(CGSizeMake(image.size.width * scaleSize, image.size.height * scaleSize));
     [image drawInRect:CGRectMake(0, 0, image.size.width * scaleSize, image.size.height * scaleSize)];
     UIImage *scaledImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     NSData *_data = UIImageJPEGRepresentation(scaledImage, 1.0f);
-    //NSString *_encodedImageStr = [_data base64EncodedStringWithOptions:1];
+    NSString *_encodedImageStr = [datas base64EncodedStringWithOptions:1];
+    _encodedImageStr = [_encodedImageStr stringByReplacingOccurrencesOfString:@"+" withString:@"|JH|"];
+    _encodedImageStr = [_encodedImageStr stringByReplacingOccurrencesOfString:@" " withString:@"|KG|"];
+    _encodedImageStr = [_encodedImageStr stringByReplacingOccurrencesOfString:@"\r\n" withString:@"|HC|"];
+    //Replace("|JH|", "+").Replace("|KG|", " ").Replace("|HC|", "\r\n");
     
     MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = NSLocalizedString(@"Loading", nil);
     
-    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"testImage.jpg",@"name",nil];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"testImage.png",@"name",nil];
     NSString *jsonStr = [dic JSONString];
     NSURL *URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"set.picture.add" Params:jsonStr]];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:URL cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
     
     [request setHTTPMethod:@"POST"];
-    //NSData *data = [[NSData alloc]initWithBase64EncodedString:_encodedImageStr options:1];
-    [request setHTTPBody:_data];
-    NSString *contentType = @"text/html";
+    NSData *data = [[NSData alloc]initWithBase64EncodedString:_encodedImageStr options:1];
+    [request setHTTPBody:data];
+    NSString *contentType = @"multipart/form-data";
     [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
         [MBProgressHUD hideHUDForView:self.view animated:YES];
