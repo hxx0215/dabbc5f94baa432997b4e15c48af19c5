@@ -13,6 +13,7 @@
 @property (nonatomic, strong)NSArray *companyData;
 @property (nonatomic, strong)NSArray *personalData;
 @property (nonatomic, strong)NSArray *graphData;
+
 @end
 
 @implementation HNConstructViewController
@@ -36,6 +37,26 @@
     self.tableView.frame = self.view.bounds;
     [self.tableView reloadData];
 }
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 88)];
+    UIButton *purchase = [UIButton buttonWithType:UIButtonTypeCustom];
+    purchase.height = 40;
+    purchase.width = self.view.width - 36;
+    purchase.left = 18;
+    purchase.centerY = 44;
+    purchase.layer.cornerRadius = 5.0;
+    [purchase setTitle:NSLocalizedString(@"前去支付费用", nil) forState:UIControlStateNormal];
+    [purchase setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [purchase setBackgroundColor:[UIColor colorWithRed:245.0/255.0 green:72.0/255.0 blue:0.0 alpha:1.0]];
+    [purchase addTarget:self action:@selector(purchase:) forControlEvents:UIControlEventTouchUpInside];
+    [view addSubview:purchase];
+    CGSize size = self.tableView.contentSize;
+    view.top = size.height;
+    [self.tableView addSubview:view];
+    size.height += view.height;
+    self.tableView.contentSize = size;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -43,6 +64,7 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 2;
 }
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (0==section)
     {
@@ -52,7 +74,7 @@
             return [self.personalData count];
     }
     else
-        return [self.graphData count];
+        return [self.graphData count] ;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     if (0==section)
@@ -60,6 +82,7 @@
     else
         return 230/2;
 }
+
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UIView *view = nil;
     if (0==section){
@@ -97,7 +120,38 @@
     else if (1 == section){
         view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 115)];
         UIView *colorView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, view.width, 85)];
+        colorView.backgroundColor = [UIColor colorWithRed:211.0/255.0 green:145.0/255.0 blue:26.0/255.0 alpha:1.0];
+        UILabel *colorLabel1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.width - 14, 45)];
+        UILabel *colorLabel2 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, colorLabel1.width, 15)];
+        colorLabel1.text = @"业主信息:深圳市罗湖区万科小区1栋3017";
+        colorLabel2.text = @"李大木  13677899090";
+        colorLabel1.numberOfLines = 2;
+        colorLabel1.font = [UIFont systemFontOfSize:18];
+        colorLabel1.top = 11;
+        colorLabel1.right = self.view.width - 14;
+        colorLabel1.textColor = [UIColor whiteColor];
+        colorLabel1.textAlignment = NSTextAlignmentRight;
         
+        colorLabel2.right = colorLabel1.right;
+        colorLabel2.bottom = colorView.height - 9;
+        colorLabel2.font = [UIFont systemFontOfSize:15];
+        colorLabel2.textColor = [UIColor whiteColor];
+        colorLabel2.textAlignment = NSTextAlignmentRight;
+        [colorView addSubview:colorLabel1];
+        [colorView addSubview:colorLabel2];
+        
+        UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 85, self.view.width, 30)];
+        titleView.backgroundColor = [UIColor colorWithRed:214.0/255.0 green:220/255.0 blue:224.0/255.0 alpha:1.0];
+        UILabel *titleLabel = [[UILabel alloc] init];
+        titleLabel.text = NSLocalizedString(@"图纸资料", nil);
+        titleLabel.textColor = [UIColor colorWithWhite:128.0/255.0 alpha:1.0];
+        [titleLabel sizeToFit];
+        titleLabel.left = 27;
+        titleLabel.centerY = titleView.height / 2;
+        [titleView addSubview:titleLabel];
+        
+        [view addSubview:colorView];
+        [view addSubview:titleView];
     }
     return view;
 }
@@ -114,5 +168,9 @@
     else
         cell.textLabel.text = self.graphData[indexPath.row];
     return cell;
+}
+
+- (void)purchase:(UIButton *)sender{
+    NSLog(@"purchase");
 }
 @end

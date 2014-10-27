@@ -9,11 +9,11 @@
 #import "HNDecorateReportViewController.h"
 #import "HNReportTableViewCell.h"
 #import "HNNewReportViewController.h"
-#import "HNNewConstructViewController.h"
+//#import "HNNewConstructViewController.h"
 #import "MJRefresh.h"
 #import "HNLoginData.h"
 #import "MBProgressHUD.h"
-//#import "HNConstructViewController.h"
+#import "HNConstructViewController.h"
 
 @interface HNReportModel : NSObject
 @property (nonatomic, strong)NSString *roomName;
@@ -123,13 +123,16 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-//    HNConstructViewController *vc = [[HNConstructViewController alloc] init];
-//    vc.constructType = [self.reportList[indexPath.row] constructType];
-//    [self.navigationController pushViewController:vc animated:YES];
-    HNReportModel *model = (HNReportModel *)self.reportList[indexPath.row];
-    HNNewConstructViewController *constructViewController = [[HNNewConstructViewController alloc]initWithConstructType:model.constructType];
-    [self.navigationController pushViewController:constructViewController animated:YES];
+    HNConstructViewController *vc = [[HNConstructViewController alloc] init];
+    vc.constructType = [self.reportList[indexPath.row] constructType];
+    [self.navigationController pushViewController:vc animated:YES];
     return;
+//    ====
+//    HNReportModel *model = (HNReportModel *)self.reportList[indexPath.row];
+//    HNNewConstructViewController *constructViewController = [[HNNewConstructViewController alloc]initWithConstructType:model.constructType];
+//    [self.navigationController pushViewController:constructViewController animated:YES];
+//    return;
+//    =====
 //    HNNewReportViewController *newReportViewController = [[HNNewReportViewController alloc] init];
 //    [self.navigationController pushViewController:newReportViewController animated:YES];
     MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];

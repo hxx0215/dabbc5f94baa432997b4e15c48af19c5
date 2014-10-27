@@ -107,7 +107,7 @@
     cell.title.text = item.title;
     cell.price.text = [NSString stringWithFormat:@"%.2f",item.price];
     cell.single = item.single;
-    cell.detail.text = [NSString stringWithFormat:@"单价%.2f    数量%d",item.unitPrice,item.nums];
+    cell.detail.text = [NSString stringWithFormat:@"单价%.2f    数量%d",item.unitPrice,(int)item.nums];
     return cell;
 }
 - (void)checkAll:(UIButton *)sender{

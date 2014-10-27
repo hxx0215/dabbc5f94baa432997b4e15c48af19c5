@@ -21,7 +21,7 @@
         // Initialization code
         self.roomLabel = [[UILabel alloc] initWithFrame:CGRectMake(27, 0, self.bounds.size.width * 0.8, 17)];
         self.roomLabel.top = 19;
-        self.roomLabel.numberOfLines = 2;
+        self.roomLabel.numberOfLines = 1;
         self.roomLabel.font = [UIFont systemFontOfSize:17];
         self.statusLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.roomLabel.frame) + 8, self.bounds.size.width * 0.8, 14)];
         self.statusLabel.left = self.roomLabel.left;
@@ -43,6 +43,7 @@
 - (void)layoutSubviews{
     [super layoutSubviews];
     self.statusLabel.bottom = self.contentView.height - 14;
+    self.roomLabel.top = 19;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
