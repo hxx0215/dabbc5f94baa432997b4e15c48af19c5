@@ -12,12 +12,19 @@
 @interface HNOfficePassesDetailsViewController ()
 
 @property (nonatomic,strong) IBOutlet UIScrollView *mainView;
+
+@property (nonatomic,strong) IBOutlet UILabel *houseInfoMain;
+
+@property (nonatomic,strong) IBOutlet UILabel *houseInfoTitle;
 @property (nonatomic,strong) IBOutlet UILabel *houseInfo;
 @property (nonatomic,strong) IBOutlet UILabel *houseOnwer;
 @property (nonatomic,strong) IBOutlet UILabel *houseOnwerMobile;
+
+@property (nonatomic,strong) IBOutlet UILabel *decorationCompanyTitle;
 @property (nonatomic,strong) IBOutlet UILabel *decorationCompany;
 @property (nonatomic,strong) IBOutlet UILabel *decorationChargeMan;
 @property (nonatomic,strong) IBOutlet UILabel *decorationChargeMobile;
+/*
 @property (nonatomic,strong) IBOutlet UILabel *decortionMan;
 @property (nonatomic,strong) IBOutlet UILabel *decorationManMobile;
 @property (nonatomic,strong) IBOutlet UILabel *decorationIdCardNo;
@@ -25,6 +32,9 @@
 @property (nonatomic,strong) IBOutlet UIButton *QueryDecorationIDCardPic;
 @property (nonatomic,strong) IBOutlet UILabel *decorationPic;
 @property (nonatomic,strong) IBOutlet UIButton *QueryDecorationPic;
+*/
+@property (nonatomic,strong) IBOutlet UILabel *personsLabel;
+
 @property (nonatomic,strong) IBOutlet UILabel *passcardPerFee;
 @property (nonatomic,strong) IBOutlet UILabel *passcardCount;
 @property (nonatomic,strong) IBOutlet UILabel *passcardSumFee;
@@ -48,23 +58,46 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor=[UIColor whiteColor];
-    self.navigationItem.title=@"详情";
+    self.navigationItem.title = NSLocalizedString(@"Pass Details", nil);
+    
+    label:self.houseInfoMain.text = NSLocalizedString(@"House Information", nil) ;
+    [self labelWithTitle:NSLocalizedString(@"House Information", nil) label:self.houseInfoTitle];
+    [self labelWithTitle:NSLocalizedString(@"Construction unit", nil) label:self.decorationCompanyTitle];
+    
     [self labelWithTitle:self.temporaryModel.roomnumber label:self.houseInfo];
     [self labelWithTitle:self.temporaryModel.ownername label:self.houseOnwer];
     [self labelWithTitle:self.temporaryModel.ownerphone label:self.houseOnwerMobile];
+    self.houseOnwer.textColor = [UIColor colorWithRed:0xCC/255.0 green:0X91/255.0 blue:0X31/255.0 alpha:1];
+    self.houseOnwerMobile.textColor = [UIColor colorWithRed:0xCC/255.0 green:0X91/255.0 blue:0X31/255.0 alpha:1];
+    [self.houseOnwerMobile sizeToFit ];
+    [self.houseOnwer sizeToFit ];
+    self.houseOnwerMobile.right = self.view.width - 14;
+    self.houseOnwer.right = self.houseOnwerMobile.left-5;
     
     [self labelWithTitle:self.temporaryModel.shopname label:self.decorationCompany];
     [self labelWithTitle:self.temporaryModel.principal label:self.decorationChargeMan];
     [self labelWithTitle:self.temporaryModel.EnterprisePhone label:self.decorationChargeMobile];
+    self.decorationChargeMan.textColor = [UIColor colorWithRed:0xCC/255.0 green:0X91/255.0 blue:0X31/255.0 alpha:1];
+    self.decorationChargeMobile.textColor = [UIColor colorWithRed:0xCC/255.0 green:0X91/255.0 blue:0X31/255.0 alpha:1];
+    [self.decorationChargeMobile sizeToFit ];
+    [self.decorationChargeMan sizeToFit ];
+    self.decorationChargeMobile.right = self.view.width - 14;
+    self.decorationChargeMan.right = self.decorationChargeMobile.left-5;
     
-    if ([self.temporaryModel.proposerItems count]) {
-        HNPassProposerData* proposerData= self.temporaryModel.proposerItems[0];
-        [self labelWithTitle:proposerData.name label:self.decortionMan];
-        [self labelWithTitle:proposerData.phone label:self.decorationManMobile];
-        [self labelWithTitle:proposerData.IDcard  label:self.decorationIdCardNo];
-        [self labelWithTitle:proposerData.Icon label:self.decorationIdCardPic];
-        [self labelWithTitle:proposerData.isTransaction label:self.decorationPic];
+    NSString *str = [[NSString alloc]init];
+    for (int i=0; i<[self.temporaryModel.proposerItems count];i++) {
+        HNPassProposerData* proposerData = self.temporaryModel.proposerItems[i];
+        str = [str stringByAppendingString:[NSString stringWithFormat:@"%@ ",proposerData.name]];
     }
+    if ([self.temporaryModel.proposerItems count]) {
+        
+//        [self labelWithTitle:proposerData.name label:self.decortionMan];
+//        [self labelWithTitle:proposerData.phone label:self.decorationManMobile];
+//        [self labelWithTitle:proposerData.IDcard  label:self.decorationIdCardNo];
+//        [self labelWithTitle:proposerData.Icon label:self.decorationIdCardPic];
+//        [self labelWithTitle:proposerData.isTransaction label:self.decorationPic];
+    }
+    self.personsLabel.text = str;
     
  
     int officepassPerFee=10,depositFee=30;
@@ -82,10 +115,9 @@
 - (void)labelWithTitle:(NSString *)title label:(UILabel*)lab
 {
     [lab setText:title];
-    [lab sizeToFit];
-    lab.font = [UIFont systemFontOfSize:12];
-    lab.numberOfLines = 2;
-    lab.layer.borderColor = [UIColor blackColor].CGColor;
+    //[lab sizeToFit];
+    //lab.font = [UIFont systemFontOfSize:12];
+    //lab.numberOfLines = 2;
 }
 
 - (void)viewWillAppear:(BOOL)animated{

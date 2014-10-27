@@ -25,6 +25,7 @@
 -(BOOL)updateData:(NSDictionary *)dic;
 @end
 
+//办证人员信息JSON（name：姓名，phone：联系电话，IDcard：身份证号，IDcardImg：身份证照片，Icon:图像，isTransaction：是否已办证（0否、1是））
 @interface HNPassProposerData : NSObject
 @property (nonatomic, strong)NSString *name;
 @property (nonatomic, strong)NSString *sad;
@@ -60,3 +61,5 @@
 @property (nonatomic, strong)NSString *sort;
 -(BOOL)updateData:(NSDictionary *)dic;
 @end
+
+//商家信息JSON(businessLicense:营业执照，TaxCertificate：税务登录图，OrganizationCode：组织登记代码，Certificate：资质证书，IDCard：法人委托书及法人身份证图，gccIDCard：施工负责人身份证)

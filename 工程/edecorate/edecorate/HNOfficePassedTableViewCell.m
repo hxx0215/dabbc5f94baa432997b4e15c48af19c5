@@ -29,6 +29,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
+        self.temporaryModel = model;
         self.roomLabel = [[UILabel alloc] initWithFrame:CGRectMake(27, 0, self.bounds.size.width * 0.8, 36)];
         self.roomLabel.top = 9;
         self.roomLabel.numberOfLines = 2;
@@ -75,13 +76,17 @@
     }
     else
     {
+        NSLog(@"%@",self.temporaryModel.assessorState);
         if ([self.temporaryModel.assessorState isEqualToString:@"1"]) {
-            self.statusLabel.text = @"审核通过";
+            self.statusLabel.text = @"已审核";
             
         }
-        else
+        else if ([self.temporaryModel.assessorState isEqualToString:@"0"])
         {
-            self.statusLabel.text = @"正在审核";
+            self.statusLabel.text = @"未审核";
+        }
+        else{
+            self.statusLabel.text = @"审核未通过";
         }
     }
 }

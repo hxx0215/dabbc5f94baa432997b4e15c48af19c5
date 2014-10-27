@@ -137,7 +137,7 @@
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     HNPassData* model = self.modelList[indexPath.row];
-    if([model.CARDId isEqualToString:@""])
+    if([model.CARDId isEqualToString:@"24"])
     {
         HNOfficePassesApplyViewController* officePasseesApply=[[HNOfficePassesApplyViewController alloc] initWithModel:model];
         [self.navigationController pushViewController:officePasseesApply animated:YES];
