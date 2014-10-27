@@ -105,6 +105,9 @@
 		B9B2BC2419CF1F3000839AED /* CTAssetsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9B2BC1119CF1F3000839AED /* CTAssetsViewController.m */; };
 		B9B2BC2519CF1F3000839AED /* CTAssetsViewControllerTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = B9B2BC1319CF1F3000839AED /* CTAssetsViewControllerTransition.m */; };
 		B9B2BC2619CF1F3000839AED /* NSDateFormatter+timeIntervalFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = B9B2BC1519CF1F3000839AED /* NSDateFormatter+timeIntervalFormatter.m */; };
+		B9C2B41B19FE8BAC00C93D59 /* HNConstructTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B9C2B41A19FE8BAC00C93D59 /* HNConstructTableViewCell.m */; };
+		B9C2B41F19FE8C6900C93D59 /* selectphoto@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B9C2B41D19FE8C6900C93D59 /* selectphoto@2x.png */; };
+		B9C2B42019FE8C6900C93D59 /* selectphotoclick@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B9C2B41E19FE8C6900C93D59 /* selectphotoclick@2x.png */; };
 		B9D3DECB19CD0B2C0020CDC9 /* HNReportPurchaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D3DEC919CD0B2C0020CDC9 /* HNReportPurchaseViewController.m */; };
 		B9D3DECC19CD0B2C0020CDC9 /* HNReportPurchaseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9D3DECA19CD0B2C0020CDC9 /* HNReportPurchaseViewController.xib */; };
 		B9D3DECF19CD18C10020CDC9 /* HNDecorateCheckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D3DECE19CD18C10020CDC9 /* HNDecorateCheckViewController.m */; };
@@ -361,6 +364,10 @@
 		B9B2BC1319CF1F3000839AED /* CTAssetsViewControllerTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTAssetsViewControllerTransition.m; sourceTree = "<group>"; };
 		B9B2BC1419CF1F3000839AED /* NSDateFormatter+timeIntervalFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDateFormatter+timeIntervalFormatter.h"; sourceTree = "<group>"; };
 		B9B2BC1519CF1F3000839AED /* NSDateFormatter+timeIntervalFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDateFormatter+timeIntervalFormatter.m"; sourceTree = "<group>"; };
+		B9C2B41919FE8BAC00C93D59 /* HNConstructTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNConstructTableViewCell.h; path = Classes/DecorateControl/HNConstructTableViewCell.h; sourceTree = "<group>"; };
+		B9C2B41A19FE8BAC00C93D59 /* HNConstructTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNConstructTableViewCell.m; path = Classes/DecorateControl/HNConstructTableViewCell.m; sourceTree = "<group>"; };
+		B9C2B41D19FE8C6900C93D59 /* selectphoto@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "selectphoto@2x.png"; sourceTree = "<group>"; };
+		B9C2B41E19FE8C6900C93D59 /* selectphotoclick@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "selectphotoclick@2x.png"; sourceTree = "<group>"; };
 		B9D3DEC819CD0B2C0020CDC9 /* HNReportPurchaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNReportPurchaseViewController.h; path = Classes/DecorateControl/HNReportPurchaseViewController.h; sourceTree = "<group>"; };
 		B9D3DEC919CD0B2C0020CDC9 /* HNReportPurchaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNReportPurchaseViewController.m; path = Classes/DecorateControl/HNReportPurchaseViewController.m; sourceTree = "<group>"; };
 		B9D3DECA19CD0B2C0020CDC9 /* HNReportPurchaseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HNReportPurchaseViewController.xib; path = Classes/DecorateControl/HNReportPurchaseViewController.xib; sourceTree = "<group>"; };
@@ -765,6 +772,7 @@
 		B965862B19F68CBD00EB4766 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				B9C2B41C19FE8C3900C93D59 /* ReportDetail */,
 				B90C417D19FA3321004EBC2B /* Purchase */,
 				B965863F19F7E37E00EB4766 /* Report */,
 				B965862C19F68D4C00EB4766 /* Login */,
@@ -796,6 +804,8 @@
 			children = (
 				B965864419F9387700EB4766 /* HNConstructViewController.h */,
 				B965864519F9387700EB4766 /* HNConstructViewController.m */,
+				B9C2B41919FE8BAC00C93D59 /* HNConstructTableViewCell.h */,
+				B9C2B41A19FE8BAC00C93D59 /* HNConstructTableViewCell.m */,
 				B955579319D1A06A00FC0AAE /* HNNewConstructViewController.h */,
 				B955579419D1A06A00FC0AAE /* HNNewConstructViewController.m */,
 				B955579519D1A06A00FC0AAE /* HNNewConstructViewController.xib */,
@@ -926,6 +936,15 @@
 				B9B2BC1519CF1F3000839AED /* NSDateFormatter+timeIntervalFormatter.m */,
 			);
 			path = CTAssetsPickerController;
+			sourceTree = "<group>";
+		};
+		B9C2B41C19FE8C3900C93D59 /* ReportDetail */ = {
+			isa = PBXGroup;
+			children = (
+				B9C2B41D19FE8C6900C93D59 /* selectphoto@2x.png */,
+				B9C2B41E19FE8C6900C93D59 /* selectphotoclick@2x.png */,
+			);
+			name = ReportDetail;
 			sourceTree = "<group>";
 		};
 		B9D3DEE019CD2E8A0020CDC9 /* Share */ = {
@@ -1252,7 +1271,9 @@
 				B916F0E319C878AC00A849C7 /* PushConfig.plist in Resources */,
 				D3CD910419CF141C00E76AF4 /* HNRefundDetailViewController.xib in Resources */,
 				B955579719D1A06A00FC0AAE /* HNNewConstructViewController.xib in Resources */,
+				B9C2B41F19FE8C6900C93D59 /* selectphoto@2x.png in Resources */,
 				B916F0BA19C8781D00A849C7 /* Images.xcassets in Resources */,
+				B9C2B42019FE8C6900C93D59 /* selectphotoclick@2x.png in Resources */,
 				B90C418019FA3365004EBC2B /* purchasecheck@2x.png in Resources */,
 				D3C07BC519CDC8A0003EA5E4 /* HNComplaintApplyViewController.xib in Resources */,
 				37F9D80519D8B5E1005CB18B /* HNCommentsTableViewCell.xib in Resources */,
@@ -1400,6 +1421,7 @@
 				B9E0667119DCDCB100893DBD /* AFHTTPRequestOperation.m in Sources */,
 				B9D72D5919D846FC0011CF83 /* HNOrderViewController.m in Sources */,
 				B9AD9E0819DEC90D00D82439 /* NSString+Crypt.m in Sources */,
+				B9C2B41B19FE8BAC00C93D59 /* HNConstructTableViewCell.m in Sources */,
 				D391EE8C19CD787D00DE3363 /* HNComplaintTableViewController.m in Sources */,
 				B9B2BC1B19CF1F3000839AED /* CTAssetScrollView.m in Sources */,
 				B9882DF219CB06D90093F0F4 /* HNDecorateReportViewController.m in Sources */,

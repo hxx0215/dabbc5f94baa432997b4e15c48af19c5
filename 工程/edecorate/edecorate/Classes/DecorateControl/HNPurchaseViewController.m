@@ -90,6 +90,7 @@
     HNPurchaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
     if (!cell){
         cell = [[HNPurchaseTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identy];
+        [cell.checkButton addTarget:self action:@selector(check:) forControlEvents:UIControlEventTouchUpInside];
     }
     HNPurchaseItem *item = nil;
     if (indexPath.section == 0)
@@ -104,6 +105,7 @@
         cell.detail.textColor = [UIColor colorWithRed:45.0/255.0 green:138.05 blue:204.0 alpha:1.0];
         cell.checkButton.hidden = NO;
     }
+    cell.checkButton.tag = indexPath.row;
     cell.title.text = item.title;
     cell.price.text = [NSString stringWithFormat:@"%.2f",item.price];
     cell.single = item.single;
@@ -112,5 +114,10 @@
 }
 - (void)checkAll:(UIButton *)sender{
     sender.selected = !sender.selected;
+}
+
+- (void)check:(UIButton *)sender{
+    sender.selected = !sender.selected;
+    NSLog(@"sender:%d",sender.tag);
 }
 @end

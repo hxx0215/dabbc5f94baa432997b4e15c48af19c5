@@ -7,6 +7,8 @@
 //
 
 #import "HNConstructViewController.h"
+#import "HNPurchaseViewController.h"
+#import "HNPurchaseItem.h"
 
 @interface HNConstructViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong)UITableView *tableView;
@@ -155,7 +157,9 @@
     }
     return view;
 }
-
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 60;
+}
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *identy = @"ConstructCell";
     UITableViewCell *cell =[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identy];
@@ -171,6 +175,19 @@
 }
 
 - (void)purchase:(UIButton *)sender{
-    NSLog(@"purchase");
+    HNPurchaseViewController *pur = [[HNPurchaseViewController alloc] init];
+    HNPurchaseItem *item = [[HNPurchaseItem alloc] init];
+    item.title = @"装修保证金";
+    item.price = 2000.0;
+    item.single = 0;
+    pur.mustPay = @[item];
+    HNPurchaseItem *oItem = [[HNPurchaseItem alloc] init];
+    oItem.title = @"装修垃圾下楼费";
+    oItem.single = 1;
+    oItem.nums = 3;
+    oItem.unitPrice = 300.0;
+    oItem.price = oItem.nums * oItem.unitPrice;
+    pur.optionPay = @[oItem];
+    [self.navigationController pushViewController:pur animated:YES];
 }
 @end
