@@ -69,34 +69,34 @@
     self.statusMap = @{@"0": @"审核进度:未审核",@"1": @"审核进度:已审核",@"-1":@"审核进度:审核未通过"};
     
     self.reportList = [[NSMutableArray alloc] init];
-    HNReportModel *tModel = [[HNReportModel alloc] init];
-    tModel.roomName = @"施工房号：XXXX";
-    tModel.status = @"审核进度:审核中";
-    tModel.constructType = kCompanyNew;
-    [self.reportList addObject:tModel];
-    
-    HNReportModel *modelComDetail = [[HNReportModel alloc] init];
-    modelComDetail.roomName = @"施工房号：";
-    modelComDetail.status =@"审核进度:已通过";
-    modelComDetail.constructType = kCompanyDetail;
-    [self.reportList addObject:modelComDetail];
-    
-    HNReportModel *modelOwnNew = [[HNReportModel alloc]init];
-    modelOwnNew.roomName =@"施工房号：业主自装";
-    modelOwnNew.status = @"审核进度：审核中";
-    modelOwnNew.constructType = kPersonalNew;
-    [self.reportList addObject:modelOwnNew];
-    
-    HNReportModel *modelOwnDetail = [[HNReportModel alloc] init];
-    modelOwnDetail.roomName = @"施工房号：业主自装";
-    modelOwnDetail.status = @"审核进度：已通过";
-    modelOwnDetail.constructType = kPersonalDetail;
-    [self.reportList addObject:modelOwnDetail];
+//    HNReportModel *tModel = [[HNReportModel alloc] init];
+//    tModel.roomName = @"施工房号：XXXX";
+//    tModel.status = @"审核进度:审核中";
+//    tModel.constructType = kCompanyNew;
+//    [self.reportList addObject:tModel];
+//    
+//    HNReportModel *modelComDetail = [[HNReportModel alloc] init];
+//    modelComDetail.roomName = @"施工房号：";
+//    modelComDetail.status =@"审核进度:已通过";
+//    modelComDetail.constructType = kCompanyDetail;
+//    [self.reportList addObject:modelComDetail];
+//    
+//    HNReportModel *modelOwnNew = [[HNReportModel alloc]init];
+//    modelOwnNew.roomName =@"施工房号：业主自装";
+//    modelOwnNew.status = @"审核进度：审核中";
+//    modelOwnNew.constructType = kPersonalNew;
+//    [self.reportList addObject:modelOwnNew];
+//    
+//    HNReportModel *modelOwnDetail = [[HNReportModel alloc] init];
+//    modelOwnDetail.roomName = @"施工房号：业主自装";
+//    modelOwnDetail.status = @"审核进度：已通过";
+//    modelOwnDetail.constructType = kPersonalDetail;
+//    [self.reportList addObject:modelOwnDetail];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
+    [self.rTableView headerBeginRefreshing];
 }
 - (void)reportButton_Clicked:(id)sender{
    

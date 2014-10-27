@@ -9,6 +9,7 @@
 #import "HNConstructViewController.h"
 #import "HNPurchaseViewController.h"
 #import "HNPurchaseItem.h"
+#import "HNConstructTableViewCell.h"
 
 @interface HNConstructViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong)UITableView *tableView;
@@ -162,15 +163,15 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *identy = @"ConstructCell";
-    UITableViewCell *cell =[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identy];
+    HNConstructTableViewCell *cell =[[HNConstructTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identy];
     if (0==indexPath.section){
         if (self.constructType < 2)
-            cell.textLabel.text = self.companyData[indexPath.row];
+            cell.title.text = self.companyData[indexPath.row];
         else
-            cell.textLabel.text = self.personalData[indexPath.row];
+            cell.title.text = self.personalData[indexPath.row];
     }
     else
-        cell.textLabel.text = self.graphData[indexPath.row];
+        cell.title.text = self.graphData[indexPath.row];
     return cell;
 }
 
