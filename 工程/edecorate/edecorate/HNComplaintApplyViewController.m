@@ -11,6 +11,9 @@
 #import "UIView+AHKit.h"
 
 @interface HNComplaintApplyViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate,UITextViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource>
+
+@property (nonatomic, strong)IBOutlet UIScrollView *mainView;
+
 @property (nonatomic, strong)IBOutlet UILabel *houseInfMainLabel;
 @property (nonatomic, strong)IBOutlet UILabel *houseInfTitleLabel;
 @property (nonatomic, strong)IBOutlet UILabel *houseInfLabel;
@@ -75,6 +78,20 @@
     
     [self labelWithTitle:@"13330333033"  label:self.constructionPersonPhoneNumberLabel];
     
+    self.ownersLabel.textColor = [UIColor colorWithRed:0xCC/255.0 green:0X91/255.0 blue:0X31/255.0 alpha:1];
+    self.ownersPhoneNumberLabel.textColor = [UIColor colorWithRed:0xCC/255.0 green:0X91/255.0 blue:0X31/255.0 alpha:1];
+    [self.ownersPhoneNumberLabel sizeToFit ];
+    [self.ownersLabel sizeToFit ];
+    self.ownersPhoneNumberLabel.right = self.view.width - 14;
+    self.ownersLabel.right = self.ownersPhoneNumberLabel.left-5;
+    
+    self.constructionPersonLabel.textColor = [UIColor colorWithRed:0xCC/255.0 green:0X91/255.0 blue:0X31/255.0 alpha:1];
+    self.constructionPersonPhoneNumberLabel.textColor = [UIColor colorWithRed:0xCC/255.0 green:0X91/255.0 blue:0X31/255.0 alpha:1];
+    [self.constructionPersonPhoneNumberLabel sizeToFit ];
+    [self.constructionPersonLabel sizeToFit ];
+    self.constructionPersonPhoneNumberLabel.right = self.view.width - 14;
+    self.constructionPersonLabel.right = self.constructionPersonPhoneNumberLabel.left-5;
+    
     //Complaint Information
     [self labelWithTitle:NSLocalizedString(@"Complaint Information", nil) label:self.complaintInformationTitleLable];
     [self labelWithTitle:NSLocalizedString(@"Complaint Category", nil) label:self.complaintCategoryTitleLable];
@@ -92,9 +109,9 @@
     self.uploadButton.layer.borderColor = [UIColor blackColor].CGColor;
     
     [self.commitButton setTitle:NSLocalizedString(@"Submit complaint", nil) forState:UIControlStateNormal];
-    [self.commitButton sizeToFit];
-    self.commitButton.layer.borderWidth = 1.0;
-    self.commitButton.layer.borderColor = [UIColor blackColor].CGColor;
+    self.commitButton.layer.cornerRadius = 5.0;
+    [self.commitButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.commitButton setBackgroundColor:[UIColor colorWithRed:245.0/255.0 green:72.0/255.0 blue:0.0 alpha:1.0]];
     
     
     UIImagePickerControllerSourceType sourceType=UIImagePickerControllerSourceTypePhotoLibrary;
@@ -134,14 +151,31 @@
     button.height = self.textOKView.height = self.complaintOCategoryTF.height;
     [button setTitle:@"OK" forState:UIControlStateNormal];
     self.textOKView.hidden = YES;
-    [self.view addSubview:self.textOKView];
+    [self.mainView addSubview:self.textOKView];
     [button addTarget:self action:@selector(OKTextClick) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIToolbar * topView = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 30)];
+    //[topView setBarStyle:UIBarStyleBlack];
+    topView.backgroundColor = [UIColor whiteColor];
+    UIBarButtonItem * btnSpace = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+    UIBarButtonItem * doneButton = [[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(dismissKeyBoard)];
+    NSArray * buttonsArray = [NSArray arrayWithObjects:btnSpace,doneButton,nil];
+    [topView setItems:buttonsArray];
+    self.complaintContansTextView.inputAccessoryView = topView;
+}
+
+-(void)dismissKeyBoard
+{
+    [self.complaintContansTextView resignFirstResponder];
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     self.mainViewFramRectTop = [self.view convertRect:self.view.bounds toView:[[UIApplication sharedApplication] keyWindow]].origin.y;
+    
+    self.mainView.frame = self.view.bounds;
+    self.mainView.contentSize = CGSizeMake(self.view.bounds.size.width, self.commitButton.bottom+20);
 }
 
 - (void)labelWithTitle:(NSString *)title label:(UILabel*)lab
