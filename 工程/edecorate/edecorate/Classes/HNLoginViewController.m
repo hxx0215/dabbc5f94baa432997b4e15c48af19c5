@@ -132,7 +132,7 @@
         {
             NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
-            if ([[HNLoginData shared] updateData:[[[retJson objectFromJSONString] objectForKey:@"data"] objectAtIndex:0]] && [[HNLoginData shared].msg isEqualToString:@"登录成功"]){//之后需要替换成status
+            if ([[HNLoginData shared] updateData:[[[retJson objectFromJSONString] objectForKey:@"data"] objectAtIndex:0]] && [[HNLoginData shared].state isEqualToString:@"1"]){//之后需要替换成status
                 [self loginSuccess];
             }
             else{

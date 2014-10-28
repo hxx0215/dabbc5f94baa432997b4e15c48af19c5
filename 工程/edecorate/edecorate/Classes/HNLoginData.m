@@ -29,6 +29,7 @@
     [self setValue:[dic objectForKey:@"email"] forKey:@"email"];
     [self setValue:[dic objectForKey:@"lastlogintime"] forKey:@"lastlogintime"];
     [self setValue:[dic objectForKey:@"msg"] forKey:@"msg"];
+    [self setValue:[dic objectForKey:@"state"] forKey:@"state"];
     return YES;
 }
 @end
