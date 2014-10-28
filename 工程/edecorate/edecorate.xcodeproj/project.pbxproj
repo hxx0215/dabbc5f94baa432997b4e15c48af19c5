@@ -144,6 +144,8 @@
 		B9E0667F19DCDCB100893DBD /* UIProgressView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = B9E0666C19DCDCB100893DBD /* UIProgressView+AFNetworking.m */; };
 		B9E0668019DCDCB100893DBD /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = B9E0666E19DCDCB100893DBD /* UIRefreshControl+AFNetworking.m */; };
 		B9E0668119DCDCB100893DBD /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = B9E0667019DCDCB100893DBD /* UIWebView+AFNetworking.m */; };
+		D334E87119FFC0DB002AA7D2 /* HNDeliverDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D334E86F19FFC0DB002AA7D2 /* HNDeliverDetailTableViewCell.m */; };
+		D334E87219FFC0DB002AA7D2 /* HNDeliverDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D334E87019FFC0DB002AA7D2 /* HNDeliverDetailTableViewCell.xib */; };
 		D33549F719FEB3D300135800 /* HNPassAddNewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D33549F519FEB3D300135800 /* HNPassAddNewTableViewCell.m */; };
 		D33549F819FEB3D300135800 /* HNPassAddNewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D33549F619FEB3D300135800 /* HNPassAddNewTableViewCell.xib */; };
 		D33BBD1519CC711700AA1039 /* HNTemporaryApplyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D33BBD1419CC711700AA1039 /* HNTemporaryApplyView.xib */; };
@@ -441,6 +443,9 @@
 		B9E0666E19DCDCB100893DBD /* UIRefreshControl+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIRefreshControl+AFNetworking.m"; sourceTree = "<group>"; };
 		B9E0666F19DCDCB100893DBD /* UIWebView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+AFNetworking.h"; sourceTree = "<group>"; };
 		B9E0667019DCDCB100893DBD /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
+		D334E86E19FFC0DB002AA7D2 /* HNDeliverDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNDeliverDetailTableViewCell.h; path = Classes/DecorateControl/HNDeliverDetailTableViewCell.h; sourceTree = "<group>"; };
+		D334E86F19FFC0DB002AA7D2 /* HNDeliverDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNDeliverDetailTableViewCell.m; path = Classes/DecorateControl/HNDeliverDetailTableViewCell.m; sourceTree = "<group>"; };
+		D334E87019FFC0DB002AA7D2 /* HNDeliverDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HNDeliverDetailTableViewCell.xib; path = Classes/DecorateControl/HNDeliverDetailTableViewCell.xib; sourceTree = "<group>"; };
 		D33549F419FEB3D300135800 /* HNPassAddNewTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNPassAddNewTableViewCell.h; path = Classes/DecorateControl/HNPassAddNewTableViewCell.h; sourceTree = "<group>"; };
 		D33549F519FEB3D300135800 /* HNPassAddNewTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNPassAddNewTableViewCell.m; path = Classes/DecorateControl/HNPassAddNewTableViewCell.m; sourceTree = "<group>"; };
 		D33549F619FEB3D300135800 /* HNPassAddNewTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HNPassAddNewTableViewCell.xib; path = Classes/DecorateControl/HNPassAddNewTableViewCell.xib; sourceTree = "<group>"; };
@@ -883,6 +888,9 @@
 				B965E75F19D04955004CD201 /* HNDeliverViewController.m */,
 				D3F4B5A119E82C93001CA79C /* HNDeliverData.h */,
 				D3F4B5A219E82C93001CA79C /* HNDeliverData.m */,
+				D334E86E19FFC0DB002AA7D2 /* HNDeliverDetailTableViewCell.h */,
+				D334E86F19FFC0DB002AA7D2 /* HNDeliverDetailTableViewCell.m */,
+				D334E87019FFC0DB002AA7D2 /* HNDeliverDetailTableViewCell.xib */,
 			);
 			name = Deliver;
 			sourceTree = "<group>";
@@ -1259,6 +1267,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D334E87219FFC0DB002AA7D2 /* HNDeliverDetailTableViewCell.xib in Resources */,
 				B9D72D5A19D846FC0011CF83 /* HNOrderViewController.xib in Resources */,
 				D33EEA6B19D6D9E600D6F106 /* HNProfileViewController.xib in Resources */,
 				B90C418119FA3365004EBC2B /* purchasecheckbox@2x.png in Resources */,
@@ -1421,6 +1430,7 @@
 				B9B2BC1C19CF1F3000839AED /* CTAssetsGroupViewCell.m in Sources */,
 				B9B2BC1919CF1F3000839AED /* ALAssetsGroup+isEqual.m in Sources */,
 				B9E0667219DCDCB100893DBD /* AFHTTPRequestOperationManager.m in Sources */,
+				D334E87119FFC0DB002AA7D2 /* HNDeliverDetailTableViewCell.m in Sources */,
 				B9B2BC2619CF1F3000839AED /* NSDateFormatter+timeIntervalFormatter.m in Sources */,
 				B91A3AC519D6E6E9000F3823 /* MJRefreshHeaderView.m in Sources */,
 				B91A3AD519D703C5000F3823 /* HNGoodsHeaderView.m in Sources */,

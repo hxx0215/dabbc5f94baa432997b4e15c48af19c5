@@ -74,8 +74,7 @@
     self.view.backgroundColor=[UIColor whiteColor];
     self.navigationItem.title = NSLocalizedString(@"Pass Apply", nil);
     
-    
-label:self.houseInfoMain.text = NSLocalizedString(@"House Information", nil) ;
+    self.houseInfoMain.text = NSLocalizedString(@"House Information", nil) ;
     [self labelWithTitle:NSLocalizedString(@"House Information", nil) label:self.houseInfoTitle];
     [self labelWithTitle:NSLocalizedString(@"Construction unit", nil) label:self.decorationCompanyTitle];
     
