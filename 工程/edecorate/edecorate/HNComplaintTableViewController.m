@@ -42,12 +42,13 @@
     self.tTableView = [[UITableView alloc] initWithFrame:self.view.bounds];
     self.tTableView.delegate = self;
     self.tTableView.dataSource = self;
+    self.tTableView.height = self.view.height - self.navigationController.navigationBar.height-20;
     [self.view addSubview:self.tTableView];
     
     
     self.navigationItem.title = NSLocalizedString(@"I have a complaint", nil);
     
-    self.modelList = [[NSMutableArray alloc] init];
+    
     //[self loadMyData];
 }
 
@@ -100,7 +101,7 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
+    self.modelList = [[NSMutableArray alloc] init];
     [self loadMyData];
     
 }

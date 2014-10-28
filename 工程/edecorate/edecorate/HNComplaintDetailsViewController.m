@@ -11,17 +11,15 @@
 
 @interface HNComplaintDetailsViewController ()
 @property (nonatomic, strong)IBOutlet UILabel *houseInfMainLabel;
+
 @property (nonatomic, strong)IBOutlet UILabel *houseInfTitleLabel;
 @property (nonatomic, strong)IBOutlet UILabel *houseInfLabel;
-@property (nonatomic, strong)IBOutlet UILabel *ownersTitleLabel;
 @property (nonatomic, strong)IBOutlet UILabel *ownersLabel;
-@property (nonatomic, strong)IBOutlet UILabel *ownersPhoneNumberTitleLabel;
 @property (nonatomic, strong)IBOutlet UILabel *ownersPhoneNumberLabel;
+
 @property (nonatomic, strong)IBOutlet UILabel *constructionUnitTitleLabel;
 @property (nonatomic, strong)IBOutlet UILabel *constructionUnitLabel;
-@property (nonatomic, strong)IBOutlet UILabel *constructionPersonTitleLabel;
 @property (nonatomic, strong)IBOutlet UILabel *constructionPersonLabel;
-@property (nonatomic, strong)IBOutlet UILabel *constructionPersonPhoneNumberTitleLabel;
 @property (nonatomic, strong)IBOutlet UILabel *constructionPersonPhoneNumberLabel;
 
 @property (nonatomic, strong)IBOutlet UILabel *complaintInformationTitleLable;
@@ -67,15 +65,23 @@
     [self labelWithTitle:NSLocalizedString(@"Construction unit", nil) label:self.constructionUnitTitleLabel];
     
     [self labelWithTitle:@"feiniao"  label:self.constructionUnitLabel];
-    
-    
     [self labelWithTitle:@"laochen"  label:self.ownersLabel];
-    
     [self labelWithTitle:@"13330333033"  label:self.constructionPersonPhoneNumberLabel];
-    
-    [self labelWithTitle:NSLocalizedString(@"Phone number", nil) label:self.constructionPersonPhoneNumberTitleLabel];
-    
     [self labelWithTitle:@"13330330300" label:self.constructionPersonPhoneNumberLabel];
+    
+    self.ownersLabel.textColor = [UIColor colorWithRed:0xCC/255.0 green:0X91/255.0 blue:0X31/255.0 alpha:1];
+    self.ownersPhoneNumberLabel.textColor = [UIColor colorWithRed:0xCC/255.0 green:0X91/255.0 blue:0X31/255.0 alpha:1];
+    [self.ownersPhoneNumberLabel sizeToFit ];
+    [self.ownersLabel sizeToFit ];
+    self.ownersPhoneNumberLabel.right = self.view.width - 14;
+    self.ownersLabel.right = self.ownersPhoneNumberLabel.left-5;
+    
+    self.constructionPersonLabel.textColor = [UIColor colorWithRed:0xCC/255.0 green:0X91/255.0 blue:0X31/255.0 alpha:1];
+    self.constructionPersonPhoneNumberLabel.textColor = [UIColor colorWithRed:0xCC/255.0 green:0X91/255.0 blue:0X31/255.0 alpha:1];
+    [self.constructionPersonPhoneNumberLabel sizeToFit ];
+    [self.constructionPersonLabel sizeToFit ];
+    self.constructionPersonPhoneNumberLabel.right = self.view.width - 14;
+    self.constructionPersonLabel.right = self.constructionPersonPhoneNumberLabel.left-5;
     
     //Complaint Information
     [self labelWithTitle:NSLocalizedString(@"Complaint Information", nil) label:self.complaintInformationTitleLable];
@@ -85,12 +91,13 @@
     [self labelWithTitle:NSLocalizedString(@"Evidence", nil) label:self.evidenceTitleLable];
     [self labelWithTitle:NSLocalizedString(@"Uploaded", nil) label:self.uploadStatusLable];
     
-//    [self labelWithTitle:self.temporaryModel.complaintInfo.complaintCategory label:self.complaintCategoryLable];
-//    [self labelWithTitle:self.temporaryModel.complaintInfo.complaintObject label:self.complaintObjectLable];
-//    [self.complaintIssueLable setText:self.temporaryModel.complaintInfo.complaintIssue];
-    self.complaintIssueLable.font = [UIFont systemFontOfSize:12];
-    [self.complaintIssueLable sizeToFit];
+    [self labelWithTitle:self.temporaryModel.complainType label:self.complaintCategoryLable];
+    [self labelWithTitle:self.temporaryModel.complainObject label:self.complaintObjectLable];
+    [self.complaintIssueLable setText:self.temporaryModel.complainProblem];
+    
     self.complaintIssueLable.numberOfLines = 4;
+    [self.complaintIssueLable sizeToFit];
+    
 
     CGFloat pos = self.complaintIssueLable.bottom>self.complaintIssueTitleLable.bottom?self.complaintIssueLable.bottom:self.complaintIssueTitleLable.bottom;
     self.checkOutButton.top = pos+self.complaintIssueTitleLable.top-self.complaintObjectTitleLable.bottom;
@@ -119,10 +126,6 @@
 - (void)labelWithTitle:(NSString *)title label:(UILabel*)lab
 {
     [lab setText:title];
-    [lab sizeToFit];
-    lab.font = [UIFont systemFontOfSize:12];
-    lab.numberOfLines = 2;
-    lab.layer.borderColor = [UIColor blackColor].CGColor;
 }
 
 - (void)didReceiveMemoryWarning {

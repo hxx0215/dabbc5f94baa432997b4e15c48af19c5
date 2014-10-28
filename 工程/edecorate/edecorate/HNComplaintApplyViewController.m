@@ -224,19 +224,44 @@
     //[self.uploadImages setObject:image forKey:[NSNumber numberWithInteger:self.curButton.tag]];;
 }
 
+bool bo = false;
 - (void)textFieldDidBeginEditing:(UITextField *)textField           // became first responder
 {
+    bo = false;
+    NSLog(@"textFieldDidBeginEditing");
     if (textField == self.complaintOCategoryTF) {
         self.textOKView.right = textField.right;
         self.textOKView.bottom = textField.bottom;
         self.textOKView.hidden = NO;
     }
+    
 }
 
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    bo = true;
+    NSLog(@"textFieldShouldBeginEditing");
+    self.mainView.contentSize = CGSizeMake(self.view.bounds.size.width,self.view.bounds.size.height +216);//原始滑动距离增加键盘高度
+    CGPoint pt = [textField convertPoint:CGPointMake(0, 0) toView:self.mainView];//把当前的textField的坐标映射到scrollview上
+    if(self.mainView.contentOffset.y-pt.y+self.navigationController.navigationBar.height<=0)//判断最上面不要去滚动
+        [self.mainView setContentOffset:CGPointMake(0, pt.y-self.navigationController.navigationBar.height) animated:YES];//华东
+    return YES;
+}
+
+-(void)doKeyboard
+{
+}
 
 -(void)textFieldDidEndEditing:(UITextField *)textField{
     self.textOKView.hidden = YES;
-
+    
+    if (!bo) {
+        //开始动画
+        [UIView animateWithDuration:0.30f animations:^{
+            self.mainView.frame = self.view.bounds;
+            self.mainView.contentSize = CGSizeMake(self.view.bounds.size.width, self.commitButton.bottom+20);
+        }];
+    }
 }
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField               // called when clear button pressed. return NO to ignore (no notifications)
@@ -249,18 +274,36 @@
     return YES;
 }
 
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView
+{
+    bo = true;
+    self.mainView.contentSize = CGSizeMake(self.view.bounds.size.width,self.view.bounds.size.height +216);//原始滑动距离增加键盘高度
+    CGPoint pt = [textView convertPoint:CGPointMake(0, 0) toView:self.mainView];//把当前的textField的坐标映射到scrollview上
+    if(self.mainView.contentOffset.y-pt.y+self.navigationController.navigationBar.height<=0)//判断最上面不要去滚动
+        [self.mainView setContentOffset:CGPointMake(0, pt.y-self.navigationController.navigationBar.height) animated:YES];//华东
+    return YES;
+}
+
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
-    [UIView animateWithDuration:0.30f animations:^{
-        self.view.top = -10;
-    }];
+    bo = false;
+//    [UIView animateWithDuration:0.30f animations:^{
+//        self.view.top = -10;
+//    }];
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
-    [UIView animateWithDuration:0.30f animations:^{
-        self.view.top = self.mainViewFramRectTop;
-    }];
+//    [UIView animateWithDuration:0.30f animations:^{
+//        self.view.top = self.mainViewFramRectTop;
+//    }];
+    if (!bo) {
+        //开始动画
+        [UIView animateWithDuration:0.30f animations:^{
+            self.mainView.frame = self.view.bounds;
+            self.mainView.contentSize = CGSizeMake(self.view.bounds.size.width, self.commitButton.bottom+20);
+        }];
+    }
     
 }
 
