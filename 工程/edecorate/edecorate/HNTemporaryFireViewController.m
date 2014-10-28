@@ -58,17 +58,17 @@
     self.model = [[HNTemporaryData alloc] init];
     self.model.mshopid = [HNLoginData shared].mshopid;
     self.model.type = self.temporaryType;
-    switch (self.temporaryType) {
-        case FIRE:
-            [self loadFire];
-            break;
-        case POWER:
-            [self loadPower];
-            break;
-            
-        default:
-            break;
-    }
+//    switch (self.temporaryType) {
+//        case FIRE:
+//            [self loadFire];
+//            break;
+//        case POWER:
+//            [self loadPower];
+//            break;
+//            
+//        default:
+//            break;
+//    }
     
 }
 
@@ -166,10 +166,22 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    if(self.temporaryTableViewCell)
-    {
-        [self.temporaryTableViewCell updateMyCell];
+    switch (self.temporaryType) {
+        case FIRE:
+            [self loadFire];
+            break;
+        case POWER:
+            [self loadPower];
+            break;
+            
+        default:
+            break;
     }
+
+//    if(self.temporaryTableViewCell)
+//    {
+//        [self.temporaryTableViewCell updateMyCell];
+//    }
     
 }
 #pragma mark - tableView Delegate & DataSource

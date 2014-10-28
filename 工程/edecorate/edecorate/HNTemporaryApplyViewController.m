@@ -224,11 +224,31 @@
 
 - (IBAction)commit:(id)sender
 {
+    NSString *method;
+    NSString *jsonStr;
     MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = NSLocalizedString(@"Loading", nil);
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    NSString *jsonStr = [[self encodeWithTemporaryModel:self.temporaryModel] JSONString];
-    request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"set.temporary.fire" Params:jsonStr]];
+    
+    switch (self.temporaryModel.type) {
+        case FIRE:
+        {
+            method = @"set.temporary.fire";
+            jsonStr = [[self encodeWithFireModel:self.temporaryModel] JSONString];
+        }
+            break;
+        case POWER:
+        {
+            method = @"set.temporary.electro";
+            jsonStr = [[self encodeWithPowerModel:self.temporaryModel] JSONString];
+        }
+            break;
+            
+        default:
+            break;
+    }
+    
+    request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:method Params:jsonStr]];
     NSString *contentType = @"text/html";
     [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
     
@@ -271,9 +291,17 @@
 
 }
 
-- (NSDictionary *)encodeWithTemporaryModel:(HNTemporaryModel *)model{
+- (NSDictionary *)encodeWithFireModel:(HNTemporaryModel *)model{
     HNTemporaryFireModel* fmodel = (HNTemporaryFireModel*)model;
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:fmodel.declareId,@"declareId", fmodel.dataInfo.fireUnits,@"fireEnterprise",fmodel.dataInfo.useOfFireBy,@"fireCause",fmodel.dataInfo.fireTools,@"fireTool",fmodel.dataInfo.fireLoad,@"fireLoad",fmodel.dataInfo.startTime,@"fireBTime",fmodel.dataInfo.endTime,@"fireETime",fmodel.dataInfo.operatorPerson,@"fireOperator",fmodel.dataInfo.phone,@"firePhone",fmodel.dataInfo.validDocuments,@"PapersImg",nil];
+    return dic;
+    
+}
+
+
+- (NSDictionary *)encodeWithPowerModel:(HNTemporaryModel *)model{
+    HNTemporaryElectroModel* fmodel = (HNTemporaryElectroModel*)model;
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:fmodel.declareId,@"declareId", fmodel.dataInfo.electroEnterprise,@"electroEnterprise",fmodel.dataInfo.electroCause,@"electroCause",fmodel.dataInfo.electroTool,@"electroTool",fmodel.dataInfo.electroLoad,@"electroLoad",fmodel.dataInfo.electroBTime,@"electroBTime",fmodel.dataInfo.electroETime,@"electroETime",fmodel.dataInfo.electroOperator,@"electroOperator",fmodel.dataInfo.electroPhone,@"electroPhone",fmodel.dataInfo.PapersImg,@"PapersImg",nil];
     return dic;
     
 }
@@ -337,7 +365,7 @@
 {
     if(alertView.tag==1)
     {
-        self.temporaryModel.status = TemporaryStatusApplying;
+        //self.temporaryModel.status = TemporaryStatusApplying;
         [self.navigationController popViewControllerAnimated:YES];
     }
 }
