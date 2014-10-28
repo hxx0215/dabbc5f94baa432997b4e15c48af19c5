@@ -14,16 +14,14 @@
 @property (nonatomic, strong)IBOutlet UILabel *houseInfMainLabel;
 @property (nonatomic, strong)IBOutlet UILabel *houseInfTitleLabel;
 @property (nonatomic, strong)IBOutlet UILabel *houseInfLabel;
-@property (nonatomic, strong)IBOutlet UILabel *ownersTitleLabel;
 @property (nonatomic, strong)IBOutlet UILabel *ownersLabel;
-@property (nonatomic, strong)IBOutlet UILabel *ownersPhoneNumberTitleLabel;
 @property (nonatomic, strong)IBOutlet UILabel *ownersPhoneNumberLabel;
+
 @property (nonatomic, strong)IBOutlet UILabel *constructionUnitTitleLabel;
 @property (nonatomic, strong)IBOutlet UILabel *constructionUnitLabel;
-@property (nonatomic, strong)IBOutlet UILabel *constructionPersonTitleLabel;
 @property (nonatomic, strong)IBOutlet UILabel *constructionPersonLabel;
-@property (nonatomic, strong)IBOutlet UILabel *constructionPersonPhoneNumberTitleLabel;
 @property (nonatomic, strong)IBOutlet UILabel *constructionPersonPhoneNumberLabel;
+
 @property (strong, nonatomic) IBOutlet UILabel *temporaryApplyMainLable;
 @property (strong, nonatomic) IBOutlet UILabel *fireunitsTitleLabel;
 @property (strong, nonatomic) IBOutlet UILabel *useOfFireByTitleLabel;
@@ -65,21 +63,29 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.view.backgroundColor = [UIColor whiteColor];
-    [self labelWithTitle:NSLocalizedString(@"House Information", nil) label:self.houseInfMainLabel];
-    [self labelWithTitle:NSLocalizedString(@"House Information", nil) label:self.houseInfTitleLabel];
-    [self labelWithTitle:NSLocalizedString(@"Owners", nil) label:self.ownersTitleLabel];
-    [self labelWithTitle:NSLocalizedString(@"Phone number", nil) label:self.ownersPhoneNumberTitleLabel];
-    [self labelWithTitle:NSLocalizedString(@"Construction unit", nil) label:self.constructionUnitTitleLabel];
-    [self labelWithTitle:NSLocalizedString(@"Person in charge of construction", nil) label:self.constructionPersonTitleLabel];
-    [self labelWithTitle:NSLocalizedString(@"Phone number", nil) label:self.constructionPersonPhoneNumberTitleLabel];
+    self.houseInfMainLabel.text = NSLocalizedString(@"House Information", nil);
+    self.houseInfTitleLabel.text = NSLocalizedString(@"House Information", nil);
+    self.constructionUnitTitleLabel.text = NSLocalizedString(@"Construction unit", nil);
     
     [self labelWithTitle:self.temporaryModel.huseInfo.houseInf label:self.houseInfLabel];
     [self labelWithTitle:self.temporaryModel.huseInfo.constructionPerson label:self.constructionPersonLabel];
     [self labelWithTitle:self.temporaryModel.huseInfo.ownersPhoneNumber label:self.ownersPhoneNumberLabel];
-    //constructionUnitTitleLabel
-    [self labelWithTitle:self.temporaryModel.huseInfo.constructionUnit label:self.constructionUnitLabel];
     [self labelWithTitle:self.temporaryModel.huseInfo.owners label:self.ownersLabel];
-        [self labelWithTitle:self.temporaryModel.huseInfo.constructionPersonPhoneNumber label:self.constructionPersonPhoneNumberLabel];
+    self.ownersLabel.textColor = [UIColor colorWithRed:0xCC/255.0 green:0X91/255.0 blue:0X31/255.0 alpha:1];
+    self.ownersPhoneNumberLabel.textColor = [UIColor colorWithRed:0xCC/255.0 green:0X91/255.0 blue:0X31/255.0 alpha:1];
+    [self.ownersPhoneNumberLabel sizeToFit ];
+    [self.ownersLabel sizeToFit ];
+    self.ownersPhoneNumberLabel.right = self.view.width - 14;
+    self.ownersLabel.right = self.ownersPhoneNumberLabel.left-5;
+    
+    [self labelWithTitle:self.temporaryModel.huseInfo.constructionUnit label:self.constructionUnitLabel];
+    [self labelWithTitle:self.temporaryModel.huseInfo.constructionPersonPhoneNumber label:self.constructionPersonPhoneNumberLabel];
+    self.constructionPersonLabel.textColor = [UIColor colorWithRed:0xCC/255.0 green:0X91/255.0 blue:0X31/255.0 alpha:1];
+    self.constructionPersonPhoneNumberLabel.textColor = [UIColor colorWithRed:0xCC/255.0 green:0X91/255.0 blue:0X31/255.0 alpha:1];
+    [self.constructionPersonPhoneNumberLabel sizeToFit ];
+    [self.constructionPersonLabel sizeToFit ];
+    self.constructionPersonPhoneNumberLabel.right = self.view.width - 14;
+    self.constructionPersonLabel.right = self.constructionPersonPhoneNumberLabel.left-5;
     
     
     [self labelWithTitle:NSLocalizedString(@"Start Time", nil) label:self.startTimeTitleLabel];
@@ -175,10 +181,10 @@
 - (void)labelWithTitle:(NSString *)title label:(UILabel*)lab
 {
     [lab setText:title];
-    [lab sizeToFit];
-    lab.font = [UIFont systemFontOfSize:12];
-    lab.numberOfLines = 2;
-    lab.layer.borderColor = [UIColor blackColor].CGColor;
+//    [lab sizeToFit];
+//    lab.font = [UIFont systemFontOfSize:12];
+//    lab.numberOfLines = 2;
+//    lab.layer.borderColor = [UIColor blackColor].CGColor;
 }
 
 - (void)didReceiveMemoryWarning {
