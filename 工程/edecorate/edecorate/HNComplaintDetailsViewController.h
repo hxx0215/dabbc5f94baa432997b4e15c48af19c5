@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#include "HNTemporaryModel.h"
+#include "HNComplaintData.h"
 
 @interface HNComplaintDetailsViewController : UIViewController
-@property (nonatomic, strong)HNTemporaryModel* temporaryModel;
--(id)initWithModel:(HNTemporaryModel *)model;
+@property (nonatomic, strong)HNComplaintData* temporaryModel;
+-(id)initWithModel:(HNComplaintData *)model;
 @end

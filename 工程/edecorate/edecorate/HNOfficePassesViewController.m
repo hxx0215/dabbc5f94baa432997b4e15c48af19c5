@@ -54,8 +54,7 @@
     self.navigationItem.title=@"办理出入证";
     //[self GetPassList:@"admin" byPage:@"1" AndRow:@"8"];
     
-    self.modelList = [[NSMutableArray alloc] init];
-    [self loadMyData];
+    
 }
 
 
@@ -106,10 +105,8 @@
 
 -(void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    if(self.passTableViewCell)
-    {
-        [self.passTableViewCell updateMyCell];
-    }
+    self.modelList = [[NSMutableArray alloc] init];
+    [self loadMyData];
     
 }
 

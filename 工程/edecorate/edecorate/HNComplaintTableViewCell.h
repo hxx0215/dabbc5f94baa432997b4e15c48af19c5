@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#include "HNTemporaryModel.h"
+#include "HNComplaintData.h"
 
 @interface HNComplaintTableViewCell : UITableViewCell
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withModel:(HNTemporaryModel*)model;
--(void)updateMyCell;
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withModel:(HNComplaintData*)model;
 @end

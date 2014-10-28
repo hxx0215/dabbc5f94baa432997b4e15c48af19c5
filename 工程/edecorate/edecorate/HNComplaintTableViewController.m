@@ -48,11 +48,7 @@
     self.navigationItem.title = NSLocalizedString(@"I have a complaint", nil);
     
     self.modelList = [[NSMutableArray alloc] init];
-    HNTemporaryModel *tModel = [[HNTemporaryModel alloc] init];
-    tModel.roomName = @"施工房号：XXXX";
-    tModel.status = TemporaryStatusCustom;
-    [self.modelList addObject:tModel];
-    [self loadMyData];
+    //[self loadMyData];
 }
 
 
@@ -65,7 +61,7 @@
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[HNLoginData shared].mshopid,@"mshopid", nil];
     NSLog(@"%@",[HNLoginData shared].mshopid);
     NSString *jsonStr = [dic JSONString];
-    request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"get.deposit.refund" Params:jsonStr]];
+    request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"get.user.complaints" Params:jsonStr]];
     NSString *contentType = @"text/html";
     [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
@@ -80,9 +76,9 @@
             NSArray* array = [dic objectForKey:@"data"];
             for (int i = 0; i<total.intValue; i++) {
                 NSDictionary *dicData = [array objectAtIndex:i];
-//                HNPassData *tModel = [[HNPassData alloc] init];
-//                [tModel updateData:dicData];
-//                [self.modelList addObject:tModel];
+                HNComplaintData *tModel = [[HNComplaintData alloc] init];
+                [tModel updateData:dicData];
+                [self.modelList addObject:tModel];
             }
             if (total.intValue){//之后需要替换成status
                 [self.tTableView reloadData];
@@ -104,10 +100,8 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    if(self.complaintTableViewCell)
-    {
-        [self.complaintTableViewCell updateMyCell];
-    }
+    
+    [self loadMyData];
     
 }
 #pragma mark - tableView Delegate & DataSource
@@ -118,11 +112,11 @@
     return [self.modelList count];
 }
 
-- (HNComplaintTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *reuseIdentifier = @"complaintCell";
     HNComplaintTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
     if (!cell){
-        HNTemporaryModel *model =self.modelList[indexPath.row];
+        HNComplaintData *model =self.modelList[indexPath.row];
         cell = [[HNComplaintTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier withModel:model];
     }
     
@@ -134,8 +128,8 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     self.complaintTableViewCell = (HNComplaintTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
     NSInteger row = indexPath.row;
-    HNTemporaryModel* model = self.modelList[row];
-    if(model.status==TemporaryStatusCustom)
+    HNComplaintData* model = self.modelList[row];
+    if([model.complainObject isEqualToString:@""])
     {
         HNComplaintApplyViewController* avc = [[HNComplaintApplyViewController alloc]initWithModel:model];
         [self.navigationController pushViewController:avc animated:YES];

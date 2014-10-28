@@ -41,7 +41,7 @@
 
 @implementation HNComplaintDetailsViewController
 
--(id)initWithModel:(HNTemporaryModel *)model
+-(id)initWithModel:(HNComplaintData *)model
 {
     self = [super init];
     self.temporaryModel = model;
@@ -57,25 +57,25 @@
     [self labelWithTitle:NSLocalizedString(@"House Information", nil) label:self.houseInfMainLabel];
     
     [self labelWithTitle:NSLocalizedString(@"House Information", nil) label:self.houseInfTitleLabel];
-    [self labelWithTitle:self.temporaryModel.huseInfo.houseInf label:self.houseInfLabel];
+    [self labelWithTitle:self.temporaryModel.room label:self.houseInfLabel];
     
-    [self labelWithTitle:NSLocalizedString(@"Owners", nil) label:self.ownersTitleLabel];
-    [self labelWithTitle:self.temporaryModel.huseInfo.constructionPerson  label:self.constructionPersonLabel];
-    [self labelWithTitle:NSLocalizedString(@"Phone number", nil) label:self.ownersPhoneNumberTitleLabel];
-    [self labelWithTitle:self.temporaryModel.huseInfo.ownersPhoneNumber  label:self.ownersPhoneNumberLabel];
+    
+    [self labelWithTitle:@"laochen"  label:self.constructionPersonLabel];
+    [self labelWithTitle:@"13330333033"  label:self.ownersPhoneNumberLabel];
     
     //constructionUnitTitleLabel
     [self labelWithTitle:NSLocalizedString(@"Construction unit", nil) label:self.constructionUnitTitleLabel];
     
-    [self labelWithTitle:self.temporaryModel.huseInfo.constructionUnit  label:self.constructionUnitLabel];
+    [self labelWithTitle:@"feiniao"  label:self.constructionUnitLabel];
     
-    [self labelWithTitle:NSLocalizedString(@"Person in charge of construction", nil) label:self.constructionPersonTitleLabel];
     
-    [self labelWithTitle:self.temporaryModel.huseInfo.owners  label:self.ownersLabel];
+    [self labelWithTitle:@"laochen"  label:self.ownersLabel];
+    
+    [self labelWithTitle:@"13330333033"  label:self.constructionPersonPhoneNumberLabel];
     
     [self labelWithTitle:NSLocalizedString(@"Phone number", nil) label:self.constructionPersonPhoneNumberTitleLabel];
     
-    [self labelWithTitle:self.temporaryModel.huseInfo.constructionPersonPhoneNumber  label:self.constructionPersonPhoneNumberLabel];
+    [self labelWithTitle:@"13330330300" label:self.constructionPersonPhoneNumberLabel];
     
     //Complaint Information
     [self labelWithTitle:NSLocalizedString(@"Complaint Information", nil) label:self.complaintInformationTitleLable];
