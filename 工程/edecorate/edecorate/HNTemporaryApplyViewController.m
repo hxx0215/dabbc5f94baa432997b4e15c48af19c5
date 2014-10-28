@@ -441,9 +441,99 @@
         }
         
     }];
+    [self requestForPostWithURLString];
 
     //[self.uploadImages setObject:image forKey:[NSNumber numberWithInteger:self.curButton.tag]];;
 }
+
+-(void)requestForPostWithURLString
+{
+    
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"testImage.png",@"name",nil];
+    NSString *jsonStr = [dic JSONString];
+    NSURL *URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"set.picture.add" Params:jsonStr]];
+    
+//    NSString *paramsJson = [JsonFactory dictoryToJsonStr:URLString];
+//    //    NSLog(@"requestParamstr %@",paramsJson);
+//    //加密
+//    paramsJson = [[FBEncryptorDES encrypt:paramsJson
+//                                keyString:@"SDFL#)@F"] uppercaseString];
+//    NSString *signs= [NSString stringWithFormat:@"SDFL#)@FMethod%@Params%@SDFL#)@F",method,paramsJson];
+//    signs = [[FBEncryptorDES md5:signs] uppercaseString];
+//    //    http://113.105.159.107:84
+//    //    icbcapp.intsun.com
+//    NSString *requestStr = [NSString stringWithFormat:@"http://61.158.187.140:8088/home/?Method=%@&Params=%@&Sign=%@",method,paramsJson,signs];
+//    NSLog(@"request %@",requestStr);
+    
+    
+    //    NSString *TWITTERFON_FORM_BOUNDARY = @"AaB03x";
+    NSString *TWITTERFON_FORM_BOUNDARY = @"AABBCC";
+    //根据url初始化request
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:URL
+                                                           cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
+                                                       timeoutInterval:10];
+    //分界线 --AaB03x
+    NSString *MPboundary=[[NSString alloc]initWithFormat:@"--%@",TWITTERFON_FORM_BOUNDARY];
+    //结束符 AaB03x--
+    NSString *endMPboundary=[[NSString alloc]initWithFormat:@"%@--",MPboundary];
+    //http body的字符串
+    NSMutableString *body=[[NSMutableString alloc]init];
+    
+    ////添加分界线，换行---文件要先声明
+    [body appendFormat:@"%@\r\n",MPboundary];
+    //声明pic字段，文件名为boris.png
+    [body appendFormat:@"Content-Disposition: form-data; name=\"imgFile\"; filename=\"testImage.JPEG\"\r\n"];
+    //声明上传文件的格式
+    [body appendFormat:@"Content-Type: image/JPEG\r\n\r\n"];
+    //声明结束符：--AaB03x--
+    NSString *end=[[NSString alloc]initWithFormat:@"\r\n%@",endMPboundary];
+    
+    //声明myRequestData，用来放入http body
+    NSMutableData *myRequestData=[NSMutableData data];
+    //将body字符串转化为UTF8格式的二进制
+    [myRequestData appendData:[body dataUsingEncoding:NSUTF8StringEncoding]];
+    //将image的data加入
+    UIImage *images = [UIImage imageNamed:@"押金退款.png"];
+    //得到图片的data
+    NSData* imageData = UIImagePNGRepresentation(images);
+    [myRequestData appendData:imageData];
+    //加入结束符--AaB03x--
+    [myRequestData appendData:[end dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    //设置HTTPHeader中Content-Type的值
+    NSString *content=[[NSString alloc]initWithFormat:@"multipart/form-data; boundary=%@",TWITTERFON_FORM_BOUNDARY];
+    //设置HTTPHeader
+    [request setValue:content forHTTPHeaderField:@"Content-Type"];
+    //设置Content-Length
+    [request setValue:[NSString stringWithFormat:@"%lu", (unsigned long)[myRequestData length]] forHTTPHeaderField:@"Content-Length"];
+    //设置http body
+    [request setHTTPBody:myRequestData];
+    //http method
+    [request setHTTPMethod:@"POST"];
+    //建立连接，设置代理
+    //    NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    //设置接受response的data
+    NSError *error = nil;
+    NSHTTPURLResponse *response = nil;
+    NSData *urlData = [NSURLConnection
+                       sendSynchronousRequest:request
+                       returningResponse: &response
+                       error: &error];
+    //    return [[[NSString alloc] initWithData:urlData encoding:NSUTF8StringEncoding] autorelease];
+    //    DLog(@"DATA:%@, error:%@",URLData, error);
+    NSString *retStr = [[NSString alloc] initWithData:urlData encoding:NSUTF8StringEncoding];
+    NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
+    NSLog(@"%@",retJson);
+    //    json = [ZZ3DESEncrypt decrypt:json keyString:METHODKEY];//解密
+    //    DLog(@"解密JSON:%@",json);
+    //    json = [json URLDecodedString];//将josn转化为普通格式
+    //    DLog(@"普通格式JSON:%@",json);
+    //
+    //    NSDictionary *returnDictionary = [[json objectFromJSONString] retain];
+    //    DLog(@"解析的字典：%@",returnDictionary);
+    
+}
+
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
