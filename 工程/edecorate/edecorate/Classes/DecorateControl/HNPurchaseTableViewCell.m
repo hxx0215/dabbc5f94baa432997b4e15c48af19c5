@@ -47,7 +47,9 @@
     self.price.right = self.contentView.width - 14;
     self.price.centerY = self.title.centerY;
     if (0 == self.single)
+    {
         self.detail.hidden = YES;
+    }
     else{
         self.detail.hidden = NO;
         self.detail.left = 27;
@@ -57,7 +59,7 @@
     self.checkButton.top = 12;
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-//    [super setSelected:selected animated:animated];
+    [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
 }

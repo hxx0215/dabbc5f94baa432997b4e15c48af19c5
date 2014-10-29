@@ -14,4 +14,5 @@
 @property (nonatomic, strong)UILabel *detail;
 @property (nonatomic, assign)NSInteger single;
 @property (nonatomic, strong)UIButton *checkButton;
+
 @end
