@@ -186,7 +186,7 @@
     [self.commitButton setBackgroundColor:[UIColor colorWithRed:245.0/255.0 green:72.0/255.0 blue:0.0 alpha:1.0]];
     
     self.choiceDecorateView = [[HNDecorateChoiceView alloc]initWithFrame:CGRectMake(12, 12, self.view.bounds.size.width-24, 25)];
-    [self.view addSubview:self.choiceDecorateView];
+    [self.mainView addSubview:self.choiceDecorateView];
     self.choiceDecorateView.delegate = self;
     
     UIImagePickerControllerSourceType sourceType=UIImagePickerControllerSourceTypePhotoLibrary;
@@ -229,6 +229,7 @@
 
 - (void)updataDecorateInformation:(HNDecorateChoiceModel*)model
 {
+    self.houseInfLabel.text = model.roomName;
     self.ownersPhoneNumberLabel.text = model.ownerphone;
     self.ownersLabel.text = model.ownername;
     [self.ownersPhoneNumberLabel sizeToFit];

@@ -50,7 +50,7 @@
     [sendDic setObject:declareId forKey:@"declareid"];
     NSString *sendJson = [sendDic JSONString];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"get.decoration.declaredetails" Params:sendJson]];
+    request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"get.decoraton.declaredetails" Params:sendJson]];
     NSString *contentType = @"text/html";
     [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){

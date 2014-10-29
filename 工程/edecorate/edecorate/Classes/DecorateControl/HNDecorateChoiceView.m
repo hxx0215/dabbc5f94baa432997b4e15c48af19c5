@@ -144,9 +144,10 @@
             NSInteger count = [[dic objectForKey:@"total"] integerValue];
             if (0!=count)
             {
-                NSDictionary *dataArr = [dic objectForKey:@"data"];
-                model.ownername = [dataArr objectForKey:@"assessorstate"];
-                model.ownerphone = [dataArr objectForKey:@"ownerphone"];
+                NSArray *dataArr = [dic objectForKey:@"data"];
+                NSDictionary *dicData = [dataArr objectAtIndex:0];
+                model.ownername = [dicData objectForKey:@"ownername"];
+                model.ownerphone = [dicData objectForKey:@"ownerphone"];
                 
                 [self.delegate updataDecorateInformation:model];
             }

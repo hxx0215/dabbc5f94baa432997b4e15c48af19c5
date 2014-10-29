@@ -47,11 +47,18 @@
     
     
     self.navigationItem.title = NSLocalizedString(@"I have a complaint", nil);
-    
-    
+
+    UIBarButtonItem* barButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"新增", nil) style:UIBarButtonItemStylePlain target:self action:@selector(addButton_Clicked)];
+    self.navigationItem.rightBarButtonItem = barButtonItem;
     //[self loadMyData];
 }
 
+-(void)addButton_Clicked
+{
+    HNComplaintData* model = self.modelList[0];
+    HNComplaintApplyViewController* avc = [[HNComplaintApplyViewController alloc]initWithModel:model];
+    [self.navigationController pushViewController:avc animated:YES];
+}
 
 -(void)loadMyData
 {
@@ -130,12 +137,12 @@
     self.complaintTableViewCell = (HNComplaintTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
     NSInteger row = indexPath.row;
     HNComplaintData* model = self.modelList[row];
-    if([model.complainObject isEqualToString:@""])
-    {
-        HNComplaintApplyViewController* avc = [[HNComplaintApplyViewController alloc]initWithModel:model];
-        [self.navigationController pushViewController:avc animated:YES];
-    }
-    else
+//    if([model.complainObject isEqualToString:@""])
+//    {
+//        HNComplaintApplyViewController* avc = [[HNComplaintApplyViewController alloc]initWithModel:model];
+//        [self.navigationController pushViewController:avc animated:YES];
+//    }
+//    else
     {
         HNComplaintDetailsViewController* dac = [[HNComplaintDetailsViewController alloc]initWithModel:model];
         [self.navigationController pushViewController:dac animated:YES];

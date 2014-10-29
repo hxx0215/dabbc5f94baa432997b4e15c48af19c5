@@ -9,8 +9,9 @@
 #import "HNComplaintApplyViewController.h"
 #import "HNCommbox.h"
 #import "UIView+AHKit.h"
+#import "HNDecorateChoiceView.h"
 
-@interface HNComplaintApplyViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate,UITextViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource>
+@interface HNComplaintApplyViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate,UITextViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource,HNDecorateChoiceViewDelegate>
 
 @property (nonatomic, strong)IBOutlet UIScrollView *mainView;
 
@@ -41,6 +42,8 @@
 @property (nonatomic, strong)UIPickerView* complaintCategoryPickView;
 @property (nonatomic, strong)NSArray* complaintCategoryPickerArray;
 @property (strong, nonatomic) UIView* textOKView;
+
+@property (strong, nonatomic) IBOutlet HNDecorateChoiceView *choiceDecorateView;
 
 @property (nonatomic) CGFloat mainViewFramRectTop;
 @end
@@ -162,6 +165,22 @@
     NSArray * buttonsArray = [NSArray arrayWithObjects:btnSpace,doneButton,nil];
     [topView setItems:buttonsArray];
     self.complaintContansTextView.inputAccessoryView = topView;
+    
+    self.choiceDecorateView = [[HNDecorateChoiceView alloc]initWithFrame:CGRectMake(12, 12, self.view.bounds.size.width-24, 25)];
+    [self.mainView addSubview:self.choiceDecorateView];
+    self.choiceDecorateView.delegate = self;
+}
+
+
+- (void)updataDecorateInformation:(HNDecorateChoiceModel*)model
+{
+    self.houseInfLabel.text = model.roomName;
+    self.ownersPhoneNumberLabel.text = model.ownerphone;
+    self.ownersLabel.text = model.ownername;
+    [self.ownersPhoneNumberLabel sizeToFit];
+    [self.ownersLabel sizeToFit ];
+    self.ownersPhoneNumberLabel.right = self.view.width - 14;
+    self.ownersLabel.right = self.ownersPhoneNumberLabel.left-5;
 }
 
 -(void)dismissKeyBoard

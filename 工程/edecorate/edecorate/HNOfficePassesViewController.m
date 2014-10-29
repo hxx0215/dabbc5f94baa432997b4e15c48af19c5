@@ -53,8 +53,16 @@
     
     self.navigationItem.title=@"办理出入证";
     //[self GetPassList:@"admin" byPage:@"1" AndRow:@"8"];
+    UIBarButtonItem* barButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"新增", nil) style:UIBarButtonItemStylePlain target:self action:@selector(addButton_Clicked)];
+    self.navigationItem.rightBarButtonItem = barButtonItem;
     
-    
+}
+
+-(void)addButton_Clicked
+{
+    HNPassData* model = self.modelList[0];
+    HNOfficePassesApplyViewController* officePasseesApply=[[HNOfficePassesApplyViewController alloc] initWithModel:model];
+    [self.navigationController pushViewController:officePasseesApply animated:YES];
 }
 
 
@@ -134,12 +142,12 @@
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     HNPassData* model = self.modelList[indexPath.row];
-    if([model.CARDId isEqualToString:@"24"])
-    {
-        HNOfficePassesApplyViewController* officePasseesApply=[[HNOfficePassesApplyViewController alloc] initWithModel:model];
-        [self.navigationController pushViewController:officePasseesApply animated:YES];
-    }
-    else
+//    if([model.CARDId isEqualToString:@"24"])
+//    {
+//        HNOfficePassesApplyViewController* officePasseesApply=[[HNOfficePassesApplyViewController alloc] initWithModel:model];
+//        [self.navigationController pushViewController:officePasseesApply animated:YES];
+//    }
+ //   else
     {
         HNOfficePassesDetailsViewController *officeDetails=[[HNOfficePassesDetailsViewController alloc]  initWithModel:model];
         [self.navigationController pushViewController:officeDetails animated:YES];

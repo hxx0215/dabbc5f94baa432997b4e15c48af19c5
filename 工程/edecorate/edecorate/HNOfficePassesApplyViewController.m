@@ -14,8 +14,9 @@
 #import "MBProgressHUD.h"
 #import "HNLoginData.h"
 #import "HNPassAddNewTableViewCell.h"
+#import "HNDecorateChoiceView.h"
 
-@interface HNOfficePassesApplyViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource>
+@interface HNOfficePassesApplyViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,HNDecorateChoiceViewDelegate>
 @property (nonatomic,strong) IBOutlet UIScrollView *mainView;
 
 @property (nonatomic,strong) IBOutlet UILabel *houseInfoMain;
@@ -57,6 +58,8 @@
 @property (nonatomic,strong) IBOutlet UIButton *uploadPic;
 @property (nonatomic,strong) IBOutlet UIButton *submit;
 @property (nonatomic) NSInteger tableCellMun;
+
+@property (strong, nonatomic) IBOutlet HNDecorateChoiceView *choiceDecorateView;
 @end
 
 @implementation HNOfficePassesApplyViewController
@@ -147,7 +150,22 @@
     [self.submit setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.submit setBackgroundColor:[UIColor colorWithRed:245.0/255.0 green:72.0/255.0 blue:0.0 alpha:1.0]];
     
+    self.choiceDecorateView = [[HNDecorateChoiceView alloc]initWithFrame:CGRectMake(12, 12, self.view.bounds.size.width-24, 25)];
+    [self.mainView addSubview:self.choiceDecorateView];
+    self.choiceDecorateView.delegate = self;
     // Do any additional setup after loading the view from its nib.
+}
+
+
+- (void)updataDecorateInformation:(HNDecorateChoiceModel*)model
+{
+    self.houseInfo.text = model.roomName;
+    self.houseOnwerMobile.text = model.ownerphone;
+    self.houseOnwer.text = model.ownername;
+    [self.houseOnwerMobile sizeToFit];
+    [self.houseOnwer sizeToFit ];
+    self.houseOnwerMobile.right = self.view.width - 14;
+    self.houseOnwer.right = self.houseOnwerMobile.left-5;
 }
 
 - (void)labelWithTitle:(NSString *)title label:(UILabel*)lab
