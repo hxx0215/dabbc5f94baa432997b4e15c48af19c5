@@ -30,7 +30,7 @@
 @implementation HNReportSendModel
 @end
 
-@interface HNDecorateReportViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface HNDecorateReportViewController ()<UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate>
 
 @property (nonatomic, strong)UITableView *rTableView;
 @property (nonatomic, strong)NSMutableArray *reportList;
@@ -64,8 +64,8 @@
         typeof(self) sself = wself;
         [sself refreshData];
     }];
-//    self.reportButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Report", nil) style:UIBarButtonItemStylePlain target:self action:@selector(reportButton_Clicked:)];
-//    self.navigationItem.rightBarButtonItem = self.reportButton;
+    self.reportButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"新增", nil) style:UIBarButtonItemStylePlain target:self action:@selector(reportButton_Clicked:)];
+    self.navigationItem.rightBarButtonItem = self.reportButton;
     self.statusMap = @{@"0": @"审核进度:未审核",@"1": @"审核进度:已审核",@"-1":@"审核进度:审核未通过"};
     
     self.reportList = [[NSMutableArray alloc] init];
@@ -99,7 +99,9 @@
     [self.rTableView headerBeginRefreshing];
 }
 - (void)reportButton_Clicked:(id)sender{
-   
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:NSLocalizedString(@"请输入要承接的保健项目编号", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"取消", nil) otherButtonTitles:NSLocalizedString(@"确定",nil), nil];
+    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    [alert show];
 }
 # pragma mark - tableViewDelegate & tableViewDataSource
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -199,5 +201,57 @@
             [alert show];
         }
     }];
+}
+#pragma mark - UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{
+    UITextField *tf=[alertView textFieldAtIndex:0];
+    MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = NSLocalizedString(@"Loading", nil);
+    if (buttonIndex == 1){
+        NSDictionary *dic = @{@"declareid": tf.text};
+        NSString *sendJson = [dic JSONString];
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+        request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"get.decorate.undertake" Params:sendJson]];
+        NSString *contentType = @"text/html";
+        [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
+        [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            if (data)
+            {
+                NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
+                NSDictionary *retDic = [retJson objectFromJSONString];
+                NSInteger count = [[retDic objectForKey:@"total"] integerValue];
+                if (count != 0){
+                    NSArray *dataArr = [retDic objectForKey:@"data"];
+                    NSInteger state = [[dataArr[0] objectForKey:@"state"] integerValue];
+                    if (1==state){
+                        HNConstructViewController *vc = [[HNConstructViewController alloc] init];
+                        NSInteger type = [[dataArr[0] objectForKey:@"type"] integerValue];
+                        if (type == 0)
+                            vc.constructType = kPersonalNew;
+                        else
+                            vc.constructType = kCompanyNew;
+                        vc.roomNo = [dataArr[0] objectForKey:@"roomNumber"];
+                        vc.ownerName = [dataArr[0] objectForKey:@"ownername"];
+                        vc.ownerMobile = [dataArr[0] objectForKey:@"ownerphone"];
+                        [self.navigationController pushViewController:vc animated:YES];
+                    }
+                    else{
+                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:[dataArr[0] objectForKey:@"msg"] delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+                        [alert show];
+                    }
+                }
+                else{
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"We don't get any data.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+                    [alert show];
+                }
+            }
+            else{
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection Error", nil) message:NSLocalizedString(@"Please check your network.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+                [alert show];
+            }
+        }];
+    }
 }
 @end

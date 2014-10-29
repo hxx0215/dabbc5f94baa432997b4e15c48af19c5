@@ -15,4 +15,7 @@ typedef enum HNConstructType{
 } HNConstructType;
 @interface HNConstructViewController : UIViewController
 @property (nonatomic, assign)HNConstructType constructType;
+@property (nonatomic, strong)NSString *roomNo;
+@property (nonatomic, strong)NSString *ownerName;
+@property (nonatomic, strong)NSString *ownerMobile;
 @end

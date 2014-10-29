@@ -25,7 +25,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
-    self.companyData = @[NSLocalizedString(@"营业执照", nil),NSLocalizedString(@"税务登记证",nil),NSLocalizedString(@"组织代码登记证",nil),NSLocalizedString(@"资质证书", nil),NSLocalizedString(@"电工证", nil),NSLocalizedString(@"法人委托书及法人身份证",nil),NSLocalizedString(@"施工负责人身份证",nil)];
+    self.companyData = @[NSLocalizedString(@"营业执照", nil),NSLocalizedString(@"税务登记证",nil),NSLocalizedString(@"组织代码登记证",nil),NSLocalizedString(@"资质证书", nil),NSLocalizedString(@"电工证", nil),NSLocalizedString(@"法人委托书及法人身份证",nil),NSLocalizedString(@"施工负责人身份证",nil),NSLocalizedString(@"装修施工合同",nil)];
     self.personalData = @[NSLocalizedString(@"姓名", nil),NSLocalizedString(@"联系电话",nil),NSLocalizedString(@"身份证号",nil)];
     self.graphData = @[NSLocalizedString(@"原始结构图", nil),NSLocalizedString(@"平面布置图",nil),NSLocalizedString(@"墙体改造图",nil),NSLocalizedString(@"天花布置图", nil),NSLocalizedString(@"水路布置图", nil),NSLocalizedString(@"电路分布图",nil)];
     
@@ -126,8 +126,8 @@
         colorView.backgroundColor = [UIColor colorWithRed:211.0/255.0 green:145.0/255.0 blue:26.0/255.0 alpha:1.0];
         UILabel *colorLabel1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.width - 14, 45)];
         UILabel *colorLabel2 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, colorLabel1.width, 15)];
-        colorLabel1.text = @"业主信息:深圳市罗湖区万科小区1栋3017";
-        colorLabel2.text = @"李大木  13677899090";
+        colorLabel1.text = self.roomNo;
+        colorLabel2.text = [NSString stringWithFormat:@"%@  %@",self.ownerName,self.ownerMobile];//@"李大木  13677899090";
         colorLabel1.numberOfLines = 2;
         colorLabel1.font = [UIFont systemFontOfSize:18];
         colorLabel1.top = 11;
