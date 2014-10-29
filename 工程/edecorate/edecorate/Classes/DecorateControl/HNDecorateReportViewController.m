@@ -235,6 +235,7 @@
                         vc.roomNo = [dataArr[0] objectForKey:@"roomNumber"];
                         vc.ownerName = [dataArr[0] objectForKey:@"ownername"];
                         vc.ownerMobile = [dataArr[0] objectForKey:@"ownerphone"];
+                        vc.declareid = [dataArr[0] objectForKey:@"declareId"];
                         [self.navigationController pushViewController:vc animated:YES];
                     }
                     else{

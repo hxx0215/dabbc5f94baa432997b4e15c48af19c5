@@ -10,7 +10,7 @@
 #import "HNPurchaseViewController.h"
 #import "HNPurchaseItem.h"
 #import "HNConstructTableViewCell.h"
-
+#import "MBProgressHUD.h"
 @interface HNConstructViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong)UITableView *tableView;
 @property (nonatomic, strong)NSArray *companyData;
@@ -176,19 +176,83 @@
 }
 
 - (void)purchase:(UIButton *)sender{
-    HNPurchaseViewController *pur = [[HNPurchaseViewController alloc] init];
-    HNPurchaseItem *item = [[HNPurchaseItem alloc] init];
-    item.title = @"装修保证金";
-    item.price = 2000.0;
-    item.single = 0;
-    pur.mustPay = @[item];
-    HNPurchaseItem *oItem = [[HNPurchaseItem alloc] init];
-    oItem.title = @"装修垃圾下楼费";
-    oItem.single = 1;
-    oItem.nums = 3;
-    oItem.unitPrice = 300.0;
-    oItem.price = oItem.nums * oItem.unitPrice;
-    pur.optionPay = @[oItem];
-    [self.navigationController pushViewController:pur animated:YES];
+    MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = NSLocalizedString(@"Loading", nil);
+    NSString *type = self.constructType > 1 ? @"0" :@"1";
+    NSDictionary *dic = @{@"declareid": self.declareid,@"type": type};
+    NSString *sendJson = [dic JSONString];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"get.prices.list" Params:sendJson]];
+    NSString *contentType = @"text/html";
+    [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        if (data)
+        {
+            NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
+            NSDictionary *retDic = [retJson objectFromJSONString];
+            NSInteger count = [[retDic objectForKey:@"total"] integerValue];
+            if (count!=0){
+                NSMutableArray *mustPay = [[NSMutableArray alloc] init];
+                NSMutableArray *optionPay = [[NSMutableArray alloc] init];
+                NSArray *dataArr = [retDic objectForKey:@"data"];
+                [dataArr enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop){
+                    NSString *title = [obj objectForKey:@"name"];
+                    NSString *must = [obj objectForKey:@"IsSubmit"];
+                    NSString *price = [obj objectForKey:@"price"];
+                    NSString *useUnit = [obj objectForKey:@"useUnit"];
+                    HNPurchaseItem *item = [[HNPurchaseItem alloc] init];
+                    item.title = title;
+                    if (useUnit && ![useUnit isEqualToString:@""]){
+                        item.single = 1;
+                        item.nums = 0;
+                        item.unitPrice = [price floatValue];
+                        item.price = 0;
+                    }
+                    else{
+                        item.single = 0;
+                        item.price = [price floatValue];
+                    }
+                    if ([must isEqualToString:@"1"]){
+                        [mustPay addObject:item];
+                    }
+                    else
+                        [optionPay addObject:item];
+                }];
+                HNPurchaseViewController *pur = [[HNPurchaseViewController alloc] init];
+                pur.mustPay = mustPay;
+                pur.optionPay = optionPay;
+                [self.navigationController pushViewController:pur animated:YES];
+            }
+            else
+                [self showNoData];
+        }
+        else
+            [self showNoNetwork];
+    }];
+//    HNPurchaseViewController *pur = [[HNPurchaseViewController alloc] init];
+//    HNPurchaseItem *item = [[HNPurchaseItem alloc] init];
+//    item.title = @"装修保证金";
+//    item.price = 2000.0;
+//    item.single = 0;
+//    pur.mustPay = @[item];
+//    HNPurchaseItem *oItem = [[HNPurchaseItem alloc] init];
+//    oItem.title = @"装修垃圾下楼费";
+//    oItem.single = 1;
+//    oItem.nums = 3;
+//    oItem.unitPrice = 300.0;
+//    oItem.price = oItem.nums * oItem.unitPrice;
+//    pur.optionPay = @[oItem];
+    
+//    [self.navigationController pushViewController:pur animated:YES];
+}
+- (void)showNoNetwork{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection Error", nil) message:NSLocalizedString(@"Please check your network.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+    [alert show];
+}
+- (void)showNoData{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"We don't get any data.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+    [alert show];
 }
 @end

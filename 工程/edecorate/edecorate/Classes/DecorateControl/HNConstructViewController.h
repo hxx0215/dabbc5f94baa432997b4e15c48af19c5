@@ -18,4 +18,5 @@ typedef enum HNConstructType{
 @property (nonatomic, strong)NSString *roomNo;
 @property (nonatomic, strong)NSString *ownerName;
 @property (nonatomic, strong)NSString *ownerMobile;
+@property (nonatomic, strong)NSString *declareid;
 @end
