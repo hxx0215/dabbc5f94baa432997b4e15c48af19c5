@@ -174,6 +174,7 @@
 		D39662F619CD4E6300EE49B8 /* HNTemporaryDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D39662F419CD4E6300EE49B8 /* HNTemporaryDetailsViewController.xib */; };
 		D3A2D31019FB960600425BE1 /* HNComplaintData.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A2D30F19FB960600425BE1 /* HNComplaintData.m */; };
 		D3A2D31319FB98A100425BE1 /* HNRefundData.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A2D31219FB98A100425BE1 /* HNRefundData.m */; };
+		D3A47BCC1A01361B00B83682 /* HNDecorateChoiceView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A47BCB1A01361B00B83682 /* HNDecorateChoiceView.m */; };
 		D3A96D8E19D98BE80059CF62 /* HNAcceptReturnGoodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A96D8C19D98BE80059CF62 /* HNAcceptReturnGoodViewController.m */; };
 		D3A96D8F19D98BE80059CF62 /* HNAcceptReturnGoodViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3A96D8D19D98BE80059CF62 /* HNAcceptReturnGoodViewController.xib */; };
 		D3A96D9219D9A1990059CF62 /* HNCommentsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A96D9119D9A1990059CF62 /* HNCommentsCell.m */; };
@@ -491,6 +492,8 @@
 		D3A2D30F19FB960600425BE1 /* HNComplaintData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNComplaintData.m; path = Classes/DecorateControl/HNComplaintData.m; sourceTree = "<group>"; };
 		D3A2D31119FB98A100425BE1 /* HNRefundData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNRefundData.h; path = Classes/DecorateControl/HNRefundData.h; sourceTree = "<group>"; };
 		D3A2D31219FB98A100425BE1 /* HNRefundData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNRefundData.m; path = Classes/DecorateControl/HNRefundData.m; sourceTree = "<group>"; };
+		D3A47BCA1A01361B00B83682 /* HNDecorateChoiceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNDecorateChoiceView.h; path = Classes/DecorateControl/HNDecorateChoiceView.h; sourceTree = "<group>"; };
+		D3A47BCB1A01361B00B83682 /* HNDecorateChoiceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNDecorateChoiceView.m; path = Classes/DecorateControl/HNDecorateChoiceView.m; sourceTree = "<group>"; };
 		D3A96D8B19D98BE80059CF62 /* HNAcceptReturnGoodViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNAcceptReturnGoodViewController.h; path = Classes/BusinessBackground/HNAcceptReturnGoodViewController.h; sourceTree = "<group>"; };
 		D3A96D8C19D98BE80059CF62 /* HNAcceptReturnGoodViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNAcceptReturnGoodViewController.m; path = Classes/BusinessBackground/HNAcceptReturnGoodViewController.m; sourceTree = "<group>"; };
 		D3A96D8D19D98BE80059CF62 /* HNAcceptReturnGoodViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HNAcceptReturnGoodViewController.xib; path = Classes/BusinessBackground/HNAcceptReturnGoodViewController.xib; sourceTree = "<group>"; };
@@ -731,6 +734,8 @@
 				B9DE55FF19C9C26700280EC7 /* HNDecorateControlViewController.h */,
 				B9C2B42119FFE1E200C93D59 /* HNDecorateData.h */,
 				B9C2B42219FFE1E200C93D59 /* HNDecorateData.m */,
+				D3A47BCA1A01361B00B83682 /* HNDecorateChoiceView.h */,
+				D3A47BCB1A01361B00B83682 /* HNDecorateChoiceView.m */,
 				D3FAA5BD19D070530062B912 /* Refund */,
 				D3FAA5BC19D0703A0062B912 /* Complaint */,
 				B965E76119D04B95004CD201 /* Report */,
@@ -1358,6 +1363,7 @@
 				D3CD90FA19CF09E000E76AF4 /* HNRefundTableViewCell.m in Sources */,
 				B91A3AC319D6E6E9000F3823 /* MJRefreshConst.m in Sources */,
 				B9D3DEDA19CD235A0020CDC9 /* HNCheckTableViewCell.m in Sources */,
+				D3A47BCC1A01361B00B83682 /* HNDecorateChoiceView.m in Sources */,
 				B9B2BC1719CF1F3000839AED /* ALAsset+assetType.m in Sources */,
 				D39662F519CD4E6300EE49B8 /* HNTemporaryDetailsViewController.m in Sources */,
 				B916F0AE19C8781D00A849C7 /* main.m in Sources */,

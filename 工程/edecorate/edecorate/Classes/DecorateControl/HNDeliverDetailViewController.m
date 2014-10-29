@@ -54,7 +54,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    self.navigationItem.title = NSLocalizedString(@"Pass Apply", nil);
+    self.navigationItem.title = NSLocalizedString(@"送货安装", nil);
     
     self.houseInfoMain.text = NSLocalizedString(@"House Information", nil) ;
     [self labelWithTitle:NSLocalizedString(@"House Information", nil) label:self.houseInfoTitle];

@@ -12,6 +12,7 @@
 #import "JSONKit.h"
 #import "MBProgressHUD.h"
 #import "HNLoginData.h"
+#import "HNDecorateChoiceView.h"
 
 /*
  "House Information" = "房屋信息";
@@ -32,7 +33,7 @@
  "Upload" = "上传";
  "Submission" = "提交申请";
  */
-@interface HNTemporaryApplyViewController ()<UIAlertViewDelegate,UIImagePickerControllerDelegate,UITextFieldDelegate, UINavigationControllerDelegate>
+@interface HNTemporaryApplyViewController ()<UIAlertViewDelegate,UIImagePickerControllerDelegate,UITextFieldDelegate, UINavigationControllerDelegate,HNDecorateChoiceViewDelegate>
 @property (nonatomic, strong)IBOutlet UIScrollView *mainView;
 @property (nonatomic, strong)IBOutlet UILabel *houseInfMainLabel;
 @property (nonatomic, strong)IBOutlet UILabel *houseInfTitleLabel;
@@ -58,6 +59,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *uploadTitleLabel;
 @property (strong, nonatomic) IBOutlet UIButton *commitButton;
 
+@property (strong, nonatomic) IBOutlet HNDecorateChoiceView *choiceDecorateView;
 
 @property (strong, nonatomic) IBOutlet UITextField *fireunitsTF;
 @property (strong, nonatomic) IBOutlet UITextField *useOfFireByTF;
@@ -67,7 +69,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *endTimeTF;
 @property (strong, nonatomic) IBOutlet UITextField *operatorTF;
 @property (strong, nonatomic) IBOutlet UITextField *phoneTF;
-@property (strong, nonatomic) IBOutlet UITextField *validDocumentsTF;
+//@property (strong, nonatomic) IBOutlet UITextField *validDocumentsTF;
 
 @property (nonatomic, strong)UIImagePickerController *imagePicker;
 @property (strong, nonatomic) UIDatePicker *pickerView;
@@ -159,7 +161,7 @@
     self.endTimeTF.tag = i++;
     self.operatorTF.tag = i++;
     self.phoneTF.tag = i++;
-    self.validDocumentsTF.tag = i++;
+    //self.validDocumentsTF.tag = i++;
     self.fireunitsTF.delegate = self;
     self.useOfFireByTF.delegate = self;
     self.fireToolsTF.delegate = self;
@@ -168,7 +170,7 @@
     self.endTimeTF.delegate = self;
     self.operatorTF.delegate = self;
     self.phoneTF.delegate = self;
-    self.validDocumentsTF.delegate = self;
+    //self.validDocumentsTF.delegate = self;
     
     //@property (strong, nonatomic) IBOutlet UIButton *commitButton;
     
@@ -183,6 +185,9 @@
     [self.commitButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.commitButton setBackgroundColor:[UIColor colorWithRed:245.0/255.0 green:72.0/255.0 blue:0.0 alpha:1.0]];
     
+    self.choiceDecorateView = [[HNDecorateChoiceView alloc]initWithFrame:CGRectMake(12, 12, self.view.bounds.size.width-24, 25)];
+    [self.view addSubview:self.choiceDecorateView];
+    self.choiceDecorateView.delegate = self;
     
     UIImagePickerControllerSourceType sourceType=UIImagePickerControllerSourceTypePhotoLibrary;
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
@@ -220,6 +225,16 @@
     
 
         // Do any additional setup after loading the view.
+}
+
+- (void)updataDecorateInformation:(HNDecorateChoiceModel*)model
+{
+    self.ownersPhoneNumberLabel.text = model.ownerphone;
+    self.ownersLabel.text = model.ownername;
+    [self.ownersPhoneNumberLabel sizeToFit];
+    [self.ownersLabel sizeToFit ];
+    self.ownersPhoneNumberLabel.right = self.view.width - 14;
+    self.ownersLabel.right = self.ownersPhoneNumberLabel.left-5;
 }
 
 - (IBAction)commit:(id)sender
@@ -404,8 +419,8 @@
     _encodedImageStr = [_encodedImageStr stringByReplacingOccurrencesOfString:@"\r\n" withString:@"|HC|"];
     //Replace("|JH|", "+").Replace("|KG|", " ").Replace("|HC|", "\r\n");
     
-    MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.labelText = NSLocalizedString(@"Loading", nil);
+    //MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    //hud.labelText = NSLocalizedString(@"Loading", nil);
     
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"testImage.png",@"name",nil];
     NSString *jsonStr = [dic JSONString];
