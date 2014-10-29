@@ -53,6 +53,8 @@
     
     
     self.navigationItem.title = [self getTitleString];
+    UIBarButtonItem* barButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"新增", nil) style:UIBarButtonItemStylePlain target:self action:@selector(addButton_Clicked)];
+    self.navigationItem.rightBarButtonItem = barButtonItem;
     
 
     self.model = [[HNTemporaryData alloc] init];
@@ -70,6 +72,13 @@
 //            break;
 //    }
     
+}
+
+-(void)addButton_Clicked
+{
+    HNTemporaryModel* model = self.model.modelList[0];
+    HNTemporaryApplyViewController* tac = [[HNTemporaryApplyViewController alloc]initWithModel:model];
+    [self.navigationController pushViewController:tac animated:YES];
 }
 
 -(void)loadFire
@@ -209,12 +218,11 @@
     self.temporaryTableViewCell = (HNTemporaryTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
     NSInteger row = indexPath.row;
     HNTemporaryModel* model = self.model.modelList[row];
-    if(model.status==TemporaryStatusCustom)
-    {
-        HNTemporaryApplyViewController* tac = [[HNTemporaryApplyViewController alloc]initWithModel:model];
-        [self.navigationController pushViewController:tac animated:YES];
-    }
-    else
+//    if(model.status==TemporaryStatusCustom)
+//    {
+//        
+//    }
+//    else
     {
         HNTemporaryDetailsViewController* tdc = [[HNTemporaryDetailsViewController alloc]initWithModel:model];
         [self.navigationController pushViewController:tdc animated:YES];
