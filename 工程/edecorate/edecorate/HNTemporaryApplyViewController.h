@@ -10,5 +10,5 @@
 #include "HNTemporaryModel.h"
 @interface HNTemporaryApplyViewController : UIViewController
 @property (nonatomic, strong)HNTemporaryModel* temporaryModel;
--(id)initWithModel:(HNTemporaryModel *)model;
+-(id)initWithType:(HNTemporaryType)type;
 @end
