@@ -11,5 +11,4 @@
 
 @interface HNOfficePassesApplyViewController : UIViewController
 @property (nonatomic, strong)HNPassData* temporaryModel;
--(id)initWithModel:(HNPassData *)model;
 @end

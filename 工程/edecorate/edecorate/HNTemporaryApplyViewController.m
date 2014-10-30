@@ -34,6 +34,9 @@
  "Submission" = "提交申请";
  */
 @interface HNTemporaryApplyViewController ()<UIAlertViewDelegate,UIImagePickerControllerDelegate,UITextFieldDelegate, UINavigationControllerDelegate,HNDecorateChoiceViewDelegate>
+{
+    bool bo;
+}
 @property (nonatomic, strong)IBOutlet UIScrollView *mainView;
 @property (nonatomic, strong)IBOutlet UILabel *houseInfMainLabel;
 @property (nonatomic, strong)IBOutlet UILabel *houseInfTitleLabel;
@@ -73,12 +76,10 @@
 
 @property (nonatomic, strong)UIImagePickerController *imagePicker;
 @property (strong, nonatomic) UIDatePicker *pickerView;
-@property (strong, nonatomic) UIView* textOKView;
-@property (nonatomic)NSInteger keyboardHeight;
-@property (strong, nonatomic) UITextField* currntTF;
-@property (nonatomic) CGFloat mainViewFramRectTop;
+//@property (strong, nonatomic) UIView* textOKView;
 
 @property (strong, nonatomic) NSString* imagePath;
+
 @end
 
 #define HSPACE 10
@@ -166,26 +167,6 @@
     [self labelWithTitle:NSLocalizedString(@"Valid documents", nil) label:self.validDocumentsTitleLabel];
     [self labelWithTitle:NSLocalizedString(@"Upload", nil) label:self.uploadTitleLabel];
     
-    NSInteger i=0;
-    self.fireunitsTF.tag = i++;
-    self.useOfFireByTF.tag = i++;
-    self.fireToolsTF.tag = i++;
-    self.fireLoadTF.tag = i++;
-    self.startTimeTF.tag = i++;
-    self.endTimeTF.tag = i++;
-    self.operatorTF.tag = i++;
-    self.phoneTF.tag = i++;
-    //self.validDocumentsTF.tag = i++;
-    self.fireunitsTF.delegate = self;
-    self.useOfFireByTF.delegate = self;
-    self.fireToolsTF.delegate = self;
-    self.fireLoadTF.delegate = self;
-    self.startTimeTF.delegate = self;
-    self.endTimeTF.delegate = self;
-    self.operatorTF.delegate = self;
-    self.phoneTF.delegate = self;
-    //self.validDocumentsTF.delegate = self;
-    
     //@property (strong, nonatomic) IBOutlet UIButton *commitButton;
     
 
@@ -219,24 +200,30 @@
     //self.pickerView.hidden = YES;
     self.pickerView.datePickerMode = UIDatePickerModeDate;
     self.endTimeTF.inputView = self.pickerView;
-    self.endTimeTF.delegate = self;
     self.startTimeTF.inputView = self.pickerView;
-    self.startTimeTF.delegate = self;
     
-    self.textOKView = [[UIView alloc]init];
-    self.textOKView.backgroundColor = [UIColor grayColor];
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.textOKView addSubview:button];
-    button.width = self.textOKView.width = 50;
-    button.height = self.textOKView.height = self.startTimeTF.height;
-    [button setTitle:@"OK" forState:UIControlStateNormal];
-    self.textOKView.hidden = YES;
-    [self.view addSubview:self.textOKView];
-    [button addTarget:self action:@selector(OKTextClick) forControlEvents:UIControlEventTouchUpInside];
+    UIToolbar * topView = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 30)];
+    //[topView setBarStyle:UIBarStyleBlack];
+    topView.backgroundColor = [UIColor whiteColor];
+    UIBarButtonItem * btnSpace = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+    UIBarButtonItem * doneButton = [[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(OKTextClick)];
+    NSArray * buttonsArray = [NSArray arrayWithObjects:btnSpace,doneButton,nil];
+    [topView setItems:buttonsArray];
+    self.startTimeTF.inputAccessoryView = topView;
+    self.endTimeTF.inputAccessoryView = topView;
     
-    self.keyboardHeight = 0;
-    self.currntTF = nil;
+//    self.textOKView = [[UIView alloc]init];
+//    self.textOKView.backgroundColor = [UIColor grayColor];
+//    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [self.textOKView addSubview:button];
+//    button.width = self.textOKView.width = 50;
+//    button.height = self.textOKView.height = self.startTimeTF.height;
+//    [button setTitle:@"OK" forState:UIControlStateNormal];
+//    self.textOKView.hidden = YES;
+//    [self.view addSubview:self.textOKView];
+//    [button addTarget:self action:@selector(OKTextClick) forControlEvents:UIControlEventTouchUpInside];
     
+    bo = false;
 
         // Do any additional setup after loading the view.
 }
@@ -358,61 +345,6 @@
     
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:fmodel.declareId,@"declareId", fmodel.dataInfo.electroEnterprise,@"electroEnterprise",fmodel.dataInfo.electroCause,@"electroCause",fmodel.dataInfo.electroTool,@"electroTool",fmodel.dataInfo.electroLoad,@"electroLoad",fmodel.dataInfo.electroBTime,@"electroBTime",fmodel.dataInfo.electroETime,@"electroETime",fmodel.dataInfo.electroOperator,@"electroOperator",fmodel.dataInfo.electroPhone,@"electroPhone",fmodel.dataInfo.PapersImg,@"PapersImg",nil];
     return dic;
-    
-}
-
-- (IBAction)beginEdit:(id)sender {
-    NSLog(@"beginEdit");
-    
-    UITextField *tf = (UITextField *)sender;
-    
-    if(tf.textInputView.top>tf.bottom)
-    {
-        NSLog(@"123");
-    }
-    if(tf==self.endTimeTF||tf==self.startTimeTF)
-    {
-        self.textOKView.right = tf.right;
-        self.textOKView.bottom = tf.bottom;
-        self.textOKView.hidden = NO;
-    }
-    self.currntTF = tf;
-    [self moveViewToShowTF];
-}
-
-- (IBAction)editEnd:(id)sender {
-    NSLog(@"editEnd");
-        if (self.currntTF) {
-        self.textOKView.hidden = YES;
-    }
-    
-    self.currntTF = nil;
-    
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [textField resignFirstResponder];
-    return YES;
-}
-
-- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
-{
-    return YES;
-}
-
--(void)OKTextClick
-{
-    self.textOKView.hidden = YES;
-    if(self.currntTF)
-    {
-        NSDate *selected = [self.pickerView date];
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-        NSString *destDateString = [dateFormatter stringFromDate:selected];
-        self.currntTF.text = destDateString;
-        [self.currntTF resignFirstResponder];
-    }
     
 }
 
@@ -539,66 +471,76 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    self.mainViewFramRectTop = [self.view convertRect:self.view.bounds toView:[[UIApplication sharedApplication] keyWindow]].origin.y;
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self registerForKeyboardNotifications];
-    self.mainView.frame = [self.view bounds];
     self.mainView.contentSize = CGSizeMake(self.view.bounds.size.width, self.commitButton.bottom+20);
-    self.mainViewFramRectTop = self.view.top;
 }
 
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-- (void)registerForKeyboardNotifications
-{
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardDidShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillBeHidden:) name:UIKeyboardWillHideNotification object:nil];
 }
 
-- (void)keyboardWasShown:(NSNotification*)aNotification
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField        // return NO to disallow editing.
 {
-    NSLog(@"keyboardWasShown");
-    NSDictionary* info = [aNotification userInfo];
-    CGSize kbSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
-    NSLog(@"hight_hitht:%f",kbSize.height);
-    if(0 == self.keyboardHeight)
-    {
-        self.keyboardHeight = kbSize.height;
-        [self moveViewToShowTF];
-    }
-    self.keyboardHeight = kbSize.height;
-    
+    bo = true;
+    NSLog(@"textFieldShouldBeginEditing");
+    self.mainView.contentSize = CGSizeMake(self.view.bounds.size.width,self.commitButton.bottom+20+216);//原始滑动距离增加键盘高度
+    CGPoint pt = [textField convertPoint:CGPointMake(0, 0) toView:self.mainView];//把当前的textField的坐标映射到scrollview上
+    if(self.mainView.contentOffset.y-pt.y+self.navigationController.navigationBar.height<=0)//判断最上面不要去滚动
+        [self.mainView setContentOffset:CGPointMake(0, pt.y-self.navigationController.navigationBar.height) animated:YES];//华东
+    return YES;
 }
 
--(void)moveViewToShowTF
+- (void)textFieldDidBeginEditing:(UITextField *)textField           // became first responder
 {
-    
-    if (0 == self.keyboardHeight || nil == self.currntTF)
-    {
-        return;
+    bo = false;
+    NSLog(@"beginEdit");
+    //[self moveViewToShowTF];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+
+    if (textField==self.endTimeTF||textField==self.startTimeTF) {
+        NSDate *selected = [self.pickerView date];
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy/MM/dd"];
+        NSString *destDateString = [dateFormatter stringFromDate:selected];
+        textField.text = destDateString;
     }
-    self.view.top = self.mainViewFramRectTop;
-    
-    CGRect rect = [self.currntTF convertRect:self.currntTF.bounds toView:[[UIApplication sharedApplication] keyWindow]];
-    CGFloat offset = self.keyboardHeight - ([UIScreen mainScreen].bounds.size.height -(rect.origin.y + rect.size.height));
-    if(offset > 0){
+    if (!bo) {
+        //开始动画
         [UIView animateWithDuration:0.30f animations:^{
-            self.view.top = self.mainViewFramRectTop-offset;
+            self.mainView.contentSize = CGSizeMake(self.view.bounds.size.width, self.commitButton.bottom+20);
         }];
     }
 }
 
-- (void)keyboardWillBeHidden:(NSNotification*)aNotification
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    self.view.top = self.mainViewFramRectTop;
-    self.keyboardHeight = 0;
+    [textField resignFirstResponder];
+    return YES;
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
+{
+    return YES;
+}
+
+-(void)OKTextClick
+{
+    [self.endTimeTF resignFirstResponder];
+    [self.startTimeTF resignFirstResponder];
+}
+
+
+-(void)moveViewToShowTF
+{
 }
 
 

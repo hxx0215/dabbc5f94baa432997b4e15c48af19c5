@@ -76,7 +76,7 @@
     }
     else
     {
-        NSLog(@"%@",self.temporaryModel.assessorState);
+        //NSLog(@"%@",self.temporaryModel.assessorState);
         if ([self.temporaryModel.assessorState isEqualToString:@"1"]) {
             self.statusLabel.text = @"已审核";
             

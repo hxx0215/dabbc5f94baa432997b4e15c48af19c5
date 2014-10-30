@@ -21,6 +21,7 @@
  */
 @interface HNComplaintData : NSObject
 @property (nonatomic, strong)NSString *shopname;
+@property (nonatomic, strong)NSString *declareId;
 @property (nonatomic, strong)NSString *room;
 @property (nonatomic, strong)NSString *complainId;
 @property (nonatomic, strong)NSString *complainObject;//

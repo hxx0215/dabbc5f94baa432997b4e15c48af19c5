@@ -60,8 +60,7 @@
 
 -(void)addButton_Clicked
 {
-    HNPassData* model = self.modelList[0];
-    HNOfficePassesApplyViewController* officePasseesApply=[[HNOfficePassesApplyViewController alloc] initWithModel:model];
+    HNOfficePassesApplyViewController* officePasseesApply=[[HNOfficePassesApplyViewController alloc]init];
     [self.navigationController pushViewController:officePasseesApply animated:YES];
 }
 
@@ -73,7 +72,7 @@
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     //HNLoginModel *model = [[HNLoginModel alloc] init];
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[HNLoginData shared].mshopid,@"mshopid", nil];
-    NSLog(@"%@",[HNLoginData shared].mshopid);
+    //NSLog(@"%@",[HNLoginData shared].mshopid);
     NSString *jsonStr = [dic JSONString];
     request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"get.pass.list" Params:jsonStr]];
     NSString *contentType = @"text/html";
@@ -84,7 +83,7 @@
         {
             NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
-            NSLog(@"%@",retJson);
+            //NSLog(@"%@",retJson);
             NSDictionary* dic = [retJson objectFromJSONString];
             NSNumber* total = [dic objectForKey:@"total"];
             NSArray* array = [dic objectForKey:@"data"];

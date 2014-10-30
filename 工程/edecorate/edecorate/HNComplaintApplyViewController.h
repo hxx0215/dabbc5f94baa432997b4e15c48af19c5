@@ -11,5 +11,4 @@
 
 @interface HNComplaintApplyViewController : UIViewController
 @property (nonatomic, strong)HNComplaintData* temporaryModel;
--(id)initWithModel:(HNComplaintData *)model;
 @end
