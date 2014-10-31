@@ -126,6 +126,7 @@
     HNReportModel *model =self.reportList[indexPath.row];
     [cell setRoomName:model.roomName];
     [cell setStatus:model.status];
+
     return cell;
 }
 

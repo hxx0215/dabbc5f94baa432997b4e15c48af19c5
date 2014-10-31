@@ -256,7 +256,7 @@
     array = [NSArray arrayWithArray:jsonArray];
     
     NSArray *array2 = [[NSArray alloc]init];
-    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:self.temporaryModel.declareId,@"declareId", [NSString stringWithFormat:@"%ld",[self.temporaryModel.proposerItems count]],@"headcount",self.temporaryModel.declareId,@"proposerId",[array JSONString],@"proposer",[array2 JSONString],@"needItem",nil];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:self.temporaryModel.declareId,@"declareId", [NSString stringWithFormat:@"%ld",(unsigned long)[self.temporaryModel.proposerItems count]],@"headcount",self.temporaryModel.declareId,@"proposerId",array,@"proposer",array2,@"needItem",nil];
     NSLog(@"%@",[array JSONString]);
     NSLog(@"%@",[dic JSONString]);
     
