@@ -239,6 +239,12 @@
 
 - (NSDictionary *)encodeWithTemporaryModel{
     
+//    headcount	Y	施工总人数
+//    declareId	Y	报建编号
+//    proposerId	Y	申请用户userid
+//    proposer	Y	申请人员信息JSON（realname：姓名，idcard：身份证号，phone：联系电话，idcardImg：身份证照片，icon：头像）
+//    needItem	Y	缴费项json([{name:名称,price:价格,useUnit:单位,number:数量,IsSubmit:是否必缴,Isrefund:是否可退,totalMoney:总金额,sort:排序},{...}]
+//                            
     NSArray *array = [[NSArray alloc]init];
     NSMutableArray *jsonArray = [[NSMutableArray alloc]init];//创建最外层的数组
     for (int i=0; i<[self.temporaryModel.proposerItems count]; i++) {
@@ -256,8 +262,7 @@
     array = [NSArray arrayWithArray:jsonArray];
     
     NSArray *array2 = [[NSArray alloc]init];
-    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:self.temporaryModel.declareId,@"declareId", [NSString stringWithFormat:@"%ld",(unsigned long)[self.temporaryModel.proposerItems count]],@"headcount",self.temporaryModel.declareId,@"proposerId",array,@"proposer",array2,@"needItem",nil];
-    NSLog(@"%@",[array JSONString]);
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:self.temporaryModel.declareId,@"declareId", [NSString stringWithFormat:@"%ld",(unsigned long)[self.temporaryModel.proposerItems count]],@"headcount",[HNLoginData shared].uid,@"proposerId",[array JSONString],@"proposer",[array2 JSONString],@"needItem",self.temporaryModel.declareId,@"totalcost",nil];
     NSLog(@"%@",[dic JSONString]);
     
     return dic;
