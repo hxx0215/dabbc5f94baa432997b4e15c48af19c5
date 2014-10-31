@@ -216,7 +216,7 @@
             item= self.optionPay[self.selectIndex.row];
         }
         HNPurchaseTableViewCell *cell = (HNPurchaseTableViewCell *)[self.tableView cellForRowAtIndexPath:self.selectIndex];
-        cell.detail.text = [NSString stringWithFormat:@"单价%.2f    数量%d",item.unitPrice,[tf.text integerValue]];
+        cell.detail.text = [NSString stringWithFormat:@"单价%.2f    数量%d",item.unitPrice,(int)[tf.text integerValue]];
         item.nums = [tf.text integerValue];
         item.price = item.nums * item.unitPrice;
         cell.price.text = [NSString stringWithFormat:@"%.2f",item.price];

@@ -9,11 +9,17 @@
 #import "HNDecorateReportViewController.h"
 #import "HNReportTableViewCell.h"
 #import "HNNewReportViewController.h"
-//#import "HNNewConstructViewController.h"
 #import "MJRefresh.h"
 #import "HNLoginData.h"
 #import "MBProgressHUD.h"
 #import "HNConstructViewController.h"
+#define kOriginalSChart @"OriginalSChart"
+#define kfloorplan @"floorplan"
+#define kwallRemould @"wallRemould"
+#define kceilingPlan @"ceilingPlan"
+#define kWaterwayPlan @"WaterwayPlan"
+#define kBlockDiagram @"BlockDiagram"
+#define kshopInfo @"shopInfo"
 
 @interface HNReportModel : NSObject
 @property (nonatomic, strong)NSString *roomName;
@@ -125,18 +131,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    HNConstructViewController *vc = [[HNConstructViewController alloc] init];
-    vc.constructType = [self.reportList[indexPath.row] constructType];
-    [self.navigationController pushViewController:vc animated:YES];
-    return;
-//    ====
-//    HNReportModel *model = (HNReportModel *)self.reportList[indexPath.row];
-//    HNNewConstructViewController *constructViewController = [[HNNewConstructViewController alloc]initWithConstructType:model.constructType];
-//    [self.navigationController pushViewController:constructViewController animated:YES];
-//    return;
-//    =====
-//    HNNewReportViewController *newReportViewController = [[HNNewReportViewController alloc] init];
-//    [self.navigationController pushViewController:newReportViewController animated:YES];
     MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = NSLocalizedString(@"Loading", nil);
     HNReportSendModel *sendmodel = [[HNReportSendModel alloc] init];
@@ -149,14 +143,46 @@
     [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
         [MBProgressHUD hideHUDForView:self.view animated:YES];
-        NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
-        NSLog(@"%@",retJson);
+        if (data)
+        {
+            NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
+            NSDictionary *retDic = [retJson objectFromJSONString];
+            NSInteger count = [[retDic objectForKey:@"total"] integerValue];
+            if (count != 0){
+                NSArray *dataArr = [retDic objectForKey:@"data"];
+                HNConstructViewController *vc = [[HNConstructViewController alloc] init];
+                NSInteger type = [[dataArr[0] objectForKey:@"type"] integerValue];
+                if (type == 0)
+                    vc.constructType = kPersonalDetail;
+                else
+                    vc.constructType = kCompanyDetail;
+                vc.roomNo = [dataArr[0] objectForKey:@"roomNumber"];
+                vc.ownerName = [dataArr[0] objectForKey:@"ownername"];
+                vc.ownerMobile = [dataArr[0] objectForKey:@"ownerphone"];
+                vc.declareid = [dataArr[0] objectForKey:@"declareId"];
+                [vc.chart setObject:[dataArr[0] objectForKey:kOriginalSChart] forKey:kOriginalSChart];
+                [vc.chart setObject:[dataArr[0] objectForKey:kfloorplan] forKey:kfloorplan];
+                [vc.chart setObject:[dataArr[0] objectForKey:kwallRemould] forKey:kwallRemould];
+                [vc.chart setObject:[dataArr[0] objectForKey:kceilingPlan] forKey:kceilingPlan];
+                [vc.chart setObject:[dataArr[0] objectForKey:kWaterwayPlan] forKey:kWaterwayPlan];
+                [vc.chart setObject:[dataArr[0] objectForKey:kBlockDiagram] forKey:kBlockDiagram];
+                vc.shopInfo = [dataArr[0] objectForKey:kshopInfo];
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+            else{
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"We don't get any data.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+                [alert show];
+            }
+        }else{
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection Error", nil) message:NSLocalizedString(@"Please check your network.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+            [alert show];
+        }
     }];
 
 }
 - (NSDictionary *)encodeDetailModel:(HNReportSendModel *)model{
-    return @{@"mshopid": model.mshopid,@"declareId":model.declareId};
+    return @{@"mshopid": model.mshopid,@"declareid":model.declareId};
 }
 - (NSDictionary *)encodeSendModel:(HNReportSendModel*)model{
     NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:model.mshopid,@"mshopid", nil];

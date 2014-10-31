@@ -20,7 +20,14 @@
 @end
 
 @implementation HNConstructViewController
-
+- (instancetype)init{
+    self = [super init];
+    if (self){
+        self.chart = [[NSMutableDictionary alloc] init];
+        self.shopInfo = [[NSMutableDictionary alloc] init];
+    }
+    return self;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.

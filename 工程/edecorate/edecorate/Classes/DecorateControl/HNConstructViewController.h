@@ -19,4 +19,6 @@ typedef enum HNConstructType{
 @property (nonatomic, strong)NSString *ownerName;
 @property (nonatomic, strong)NSString *ownerMobile;
 @property (nonatomic, strong)NSString *declareid;
+@property (nonatomic, strong)NSMutableDictionary *chart;
+@property (nonatomic, strong)NSMutableDictionary *shopInfo;
 @end
