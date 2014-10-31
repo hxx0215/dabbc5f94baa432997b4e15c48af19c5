@@ -16,7 +16,7 @@
 #import "HNPassAddNewTableViewCell.h"
 #import "HNDecorateChoiceView.h"
 
-@interface HNOfficePassesApplyViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,HNDecorateChoiceViewDelegate>
+@interface HNOfficePassesApplyViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,HNDecorateChoiceViewDelegate,HNPassAddNewTableViewCellDelegate>
 @property (nonatomic,strong) IBOutlet UIScrollView *mainView;
 
 @property (nonatomic,strong) IBOutlet UILabel *houseInfoMain;
@@ -57,23 +57,25 @@
 @property (nonatomic,strong) IBOutlet UIButton *uploadIdCardPic;
 @property (nonatomic,strong) IBOutlet UIButton *uploadPic;
 @property (nonatomic,strong) IBOutlet UIButton *submit;
-@property (nonatomic) NSInteger tableCellMun;
 
 @property (strong, nonatomic) IBOutlet HNDecorateChoiceView *choiceDecorateView;
 @end
 
 @implementation HNOfficePassesApplyViewController
 
--(id)initWithModel:(HNPassData *)model
-{
-    self = [super init];
-    self.temporaryModel = model;
-    return self;
-}
+//-(id)initWithModel:(HNPassData *)model
+//{
+//    self = [super init];
+//    self.temporaryModel = model;
+//    return self;
+//}
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.temporaryModel = [[HNPassData alloc]init];
+    
     self.view.backgroundColor=[UIColor whiteColor];
     self.navigationItem.title = NSLocalizedString(@"Pass Apply", nil);
     
@@ -134,7 +136,7 @@
     self.uploadPic.layer.borderWidth = 1.0;
     self.uploadPic.layer.borderColor = [UIColor blackColor].CGColor;
     
-    self.tableCellMun = 0;
+    
     UINib *nib = [UINib nibWithNibName:NSStringFromClass([HNPassAddNewTableViewCell class]) bundle:nil];
     [self.tableView registerNib:nib forCellReuseIdentifier:@"addNewCell"];
     self.tableView.delegate = self;
@@ -166,6 +168,7 @@
     [self.houseOnwer sizeToFit ];
     self.houseOnwerMobile.right = self.view.width - 14;
     self.houseOnwer.right = self.houseOnwerMobile.left-5;
+    self.temporaryModel.declareId = model.declareId;
 }
 
 - (void)labelWithTitle:(NSString *)title label:(UILabel*)lab
@@ -185,9 +188,11 @@
 
 - (IBAction)addNewClick:(id)sender
 {
-    self.tableCellMun += 1;
     self.tableView.hidden = NO;
+    HNPassProposerData* data = [[HNPassProposerData alloc]init];
+    [self.temporaryModel.proposerItems addObject:data];
     [self.tableView reloadData ];
+    self.tableView.height = [self.temporaryModel.proposerItems count]*101+2;
     self.payView.top = self.tableView.bottom+24;
     
     self.mainView.contentSize = CGSizeMake(self.view.bounds.size.width, self.payView.bottom+20);
@@ -233,10 +238,29 @@
 }
 
 - (NSDictionary *)encodeWithTemporaryModel{
-//    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:self.temporaryModel.declareId,@"declareId", _temporaryModel.headcount,@"headcount",_temporaryModel.proposerId,@"proposerId",_temporaryModel.proposer,@"proposer",_temporaryModel.needItem,@"needItem",nil];
-    //return dic;
-    return nil;
     
+    NSArray *array = [[NSArray alloc]init];
+    NSMutableArray *jsonArray = [[NSMutableArray alloc]init];//创建最外层的数组
+    for (int i=0; i<[self.temporaryModel.proposerItems count]; i++) {
+        HNPassProposerData *tModel = [self.temporaryModel.proposerItems objectAtIndex:i];
+        
+        NSDictionary *dic = [[NSMutableDictionary alloc]init];//创建内层的字典
+        //申请人员信息JSON（realname：姓名，idcard：身份证号，phone：联系电话，idcardImg：身份证照片，icon：头像）
+        [dic setValue:tModel.name forKey:@"realname"];
+        [dic setValue:tModel.IDcard forKey:@"idcard"];
+        [dic setValue:tModel.phone forKey:@"phone"];
+        [dic setValue:tModel.IDcardImg forKey:@"idcardImg"];
+        [dic setValue:tModel.Icon forKey:@"icon"];
+        [jsonArray addObject:dic];
+    }
+    array = [NSArray arrayWithArray:jsonArray];
+    
+    NSArray *array2 = [[NSArray alloc]init];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:self.temporaryModel.declareId,@"declareId", [NSString stringWithFormat:@"%ld",[self.temporaryModel.proposerItems count]],@"headcount",self.temporaryModel.declareId,@"proposerId",[array JSONString],@"proposer",[array2 JSONString],@"needItem",nil];
+    NSLog(@"%@",[array JSONString]);
+    NSLog(@"%@",[dic JSONString]);
+    
+    return dic;
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -256,7 +280,7 @@
 }
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return  self.tableCellMun;
+    return  [self.temporaryModel.proposerItems count];
 }
 
 
@@ -266,10 +290,29 @@
     HNPassAddNewTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
     if (!cell){
         cell = [[HNPassAddNewTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
+        
     }
+    cell.delegate = self;
+    cell.proposerData = [self.temporaryModel.proposerItems objectAtIndex:indexPath.row];
     return cell;
 }
 
+
+- (void)moveScrollView:(UITextField*)textFiled
+{
+    self.mainView.contentSize = CGSizeMake(self.view.bounds.size.width,self.payView.bottom+20+216);//原始滑动距离增加键盘高度
+    CGPoint pt = [textFiled convertPoint:CGPointMake(0, 0) toView:self.mainView];//把当前的textField的坐标映射到scrollview上
+    if(self.mainView.contentOffset.y-pt.y+self.navigationController.navigationBar.height<=0)//判断最上面不要去滚动
+        [self.mainView setContentOffset:CGPointMake(0, pt.y-self.navigationController.navigationBar.height) animated:YES];//华东
+}
+
+- (void)finishMoveScrollView:(UITextField*)textFiled
+{
+    [UIView animateWithDuration:0.30f animations:^{
+        
+        self.mainView.contentSize = CGSizeMake(self.view.bounds.size.width, self.payView.bottom+20);
+    }];
+}
 /*
  #pragma mark - Navigation
  

@@ -7,20 +7,23 @@
 //
 
 #import "HNRefundApplyViewController.h"
+#import "HNDecorateChoiceView.h"
 
-@interface HNRefundApplyViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate>
+@interface HNRefundApplyViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate,HNDecorateChoiceViewDelegate>
 @property (strong, nonatomic) IBOutlet UIButton *commitButton;
 @property (strong, nonatomic) IBOutlet UIButton *uploadButton;
 
 @property (nonatomic, strong)UIImagePickerController *imagePicker;
+
+@property (strong, nonatomic) IBOutlet HNDecorateChoiceView *choiceDecorateView;
 @end
 
 @implementation HNRefundApplyViewController
 
--(id)initWithModel:(HNTemporaryModel *)model
+-(id)init
 {
     self = [super init];
-    self.temporaryModel = model;
+    self.temporaryModel = [[HNRefundData alloc]init];
     
     UIImagePickerControllerSourceType sourceType=UIImagePickerControllerSourceTypePhotoLibrary;
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
@@ -36,6 +39,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    self.choiceDecorateView = [[HNDecorateChoiceView alloc]initWithFrame:CGRectMake(12, 12, self.view.bounds.size.width-24, 25)];
+    [self.view addSubview:self.choiceDecorateView];
+    self.choiceDecorateView.delegate = self;
+}
+
+- (void)updataDecorateInformation:(HNDecorateChoiceModel*)model
+{
+//    self.houseInfLabel.text = model.roomName;
+//    self.ownersPhoneNumberLabel.text = model.ownerphone;
+//    self.ownersLabel.text = model.ownername;
+//    [self.ownersPhoneNumberLabel sizeToFit];
+//    [self.ownersLabel sizeToFit ];
+//    self.ownersPhoneNumberLabel.right = self.view.width - 14;
+//    self.ownersLabel.right = self.ownersPhoneNumberLabel.left-5;
+    self.temporaryModel.declareId = model.declareId;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -54,7 +73,6 @@
 {
     if(alertView.tag==1)
     {
-        self.temporaryModel.status = TemporaryStatusApplying;
         [self.navigationController popViewControllerAnimated:YES];
     }
 }

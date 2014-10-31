@@ -34,6 +34,9 @@
  "Submission" = "提交申请";
  */
 @interface HNTemporaryApplyViewController ()<UIAlertViewDelegate,UIImagePickerControllerDelegate,UITextFieldDelegate, UINavigationControllerDelegate,HNDecorateChoiceViewDelegate>
+{
+    bool bo;
+}
 @property (nonatomic, strong)IBOutlet UIScrollView *mainView;
 @property (nonatomic, strong)IBOutlet UILabel *houseInfMainLabel;
 @property (nonatomic, strong)IBOutlet UILabel *houseInfTitleLabel;
@@ -73,10 +76,10 @@
 
 @property (nonatomic, strong)UIImagePickerController *imagePicker;
 @property (strong, nonatomic) UIDatePicker *pickerView;
-@property (strong, nonatomic) UIView* textOKView;
-@property (nonatomic)NSInteger keyboardHeight;
-@property (strong, nonatomic) UITextField* currntTF;
-@property (nonatomic) CGFloat mainViewFramRectTop;
+//@property (strong, nonatomic) UIView* textOKView;
+
+@property (strong, nonatomic) NSString* imagePath;
+
 @end
 
 #define HSPACE 10
@@ -87,10 +90,22 @@
 
 @implementation HNTemporaryApplyViewController
 
--(id)initWithModel:(HNTemporaryModel *)model
+-(id)initWithType:(HNTemporaryType)type;
 {
     self = [super init];
-    self.temporaryModel = model;
+    switch (type) {
+        case FIRE:
+            self.temporaryModel = [[HNTemporaryFireModel alloc]init];
+            
+            break;
+        case POWER:
+            self.temporaryModel = [[HNTemporaryElectroModel alloc]init];
+            break;
+            
+        default:
+            break;
+    }
+    self.temporaryModel.type = type;
     return self;
 }
 
@@ -152,26 +167,6 @@
     [self labelWithTitle:NSLocalizedString(@"Valid documents", nil) label:self.validDocumentsTitleLabel];
     [self labelWithTitle:NSLocalizedString(@"Upload", nil) label:self.uploadTitleLabel];
     
-    NSInteger i=0;
-    self.fireunitsTF.tag = i++;
-    self.useOfFireByTF.tag = i++;
-    self.fireToolsTF.tag = i++;
-    self.fireLoadTF.tag = i++;
-    self.startTimeTF.tag = i++;
-    self.endTimeTF.tag = i++;
-    self.operatorTF.tag = i++;
-    self.phoneTF.tag = i++;
-    //self.validDocumentsTF.tag = i++;
-    self.fireunitsTF.delegate = self;
-    self.useOfFireByTF.delegate = self;
-    self.fireToolsTF.delegate = self;
-    self.fireLoadTF.delegate = self;
-    self.startTimeTF.delegate = self;
-    self.endTimeTF.delegate = self;
-    self.operatorTF.delegate = self;
-    self.phoneTF.delegate = self;
-    //self.validDocumentsTF.delegate = self;
-    
     //@property (strong, nonatomic) IBOutlet UIButton *commitButton;
     
 
@@ -205,24 +200,30 @@
     //self.pickerView.hidden = YES;
     self.pickerView.datePickerMode = UIDatePickerModeDate;
     self.endTimeTF.inputView = self.pickerView;
-    self.endTimeTF.delegate = self;
     self.startTimeTF.inputView = self.pickerView;
-    self.startTimeTF.delegate = self;
     
-    self.textOKView = [[UIView alloc]init];
-    self.textOKView.backgroundColor = [UIColor grayColor];
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.textOKView addSubview:button];
-    button.width = self.textOKView.width = 50;
-    button.height = self.textOKView.height = self.startTimeTF.height;
-    [button setTitle:@"OK" forState:UIControlStateNormal];
-    self.textOKView.hidden = YES;
-    [self.view addSubview:self.textOKView];
-    [button addTarget:self action:@selector(OKTextClick) forControlEvents:UIControlEventTouchUpInside];
+    UIToolbar * topView = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 30)];
+    //[topView setBarStyle:UIBarStyleBlack];
+    topView.backgroundColor = [UIColor whiteColor];
+    UIBarButtonItem * btnSpace = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+    UIBarButtonItem * doneButton = [[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(OKTextClick)];
+    NSArray * buttonsArray = [NSArray arrayWithObjects:btnSpace,doneButton,nil];
+    [topView setItems:buttonsArray];
+    self.startTimeTF.inputAccessoryView = topView;
+    self.endTimeTF.inputAccessoryView = topView;
     
-    self.keyboardHeight = 0;
-    self.currntTF = nil;
+//    self.textOKView = [[UIView alloc]init];
+//    self.textOKView.backgroundColor = [UIColor grayColor];
+//    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [self.textOKView addSubview:button];
+//    button.width = self.textOKView.width = 50;
+//    button.height = self.textOKView.height = self.startTimeTF.height;
+//    [button setTitle:@"OK" forState:UIControlStateNormal];
+//    self.textOKView.hidden = YES;
+//    [self.view addSubview:self.textOKView];
+//    [button addTarget:self action:@selector(OKTextClick) forControlEvents:UIControlEventTouchUpInside];
     
+    bo = false;
 
         // Do any additional setup after loading the view.
 }
@@ -236,6 +237,10 @@
     [self.ownersLabel sizeToFit ];
     self.ownersPhoneNumberLabel.right = self.view.width - 14;
     self.ownersLabel.right = self.ownersPhoneNumberLabel.left-5;
+    self.temporaryModel.declareId = model.declareId;
+    self.temporaryModel.roomName = model.roomName;
+    self.temporaryModel.huseInfo.owners = model.ownername;
+    self.temporaryModel.huseInfo.ownersPhoneNumber = model.ownerphone;
 }
 
 - (IBAction)commit:(id)sender
@@ -276,8 +281,7 @@
             NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
             NSLog(@"%@",retJson);
             NSDictionary* dic = [retJson objectFromJSONString];
-            int commitStatus = 1;
-            if (commitStatus)
+            if ([[dic objectForKey:@"total"] integerValue]>=1)
             {
                 UIAlertView* alert=[[UIAlertView alloc]initWithTitle:nil message:@"已提交审核" delegate:self cancelButtonTitle:@"OK"otherButtonTitles:nil,nil];
                 alert.tag=1;
@@ -309,6 +313,17 @@
 
 - (NSDictionary *)encodeWithFireModel:(HNTemporaryModel *)model{
     HNTemporaryFireModel* fmodel = (HNTemporaryFireModel*)model;
+    
+    fmodel.dataInfo.fireUnits = self.fireunitsTF.text;
+    fmodel.dataInfo.useOfFireBy = self.useOfFireByTF.text;
+    fmodel.dataInfo.fireTools = self.fireToolsTF.text;
+    fmodel.dataInfo.fireLoad = self.fireLoadTF.text;
+    fmodel.dataInfo.startTime = self.startTimeTF.text;
+    fmodel.dataInfo.endTime = self.endTimeTF.text;
+    fmodel.dataInfo.operatorPerson = self.operatorTF.text;
+    fmodel.dataInfo.phone = self.phoneTF.text;
+    fmodel.dataInfo.validDocuments = self.imagePath;
+    
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:fmodel.declareId,@"declareId", fmodel.dataInfo.fireUnits,@"fireEnterprise",fmodel.dataInfo.useOfFireBy,@"fireCause",fmodel.dataInfo.fireTools,@"fireTool",fmodel.dataInfo.fireLoad,@"fireLoad",fmodel.dataInfo.startTime,@"fireBTime",fmodel.dataInfo.endTime,@"fireETime",fmodel.dataInfo.operatorPerson,@"fireOperator",fmodel.dataInfo.phone,@"firePhone",fmodel.dataInfo.validDocuments,@"PapersImg",nil];
     return dic;
     
@@ -317,63 +332,19 @@
 
 - (NSDictionary *)encodeWithPowerModel:(HNTemporaryModel *)model{
     HNTemporaryElectroModel* fmodel = (HNTemporaryElectroModel*)model;
+    
+    fmodel.dataInfo.electroEnterprise = self.fireunitsTF.text;
+    fmodel.dataInfo.electroCause = self.useOfFireByTF.text;
+    fmodel.dataInfo.electroTool = self.fireToolsTF.text;
+    fmodel.dataInfo.electroLoad = self.fireLoadTF.text;
+    fmodel.dataInfo.electroBTime = self.startTimeTF.text;
+    fmodel.dataInfo.electroETime = self.endTimeTF.text;
+    fmodel.dataInfo.electroOperator = self.operatorTF.text;
+    fmodel.dataInfo.electroPhone = self.phoneTF.text;
+    fmodel.dataInfo.PapersImg = self.imagePath;
+    
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:fmodel.declareId,@"declareId", fmodel.dataInfo.electroEnterprise,@"electroEnterprise",fmodel.dataInfo.electroCause,@"electroCause",fmodel.dataInfo.electroTool,@"electroTool",fmodel.dataInfo.electroLoad,@"electroLoad",fmodel.dataInfo.electroBTime,@"electroBTime",fmodel.dataInfo.electroETime,@"electroETime",fmodel.dataInfo.electroOperator,@"electroOperator",fmodel.dataInfo.electroPhone,@"electroPhone",fmodel.dataInfo.PapersImg,@"PapersImg",nil];
     return dic;
-    
-}
-
-- (IBAction)beginEdit:(id)sender {
-    NSLog(@"beginEdit");
-    
-    UITextField *tf = (UITextField *)sender;
-    
-    if(tf.textInputView.top>tf.bottom)
-    {
-        NSLog(@"123");
-    }
-    if(tf==self.endTimeTF||tf==self.startTimeTF)
-    {
-        self.textOKView.right = tf.right;
-        self.textOKView.bottom = tf.bottom;
-        self.textOKView.hidden = NO;
-    }
-    self.currntTF = tf;
-    [self moveViewToShowTF];
-}
-
-- (IBAction)editEnd:(id)sender {
-    NSLog(@"editEnd");
-        if (self.currntTF) {
-        self.textOKView.hidden = YES;
-    }
-    
-    self.currntTF = nil;
-    
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [textField resignFirstResponder];
-    return YES;
-}
-
-- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
-{
-    return YES;
-}
-
--(void)OKTextClick
-{
-    self.textOKView.hidden = YES;
-    if(self.currntTF)
-    {
-        NSDate *selected = [self.pickerView date];
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-        NSString *destDateString = [dateFormatter stringFromDate:selected];
-        self.currntTF.text = destDateString;
-        [self.currntTF resignFirstResponder];
-    }
     
 }
 
@@ -404,90 +375,26 @@
     UIImage *image=[info objectForKey:UIImagePickerControllerOriginalImage];
     [self.imagePicker dismissViewControllerAnimated:YES completion:nil];
     
-    UIImage *images = [UIImage imageNamed:@"押金退款.png"];
-    //得到图片的data
-    NSData* datas = UIImagePNGRepresentation(images);
-    
     CGFloat scaleSize = 0.5f;
     UIGraphicsBeginImageContext(CGSizeMake(image.size.width * scaleSize, image.size.height * scaleSize));
     [image drawInRect:CGRectMake(0, 0, image.size.width * scaleSize, image.size.height * scaleSize)];
     UIImage *scaledImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-    NSData *_data = UIImageJPEGRepresentation(scaledImage, 1.0f);
-    NSString *_encodedImageStr = [datas base64EncodedStringWithOptions:1];
-    _encodedImageStr = [_encodedImageStr stringByReplacingOccurrencesOfString:@"+" withString:@"|JH|"];
-    _encodedImageStr = [_encodedImageStr stringByReplacingOccurrencesOfString:@" " withString:@"|KG|"];
-    _encodedImageStr = [_encodedImageStr stringByReplacingOccurrencesOfString:@"\r\n" withString:@"|HC|"];
-    //Replace("|JH|", "+").Replace("|KG|", " ").Replace("|HC|", "\r\n");
     
-    //MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    //hud.labelText = NSLocalizedString(@"Loading", nil);
-    
-    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"testImage.png",@"name",nil];
-    NSString *jsonStr = [dic JSONString];
-    NSURL *URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"set.picture.add" Params:jsonStr]];
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:URL cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
-    
-    [request setHTTPMethod:@"POST"];
-    NSData *data = [[NSData alloc]initWithBase64EncodedString:_encodedImageStr options:1];
-    [request setHTTPBody:data];
-    NSString *contentType = @"multipart/form-data";
-    [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
-    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-        if (data)
-        {
-            NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
-            NSLog(@"%@",retJson);
-            NSDictionary* dic = [retJson objectFromJSONString];
-            int commitStatus = 1;
-            if (commitStatus)
-            {
-            }
-            else
-            {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Loading Fail", nil) message:NSLocalizedString(@"Please try again", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
-                [alert show];
-            }
-        }
-        else{
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection Error", nil) message:NSLocalizedString(@"Please check your network.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
-            [alert show];
-        }
-        
-    }];
-    [self requestForPostWithURLString];
-
-    //[self.uploadImages setObject:image forKey:[NSNumber numberWithInteger:self.curButton.tag]];;
+    [self requestForPostWithURLString:scaledImage];
 }
 
--(void)requestForPostWithURLString
+-(void)requestForPostWithURLString:(UIImage*)image
 {
     
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"testImage.png",@"name",nil];
     NSString *jsonStr = [dic JSONString];
     NSURL *URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"set.picture.add" Params:jsonStr]];
     
-//    NSString *paramsJson = [JsonFactory dictoryToJsonStr:URLString];
-//    //    NSLog(@"requestParamstr %@",paramsJson);
-//    //加密
-//    paramsJson = [[FBEncryptorDES encrypt:paramsJson
-//                                keyString:@"SDFL#)@F"] uppercaseString];
-//    NSString *signs= [NSString stringWithFormat:@"SDFL#)@FMethod%@Params%@SDFL#)@F",method,paramsJson];
-//    signs = [[FBEncryptorDES md5:signs] uppercaseString];
-//    //    http://113.105.159.107:84
-//    //    icbcapp.intsun.com
-//    NSString *requestStr = [NSString stringWithFormat:@"http://61.158.187.140:8088/home/?Method=%@&Params=%@&Sign=%@",method,paramsJson,signs];
-//    NSLog(@"request %@",requestStr);
-    
-    
     //    NSString *TWITTERFON_FORM_BOUNDARY = @"AaB03x";
     NSString *TWITTERFON_FORM_BOUNDARY = @"AABBCC";
     //根据url初始化request
-    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:URL
-                                                           cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
-                                                       timeoutInterval:10];
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:URL cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:10];
     //分界线 --AaB03x
     NSString *MPboundary=[[NSString alloc]initWithFormat:@"--%@",TWITTERFON_FORM_BOUNDARY];
     //结束符 AaB03x--
@@ -509,9 +416,9 @@
     //将body字符串转化为UTF8格式的二进制
     [myRequestData appendData:[body dataUsingEncoding:NSUTF8StringEncoding]];
     //将image的data加入
-    UIImage *images = [UIImage imageNamed:@"押金退款.png"];
+    //UIImage *images = [UIImage imageNamed:@"押金退款.png"];
     //得到图片的data
-    NSData* imageData = UIImagePNGRepresentation(images);
+    NSData* imageData = UIImagePNGRepresentation(image);
     [myRequestData appendData:imageData];
     //加入结束符--AaB03x--
     [myRequestData appendData:[end dataUsingEncoding:NSUTF8StringEncoding]];
@@ -527,92 +434,113 @@
     //http method
     [request setHTTPMethod:@"POST"];
     //建立连接，设置代理
-    //    NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-    //设置接受response的data
-    NSError *error = nil;
-    NSHTTPURLResponse *response = nil;
-    NSData *urlData = [NSURLConnection
-                       sendSynchronousRequest:request
-                       returningResponse: &response
-                       error: &error];
-    //    return [[[NSString alloc] initWithData:urlData encoding:NSUTF8StringEncoding] autorelease];
-    //    DLog(@"DATA:%@, error:%@",URLData, error);
-    NSString *retStr = [[NSString alloc] initWithData:urlData encoding:NSUTF8StringEncoding];
-    NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
-    NSLog(@"%@",retJson);
-    //    json = [ZZ3DESEncrypt decrypt:json keyString:METHODKEY];//解密
-    //    DLog(@"解密JSON:%@",json);
-    //    json = [json URLDecodedString];//将josn转化为普通格式
-    //    DLog(@"普通格式JSON:%@",json);
-    //
-    //    NSDictionary *returnDictionary = [[json objectFromJSONString] retain];
-    //    DLog(@"解析的字典：%@",returnDictionary);
+    
+    
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        if (data)
+        {
+            NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
+            NSLog(@"%@",retJson);
+            NSDictionary* dic = [retJson objectFromJSONString];
+            //    {"verification":true,"total":1,"data":[{"state":1,"msg":"http://113.105.159.115/Picture/201410/302117447717.png"}],"error":null}
+            if ([[dic objectForKey:@"total"] integerValue]>=1)
+            {
+                NSArray* array = [dic objectForKey:@"data"];
+                NSDictionary *dicData = [array objectAtIndex:0];
+                self.imagePath = [dicData objectForKey:@"msg"];
+                [self.uploadButton setTitle:@"已上传" forState:UIControlStateNormal];
+                [self.uploadButton sizeToFit];
+            }
+            else
+            {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Loading Fail", nil) message:NSLocalizedString(@"Please try again", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+                [alert show];
+            }
+        }
+        else{
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection Error", nil) message:NSLocalizedString(@"Please check your network.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+            [alert show];
+        }
+        
+    }];
     
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    self.mainViewFramRectTop = [self.view convertRect:self.view.bounds toView:[[UIApplication sharedApplication] keyWindow]].origin.y;
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self registerForKeyboardNotifications];
-    self.mainView.frame = [self.view bounds];
     self.mainView.contentSize = CGSizeMake(self.view.bounds.size.width, self.commitButton.bottom+20);
-    self.mainViewFramRectTop = self.view.top;
 }
 
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-- (void)registerForKeyboardNotifications
-{
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardDidShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillBeHidden:) name:UIKeyboardWillHideNotification object:nil];
 }
 
-- (void)keyboardWasShown:(NSNotification*)aNotification
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField        // return NO to disallow editing.
 {
-    NSLog(@"keyboardWasShown");
-    NSDictionary* info = [aNotification userInfo];
-    CGSize kbSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
-    NSLog(@"hight_hitht:%f",kbSize.height);
-    if(0 == self.keyboardHeight)
-    {
-        self.keyboardHeight = kbSize.height;
-        [self moveViewToShowTF];
-    }
-    self.keyboardHeight = kbSize.height;
-    
+    bo = true;
+    NSLog(@"textFieldShouldBeginEditing");
+    self.mainView.contentSize = CGSizeMake(self.view.bounds.size.width,self.commitButton.bottom+20+216);//原始滑动距离增加键盘高度
+    CGPoint pt = [textField convertPoint:CGPointMake(0, 0) toView:self.mainView];//把当前的textField的坐标映射到scrollview上
+    if(self.mainView.contentOffset.y-pt.y+self.navigationController.navigationBar.height<=0)//判断最上面不要去滚动
+        [self.mainView setContentOffset:CGPointMake(0, pt.y-self.navigationController.navigationBar.height) animated:YES];//华东
+    return YES;
 }
 
--(void)moveViewToShowTF
+- (void)textFieldDidBeginEditing:(UITextField *)textField           // became first responder
 {
-    
-    if (0 == self.keyboardHeight || nil == self.currntTF)
-    {
-        return;
+    bo = false;
+    NSLog(@"beginEdit");
+    //[self moveViewToShowTF];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+
+    if (textField==self.endTimeTF||textField==self.startTimeTF) {
+        NSDate *selected = [self.pickerView date];
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy/MM/dd"];
+        NSString *destDateString = [dateFormatter stringFromDate:selected];
+        textField.text = destDateString;
     }
-    self.view.top = self.mainViewFramRectTop;
-    
-    CGRect rect = [self.currntTF convertRect:self.currntTF.bounds toView:[[UIApplication sharedApplication] keyWindow]];
-    CGFloat offset = self.keyboardHeight - ([UIScreen mainScreen].bounds.size.height -(rect.origin.y + rect.size.height));
-    if(offset > 0){
+    if (!bo) {
+        //开始动画
         [UIView animateWithDuration:0.30f animations:^{
-            self.view.top = self.mainViewFramRectTop-offset;
+            self.mainView.contentSize = CGSizeMake(self.view.bounds.size.width, self.commitButton.bottom+20);
         }];
     }
 }
 
-- (void)keyboardWillBeHidden:(NSNotification*)aNotification
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    self.view.top = self.mainViewFramRectTop;
-    self.keyboardHeight = 0;
+    [textField resignFirstResponder];
+    return YES;
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
+{
+    return YES;
+}
+
+-(void)OKTextClick
+{
+    [self.endTimeTF resignFirstResponder];
+    [self.startTimeTF resignFirstResponder];
+}
+
+
+-(void)moveViewToShowTF
+{
 }
 
 

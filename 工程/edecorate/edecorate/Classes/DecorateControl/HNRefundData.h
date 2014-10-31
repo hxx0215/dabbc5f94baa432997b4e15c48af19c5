@@ -18,6 +18,7 @@
 @end
 
 @interface HNRefundData : NSObject
+@property (nonatomic, strong)NSString *declareId;
 @property (nonatomic, strong)NSMutableArray *projectrefundBody;
 @property (nonatomic, strong)NSMutableArray *finefundBody;
 @property (nonatomic, strong)NSString *projectrefund;

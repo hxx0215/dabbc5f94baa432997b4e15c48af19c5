@@ -76,8 +76,7 @@
 
 -(void)addButton_Clicked
 {
-    HNTemporaryModel* model = self.model.modelList[0];
-    HNTemporaryApplyViewController* tac = [[HNTemporaryApplyViewController alloc]initWithModel:model];
+    HNTemporaryApplyViewController* tac = [[HNTemporaryApplyViewController alloc]initWithType:self.temporaryType];
     [self.navigationController pushViewController:tac animated:YES];
 }
 

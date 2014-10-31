@@ -55,8 +55,7 @@
 
 -(void)addButton_Clicked
 {
-    HNComplaintData* model = self.modelList[0];
-    HNComplaintApplyViewController* avc = [[HNComplaintApplyViewController alloc]initWithModel:model];
+    HNComplaintApplyViewController* avc = [[HNComplaintApplyViewController alloc]init];
     [self.navigationController pushViewController:avc animated:YES];
 }
 

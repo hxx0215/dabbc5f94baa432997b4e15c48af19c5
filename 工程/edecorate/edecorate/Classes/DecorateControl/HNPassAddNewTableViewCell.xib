@@ -31,25 +31,25 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="点此输入姓名" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dut-xO-mMn">
+                    <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="点此输入姓名" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dut-xO-mMn">
                         <rect key="frame" x="86" y="7" width="181" height="30"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits"/>
                     </textField>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="电话号码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jPy-w1-WuG">
+                    <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="电话号码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jPy-w1-WuG">
                         <rect key="frame" x="86" y="36" width="181" height="30"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits"/>
                     </textField>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="out-cq-DfK">
+                    <textField opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="out-cq-DfK">
                         <rect key="frame" x="86" y="65" width="147" height="30"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits"/>
                     </textField>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="添加照片_18" translatesAutoresizingMaskIntoConstraints="NO" id="2JF-fH-4bQ">
+                    <imageView userInteractionEnabled="NO" tag="4" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="添加照片_18" translatesAutoresizingMaskIntoConstraints="NO" id="2JF-fH-4bQ">
                         <rect key="frame" x="270" y="8" width="46" height="60"/>
                     </imageView>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aYF-QW-gSh">
+                    <button opaque="NO" tag="5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aYF-QW-gSh">
                         <rect key="frame" x="241" y="68" width="75" height="30"/>
                         <color key="backgroundColor" red="0.1803921568627451" green="0.70196078431372544" blue="0.4823529411764706" alpha="1" colorSpace="calibratedRGB"/>
                         <state key="normal" title="上传证件照">
@@ -59,13 +59,6 @@
                     </button>
                 </subviews>
             </tableViewCellContentView>
-            <connections>
-                <outlet property="cardNOTextField" destination="out-cq-DfK" id="c5n-4D-VqC"/>
-                <outlet property="iconImageView" destination="2JF-fH-4bQ" id="8NE-xJ-o4c"/>
-                <outlet property="nameTextField" destination="dut-xO-mMn" id="AtA-hl-qf7"/>
-                <outlet property="phoneTextField" destination="jPy-w1-WuG" id="4M8-fr-BaQ"/>
-                <outlet property="uploadButton" destination="aYF-QW-gSh" id="9AA-ql-4L0"/>
-            </connections>
             <point key="canvasLocation" x="379" y="242.5"/>
         </tableViewCell>
     </objects>

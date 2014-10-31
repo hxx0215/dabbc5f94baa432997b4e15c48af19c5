@@ -37,12 +37,19 @@
     
     self.navigationItem.title = NSLocalizedString(@"Deposit refund", nil);
     
-    self.modelList = [[NSMutableArray alloc] init];
-    HNTemporaryModel *tModel = [[HNTemporaryModel alloc] init];
-    tModel.roomName = @"施工房号：XXXX";
-    tModel.status = TemporaryStatusCustom;
-    [self.modelList addObject:tModel];
-    [self loadMyData];
+    self.navigationItem.title = NSLocalizedString(@"I have a complaint", nil);
+    
+    UIBarButtonItem* barButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"新增", nil) style:UIBarButtonItemStylePlain target:self action:@selector(addButton_Clicked)];
+    self.navigationItem.rightBarButtonItem = barButtonItem;
+    //[self loadMyData];
+}
+
+-(void)addButton_Clicked
+{
+    {
+        HNRefundApplyViewController* avc = [[HNRefundApplyViewController alloc]init];
+        [self.navigationController pushViewController:avc animated:YES];
+    }
 }
 
 -(void)loadMyData
@@ -92,11 +99,8 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    if(self.refundTableViewCell)
-    {
-        [self.refundTableViewCell updateMyCell];
-    }
-    
+    self.modelList = [[NSMutableArray alloc] init];
+    [self loadMyData];
 }
 #pragma mark - tableView Delegate & DataSource
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -123,12 +127,12 @@
     self.refundTableViewCell = (HNRefundTableViewCell*)[tableView cellForRowAtIndexPath:indexPath];
     NSInteger row = indexPath.row;
     HNTemporaryModel* model = self.modelList[row];
-    if(model.status==TemporaryStatusCustom)
-    {
-        HNRefundApplyViewController* avc = [[HNRefundApplyViewController alloc]initWithModel:model];
-        [self.navigationController pushViewController:avc animated:YES];
-    }
-    else
+//    if(model.status==TemporaryStatusCustom)
+//    {
+//        HNRefundApplyViewController* avc = [[HNRefundApplyViewController alloc]initWithModel:model];
+//        [self.navigationController pushViewController:avc animated:YES];
+//    }
+//    else
     {
         HNRefundDetailViewController* dac = [[HNRefundDetailViewController alloc]initWithModel:model];
         [self.navigationController pushViewController:dac animated:YES];

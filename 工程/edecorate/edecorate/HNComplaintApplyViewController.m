@@ -9,6 +9,10 @@
 #import "HNComplaintApplyViewController.h"
 #import "HNCommbox.h"
 #import "UIView+AHKit.h"
+#import "NSString+Crypt.h"
+#import "JSONKit.h"
+#import "MBProgressHUD.h"
+#import "HNLoginData.h"
 #import "HNDecorateChoiceView.h"
 
 @interface HNComplaintApplyViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate,UITextViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource,HNDecorateChoiceViewDelegate>
@@ -50,10 +54,10 @@
 
 @implementation HNComplaintApplyViewController
 
--(id)initWithModel:(HNComplaintData *)model
+-(id)init
 {
     self = [super init];
-    self.temporaryModel = model;
+    self.temporaryModel = [[HNComplaintData alloc]init];;
     return self;
 }
 
@@ -181,6 +185,7 @@
     [self.ownersLabel sizeToFit ];
     self.ownersPhoneNumberLabel.right = self.view.width - 14;
     self.ownersLabel.right = self.ownersPhoneNumberLabel.left-5;
+    self.temporaryModel.declareId = model.declareId;
 }
 
 -(void)dismissKeyBoard
@@ -216,12 +221,59 @@
 
 - (IBAction)commit:(id)sender
 {
-//    self.temporaryModel.complaintInfo.complaintCategory = self.complaintOCategoryTF.text;
-//    self.temporaryModel.complaintInfo.complaintObject = self.complaintObjectTF.text;
-//    self.temporaryModel.complaintInfo.complaintIssue = self.complaintContansTextView.text;
-    UIAlertView* alert=[[UIAlertView alloc]initWithTitle:nil message:@"已提交投诉" delegate:self cancelButtonTitle:@"OK"otherButtonTitles:nil,nil];
-    alert.tag=1;
-    [alert show];
+    MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = NSLocalizedString(@"Loading", nil);
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    NSString *jsonStr = [[self encodeWithModel] JSONString];
+    request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"set.user.complaints" Params:jsonStr]];
+    NSString *contentType = @"text/html";
+    [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
+    
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        if (data)
+        {
+            NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
+            NSLog(@"%@",retJson);
+            NSDictionary* dic = [retJson objectFromJSONString];
+            int commitStatus = 1;
+            if (commitStatus)
+            {
+                UIAlertView* alert=[[UIAlertView alloc]initWithTitle:nil message:@"已提交投诉" delegate:self cancelButtonTitle:@"OK"otherButtonTitles:nil,nil];
+                [alert show];
+            }
+            else
+            {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Loading Fail", nil) message:NSLocalizedString(@"Please try again", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+                [alert show];
+            }
+        }
+        else{
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection Error", nil) message:NSLocalizedString(@"Please check your network.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+            [alert show];
+        }
+        
+    }];
+
+}
+
+- (NSDictionary *)encodeWithModel{
+    /*
+    body		商家编号
+    complainant		投诉人姓名（负责人）
+    complainantId		商家编号
+    complainfile 		投诉附件
+    complainObject 		投诉对象
+    complainProblem 		投诉问题
+    complainType 		投诉类别
+    declareId 		报建Id
+     */
+    self.temporaryModel.complainObject = self.complaintObjectTF.text;
+    self.temporaryModel.complainType = self.complaintOCategoryTF.text;
+    self.temporaryModel.complainProblem = self.complaintContansTextView.text;
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:self.temporaryModel.declareId,@"body", self.temporaryModel.declareId,@"complainant",self.temporaryModel.declareId,@"complainantId",self.temporaryModel.declareId,@"complainfile",self.temporaryModel.complainObject,@"complainObject",self.temporaryModel.complainProblem,@"complainProblem",self.temporaryModel.complainType,@"complainType",self.temporaryModel.declareId,@"declareId",nil];
+    return dic;
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex

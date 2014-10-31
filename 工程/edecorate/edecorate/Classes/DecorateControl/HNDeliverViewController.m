@@ -33,8 +33,23 @@
     self.dTableView.delegate = self;
     [self.view addSubview:self.dTableView];
     
-    self.deliverList = [[NSMutableArray alloc] init];
+    
+    self.navigationItem.title = NSLocalizedString(@"Deposit refund", nil);
+    
+    self.navigationItem.title = NSLocalizedString(@"I have a complaint", nil);
+    
+    UIBarButtonItem* barButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"新增", nil) style:UIBarButtonItemStylePlain target:self action:@selector(addButton_Clicked)];
+    self.navigationItem.rightBarButtonItem = barButtonItem;
+    //[self loadMyData];
+}
 
+-(void)addButton_Clicked
+{
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.deliverList = [[NSMutableArray alloc] init];
     [self loadMyData];
 }
 

@@ -111,8 +111,7 @@
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                     <connections>
-                        <action selector="beginEdit:" destination="-1" eventType="editingDidBegin" id="Med-Uc-en9"/>
-                        <action selector="editEnd:" destination="-1" eventType="editingDidEnd" id="air-7P-gfg"/>
+                        <outlet property="delegate" destination="-1" id="QKh-dp-N33"/>
                     </connections>
                 </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="3Q9-TE-gxs">
@@ -121,8 +120,7 @@
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                     <connections>
-                        <action selector="beginEdit:" destination="-1" eventType="editingDidBegin" id="dkG-XX-pMX"/>
-                        <action selector="editEnd:" destination="-1" eventType="editingDidEnd" id="Uwn-67-lqw"/>
+                        <outlet property="delegate" destination="-1" id="S1d-TR-j8E"/>
                     </connections>
                 </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="sA8-79-7gB">
@@ -131,8 +129,7 @@
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                     <connections>
-                        <action selector="beginEdit:" destination="-1" eventType="editingDidBegin" id="1z9-2P-Hr7"/>
-                        <action selector="editEnd:" destination="-1" eventType="editingDidEnd" id="QAG-Ni-QgX"/>
+                        <outlet property="delegate" destination="-1" id="jMO-sE-GjK"/>
                     </connections>
                 </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="I5y-yY-B2Q">
@@ -141,8 +138,7 @@
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                     <connections>
-                        <action selector="beginEdit:" destination="-1" eventType="editingDidBegin" id="4Mi-MK-Xju"/>
-                        <action selector="editEnd:" destination="-1" eventType="editingDidEnd" id="4Ex-nT-NL4"/>
+                        <outlet property="delegate" destination="-1" id="P9d-JO-tyL"/>
                     </connections>
                 </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="SMr-Q9-Bir">
@@ -151,8 +147,7 @@
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                     <connections>
-                        <action selector="beginEdit:" destination="-1" eventType="editingDidBegin" id="t5k-YI-Up3"/>
-                        <action selector="editEnd:" destination="-1" eventType="editingDidEnd" id="9BB-9m-KUu"/>
+                        <outlet property="delegate" destination="-1" id="j5l-Xy-Mr2"/>
                     </connections>
                 </textField>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="用火是由" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Us1-Df-wdp">
@@ -168,8 +163,7 @@
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                     <connections>
-                        <action selector="beginEdit:" destination="-1" eventType="editingDidBegin" id="NlQ-hF-gvv"/>
-                        <action selector="editEnd:" destination="-1" eventType="editingDidEnd" id="PfN-F6-E2J"/>
+                        <outlet property="delegate" destination="-1" id="1tW-wu-bin"/>
                     </connections>
                 </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="0Kd-CP-nsO">
@@ -178,8 +172,7 @@
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                     <connections>
-                        <action selector="beginEdit:" destination="-1" eventType="editingDidBegin" id="DpI-HJ-qmU"/>
-                        <action selector="editEnd:" destination="-1" eventType="editingDidEnd" id="52Q-Ic-jtP"/>
+                        <outlet property="delegate" destination="-1" id="FhP-FL-J94"/>
                     </connections>
                 </textField>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="用火单位" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PAH-mC-S10">
