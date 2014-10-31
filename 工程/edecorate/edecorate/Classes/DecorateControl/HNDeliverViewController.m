@@ -14,6 +14,7 @@
 #import "MBProgressHUD.h"
 #import "HNLoginData.h"
 #import "HNDeliverData.h"
+#import "HNDeliverApplyViewController.h"
 
 @interface HNDeliverViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong)UITableView *dTableView;
@@ -34,9 +35,7 @@
     [self.view addSubview:self.dTableView];
     
     
-    self.navigationItem.title = NSLocalizedString(@"Deposit refund", nil);
-    
-    self.navigationItem.title = NSLocalizedString(@"I have a complaint", nil);
+    self.navigationItem.title = NSLocalizedString(@"Delivery&Installation", nil);
     
     UIBarButtonItem* barButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"新增", nil) style:UIBarButtonItemStylePlain target:self action:@selector(addButton_Clicked)];
     self.navigationItem.rightBarButtonItem = barButtonItem;
@@ -45,6 +44,8 @@
 
 -(void)addButton_Clicked
 {
+    HNDeliverApplyViewController* vc = [[HNDeliverApplyViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated{

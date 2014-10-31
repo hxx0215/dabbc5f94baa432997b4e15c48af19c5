@@ -9,9 +9,21 @@
 #import "HNDeliverData.h"
 
 @implementation HNDeliverData
+-(id)init
+{
+    self = [super init];
+    self.proposerItems = [[NSMutableArray alloc] init];
+    self.needItems = [[NSMutableArray alloc] init];
+    self.manageItems = [[NSMutableArray alloc] init];
+    return self;
+}
+
 -(BOOL)updateData:(NSDictionary *)dic{
     if (!dic)
         return NO;
+    [self.proposerItems removeAllObjects];
+    [self.needItems removeAllObjects];
+    [self.manageItems removeAllObjects];
     [self setValue:[dic objectForKey:@"shopname"] forKey:@"shopname"];
     [self setValue:[dic objectForKey:@"roomnumber"] forKey:@"roomnumber"];
     [self setValue:[dic objectForKey:@"declareId"] forKey:@"declareId"];
@@ -28,7 +40,7 @@
     [self setValue:[dic objectForKey:@"eTime"] forKey:@"eTime"];
     [self setValue:[dic objectForKey:@"state"] forKey:@"state"];
     
-    self.proposerItems = [[NSMutableArray alloc] init];
+    
     NSArray* array = [dic objectForKey:@"proposerItem"];
     for (int i=0; i<[array count]; i++) {
         NSDictionary *dicData = [array objectAtIndex:i];
@@ -37,7 +49,7 @@
         [self.proposerItems addObject:tModel];
     }
     
-    self.needItems = [[NSMutableArray alloc] init];
+    
     array = [dic objectForKey:@"needItem"];
     for (int i=0; i<[array count]; i++) {
         NSDictionary *dicData = [array objectAtIndex:i];
@@ -46,7 +58,7 @@
         [self.needItems addObject:tModel];
     }
     
-    self.manageItems = [[NSMutableArray alloc] init];
+    
     array = [dic objectForKey:@"manageItem"];
     for (int i=0; i<[array count]; i++) {
         NSDictionary *dicData = [array objectAtIndex:i];

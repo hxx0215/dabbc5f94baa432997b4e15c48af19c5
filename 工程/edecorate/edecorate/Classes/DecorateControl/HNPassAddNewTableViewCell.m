@@ -17,7 +17,7 @@ bool bo;
 -(id)init
 {
     self = [super init];
-    self.uploadButton.backgroundColor = [UIColor colorWithRed:45/255.0 green:179/255.0 blue:123/255.0 alpha:1];
+    
     bo = false;
     return self;
 }
@@ -34,6 +34,8 @@ bool bo;
     self.nameTextField.delegate = self;
     self.phoneTextField.delegate = self;
     self.cardNOTextField.delegate = self;
+    
+    self.uploadButton.backgroundColor = [UIColor colorWithRed:45/255.0 green:179/255.0 blue:123/255.0 alpha:1];
     
 }
 

@@ -16,7 +16,7 @@
 #import "HNPassAddNewTableViewCell.h"
 #import "HNDecorateChoiceView.h"
 
-@interface HNOfficePassesApplyViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,HNDecorateChoiceViewDelegate,HNPassAddNewTableViewCellDelegate>
+@interface HNOfficePassesApplyViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate,HNDecorateChoiceViewDelegate,HNPassAddNewTableViewCellDelegate>
 @property (nonatomic,strong) IBOutlet UIScrollView *mainView;
 
 @property (nonatomic,strong) IBOutlet UILabel *houseInfoMain;
