@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "HNRefundData.h"
 @interface HNRefundTableViewCell : UITableViewCell
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withModel:(HNRefundData*)model;
+- (void)setRoomName:(NSString *)roomname;
+- (void)setStatus:(NSString *)status;
 @end

@@ -14,7 +14,7 @@
 
 @implementation HNRefundDetailViewController
 
--(id)initWithModel:(HNTemporaryModel *)model
+-(id)initWithModel:(HNRefundData *)model
 {
     self = [super init];
     self.temporaryModel = model;
