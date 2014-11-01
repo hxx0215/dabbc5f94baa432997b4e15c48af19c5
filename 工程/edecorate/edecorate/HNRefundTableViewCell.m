@@ -12,7 +12,7 @@
 
 @property (nonatomic, strong)UILabel *roomLabel;
 @property (nonatomic, strong)UILabel *statusLabel;
-@property (nonatomic, strong)HNTemporaryModel* temporaryModel;
+@property (nonatomic, strong)HNRefundData* temporaryModel;
 @end
 
 @implementation HNRefundTableViewCell
@@ -21,7 +21,7 @@
     // Initialization code
 }
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withModel:(HNTemporaryModel*)model
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withModel:(HNRefundData*)model
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
@@ -33,19 +33,15 @@
         self.statusLabel.font = [UIFont systemFontOfSize:28];
         [self.contentView addSubview:self.roomLabel];
         [self.contentView addSubview:self.statusLabel];
-        self.temporaryModel = model;
-        self.roomLabel.text = model.roomName;
-        [self setStatus:model.status];
+//        self.temporaryModel = model;
+//        self.roomLabel.text = model.roomName;
+//        [self setStatus:model.status];
         
         self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     return self;
 }
 
--(void)update
-{
-    [self setStatus:self.temporaryModel.status];
-}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
@@ -54,35 +50,30 @@
     // Configure the view for the selected state
 }
 
--(void)updateMyCell
-{
-    [self setStatus:self.temporaryModel.status];
-}
+
 
 - (void)setRoomName:(NSString *)roomname{
     self.roomLabel.text = roomname;
 }
 
-- (void)setStatus:(HNTemporaryStatus)status
+- (void)setStatus
 {
     
-    self.roomLabel.font = [UIFont systemFontOfSize:15];
-    
-    switch (status) {
-        case TemporaryStatusApplying:
-            self.statusLabel.text = @"正在处理";
-            break;
-        case TemporaryStatusPassed:
-            self.statusLabel.text = @"退款成功";
-            break;
-        case TemporaryStatusNotPassed:
-            self.statusLabel.text = @"退款失败";
-            break;
-        default:
-            self.statusLabel.text = @"";
-            self.roomLabel.font = [UIFont systemFontOfSize:20];
-            break;
-    }
+//    switch (status) {
+//        case TemporaryStatusApplying:
+//            self.statusLabel.text = @"正在处理";
+//            break;
+//        case TemporaryStatusPassed:
+//            self.statusLabel.text = @"退款成功";
+//            break;
+//        case TemporaryStatusNotPassed:
+//            self.statusLabel.text = @"退款失败";
+//            break;
+//        default:
+//            self.statusLabel.text = @"";
+//            self.roomLabel.font = [UIFont systemFontOfSize:20];
+//            break;
+//    }
 }
 
 @end

@@ -16,7 +16,7 @@
 #import "HNDeliverData.h"
 #import "HNDeliveApplyTableViewCell.h"
 
-@interface HNDeliverApplyViewController ()<UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate,HNDecorateChoiceViewDelegate,UITextFieldDelegate>
+@interface HNDeliverApplyViewController ()<UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate,HNDecorateChoiceViewDelegate,UITextFieldDelegate,HNDeliveApplyAddNewTableViewCellDelegate>
 @property bool bo;
 @property (strong, nonatomic) HNDecorateChoiceView *choiceDecorateView;
 @property (nonatomic, strong)IBOutlet UIScrollView *mainView;
@@ -30,10 +30,13 @@
 @property (nonatomic,strong) IBOutlet UILabel *decorationCompanyTitle;
 
 @property (nonatomic, strong)IBOutlet UILabel* productTitle;
-@property (nonatomic, strong)IBOutlet UILabel* timeTitleLabel;
+@property (nonatomic, strong)IBOutlet UILabel* btimeTitleLabel;
+@property (nonatomic, strong)IBOutlet UILabel* etimeTitleLabel;
 
 @property (nonatomic, strong)IBOutlet UITextField* productTextField;
-@property (nonatomic, strong)IBOutlet UITextField* timeTextField;
+@property (nonatomic, strong)IBOutlet UITextField* bTimeTextField;
+@property (nonatomic, strong)IBOutlet UITextField* eTimeTextField;
+@property (nonatomic, strong)IBOutlet UITextField* cField;
 
 @property (strong, nonatomic) IBOutlet UIView *viewRoom;
 @property (strong, nonatomic) IBOutlet UIView *viewPrincipal ;
@@ -46,6 +49,8 @@
 
 @property (nonatomic, strong) HNDeliverData* model;
 @property (nonatomic, strong)IBOutlet UIButton* commitButton;
+
+@property (strong, nonatomic) UIDatePicker *pickerView;
 @end
 
 @implementation HNDeliverApplyViewController
@@ -64,7 +69,8 @@
     self.ownerphoneLabel.textColor = [UIColor colorWithRed:0xCC/255.0 green:0X91/255.0 blue:0X31/255.0 alpha:1];
     
     self.productTitle.text = NSLocalizedString(@"送货安装产品", nil);
-    self.timeTitleLabel.text = NSLocalizedString(@"起止日前", nil);
+    self.btimeTitleLabel.text = NSLocalizedString(@"Start Time", nil);
+    self.etimeTitleLabel.text = NSLocalizedString(@"End Time", nil);
     
     UINib *nib = [UINib nibWithNibName:NSStringFromClass([HNDeliveApplyTableViewCell class]) bundle:nil];
     self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, self.viewInformation.bottom, self.mainView.width, 150)];
@@ -88,6 +94,35 @@
     self.choiceDecorateView.delegate = self;
     
     self.model = [[HNDeliverData alloc]init];
+    
+    
+    self.pickerView = [[UIDatePicker alloc]init];
+    self.pickerView.frame = CGRectMake(0, 500, 300, 200);
+    self.pickerView.backgroundColor = [UIColor grayColor];
+    //self.pickerView.hidden = YES;
+    self.pickerView.datePickerMode = UIDatePickerModeDate;
+    self.eTimeTextField.inputView = self.pickerView;
+    self.bTimeTextField.inputView = self.pickerView;
+    
+    UIToolbar * topView = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 30)];
+    //[topView setBarStyle:UIBarStyleBlack];
+    topView.backgroundColor = [UIColor whiteColor];
+    UIBarButtonItem * btnSpace = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+    UIBarButtonItem * doneButton = [[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(OKTextClick)];
+    NSArray * buttonsArray = [NSArray arrayWithObjects:btnSpace,doneButton,nil];
+    [topView setItems:buttonsArray];
+    self.eTimeTextField.inputAccessoryView = topView;
+    self.bTimeTextField.inputAccessoryView = topView;
+}
+
+-(void)OKTextClick
+{
+    NSDate *selected = [self.pickerView date];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy/MM/dd"];
+    NSString *destDateString = [dateFormatter stringFromDate:selected];
+    self.cField.text = destDateString;
+    [self.cField resignFirstResponder];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -160,21 +195,35 @@
 
 - (NSDictionary *)encodeWithModel{
     /*
-     body		商家编号
-     complainant		投诉人姓名（负责人）
-     complainantId		商家编号
-     complainfile 		投诉附件
-     complainObject 		投诉对象
-     complainProblem 		投诉问题
-     complainType 		投诉类别
-     declareId 		报建Id
+     declareId	Y	报建编号
+     product		送货产品名称
+     btime		送货开始时间
+     etime		送货结束时间
+     proposer		申请人员信息json[{realname:姓名,idcard:身份证号,phone:联系电话,idcardImg:身份证照片,icon:头像},{...}]）
+     needItem		缴费项json([{name:名称,price:价格,useUnit:单位,number:数量,IsSubmit:是否必缴,Isrefund:是否可退,totalMoney:总金额,sort:排序},{...}]
      */
-//    self.temporaryModel.complainObject = self.complaintObjectTF.text;
-//    self.temporaryModel.complainType = self.complaintOCategoryTF.text;
-//    self.temporaryModel.complainProblem = self.complaintContansTextView.text;
-//    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:self.temporaryModel.declareId,@"body", self.temporaryModel.declareId,@"complainant",self.temporaryModel.declareId,@"complainantId",self.temporaryModel.declareId,@"complainfile",self.temporaryModel.complainObject,@"complainObject",self.temporaryModel.complainProblem,@"complainProblem",self.temporaryModel.complainType,@"complainType",self.temporaryModel.declareId,@"declareId",nil];
-//    return dic;
-    return nil;
+    
+
+    NSArray *array = [[NSArray alloc]init];
+    NSMutableArray *jsonArray = [[NSMutableArray alloc]init];//创建最外层的数组
+    for (int i=0; i<[self.model.proposerItems count]; i++) {
+        HNDeliverProposerItem *tModel = [self.model.proposerItems objectAtIndex:i];
+        NSDictionary *dic = [[NSMutableDictionary alloc]init];//创建内层的字典
+        //申请人员信息JSON（realname：姓名，idcard：身份证号，phone：联系电话，idcardImg：身份证照片，icon：头像）
+        [dic setValue:tModel.name forKey:@"realname"];
+        [dic setValue:tModel.IDcard forKey:@"idcard"];
+        [dic setValue:tModel.phone forKey:@"phone"];
+        [dic setValue:tModel.IDcardImg forKey:@"idcardImg"];
+        [dic setValue:tModel.Icon forKey:@"icon"];
+        [jsonArray addObject:dic];
+    }
+    array = [NSArray arrayWithArray:jsonArray];
+    
+    NSArray *array2 = [[NSArray alloc]init];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:self.model.declareId,@"declareId", self.productTextField.text,@"product",self.bTimeTextField.text,@"btime",self.eTimeTextField.text,@"etime",[array JSONString],@"proposer",[array2 JSONString],@"needItem",nil];
+    NSLog(@"%@",[dic JSONString]);
+    
+    return dic;
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -219,10 +268,27 @@
     return cell;
 }
 
+#pragma mark HNDeliveApplyAddNewTableViewCellDelegate
+- (void)willDidMoveScrollView:(UITextField*)textFiled
+{
+    [self textFieldShouldBeginEditing:textFiled];
+}
+
+- (void)didMoveScrollView:(UITextField*)textFiled
+{
+    [self textFieldDidBeginEditing:textFiled];
+}
+
+- (void)finishMoveScrollView:(UITextField*)textFiled
+{
+    [self textFieldDidEndEditing:textFiled];
+}
+
 #pragma mark UITextFieldDelegate
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField           // became first responder
 {
+    self.cField = textField;
     self.bo = false;
     NSLog(@"textFieldDidBeginEditing");
 }
