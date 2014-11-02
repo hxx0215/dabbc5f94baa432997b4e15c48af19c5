@@ -26,4 +26,5 @@
 @interface HNDecorateChoiceView : UIView
 @property (nonatomic, strong) id <HNDecorateChoiceViewDelegate> delegate;
 @property (nonatomic, strong)NSMutableArray *decorateList;
+@property (nonatomic)BOOL updataDecorateInformation;
 @end

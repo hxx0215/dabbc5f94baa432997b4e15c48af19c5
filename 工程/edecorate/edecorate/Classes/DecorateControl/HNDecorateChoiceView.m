@@ -29,6 +29,7 @@
 -(id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
+    self.updataDecorateInformation = TRUE;
     UIImage* image = [UIImage imageNamed:@"down_box_triangle.png"];
     self.button = [UIButton buttonWithType:UIButtonTypeCustom];
     self.button.frame = CGRectMake(self.width-image.size.width-10, (self.height-image.size.height)/2.0, image.size.width, image.size.height);
@@ -132,6 +133,9 @@
     HNDecorateChoiceModel *model = (HNDecorateChoiceModel*)[self.decorateList objectAtIndex:row];
     [self.selectButton setTitle:model.roomName forState:UIControlStateNormal];
     //self.textFiled.text = model.roomName;
+    if (!self.updataDecorateInformation) {
+        return;
+    }
     if (!self.delegate) {
         return;
     }
