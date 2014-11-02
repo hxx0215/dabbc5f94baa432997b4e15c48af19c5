@@ -9,11 +9,17 @@
 #import "HNDecorateCheckViewController.h"
 #import "HNCheckTableViewCell.h"
 #import "HNCheckDetailViewController.h"
+#import "HNLoginData.h"
+#import "MJRefresh.h"
 
 @interface HNCheckModel : NSObject
 @property (nonatomic, strong)NSString *roomName;
 @property (nonatomic, strong)NSString *checkSchedule;
 @property (nonatomic, strong)NSString *checkStage;
+@property (nonatomic, strong)NSString *checkid;
+@property (nonatomic, strong)NSString *deployId;
+@property (nonatomic, strong)NSString *manageAssessor;
+@property (nonatomic, strong)NSString *ownerAssessor;
 @end
 @implementation HNCheckModel
 @end
@@ -21,7 +27,7 @@
 @interface HNDecorateCheckViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong)UITableView *cTableView;
 @property (nonatomic, strong)NSMutableArray *checkList;
-
+@property (nonatomic, strong)NSDictionary *stageMap;
 @end
 
 @implementation HNDecorateCheckViewController
@@ -34,15 +40,25 @@
     self.cTableView.dataSource = self;
     self.cTableView.delegate = self;
     [self.view addSubview:self.cTableView];
-    
+    typeof(self) __weak weakSelf = self;
+    [self.cTableView addHeaderWithCallback:^{
+       typeof(self) strongSelf = weakSelf;
+        [strongSelf refreshData];
+    }];
     self.checkList = [[NSMutableArray alloc] init];
-    
-    HNCheckModel *model = [[HNCheckModel alloc] init];
-    model.roomName =@"小区名房间号";
-    model.checkSchedule = @"验收进度";
-    model.checkStage = @"验收阶段";
-    
-    [self.checkList addObject:model];
+    self.stageMap = @{@"-1": NSLocalizedString(@"验收不通过", nil),@"0": NSLocalizedString(@"等待验收", nil), @"1": NSLocalizedString(@"验收通过", nil)};
+
+//    HNCheckModel *model = [[HNCheckModel alloc] init];
+//    model.roomName =@"小区名房间号";
+//    model.checkSchedule = @"验收进度";
+//    model.checkStage = @"验收阶段";
+//    
+//    [self.checkList addObject:model];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.cTableView headerBeginRefreshing];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -65,12 +81,62 @@
     HNCheckModel *model = self.checkList[indexPath.row];
     cell.roomName.text = model.roomName;
     cell.checkSchedule.text = model.checkSchedule;
-    cell.checkStage.text = model.checkStage;
+    cell.checkStage.text = self.stageMap[model.checkStage];
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     HNCheckDetailViewController *checkDetail = [[HNCheckDetailViewController alloc] init];
     [self.navigationController pushViewController:checkDetail animated:YES];
+}
+
+- (void)refreshData{
+    NSDictionary *sendDic = @{@"mshopid": [HNLoginData shared].mshopid};
+    NSString *sendJson = [sendDic JSONString];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"get.acceptance.list" Params:sendJson]];
+    NSString *contentType = @"text/html";
+    [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
+        [self.cTableView headerEndRefreshing];
+        if (data){
+            NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
+            NSDictionary *retDic = [retJson objectFromJSONString];
+            NSInteger count = [[retDic objectForKey:@"total"] integerValue];
+            if (0 != count){
+                NSArray *dataArr = [retDic objectForKey:@"data"];
+                [self.checkList removeAllObjects];
+                for (int i = 0; i<count ;i ++){
+                    HNCheckModel *model = [[HNCheckModel alloc] init];
+                    model.roomName = [dataArr[i] objectForKey:@"room"];
+                    model.checkid = [dataArr[i] objectForKey:@"checkid"];
+                    model.checkSchedule = [dataArr[i] objectForKey:@"processname"];
+                    model.deployId = [dataArr[i] objectForKey:@"depolyId"];
+                    model.ownerAssessor = [dataArr[i] objectForKey:@"ownerAssessor"];
+                    model.manageAssessor = [dataArr[i] objectForKey:@"manageAssessor"];
+                    model.checkStage = [dataArr[i] objectForKey:@"state"];
+                    [self.checkList addObject:model];
+                }
+                [self.cTableView reloadData];
+            }
+            else{
+                [self showNoData];
+            }
+        }
+        else{
+            [self showNoNet];
+        }
+    }];
+}
+
+- (void)showNoNet{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection Error", nil) message:NSLocalizedString(@"Please check your network.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+    [alert show];
+}
+
+- (void)showNoData{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"We don't get any data.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+    [alert show];
 }
 @end
