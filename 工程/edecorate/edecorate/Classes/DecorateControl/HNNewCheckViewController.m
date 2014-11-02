@@ -9,6 +9,7 @@
 #import "HNNewCheckViewController.h"
 #import "HNDecorateChoiceView.h"
 #import "HNLoginData.h"
+#import "HNNewCheckTableViewCell.h"
 
 @interface HNNewCheckViewController ()<UITableViewDelegate,UITableViewDataSource,HNDecorateChoiceViewDelegate>
 @property (nonatomic, strong) HNDecorateChoiceView *pickView;
@@ -55,11 +56,11 @@
                 if (0 != count){
                     [self.dataArr removeAllObjects];
                     self.dataArr = [[retDic objectForKey:@"data"] mutableCopy];
-                    [self.tableView reloadData];
+                    [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
                 }
                 else{
                     [self.dataArr removeAllObjects];
-                    [self.tableView reloadData];
+                    [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
                     [self showNoData];
                 }
             }else{
@@ -79,6 +80,10 @@
 //    [alert show];
     [alert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:YES];
 }
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.width, 50)];
+    return view;
+}
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return [self.dataArr count];
 }
@@ -87,11 +92,13 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *identify = @"newCheckCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identify];
+    HNNewCheckTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identify];
     if (!cell){
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identify];
+        cell = [[HNNewCheckTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identify];
     }
-    cell.textLabel.text = [[self.dataArr[indexPath.section] objectForKey:@"ItemBody"][indexPath.row] objectForKey:@"bodyname"];
+    cell.name.text = [[self.dataArr[indexPath.section] objectForKey:@"ItemBody"][indexPath.row] objectForKey:@"bodyname"];
+    cell.type = [[self.dataArr[indexPath.section] objectForKey:@"ItemBody"][indexPath.row] objectForKey:@"bodytype"];
+    cell.itemId =[self.dataArr[indexPath.section] objectForKey:@"itemId"];
     return cell;
 }
 @end
