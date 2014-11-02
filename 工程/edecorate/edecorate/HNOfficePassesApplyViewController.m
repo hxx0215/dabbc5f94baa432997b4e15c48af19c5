@@ -15,6 +15,7 @@
 #import "HNLoginData.h"
 #import "HNPassAddNewTableViewCell.h"
 #import "HNDecorateChoiceView.h"
+#import "HNUploadImage.h"
 
 @interface HNOfficePassesApplyViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate,HNDecorateChoiceViewDelegate,HNPassAddNewTableViewCellDelegate>
 @property (nonatomic,strong) IBOutlet UIScrollView *mainView;
@@ -57,6 +58,9 @@
 @property (nonatomic,strong) IBOutlet UIButton *uploadIdCardPic;
 @property (nonatomic,strong) IBOutlet UIButton *uploadPic;
 @property (nonatomic,strong) IBOutlet UIButton *submit;
+
+@property (nonatomic, strong) UIImagePickerController *imagePicker;
+@property (nonatomic, strong) HNPassAddNewTableViewCell *addNewCell;
 
 @property (strong, nonatomic) IBOutlet HNDecorateChoiceView *choiceDecorateView;
 @end
@@ -155,6 +159,15 @@
     self.choiceDecorateView = [[HNDecorateChoiceView alloc]initWithFrame:CGRectMake(12, 12, self.view.bounds.size.width-24, 25)];
     [self.mainView addSubview:self.choiceDecorateView];
     self.choiceDecorateView.delegate = self;
+    
+    UIImagePickerControllerSourceType sourceType=UIImagePickerControllerSourceTypePhotoLibrary;
+    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        sourceType=UIImagePickerControllerSourceTypePhotoLibrary;
+    }
+    self.imagePicker = [[UIImagePickerController alloc] init];
+    self.imagePicker.delegate =self;
+    self.imagePicker.sourceType = sourceType;
+    self.imagePicker.allowsEditing = NO;
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -301,7 +314,7 @@
     cell.proposerData = [self.temporaryModel.proposerItems objectAtIndex:indexPath.row];
     return cell;
 }
-
+ #pragma mark - HNPassAddNewTableViewCellDelegate
 
 - (void)moveScrollView:(UITextField*)textFiled
 {
@@ -317,6 +330,37 @@
         
         self.mainView.contentSize = CGSizeMake(self.view.bounds.size.width, self.payView.bottom+20);
     }];
+}
+
+- (void)showImagePickView:(id)cell
+{
+    [self presentViewController:self.imagePicker animated:YES completion:nil];
+    self.addNewCell = cell;
+}
+
+ #pragma mark - UIImagePickerControllerDelegate
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
+    UIImage *image=[info objectForKey:UIImagePickerControllerOriginalImage];
+    [self.imagePicker dismissViewControllerAnimated:YES completion:nil];
+    
+    if (!self.addNewCell) {
+        return;
+    }
+    
+    CGFloat scaleSize = 0.1f;
+    UIGraphicsBeginImageContext(CGSizeMake(image.size.width * scaleSize, image.size.height * scaleSize));
+    [image drawInRect:CGRectMake(0, 0, image.size.width * scaleSize, image.size.height * scaleSize)];
+    UIImage *scaledImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = NSLocalizedString(@"Loading", nil);
+    [HNUploadImage UploadImage:scaledImage block:^(NSString *msg) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [self.addNewCell updateImage:msg whithImage:image];
+        self.addNewCell = nil;
+    }];
+    
 }
 /*
  #pragma mark - Navigation

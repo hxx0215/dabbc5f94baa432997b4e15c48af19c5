@@ -42,12 +42,12 @@
                         <textInputTraits key="textInputTraits"/>
                     </textField>
                     <textField opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="out-cq-DfK">
-                        <rect key="frame" x="86" y="65" width="147" height="30"/>
+                        <rect key="frame" x="86" y="66" width="152" height="30"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits"/>
                     </textField>
                     <imageView userInteractionEnabled="NO" tag="4" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="添加照片_18" translatesAutoresizingMaskIntoConstraints="NO" id="2JF-fH-4bQ">
-                        <rect key="frame" x="270" y="8" width="46" height="60"/>
+                        <rect key="frame" x="275" y="10" width="37" height="49"/>
                     </imageView>
                     <button opaque="NO" tag="5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aYF-QW-gSh">
                         <rect key="frame" x="241" y="68" width="75" height="30"/>
@@ -59,7 +59,7 @@
                     </button>
                 </subviews>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="379" y="242.5"/>
+            <point key="canvasLocation" x="379" y="241.5"/>
         </tableViewCell>
     </objects>
     <resources>

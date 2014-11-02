@@ -109,16 +109,26 @@
 //    return NO;
 //}
 
+- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view
+{
+    UILabel *label = [[UILabel alloc]init];
+    label.textAlignment = NSTextAlignmentCenter;
+    HNDecorateChoiceModel *model = (HNDecorateChoiceModel*)[self.decorateList objectAtIndex:row];
+    label.text = model.roomName;
+    label.font = [UIFont systemFontOfSize:14];
+    return label;
+}
+
 -(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
     return 1;
 }
 -(NSInteger) pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
     return [self.decorateList count];
 }
--(NSString*) pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
-    HNDecorateChoiceModel *model = (HNDecorateChoiceModel*)[self.decorateList objectAtIndex:row];
-    return model.roomName;
-}
+//-(NSString*) pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
+//    HNDecorateChoiceModel *model = (HNDecorateChoiceModel*)[self.decorateList objectAtIndex:row];
+//    return model.roomName;
+//}
 
 -(void)textFieldDidEndEditing:(UITextField *)textField{
     NSInteger row = [self.selectPicker selectedRowInComponent:0];

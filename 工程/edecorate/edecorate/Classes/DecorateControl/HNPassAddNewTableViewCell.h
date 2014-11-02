@@ -12,6 +12,7 @@
 @protocol HNPassAddNewTableViewCellDelegate <NSObject>
 - (void)moveScrollView:(UITextField*)textFiled;
 - (void)finishMoveScrollView:(UITextField*)textFiled;
+- (void)showImagePickView:(id)cell;
 @end
 
 @interface HNPassAddNewTableViewCell : UITableViewCell
@@ -22,4 +23,5 @@
 @property (strong, nonatomic) IBOutlet UIImageView *iconImageView;
 @property (strong, nonatomic) HNPassProposerData* proposerData;
 @property (nonatomic, strong) id <HNPassAddNewTableViewCellDelegate> delegate;
+-(void)updateImage:(NSString*)msg whithImage:(UIImage*)image;
 @end
