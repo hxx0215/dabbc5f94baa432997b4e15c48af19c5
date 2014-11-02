@@ -15,6 +15,8 @@
 #import "NSString+Crypt.h"
 #import "HNLoginData.h"
 #import "HNPassData.h"
+#import "HNRefundData.h"
+#import "MJRefresh.h"
 
 //@interface HNOfficePassModel : NSObject
 //@property (nonatomic, strong)NSString *roomName;
@@ -50,6 +52,14 @@
     self.tTableView.delegate=self;
     self.tTableView.dataSource=self;
     [self.view addSubview:self.tTableView];
+    self.tTableView.height = self.view.height-self.navigationController.navigationBar.height-20;
+    self.modelList = [[NSMutableArray alloc] init];
+    
+    __weak typeof(self) wself = self;
+    [self.tTableView addHeaderWithCallback:^{
+        typeof(self) sself = wself;
+        [sself loadMyData];
+    }];
     
     self.navigationItem.title=@"办理出入证";
     //[self GetPassList:@"admin" byPage:@"1" AndRow:@"8"];
@@ -78,22 +88,25 @@
     NSString *contentType = @"text/html";
     [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
+        [self.tTableView headerEndRefreshing];
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         if (data)
         {
+            [self.modelList removeAllObjects];
             NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
             //NSLog(@"%@",retJson);
             NSDictionary* dic = [retJson objectFromJSONString];
             NSNumber* total = [dic objectForKey:@"total"];
-            NSArray* array = [dic objectForKey:@"data"];
-            for (int i = 0; i<total.intValue; i++) {
-                NSDictionary *dicData = [array objectAtIndex:i];
-                HNPassData *tModel = [[HNPassData alloc] init];
-                [tModel updateData:dicData];
-                [self.modelList addObject:tModel];
-            }
+
             if (total.intValue){//之后需要替换成status
+                NSArray* array = [dic objectForKey:@"data"];
+                for (int i = 0; i<total.intValue; i++) {
+                    NSDictionary *dicData = [array objectAtIndex:i];
+                    HNPassData *tModel = [[HNPassData alloc] init];
+                    [tModel updateData:dicData];
+                    [self.modelList addObject:tModel];
+                }
                 [self.tTableView reloadData];
             }
             else
@@ -112,8 +125,7 @@
 
 -(void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    self.modelList = [[NSMutableArray alloc] init];
-    [self loadMyData];
+    [self.tTableView headerBeginRefreshing];
     
 }
 

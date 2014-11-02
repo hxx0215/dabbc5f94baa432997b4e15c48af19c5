@@ -152,11 +152,7 @@
     
     UIImage *image=[info objectForKey:UIImagePickerControllerOriginalImage];
     
-    CGFloat scaleSize = 0.1f;
-    UIGraphicsBeginImageContext(CGSizeMake(image.size.width * scaleSize, image.size.height * scaleSize));
-    [image drawInRect:CGRectMake(0, 0, image.size.width * scaleSize, image.size.height * scaleSize)];
-    UIImage *scaledImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
+    UIImage *scaledImage = [HNUploadImage ScaledImage:image scale:0.5];
     
     MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = NSLocalizedString(@"Loading", nil);
@@ -164,7 +160,6 @@
     [self.imagePicker dismissViewControllerAnimated:YES completion:nil];
     //[self.uploadImages setObject:image forKey:[NSNumber numberWithInteger:self.curButton.tag]];;
     [HNUploadImage UploadImage:scaledImage block:^(NSString *msg) {
-        NSLog(@"%@",msg);
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         if (msg) {
             self.imageName = msg;

@@ -171,9 +171,9 @@
     
 
     [self.uploadButton setTitle:NSLocalizedString(@"Upload", nil) forState:UIControlStateNormal];
-    [self.uploadButton sizeToFit];
-    self.uploadButton.layer.borderWidth = 1.0;
-    self.uploadButton.layer.borderColor = [UIColor blackColor].CGColor;
+    self.uploadButton.layer.cornerRadius = 5.0;
+    [self.uploadButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.uploadButton setBackgroundColor:[UIColor colorWithRed:0.0 green:72.0/255.0 blue:245.0/255.0 alpha:1.0]];
     
     [self.commitButton setTitle:NSLocalizedString(@"Submission", nil) forState:UIControlStateNormal];
     self.commitButton.layer.cornerRadius = 5.0;

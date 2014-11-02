@@ -15,6 +15,8 @@
 #import "NSString+Crypt.h"
 #import "HNLoginData.h"
 #import "HNComplaintData.h"
+#import "HNRefundData.h"
+#import "MJRefresh.h"
 
 @interface HNComplaintTableViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong)UITableView *tTableView;
@@ -44,7 +46,13 @@
     self.tTableView.dataSource = self;
     self.tTableView.height = self.view.height - self.navigationController.navigationBar.height-20;
     [self.view addSubview:self.tTableView];
+    self.modelList = [[NSMutableArray alloc] init];
     
+    __weak typeof(self) wself = self;
+    [self.tTableView addHeaderWithCallback:^{
+        typeof(self) sself = wself;
+        [sself loadMyData];
+    }];
     
     self.navigationItem.title = NSLocalizedString(@"I have a complaint", nil);
 
@@ -72,22 +80,27 @@
     NSString *contentType = @"text/html";
     [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
+        [self.tTableView headerEndRefreshing];
         [MBProgressHUD hideHUDForView:self.view animated:YES];
+        
         if (data)
         {
+            [self.modelList removeAllObjects];
             NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
             NSLog(@"%@",retJson);
             NSDictionary* dic = [retJson objectFromJSONString];
             NSNumber* total = [dic objectForKey:@"total"];
-            NSArray* array = [dic objectForKey:@"data"];
-            for (int i = 0; i<total.intValue; i++) {
-                NSDictionary *dicData = [array objectAtIndex:i];
-                HNComplaintData *tModel = [[HNComplaintData alloc] init];
-                [tModel updateData:dicData];
-                [self.modelList addObject:tModel];
-            }
+
             if (total.intValue){//之后需要替换成status
+                NSArray* array = [dic objectForKey:@"data"];
+                for (int i = 0; i<total.intValue; i++) {
+                    NSDictionary *dicData = [array objectAtIndex:i];
+                    HNComplaintData *tModel = [[HNComplaintData alloc] init];
+                    [tModel updateData:dicData];
+                    [self.modelList addObject:tModel];
+                    
+                }
                 [self.tTableView reloadData];
             }
             else
@@ -107,8 +120,7 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    self.modelList = [[NSMutableArray alloc] init];
-    [self loadMyData];
+    [self.tTableView headerBeginRefreshing];
     
 }
 #pragma mark - tableView Delegate & DataSource

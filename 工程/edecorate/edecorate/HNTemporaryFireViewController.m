@@ -14,6 +14,8 @@
 #import "JSONKit.h"
 #import "MBProgressHUD.h"
 #import "HNLoginData.h"
+#import "HNRefundData.h"
+#import "MJRefresh.h"
 
 @interface HNTemporaryFireViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -47,10 +49,27 @@
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
     self.tTableView = [[UITableView alloc] initWithFrame:self.view.bounds];
+    self.tTableView.height = self.view.height-self.navigationController.navigationBar.height-20;
     self.tTableView.delegate = self;
     self.tTableView.dataSource = self;
     [self.view addSubview:self.tTableView];
     
+    __weak typeof(self) wself = self;
+    [self.tTableView addHeaderWithCallback:^{
+        typeof(self) sself = wself;
+        switch (sself.temporaryType) {
+            case FIRE:
+                [sself loadFire];
+                break;
+            case POWER:
+                [sself loadPower];
+                break;
+                
+            default:
+                break;
+        }
+    }];
+
     
     self.navigationItem.title = [self getTitleString];
     UIBarButtonItem* barButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"新增", nil) style:UIBarButtonItemStylePlain target:self action:@selector(addButton_Clicked)];
@@ -91,6 +110,7 @@
     [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
     
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
+        [self.tTableView headerEndRefreshing];
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         if (data)
         {
@@ -129,6 +149,7 @@
     [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
     
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
+        [self.tTableView headerEndRefreshing];
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         if (data)
         {
@@ -174,17 +195,7 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    switch (self.temporaryType) {
-        case FIRE:
-            [self loadFire];
-            break;
-        case POWER:
-            [self loadPower];
-            break;
-            
-        default:
-            break;
-    }
+    [self.tTableView headerBeginRefreshing];
 
 //    if(self.temporaryTableViewCell)
 //    {

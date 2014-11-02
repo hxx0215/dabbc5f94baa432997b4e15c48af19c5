@@ -34,6 +34,9 @@
 @property (strong, nonatomic) IBOutlet UITextView *complaintContansTextView;
 
 @property (nonatomic, strong)IBOutlet UILabel *complaintInformationTitleLable;
+
+@property (nonatomic, strong)IBOutlet UITextField *complaintBody;
+@property (nonatomic, strong)IBOutlet UITextField *complaintComplainant;
 @property (nonatomic, strong)IBOutlet UILabel *complaintCategoryTitleLable;
 @property (nonatomic, strong)IBOutlet UILabel *complaintObjectTitleLable;
 @property (nonatomic, strong)IBOutlet UILabel *complaintIssueTitleLable;
@@ -47,6 +50,8 @@
 @property (nonatomic, strong)UIPickerView* complaintCategoryPickView;
 @property (nonatomic, strong)NSArray* complaintCategoryPickerArray;
 @property (strong, nonatomic) UIView* textOKView;
+
+@property (strong, nonatomic) NSString* imageName;
 
 @property (strong, nonatomic) IBOutlet HNDecorateChoiceView *choiceDecorateView;
 
@@ -112,9 +117,9 @@
     self.complaintContansTextView.layer.borderColor = [UIColor blackColor].CGColor;
 
     [self.uploadButton setTitle:NSLocalizedString(@"Upload", nil) forState:UIControlStateNormal];
-    self.uploadButton.layer.borderWidth = 1.0;
-    self.uploadButton.font = [UIFont systemFontOfSize:12];
-    self.uploadButton.layer.borderColor = [UIColor blackColor].CGColor;
+    self.uploadButton.layer.cornerRadius = 5.0;
+    [self.uploadButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.uploadButton setBackgroundColor:[UIColor colorWithRed:0.0 green:72.0/255.0 blue:245.0/255.0 alpha:1.0]];
     
     [self.commitButton setTitle:NSLocalizedString(@"Submit complaint", nil) forState:UIControlStateNormal];
     self.commitButton.layer.cornerRadius = 5.0;
@@ -273,7 +278,7 @@
     self.temporaryModel.complainObject = self.complaintObjectTF.text;
     self.temporaryModel.complainType = self.complaintOCategoryTF.text;
     self.temporaryModel.complainProblem = self.complaintContansTextView.text;
-    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:self.temporaryModel.declareId,@"body", self.temporaryModel.declareId,@"complainant",self.temporaryModel.declareId,@"complainantId",self.temporaryModel.declareId,@"complainfile",self.temporaryModel.complainObject,@"complainObject",self.temporaryModel.complainProblem,@"complainProblem",self.temporaryModel.complainType,@"complainType",self.temporaryModel.declareId,@"declareId",nil];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:self.complaintBody.text,@"body", self.complaintComplainant,@"complainant",[HNLoginData shared].mshopid,@"complainantId",self.imageName,@"complainfile",self.temporaryModel.complainObject,@"complainObject",self.temporaryModel.complainProblem,@"complainProblem",self.temporaryModel.complainType,@"complainType",self.temporaryModel.declareId,@"declareId",nil];
     return dic;
 }
 
@@ -292,16 +297,20 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
     
+    UIImage *image=[info objectForKey:UIImagePickerControllerOriginalImage];
+    
+    UIImage *scaledImage = [HNUploadImage ScaledImage:image scale:0.5];
+    
     MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = NSLocalizedString(@"Loading", nil);
-    UIImage *image=[info objectForKey:UIImagePickerControllerOriginalImage];
+    
     [self.imagePicker dismissViewControllerAnimated:YES completion:nil];
     //[self.uploadImages setObject:image forKey:[NSNumber numberWithInteger:self.curButton.tag]];;
-    [HNUploadImage UploadImage:image block:^(NSString *msg) {
-        NSLog(@"%@",msg);
+    [HNUploadImage UploadImage:scaledImage block:^(NSString *msg) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         if (msg) {
-            self.uploadButton.titleLabel.text = msg;
+            self.imageName = msg;
+            [self.uploadButton setTitle:@"已上传" forState:UIControlStateNormal];
         }
     }];
 }

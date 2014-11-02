@@ -40,6 +40,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
 
     self.rTableView = [[UITableView alloc] initWithFrame:self.view.bounds];
+    self.rTableView.height = self.view.height-self.navigationController.navigationBar.height-20;
     self.rTableView.delegate = self;
     self.rTableView.dataSource = self;
     [self.view addSubview:self.rTableView];
@@ -81,6 +82,7 @@
     NSString *contentType = @"text/html";
     [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
+        [self.rTableView headerEndRefreshing];
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         if (data)
         {
