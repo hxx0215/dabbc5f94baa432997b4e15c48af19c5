@@ -865,13 +865,13 @@
 			children = (
 				B9D3DECD19CD18C10020CDC9 /* HNDecorateCheckViewController.h */,
 				B9D3DECE19CD18C10020CDC9 /* HNDecorateCheckViewController.m */,
+				B9D3DED819CD235A0020CDC9 /* HNCheckTableViewCell.h */,
+				B9D3DED919CD235A0020CDC9 /* HNCheckTableViewCell.m */,
 				B9D3DEE419CD65500020CDC9 /* HNCheckDetailView.h */,
 				B9D3DEE519CD65500020CDC9 /* HNCheckDetailView.m */,
 				B9D3DEDB19CD25430020CDC9 /* HNCheckDetailViewController.h */,
 				B9D3DEDC19CD25430020CDC9 /* HNCheckDetailViewController.m */,
 				B9D3DEDD19CD25430020CDC9 /* HNCheckDetailViewController.xib */,
-				B9D3DED819CD235A0020CDC9 /* HNCheckTableViewCell.h */,
-				B9D3DED919CD235A0020CDC9 /* HNCheckTableViewCell.m */,
 			);
 			name = Check;
 			sourceTree = "<group>";

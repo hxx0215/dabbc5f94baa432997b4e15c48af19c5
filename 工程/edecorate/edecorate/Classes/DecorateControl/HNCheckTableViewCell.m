@@ -17,7 +17,7 @@
         // Initialization code
         self.roomName = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width * 0.8, 30)];
         self.roomName.numberOfLines = 2;
-        self.roomName.font = [UIFont systemFontOfSize:15];
+        self.roomName.font = [UIFont systemFontOfSize:13];
         self.checkStage = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.roomName.frame) + 8, self.bounds.size.width * 0.8, 20)];
         self.checkStage.font = [UIFont systemFontOfSize:20];
         
