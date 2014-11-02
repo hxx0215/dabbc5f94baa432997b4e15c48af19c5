@@ -9,7 +9,7 @@
 #import "HNPassAddNewTableViewCell.h"
 
 @interface HNPassAddNewTableViewCell()<UITextFieldDelegate>
-
+@property (strong, nonatomic) id updataView;
 @end
 
 @implementation HNPassAddNewTableViewCell
@@ -17,7 +17,6 @@ bool bo;
 -(id)init
 {
     self = [super init];
-    
     bo = false;
     return self;
 }
@@ -36,7 +35,40 @@ bool bo;
     self.cardNOTextField.delegate = self;
     
     self.uploadButton.backgroundColor = [UIColor colorWithRed:45/255.0 green:179/255.0 blue:123/255.0 alpha:1];
+    [self.uploadButton addTarget:self action:@selector(uploadClick) forControlEvents:UIControlEventTouchUpInside];
     
+    self.iconImageView.userInteractionEnabled = YES;
+    UITapGestureRecognizer *singleTap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(uploadImage:)];
+    [self.iconImageView addGestureRecognizer:singleTap1];
+    
+}
+
+-(IBAction)uploadImage:(id)sender
+{
+    [self.delegate showImagePickView:self];
+    self.updataView = self.iconImageView;
+}
+
+-(void)uploadClick
+{
+    [self.delegate showImagePickView:self];
+    self.updataView = self.uploadButton;
+}
+
+-(void)updateImage:(NSString*)msg whithImage:(UIImage*)image
+{
+    if (!msg) {
+        return;
+    }
+    if ([self.updataView isEqual:self.uploadButton]) {
+        [self.uploadButton setTitle:@"已上传" forState:UIControlStateNormal];
+        self.proposerData.IDcardImg = msg;
+    }
+    else
+    {
+        self.proposerData.Icon = msg;
+        [self.iconImageView setImage:image];
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -63,8 +95,6 @@ bool bo;
     self.proposerData.name = self.nameTextField.text;
     self.proposerData.phone = self.phoneTextField.text;
     self.proposerData.IDcard = self.cardNOTextField.text;
-    self.proposerData.IDcardImg = @"123";
-    self.proposerData.Icon = @"123";
     if (!bo) {
         [self.delegate finishMoveScrollView:textField];
     }
