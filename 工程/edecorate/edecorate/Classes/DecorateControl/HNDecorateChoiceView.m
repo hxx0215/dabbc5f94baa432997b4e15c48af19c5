@@ -15,10 +15,12 @@
 @implementation HNDecorateChoiceModel
 @end
 
-@interface HNDecorateChoiceView()<UIPickerViewDelegate, UITextFieldDelegate,UIPickerViewDataSource>
-@property (nonatomic, strong) UITextField* textFiled;
+@interface HNDecorateChoiceView()<UIPickerViewDelegate,UIPickerViewDataSource>
+//@property (nonatomic, strong) UITextField* textFiled;
 @property (nonatomic, strong) UIButton* button;
+@property (nonatomic, strong) UIButton* selectButton;
 @property (strong, nonatomic) UIPickerView *selectPicker;
+@property (nonatomic, strong) UIView *backPickerview;
 @end
 
 @implementation HNDecorateChoiceView
@@ -33,29 +35,46 @@
     [self.button setImage:image forState:UIControlStateNormal];
     [self addSubview:self.button];
     
-    self.textFiled = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, self.width, self.height)];
-    [self addSubview:self.textFiled];
-    self.textFiled.delegate = self;
-    self.textFiled.borderStyle = UITextBorderStyleRoundedRect;
-    self.textFiled.backgroundColor = [UIColor clearColor];
+    self.selectButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.selectButton.frame=CGRectMake(0, 0, self.width, self.height);
+    [self addSubview:self.selectButton];
+    self.selectButton.layer.cornerRadius = 5.0;
+    self.selectButton.backgroundColor = [UIColor clearColor];
+    self.selectButton.layer.borderWidth = 1.0;
+    self.selectButton.layer.borderColor = [UIColor colorWithWhite:173.0/255.0 alpha:1.0].CGColor;
+    [self.selectButton addTarget:self action:@selector(btnClick) forControlEvents:UIControlEventTouchUpInside];
+    //self.selectButton.titleLabel.font = [UIFont systemFontOfSize:15];
+    [self.selectButton setTitleColor:[UIColor darkTextColor] forState:UIControlStateNormal];
     
-    self.selectPicker = [[UIPickerView alloc]init];
-    self.textFiled.inputView = self.selectPicker;
-    //self.textFiled.inputAccessoryView = doneToolbar;
-    self.selectPicker.delegate = self;
-    self.selectPicker.dataSource = self;
-    self.selectPicker.frame = CGRectMake(0, 480, 320, 216);
-    self.decorateList = [[NSMutableArray alloc]init];
-    
-    UIToolbar * topView = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 30)];
-    //[topView setBarStyle:UIBarStyleBlack];
+    CGRect rect = [[[UIApplication sharedApplication] keyWindow]bounds];
+    UIToolbar * topView = [[UIToolbar alloc]initWithFrame:CGRectMake(0, rect.size.height-216-30, 320, 30)];
+    [topView setBarStyle:UIBarStyleBlack];
     topView.backgroundColor = [UIColor whiteColor];
     UIBarButtonItem * btnSpace = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
     UIBarButtonItem * doneButton = [[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(doneChoice)];
     NSArray * buttonsArray = [NSArray arrayWithObjects:btnSpace,doneButton,nil];
     [topView setItems:buttonsArray];
-    self.textFiled.inputAccessoryView = topView;
-    self.textFiled.placeholder = @"请选择";
+    
+    
+    self.backPickerview = [[UIView alloc]initWithFrame:rect];
+    self.backPickerview.userInteractionEnabled = YES;
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hidePickView)];
+    [self.backPickerview addGestureRecognizer:singleTap];
+    self.selectPicker = [[UIPickerView alloc]init];
+    self.selectPicker.backgroundColor = [UIColor colorWithRed:200.0/255 green:200.0/255 blue:200.0/255 alpha:1];
+    self.selectPicker.delegate = self;
+    self.selectPicker.dataSource = self;
+    self.selectPicker.frame = CGRectMake(0, rect.size.height-216, 320, 216);
+    self.selectPicker.hidden = NO;
+    [self.backPickerview addSubview:topView];
+    [self.backPickerview addSubview:self.selectPicker];
+    [[[UIApplication sharedApplication] keyWindow] addSubview:self.backPickerview];
+    
+    self.decorateList = [[NSMutableArray alloc]init];
+    
+
+    //self.textFiled.inputAccessoryView = topView;
+    //self.textFiled.placeholder = @"请选择";
     
     [[HNDecorateData shared] loadingDecorateData:[HNLoginData shared].mshopid block:^(NSURLResponse *response, NSData *data, NSError *connectionError){
         if (data)
@@ -95,9 +114,64 @@
     return self;
 }
 
+-(void)hidePickView
+{
+    self.backPickerview.hidden = YES;
+}
+
+-(void)btnClick
+{
+    self.backPickerview.hidden = NO;
+}
+
+
 -(void)doneChoice
 {
-    [self.textFiled resignFirstResponder];
+    [self hidePickView];
+    NSInteger row = [self.selectPicker selectedRowInComponent:0];
+    HNDecorateChoiceModel *model = (HNDecorateChoiceModel*)[self.decorateList objectAtIndex:row];
+    [self.selectButton setTitle:model.roomName forState:UIControlStateNormal];
+    //self.textFiled.text = model.roomName;
+    if (!self.delegate) {
+        return;
+    }
+    if (model.ownername) {
+        if ([self.delegate respondsToSelector:@selector(updataDecorateInformation:)])
+            [self.delegate updataDecorateInformation:model];
+        return;
+    }
+    MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.superview animated:YES];
+    hud.labelText = NSLocalizedString(@"Loading", nil);
+    [[HNDecorateData shared] loadingDetail:[HNLoginData shared].mshopid declare:model.declareId block:^(NSURLResponse *response, NSData *data, NSError *connectionError){
+        [MBProgressHUD hideHUDForView:self.superview animated:YES];
+        if (data)
+        {
+            NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
+            NSLog(@"%@",retJson);
+            NSDictionary* dic = [retJson objectFromJSONString];
+            NSInteger count = [[dic objectForKey:@"total"] integerValue];
+            if (0!=count)
+            {
+                NSArray *dataArr = [dic objectForKey:@"data"];
+                NSDictionary *dicData = [dataArr objectAtIndex:0];
+                model.ownername = [dicData objectForKey:@"ownername"];
+                model.ownerphone = [dicData objectForKey:@"ownerphone"];
+                if ([self.delegate respondsToSelector:@selector(updataDecorateInformation:)])
+                    [self.delegate updataDecorateInformation:model];
+            }
+            else
+            {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login Fail", nil) message:NSLocalizedString(@"Please input correct username and password", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+                [alert show];
+            }
+        }
+        else{
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection Error", nil) message:NSLocalizedString(@"Please check your network.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+            [alert show];
+        }
+        
+    }];
 }
 
 
@@ -129,52 +203,6 @@
 //    HNDecorateChoiceModel *model = (HNDecorateChoiceModel*)[self.decorateList objectAtIndex:row];
 //    return model.roomName;
 //}
-
--(void)textFieldDidEndEditing:(UITextField *)textField{
-    NSInteger row = [self.selectPicker selectedRowInComponent:0];
-    HNDecorateChoiceModel *model = (HNDecorateChoiceModel*)[self.decorateList objectAtIndex:row];
-    self.textFiled.text = model.roomName;
-    if (!self.delegate) {
-        return;
-    }
-    if (model.ownername) {
-        if ([self.delegate respondsToSelector:@selector(updataDecorateInformation:)])
-            [self.delegate updataDecorateInformation:model];
-        return;
-    }
-    MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.superview animated:YES];
-    hud.labelText = NSLocalizedString(@"Loading", nil);
-    [[HNDecorateData shared] loadingDetail:[HNLoginData shared].mshopid declare:model.declareId block:^(NSURLResponse *response, NSData *data, NSError *connectionError){
-        [MBProgressHUD hideHUDForView:self.superview animated:YES];
-        if (data)
-        {
-            NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
-            NSLog(@"%@",retJson);
-            NSDictionary* dic = [retJson objectFromJSONString];
-            NSInteger count = [[dic objectForKey:@"total"] integerValue];
-            if (0!=count)
-            {
-                NSArray *dataArr = [dic objectForKey:@"data"];
-                NSDictionary *dicData = [dataArr objectAtIndex:0];
-                model.ownername = [dicData objectForKey:@"ownername"];
-                model.ownerphone = [dicData objectForKey:@"ownerphone"];
-                
-                [self.delegate updataDecorateInformation:model];
-            }
-            else
-            {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login Fail", nil) message:NSLocalizedString(@"Please input correct username and password", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
-                [alert show];
-            }
-        }
-        else{
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection Error", nil) message:NSLocalizedString(@"Please check your network.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
-            [alert show];
-        }
-        
-    }];
-}
 
 /*
 // Only override drawRect: if you perform custom drawing.
