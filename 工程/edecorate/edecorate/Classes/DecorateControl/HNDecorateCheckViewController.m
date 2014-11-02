@@ -8,9 +8,10 @@
 
 #import "HNDecorateCheckViewController.h"
 #import "HNCheckTableViewCell.h"
-#import "HNCheckDetailViewController.h"
+//#import "HNCheckDetailViewController.h"
 #import "HNLoginData.h"
 #import "MJRefresh.h"
+#import "HNCheckViewController.h"
 
 @interface HNCheckModel : NSObject
 @property (nonatomic, strong)NSString *roomName;
@@ -86,8 +87,20 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    HNCheckDetailViewController *checkDetail = [[HNCheckDetailViewController alloc] init];
-    [self.navigationController pushViewController:checkDetail animated:YES];
+//    HNCheckDetailViewController *checkDetail = [[HNCheckDetailViewController alloc] init];
+//    [self.navigationController pushViewController:checkDetail animated:YES];
+    NSDictionary *sendDic = @{@"checkid": [self.checkList[indexPath.row] checkid]};
+    NSString *sendJson = [sendDic JSONString];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"get.acceptance.stepinfo" Params:sendJson]];
+    NSString *contentType = @"text/html";
+    [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
+        NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
+        NSDictionary *retDic = [retJson objectFromJSONString];
+        NSLog(@"%@",retDic);
+    }];
 }
 
 - (void)refreshData{
