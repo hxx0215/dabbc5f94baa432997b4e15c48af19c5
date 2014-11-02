@@ -7,6 +7,7 @@
 //
 
 #import "HNCheckViewController.h"
+#import "HNCheckDetailTableViewCell.h"
 
 @interface HNCheckViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong)UITableView *tableView;
@@ -37,14 +38,32 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return [[self.contentArr[section] objectForKey:@"Bodyitem"] count];
 }
-
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 50;
+}
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.width, 50)];
+    view.backgroundColor = [UIColor grayColor];
+    UILabel *label = [[UILabel alloc] init];
+    label.text = [self.contentArr[section] objectForKey:@"typename"];
+    [label sizeToFit];
+    label.centerY = view.height / 2;
+    [view addSubview:label];
+    return view;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 40;
+}
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *identify = @"CheckCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identify];
+    HNCheckDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identify];
     if (!cell){
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identify];
+        cell = [[HNCheckDetailTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identify];
     }
-    cell.textLabel.text = [[self.contentArr[indexPath.section] objectForKey:@"Bodyitem"][indexPath.row] objectForKey:@"name"];
+    cell.nameLabel.text = [[self.contentArr[indexPath.section] objectForKey:@"Bodyitem"][indexPath.row] objectForKey:@"name"];
+    [cell.nameLabel sizeToFit];
+    cell.contentLabel.text = [[self.contentArr[indexPath.section] objectForKey:@"Bodyitem"][indexPath.row] objectForKey:@"img"];
+    [cell.contentLabel sizeToFit];
     return cell;
 }
 @end

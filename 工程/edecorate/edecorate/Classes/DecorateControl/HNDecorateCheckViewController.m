@@ -12,7 +12,7 @@
 #import "HNLoginData.h"
 #import "MJRefresh.h"
 #import "HNCheckViewController.h"
-
+#import "MBProgressHUD.h"
 @interface HNCheckModel : NSObject
 @property (nonatomic, strong)NSString *roomName;
 @property (nonatomic, strong)NSString *checkSchedule;
@@ -59,7 +59,9 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self.cTableView headerBeginRefreshing];
+    MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = NSLocalizedString(@"Loading", nil);
+    [self refreshData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -96,10 +98,25 @@
     NSString *contentType = @"text/html";
     [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
-        NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
-        NSDictionary *retDic = [retJson objectFromJSONString];
-        NSLog(@"%@",retDic);
+        if (data)
+        {
+            NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
+            NSDictionary *retDic = [retJson objectFromJSONString];
+            NSInteger count = [[retDic objectForKey:@"total"] integerValue];
+            if (0 != count){
+                NSArray *dataArr = [retDic objectForKey:@"data"];
+                HNCheckViewController *vc = [[HNCheckViewController alloc] init];
+                vc.contentArr = [dataArr[0] objectForKey:@"ItemType"];
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+            else{
+                [self showNoData];
+            }
+        }
+        else{
+            [self showNoNet];
+        }
     }];
 }
 
@@ -112,6 +129,7 @@
     [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
         [self.cTableView headerEndRefreshing];
+        [self loadDataComplete];
         if (data){
             NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
@@ -151,5 +169,8 @@
 - (void)showNoData{
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"We don't get any data.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
     [alert show];
+}
+- (void)loadDataComplete{
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
 }
 @end

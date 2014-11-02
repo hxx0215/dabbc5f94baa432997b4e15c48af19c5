@@ -147,6 +147,7 @@
 		B9E0668119DCDCB100893DBD /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = B9E0667019DCDCB100893DBD /* UIWebView+AFNetworking.m */; };
 		B9E433601A063148000E2CA9 /* HNCheckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9E4335E1A063148000E2CA9 /* HNCheckViewController.m */; };
 		B9E433611A063148000E2CA9 /* HNCheckViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9E4335F1A063148000E2CA9 /* HNCheckViewController.xib */; };
+		B9E433641A064706000E2CA9 /* HNCheckDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B9E433631A064706000E2CA9 /* HNCheckDetailTableViewCell.m */; };
 		D334E87119FFC0DB002AA7D2 /* HNDeliverDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D334E86F19FFC0DB002AA7D2 /* HNDeliverDetailTableViewCell.m */; };
 		D334E87219FFC0DB002AA7D2 /* HNDeliverDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D334E87019FFC0DB002AA7D2 /* HNDeliverDetailTableViewCell.xib */; };
 		D33549F719FEB3D300135800 /* HNPassAddNewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D33549F519FEB3D300135800 /* HNPassAddNewTableViewCell.m */; };
@@ -457,6 +458,8 @@
 		B9E4335D1A063148000E2CA9 /* HNCheckViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNCheckViewController.h; path = Classes/DecorateControl/HNCheckViewController.h; sourceTree = "<group>"; };
 		B9E4335E1A063148000E2CA9 /* HNCheckViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNCheckViewController.m; path = Classes/DecorateControl/HNCheckViewController.m; sourceTree = "<group>"; };
 		B9E4335F1A063148000E2CA9 /* HNCheckViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HNCheckViewController.xib; path = Classes/DecorateControl/HNCheckViewController.xib; sourceTree = "<group>"; };
+		B9E433621A064706000E2CA9 /* HNCheckDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNCheckDetailTableViewCell.h; path = Classes/DecorateControl/HNCheckDetailTableViewCell.h; sourceTree = "<group>"; };
+		B9E433631A064706000E2CA9 /* HNCheckDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNCheckDetailTableViewCell.m; path = Classes/DecorateControl/HNCheckDetailTableViewCell.m; sourceTree = "<group>"; };
 		D334E86E19FFC0DB002AA7D2 /* HNDeliverDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNDeliverDetailTableViewCell.h; path = Classes/DecorateControl/HNDeliverDetailTableViewCell.h; sourceTree = "<group>"; };
 		D334E86F19FFC0DB002AA7D2 /* HNDeliverDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNDeliverDetailTableViewCell.m; path = Classes/DecorateControl/HNDeliverDetailTableViewCell.m; sourceTree = "<group>"; };
 		D334E87019FFC0DB002AA7D2 /* HNDeliverDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HNDeliverDetailTableViewCell.xib; path = Classes/DecorateControl/HNDeliverDetailTableViewCell.xib; sourceTree = "<group>"; };
@@ -880,6 +883,8 @@
 				B9E4335D1A063148000E2CA9 /* HNCheckViewController.h */,
 				B9E4335E1A063148000E2CA9 /* HNCheckViewController.m */,
 				B9E4335F1A063148000E2CA9 /* HNCheckViewController.xib */,
+				B9E433621A064706000E2CA9 /* HNCheckDetailTableViewCell.h */,
+				B9E433631A064706000E2CA9 /* HNCheckDetailTableViewCell.m */,
 				B9D3DEE419CD65500020CDC9 /* HNCheckDetailView.h */,
 				B9D3DEE519CD65500020CDC9 /* HNCheckDetailView.m */,
 				B9D3DEDB19CD25430020CDC9 /* HNCheckDetailViewController.h */,
@@ -1376,6 +1381,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B91A3AC419D6E6E9000F3823 /* MJRefreshFooterView.m in Sources */,
+				B9E433641A064706000E2CA9 /* HNCheckDetailTableViewCell.m in Sources */,
 				D3C07BBD19CD60AF003EA5E4 /* HNTemporaryModel.m in Sources */,
 				B965E76919D04CDA004CD201 /* HNDeliverDetailViewController.m in Sources */,
 				B9DE560D19C9C5D300280EC7 /* HNMessageViewController.m in Sources */,
