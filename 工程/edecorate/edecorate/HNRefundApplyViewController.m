@@ -13,11 +13,15 @@
 #import "JSONKit.h"
 #import "MBProgressHUD.h"
 #import "HNLoginData.h"
+#import "HNUploadImage.h"
 
-@interface HNRefundApplyViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate,HNDecorateChoiceViewDelegate>
+@interface HNRefundApplyViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate>
 @property (strong, nonatomic) IBOutlet UIScrollView *mainView;
 @property (strong, nonatomic) IBOutlet UIButton *commitButton;
 @property (strong, nonatomic) IBOutlet UIButton *uploadButton;
+
+@property (nonatomic, strong)IBOutlet UILabel *houseInfTitleLabel;
+@property (nonatomic, strong)IBOutlet UILabel *houseInfLabel;
 
 @property (strong, nonatomic) IBOutlet UILabel *projectrefundLabel;
 @property (strong, nonatomic) IBOutlet UILabel *finefundLabel;
@@ -25,6 +29,7 @@
 
 @property (nonatomic, strong)UIImagePickerController *imagePicker;
 
+@property (strong, nonatomic) NSString *imageName;
 //@property (strong, nonatomic) IBOutlet HNDecorateChoiceView *choiceDecorateView;
 @end
 
@@ -62,21 +67,17 @@
     [self.commitButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.commitButton setBackgroundColor:[UIColor colorWithRed:245.0/255.0 green:72.0/255.0 blue:0.0 alpha:1.0]];
     
+    self.uploadButton.layer.cornerRadius = 5.0;
+    [self.uploadButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.uploadButton setBackgroundColor:[UIColor colorWithRed:0.0 green:72.0/255.0 blue:245.0/255.0 alpha:1.0]];
+    
+
+    self.houseInfTitleLabel.text = NSLocalizedString(@"House Information", nil);
+    self.houseInfLabel.text = self.temporaryModel.refundModel.roomName;
+    
     self.projectrefundLabel.text = self.temporaryModel.projectrefund;
     self.finefundLabel.text = self.temporaryModel.finefund;
     self.cardnumberLabel.text = self.temporaryModel.cardnumber;
-}
-
-- (void)updataDecorateInformation:(HNDecorateChoiceModel*)model
-{
-//    self.houseInfLabel.text = model.roomName;
-//    self.ownersPhoneNumberLabel.text = model.ownerphone;
-//    self.ownersLabel.text = model.ownername;
-//    [self.ownersPhoneNumberLabel sizeToFit];
-//    [self.ownersLabel sizeToFit ];
-//    self.ownersPhoneNumberLabel.right = self.view.width - 14;
-//    self.ownersLabel.right = self.ownersPhoneNumberLabel.left-5;
-    self.temporaryModel.declareId = model.declareId;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -131,7 +132,7 @@
      cardimg		回收照片
      */
     
-    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:self.temporaryModel.declareId,@"declareid", @"0",@"cardnum",self.temporaryModel.declareId,@"cardimg",nil];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:self.temporaryModel.declareId,@"declareid", self.temporaryModel.cardnumber,@"cardnum",self.imageName,@"cardimg",nil];
     return dic;
 }
 
@@ -148,9 +149,28 @@
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
+    
     UIImage *image=[info objectForKey:UIImagePickerControllerOriginalImage];
+    
+    CGFloat scaleSize = 0.1f;
+    UIGraphicsBeginImageContext(CGSizeMake(image.size.width * scaleSize, image.size.height * scaleSize));
+    [image drawInRect:CGRectMake(0, 0, image.size.width * scaleSize, image.size.height * scaleSize)];
+    UIImage *scaledImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = NSLocalizedString(@"Loading", nil);
+    
     [self.imagePicker dismissViewControllerAnimated:YES completion:nil];
     //[self.uploadImages setObject:image forKey:[NSNumber numberWithInteger:self.curButton.tag]];;
+    [HNUploadImage UploadImage:scaledImage block:^(NSString *msg) {
+        NSLog(@"%@",msg);
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        if (msg) {
+            self.imageName = msg;
+            [self.uploadButton setTitle:@"已上传" forState:UIControlStateNormal];
+        }
+    }];
 }
 /*
 #pragma mark - Navigation

@@ -17,14 +17,7 @@
 #import "HNRefundData.h"
 #import "MJRefresh.h"
 
-@interface HNRefundModel : NSObject
-@property (nonatomic, strong)NSString *roomName;
-@property (nonatomic, strong)NSString *status;
-//@property (nonatomic, assign)HNConstructType constructType;
-@property (nonatomic, strong)NSString *declareId;
-@end
-@implementation HNRefundModel
-@end
+
 @interface HNRefundSendModel : NSObject//列表和详细通用
 @property (nonatomic, strong)NSString *mshopid;
 @property (nonatomic, strong)NSString *declareId;
@@ -76,12 +69,12 @@
 //    }
 //}
 //
--(void)loadMyData:(NSString*)declareId
+-(void)loadMyData:(HNRefundModel*)model
 {
     MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = NSLocalizedString(@"Loading", nil);
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:declareId,@"declareid", nil];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:model.declareId,@"declareid", nil];
     
     NSString *jsonStr = [dic JSONString];
     request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"get.deposit.refund" Params:jsonStr]];
@@ -103,6 +96,7 @@
                 NSDictionary *dicData = [array objectAtIndex:0];
                 HNRefundData *tModel = [[HNRefundData alloc] init];
                 [tModel updateData:dicData];
+                tModel.refundModel = model;
                 
                 HNRefundApplyViewController* dac = [[HNRefundApplyViewController alloc]initWithModel:tModel];
                 [self.navigationController pushViewController:dac animated:YES];
@@ -203,7 +197,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     NSInteger row = indexPath.row;
     HNRefundModel* model = self.refundList[row];
-    [self loadMyData:model.declareId];
+    [self loadMyData:model];
     
 }
 

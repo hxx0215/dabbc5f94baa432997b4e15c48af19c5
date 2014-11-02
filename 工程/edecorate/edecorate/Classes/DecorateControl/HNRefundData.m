@@ -8,6 +8,9 @@
 
 #import "HNRefundData.h"
 
+@implementation HNRefundModel
+@end
+
 @implementation HNRefundData
 -(BOOL)updateData:(NSDictionary *)dic
 {
