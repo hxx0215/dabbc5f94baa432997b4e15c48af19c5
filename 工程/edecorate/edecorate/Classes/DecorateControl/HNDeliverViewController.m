@@ -15,6 +15,8 @@
 #import "HNLoginData.h"
 #import "HNDeliverData.h"
 #import "HNDeliverApplyViewController.h"
+#import "HNRefundData.h"
+#import "MJRefresh.h"
 
 @interface HNDeliverViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong)UITableView *dTableView;
@@ -30,10 +32,17 @@
     // Do any additional setup after loading the view.
     self.title = NSLocalizedString(@"Decorate Check", nil);
     self.dTableView = [[UITableView alloc] initWithFrame:self.view.bounds];
+    self.dTableView.height = self.view.height-self.navigationController.navigationBar.height-20;
     self.dTableView.dataSource = self;
     self.dTableView.delegate = self;
     [self.view addSubview:self.dTableView];
+    self.deliverList = [[NSMutableArray alloc] init];
     
+    __weak typeof(self) wself = self;
+    [self.dTableView addHeaderWithCallback:^{
+        typeof(self) sself = wself;
+        [sself loadMyData];
+    }];
     
     self.navigationItem.title = NSLocalizedString(@"Delivery&Installation", nil);
     
@@ -50,8 +59,7 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    self.deliverList = [[NSMutableArray alloc] init];
-    [self loadMyData];
+    [self.dTableView headerBeginRefreshing];
 }
 
 -(void)loadMyData
@@ -66,22 +74,25 @@
     NSString *contentType = @"text/html";
     [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
+        [self.dTableView headerEndRefreshing];
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         if (data)
         {
+            [self.deliverList removeAllObjects];
             NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
             NSLog(@"%@",retJson);
             NSDictionary* dic = [retJson objectFromJSONString];
             NSNumber* total = [dic objectForKey:@"total"];
-            NSArray* array = [dic objectForKey:@"data"];
-            for (int i = 0; i<total.intValue; i++) {
-                NSDictionary *dicData = [array objectAtIndex:i];
-                HNDeliverData *tModel = [[HNDeliverData alloc] init];
-                [tModel updateData:dicData];
-                [self.deliverList addObject:tModel];
-            }
+
             if (total.intValue){//之后需要替换成status
+                NSArray* array = [dic objectForKey:@"data"];
+                for (int i = 0; i<total.intValue; i++) {
+                    NSDictionary *dicData = [array objectAtIndex:i];
+                    HNDeliverData *tModel = [[HNDeliverData alloc] init];
+                    [tModel updateData:dicData];
+                    [self.deliverList addObject:tModel];
+                }
                 [self.dTableView reloadData];
             }
             else

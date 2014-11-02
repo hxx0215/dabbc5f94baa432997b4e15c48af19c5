@@ -10,4 +10,5 @@
 
 @interface HNUploadImage : NSObject
 +(void)UploadImage:(UIImage*)image block:(void (^)(NSString *msg))loadComplete;
++(UIImage*)ScaledImage:(UIImage*)image scale:(CGFloat)scale;
 @end
