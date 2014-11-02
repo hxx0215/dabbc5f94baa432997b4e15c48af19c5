@@ -13,6 +13,8 @@
 #import "MJRefresh.h"
 #import "HNCheckViewController.h"
 #import "MBProgressHUD.h"
+#import "HNNewCheckViewController.h"
+
 @interface HNCheckModel : NSObject
 @property (nonatomic, strong)NSString *roomName;
 @property (nonatomic, strong)NSString *checkSchedule;
@@ -29,6 +31,7 @@
 @property (nonatomic, strong)UITableView *cTableView;
 @property (nonatomic, strong)NSMutableArray *checkList;
 @property (nonatomic, strong)NSDictionary *stageMap;
+@property (nonatomic, strong)UIBarButtonItem *createButton;
 @end
 
 @implementation HNDecorateCheckViewController
@@ -49,6 +52,8 @@
     self.checkList = [[NSMutableArray alloc] init];
     self.stageMap = @{@"-1": NSLocalizedString(@"验收不通过", nil),@"0": NSLocalizedString(@"等待验收", nil), @"1": NSLocalizedString(@"验收通过", nil)};
 
+    self.createButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"新增", nil) style:UIBarButtonItemStylePlain target:self action:@selector(createNewCheck:)];
+    self.navigationItem.rightBarButtonItem = self.createButton;
 //    HNCheckModel *model = [[HNCheckModel alloc] init];
 //    model.roomName =@"小区名房间号";
 //    model.checkSchedule = @"验收进度";
@@ -67,6 +72,10 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+- (void)createNewCheck:(id)sender{
+    HNNewCheckViewController *vc = [[HNNewCheckViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 85;
