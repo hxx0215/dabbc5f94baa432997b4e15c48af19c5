@@ -88,39 +88,44 @@
     NSString *contentType = @"text/html";
     [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
-        [self.tTableView headerEndRefreshing];
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-        if (data)
-        {
-            [self.modelList removeAllObjects];
-            NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
-            //NSLog(@"%@",retJson);
-            NSDictionary* dic = [retJson objectFromJSONString];
-            NSNumber* total = [dic objectForKey:@"total"];
 
-            if (total.intValue){//之后需要替换成status
-                NSArray* array = [dic objectForKey:@"data"];
-                for (int i = 0; i<total.intValue; i++) {
-                    NSDictionary *dicData = [array objectAtIndex:i];
-                    HNPassData *tModel = [[HNPassData alloc] init];
-                    [tModel updateData:dicData];
-                    [self.modelList addObject:tModel];
-                }
-                [self.tTableView reloadData];
+        [self performSelector:@selector(didLoadMyData:) withObject:data afterDelay:YES];
+    }];
+}
+
+-(void)didLoadMyData:(NSData*)data
+{
+    [self.tTableView headerEndRefreshing];
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    if (data)
+    {
+        [self.modelList removeAllObjects];
+        NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
+        //NSLog(@"%@",retJson);
+        NSDictionary* dic = [retJson objectFromJSONString];
+        NSNumber* total = [dic objectForKey:@"total"];
+        
+        if (total.intValue){//之后需要替换成status
+            NSArray* array = [dic objectForKey:@"data"];
+            for (int i = 0; i<total.intValue; i++) {
+                NSDictionary *dicData = [array objectAtIndex:i];
+                HNPassData *tModel = [[HNPassData alloc] init];
+                [tModel updateData:dicData];
+                [self.modelList addObject:tModel];
             }
-            else
-            {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login Fail", nil) message:NSLocalizedString(@"Please input correct username and password", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
-                [alert show];
-            }
+            [self.tTableView reloadData];
         }
-        else{
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection Error", nil) message:NSLocalizedString(@"Please check your network.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+        else
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login Fail", nil) message:NSLocalizedString(@"Please input correct username and password", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
             [alert show];
         }
-        
-    }];
+    }
+    else{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection Error", nil) message:NSLocalizedString(@"Please check your network.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+        [alert show];
+    }
 }
 
 -(void) viewWillAppear:(BOOL)animated{

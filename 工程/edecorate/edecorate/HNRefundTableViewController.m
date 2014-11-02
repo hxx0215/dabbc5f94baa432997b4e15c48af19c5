@@ -29,6 +29,7 @@
 @property (nonatomic, strong)UITableView *rTableView;
 @property (nonatomic, strong)NSMutableArray *refundList;
 @property (nonatomic, strong)NSDictionary *statusMap;
+@property (nonatomic, strong)HNRefundModel *currentModel;
 @end
 
 
@@ -76,45 +77,51 @@
     hud.labelText = NSLocalizedString(@"Loading", nil);
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:model.declareId,@"declareid", nil];
-    
+    self.currentModel = model;
     NSString *jsonStr = [dic JSONString];
     request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"get.deposit.refund" Params:jsonStr]];
     NSString *contentType = @"text/html";
     [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
-        [self.rTableView headerEndRefreshing];
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-        if (data)
-        {
-            NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
-            NSLog(@"%@",retJson);
-            NSDictionary* dic = [retJson objectFromJSONString];
-            NSNumber* total = [dic objectForKey:@"total"];
+        [self performSelector:@selector(didLoadMyData:) withObject:data afterDelay:YES];
+    }];
+}
 
-            if (total.intValue>=0){//之后需要替换成status
-                
-                NSArray* array = [dic objectForKey:@"data"];
-                NSDictionary *dicData = [array objectAtIndex:0];
-                HNRefundData *tModel = [[HNRefundData alloc] init];
-                [tModel updateData:dicData];
-                tModel.refundModel = model;
-                
-                HNRefundApplyViewController* dac = [[HNRefundApplyViewController alloc]initWithModel:tModel];
-                [self.navigationController pushViewController:dac animated:YES];
-            }
-            else
-            {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Load Data Fail", nil) message:NSLocalizedString(@"NO data", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
-                [alert show];
-            }
+-(void)didLoadMyData:(NSData*)data
+{
+    assert(self.currentModel);
+    [self.rTableView headerEndRefreshing];
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    if (data)
+    {
+        NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
+        NSLog(@"%@",retJson);
+        NSDictionary* dic = [retJson objectFromJSONString];
+        NSNumber* total = [dic objectForKey:@"total"];
+        
+        if (total.intValue>=0){//之后需要替换成status
+            
+            NSArray* array = [dic objectForKey:@"data"];
+            NSDictionary *dicData = [array objectAtIndex:0];
+            HNRefundData *tModel = [[HNRefundData alloc] init];
+            [tModel updateData:dicData];
+            tModel.refundModel = self.currentModel;
+            
+            HNRefundApplyViewController* dac = [[HNRefundApplyViewController alloc]initWithModel:tModel];
+            [self.navigationController pushViewController:dac animated:YES];
         }
-        else{
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection Error", nil) message:NSLocalizedString(@"Please check your network.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+        else
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Load Data Fail", nil) message:NSLocalizedString(@"NO data", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
             [alert show];
         }
-        
-    }];
+    }
+    else{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection Error", nil) message:NSLocalizedString(@"Please check your network.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+        [alert show];
+    }
+    self.currentModel = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -142,35 +149,41 @@
     NSString *contentType = @"text/html";
     [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
-        [self.rTableView headerEndRefreshing];
-        if (data)
+ 
+        [self performSelector:@selector(didrefreshData:) withObject:data afterDelay:YES];
+    }];
+}
+
+-(void)didrefreshData:(NSData*)data
+{
+    [self.rTableView headerEndRefreshing];
+    if (data)
+    {
+        NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
+        NSDictionary *retDic = [retJson objectFromJSONString];
+        NSInteger count = [[retDic objectForKey:@"total"] integerValue];
+        if (0!=count)
         {
-            NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
-            NSDictionary *retDic = [retJson objectFromJSONString];
-            NSInteger count = [[retDic objectForKey:@"total"] integerValue];
-            if (0!=count)
-            {
-                NSArray *dataArr = [retDic objectForKey:@"data"];
-                [self.refundList removeAllObjects];
-                for (int i=0; i<count; i++) {
-                    HNRefundModel *model = [[HNRefundModel alloc] init];
-                    model.status = self.statusMap[[dataArr[i] objectForKey:@"assessorstate"]];
-                    model.roomName = [NSString stringWithFormat:@"%@",[dataArr[i] objectForKey:@"roomnumber"]];
-                    model.declareId = [dataArr[i] objectForKey:@"declareId"];
-                    [self.refundList addObject:model];
-                }
-                [self.rTableView reloadData];
+            NSArray *dataArr = [retDic objectForKey:@"data"];
+            [self.refundList removeAllObjects];
+            for (int i=0; i<count; i++) {
+                HNRefundModel *model = [[HNRefundModel alloc] init];
+                model.status = self.statusMap[[dataArr[i] objectForKey:@"assessorstate"]];
+                model.roomName = [NSString stringWithFormat:@"%@",[dataArr[i] objectForKey:@"roomnumber"]];
+                model.declareId = [dataArr[i] objectForKey:@"declareId"];
+                [self.refundList addObject:model];
             }
-            else{
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"We don't get any data.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
-                [alert show];
-            }
-        }else{
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection Error", nil) message:NSLocalizedString(@"Please check your network.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+            [self.rTableView reloadData];
+        }
+        else{
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"We don't get any data.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
             [alert show];
         }
-    }];
+    }else{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection Error", nil) message:NSLocalizedString(@"Please check your network.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+        [alert show];
+    }
 }
 
 #pragma mark - tableView Delegate & DataSource

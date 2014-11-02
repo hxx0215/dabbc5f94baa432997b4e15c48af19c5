@@ -92,6 +92,7 @@
     
 }
 
+
 +(UIImage*)ScaledImage:(UIImage*)image scale:(CGFloat)scaleSize
 {
     UIGraphicsBeginImageContext(CGSizeMake(image.size.width * scaleSize, image.size.height * scaleSize));
