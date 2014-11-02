@@ -14,6 +14,7 @@
 #import "MBProgressHUD.h"
 #import "HNLoginData.h"
 #import "HNDecorateChoiceView.h"
+#import "HNUploadImage.h"
 
 @interface HNComplaintApplyViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate,UITextViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource,HNDecorateChoiceViewDelegate>
 
@@ -290,9 +291,19 @@
 
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
+    
+    MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = NSLocalizedString(@"Loading", nil);
     UIImage *image=[info objectForKey:UIImagePickerControllerOriginalImage];
     [self.imagePicker dismissViewControllerAnimated:YES completion:nil];
     //[self.uploadImages setObject:image forKey:[NSNumber numberWithInteger:self.curButton.tag]];;
+    [HNUploadImage UploadImage:image block:^(NSString *msg) {
+        NSLog(@"%@",msg);
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        if (msg) {
+            self.uploadButton.titleLabel.text = msg;
+        }
+    }];
 }
 
 bool bo = false;

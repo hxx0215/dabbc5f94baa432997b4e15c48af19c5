@@ -380,7 +380,8 @@
     [image drawInRect:CGRectMake(0, 0, image.size.width * scaleSize, image.size.height * scaleSize)];
     UIImage *scaledImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-    
+    MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = NSLocalizedString(@"Loading", nil);
     [self requestForPostWithURLString:scaledImage];
 }
 

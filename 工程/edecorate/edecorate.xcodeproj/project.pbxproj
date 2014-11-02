@@ -176,6 +176,7 @@
 		D391EE8C19CD787D00DE3363 /* HNComplaintTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D391EE8B19CD787D00DE3363 /* HNComplaintTableViewController.m */; };
 		D39662F519CD4E6300EE49B8 /* HNTemporaryDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D39662F319CD4E6300EE49B8 /* HNTemporaryDetailsViewController.m */; };
 		D39662F619CD4E6300EE49B8 /* HNTemporaryDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D39662F419CD4E6300EE49B8 /* HNTemporaryDetailsViewController.xib */; };
+		D39E3C5C1A05F7A7008C5F95 /* HNUploadImage.m in Sources */ = {isa = PBXBuildFile; fileRef = D39E3C5B1A05F7A7008C5F95 /* HNUploadImage.m */; };
 		D3A2D31019FB960600425BE1 /* HNComplaintData.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A2D30F19FB960600425BE1 /* HNComplaintData.m */; };
 		D3A2D31319FB98A100425BE1 /* HNRefundData.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A2D31219FB98A100425BE1 /* HNRefundData.m */; };
 		D3A47BCC1A01361B00B83682 /* HNDecorateChoiceView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A47BCB1A01361B00B83682 /* HNDecorateChoiceView.m */; };
@@ -498,6 +499,8 @@
 		D39662F219CD4E6300EE49B8 /* HNTemporaryDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNTemporaryDetailsViewController.h; sourceTree = "<group>"; };
 		D39662F319CD4E6300EE49B8 /* HNTemporaryDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNTemporaryDetailsViewController.m; sourceTree = "<group>"; };
 		D39662F419CD4E6300EE49B8 /* HNTemporaryDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HNTemporaryDetailsViewController.xib; sourceTree = "<group>"; };
+		D39E3C5A1A05F7A7008C5F95 /* HNUploadImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNUploadImage.h; path = Classes/DecorateControl/HNUploadImage.h; sourceTree = "<group>"; };
+		D39E3C5B1A05F7A7008C5F95 /* HNUploadImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNUploadImage.m; path = Classes/DecorateControl/HNUploadImage.m; sourceTree = "<group>"; };
 		D3A2D30E19FB960600425BE1 /* HNComplaintData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNComplaintData.h; path = Classes/DecorateControl/HNComplaintData.h; sourceTree = "<group>"; };
 		D3A2D30F19FB960600425BE1 /* HNComplaintData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNComplaintData.m; path = Classes/DecorateControl/HNComplaintData.m; sourceTree = "<group>"; };
 		D3A2D31119FB98A100425BE1 /* HNRefundData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNRefundData.h; path = Classes/DecorateControl/HNRefundData.h; sourceTree = "<group>"; };
@@ -740,6 +743,8 @@
 		B94B7A6019C9BE25000112ED /* DecorateControl */ = {
 			isa = PBXGroup;
 			children = (
+				D39E3C5A1A05F7A7008C5F95 /* HNUploadImage.h */,
+				D39E3C5B1A05F7A7008C5F95 /* HNUploadImage.m */,
 				B9DE560019C9C26700280EC7 /* HNDecorateControlViewController.m */,
 				B9DE55FF19C9C26700280EC7 /* HNDecorateControlViewController.h */,
 				B9C2B42119FFE1E200C93D59 /* HNDecorateData.h */,
@@ -1455,6 +1460,7 @@
 				D3C07BC919CDC8CA003EA5E4 /* HNComplaintDetailsViewController.m in Sources */,
 				B9E0668019DCDCB100893DBD /* UIRefreshControl+AFNetworking.m in Sources */,
 				D3A2D31319FB98A100425BE1 /* HNRefundData.m in Sources */,
+				D39E3C5C1A05F7A7008C5F95 /* HNUploadImage.m in Sources */,
 				B91BFCFC19E2C89A00FD468F /* MBProgressHUD.m in Sources */,
 				B9E0667619DCDCB100893DBD /* AFURLConnectionOperation.m in Sources */,
 				D3CD90F719CF09B500E76AF4 /* HNRefundTableViewController.m in Sources */,

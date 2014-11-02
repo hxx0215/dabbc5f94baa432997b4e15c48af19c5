@@ -8,6 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+@interface HNRefundModel : NSObject
+@property (nonatomic, strong)NSString *roomName;
+@property (nonatomic, strong)NSString *status;
+//@property (nonatomic, assign)HNConstructType constructType;
+@property (nonatomic, strong)NSString *declareId;
+@end
+
+
 //[{count:编号，money:金额，name:退款项}] 可退款
 //[{count:编号，money:金额，name:原因}] 处罚
 @interface HNRefundBodyItem : NSObject
@@ -18,6 +26,7 @@
 @end
 
 @interface HNRefundData : NSObject
+@property (nonatomic, strong)HNRefundModel *refundModel;
 @property (nonatomic, strong)NSString *declareId;
 @property (nonatomic, strong)NSMutableArray *projectrefundBody;
 @property (nonatomic, strong)NSMutableArray *finefundBody;
