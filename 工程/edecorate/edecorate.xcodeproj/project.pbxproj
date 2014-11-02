@@ -18,6 +18,7 @@
 		37F9D80019D8B481005CB18B /* HNCommentsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F9D7FF19D8B481005CB18B /* HNCommentsHeaderView.m */; };
 		37F9D80419D8B5E1005CB18B /* HNCommentsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F9D80219D8B5E1005CB18B /* HNCommentsTableViewCell.m */; };
 		37F9D80519D8B5E1005CB18B /* HNCommentsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37F9D80319D8B5E1005CB18B /* HNCommentsTableViewCell.xib */; };
+		B909D3561A066E6A002EECF9 /* HNNewCheckTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B909D3551A066E6A002EECF9 /* HNNewCheckTableViewCell.m */; };
 		B90C417919FA2674004EBC2B /* HNPurchaseItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B90C417819FA2674004EBC2B /* HNPurchaseItem.m */; };
 		B90C417C19FA282A004EBC2B /* HNPurchaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B90C417B19FA282A004EBC2B /* HNPurchaseViewController.m */; };
 		B90C418019FA3365004EBC2B /* purchasecheck@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B90C417E19FA3365004EBC2B /* purchasecheck@2x.png */; };
@@ -237,6 +238,8 @@
 		37F9D80119D8B5E1005CB18B /* HNCommentsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNCommentsTableViewCell.h; sourceTree = "<group>"; };
 		37F9D80219D8B5E1005CB18B /* HNCommentsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNCommentsTableViewCell.m; sourceTree = "<group>"; };
 		37F9D80319D8B5E1005CB18B /* HNCommentsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HNCommentsTableViewCell.xib; sourceTree = "<group>"; };
+		B909D3541A066E6A002EECF9 /* HNNewCheckTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNNewCheckTableViewCell.h; path = Classes/DecorateControl/HNNewCheckTableViewCell.h; sourceTree = "<group>"; };
+		B909D3551A066E6A002EECF9 /* HNNewCheckTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNNewCheckTableViewCell.m; path = Classes/DecorateControl/HNNewCheckTableViewCell.m; sourceTree = "<group>"; };
 		B90C417719FA2674004EBC2B /* HNPurchaseItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNPurchaseItem.h; path = Classes/DecorateControl/HNPurchaseItem.h; sourceTree = "<group>"; };
 		B90C417819FA2674004EBC2B /* HNPurchaseItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNPurchaseItem.m; path = Classes/DecorateControl/HNPurchaseItem.m; sourceTree = "<group>"; };
 		B90C417A19FA282A004EBC2B /* HNPurchaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNPurchaseViewController.h; path = Classes/DecorateControl/HNPurchaseViewController.h; sourceTree = "<group>"; };
@@ -893,6 +896,8 @@
 				B9E433651A06515E000E2CA9 /* HNNewCheckViewController.h */,
 				B9E433661A06515E000E2CA9 /* HNNewCheckViewController.m */,
 				B9E433671A06515E000E2CA9 /* HNNewCheckViewController.xib */,
+				B909D3541A066E6A002EECF9 /* HNNewCheckTableViewCell.h */,
+				B909D3551A066E6A002EECF9 /* HNNewCheckTableViewCell.m */,
 				B9D3DEE419CD65500020CDC9 /* HNCheckDetailView.h */,
 				B9D3DEE519CD65500020CDC9 /* HNCheckDetailView.m */,
 				B9D3DEDB19CD25430020CDC9 /* HNCheckDetailViewController.h */,
@@ -1460,6 +1465,7 @@
 				B9E0667519DCDCB100893DBD /* AFSecurityPolicy.m in Sources */,
 				B91BFCFF19E2D11F00FD468F /* HNLoginData.m in Sources */,
 				D33EEA6A19D6D9E600D6F106 /* HNProfileViewController.m in Sources */,
+				B909D3561A066E6A002EECF9 /* HNNewCheckTableViewCell.m in Sources */,
 				B9B2BC1819CF1F3000839AED /* ALAsset+isEqual.m in Sources */,
 				B9D3DECB19CD0B2C0020CDC9 /* HNReportPurchaseViewController.m in Sources */,
 				B94C773A19D3082D0046AC58 /* CALayer+XibConfiguration.m in Sources */,
