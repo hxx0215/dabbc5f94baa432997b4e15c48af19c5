@@ -128,7 +128,8 @@
         return;
     }
     if (model.ownername) {
-        [self.delegate updataDecorateInformation:model];
+        if ([self.delegate respondsToSelector:@selector(updataDecorateInformation:)])
+            [self.delegate updataDecorateInformation:model];
         return;
     }
     MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.superview animated:YES];
