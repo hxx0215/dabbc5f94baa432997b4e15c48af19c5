@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
-        <deployment defaultVersion="1808" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HNDeliverApplyViewController">
             <connections>
                 <outlet property="AddPassCardMan" destination="Zb1-W7-XtQ" id="8WY-e1-YML"/>
+                <outlet property="bTimeTextField" destination="kvI-uq-8pM" id="2u1-yb-6T2"/>
+                <outlet property="btimeTitleLabel" destination="k8h-ee-B6q" id="P9d-cO-NUg"/>
                 <outlet property="commitButton" destination="kkT-lc-ei9" id="kxS-oB-VLk"/>
                 <outlet property="decorationCompanyTitle" destination="dAG-hI-leI" id="hTG-o3-ni9"/>
+                <outlet property="eTimeTextField" destination="Gpt-Dp-Lzs" id="FnE-RU-fXH"/>
+                <outlet property="etimeTitleLabel" destination="R8n-E4-ecx" id="Qzh-L4-mQr"/>
                 <outlet property="houseInfoMain" destination="Zxa-Ay-j6D" id="K63-uY-BEG"/>
                 <outlet property="houseInfoTitle" destination="tI0-Cv-dT7" id="JGk-JX-cLl"/>
                 <outlet property="mainView" destination="2cR-6z-mMA" id="bbn-7B-WCL"/>
@@ -18,8 +21,6 @@
                 <outlet property="productTextField" destination="7Qy-XL-aoK" id="rTc-iW-N1X"/>
                 <outlet property="productTitle" destination="WnH-wp-omr" id="u4t-Vq-AQF"/>
                 <outlet property="roomNameLabel" destination="gw1-Qx-INg" id="7fG-Nh-pM2"/>
-                <outlet property="timeTextField" destination="kvI-uq-8pM" id="b1e-2U-JW2"/>
-                <outlet property="timeTitleLabel" destination="k8h-ee-B6q" id="gCs-nV-4d5"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="viewInformation" destination="SxC-wa-Nd3" id="69V-G5-zkc"/>
                 <outlet property="viewPrice" destination="JLy-Ag-H6F" id="2CG-Ww-YSn"/>
@@ -123,7 +124,7 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <view contentMode="scaleToFill" id="SxC-wa-Nd3">
-                            <rect key="frame" x="8" y="275" width="304" height="145"/>
+                            <rect key="frame" x="8" y="275" width="304" height="180"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="送货安装信息" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="JIz-H4-ijF">
@@ -149,7 +150,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="送货安装人员信息" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9Jx-v8-XtS">
-                                    <rect key="frame" x="0.0" y="115" width="304" height="30"/>
+                                    <rect key="frame" x="0.0" y="150" width="304" height="30"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" red="0.90196078430000004" green="0.36470588240000001" blue="0.08235294118" alpha="1" colorSpace="calibratedRGB"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -174,11 +175,27 @@
                                         <outlet property="delegate" destination="-1" id="P8o-AZ-T3H"/>
                                     </connections>
                                 </textField>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="R8n-E4-ecx">
+                                    <rect key="frame" x="0.0" y="119" width="69" height="21"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="Gpt-Dp-Lzs">
+                                    <rect key="frame" x="81" y="115" width="215" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="-1" id="Gcs-4Z-XQ9"/>
+                                    </connections>
+                                </textField>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <view contentMode="scaleToFill" id="JLy-Ag-H6F">
-                            <rect key="frame" x="8" y="437" width="304" height="212"/>
+                            <rect key="frame" x="8" y="505" width="304" height="212"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rMl-Dc-sub">

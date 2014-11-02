@@ -11,4 +11,5 @@
 
 @interface HNRefundApplyViewController : UIViewController
 @property (nonatomic, strong)HNRefundData* temporaryModel;
+-(id)initWithModel:(HNRefundData *)model;
 @end

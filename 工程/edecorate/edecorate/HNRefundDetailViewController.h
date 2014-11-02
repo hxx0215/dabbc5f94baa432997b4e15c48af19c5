@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "HNTemporaryModel.h"
+#import "HNRefundData.h"
 
 @interface HNRefundDetailViewController : UIViewController
-@property (nonatomic, strong)HNTemporaryModel* temporaryModel;
--(id)initWithModel:(HNTemporaryModel *)model;
+@property (nonatomic, strong)HNRefundData* temporaryModel;
+-(id)initWithModel:(HNRefundData *)model;
 @end

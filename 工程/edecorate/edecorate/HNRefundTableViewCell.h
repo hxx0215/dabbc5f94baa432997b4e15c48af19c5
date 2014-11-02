@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "HNTemporaryModel.h"
+#import "HNRefundData.h"
 @interface HNRefundTableViewCell : UITableViewCell
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withModel:(HNTemporaryModel*)model;
--(void)updateMyCell;
+- (void)setRoomName:(NSString *)roomname;
+- (void)setStatus:(NSString *)status;
 @end
