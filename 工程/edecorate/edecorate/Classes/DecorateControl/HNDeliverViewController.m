@@ -59,7 +59,7 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self.dTableView headerBeginRefreshing];
+    [self loadMyData];
 }
 
 -(void)loadMyData

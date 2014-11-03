@@ -204,12 +204,18 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self.tTableView headerBeginRefreshing];
-
-//    if(self.temporaryTableViewCell)
-//    {
-//        [self.temporaryTableViewCell updateMyCell];
-//    }
+    
+    switch (self.temporaryType) {
+        case FIRE:
+            [self loadFire];
+            break;
+        case POWER:
+            [self loadPower];
+            break;
+            
+        default:
+            break;
+    }
     
 }
 #pragma mark - tableView Delegate & DataSource
