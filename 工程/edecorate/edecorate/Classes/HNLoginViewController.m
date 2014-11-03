@@ -41,6 +41,7 @@
 }
 
 - (void)viewDidLoad{
+    [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     self.title = NSLocalizedString(@"Login", nil);
     self.backImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"loginback.png"]];

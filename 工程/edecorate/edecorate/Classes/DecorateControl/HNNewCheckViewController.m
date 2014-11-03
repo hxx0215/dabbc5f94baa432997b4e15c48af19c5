@@ -66,7 +66,7 @@
         else{
             [self.dataArr removeAllObjects];
             [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
-//            [self showNoData];
+            [self showNoData];
         }
     }else{
         [self showNoNet];

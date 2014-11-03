@@ -81,6 +81,7 @@
                        &movedBytes);
     
     NSData *myData = [NSData dataWithBytes:(const void *)bufferPtr length:(NSUInteger)movedBytes];
+    free(bufferPtr);
     return [[myData description] formatData];
 }
 - (NSString *)formatData{
@@ -133,8 +134,8 @@
 #pragma mark - decrypt
 - (NSString *)decryptWithDES{
     NSData *data = [self dataUsingEncoding:NSASCIIStringEncoding];
-    char *vplainText = malloc([self length] * sizeof(char));
-    strcpy(vplainText, [self UTF8String]);
+    char *vplainText = strdup([self UTF8String]);//calloc([self length] * sizeof(char) + 1);
+//    strcpy(vplainText, [self UTF8String]);
     char *plain = malloc([self length] / 2 *sizeof(char));
     for (int i=0;i<[self length] / 2;i++)
     {
@@ -150,6 +151,7 @@
             b = vplainText[i * 2 + 1] - '0';
         plain[i] = a * 16 + b;
     }
+    free(vplainText);
     CCCryptorStatus ccStatus;
     const void *vinitVec = (const void *) [KeyStr UTF8String];
     size_t plainTextBufferSize = [data length];
@@ -171,7 +173,9 @@
                        (void *)bufferPtr,
                        bufferPtrSize,
                        &movedBytes);
+    free(plain);
     NSData *myData = [NSData dataWithBytes:(const void *)bufferPtr length:(NSUInteger)movedBytes];
+    free(bufferPtr);
     NSString *ret = [[NSString alloc] initWithData:myData encoding:NSASCIIStringEncoding];
     return ret;
 }
