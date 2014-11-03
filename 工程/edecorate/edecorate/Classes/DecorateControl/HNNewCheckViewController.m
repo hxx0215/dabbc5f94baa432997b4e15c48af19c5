@@ -48,25 +48,28 @@
         NSString *contentType = @"text/html";
         [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
         [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
-            if (data){
-                NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
-                NSDictionary *retDic = [retJson objectFromJSONString];
-                NSInteger count = [[retDic objectForKey:@"total"] integerValue];
-                if (0 != count){
-                    [self.dataArr removeAllObjects];
-                    self.dataArr = [[retDic objectForKey:@"data"] mutableCopy];
-                    [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
-                }
-                else{
-                    [self.dataArr removeAllObjects];
-                    [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
-                    [self showNoData];
-                }
-            }else{
-                [self showNoNet];
-            }
+            [self performSelectorOnMainThread:@selector(testOnMain:) withObject:data waitUntilDone:YES];
         }];
+    }
+}
+- (void)testOnMain:(NSData *)data{
+    if (data){
+        NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
+        NSDictionary *retDic = [retJson objectFromJSONString];
+        NSInteger count = [[retDic objectForKey:@"total"] integerValue];
+        if (0 != count){
+            [self.dataArr removeAllObjects];
+            self.dataArr = [[retDic objectForKey:@"data"] mutableCopy];
+            [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
+        }
+        else{
+            [self.dataArr removeAllObjects];
+            [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
+//            [self showNoData];
+        }
+    }else{
+        [self showNoNet];
     }
 }
 - (void)showNoNet{
@@ -76,9 +79,12 @@
 }
 
 - (void)showNoData{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"We don't get any data.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
-//    [alert show];
-    [alert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:YES];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"We don't get any data.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+        [alert show];
+    });
+    
+//    [alert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:YES];
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.width, 50)];

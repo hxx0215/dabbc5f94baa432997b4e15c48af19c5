@@ -157,7 +157,8 @@
     hud.labelText = NSLocalizedString(@"Loading", nil);
     [[HNDecorateData shared] loadingDetail:[HNLoginData shared].mshopid declare:model.declareId block:^(NSURLResponse *response, NSData *data, NSError *connectionError){
         self.currentModel = model;
-        [self performSelector:@selector(doLoadingDetail:) withObject:data afterDelay:YES];
+//        [self performSelector:@selector(doLoadingDetail:) withObject:data afterDelay:YES];
+        [self performSelectorOnMainThread:@selector(doLoadingDetail:) withObject:data waitUntilDone:YES];
     }];
 }
 
