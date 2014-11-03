@@ -222,7 +222,7 @@
     [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
     
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
-        [self performSelector:@selector(didCheckOut:) withObject:data afterDelay:YES];
+        [self performSelectorOnMainThread:@selector(didCheckOut:) withObject:data waitUntilDone:YES];
         
     }];
 }

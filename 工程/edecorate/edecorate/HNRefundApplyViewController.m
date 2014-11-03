@@ -97,7 +97,7 @@
     
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
 
-        [self performSelector:@selector(didCommit:) withObject:data afterDelay:YES];
+        [self performSelectorOnMainThread:@selector(didCommit:) withObject:data waitUntilDone:YES];
         
     }];
 }

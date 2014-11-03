@@ -111,7 +111,7 @@
     
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
 
-        [self performSelector:@selector(didLoadFire:) withObject:data afterDelay:YES];
+        [self performSelectorOnMainThread:@selector(didLoadFire:) withObject:data waitUntilDone:YES];
     }];
 
 }
@@ -153,7 +153,7 @@
     [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
     
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
-        [self performSelector:@selector(didLoadPower:) withObject:data afterDelay:YES];
+        [self performSelectorOnMainThread:@selector(didLoadPower:) withObject:data waitUntilDone:YES];
         
     }];
     

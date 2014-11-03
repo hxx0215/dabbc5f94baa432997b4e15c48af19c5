@@ -274,7 +274,7 @@
     [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
     
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
-        [self performSelector:@selector(didCommit:) withObject:data afterDelay:YES];
+        [self performSelectorOnMainThread:@selector(didCommit:) withObject:data waitUntilDone:YES];
         
     }];
 
@@ -443,7 +443,7 @@
     
     
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
-        [self performSelector:@selector(didUploadImage:) withObject:data afterDelay:YES];
+        [self performSelectorOnMainThread:@selector(didUploadImage:) withObject:data waitUntilDone:YES];
     }];
     
 }

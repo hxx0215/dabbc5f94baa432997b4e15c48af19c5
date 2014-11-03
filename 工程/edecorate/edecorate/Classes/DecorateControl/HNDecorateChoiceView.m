@@ -60,7 +60,7 @@
     self.textFiled.placeholder = @"请选择";
     
     [[HNDecorateData shared] loadingDecorateData:[HNLoginData shared].mshopid block:^(NSURLResponse *response, NSData *data, NSError *connectionError){
-        [self performSelector:@selector(doDecorateData:) withObject:data afterDelay:YES];
+        [self performSelectorOnMainThread:@selector(doDecorateData:) withObject:data waitUntilDone:YES];
     }];
     
     return self;
@@ -141,9 +141,13 @@
     HNDecorateChoiceModel *model = (HNDecorateChoiceModel*)[self.decorateList objectAtIndex:row];
     self.textFiled.text = model.roomName;
     
-    if(!self.updataDecorateInformation)
-        return;
+    
     if (!self.delegate) {
+        return;
+    }
+    if(!self.updataDecorateInformation)
+    {
+        [self.delegate updataDecorateInformation:model];
         return;
     }
     if (model.ownername) {
