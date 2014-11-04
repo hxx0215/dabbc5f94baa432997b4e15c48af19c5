@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface HNLoginViewController : UIViewController
-
+@property (strong, nonatomic) UITabBarController *tabBarController;
 @end

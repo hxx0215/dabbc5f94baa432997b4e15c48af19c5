@@ -14,6 +14,9 @@
 #import "MBProgressHUD.h"
 #import "HNLoginData.h"
 #import "HNLoginView.h"
+#import "HNDecorateControlViewController.h"
+#import "HNBusinessBKControlViewController.h"
+#import "HNMessageViewController.h"
 
 @interface HNLoginModel: NSObject
 @property (nonatomic, strong)NSString *username;
@@ -22,7 +25,7 @@
 @implementation HNLoginModel
 @end
 
-@interface HNLoginViewController()
+@interface HNLoginViewController()<UITabBarControllerDelegate>
 
 @property (nonatomic, strong)UIButton *loginButton;
 @property (nonatomic, strong)UIImageView *backImage;
@@ -88,9 +91,35 @@
     [self.view addSubview:self.loginButton];
     self.loginView.userName.text = @"admin";
     self.loginView.password.text = @"123456";
+    [self initTabBar];
 
 }
-
+- (void)initTabBar{
+    self.tabBarController = [[UITabBarController alloc] init];
+    HNHomeViewController *vc1 = [[HNHomeViewController alloc] init];
+    vc1.title = NSLocalizedString(@"E Decorate", nil);
+    UITabBarItem *item1 = [[UITabBarItem alloc] initWithTitle:@"home" image:[UIImage imageNamed:@"btn_scanner01"] tag:101];
+    UITabBarItem *item2 = [[UITabBarItem alloc] initWithTitle:@"装修管控" image:[UIImage imageNamed:@"btn_scanner01"] tag:102];
+    UITabBarItem *item3 = [[UITabBarItem alloc] initWithTitle:@"商务后台" image:[UIImage imageNamed:@"btn_scanner01"] tag:103];
+    UITabBarItem *item4 = [[UITabBarItem alloc] initWithTitle:@"消息" image:[UIImage imageNamed:@"btn_scanner01"] tag:104];
+    vc1.tabBarItem = item1;
+    HNDecorateControlViewController *vc2 = [[HNDecorateControlViewController alloc] init];
+    vc2.tabBarItem = item2;
+    HNBusinessBKControlViewController *vc3 = [[HNBusinessBKControlViewController alloc] init];
+    vc3.tabBarItem = item3;
+    HNMessageViewController *vc4 = [[HNMessageViewController alloc] init];
+    vc4.tabBarItem = item4;
+    UINavigationController *nav1 = [[UINavigationController alloc] initWithRootViewController:vc1];
+    nav1.navigationBar.translucent = NO;
+    UINavigationController *nav2 = [[UINavigationController alloc] initWithRootViewController:vc2];
+    nav2.navigationBar.translucent = NO;
+    UINavigationController *nav3 = [[UINavigationController alloc] initWithRootViewController:vc3];
+    nav3.navigationBar.translucent = NO;
+    UINavigationController *nav4 = [[UINavigationController alloc] initWithRootViewController:vc4];
+    nav4.navigationBar.translucent = NO;
+    self.tabBarController.viewControllers = @[nav1,nav2,nav3,nav4];
+    self.tabBarController.delegate = self;
+}
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
 //    [self.view insertSubview:self.backImage atIndex:100];
@@ -163,6 +192,40 @@
     HNHomeViewController *homeViewController = [[HNHomeViewController alloc] init];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:homeViewController];
     nav.navigationBar.translucent = NO;
-    [self presentViewController:nav animated:YES completion:nil];
+    [self presentViewController:self.tabBarController animated:YES completion:nil];
+
 }
+
+- (void)changeViewControlelr:(id)sender{
+    
+}
+
+
+- (void)tabBarController:(UITabBarController *)tabBarController willBeginCustomizingViewControllers:(NSArray *)viewControllers
+{
+    NSLog(@"willBeginCustomizingViewControllers: %@", viewControllers);
+}
+
+- (void)tabBarController:(UITabBarController *)tabBarController willEndCustomizingViewControllers:(NSArray *)viewControllers changed:(BOOL)changed
+{
+    NSLog(@"viewcontrollers: %@, ischanged: %d", viewControllers, changed);
+}
+
+
+- (void)tabBarController:(UITabBarController *)tabBarController didEndCustomizingViewControllers:(NSArray *)viewControllers changed:(BOOL)changed
+{
+    NSLog(@"didEndCustomizingViewController!");
+    NSLog(@"didEndCustomizingViewController: %@, ischanged: %d", viewControllers, changed);
+}
+
+- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
+{
+    return YES;
+}
+
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
+{
+//    NSLog(@"didSelectViewController!");
+}
+
 @end
