@@ -130,7 +130,7 @@
 
 -(void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self.tTableView headerBeginRefreshing];
+    [self loadMyData];
     
 }
 

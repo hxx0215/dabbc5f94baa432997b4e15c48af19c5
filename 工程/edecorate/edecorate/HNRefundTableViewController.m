@@ -127,8 +127,7 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
 //    self.modelList = [[NSMutableArray alloc] init];
-//    [self loadMyData];
-    [self.rTableView headerBeginRefreshing];
+    [self refreshData];
 }
 
 - (NSDictionary *)encodeDetailModel:(HNRefundSendModel *)model{
