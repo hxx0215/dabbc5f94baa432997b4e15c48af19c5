@@ -117,15 +117,18 @@
 
 - (void)decorateReportedConstructionButton_Clicked:(id)sender{
     HNDecorateReportViewController *reportViewController = [[HNDecorateReportViewController alloc] init];
+    reportViewController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:reportViewController animated:YES];
 }
 
 - (void)decorateAcceptanceButton_Clicked:(id)sender{
     HNDecorateCheckViewController *checkViewController = [[HNDecorateCheckViewController alloc] init];
+    checkViewController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:checkViewController animated:YES];
 }
 - (void)officePassesButton_Clicked:(id)sender{
     HNOfficePassesViewController *officePassViewcontroller=[[HNOfficePassesViewController alloc] init];
+    officePassViewcontroller.hidesBottomBarWhenPushed= YES;
     [self.navigationController pushViewController:officePassViewcontroller animated:YES];
     
     //HNOfficePassesApplyViewController *officePassApplyViewcontroller=[[HNOfficePassesApplyViewController alloc] init];
@@ -134,26 +137,31 @@
 
 - (void)temporaryFireConstructionButton_Clicked:(id)sender{
     HNTemporaryFireViewController *temporaryViewController = [[HNTemporaryFireViewController alloc] initWithTemporaryType:FIRE];
+    temporaryViewController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:temporaryViewController animated:YES];
 }
 
 - (void)temporaryPowerButton_Clicked:(id)sender{
     HNTemporaryFireViewController *temporaryViewController = [[HNTemporaryFireViewController alloc] initWithTemporaryType:POWER];
+    temporaryViewController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:temporaryViewController animated:YES];
 }
 
 - (void)deliveryAndInstallationButton_Clicked:(id)sender{
     HNDeliverViewController *deliverViewController = [[HNDeliverViewController alloc]init];
+    deliverViewController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:deliverViewController animated:YES];
 }
 
 - (void)depositRefundButton_Clicked:(id)sender{
     HNRefundTableViewController *refundViewcontroller=[[HNRefundTableViewController alloc] init];
+    refundViewcontroller.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:refundViewcontroller animated:YES];
 }
 
 - (void)IHaveAComplaintButton_Clicked:(id)sender{
     HNComplaintTableViewController *complaintViewController = [[HNComplaintTableViewController alloc] init];
+    complaintViewController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:complaintViewController animated:YES];
 }
 
