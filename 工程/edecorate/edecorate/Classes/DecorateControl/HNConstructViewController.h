@@ -7,6 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#define kOriginalSChart @"OriginalSChart"
+#define kfloorplan @"floorplan"
+#define kwallRemould @"wallRemould"
+#define kceilingPlan @"ceilingPlan"
+#define kWaterwayPlan @"WaterwayPlan"
+#define kBlockDiagram @"BlockDiagram"
+#define kshopInfo @"shopInfo"
 typedef enum HNConstructType{
     kCompanyNew = 0,
     kCompanyDetail,

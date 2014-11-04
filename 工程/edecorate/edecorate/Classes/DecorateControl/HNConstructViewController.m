@@ -170,7 +170,12 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *identy = @"ConstructCell";
-    HNConstructTableViewCell *cell =[[HNConstructTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identy];
+    HNConstructTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
+    if (!cell)
+    {
+        cell = [[HNConstructTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identy];
+        [cell.photo addTarget:self action:@selector(showPic:) forControlEvents:UIControlEventTouchUpInside];
+    }
     if (0==indexPath.section){
         if (self.constructType < 2)
             cell.title.text = self.companyData[indexPath.row];
@@ -179,6 +184,7 @@
     }
     else
         cell.title.text = self.graphData[indexPath.row];
+    cell.photo.tag = (indexPath.section + 1) * 100 + indexPath.row;
     return cell;
 }
 
@@ -256,10 +262,18 @@
 }
 - (void)showNoNetwork{
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection Error", nil) message:NSLocalizedString(@"Please check your network.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
-    [alert show];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [alert show];
+    });
+    
 }
 - (void)showNoData{
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"We don't get any data.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
-    [alert show];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [alert show];
+    });
+}
+- (void)showPic:(UIButton *)sender{
+    [sender setImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:@""]]] forState:UIControlStateNormal];
 }
 @end

@@ -13,13 +13,7 @@
 #import "HNLoginData.h"
 #import "MBProgressHUD.h"
 #import "HNConstructViewController.h"
-#define kOriginalSChart @"OriginalSChart"
-#define kfloorplan @"floorplan"
-#define kwallRemould @"wallRemould"
-#define kceilingPlan @"ceilingPlan"
-#define kWaterwayPlan @"WaterwayPlan"
-#define kBlockDiagram @"BlockDiagram"
-#define kshopInfo @"shopInfo"
+
 
 @interface HNReportModel : NSObject
 @property (nonatomic, strong)NSString *roomName;
@@ -143,7 +137,9 @@
     NSString *contentType = @"text/html";
     [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+        });
         if (data)
         {
             NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -169,15 +165,22 @@
                 [vc.chart setObject:[dataArr[0] objectForKey:kWaterwayPlan] forKey:kWaterwayPlan];
                 [vc.chart setObject:[dataArr[0] objectForKey:kBlockDiagram] forKey:kBlockDiagram];
                 vc.shopInfo = [dataArr[0] objectForKey:kshopInfo];
-                [self.navigationController pushViewController:vc animated:YES];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.navigationController pushViewController:vc animated:YES];
+                });
             }
             else{
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"We don't get any data.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
-                [alert show];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [alert show];
+                });
+                
             }
         }else{
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection Error", nil) message:NSLocalizedString(@"Please check your network.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
-            [alert show];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [alert show];
+            });
         }
     }];
 
