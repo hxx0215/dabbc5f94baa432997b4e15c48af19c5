@@ -60,43 +60,50 @@
 #define WSPACE 44/2
 #define TSPACEPER 0.1
 #define STARTTOP 266/2
+#define BTNWIDTH 100
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationItem.title = NSLocalizedString(@"Decorate Control", nil) ;
     
-    self.view.backgroundColor = [UIColor colorWithRed:220/255.0 green:220/255.0 blue:220/255.0 alpha:1];
+    self.view.backgroundColor = [UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1];
     self.decorateReportedConstruction = [self createButtonWithTitle:NSLocalizedString(@"Reported that construction decoration", nil) selector:@selector(decorateReportedConstructionButton_Clicked:) row:0 coloum:0 image:[UIImage imageNamed:@"decorate_report_button_normal"] imageClick:[UIImage imageNamed:@"decorate_report_button_pressed"]];
     
     self.decorateAcceptance = [self createButtonWithTitle:NSLocalizedString(@"Decoration acceptance", nil) selector:@selector(decorateAcceptanceButton_Clicked:) row:0 coloum:1 image:[UIImage imageNamed:@"decorate_check_button_normal"] imageClick:[UIImage imageNamed:@"decorate_check_button_pressed"]];
     self.officePasses = [self createButtonWithTitle:NSLocalizedString(@"Office passes", nil) selector:@selector(officePassesButton_Clicked:) row:0 coloum:2 image:[UIImage imageNamed:@"decorate_passport_button_normal"] imageClick:[UIImage imageNamed:@"decorate_passport_button_pressed"]];
     self.temporaryFire = [self createButtonWithTitle:NSLocalizedString(@"Temporary fire", nil) selector:@selector(temporaryFireConstructionButton_Clicked:) row:1 coloum:0 image:[UIImage imageNamed:@"decorate_fire_button_normal"] imageClick:[UIImage imageNamed:@"decorate_fire_button_pressed"]];
+    
+    self.deliveryAndInstallation = [self createButtonWithTitle:NSLocalizedString(@"Delivery&Installation", nil) selector:@selector(deliveryAndInstallationButton_Clicked:) row:1 coloum:1 image:[UIImage imageNamed:@"decorate_installation_button_normal"] imageClick:[UIImage imageNamed:@"decorate_installation_button_pressed"]];
+    self.depositRefund = [self createButtonWithTitle:NSLocalizedString(@"Deposit refund", nil) selector:@selector(depositRefundButton_Clicked:) row:1 coloum:2 image:[UIImage imageNamed:@"decorate_refund_button_normal"] imageClick:[UIImage imageNamed:@"decorate_refund_button_pressed"]];
+    self.IHaveAComplaint = [self createButtonWithTitle:NSLocalizedString(@"I have a complaint", nil) selector:@selector(IHaveAComplaintButton_Clicked:) row:2 coloum:0 image:[UIImage imageNamed:@"decorate_complain_button_normal"] imageClick:[UIImage imageNamed:@"decorate_complain_button_pressed"]];
+    
     self.temporaryPower = [self createButtonWithTitle:NSLocalizedString(@"Temporary power", nil) selector:@selector(temporaryPowerButton_Clicked:) row:1 coloum:1 image:[UIImage imageNamed:@"decorate_electric_button_normal"] imageClick:[UIImage imageNamed:@"decorate_electric_button_pressed"]];
-    self.deliveryAndInstallation = [self createButtonWithTitle:NSLocalizedString(@"Delivery&Installation", nil) selector:@selector(deliveryAndInstallationButton_Clicked:) row:1 coloum:2 image:[UIImage imageNamed:@"decorate_installation_button_normal"] imageClick:[UIImage imageNamed:@"decorate_installation_button_pressed"]];
-    self.depositRefund = [self createButtonWithTitle:NSLocalizedString(@"Deposit refund", nil) selector:@selector(depositRefundButton_Clicked:) row:2 coloum:0 image:[UIImage imageNamed:@"decorate_refund_button_normal"] imageClick:[UIImage imageNamed:@"decorate_refund_button_pressed"]];
-    self.IHaveAComplaint = [self createButtonWithTitle:NSLocalizedString(@"I have a complaint", nil) selector:@selector(IHaveAComplaintButton_Clicked:) row:2 coloum:1 image:[UIImage imageNamed:@"decorate_complain_button_normal"] imageClick:[UIImage imageNamed:@"decorate_complain_button_pressed"]];
 }
 
 - (UIButton *)createButtonWithTitle:(NSString *)title selector:(SEL)selector row:(int)ro coloum:(int)col image:(UIImage* )image imageClick:(UIImage* )imageClick{
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.backgroundColor = [UIColor whiteColor];
+    btn.width = (self.view.width-20)/3;
+    btn.height = (1.0*btn.width/image.size.width)*image.size.height;
     [btn setImage:image forState:UIControlStateNormal];
     [btn setImage:imageClick forState:UIControlStateSelected];
-    [btn.titleLabel setContentMode:UIViewContentModeCenter];
-    [btn sizeToFit];
-    CGFloat f = (self.view.width - image.size.width*3)/4.0;
-    CGFloat hf = (self.view.bounds.size.height -100 - image.size.width*2 - HSPACE-40)/3.0;
-    btn.left = f+(f+image.size.width)*col;
-    btn.top = hf+(image.size.width+20+HSPACE)*ro;
+    //［btn set
+    //[btn.titleLabel setContentMode:UIViewContentModeBottom];
+    //[btn sizeToFit];
+    CGFloat f = 8;
+    btn.left = f+(2+btn.width)*col;
+    btn.top = f+(2+btn.height)*ro;
     
-    UILabel* label = [[UILabel alloc]initWithFrame:CGRectMake(0, image.size.height, image.size.width, 20)];
-    
-    [btn addSubview:label];
-    label.text = title;
-    label.textAlignment = NSTextAlignmentCenter;
-    label.textColor = [UIColor blackColor];
+    [btn setTitle:title forState:UIControlStateNormal];
+    [btn setTitleColor:[UIColor darkTextColor] forState:UIControlStateNormal];
+    btn.titleEdgeInsets = UIEdgeInsetsMake(btn.height-24, 0, 0, 0);
+    UILabel* label = btn.titleLabel;
+//    label.text = title;
+//    label.textAlignment = NSTextAlignmentCenter;
+//    label.textColor = [UIColor blackColor];
     label.font = [UIFont systemFontOfSize:12];
-    
+    [btn bringSubviewToFront:label];
     
     //btn.layer.borderWidth = 1.0;
     //btn.layer.borderColor = [UIColor blackColor].CGColor;
