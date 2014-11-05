@@ -64,6 +64,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.navigationItem.title = NSLocalizedString(@"Decorate Control", nil) ;
+    
     self.view.backgroundColor = [UIColor whiteColor];
     self.decorateReportedConstruction = [self createButtonWithTitle:NSLocalizedString(@"Reported that construction decoration", nil) selector:@selector(decorateReportedConstructionButton_Clicked:) row:0 coloum:0 image:[UIImage imageNamed:@"装修报建.png"] imageClick:[UIImage imageNamed:@"装修报建点击.png"]];
     

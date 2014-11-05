@@ -152,6 +152,8 @@
 		B9E433641A064706000E2CA9 /* HNCheckDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B9E433631A064706000E2CA9 /* HNCheckDetailTableViewCell.m */; };
 		B9E433681A06515E000E2CA9 /* HNNewCheckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9E433661A06515E000E2CA9 /* HNNewCheckViewController.m */; };
 		B9E433691A06515E000E2CA9 /* HNNewCheckViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9E433671A06515E000E2CA9 /* HNNewCheckViewController.xib */; };
+		D3201FAE1A0A640C00236B08 /* HNSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3201FAC1A0A640C00236B08 /* HNSettingViewController.m */; };
+		D3201FAF1A0A640C00236B08 /* HNSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3201FAD1A0A640C00236B08 /* HNSettingViewController.xib */; };
 		D334E87119FFC0DB002AA7D2 /* HNDeliverDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D334E86F19FFC0DB002AA7D2 /* HNDeliverDetailTableViewCell.m */; };
 		D334E87219FFC0DB002AA7D2 /* HNDeliverDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D334E87019FFC0DB002AA7D2 /* HNDeliverDetailTableViewCell.xib */; };
 		D33549F719FEB3D300135800 /* HNPassAddNewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D33549F519FEB3D300135800 /* HNPassAddNewTableViewCell.m */; };
@@ -470,6 +472,9 @@
 		B9E433651A06515E000E2CA9 /* HNNewCheckViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNNewCheckViewController.h; path = Classes/DecorateControl/HNNewCheckViewController.h; sourceTree = "<group>"; };
 		B9E433661A06515E000E2CA9 /* HNNewCheckViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNNewCheckViewController.m; path = Classes/DecorateControl/HNNewCheckViewController.m; sourceTree = "<group>"; };
 		B9E433671A06515E000E2CA9 /* HNNewCheckViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HNNewCheckViewController.xib; path = Classes/DecorateControl/HNNewCheckViewController.xib; sourceTree = "<group>"; };
+		D3201FAB1A0A640C00236B08 /* HNSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNSettingViewController.h; path = Classes/Setting/HNSettingViewController.h; sourceTree = "<group>"; };
+		D3201FAC1A0A640C00236B08 /* HNSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNSettingViewController.m; path = Classes/Setting/HNSettingViewController.m; sourceTree = "<group>"; };
+		D3201FAD1A0A640C00236B08 /* HNSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HNSettingViewController.xib; path = Classes/Setting/HNSettingViewController.xib; sourceTree = "<group>"; };
 		D334E86E19FFC0DB002AA7D2 /* HNDeliverDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNDeliverDetailTableViewCell.h; path = Classes/DecorateControl/HNDeliverDetailTableViewCell.h; sourceTree = "<group>"; };
 		D334E86F19FFC0DB002AA7D2 /* HNDeliverDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNDeliverDetailTableViewCell.m; path = Classes/DecorateControl/HNDeliverDetailTableViewCell.m; sourceTree = "<group>"; };
 		D334E87019FFC0DB002AA7D2 /* HNDeliverDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HNDeliverDetailTableViewCell.xib; path = Classes/DecorateControl/HNDeliverDetailTableViewCell.xib; sourceTree = "<group>"; };
@@ -825,6 +830,7 @@
 		B965862B19F68CBD00EB4766 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				D3201FB01A0A654900236B08 /* TabBar */,
 				B93ED05D1A085B9F008B99B2 /* btn_scanner01@2x.png */,
 				B9C2B41C19FE8C3900C93D59 /* ReportDetail */,
 				B90C417D19FA3321004EBC2B /* Purchase */,
@@ -1132,6 +1138,7 @@
 		B9F295E219C9A8DA003242DF /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				D3201FAA1A0A63D900236B08 /* Setting */,
 				B94B7A6319C9BF3E000112ED /* HNHomeViewController.h */,
 				B94B7A6419C9BF3E000112ED /* HNHomeViewController.m */,
 				B953CE0C19CAFBE000BD57DF /* HNLoginViewController.h */,
@@ -1167,6 +1174,23 @@
 				B94C773919D3082D0046AC58 /* CALayer+XibConfiguration.m */,
 			);
 			name = "Third Party";
+			sourceTree = "<group>";
+		};
+		D3201FAA1A0A63D900236B08 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				D3201FAB1A0A640C00236B08 /* HNSettingViewController.h */,
+				D3201FAC1A0A640C00236B08 /* HNSettingViewController.m */,
+				D3201FAD1A0A640C00236B08 /* HNSettingViewController.xib */,
+			);
+			name = Setting;
+			sourceTree = "<group>";
+		};
+		D3201FB01A0A654900236B08 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = TabBar;
 			sourceTree = "<group>";
 		};
 		D33EEA6019D6C29100D6F106 /* volume */ = {
@@ -1330,6 +1354,7 @@
 				D334E87219FFC0DB002AA7D2 /* HNDeliverDetailTableViewCell.xib in Resources */,
 				B9D72D5A19D846FC0011CF83 /* HNOrderViewController.xib in Resources */,
 				D33EEA6B19D6D9E600D6F106 /* HNProfileViewController.xib in Resources */,
+				D3201FAF1A0A640C00236B08 /* HNSettingViewController.xib in Resources */,
 				B90C418119FA3365004EBC2B /* purchasecheckbox@2x.png in Resources */,
 				D38E009119D84BE0000F5263 /* HNReimburseViewController.xib in Resources */,
 				B9DE560419C9C40B00280EC7 /* Localizable.strings in Resources */,
@@ -1450,6 +1475,7 @@
 				B9B2BC2519CF1F3000839AED /* CTAssetsViewControllerTransition.m in Sources */,
 				B953CE0E19CAFBE000BD57DF /* HNLoginViewController.m in Sources */,
 				B94B7A6519C9BF3E000112ED /* HNHomeViewController.m in Sources */,
+				D3201FAE1A0A640C00236B08 /* HNSettingViewController.m in Sources */,
 				B95D15C419D9AE4B00689B4D /* HNEditPriceViewController.m in Sources */,
 				B9C2B42319FFE1E200C93D59 /* HNDecorateData.m in Sources */,
 				B9E0667E19DCDCB100893DBD /* UIImageView+AFNetworking.m in Sources */,

@@ -36,6 +36,11 @@
     // Do any additional setup after loading the view.
 //    self.title = NSLocalizedString(@"E Decorate", nil);
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    UIImageView *imageView = [[UIImageView alloc]initWithFrame:self.view.bounds];
+    [imageView setImage:[UIImage imageNamed:@"loading_activity_background"]];
+    [self.view addSubview:imageView];
+    /*
     self.decorateControlButton = [self createButtonWithTitle:NSLocalizedString(@"Decorate Control", nil) selector:@selector(decorateControlButton_Clicked:) textColor:[UIColor colorWithRed:0x00/255.0 green:0xa5/255.0 blue:0xf6/255.0 alpha:1]];
     
     self.businessBackgroundButton = [self createButtonWithTitle:NSLocalizedString(@"Business Background", nil) selector:@selector(businessBackgroundButton_Clicked:) textColor:[UIColor colorWithRed:0xe5/255.0 green:0x7d/255.0 blue:0x45/255.0 alpha:1]];
@@ -47,6 +52,7 @@
     self.settingButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Setting", nil) style:UIBarButtonItemStylePlain target:self action:@selector(settingButton_Clicked:)];
     [self.settingButton setImage:[UIImage imageNamed:@"设置_11.png"]];
     self.navigationItem.rightBarButtonItem = self.settingButton;
+     */
 }
 
 - (UIButton *)createButtonWithTitle:(NSString *)title selector:(SEL)selector textColor:(UIColor *)color{

@@ -17,6 +17,7 @@
 #import "HNDecorateControlViewController.h"
 #import "HNBusinessBKControlViewController.h"
 #import "HNMessageViewController.h"
+#import "HNSettingViewController.h"
 
 @interface HNLoginModel: NSObject
 @property (nonatomic, strong)NSString *username;
@@ -96,12 +97,17 @@
 }
 - (void)initTabBar{
     self.tabBarController = [[UITabBarController alloc] init];
+    self.tabBarController.view.backgroundColor = [UIColor darkGrayColor];
     HNHomeViewController *vc1 = [[HNHomeViewController alloc] init];
     vc1.title = NSLocalizedString(@"E Decorate", nil);
-    UITabBarItem *item1 = [[UITabBarItem alloc] initWithTitle:@"home" image:[UIImage imageNamed:@"btn_scanner01"] tag:101];
-    UITabBarItem *item2 = [[UITabBarItem alloc] initWithTitle:@"装修管控" image:[UIImage imageNamed:@"btn_scanner01"] tag:102];
-    UITabBarItem *item3 = [[UITabBarItem alloc] initWithTitle:@"商务后台" image:[UIImage imageNamed:@"btn_scanner01"] tag:103];
-    UITabBarItem *item4 = [[UITabBarItem alloc] initWithTitle:@"消息" image:[UIImage imageNamed:@"btn_scanner01"] tag:104];
+    UITabBarItem *item1 = [[UITabBarItem alloc] initWithTitle:@"home" image:[UIImage imageNamed:@"设置_11"] tag:101];
+    UITabBar *tabBar = [self.tabBarController tabBar];
+    [tabBar setTintColor:[UIColor greenColor]];
+    tabBar.barStyle = UIBarStyleBlack;
+    UITabBarItem *item2 = [[UITabBarItem alloc] initWithTitle:@"装修管控" image:[UIImage imageNamed:@"Tab2"] tag:102];
+    UITabBarItem *item3 = [[UITabBarItem alloc] initWithTitle:@"商务后台" image:[UIImage imageNamed:@"Tab3"] tag:103];
+    UITabBarItem *item4 = [[UITabBarItem alloc] initWithTitle:@"消息" image:[UIImage imageNamed:@"Tab4"] tag:104];
+    UITabBarItem *item5 = [[UITabBarItem alloc] initWithTitle:@"设置" image:[UIImage imageNamed:@"Tab5"] tag:105];
     vc1.tabBarItem = item1;
     HNDecorateControlViewController *vc2 = [[HNDecorateControlViewController alloc] init];
     vc2.tabBarItem = item2;
@@ -109,6 +115,8 @@
     vc3.tabBarItem = item3;
     HNMessageViewController *vc4 = [[HNMessageViewController alloc] init];
     vc4.tabBarItem = item4;
+    HNSettingViewController *vc5 = [[HNSettingViewController alloc]init];
+    vc5.tabBarItem = item5;
     UINavigationController *nav1 = [[UINavigationController alloc] initWithRootViewController:vc1];
     nav1.navigationBar.translucent = NO;
     UINavigationController *nav2 = [[UINavigationController alloc] initWithRootViewController:vc2];
@@ -117,7 +125,9 @@
     nav3.navigationBar.translucent = NO;
     UINavigationController *nav4 = [[UINavigationController alloc] initWithRootViewController:vc4];
     nav4.navigationBar.translucent = NO;
-    self.tabBarController.viewControllers = @[nav1,nav2,nav3,nav4];
+    UINavigationController *nav5 = [[UINavigationController alloc] initWithRootViewController:vc5];
+    nav5.navigationBar.translucent = NO;
+    self.tabBarController.viewControllers = @[nav1,nav2,nav3,nav4,nav5];
     self.tabBarController.delegate = self;
 }
 - (void)viewWillAppear:(BOOL)animated{
