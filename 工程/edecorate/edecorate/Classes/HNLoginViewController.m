@@ -98,9 +98,9 @@
 - (void)initTabBar{
     self.tabBarController = [[UITabBarController alloc] init];
     self.tabBarController.view.backgroundColor = [UIColor darkGrayColor];
-    HNHomeViewController *vc1 = [[HNHomeViewController alloc] init];
-    vc1.title = NSLocalizedString(@"E Decorate", nil);
-    UITabBarItem *item1 = [[UITabBarItem alloc] initWithTitle:@"home" image:[UIImage imageNamed:@"设置_11"] tag:101];
+    //HNHomeViewController *vc1 = [[HNHomeViewController alloc] init];
+    //vc1.title = NSLocalizedString(@"E Decorate", nil);
+    //UITabBarItem *item1 = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Home", nil) image:[UIImage imageNamed:@"设置_11"] tag:101];
     UITabBar *tabBar = [self.tabBarController tabBar];
     [tabBar setTintColor:[UIColor greenColor]];
     tabBar.barStyle = UIBarStyleBlack;
@@ -108,7 +108,7 @@
     UITabBarItem *item3 = [[UITabBarItem alloc] initWithTitle:@"商务后台" image:[UIImage imageNamed:@"Tab3"] tag:103];
     UITabBarItem *item4 = [[UITabBarItem alloc] initWithTitle:@"消息" image:[UIImage imageNamed:@"Tab4"] tag:104];
     UITabBarItem *item5 = [[UITabBarItem alloc] initWithTitle:@"设置" image:[UIImage imageNamed:@"Tab5"] tag:105];
-    vc1.tabBarItem = item1;
+    //vc1.tabBarItem = item1;
     HNDecorateControlViewController *vc2 = [[HNDecorateControlViewController alloc] init];
     vc2.tabBarItem = item2;
     HNBusinessBKControlViewController *vc3 = [[HNBusinessBKControlViewController alloc] init];
@@ -117,8 +117,8 @@
     vc4.tabBarItem = item4;
     HNSettingViewController *vc5 = [[HNSettingViewController alloc]init];
     vc5.tabBarItem = item5;
-    UINavigationController *nav1 = [[UINavigationController alloc] initWithRootViewController:vc1];
-    nav1.navigationBar.translucent = NO;
+    //UINavigationController *nav1 = [[UINavigationController alloc] initWithRootViewController:vc1];
+    //nav1.navigationBar.translucent = NO;
     UINavigationController *nav2 = [[UINavigationController alloc] initWithRootViewController:vc2];
     nav2.navigationBar.translucent = NO;
     UINavigationController *nav3 = [[UINavigationController alloc] initWithRootViewController:vc3];
@@ -127,7 +127,7 @@
     nav4.navigationBar.translucent = NO;
     UINavigationController *nav5 = [[UINavigationController alloc] initWithRootViewController:vc5];
     nav5.navigationBar.translucent = NO;
-    self.tabBarController.viewControllers = @[nav1,nav2,nav3,nav4,nav5];
+    self.tabBarController.viewControllers = @[nav2,nav3,nav4,nav5];
     self.tabBarController.delegate = self;
 }
 - (void)viewWillAppear:(BOOL)animated{
