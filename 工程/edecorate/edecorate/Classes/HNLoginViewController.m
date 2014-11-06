@@ -203,7 +203,7 @@
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:homeViewController];
     nav.navigationBar.translucent = NO;
     [self presentViewController:self.tabBarController animated:YES completion:nil];
-
+    self.tabBarController.selectedIndex = 0;
 }
 
 - (void)changeViewControlelr:(id)sender{

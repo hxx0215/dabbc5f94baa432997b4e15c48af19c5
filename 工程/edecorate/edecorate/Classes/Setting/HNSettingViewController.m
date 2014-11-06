@@ -28,6 +28,11 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+- (IBAction)logOut:(UIButton *)sender {
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+}
 
 /*
 #pragma mark - Navigation
