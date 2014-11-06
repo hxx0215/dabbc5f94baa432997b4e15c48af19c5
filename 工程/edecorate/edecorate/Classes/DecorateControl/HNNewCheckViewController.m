@@ -10,13 +10,16 @@
 #import "HNDecorateChoiceView.h"
 #import "HNLoginData.h"
 #import "HNNewCheckTableViewCell.h"
+#import "HNUploadImage.h"
+#import "MBProgressHUD.h"
 
-@interface HNNewCheckViewController ()<UITableViewDelegate,UITableViewDataSource,HNDecorateChoiceViewDelegate>
+@interface HNNewCheckViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate,HNDecorateChoiceViewDelegate>
 @property (nonatomic, strong) HNDecorateChoiceView *pickView;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArr;
 @property (nonatomic, strong) UIButton *submit;
 @property (nonatomic, strong) NSString *curDeclareId;
+@property (nonatomic, strong) NSIndexPath *curIndexPath;
 @end
 
 @implementation HNNewCheckViewController
@@ -106,7 +109,7 @@
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.width, 50)];
-    view.backgroundColor = [UIColor grayColor];
+    view.backgroundColor = [UIColor colorWithRed:144/255.0 green:197/255.0 blue:31/255.0 alpha:1.0];
     UILabel *label = [[UILabel alloc] init];
     label.font = [UIFont systemFontOfSize:15.0];
     label.text = [self.dataArr[section] objectForKey:@"typename"];
@@ -159,6 +162,44 @@
         NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
         NSDictionary *retDic = [retJson objectFromJSONString];
         NSLog(@"%@",[retDic objectForKey:@"error"]);
+    }];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    self.curIndexPath = indexPath;
+    HNNewCheckTableViewCell *cell = (HNNewCheckTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+    if ([cell.type isEqualToString:@"2"]){
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+        picker.delegate = self;
+        picker.allowsEditing = NO;
+        self.view.userInteractionEnabled = NO;
+        [self presentViewController:picker animated:YES completion:^{
+            self.view.userInteractionEnabled = YES;
+        }];
+    }
+    
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
+    UIImage *image=[info objectForKey:UIImagePickerControllerOriginalImage];
+    
+    UIImage *scaledImage = [HNUploadImage ScaledImage:image scale:0.5];
+    MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = NSLocalizedString(@"Uploading", nil);
+    
+    [picker dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+    [HNUploadImage UploadImage:scaledImage block:^(NSString *msg) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        if (msg) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:msg delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+                [alert show];
+            });
+        }
     }];
 }
 @end

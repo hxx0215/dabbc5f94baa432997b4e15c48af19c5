@@ -108,6 +108,8 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 //    HNCheckDetailViewController *checkDetail = [[HNCheckDetailViewController alloc] init];
 //    [self.navigationController pushViewController:checkDetail animated:YES];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = NSLocalizedString(@"Loading", nil);
     NSDictionary *sendDic = @{@"checkid": [self.checkList[indexPath.row] checkid]};
     NSString *sendJson = [sendDic JSONString];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
@@ -115,6 +117,9 @@
     NSString *contentType = @"text/html";
     [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+        });
         if (data)
         {
             NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -125,7 +130,9 @@
                 NSArray *dataArr = [retDic objectForKey:@"data"];
                 HNCheckViewController *vc = [[HNCheckViewController alloc] init];
                 vc.contentArr = [dataArr[0] objectForKey:@"ItemType"];
-                [self.navigationController pushViewController:vc animated:YES];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.navigationController pushViewController:vc animated:YES];
+                });
             }
             else{
                 [self showNoData];
@@ -179,13 +186,18 @@
 }
 
 - (void)showNoNet{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection Error", nil) message:NSLocalizedString(@"Please check your network.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
-    [alert show];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection Error", nil) message:NSLocalizedString(@"Please check your network.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+        [alert show];
+    });
+    
 }
 
 - (void)showNoData{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"We don't get any data.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
-    [alert show];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"We don't get any data.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+        [alert show];
+    });
 }
 - (void)loadDataComplete{
     [MBProgressHUD hideHUDForView:self.view animated:YES];
