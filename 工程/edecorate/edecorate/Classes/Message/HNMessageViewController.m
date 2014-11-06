@@ -36,7 +36,7 @@
     m2.title = @"处罚单";
     m2.messgae = @"  您好！非常感谢阁下一直以来对我公司工作的支持和配合..";
     m2.date = @"2014/9/18 10:30";
-    [self.mList addObject:m1];
+    [self.mList addObject:m2];
 }
 
 - (void)didReceiveMemoryWarning {
