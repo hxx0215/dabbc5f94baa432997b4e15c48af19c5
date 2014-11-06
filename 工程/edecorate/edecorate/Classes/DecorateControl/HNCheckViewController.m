@@ -8,6 +8,7 @@
 
 #import "HNCheckViewController.h"
 #import "HNCheckDetailTableViewCell.h"
+#import "MBProgressHUD.h"
 
 @interface HNCheckViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong)UITableView *tableView;
@@ -43,7 +44,7 @@
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.width, 50)];
-    view.backgroundColor = [UIColor grayColor];
+    view.backgroundColor = [UIColor colorWithRed:144/255.0 green:197/255.0 blue:31/255.0 alpha:1.0];
     UILabel *label = [[UILabel alloc] init];
     label.text = [self.contentArr[section] objectForKey:@"typename"];
     [label sizeToFit];
@@ -62,12 +63,47 @@
     }
     cell.nameLabel.text = [[self.contentArr[indexPath.section] objectForKey:@"Bodyitem"][indexPath.row] objectForKey:@"name"];
     [cell.nameLabel sizeToFit];
+    if ([[[self.contentArr[indexPath.section] objectForKey:@"Bodyitem"][indexPath.row] objectForKey:@"type"] isEqualToString:@"1"])
     cell.contentLabel.text = [[self.contentArr[indexPath.section] objectForKey:@"Bodyitem"][indexPath.row] objectForKey:@"img"];
+    else{
+        cell.contentLabel.text = NSLocalizedString(@"点击查看图片", nil);
+    }
     [cell.contentLabel sizeToFit];
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    NSLog(@"%@",[[self.contentArr[indexPath.section] objectForKey:@"Bodyitem"][indexPath.row] objectForKey:@"img"]);
+    if ([[[self.contentArr[indexPath.section] objectForKey:@"Bodyitem"][indexPath.row] objectForKey:@"type"] isEqualToString:@"2"]){
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.labelText = NSLocalizedString(@"loading", nil);
+        __block UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [btn setBackgroundColor:[UIColor grayColor]];
+        [btn addTarget:self action:@selector(hideImg:) forControlEvents:UIControlEventTouchUpInside];
+        btn.frame = CGRectZero;
+        btn.center = CGPointMake([UIScreen mainScreen].bounds.size.width /2, [UIScreen mainScreen].bounds.size.height / 2);
+        [[UIApplication sharedApplication].keyWindow addSubview:btn];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            NSLog(@"%@",[[self.contentArr[indexPath.section] objectForKey:@"Bodyitem"][indexPath.row] objectForKey:@"img"]);
+            NSData *imgData = [NSData dataWithContentsOfURL:[NSURL URLWithString:[[self.contentArr[indexPath.section] objectForKey:@"Bodyitem"][indexPath.row] objectForKey:@"img"]]];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                UIImage *img = [UIImage imageWithData:imgData];
+                if (imgData)
+                    [btn setImage:img forState:UIControlStateNormal];
+                else
+                {
+                    btn.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
+                    [btn setTitle:[NSString stringWithFormat:@"%@:\n%@",NSLocalizedString(@"糟糕链接失效了!图片地址为", nil),[[self.contentArr[indexPath.section] objectForKey:@"Bodyitem"][indexPath.row] objectForKey:@"img"]] forState:UIControlStateNormal];
+                }
+                [UIView animateWithDuration:1.0
+                                 animations:^{
+                                     btn.frame = [UIScreen mainScreen].bounds;
+                                 }];
+            });
+        });
+    }
+}
+- (void)hideImg:(UIButton *)sender{
+    [sender removeFromSuperview];
 }
 @end
