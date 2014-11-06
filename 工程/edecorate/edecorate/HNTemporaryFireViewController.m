@@ -71,9 +71,9 @@
     }];
 
     
+
     self.navigationItem.title = [self getTitleString];
-    UIBarButtonItem* barButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"add_click"] style:UIBarButtonItemStylePlain target:self action:@selector(addButton_Clicked)];
-    self.navigationItem.rightBarButtonItem = barButtonItem;
+    [self initNaviButton];
     
 
     self.model = [[HNTemporaryData alloc] init];
@@ -92,7 +92,14 @@
 //    }
     
 }
-
+- (void)initNaviButton{
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setImage:[UIImage imageNamed:@"add.png"] forState:UIControlStateNormal];
+    [button setImage:[UIImage imageNamed:@"add_click.png"] forState:UIControlStateHighlighted];
+    [button addTarget:self action:@selector(addButton_Clicked) forControlEvents:UIControlEventTouchUpInside];
+    [button sizeToFit];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+}
 -(void)addButton_Clicked
 {
     HNTemporaryApplyViewController* tac = [[HNTemporaryApplyViewController alloc]initWithType:self.temporaryType];
