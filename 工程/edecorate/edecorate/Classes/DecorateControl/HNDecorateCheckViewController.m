@@ -39,7 +39,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = NSLocalizedString(@"Decorate Check", nil);
+    self.title = NSLocalizedString(@"装修验收", nil);
     self.cTableView = [[UITableView alloc] initWithFrame:self.view.bounds];
     self.cTableView.dataSource = self;
     self.cTableView.delegate = self;
@@ -51,9 +51,8 @@
     }];
     self.checkList = [[NSMutableArray alloc] init];
     self.stageMap = @{@"-1": NSLocalizedString(@"验收不通过", nil),@"0": NSLocalizedString(@"等待验收", nil), @"1": NSLocalizedString(@"验收通过", nil)};
-
-    self.createButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"新增", nil) style:UIBarButtonItemStylePlain target:self action:@selector(createNewCheck:)];
-    self.navigationItem.rightBarButtonItem = self.createButton;
+    [self initNaviButton];
+    
 //    HNCheckModel *model = [[HNCheckModel alloc] init];
 //    model.roomName =@"小区名房间号";
 //    model.checkSchedule = @"验收进度";
@@ -61,11 +60,20 @@
 //    
 //    [self.checkList addObject:model];
 }
-
+- (void)initNaviButton{
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setImage:[UIImage imageNamed:@"add.png"] forState:UIControlStateNormal];
+    [button setImage:[UIImage imageNamed:@"add_click.png"] forState:UIControlStateHighlighted];
+    [button addTarget:self action:@selector(createNewCheck:) forControlEvents:UIControlEventTouchUpInside];
+    [button sizeToFit];
+    self.createButton = [[UIBarButtonItem alloc] initWithCustomView:button];
+    self.navigationItem.rightBarButtonItem = self.createButton;
+}
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = NSLocalizedString(@"Loading", nil);
+    self.cTableView.frame = self.view.bounds;
     [self refreshData];
 }
 

@@ -64,8 +64,7 @@
         typeof(self) sself = wself;
         [sself refreshData];
     }];
-    self.reportButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"新增", nil) style:UIBarButtonItemStylePlain target:self action:@selector(reportButton_Clicked:)];
-    self.navigationItem.rightBarButtonItem = self.reportButton;
+    [self initNaviButton];
     self.statusMap = @{@"0": @"审核进度:未审核",@"1": @"审核进度:已审核",@"-1":@"审核进度:审核未通过"};
     
     self.reportList = [[NSMutableArray alloc] init];
@@ -93,7 +92,14 @@
 //    modelOwnDetail.constructType = kPersonalDetail;
 //    [self.reportList addObject:modelOwnDetail];
 }
-
+- (void)initNaviButton{
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setImage:[UIImage imageNamed:@"add.png"] forState:UIControlStateNormal];
+    [button setImage:[UIImage imageNamed:@"add_click.png"] forState:UIControlStateHighlighted];
+    [button addTarget:self action:@selector(reportButton_Clicked:) forControlEvents:UIControlEventTouchUpInside];
+    [button sizeToFit];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+}
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.rTableView headerBeginRefreshing];
@@ -234,6 +240,8 @@
 }
 #pragma mark - UIAlertViewDelegate
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{
+    if (0==buttonIndex)
+        return;
     UITextField *tf=[alertView textFieldAtIndex:0];
     MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = NSLocalizedString(@"Loading", nil);

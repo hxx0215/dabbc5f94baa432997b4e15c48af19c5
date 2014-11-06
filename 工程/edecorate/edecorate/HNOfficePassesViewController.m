@@ -63,11 +63,17 @@
     
     self.navigationItem.title=@"办理出入证";
     //[self GetPassList:@"admin" byPage:@"1" AndRow:@"8"];
-    UIBarButtonItem* barButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"新增", nil) style:UIBarButtonItemStylePlain target:self action:@selector(addButton_Clicked)];
-    self.navigationItem.rightBarButtonItem = barButtonItem;
+    [self initNaviButton];
     
 }
-
+- (void)initNaviButton{
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setImage:[UIImage imageNamed:@"add.png"] forState:UIControlStateNormal];
+    [button setImage:[UIImage imageNamed:@"add_click.png"] forState:UIControlStateHighlighted];
+    [button addTarget:self action:@selector(addButton_Clicked) forControlEvents:UIControlEventTouchUpInside];
+    [button sizeToFit];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+}
 -(void)addButton_Clicked
 {
     HNOfficePassesApplyViewController* officePasseesApply=[[HNOfficePassesApplyViewController alloc]init];
