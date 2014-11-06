@@ -237,9 +237,12 @@
     static NSString *reuseIdentifier = @"temporaryCell";
     HNTemporaryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
     if (!cell){
-        HNTemporaryModel *model =self.model.modelList[indexPath.row];
-        cell = [[HNTemporaryTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier withModel:model];
+        
+        cell = [[HNTemporaryTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
     }
+    HNTemporaryModel *model =self.model.modelList[indexPath.row];
+    [cell setRoomName:model.roomName];
+    [cell setStatus:model.status];
     
     return cell;
 }

@@ -29,9 +29,10 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-        self.roomLabel = [[UILabel alloc] initWithFrame:CGRectMake(27, 0, self.bounds.size.width * 0.8, 17)];
-        self.roomLabel.top = 19;
-        self.roomLabel.numberOfLines = 1;
+        
+        self.roomLabel = [[UILabel alloc] initWithFrame:CGRectMake(27, 0, self.bounds.size.width * 0.8, 36)];
+        self.roomLabel.top = 9;
+        self.roomLabel.numberOfLines = 2;
         self.roomLabel.font = [UIFont systemFontOfSize:15];
         self.statusLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.roomLabel.frame) + 8, self.bounds.size.width * 0.8, 14)];
         self.statusLabel.left = self.roomLabel.left;
@@ -42,19 +43,19 @@
         self.statusImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 10, 10)];
         self.statusImage.left = 12;
         self.statusImage.top = 23;
+        
+        [self.contentView addSubview:self.statusImage];
         [self.contentView addSubview:self.roomLabel];
         [self.contentView addSubview:self.statusLabel];
-        [self.contentView addSubview:self.statusImage];
+        
         self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     return self;
 }
 
-
 - (void)layoutSubviews{
     [super layoutSubviews];
-    self.statusLabel.bottom = self.contentView.height - 14;
-    self.roomLabel.top = 19;
+    self.statusLabel.top = self.roomLabel.bottom +3;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

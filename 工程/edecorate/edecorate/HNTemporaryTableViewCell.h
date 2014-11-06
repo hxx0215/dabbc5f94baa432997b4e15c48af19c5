@@ -10,6 +10,7 @@
 #include "HNTemporaryModel.h"
 
 @interface HNTemporaryTableViewCell : UITableViewCell
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withModel:(HNTemporaryModel*)model;
--(void)updateMyCell;
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier;
+- (void)setRoomName:(NSString *)roomname;
+- (void)setStatus:(HNTemporaryStatus)status;
 @end
