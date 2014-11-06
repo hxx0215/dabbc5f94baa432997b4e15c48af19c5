@@ -86,8 +86,10 @@
     btn.backgroundColor = [UIColor whiteColor];
     btn.width = (self.view.width-20)/3;
     btn.height = (1.0*btn.width/image.size.width)*image.size.height;
-    [btn setImage:image forState:UIControlStateNormal];
-    [btn setImage:imageClick forState:UIControlStateSelected];
+//    [btn setImage:image forState:UIControlStateNormal];
+//    [btn setImage:imageClick forState:UIControlStateSelected];
+    [btn setBackgroundImage:image forState:UIControlStateNormal];
+    [btn setBackgroundImage:imageClick forState:UIControlStateHighlighted];
     //［btn set
     //[btn.titleLabel setContentMode:UIViewContentModeBottom];
     //[btn sizeToFit];
