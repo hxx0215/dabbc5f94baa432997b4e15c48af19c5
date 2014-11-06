@@ -47,6 +47,7 @@
     view.backgroundColor = [UIColor colorWithRed:144/255.0 green:197/255.0 blue:31/255.0 alpha:1.0];
     UILabel *label = [[UILabel alloc] init];
     label.text = [self.contentArr[section] objectForKey:@"typename"];
+    label.textColor = [UIColor whiteColor];
     [label sizeToFit];
     label.centerY = view.height / 2;
     [view addSubview:label];

@@ -111,6 +111,7 @@
     UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.width, 50)];
     view.backgroundColor = [UIColor colorWithRed:144/255.0 green:197/255.0 blue:31/255.0 alpha:1.0];
     UILabel *label = [[UILabel alloc] init];
+    label.textColor = [UIColor whiteColor];
     label.font = [UIFont systemFontOfSize:15.0];
     label.text = [self.dataArr[section] objectForKey:@"typename"];
     [label sizeToFit];

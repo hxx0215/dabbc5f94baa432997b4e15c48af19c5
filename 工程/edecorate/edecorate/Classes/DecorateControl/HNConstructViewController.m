@@ -99,7 +99,7 @@
         view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 70)];
         
         UIView *colorView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 40)];
-        colorView.backgroundColor = [UIColor colorWithRed:0.0 green:188.0/255.0 blue:125.9/255.0 alpha:1.0];
+        colorView.backgroundColor = [UIColor colorWithRed:144/255.0 green:197/255.0 blue:31/255.0 alpha:1.0];
         UILabel *colorLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 18)];
         if (self.constructType < 2){
             colorLabel.text = NSLocalizedString(@"承包方式:公司承包装修", nil);
@@ -130,7 +130,7 @@
     else if (1 == section){
         view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 115)];
         UIView *colorView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, view.width, 85)];
-        colorView.backgroundColor = [UIColor colorWithRed:211.0/255.0 green:145.0/255.0 blue:26.0/255.0 alpha:1.0];
+        colorView.backgroundColor = [UIColor colorWithRed:144/255.0 green:197/255.0 blue:31/255.0 alpha:1.0];
         UILabel *colorLabel1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.width - 14, 45)];
         UILabel *colorLabel2 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, colorLabel1.width, 15)];
         colorLabel1.text = self.roomNo;
