@@ -78,7 +78,7 @@
     self.depositRefund = [self createButtonWithTitle:NSLocalizedString(@"Deposit refund", nil) selector:@selector(depositRefundButton_Clicked:) row:1 coloum:2 image:[UIImage imageNamed:@"decorate_refund_button_normal"] imageClick:[UIImage imageNamed:@"decorate_refund_button_pressed"]];
     self.IHaveAComplaint = [self createButtonWithTitle:NSLocalizedString(@"I have a complaint", nil) selector:@selector(IHaveAComplaintButton_Clicked:) row:2 coloum:0 image:[UIImage imageNamed:@"decorate_complain_button_normal"] imageClick:[UIImage imageNamed:@"decorate_complain_button_pressed"]];
     
-    self.temporaryPower = [self createButtonWithTitle:NSLocalizedString(@"Temporary power", nil) selector:@selector(temporaryPowerButton_Clicked:) row:1 coloum:1 image:[UIImage imageNamed:@"decorate_electric_button_normal"] imageClick:[UIImage imageNamed:@"decorate_electric_button_pressed"]];
+    self.temporaryPower = [self createButtonWithTitle:NSLocalizedString(@"Temporary power", nil) selector:@selector(temporaryPowerButton_Clicked:) row:2 coloum:1 image:[UIImage imageNamed:@"decorate_electric_button_normal"] imageClick:[UIImage imageNamed:@"decorate_electric_button_pressed"]];
 }
 
 - (UIButton *)createButtonWithTitle:(NSString *)title selector:(SEL)selector row:(int)ro coloum:(int)col image:(UIImage* )image imageClick:(UIImage* )imageClick{

@@ -17,6 +17,7 @@
 #import "HNDeliverApplyViewController.h"
 #import "HNRefundData.h"
 #import "MJRefresh.h"
+#import "HNOfficePassedTableViewCell.h"
 
 @interface HNDeliverViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong)UITableView *dTableView;
@@ -127,28 +128,15 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *identify = @"checkCell";
-    HNReportTableViewCell *cell= [tableView dequeueReusableCellWithIdentifier:identify];
+    static NSString *identify = @"fficePassedCell";
+    HNOfficePassedTableViewCell *cell= [tableView dequeueReusableCellWithIdentifier:identify];
     if (!cell){
-        cell = [[HNReportTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identify];
+        cell = [[HNOfficePassedTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identify];
     }
     HNDeliverData *model = self.deliverList[indexPath.row];
     [cell setRoomName:model.roomnumber];
     //申请状态（0未审核，1已审核，-1审核未通过）
-    switch (model.state.intValue) {
-        case 0:
-            [cell setStatus:@"未审核"];
-            break;
-        case 1:
-            [cell setStatus:@"已审核"];
-            break;
-        case -1:
-            [cell setStatus:@"审核未通过"];
-            break;
-            
-        default:
-            break;
-    }
+    [cell setStatus:model.state];
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
