@@ -10,5 +10,6 @@
 
 @interface HNMessageModel : NSObject
 @property (nonatomic, strong)NSString *title;
+@property (nonatomic, strong)NSString *messgae;
 @property (nonatomic, strong)NSString *date;
 @end

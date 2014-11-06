@@ -181,6 +181,8 @@
 		D38615EF1A03E9DC005B4093 /* HNDeliverApplyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38615ED1A03E9DC005B4093 /* HNDeliverApplyViewController.xib */; };
 		D38615F31A03F80A005B4093 /* HNDeliveApplyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D38615F11A03F80A005B4093 /* HNDeliveApplyTableViewCell.m */; };
 		D38615F41A03F80A005B4093 /* HNDeliveApplyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38615F21A03F80A005B4093 /* HNDeliveApplyTableViewCell.xib */; };
+		D38DD5611A0BB1E100886933 /* HNMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D38DD55F1A0BB1E100886933 /* HNMessageTableViewCell.m */; };
+		D38DD5621A0BB1E100886933 /* HNMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38DD5601A0BB1E100886933 /* HNMessageTableViewCell.xib */; };
 		D38E009019D84BE0000F5263 /* HNReimburseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D38E008E19D84BE0000F5263 /* HNReimburseViewController.m */; };
 		D38E009119D84BE0000F5263 /* HNReimburseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38E008F19D84BE0000F5263 /* HNReimburseViewController.xib */; };
 		D38E009419D84D20000F5263 /* HNReturnsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D38E009319D84D20000F5263 /* HNReturnsHeaderView.m */; };
@@ -517,6 +519,9 @@
 		D38615F01A03F80A005B4093 /* HNDeliveApplyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNDeliveApplyTableViewCell.h; path = Classes/DecorateControl/HNDeliveApplyTableViewCell.h; sourceTree = "<group>"; };
 		D38615F11A03F80A005B4093 /* HNDeliveApplyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNDeliveApplyTableViewCell.m; path = Classes/DecorateControl/HNDeliveApplyTableViewCell.m; sourceTree = "<group>"; };
 		D38615F21A03F80A005B4093 /* HNDeliveApplyTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HNDeliveApplyTableViewCell.xib; path = Classes/DecorateControl/HNDeliveApplyTableViewCell.xib; sourceTree = "<group>"; };
+		D38DD55E1A0BB1E100886933 /* HNMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNMessageTableViewCell.h; path = Classes/Message/HNMessageTableViewCell.h; sourceTree = "<group>"; };
+		D38DD55F1A0BB1E100886933 /* HNMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNMessageTableViewCell.m; path = Classes/Message/HNMessageTableViewCell.m; sourceTree = "<group>"; };
+		D38DD5601A0BB1E100886933 /* HNMessageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HNMessageTableViewCell.xib; path = Classes/Message/HNMessageTableViewCell.xib; sourceTree = "<group>"; };
 		D38E008D19D84BE0000F5263 /* HNReimburseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNReimburseViewController.h; sourceTree = "<group>"; };
 		D38E008E19D84BE0000F5263 /* HNReimburseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNReimburseViewController.m; sourceTree = "<group>"; };
 		D38E008F19D84BE0000F5263 /* HNReimburseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HNReimburseViewController.xib; sourceTree = "<group>"; };
@@ -822,6 +827,9 @@
 				B9DE560C19C9C5D300280EC7 /* HNMessageViewController.m */,
 				B94C854619C9CA770040D47E /* HNMessageModel.h */,
 				B94C854719C9CA770040D47E /* HNMessageModel.m */,
+				D38DD55E1A0BB1E100886933 /* HNMessageTableViewCell.h */,
+				D38DD55F1A0BB1E100886933 /* HNMessageTableViewCell.m */,
+				D38DD5601A0BB1E100886933 /* HNMessageTableViewCell.xib */,
 			);
 			name = Message;
 			sourceTree = "<group>";
@@ -1425,6 +1433,7 @@
 				B965863E19F6A56000EB4766 /* rememberit@2x.png in Resources */,
 				B91A3AD219D6F9D4000F3823 /* HNGoodsViewController.xib in Resources */,
 				B9D3DEDF19CD25430020CDC9 /* HNCheckDetailViewController.xib in Resources */,
+				D38DD5621A0BB1E100886933 /* HNMessageTableViewCell.xib in Resources */,
 				B965E76A19D04CDA004CD201 /* HNDeliverDetailViewController.xib in Resources */,
 				B916F0B519C8781D00A849C7 /* Main.storyboard in Resources */,
 				B9E433691A06515E000E2CA9 /* HNNewCheckViewController.xib in Resources */,
@@ -1552,6 +1561,7 @@
 				D3CD90F719CF09B500E76AF4 /* HNRefundTableViewController.m in Sources */,
 				B9882DF819CB11920093F0F4 /* HNNewReportViewController.m in Sources */,
 				B9B2BC1C19CF1F3000839AED /* CTAssetsGroupViewCell.m in Sources */,
+				D38DD5611A0BB1E100886933 /* HNMessageTableViewCell.m in Sources */,
 				B9B2BC1919CF1F3000839AED /* ALAssetsGroup+isEqual.m in Sources */,
 				B9E0667219DCDCB100893DBD /* AFHTTPRequestOperationManager.m in Sources */,
 				D334E87119FFC0DB002AA7D2 /* HNDeliverDetailTableViewCell.m in Sources */,
