@@ -56,7 +56,7 @@
     
     self.navigationItem.title = NSLocalizedString(@"I have a complaint", nil);
 
-    UIBarButtonItem* barButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"新增", nil) style:UIBarButtonItemStylePlain target:self action:@selector(addButton_Clicked)];
+    UIBarButtonItem* barButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"add_click"] style:UIBarButtonItemStylePlain target:self action:@selector(addButton_Clicked)];
     self.navigationItem.rightBarButtonItem = barButtonItem;
     //[self loadMyData];
 }
