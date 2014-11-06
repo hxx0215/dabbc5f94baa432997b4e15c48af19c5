@@ -20,6 +20,10 @@
 
 
 @property (nonatomic,strong) IBOutlet UILabel *houseInfoMain;
+@property (nonatomic,strong) IBOutlet UILabel *decorationMain;
+@property (nonatomic,strong) IBOutlet UILabel *personMain;
+@property (nonatomic,strong) IBOutlet UILabel *payMain;
+@property (nonatomic,strong) IBOutlet UILabel *godInfoMain;
 
 @property (nonatomic,strong) IBOutlet UILabel *houseInfoTitle;
 @property (nonatomic,strong) IBOutlet UILabel *houseInfo;
@@ -101,6 +105,12 @@
     [self.tableView registerNib:nib forCellReuseIdentifier:@"DeliverDetailCell"];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    
+    [HNUIStyleSet UIStyleSetRoundView:self.houseInfoMain];
+    [HNUIStyleSet UIStyleSetRoundView:self.decorationMain];
+    [HNUIStyleSet UIStyleSetRoundView:self.personMain];
+    [HNUIStyleSet UIStyleSetRoundView:self.payMain];
+    [HNUIStyleSet UIStyleSetRoundView:self.godInfoMain];
 }
 
 - (void)labelWithTitle:(NSString *)title label:(UILabel*)lab

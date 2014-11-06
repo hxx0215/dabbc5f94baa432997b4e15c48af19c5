@@ -6,11 +6,14 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HNRefundApplyViewController">
             <connections>
+                <outlet property="Main1" destination="fYr-bf-Q5A" id="9q6-1e-g3v"/>
+                <outlet property="Main2" destination="ZrC-5o-GpC" id="gBH-e3-GvE"/>
                 <outlet property="cardnumberLabel" destination="YmK-R4-qMN" id="Inv-Dj-neh"/>
                 <outlet property="commitButton" destination="4Ob-0S-zcG" id="fbr-c2-HUA"/>
                 <outlet property="finefundLabel" destination="CLC-fI-Wjz" id="TnE-VG-dtR"/>
                 <outlet property="houseInfLabel" destination="6Nf-iG-lME" id="4x8-Yg-c76"/>
                 <outlet property="houseInfTitleLabel" destination="8FU-nu-T4j" id="KGV-YT-nZY"/>
+                <outlet property="houseInfoMain" destination="ZHB-cz-f4H" id="qpQ-Mb-kXq"/>
                 <outlet property="mainView" destination="AKr-gQ-3wX" id="jdR-xs-epZ"/>
                 <outlet property="projectrefundLabel" destination="aGv-i3-lLS" id="hRx-yv-TsW"/>
                 <outlet property="uploadButton" destination="AA2-Gk-6yu" id="dyG-Wa-PNN"/>

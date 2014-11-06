@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
-        <deployment defaultVersion="1808" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <objects>
@@ -12,12 +11,14 @@
                 <outlet property="decorationChargeMobile" destination="xq2-61-ShK" id="iWQ-FF-xh0"/>
                 <outlet property="decorationCompany" destination="YkG-51-1Ue" id="UzL-A4-Bn4"/>
                 <outlet property="decorationCompanyTitle" destination="cvP-R3-B5n" id="fyk-dh-Nls"/>
+                <outlet property="decorationInfoMain" destination="Qnq-GY-8J9" id="PcP-33-sk6"/>
                 <outlet property="houseInfo" destination="gNx-wl-1CB" id="yUz-0l-IaY"/>
                 <outlet property="houseInfoMain" destination="MPK-BX-Gy4" id="ad3-aW-euc"/>
                 <outlet property="houseInfoTitle" destination="Xbo-qP-O9t" id="fUU-ZQ-zxl"/>
                 <outlet property="houseOnwer" destination="jxg-ih-m81" id="EQ1-IP-iTf"/>
                 <outlet property="houseOnwerMobile" destination="iPl-6d-qyo" id="shp-lR-i7Z"/>
                 <outlet property="mainView" destination="i5M-Pr-FkT" id="ClQ-Lf-rQK"/>
+                <outlet property="payInfoMain" destination="Cet-gk-jkm" id="dez-Ho-fTs"/>
                 <outlet property="payView" destination="Zse-9F-0i1" id="pUv-qv-f7H"/>
                 <outlet property="personsLabel" destination="Mex-SE-phe" id="08T-lC-p9C"/>
                 <outlet property="submit" destination="Aij-AS-vhP" id="G7D-0A-uvx"/>

@@ -11,6 +11,8 @@
 
 @interface HNComplaintDetailsViewController ()
 @property (nonatomic, strong)IBOutlet UILabel *houseInfMainLabel;
+@property (nonatomic, strong)IBOutlet UILabel *constructionInfMainLabel;
+@property (nonatomic, strong)IBOutlet UILabel *complaintInfMainLabel;
 
 @property (nonatomic, strong)IBOutlet UILabel *houseInfTitleLabel;
 @property (nonatomic, strong)IBOutlet UILabel *houseInfLabel;
@@ -130,7 +132,9 @@
     self.checkOutButton.layer.borderColor = [UIColor blackColor].CGColor;
     
     [self.complaintStatusLable setText:NSLocalizedString(@"Processing", nil)];
-    [self.complaintStatusLable sizeToFit];
+    [HNUIStyleSet UIStyleSetRoundView:self.houseInfMainLabel];
+    [HNUIStyleSet UIStyleSetRoundView:self.complaintInfMainLabel];
+    [HNUIStyleSet UIStyleSetRoundView:self.complaintStatusLable];
     /*
      "Processing" ＝ "正在处理";*/
     

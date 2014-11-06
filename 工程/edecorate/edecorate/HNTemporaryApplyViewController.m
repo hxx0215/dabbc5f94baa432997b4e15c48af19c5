@@ -39,6 +39,8 @@
 }
 @property (nonatomic, strong)IBOutlet UIScrollView *mainView;
 @property (nonatomic, strong)IBOutlet UILabel *houseInfMainLabel;
+@property (nonatomic, strong)IBOutlet UILabel *constructionInfMainLabel;
+
 @property (nonatomic, strong)IBOutlet UILabel *houseInfTitleLabel;
 @property (nonatomic, strong)IBOutlet UILabel *houseInfLabel;
 @property (nonatomic, strong)IBOutlet UILabel *ownersLabel;
@@ -180,7 +182,7 @@
     [self.commitButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.commitButton setBackgroundColor:[UIColor colorWithRed:245.0/255.0 green:72.0/255.0 blue:0.0 alpha:1.0]];
     
-    self.choiceDecorateView = [[HNDecorateChoiceView alloc]initWithFrame:CGRectMake(12, 12, self.view.bounds.size.width-24, 25)];
+    self.choiceDecorateView = [[HNDecorateChoiceView alloc]initWithFrame:CGRectMake(12, 12, self.view.bounds.size.width-24, 30)];
     [self.mainView addSubview:self.choiceDecorateView];
     self.choiceDecorateView.delegate = self;
     
@@ -222,6 +224,11 @@
 //    self.textOKView.hidden = YES;
 //    [self.view addSubview:self.textOKView];
 //    [button addTarget:self action:@selector(OKTextClick) forControlEvents:UIControlEventTouchUpInside];
+    
+    [HNUIStyleSet UIStyleSetRoundView:self.houseInfMainLabel];
+    [HNUIStyleSet UIStyleSetRoundView:self.temporaryApplyMainLable];
+    [HNUIStyleSet UIStyleSetRoundView:self.constructionInfMainLabel];
+    
     
     bo = false;
 

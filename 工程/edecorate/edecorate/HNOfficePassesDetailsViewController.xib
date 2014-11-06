@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
-        <deployment defaultVersion="1808" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <objects>
@@ -11,6 +10,7 @@
                 <outlet property="decorationChargeMobile" destination="EPA-MH-nIR" id="ri4-Dj-hv4"/>
                 <outlet property="decorationCompany" destination="g40-Vf-mgR" id="oew-ao-izE"/>
                 <outlet property="decorationCompanyTitle" destination="t0t-bh-AxR" id="pSJ-LY-PmI"/>
+                <outlet property="decorationInfoMain" destination="yoW-Oc-caj" id="KLi-JK-Xiy"/>
                 <outlet property="depositCount" destination="7Li-o5-73H" id="Nbs-LP-HGc"/>
                 <outlet property="depositPerFee" destination="Sqy-19-EGU" id="rWo-Hk-M1S"/>
                 <outlet property="depositSumFee" destination="oGI-7N-FzC" id="0lR-Em-ENu"/>
@@ -23,6 +23,7 @@
                 <outlet property="passcardCount" destination="AIS-fq-c6e" id="4fm-it-Uue"/>
                 <outlet property="passcardPerFee" destination="Ltx-OA-w55" id="e0W-15-ucc"/>
                 <outlet property="passcardSumFee" destination="g2e-Me-IdS" id="04X-ri-IAG"/>
+                <outlet property="payInfoMain" destination="a98-Tj-H9M" id="Ubd-Vz-Nb0"/>
                 <outlet property="personsLabel" destination="1xc-jG-HwL" id="O65-Cf-mfb"/>
                 <outlet property="sumMoney" destination="OfB-Mg-sbr" id="5bZ-Wl-eKh"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="E1B-4k-Icr"/>

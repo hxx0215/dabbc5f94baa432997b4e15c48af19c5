@@ -10,6 +10,7 @@
                 <outlet property="complaintCategoryLable" destination="p9i-vH-PT1" id="X7D-h6-dQJ"/>
                 <outlet property="complaintCategoryTitleLable" destination="M38-Eg-QQr" id="oOK-U2-952"/>
                 <outlet property="complaintCreateTimeLable" destination="y1x-yJ-F8I" id="Hjg-jF-ULh"/>
+                <outlet property="complaintInfMainLabel" destination="901-Fa-N7H" id="FS0-FW-JTH"/>
                 <outlet property="complaintInformationTitleLable" destination="901-Fa-N7H" id="yAY-Ml-q5u"/>
                 <outlet property="complaintIssueLable" destination="JAH-mq-5u2" id="Vob-JJ-qfE"/>
                 <outlet property="complaintIssueTitleLable" destination="XQ1-Jd-4xV" id="Rrx-HH-6gy"/>
@@ -190,8 +191,8 @@
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="yk6-at-vwN">
-                            <rect key="frame" x="84" y="461" width="83" height="21"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="yk6-at-vwN">
+                            <rect key="frame" x="108" y="466" width="105" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.90196078430000004" green="0.36470588240000001" blue="0.08235294118" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>

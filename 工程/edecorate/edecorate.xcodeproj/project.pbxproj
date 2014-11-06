@@ -183,6 +183,7 @@
 		D38615F41A03F80A005B4093 /* HNDeliveApplyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38615F21A03F80A005B4093 /* HNDeliveApplyTableViewCell.xib */; };
 		D38DD5611A0BB1E100886933 /* HNMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D38DD55F1A0BB1E100886933 /* HNMessageTableViewCell.m */; };
 		D38DD5621A0BB1E100886933 /* HNMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38DD5601A0BB1E100886933 /* HNMessageTableViewCell.xib */; };
+		D38DD5651A0BC8DC00886933 /* HNUIStyleSet.m in Sources */ = {isa = PBXBuildFile; fileRef = D38DD5641A0BC8DC00886933 /* HNUIStyleSet.m */; };
 		D38E009019D84BE0000F5263 /* HNReimburseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D38E008E19D84BE0000F5263 /* HNReimburseViewController.m */; };
 		D38E009119D84BE0000F5263 /* HNReimburseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38E008F19D84BE0000F5263 /* HNReimburseViewController.xib */; };
 		D38E009419D84D20000F5263 /* HNReturnsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D38E009319D84D20000F5263 /* HNReturnsHeaderView.m */; };
@@ -522,6 +523,8 @@
 		D38DD55E1A0BB1E100886933 /* HNMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNMessageTableViewCell.h; path = Classes/Message/HNMessageTableViewCell.h; sourceTree = "<group>"; };
 		D38DD55F1A0BB1E100886933 /* HNMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNMessageTableViewCell.m; path = Classes/Message/HNMessageTableViewCell.m; sourceTree = "<group>"; };
 		D38DD5601A0BB1E100886933 /* HNMessageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HNMessageTableViewCell.xib; path = Classes/Message/HNMessageTableViewCell.xib; sourceTree = "<group>"; };
+		D38DD5631A0BC8DC00886933 /* HNUIStyleSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNUIStyleSet.h; path = Classes/HNUIStyleSet.h; sourceTree = "<group>"; };
+		D38DD5641A0BC8DC00886933 /* HNUIStyleSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNUIStyleSet.m; path = Classes/HNUIStyleSet.m; sourceTree = "<group>"; };
 		D38E008D19D84BE0000F5263 /* HNReimburseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNReimburseViewController.h; sourceTree = "<group>"; };
 		D38E008E19D84BE0000F5263 /* HNReimburseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNReimburseViewController.m; sourceTree = "<group>"; };
 		D38E008F19D84BE0000F5263 /* HNReimburseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HNReimburseViewController.xib; sourceTree = "<group>"; };
@@ -796,6 +799,8 @@
 				B965E76519D04C43004CD201 /* Temporary */,
 				D3CD90F219CED1FA00E76AF4 /* HNCommbox.h */,
 				D3CD90F319CED1FA00E76AF4 /* HNCommbox.m */,
+				D38DD5631A0BC8DC00886933 /* HNUIStyleSet.h */,
+				D38DD5641A0BC8DC00886933 /* HNUIStyleSet.m */,
 			);
 			name = DecorateControl;
 			sourceTree = "<group>";
@@ -1555,6 +1560,7 @@
 				B9E0668019DCDCB100893DBD /* UIRefreshControl+AFNetworking.m in Sources */,
 				D3A2D31319FB98A100425BE1 /* HNRefundData.m in Sources */,
 				D39E3C5C1A05F7A7008C5F95 /* HNUploadImage.m in Sources */,
+				D38DD5651A0BC8DC00886933 /* HNUIStyleSet.m in Sources */,
 				B91BFCFC19E2C89A00FD468F /* MBProgressHUD.m in Sources */,
 				B9E0667619DCDCB100893DBD /* AFURLConnectionOperation.m in Sources */,
 				B9E433681A06515E000E2CA9 /* HNNewCheckViewController.m in Sources */,

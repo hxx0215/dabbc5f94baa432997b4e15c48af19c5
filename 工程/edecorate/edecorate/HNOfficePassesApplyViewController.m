@@ -21,6 +21,8 @@
 @property (nonatomic,strong) IBOutlet UIScrollView *mainView;
 
 @property (nonatomic,strong) IBOutlet UILabel *houseInfoMain;
+@property (nonatomic,strong) IBOutlet UILabel *decorationInfoMain;
+@property (nonatomic,strong) IBOutlet UILabel *payInfoMain;
 
 @property (nonatomic,strong) IBOutlet UILabel *houseInfoTitle;
 @property (nonatomic,strong) IBOutlet UILabel *houseInfo;
@@ -84,6 +86,11 @@
     self.navigationItem.title = NSLocalizedString(@"Pass Apply", nil);
     
     self.houseInfoMain.text = NSLocalizedString(@"House Information", nil) ;
+    
+    [HNUIStyleSet UIStyleSetRoundView:self.houseInfoMain];
+    [HNUIStyleSet UIStyleSetRoundView:self.decorationInfoMain];
+    [HNUIStyleSet UIStyleSetRoundView:self.payInfoMain];
+    
     [self labelWithTitle:NSLocalizedString(@"House Information", nil) label:self.houseInfoTitle];
     [self labelWithTitle:NSLocalizedString(@"Construction unit", nil) label:self.decorationCompanyTitle];
     
@@ -156,7 +163,7 @@
     [self.submit setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.submit setBackgroundColor:[UIColor colorWithRed:245.0/255.0 green:72.0/255.0 blue:0.0 alpha:1.0]];
     
-    self.choiceDecorateView = [[HNDecorateChoiceView alloc]initWithFrame:CGRectMake(12, 12, self.view.bounds.size.width-24, 25)];
+    self.choiceDecorateView = [[HNDecorateChoiceView alloc]initWithFrame:CGRectMake(12, 12, self.view.bounds.size.width-24, 30)];
     [self.mainView addSubview:self.choiceDecorateView];
     self.choiceDecorateView.delegate = self;
     

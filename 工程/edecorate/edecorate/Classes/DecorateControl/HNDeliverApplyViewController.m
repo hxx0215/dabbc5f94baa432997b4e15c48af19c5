@@ -22,6 +22,11 @@
 @property (nonatomic, strong)IBOutlet UIScrollView *mainView;
 
 @property (nonatomic,strong) IBOutlet UILabel *houseInfoMain;
+@property (nonatomic,strong) IBOutlet UILabel *decorationMain;
+@property (nonatomic,strong) IBOutlet UILabel *personMain;
+@property (nonatomic,strong) IBOutlet UILabel *payMain;
+@property (nonatomic,strong) IBOutlet UILabel *godInfoMain;
+
 @property (nonatomic,strong) IBOutlet UILabel *houseInfoTitle;
 @property (nonatomic, strong)IBOutlet UILabel* roomNameLabel;
 @property (nonatomic, strong)IBOutlet UILabel* ownerphoneLabel;
@@ -113,6 +118,12 @@
     [topView setItems:buttonsArray];
     self.eTimeTextField.inputAccessoryView = topView;
     self.bTimeTextField.inputAccessoryView = topView;
+    
+    [HNUIStyleSet UIStyleSetRoundView:self.houseInfoMain];
+    [HNUIStyleSet UIStyleSetRoundView:self.decorationMain];
+    [HNUIStyleSet UIStyleSetRoundView:self.personMain];
+    [HNUIStyleSet UIStyleSetRoundView:self.payMain];
+    [HNUIStyleSet UIStyleSetRoundView:self.godInfoMain];
 }
 
 -(void)OKTextClick

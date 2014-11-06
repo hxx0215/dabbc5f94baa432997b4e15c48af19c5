@@ -17,6 +17,11 @@
 
 @interface HNRefundApplyViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate>
 @property (strong, nonatomic) IBOutlet UIScrollView *mainView;
+
+@property (nonatomic, strong)IBOutlet UILabel *houseInfoMain;
+@property (nonatomic, strong)IBOutlet UILabel *Main1;
+@property (nonatomic, strong)IBOutlet UILabel *Main2;
+
 @property (strong, nonatomic) IBOutlet UIButton *commitButton;
 @property (strong, nonatomic) IBOutlet UIButton *uploadButton;
 
@@ -78,6 +83,10 @@
     self.projectrefundLabel.text = self.temporaryModel.projectrefund;
     self.finefundLabel.text = self.temporaryModel.finefund;
     self.cardnumberLabel.text = self.temporaryModel.cardnumber;
+    
+    [HNUIStyleSet UIStyleSetRoundView:self.houseInfoMain];
+    [HNUIStyleSet UIStyleSetRoundView:self.Main1];
+    [HNUIStyleSet UIStyleSetRoundView:self.Main2];
 }
 
 - (void)didReceiveMemoryWarning {

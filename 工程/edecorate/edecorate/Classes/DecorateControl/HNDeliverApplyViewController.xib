@@ -11,13 +11,17 @@
                 <outlet property="btimeTitleLabel" destination="k8h-ee-B6q" id="P9d-cO-NUg"/>
                 <outlet property="commitButton" destination="kkT-lc-ei9" id="kxS-oB-VLk"/>
                 <outlet property="decorationCompanyTitle" destination="dAG-hI-leI" id="hTG-o3-ni9"/>
+                <outlet property="decorationMain" destination="FQl-wv-5KR" id="omc-b7-bGa"/>
                 <outlet property="eTimeTextField" destination="Gpt-Dp-Lzs" id="FnE-RU-fXH"/>
                 <outlet property="etimeTitleLabel" destination="R8n-E4-ecx" id="Qzh-L4-mQr"/>
+                <outlet property="godInfoMain" destination="JIz-H4-ijF" id="RZg-WP-fRm"/>
                 <outlet property="houseInfoMain" destination="Zxa-Ay-j6D" id="K63-uY-BEG"/>
                 <outlet property="houseInfoTitle" destination="tI0-Cv-dT7" id="JGk-JX-cLl"/>
                 <outlet property="mainView" destination="2cR-6z-mMA" id="bbn-7B-WCL"/>
                 <outlet property="ownernameLabel" destination="nrG-0E-6vF" id="Gzb-vx-bSR"/>
                 <outlet property="ownerphoneLabel" destination="dt8-mm-tBr" id="GtM-Q4-8as"/>
+                <outlet property="payMain" destination="3I9-Xp-1gY" id="Hbe-N5-Yop"/>
+                <outlet property="personMain" destination="9Jx-v8-XtS" id="RLD-kL-jwL"/>
                 <outlet property="productTextField" destination="7Qy-XL-aoK" id="rTc-iW-N1X"/>
                 <outlet property="productTitle" destination="WnH-wp-omr" id="u4t-Vq-AQF"/>
                 <outlet property="roomNameLabel" destination="gw1-Qx-INg" id="7fG-Nh-pM2"/>

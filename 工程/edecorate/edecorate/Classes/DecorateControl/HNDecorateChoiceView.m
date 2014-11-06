@@ -57,7 +57,7 @@
     NSArray * buttonsArray = [NSArray arrayWithObjects:btnSpace,doneButton,nil];
     [topView setItems:buttonsArray];
     self.textFiled.inputAccessoryView = topView;
-    self.textFiled.placeholder = @"请选择";
+    self.textFiled.placeholder = @"请选择地址";
     
     [[HNDecorateData shared] loadingDecorateData:[HNLoginData shared].mshopid block:^(NSURLResponse *response, NSData *data, NSError *connectionError){
         [self performSelectorOnMainThread:@selector(doDecorateData:) withObject:data waitUntilDone:YES];

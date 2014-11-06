@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HNTemporaryDetailsViewController">
             <connections>
                 <outlet property="checkOutButton" destination="cKU-PY-NJi" id="gns-WQ-6IM"/>
+                <outlet property="constructionInfMainLabel" destination="cs3-U0-apx" id="oSo-55-kHJ"/>
                 <outlet property="constructionPersonLabel" destination="leA-Ul-xRl" id="cMu-Y9-ovm"/>
                 <outlet property="constructionPersonPhoneNumberLabel" destination="5pt-kH-YeX" id="eiT-pQ-ayu"/>
                 <outlet property="constructionUnitLabel" destination="2rS-Qa-hc1" id="Ydf-sB-Mya"/>
@@ -173,9 +174,10 @@
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4Hl-dh-RJw">
-                    <rect key="frame" x="48" y="657" width="42" height="21"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="status" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4Hl-dh-RJw">
+                    <rect key="frame" x="48" y="650" width="100" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.96078431369999995" green="0.28235294119999998" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>

@@ -12,6 +12,8 @@
 @interface HNTemporaryDetailsViewController ()
 @property (nonatomic, strong)IBOutlet UIScrollView *mainView;
 @property (nonatomic, strong)IBOutlet UILabel *houseInfMainLabel;
+@property (nonatomic, strong)IBOutlet UILabel *constructionInfMainLabel;
+
 @property (nonatomic, strong)IBOutlet UILabel *houseInfTitleLabel;
 @property (nonatomic, strong)IBOutlet UILabel *houseInfLabel;
 @property (nonatomic, strong)IBOutlet UILabel *ownersLabel;
@@ -149,7 +151,13 @@
     self.checkOutButton.layer.borderColor = [UIColor blackColor].CGColor;
     
     [self.statusLable setText:@"正在审核"];
-    [self.statusLable sizeToFit];
+    //[self.statusLable sizeToFit];
+    
+    [HNUIStyleSet UIStyleSetRoundView:self.houseInfMainLabel];
+    [HNUIStyleSet UIStyleSetRoundView:self.temporaryApplyMainLable];
+    [HNUIStyleSet UIStyleSetRoundView:self.constructionInfMainLabel];
+    [HNUIStyleSet UIStyleSetRoundView:self.statusLable];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated{

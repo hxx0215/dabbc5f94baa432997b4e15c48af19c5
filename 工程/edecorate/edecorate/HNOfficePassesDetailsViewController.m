@@ -14,6 +14,8 @@
 @property (nonatomic,strong) IBOutlet UIScrollView *mainView;
 
 @property (nonatomic,strong) IBOutlet UILabel *houseInfoMain;
+@property (nonatomic,strong) IBOutlet UILabel *decorationInfoMain;
+@property (nonatomic,strong) IBOutlet UILabel *payInfoMain;
 
 @property (nonatomic,strong) IBOutlet UILabel *houseInfoTitle;
 @property (nonatomic,strong) IBOutlet UILabel *houseInfo;
@@ -98,6 +100,10 @@
 //        [self labelWithTitle:proposerData.isTransaction label:self.decorationPic];
     }
     self.personsLabel.text = str;
+    
+    [HNUIStyleSet UIStyleSetRoundView:self.houseInfoMain];
+    [HNUIStyleSet UIStyleSetRoundView:self.decorationInfoMain];
+    [HNUIStyleSet UIStyleSetRoundView:self.payInfoMain];
     
  
     int officepassPerFee=10,depositFee=30;

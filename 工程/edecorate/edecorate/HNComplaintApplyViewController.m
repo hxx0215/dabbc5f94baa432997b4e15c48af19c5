@@ -21,6 +21,9 @@
 @property (nonatomic, strong)IBOutlet UIScrollView *mainView;
 
 @property (nonatomic, strong)IBOutlet UILabel *houseInfMainLabel;
+@property (nonatomic, strong)IBOutlet UILabel *constructionInfMainLabel;
+@property (nonatomic, strong)IBOutlet UILabel *complaintInfMainLabel;
+
 @property (nonatomic, strong)IBOutlet UILabel *houseInfTitleLabel;
 @property (nonatomic, strong)IBOutlet UILabel *houseInfLabel;
 @property (nonatomic, strong)IBOutlet UILabel *ownersLabel;
@@ -176,9 +179,13 @@
     [topView setItems:buttonsArray];
     self.complaintContansTextView.inputAccessoryView = topView;
     
-    self.choiceDecorateView = [[HNDecorateChoiceView alloc]initWithFrame:CGRectMake(12, 12, self.view.bounds.size.width-24, 25)];
+    self.choiceDecorateView = [[HNDecorateChoiceView alloc]initWithFrame:CGRectMake(12, 12, self.view.bounds.size.width-24, 30)];
     [self.mainView addSubview:self.choiceDecorateView];
     self.choiceDecorateView.delegate = self;
+    
+    [HNUIStyleSet UIStyleSetRoundView:self.houseInfMainLabel];
+    [HNUIStyleSet UIStyleSetRoundView:self.complaintInfMainLabel];
+    [HNUIStyleSet UIStyleSetRoundView:self.constructionInfMainLabel];
 }
 
 
