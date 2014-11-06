@@ -86,6 +86,10 @@
 		B9882DF519CB079A0093F0F4 /* HNReportTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B9882DF419CB079A0093F0F4 /* HNReportTableViewCell.m */; };
 		B9882DF819CB11920093F0F4 /* HNNewReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9882DF719CB11920093F0F4 /* HNNewReportViewController.m */; };
 		B9882DFB19CB152F0093F0F4 /* HNNewCompanyReportView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9882DFA19CB152F0093F0F4 /* HNNewCompanyReportView.m */; };
+		B9A09D7E1A0B9B4A00A88CD8 /* add_click@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B9A09D7C1A0B9B4A00A88CD8 /* add_click@2x.png */; };
+		B9A09D7F1A0B9B4A00A88CD8 /* add@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B9A09D7D1A0B9B4A00A88CD8 /* add@2x.png */; };
+		B9A09D821A0B9CA500A88CD8 /* arrowBack@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B9A09D801A0B9CA500A88CD8 /* arrowBack@2x.png */; };
+		B9A09D831A0B9CA500A88CD8 /* arrowBackClick@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B9A09D811A0B9CA500A88CD8 /* arrowBackClick@2x.png */; };
 		B9AD9E0819DEC90D00D82439 /* NSString+Crypt.m in Sources */ = {isa = PBXBuildFile; fileRef = B9AD9E0719DEC90D00D82439 /* NSString+Crypt.m */; };
 		B9AD9E0B19E01A7900D82439 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = B9AD9E0A19E01A7900D82439 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		B9B2BBF119CF1F1000839AED /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B2BBF019CF1F1000839AED /* AssetsLibrary.framework */; };
@@ -348,6 +352,10 @@
 		B9882DF719CB11920093F0F4 /* HNNewReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNNewReportViewController.m; path = Classes/DecorateControl/HNNewReportViewController.m; sourceTree = "<group>"; };
 		B9882DF919CB152F0093F0F4 /* HNNewCompanyReportView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNNewCompanyReportView.h; path = Classes/DecorateControl/HNNewCompanyReportView.h; sourceTree = "<group>"; };
 		B9882DFA19CB152F0093F0F4 /* HNNewCompanyReportView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNNewCompanyReportView.m; path = Classes/DecorateControl/HNNewCompanyReportView.m; sourceTree = "<group>"; };
+		B9A09D7C1A0B9B4A00A88CD8 /* add_click@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "add_click@2x.png"; sourceTree = "<group>"; };
+		B9A09D7D1A0B9B4A00A88CD8 /* add@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "add@2x.png"; sourceTree = "<group>"; };
+		B9A09D801A0B9CA500A88CD8 /* arrowBack@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrowBack@2x.png"; sourceTree = "<group>"; };
+		B9A09D811A0B9CA500A88CD8 /* arrowBackClick@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrowBackClick@2x.png"; sourceTree = "<group>"; };
 		B9AD9E0619DEC90D00D82439 /* NSString+Crypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Crypt.h"; sourceTree = "<group>"; };
 		B9AD9E0719DEC90D00D82439 /* NSString+Crypt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Crypt.m"; sourceTree = "<group>"; };
 		B9AD9E0919E01A7900D82439 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
@@ -830,6 +838,7 @@
 		B965862B19F68CBD00EB4766 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				B9A09D7B1A0B9B3400A88CD8 /* NavigationItem */,
 				D3201FB01A0A654900236B08 /* TabBar */,
 				B93ED05D1A085B9F008B99B2 /* btn_scanner01@2x.png */,
 				B9C2B41C19FE8C3900C93D59 /* ReportDetail */,
@@ -978,6 +987,17 @@
 				D3F90F1219CB1474000C95E4 /* HNTemporaryTableViewCell.m */,
 			);
 			name = Temporary;
+			sourceTree = "<group>";
+		};
+		B9A09D7B1A0B9B3400A88CD8 /* NavigationItem */ = {
+			isa = PBXGroup;
+			children = (
+				B9A09D7C1A0B9B4A00A88CD8 /* add_click@2x.png */,
+				B9A09D7D1A0B9B4A00A88CD8 /* add@2x.png */,
+				B9A09D801A0B9CA500A88CD8 /* arrowBack@2x.png */,
+				B9A09D811A0B9CA500A88CD8 /* arrowBackClick@2x.png */,
+			);
+			name = NavigationItem;
 			sourceTree = "<group>";
 		};
 		B9B2BBF419CF1F3000839AED /* CTAssetsPickerController */ = {
@@ -1363,8 +1383,11 @@
 				D38615EF1A03E9DC005B4093 /* HNDeliverApplyViewController.xib in Resources */,
 				D33EEABD19D6FF5D00D6F106 /* city.plist in Resources */,
 				D3C07BCA19CDC8CA003EA5E4 /* HNComplaintDetailsViewController.xib in Resources */,
+				B9A09D821A0B9CA500A88CD8 /* arrowBack@2x.png in Resources */,
 				B9E0660A19DAED6100893DBD /* HNDeliverGoodsViewController.xib in Resources */,
+				B9A09D831A0B9CA500A88CD8 /* arrowBackClick@2x.png in Resources */,
 				B91A3AC119D6E6E9000F3823 /* MJRefresh.bundle in Resources */,
+				B9A09D7E1A0B9B4A00A88CD8 /* add_click@2x.png in Resources */,
 				D33BBD1519CC711700AA1039 /* HNTemporaryApplyView.xib in Resources */,
 				B965864319F7E38E00EB4766 /* unsubmit@2x.png in Resources */,
 				D33EEABC19D6FF5D00D6F106 /* area.plist in Resources */,
@@ -1398,6 +1421,7 @@
 				B965864219F7E38E00EB4766 /* accept@2x.png in Resources */,
 				B9D3DECC19CD0B2C0020CDC9 /* HNReportPurchaseViewController.xib in Resources */,
 				3732B13219D0182100ADF3F5 /* HNOfficePassesApplyViewController.xib in Resources */,
+				B9A09D7F1A0B9B4A00A88CD8 /* add@2x.png in Resources */,
 				B965863E19F6A56000EB4766 /* rememberit@2x.png in Resources */,
 				B91A3AD219D6F9D4000F3823 /* HNGoodsViewController.xib in Resources */,
 				B9D3DEDF19CD25430020CDC9 /* HNCheckDetailViewController.xib in Resources */,
