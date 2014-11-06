@@ -71,6 +71,8 @@
     }];
 
     
+
+    self.navigationItem.title = [self getTitleString];
     [self initNaviButton];
     
 

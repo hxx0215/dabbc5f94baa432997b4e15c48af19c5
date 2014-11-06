@@ -63,6 +63,7 @@
     
     self.navigationItem.title=@"办理出入证";
     //[self GetPassList:@"admin" byPage:@"1" AndRow:@"8"];
+
     [self initNaviButton];
     
 }

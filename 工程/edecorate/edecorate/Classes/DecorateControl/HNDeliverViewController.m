@@ -46,6 +46,7 @@
     
     self.navigationItem.title = NSLocalizedString(@"Delivery&Installation", nil);
     
+
     [self initNaviButton];
     //[self loadMyData];
 }
