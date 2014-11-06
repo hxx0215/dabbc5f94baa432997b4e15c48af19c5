@@ -11,6 +11,7 @@
 #import "HNTemporaryModel.h"
 
 @interface HNOfficePassedTableViewCell : UITableViewCell
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withModel:(HNPassData*)model;
--(void)updateMyCell;
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier;
+- (void)setRoomName:(NSString *)roomname;
+- (void)setStatus:(NSString *)status;
 @end

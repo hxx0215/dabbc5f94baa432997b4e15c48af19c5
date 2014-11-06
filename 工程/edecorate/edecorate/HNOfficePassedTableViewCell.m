@@ -14,7 +14,7 @@
 
 @property (nonatomic, strong)UILabel *roomLabel;
 @property (nonatomic, strong)UILabel *statusLabel;
-@property (nonatomic, strong)HNPassData* temporaryModel;
+@property (nonatomic, strong)UIImageView *statusImage;
 
 @end
 
@@ -24,12 +24,12 @@
     // Initialization code
 }
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withModel:(HNPassData*)model
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-        self.temporaryModel = model;
+        
         self.roomLabel = [[UILabel alloc] initWithFrame:CGRectMake(27, 0, self.bounds.size.width * 0.8, 36)];
         self.roomLabel.top = 9;
         self.roomLabel.numberOfLines = 2;
@@ -39,11 +39,16 @@
         self.statusLabel.bottom = self.contentView.height - 14;
         self.statusLabel.font = [UIFont systemFontOfSize:14];
         self.statusLabel.textColor = [UIColor colorWithWhite:128.0/255.0 alpha:1.0];
+        
+        self.statusImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 10, 10)];
+        self.statusImage.left = 12;
+        self.statusImage.top = 23;
+        
+        [self.contentView addSubview:self.statusImage];
         [self.contentView addSubview:self.roomLabel];
         [self.contentView addSubview:self.statusLabel];
+        
         self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        self.roomLabel.text = model.roomnumber;
-        [self setStatus];
     }
     return self;
 }
@@ -53,43 +58,29 @@
     self.statusLabel.top = self.roomLabel.bottom +3;
 }
 
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated
+{
     [super setSelected:selected animated:animated];
-
+    
     // Configure the view for the selected state
 }
-
--(void)updateMyCell
-{
-    [self setStatus];
-}
-
 - (void)setRoomName:(NSString *)roomname{
     self.roomLabel.text = roomname;
 }
-
-- (void)setStatus
-{
-    if ([self.temporaryModel.CARDId isEqualToString:@"0"]) {
-        self.statusLabel.text = @"";
+- (void)setStatus:(NSString *)status{
+    if (status.intValue==1) {
+        self.statusLabel.text = @"审核进度:已审核";
+        self.statusImage.image = [UIImage imageNamed:@"accept.png"];
+    }
+    else if (status.intValue==-1){
+        self.statusLabel.text = @"审核进度:审核未通过";
+        self.statusImage.image = [UIImage imageNamed:@"unsubmit.png"];
     }
     else
     {
-        //NSLog(@"%@",self.temporaryModel.assessorState);
-        if ([self.temporaryModel.assessorState isEqualToString:@"1"]) {
-            self.statusLabel.text = @"已审核";
-            
-        }
-        else if ([self.temporaryModel.assessorState isEqualToString:@"0"])
-        {
-            self.statusLabel.text = @"未审核";
-        }
-        else{
-            self.statusLabel.text = @"审核未通过";
-        }
+        self.statusLabel.text = @"审核进度:未审核";
+        self.statusImage.image = [UIImage new];
     }
 }
-
 
 @end

@@ -11,11 +11,11 @@
 @interface HNTemporaryTableViewCell ()
 @property (nonatomic, strong)UILabel *roomLabel;
 @property (nonatomic, strong)UILabel *statusLabel;
-@property (nonatomic, strong)HNTemporaryModel* temporaryModel;
+@property (nonatomic, strong)UIImageView *statusImage;
 @end
 @implementation HNTemporaryTableViewCell
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withModel:(HNTemporaryModel*)model
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
@@ -31,13 +31,13 @@
         self.statusLabel.font = [UIFont systemFontOfSize:14];
         self.statusLabel.textColor = [UIColor colorWithWhite:128.0/255.0 alpha:1.0];
         
+        self.statusImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 10, 10)];
+        self.statusImage.left = 12;
+        self.statusImage.top = 23;
         
-        
+        [self.contentView addSubview:self.statusImage];
         [self.contentView addSubview:self.roomLabel];
         [self.contentView addSubview:self.statusLabel];
-        self.temporaryModel = model;
-        self.roomLabel.text = model.roomName;
-        [self setStatus:model.status];
         
         self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
@@ -47,11 +47,6 @@
 - (void)layoutSubviews{
     [super layoutSubviews];
     self.statusLabel.top = self.roomLabel.bottom +3;
-}
-
--(void)updateMyCell
-{
-    [self setStatus:self.temporaryModel.status];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
@@ -68,17 +63,23 @@
     switch (status) {
         case TemporaryStatusApplying:
             self.statusLabel.text = @"审核进度:审核中";
+            self.statusImage.image = [UIImage new];
             break;
         case TemporaryStatusPassed:
             self.statusLabel.text = @"审核进度:已通过";
+            self.statusImage.image = [UIImage imageNamed:@"accept.png"];
+            
             break;
         case TemporaryStatusNotPassed:
             self.statusLabel.text = @"审核进度:未通过";
+            self.statusImage.image = [UIImage imageNamed:@"unsubmit.png"];
             break;
         default:
-            self.statusLabel.text = @"";
+            self.statusLabel.text = @"审核进度:审核中";
+            self.statusImage.image = [UIImage new];
             break;
     }
 }
+
 @end
 

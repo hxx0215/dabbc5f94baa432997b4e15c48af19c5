@@ -155,9 +155,12 @@
     static NSString *reuseIdentifier = @"refundCell";
     HNOfficePassedTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
     if (!cell){
-        HNPassData *model =self.modelList[indexPath.row];
-        cell = [[HNOfficePassedTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier withModel:model];
+        
+        cell = [[HNOfficePassedTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
     }
+    HNPassData *model =self.modelList[indexPath.row];
+    [cell setRoomName:model.roomnumber];
+    [cell setStatus:model.assessorState];
     return cell;
 }
 

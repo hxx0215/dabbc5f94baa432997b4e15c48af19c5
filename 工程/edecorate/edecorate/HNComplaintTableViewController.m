@@ -149,9 +149,12 @@
     static NSString *reuseIdentifier = @"complaintCell";
     HNComplaintTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
     if (!cell){
-        HNComplaintData *model =self.modelList[indexPath.row];
-        cell = [[HNComplaintTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier withModel:model];
+        
+        cell = [[HNComplaintTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
     }
+    HNComplaintData *model =self.modelList[indexPath.row];
+    [cell setRoomName:model.room];
+    [cell setStatus:model.constructionTeam];
     
     return cell;
 }

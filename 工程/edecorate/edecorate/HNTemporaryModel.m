@@ -119,12 +119,11 @@
         case 1:
             self.status = TemporaryStatusPassed;
             break;
+        case -1:
+            self.status = TemporaryStatusNotPassed;
             
         default:
             break;
-    }
-    if ([self.fireId isEqualToString:@"7"]) {
-        self.status = TemporaryStatusCustom;
     }
     [self.huseInfo updateData:dic];
     [self.dataInfo updateData:dic];

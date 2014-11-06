@@ -10,5 +10,7 @@
 #include "HNComplaintData.h"
 
 @interface HNComplaintTableViewCell : UITableViewCell
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier withModel:(HNComplaintData*)model;
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier;
+- (void)setRoomName:(NSString *)roomname;
+- (void)setStatus:(NSString *)status;
 @end
