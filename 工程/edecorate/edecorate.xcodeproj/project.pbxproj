@@ -156,6 +156,7 @@
 		B9E433641A064706000E2CA9 /* HNCheckDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B9E433631A064706000E2CA9 /* HNCheckDetailTableViewCell.m */; };
 		B9E433681A06515E000E2CA9 /* HNNewCheckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9E433661A06515E000E2CA9 /* HNNewCheckViewController.m */; };
 		B9E433691A06515E000E2CA9 /* HNNewCheckViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9E433671A06515E000E2CA9 /* HNNewCheckViewController.xib */; };
+		B9EBC8491A0E4D79008523E2 /* HNBrowseImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9EBC8481A0E4D79008523E2 /* HNBrowseImageViewController.m */; };
 		D3201FAE1A0A640C00236B08 /* HNSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3201FAC1A0A640C00236B08 /* HNSettingViewController.m */; };
 		D3201FAF1A0A640C00236B08 /* HNSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3201FAD1A0A640C00236B08 /* HNSettingViewController.xib */; };
 		D334E87119FFC0DB002AA7D2 /* HNDeliverDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D334E86F19FFC0DB002AA7D2 /* HNDeliverDetailTableViewCell.m */; };
@@ -483,6 +484,8 @@
 		B9E433651A06515E000E2CA9 /* HNNewCheckViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNNewCheckViewController.h; path = Classes/DecorateControl/HNNewCheckViewController.h; sourceTree = "<group>"; };
 		B9E433661A06515E000E2CA9 /* HNNewCheckViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNNewCheckViewController.m; path = Classes/DecorateControl/HNNewCheckViewController.m; sourceTree = "<group>"; };
 		B9E433671A06515E000E2CA9 /* HNNewCheckViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HNNewCheckViewController.xib; path = Classes/DecorateControl/HNNewCheckViewController.xib; sourceTree = "<group>"; };
+		B9EBC8471A0E4D79008523E2 /* HNBrowseImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNBrowseImageViewController.h; path = Resources/HNBrowseImageViewController.h; sourceTree = "<group>"; };
+		B9EBC8481A0E4D79008523E2 /* HNBrowseImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNBrowseImageViewController.m; path = Resources/HNBrowseImageViewController.m; sourceTree = "<group>"; };
 		D3201FAB1A0A640C00236B08 /* HNSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNSettingViewController.h; path = Classes/Setting/HNSettingViewController.h; sourceTree = "<group>"; };
 		D3201FAC1A0A640C00236B08 /* HNSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNSettingViewController.m; path = Classes/Setting/HNSettingViewController.m; sourceTree = "<group>"; };
 		D3201FAD1A0A640C00236B08 /* HNSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HNSettingViewController.xib; path = Classes/Setting/HNSettingViewController.xib; sourceTree = "<group>"; };
@@ -1065,6 +1068,8 @@
 		B9D3DEE019CD2E8A0020CDC9 /* Share */ = {
 			isa = PBXGroup;
 			children = (
+				B9EBC8471A0E4D79008523E2 /* HNBrowseImageViewController.h */,
+				B9EBC8481A0E4D79008523E2 /* HNBrowseImageViewController.m */,
 				D33EEABE19D7000E00D6F106 /* HNAreaPickerView.h */,
 				D33EEABF19D7000E00D6F106 /* HNAreaPickerView.m */,
 				D33EEAC019D7000E00D6F106 /* HNAreaPickerView.xib */,
@@ -1535,6 +1540,7 @@
 				D33EEA6A19D6D9E600D6F106 /* HNProfileViewController.m in Sources */,
 				B909D3561A066E6A002EECF9 /* HNNewCheckTableViewCell.m in Sources */,
 				B9B2BC1819CF1F3000839AED /* ALAsset+isEqual.m in Sources */,
+				B9EBC8491A0E4D79008523E2 /* HNBrowseImageViewController.m in Sources */,
 				B9D3DECB19CD0B2C0020CDC9 /* HNReportPurchaseViewController.m in Sources */,
 				B94C773A19D3082D0046AC58 /* CALayer+XibConfiguration.m in Sources */,
 				B9E0668119DCDCB100893DBD /* UIWebView+AFNetworking.m in Sources */,
