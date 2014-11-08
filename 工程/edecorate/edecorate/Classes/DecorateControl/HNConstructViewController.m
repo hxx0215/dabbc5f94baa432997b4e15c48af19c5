@@ -36,10 +36,10 @@
     self.personalData = @[NSLocalizedString(@"姓名", nil),NSLocalizedString(@"联系电话",nil),NSLocalizedString(@"身份证号",nil)];
     self.graphData = @[NSLocalizedString(@"原始结构图", nil),NSLocalizedString(@"平面布置图",nil),NSLocalizedString(@"墙体改造图",nil),NSLocalizedString(@"天花布置图", nil),NSLocalizedString(@"水路布置图", nil),NSLocalizedString(@"电路分布图",nil)];
     
-    self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
 }
 - (void)viewWillAppear:(BOOL)animated{
@@ -72,7 +72,7 @@
     // Dispose of any resources that can be recreated.
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -83,86 +83,36 @@
         else
             return [self.personalData count];
     }
-    else
+    else if (1==section)
         return [self.graphData count] ;
+    else
+        return 0;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if (0==section)
-        return 70;
-    else
-        return 230/2;
+    return 50;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    UIView *view = nil;
-    if (0==section){
-        view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 70)];
-        
-        UIView *colorView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 40)];
-        colorView.backgroundColor = [UIColor colorWithRed:144/255.0 green:197/255.0 blue:31/255.0 alpha:1.0];
-        UILabel *colorLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 18)];
-        if (self.constructType < 2){
-            colorLabel.text = NSLocalizedString(@"承包方式:公司承包装修", nil);
-        }
-        else{
-            colorLabel.text = NSLocalizedString(@"承包方式:业主自装", nil);
-        }
-
-        colorLabel.textColor = [UIColor whiteColor];
-        colorLabel.font = [UIFont systemFontOfSize:18.0];
-        colorLabel.left = 27;
-        colorLabel.centerY = colorView.height / 2;
-        [colorView addSubview:colorLabel];
-        
-        UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 40, self.view.width, 30)];
-        titleView.backgroundColor = [UIColor colorWithRed:214.0/255.0 green:220/255.0 blue:224.0/255.0 alpha:1.0];
-        UILabel *titleLabel = [[UILabel alloc] init];
-        titleLabel.text = NSLocalizedString(@"装修公司资料", nil);
-        titleLabel.textColor = [UIColor colorWithWhite:128.0/255.0 alpha:1.0];
-        [titleLabel sizeToFit];
-        titleLabel.left = 27;
-        titleLabel.centerY = titleView.height / 2;
-        [titleView addSubview:titleLabel];
-        
-        [view addSubview:colorView];
-        [view addSubview:titleView];
-    }
-    else if (1 == section){
-        view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 115)];
-        UIView *colorView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, view.width, 85)];
-        colorView.backgroundColor = [UIColor colorWithRed:144/255.0 green:197/255.0 blue:31/255.0 alpha:1.0];
-        UILabel *colorLabel1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.width - 14, 45)];
-        UILabel *colorLabel2 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, colorLabel1.width, 15)];
-        colorLabel1.text = self.roomNo;
-        colorLabel2.text = [NSString stringWithFormat:@"%@  %@",self.ownerName,self.ownerMobile];//@"李大木  13677899090";
-        colorLabel1.numberOfLines = 2;
-        colorLabel1.font = [UIFont systemFontOfSize:18];
-        colorLabel1.top = 11;
-        colorLabel1.right = self.view.width - 14;
-        colorLabel1.textColor = [UIColor whiteColor];
-        colorLabel1.textAlignment = NSTextAlignmentRight;
-        
-        colorLabel2.right = colorLabel1.right;
-        colorLabel2.bottom = colorView.height - 9;
-        colorLabel2.font = [UIFont systemFontOfSize:15];
-        colorLabel2.textColor = [UIColor whiteColor];
-        colorLabel2.textAlignment = NSTextAlignmentRight;
-        [colorView addSubview:colorLabel1];
-        [colorView addSubview:colorLabel2];
-        
-        UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 85, self.view.width, 30)];
-        titleView.backgroundColor = [UIColor colorWithRed:214.0/255.0 green:220/255.0 blue:224.0/255.0 alpha:1.0];
-        UILabel *titleLabel = [[UILabel alloc] init];
-        titleLabel.text = NSLocalizedString(@"图纸资料", nil);
-        titleLabel.textColor = [UIColor colorWithWhite:128.0/255.0 alpha:1.0];
-        [titleLabel sizeToFit];
-        titleLabel.left = 27;
-        titleLabel.centerY = titleView.height / 2;
-        [titleView addSubview:titleLabel];
-        
-        [view addSubview:colorView];
-        [view addSubview:titleView];
-    }
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.width, 50)];
+    UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(10, 0, tableView.width - 20, 50)];
+    contentView.backgroundColor = [UIColor projectGreen];
+    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:contentView.bounds byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii:CGSizeMake(7, 7)];
+    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+    maskLayer.frame = contentView.bounds;
+    maskLayer.path = maskPath.CGPath;
+    contentView.layer.mask = maskLayer;
+    
+    UILabel *label = [[UILabel alloc] init];
+    if (section == 0){
+        label.text = NSLocalizedString(@"承包方式:", nil);
+    }else
+        label.text = NSLocalizedString(@"缴费项目", nil);
+    [label sizeToFit];
+    label.textColor = [UIColor whiteColor];
+    label.left = 5;
+    label.centerY = contentView.height / 2;
+    [contentView addSubview:label];
+    [view addSubview:contentView];
     return view;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -187,7 +137,53 @@
     cell.photo.tag = (indexPath.section + 1) * 100 + indexPath.row;
     return cell;
 }
-
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([cell respondsToSelector:@selector(tintColor)]) {
+        if (tableView == self.tableView) {
+            CGFloat cornerRadius = 7.f;
+            cell.backgroundColor = UIColor.clearColor;
+            CAShapeLayer *layer = [[CAShapeLayer alloc] init];
+            CGMutablePathRef pathRef = CGPathCreateMutable();
+            CGRect bounds = CGRectInset(cell.bounds, 10, 0);
+            BOOL addLine = NO;
+            if (indexPath.row == 0 && indexPath.row == [tableView numberOfRowsInSection:indexPath.section]-1) {
+                CGPathAddRoundedRect(pathRef, nil, bounds, cornerRadius, cornerRadius);
+                /*} else if (indexPath.row == 0) {
+                 CGPathMoveToPoint(pathRef, nil, CGRectGetMinX(bounds), CGRectGetMaxY(bounds));
+                 CGPathAddArcToPoint(pathRef, nil, CGRectGetMinX(bounds), CGRectGetMinY(bounds), CGRectGetMidX(bounds), CGRectGetMinY(bounds), cornerRadius);
+                 CGPathAddArcToPoint(pathRef, nil, CGRectGetMaxX(bounds), CGRectGetMinY(bounds), CGRectGetMaxX(bounds), CGRectGetMidY(bounds), cornerRadius);
+                 CGPathAddLineToPoint(pathRef, nil, CGRectGetMaxX(bounds), CGRectGetMaxY(bounds));
+                 addLine = YES;*/
+            } else if (indexPath.row == [tableView numberOfRowsInSection:indexPath.section]-1) {
+                CGPathMoveToPoint(pathRef, nil, CGRectGetMinX(bounds), CGRectGetMinY(bounds));
+                CGPathAddArcToPoint(pathRef, nil, CGRectGetMinX(bounds), CGRectGetMaxY(bounds), CGRectGetMidX(bounds), CGRectGetMaxY(bounds), cornerRadius);
+                CGPathAddArcToPoint(pathRef, nil, CGRectGetMaxX(bounds), CGRectGetMaxY(bounds), CGRectGetMaxX(bounds), CGRectGetMidY(bounds), cornerRadius);
+                CGPathAddLineToPoint(pathRef, nil, CGRectGetMaxX(bounds), CGRectGetMinY(bounds));
+            } else {
+                CGPathAddRect(pathRef, nil, bounds);
+                addLine = YES;
+            }
+            layer.path = pathRef;
+            CFRelease(pathRef);
+            layer.fillColor = [UIColor colorWithWhite:1.f alpha:0.8f].CGColor;
+            
+            if (addLine == YES) {
+                CALayer *lineLayer = [[CALayer alloc] init];
+                CGFloat lineHeight = (1.f / [UIScreen mainScreen].scale);
+                lineLayer.frame = CGRectMake(CGRectGetMinX(bounds)+10, bounds.size.height-lineHeight, bounds.size.width-10, lineHeight);
+                lineLayer.backgroundColor = tableView.separatorColor.CGColor;
+                [layer addSublayer:lineLayer];
+            }
+            UIView *testView = [[UIView alloc] initWithFrame:bounds];
+            
+            [testView.layer insertSublayer:layer atIndex:0];
+            testView.backgroundColor = UIColor.clearColor;
+            cell.backgroundView = testView;
+            
+        }
+    }
+}
 - (void)purchase:(UIButton *)sender{
     MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = NSLocalizedString(@"Loading", nil);

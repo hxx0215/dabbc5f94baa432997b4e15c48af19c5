@@ -16,3 +16,9 @@
 + (NSString *)createSignWithMethod:(NSString *)method Params:(NSString *)params;
 + (NSString *)createResponseURLWithMethod:(NSString *)method Params:(NSString *)params;
 @end
+
+
+@interface UIColor (Project)
++ (UIColor *)projectGreen;
++ (UIColor *)projectRed;
+@end
