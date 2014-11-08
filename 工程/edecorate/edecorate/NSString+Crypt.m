@@ -189,6 +189,9 @@
     
     return [outputStr stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 }
+- (NSString *)addPort{
+    return [self stringByReplacingOccurrencesOfString:@"http://113.105.159.115" withString:@"http://113.105.159.115:5030"];
+}
 @end
 
 
