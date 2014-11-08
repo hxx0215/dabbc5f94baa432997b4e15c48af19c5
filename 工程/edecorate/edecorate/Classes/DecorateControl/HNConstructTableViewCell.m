@@ -19,9 +19,11 @@
         self.photo.right = self.contentView.width - 14;
         self.photo.centerY = self.contentView.height / 2;
         
-        self.title = [[UILabel alloc] initWithFrame:CGRectMake(12, 0, 200, 18)];;
+        self.title = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 200, 18)];;
         self.title.centerY = self.contentView.height / 2;
-        
+        self.title.numberOfLines = 0;
+        self.title.lineBreakMode = NSLineBreakByWordWrapping;
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self.contentView addSubview:self.photo];
         [self.contentView addSubview:self.title];
     }
@@ -37,9 +39,17 @@
     self.title.centerY = self.contentView.height / 2;
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-//    [super setSelected:selected animated:animated];
+    [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
 }
-
+- (void)reset{
+    self.title.textColor = [UIColor blackColor];
+    self.photo.hidden = NO;
+//    self.title.bounds = CGRectMake(0, 0, 200, 18);
+    self.title.height = 18;
+    self.title.centerY = self.contentView.height / 2;
+    [self.photo setImage:[UIImage imageNamed:@"selectphoto.png"] forState:UIControlStateNormal];
+    [self.photo setImage:[UIImage imageNamed:@"selectphotoclick.png"] forState:UIControlStateHighlighted];
+}
 @end

@@ -9,7 +9,7 @@
 #import "HNBrowseImageViewController.h"
 
 @interface HNBrowseImageViewController ()
-
+@property (nonatomic, strong)UIImageView *imageView;
 @end
 
 @implementation HNBrowseImageViewController
@@ -17,13 +17,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.view.backgroundColor = [UIColor blackColor];
+    self.imageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
+    self.imageView.image = self.image;
+    self.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    [self.view addSubview:self.imageView];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    [self dismissViewControllerAnimated:NO completion:^{
+        
+    }];
+}
 /*
 #pragma mark - Navigation
 

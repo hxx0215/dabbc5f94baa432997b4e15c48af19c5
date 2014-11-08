@@ -11,12 +11,15 @@
 #import "HNPurchaseItem.h"
 #import "HNConstructTableViewCell.h"
 #import "MBProgressHUD.h"
+#import "HNBrowseImageViewController.h"
 @interface HNConstructViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong)UITableView *tableView;
 @property (nonatomic, strong)NSArray *companyData;
 @property (nonatomic, strong)NSArray *personalData;
 @property (nonatomic, strong)NSArray *graphData;
-
+@property (nonatomic, strong)NSMutableArray *detailTitle;
+@property (nonatomic, strong)NSArray *pernalDetail;
+@property (nonatomic, strong)NSMutableDictionary *picDict;
 @end
 
 @implementation HNConstructViewController
@@ -25,6 +28,7 @@
     if (self){
         self.chart = [[NSMutableDictionary alloc] init];
         self.shopInfo = [[NSMutableDictionary alloc] init];
+        self.picDict = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
@@ -32,15 +36,58 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
-    self.companyData = @[NSLocalizedString(@"营业执照", nil),NSLocalizedString(@"税务登记证",nil),NSLocalizedString(@"组织代码登记证",nil),NSLocalizedString(@"资质证书", nil),NSLocalizedString(@"电工证", nil),NSLocalizedString(@"法人委托书及法人身份证",nil),NSLocalizedString(@"施工负责人身份证",nil),NSLocalizedString(@"装修施工合同",nil)];
-    self.personalData = @[NSLocalizedString(@"姓名", nil),NSLocalizedString(@"联系电话",nil),NSLocalizedString(@"身份证号",nil)];
+    self.companyData = @[NSLocalizedString(@"营业执照", nil),NSLocalizedString(@"税务登记证",nil),NSLocalizedString(@"组织代码登记证",nil),NSLocalizedString(@"资质证书", nil),NSLocalizedString(@"电工证", nil),NSLocalizedString(@"法人委托书",nil),NSLocalizedString(@"法人身份证", nil),NSLocalizedString(@"装修施工合同图证",nil),NSLocalizedString(@"施工负责人身份",nil)];
+    self.personalData = @[NSLocalizedString(@"房屋地址:", nil),NSLocalizedString(@"业主姓名:",nil),NSLocalizedString(@"手机号:",nil)];
     self.graphData = @[NSLocalizedString(@"原始结构图", nil),NSLocalizedString(@"平面布置图",nil),NSLocalizedString(@"墙体改造图",nil),NSLocalizedString(@"天花布置图", nil),NSLocalizedString(@"水路布置图", nil),NSLocalizedString(@"电路分布图",nil)];
     
     self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+
     [self.view addSubview:self.tableView];
+    
+    [self initDetailData];
+    [self initPicDict];
+    self.pernalDetail = @[self.roomNo,self.ownerName,self.ownerMobile];
+}
+
+- (void)initDetailData{
+    self.detailTitle = [[NSMutableArray alloc] init];
+    if (self.constructType < 2){
+        [self.detailTitle addObject:NSLocalizedString(@"装修公司资料", nil)];
+        [self.detailTitle addObjectsFromArray:self.companyData];
+    }
+    [self.detailTitle addObject:NSLocalizedString(@"业主及图纸资料", nil)];
+    [self.detailTitle addObjectsFromArray:self.personalData];
+    [self.detailTitle addObjectsFromArray:self.graphData];
+}
+- (void)initPicDict{
+    self.picDict = [[NSMutableDictionary alloc] init];
+    NSString *offset = @"3";
+    if (self.constructType < 2){
+        [self.picDict setObject:[self imageWithLink:self.shopInfo[@"businessLicense"]] forKey:@"1"];
+        [self.picDict setObject:[self imageWithLink:self.shopInfo[@"TaxCertificate"]] forKey:@"2"];
+        [self.picDict setObject:[self imageWithLink:self.shopInfo[@"OrganizationCode"]] forKey:@"3"];
+        [self.picDict setObject:[self imageWithLink:self.shopInfo[@"Certificate"]] forKey:@"4"];
+        [self.picDict setObject:[self imageWithLink:self.shopInfo[@"Electrician"]] forKey:@"5"];
+        [self.picDict setObject:[self imageWithLink:self.shopInfo[@"powerAttorney"]] forKey:@"6"];
+        [self.picDict setObject:[self imageWithLink:self.shopInfo[@"gccIDCard"]] forKey:@"7"];
+        [self.picDict setObject:[self imageWithLink:self.shopInfo[@"compactIMG"]] forKey:@"8"];
+        [self.picDict setObject:[self imageWithLink:self.shopInfo[@"AttorneyIDcard"]] forKey:@"9"];
+        offset = @"13";
+    }
+    NSInteger flag = [offset integerValue];
+    [self.picDict setObject:[self imageWithLink:self.chart[kOriginalSChart]] forKey:[NSString stringWithFormat:@"%d",++flag]];
+    [self.picDict setObject:[self imageWithLink:self.chart[kfloorplan]] forKey:[NSString stringWithFormat:@"%d",++flag]];
+    [self.picDict setObject:[self imageWithLink:self.chart[kwallRemould]] forKey:[NSString stringWithFormat:@"%d",++flag]];
+    [self.picDict setObject:[self imageWithLink:self.chart[kceilingPlan]] forKey:[NSString stringWithFormat:@"%d",++flag]];
+    [self.picDict setObject:[self imageWithLink:self.chart[kWaterwayPlan]] forKey:[NSString stringWithFormat:@"%d",++flag]];
+    [self.picDict setObject:[self imageWithLink:self.chart[kBlockDiagram]] forKey:[NSString stringWithFormat:@"%d",++flag]];
+}
+- (UIImage *)imageWithLink:(NSString *)link{
+    UIImage *image =[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[link addPort]]]];
+    return image? image : [UIImage imageNamed:@"selectphoto.png"];
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -72,29 +119,28 @@
     // Dispose of any resources that can be recreated.
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 3;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (0==section)
     {
-        if (self.constructType < 2)
-            return [self.companyData count];
-        else
-            return [self.personalData count];
+//        if (self.constructType < 2)
+//            return [self.companyData count];
+//        else
+//            return [self.personalData count];
+        return [self.detailTitle count];
     }
-    else if (1==section)
-        return [self.graphData count] ;
     else
         return 0;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 50;
+    return 55;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.width, 50)];
-    UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(10, 0, tableView.width - 20, 50)];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.width, 55)];
+    UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(10, 5, tableView.width - 20, 50)];
     contentView.backgroundColor = [UIColor projectGreen];
     UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:contentView.bounds byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii:CGSizeMake(7, 7)];
     CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
@@ -104,7 +150,8 @@
     
     UILabel *label = [[UILabel alloc] init];
     if (section == 0){
-        label.text = NSLocalizedString(@"承包方式:", nil);
+        label.text = [NSString stringWithFormat:@"%@:%@",NSLocalizedString(@"承包方式", nil),
+                      self.constructType < 2 ? @"公司承包装修" : @"业主自装"];
     }else
         label.text = NSLocalizedString(@"缴费项目", nil);
     [label sizeToFit];
@@ -127,13 +174,42 @@
         [cell.photo addTarget:self action:@selector(showPic:) forControlEvents:UIControlEventTouchUpInside];
     }
     if (0==indexPath.section){
-        if (self.constructType < 2)
-            cell.title.text = self.companyData[indexPath.row];
-        else
-            cell.title.text = self.personalData[indexPath.row];
+        //图纸及资料
+        cell.title.text = self.detailTitle[indexPath.row];
+        [cell reset];
+        if (0==indexPath.row){
+            cell.title.textColor = [UIColor colorWithWhite:200.0/255.0 alpha:1.0];
+            cell.photo.hidden = YES;
+        }
+        int offset = 0;
+        if (self.constructType < 2){
+            offset = [self.companyData count] + 1;
+        }
+        if (offset == indexPath.row)
+        {
+            cell.title.textColor = [UIColor colorWithWhite:200.0/255.0 alpha:1.0];
+            cell.photo.hidden = YES;
+        }
+        if (offset < indexPath.row && offset + [self.personalData count] + 1> indexPath.row)
+        {
+            UIFont *font = cell.title.font;
+            CGSize size = CGSizeMake(cell.contentView.width - 30, cell.contentView.height);
+            CGSize titleSize = [[NSString stringWithFormat:@"%@%@",cell.title.text,self.pernalDetail[indexPath.row - offset - 1]] sizeWithFont:font constrainedToSize:size lineBreakMode:NSLineBreakByWordWrapping];
+            cell.title.width = titleSize.width;
+            cell.title.height = titleSize.height;
+            cell.title.text = [NSString stringWithFormat:@"%@%@",cell.title.text,self.pernalDetail[indexPath.row - offset - 1]];
+            cell.title.centerY = cell.contentView.height / 2;
+            cell.photo.hidden = YES;
+        }
+        if (!cell.photo.hidden){
+            [cell.photo setImage:[self.picDict objectForKey:[NSString stringWithFormat:@"%d",indexPath.row]] forState:UIControlStateNormal];
+            [cell.photo setImage:[self.picDict objectForKey:[NSString stringWithFormat:@"%d",indexPath.row]] forState:UIControlStateHighlighted];
+        }
     }
     else
-        cell.title.text = self.graphData[indexPath.row];
+    {
+        //缴费
+    }
     cell.photo.tag = (indexPath.section + 1) * 100 + indexPath.row;
     return cell;
 }
@@ -270,6 +346,11 @@
     });
 }
 - (void)showPic:(UIButton *)sender{
-    [sender setImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:@""]]] forState:UIControlStateNormal];
+    HNBrowseImageViewController *vc = [[HNBrowseImageViewController alloc] init];
+    vc.image = sender.currentImage;
+    [self presentViewController:vc animated:NO completion:^{
+        
+    }];
 }
+
 @end

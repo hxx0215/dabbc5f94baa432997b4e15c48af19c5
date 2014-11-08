@@ -11,4 +11,5 @@
 @interface HNConstructTableViewCell : UITableViewCell
 @property (nonatomic, strong)UIButton *photo;
 @property (nonatomic, strong)UILabel *title;
+- (void)reset;
 @end

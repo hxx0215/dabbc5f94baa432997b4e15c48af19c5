@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface HNBrowseImageViewController : UIViewController
-
+@property (nonatomic, strong)UIImage *image;
 @end
