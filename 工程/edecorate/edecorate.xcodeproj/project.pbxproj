@@ -171,6 +171,7 @@
 		D33EEAC219D7000E00D6F106 /* HNAreaPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D33EEAC019D7000E00D6F106 /* HNAreaPickerView.xib */; };
 		D33EEAC619D70C8800D6F106 /* HNProfileChangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D33EEAC419D70C8800D6F106 /* HNProfileChangeViewController.m */; };
 		D33EEAC719D70C8800D6F106 /* HNProfileChangeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D33EEAC519D70C8800D6F106 /* HNProfileChangeViewController.xib */; };
+		D351B9701A0FC38D0015D261 /* HNComplaintApplyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D351B96F1A0FC38D0015D261 /* HNComplaintApplyTableViewCell.m */; };
 		D35EE4DE19EECFC100D889A3 /* HNHttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = D35EE4DD19EECFC100D889A3 /* HNHttpRequest.m */; };
 		D38615EE1A03E9DC005B4093 /* HNDeliverApplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D38615EC1A03E9DC005B4093 /* HNDeliverApplyViewController.m */; };
 		D38615EF1A03E9DC005B4093 /* HNDeliverApplyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38615ED1A03E9DC005B4093 /* HNDeliverApplyViewController.xib */; };
@@ -499,6 +500,8 @@
 		D33EEAC319D70C8800D6F106 /* HNProfileChangeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNProfileChangeViewController.h; sourceTree = "<group>"; };
 		D33EEAC419D70C8800D6F106 /* HNProfileChangeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNProfileChangeViewController.m; sourceTree = "<group>"; };
 		D33EEAC519D70C8800D6F106 /* HNProfileChangeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HNProfileChangeViewController.xib; sourceTree = "<group>"; };
+		D351B96E1A0FC38D0015D261 /* HNComplaintApplyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNComplaintApplyTableViewCell.h; path = Classes/DecorateControl/HNComplaintApplyTableViewCell.h; sourceTree = "<group>"; };
+		D351B96F1A0FC38D0015D261 /* HNComplaintApplyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNComplaintApplyTableViewCell.m; path = Classes/DecorateControl/HNComplaintApplyTableViewCell.m; sourceTree = "<group>"; };
 		D35EE4DC19EECFC100D889A3 /* HNHttpRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNHttpRequest.h; sourceTree = "<group>"; };
 		D35EE4DD19EECFC100D889A3 /* HNHttpRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNHttpRequest.m; sourceTree = "<group>"; };
 		D38615EB1A03E9DC005B4093 /* HNDeliverApplyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNDeliverApplyViewController.h; path = Classes/DecorateControl/HNDeliverApplyViewController.h; sourceTree = "<group>"; };
@@ -1261,6 +1264,8 @@
 				D391EE8B19CD787D00DE3363 /* HNComplaintTableViewController.m */,
 				D3A2D30E19FB960600425BE1 /* HNComplaintData.h */,
 				D3A2D30F19FB960600425BE1 /* HNComplaintData.m */,
+				D351B96E1A0FC38D0015D261 /* HNComplaintApplyTableViewCell.h */,
+				D351B96F1A0FC38D0015D261 /* HNComplaintApplyTableViewCell.m */,
 			);
 			name = Complaint;
 			sourceTree = "<group>";
@@ -1470,6 +1475,7 @@
 				B9B2BC2419CF1F3000839AED /* CTAssetsViewController.m in Sources */,
 				B90C417C19FA282A004EBC2B /* HNPurchaseViewController.m in Sources */,
 				B9E0667D19DCDCB100893DBD /* UIButton+AFNetworking.m in Sources */,
+				D351B9701A0FC38D0015D261 /* HNComplaintApplyTableViewCell.m in Sources */,
 				B90C418419FA368D004EBC2B /* HNPurchaseTableViewCell.m in Sources */,
 				B95D15BF19D9A28200689B4D /* CustomIOS7AlertView.m in Sources */,
 				D38615EE1A03E9DC005B4093 /* HNDeliverApplyViewController.m in Sources */,

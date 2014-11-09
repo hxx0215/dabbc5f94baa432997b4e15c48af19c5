@@ -38,8 +38,10 @@
     self.textFiled = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, self.width, self.height)];
     [self addSubview:self.textFiled];
     self.textFiled.delegate = self;
-    self.textFiled.borderStyle = UITextBorderStyleRoundedRect;
+    self.textFiled.borderStyle = UITextBorderStyleNone;
     self.textFiled.backgroundColor = [UIColor clearColor];
+    self.textFiled.font = [UIFont systemFontOfSize:15];
+    self.textFiled.textColor = [UIColor whiteColor];
     
     self.selectPicker = [[UIPickerView alloc]init];
     self.textFiled.inputView = self.selectPicker;
