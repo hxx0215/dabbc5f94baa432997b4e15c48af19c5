@@ -58,7 +58,6 @@
 
 @property (strong, nonatomic) IBOutlet HNDecorateChoiceView *choiceDecorateView;
 
-@property (nonatomic) CGFloat mainViewFramRectTop;
 @end
 
 @implementation HNComplaintApplyViewController
@@ -209,7 +208,6 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    self.mainViewFramRectTop = [self.view convertRect:self.view.bounds toView:[[UIApplication sharedApplication] keyWindow]].origin.y;
     
     self.mainView.frame = self.view.bounds;
     self.mainView.contentSize = CGSizeMake(self.view.bounds.size.width, self.commitButton.bottom+20);

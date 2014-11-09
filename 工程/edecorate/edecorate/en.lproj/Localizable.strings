@@ -53,12 +53,16 @@
 "Check Out" = "Check Out";
 
 "Complaint Information" = "Complaint Information";
+"Complaint Time" = "Complaint Time";
+"Complaint Content" = "Complaint Content";
 "Complaint Category" = "Complaint Category";
 "Complaint Object" = "Complaint Object";
 "Complaint Issue" = "Complaint Issue";
 "Evidence" = "Evidence";
 "Submit complaint" = "Submit complaint";
 "Processing" = "Processing";
+"constructionTeam result" = "constructionTeam result";
+"management result" = "management result";
 
 "Company Data" = "Company Data";
 "Company Certificate" = "Company Certificate";

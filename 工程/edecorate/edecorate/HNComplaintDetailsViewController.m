@@ -9,7 +9,7 @@
 #import "HNComplaintDetailsViewController.h"
 #import "UIView+AHKit.h"
 
-@interface HNComplaintDetailsViewController ()
+@interface HNComplaintDetailsViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong)IBOutlet UILabel *houseInfMainLabel;
 @property (nonatomic, strong)IBOutlet UILabel *constructionInfMainLabel;
 @property (nonatomic, strong)IBOutlet UILabel *complaintInfMainLabel;
@@ -45,7 +45,7 @@
 @property (nonatomic, strong)IBOutlet UILabel *complaintconstructionTeamTitleLable;
 @property (nonatomic, strong)IBOutlet UILabel *complaintmanagementTitleLable;
 
-
+@property (nonatomic, strong) UITableView *tableView;
 @end
 
 @implementation HNComplaintDetailsViewController
@@ -63,55 +63,21 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     
-    [self labelWithTitle:NSLocalizedString(@"House Information", nil) label:self.houseInfMainLabel];
+    self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-    [self labelWithTitle:NSLocalizedString(@"House Information", nil) label:self.houseInfTitleLabel];
-    [self labelWithTitle:self.temporaryModel.room label:self.houseInfLabel];
+    [self.view addSubview:self.tableView];
     
-    
-//    [self labelWithTitle:@"laochen"  label:self.constructionPersonLabel];
-//    [self labelWithTitle:@"13330333033"  label:self.ownersPhoneNumberLabel];
+//    [self labelWithTitle:NSLocalizedString(@"House Information", nil) label:self.houseInfMainLabel];
 //    
-//    //constructionUnitTitleLabel
-//    [self labelWithTitle:NSLocalizedString(@"Construction unit", nil) label:self.constructionUnitTitleLabel];
+//    [self labelWithTitle:NSLocalizedString(@"House Information", nil) label:self.houseInfTitleLabel];
+//    [self labelWithTitle:self.temporaryModel.room label:self.houseInfLabel];
 //    
-//    [self labelWithTitle:@"feiniao"  label:self.constructionUnitLabel];
-//    [self labelWithTitle:@"laochen"  label:self.ownersLabel];
-//    [self labelWithTitle:@"13330333033"  label:self.constructionPersonPhoneNumberLabel];
-//    [self labelWithTitle:@"13330330300" label:self.constructionPersonPhoneNumberLabel];
-    
-//    self.ownersLabel.textColor = [UIColor colorWithRed:0xCC/255.0 green:0X91/255.0 blue:0X31/255.0 alpha:1];
-//    self.ownersPhoneNumberLabel.textColor = [UIColor colorWithRed:0xCC/255.0 green:0X91/255.0 blue:0X31/255.0 alpha:1];
-//    [self.ownersPhoneNumberLabel sizeToFit ];
-//    [self.ownersLabel sizeToFit ];
-//    self.ownersPhoneNumberLabel.right = self.view.width - 14;
-//    self.ownersLabel.right = self.ownersPhoneNumberLabel.left-5;
-//    
-//    self.constructionPersonLabel.textColor = [UIColor colorWithRed:0xCC/255.0 green:0X91/255.0 blue:0X31/255.0 alpha:1];
-//    self.constructionPersonPhoneNumberLabel.textColor = [UIColor colorWithRed:0xCC/255.0 green:0X91/255.0 blue:0X31/255.0 alpha:1];
-//    [self.constructionPersonPhoneNumberLabel sizeToFit ];
-//    [self.constructionPersonLabel sizeToFit ];
-//    self.constructionPersonPhoneNumberLabel.right = self.view.width - 14;
-//    self.constructionPersonLabel.right = self.constructionPersonPhoneNumberLabel.left-5;
     
     //Complaint Information
-    [self labelWithTitle:NSLocalizedString(@"Complaint Information", nil) label:self.complaintInformationTitleLable];
-    [self labelWithTitle:NSLocalizedString(@"Complaint Category", nil) label:self.complaintCategoryTitleLable];
-    [self labelWithTitle:NSLocalizedString(@"Complaint Object", nil) label:self.complaintObjectTitleLable];
-    [self labelWithTitle:NSLocalizedString(@"Complaint Issue", nil) label:self.complaintIssueTitleLable];
-    [self labelWithTitle:NSLocalizedString(@"Evidence", nil) label:self.evidenceTitleLable];
-    [self labelWithTitle:NSLocalizedString(@"Uploaded", nil) label:self.uploadStatusLable];
-    
-    [self labelWithTitle:self.temporaryModel.complainType label:self.complaintCategoryLable];
-    [self labelWithTitle:self.temporaryModel.complainObject label:self.complaintObjectLable];
-    [self.complaintIssueLable setText:self.temporaryModel.complainProblem];
-    
-    self.complaintIssueLable.numberOfLines = 4;
-    [self.complaintIssueLable sizeToFit];
-    self.complaintbodyLable.text = self.temporaryModel.body;
-    self.complaintCreateTimeLable.text = self.temporaryModel.CreateTime;
-    self.complaintmanagementLable.text = self.temporaryModel.management;
-    self.complaintconstructionTeamLable.text = self.temporaryModel.constructionTeam;
+
     
 
     CGFloat pos = self.complaintIssueLable.bottom>self.complaintIssueTitleLable.bottom?self.complaintIssueLable.bottom:self.complaintIssueTitleLable.bottom;
@@ -155,6 +121,171 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - tableView
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 2;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    if (0==section)
+    {
+        
+        return 0;
+    }
+    else
+        return 7;
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 55;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.width, 55)];
+    UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(10, 5, tableView.width - 20, 50)];
+    contentView.backgroundColor = [UIColor projectGreen];
+    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:contentView.bounds byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii:CGSizeMake(7, 7)];
+    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+    maskLayer.frame = contentView.bounds;
+    maskLayer.path = maskPath.CGPath;
+    contentView.layer.mask = maskLayer;
+    
+    UILabel *label = [[UILabel alloc] init];
+    if (section == 0){
+        label.text = self.temporaryModel.room;
+    }else
+        label.text = NSLocalizedString(@"投诉信息", nil);
+    label.font = [UIFont systemFontOfSize:15];
+    label.width = contentView.width -10;
+    label.numberOfLines = 2;
+    [label sizeToFit];
+    label.textColor = [UIColor whiteColor];
+    label.left = 5;
+    label.centerY = contentView.height / 2;
+    [contentView addSubview:label];
+    [view addSubview:contentView];
+    return view;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 30;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *identy = @"complaintDetailCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
+    if (!cell)
+    {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:identy];
+    }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    if (1==indexPath.section){
+        NSString *titleString = nil;
+        NSString *detailString = nil;
+        switch (indexPath.row) {
+            case 0:
+            {
+                titleString = NSLocalizedString(@"Complaint Time", nil);
+                detailString = self.temporaryModel.CreateTime;
+            }
+                break;
+            case 1:
+            {
+                titleString = NSLocalizedString(@"Complaint Content", nil);
+                detailString = self.temporaryModel.body;
+            }
+                break;
+            case 2:
+            {
+                titleString = NSLocalizedString(@"Complaint Category", nil);
+                detailString = self.temporaryModel.complainType;
+            }
+                break;
+            case 3:
+            {
+                titleString = NSLocalizedString(@"Complaint Object", nil);
+                detailString = self.temporaryModel.complainObject;
+            }
+                break;
+            case 4:
+            {
+                titleString = NSLocalizedString(@"Complaint Issue", nil);
+                detailString = self.temporaryModel.complainProblem;
+            }
+                break;
+            case 5:
+            {
+                titleString = NSLocalizedString(@"constructionTeam result", nil);
+                detailString = self.temporaryModel.constructionTeam;
+            }
+                break;
+            case 6:
+            {
+                titleString = NSLocalizedString(@"management result", nil);
+                detailString = self.temporaryModel.management;
+            }
+                break;
+                
+            default:
+                break;
+        }
+        cell.textLabel.textColor = [UIColor darkTextColor];
+        cell.textLabel.text = titleString;
+        cell.detailTextLabel.text = detailString;
+    }
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([cell respondsToSelector:@selector(tintColor)]) {
+        if (tableView == self.tableView) {
+            CGFloat cornerRadius = 7.f;
+            cell.backgroundColor = UIColor.clearColor;
+            CAShapeLayer *layer = [[CAShapeLayer alloc] init];
+            CGMutablePathRef pathRef = CGPathCreateMutable();
+            CGRect bounds = CGRectInset(cell.bounds, 10, 0);
+            BOOL addLine = NO;
+            if (indexPath.row == 0 && indexPath.row == [tableView numberOfRowsInSection:indexPath.section]-1) {
+                CGPathAddRoundedRect(pathRef, nil, bounds, cornerRadius, cornerRadius);
+                /*} else if (indexPath.row == 0) {
+                 CGPathMoveToPoint(pathRef, nil, CGRectGetMinX(bounds), CGRectGetMaxY(bounds));
+                 CGPathAddArcToPoint(pathRef, nil, CGRectGetMinX(bounds), CGRectGetMinY(bounds), CGRectGetMidX(bounds), CGRectGetMinY(bounds), cornerRadius);
+                 CGPathAddArcToPoint(pathRef, nil, CGRectGetMaxX(bounds), CGRectGetMinY(bounds), CGRectGetMaxX(bounds), CGRectGetMidY(bounds), cornerRadius);
+                 CGPathAddLineToPoint(pathRef, nil, CGRectGetMaxX(bounds), CGRectGetMaxY(bounds));
+                 addLine = YES;*/
+            } else if (indexPath.row == [tableView numberOfRowsInSection:indexPath.section]-1) {
+                CGPathMoveToPoint(pathRef, nil, CGRectGetMinX(bounds), CGRectGetMinY(bounds));
+                CGPathAddArcToPoint(pathRef, nil, CGRectGetMinX(bounds), CGRectGetMaxY(bounds), CGRectGetMidX(bounds), CGRectGetMaxY(bounds), cornerRadius);
+                CGPathAddArcToPoint(pathRef, nil, CGRectGetMaxX(bounds), CGRectGetMaxY(bounds), CGRectGetMaxX(bounds), CGRectGetMidY(bounds), cornerRadius);
+                CGPathAddLineToPoint(pathRef, nil, CGRectGetMaxX(bounds), CGRectGetMinY(bounds));
+            } else {
+                CGPathAddRect(pathRef, nil, bounds);
+                addLine = YES;
+            }
+            layer.path = pathRef;
+            CFRelease(pathRef);
+            layer.fillColor = [UIColor colorWithWhite:1.f alpha:0.8f].CGColor;
+            
+            if (addLine == YES) {
+                CALayer *lineLayer = [[CALayer alloc] init];
+                CGFloat lineHeight = (1.f / [UIScreen mainScreen].scale);
+                lineLayer.frame = CGRectMake(CGRectGetMinX(bounds)+10, bounds.size.height-lineHeight, bounds.size.width-10, lineHeight);
+                lineLayer.backgroundColor = tableView.separatorColor.CGColor;
+                [layer addSublayer:lineLayer];
+            }
+            UIView *testView = [[UIView alloc] initWithFrame:bounds];
+            
+            [testView.layer insertSublayer:layer atIndex:0];
+            testView.backgroundColor = UIColor.clearColor;
+            cell.backgroundView = testView;
+            
+        }
+    }
 }
 
 /*

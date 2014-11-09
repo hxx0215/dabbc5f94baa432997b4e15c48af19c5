@@ -10,4 +10,6 @@
 
 @interface HNUIStyleSet : NSObject
 +(void)UIStyleSetRoundView:(UIView*)label;
++(UIColor *)projectGreen;
++(UIColor *)projectRed;
 @end
