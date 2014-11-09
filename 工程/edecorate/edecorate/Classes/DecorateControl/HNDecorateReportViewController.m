@@ -8,7 +8,7 @@
 
 #import "HNDecorateReportViewController.h"
 #import "HNReportTableViewCell.h"
-#import "HNNewReportViewController.h"
+//#import "HNNewReportViewController.h"
 #import "MJRefresh.h"
 #import "HNLoginData.h"
 #import "MBProgressHUD.h"
