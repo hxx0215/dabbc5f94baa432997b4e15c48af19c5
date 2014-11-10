@@ -181,7 +181,7 @@
             cell.title.textColor = [UIColor colorWithWhite:200.0/255.0 alpha:1.0];
             cell.photo.hidden = YES;
         }
-        int offset = 0;
+        NSUInteger offset = 0;
         if (self.constructType < 2){
             offset = [self.companyData count] + 1;
         }
@@ -202,8 +202,8 @@
             cell.photo.hidden = YES;
         }
         if (!cell.photo.hidden){
-            [cell.photo setImage:[self.picDict objectForKey:[NSString stringWithFormat:@"%d",indexPath.row]] forState:UIControlStateNormal];
-            [cell.photo setImage:[self.picDict objectForKey:[NSString stringWithFormat:@"%d",indexPath.row]] forState:UIControlStateHighlighted];
+            [cell.photo setImage:[self.picDict objectForKey:[NSString stringWithFormat:@"%ld",indexPath.row]] forState:UIControlStateNormal];
+            [cell.photo setImage:[self.picDict objectForKey:[NSString stringWithFormat:@"%ld",indexPath.row]] forState:UIControlStateHighlighted];
         }
     }
     else
