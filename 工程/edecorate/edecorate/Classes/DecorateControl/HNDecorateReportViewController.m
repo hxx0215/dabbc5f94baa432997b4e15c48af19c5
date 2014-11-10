@@ -8,7 +8,7 @@
 
 #import "HNDecorateReportViewController.h"
 #import "HNReportTableViewCell.h"
-//#import "HNNewReportViewController.h"
+#import "HNNewReportViewController.h"
 #import "MJRefresh.h"
 #import "HNLoginData.h"
 #import "MBProgressHUD.h"
@@ -266,17 +266,13 @@
                     NSArray *dataArr = [retDic objectForKey:@"data"];
                     NSInteger state = [[dataArr[0] objectForKey:@"state"] integerValue];
                     if (1==state){
-                        HNConstructViewController *vc = [[HNConstructViewController alloc] init];
+                        HNNewReportViewController *vc = [[HNNewReportViewController alloc] init];
                         NSInteger type = [[dataArr[0] objectForKey:@"type"] integerValue];
-                        if (type == 0)
-                            vc.constructType = kPersonalNew;
-                        else
-                            vc.constructType = kCompanyNew;
-                        vc.roomNo = [dataArr[0] objectForKey:@"roomNumber"];
-                        vc.ownerName = [dataArr[0] objectForKey:@"ownername"];
-                        vc.ownerMobile = [dataArr[0] objectForKey:@"ownerphone"];
-                        vc.declareid = [dataArr[0] objectForKey:@"declareId"];
-                        [self.navigationController pushViewController:vc animated:YES];
+                        vc.constructType = type;
+                        vc.declareId = [NSString stringWithFormat:@"%@",[dataArr[0] objectForKey:@"declareId"]];
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [self.navigationController pushViewController:vc animated:YES];
+                        });
                     }
                     else{
                         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:[dataArr[0] objectForKey:@"msg"] delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];

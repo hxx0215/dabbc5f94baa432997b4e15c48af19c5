@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface HNNewReportViewController : UIViewController
-
+@property (nonatomic, assign)NSInteger constructType;
+@property (nonatomic, strong)NSString *declareId;
 @end

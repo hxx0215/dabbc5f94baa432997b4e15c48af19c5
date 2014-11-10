@@ -202,8 +202,8 @@
             cell.photo.hidden = YES;
         }
         if (!cell.photo.hidden){
-            [cell.photo setImage:[self.picDict objectForKey:[NSString stringWithFormat:@"%ld",indexPath.row]] forState:UIControlStateNormal];
-            [cell.photo setImage:[self.picDict objectForKey:[NSString stringWithFormat:@"%ld",indexPath.row]] forState:UIControlStateHighlighted];
+            [cell.photo setImage:[self.picDict objectForKey:[NSString stringWithFormat:@"%d",indexPath.row]] forState:UIControlStateNormal];
+            [cell.photo setImage:[self.picDict objectForKey:[NSString stringWithFormat:@"%d",indexPath.row]] forState:UIControlStateHighlighted];
         }
     }
     else
