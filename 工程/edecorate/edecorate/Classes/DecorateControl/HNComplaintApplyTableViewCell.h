@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface HNComplaintApplyTableViewCell : UITableViewCell
+@property (nonatomic, strong)UIButton *photo;
 @property (nonatomic, strong)UITextField *textView;
 @property (nonatomic, strong)UITextView *textView2;
 @property (nonatomic, strong)UILabel *title;
-- (void)reset;
+- (void)setStyle:(NSInteger)flage;
 @end
