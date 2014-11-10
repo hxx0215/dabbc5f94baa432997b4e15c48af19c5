@@ -14,6 +14,14 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self){
         
+        self.photo = [UIButton buttonWithType:UIButtonTypeCustom];
+        [self.photo setImage:[UIImage imageNamed:@"selectphoto.png"] forState:UIControlStateNormal];
+        [self.photo setImage:[UIImage imageNamed:@"selectphotoclick.png"] forState:UIControlStateHighlighted];
+        [self.photo sizeToFit];
+        self.photo.right = self.contentView.width - 14;
+        self.photo.centerY = self.contentView.height / 2;
+        self.photo.hidden = YES;
+        
         self.title = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 100, 18)];
         self.title.centerY = self.contentView.height / 2;
         self.title.numberOfLines = 0;
@@ -34,6 +42,7 @@
         self.textView2.font = [UIFont systemFontOfSize:13];
         
         self.selectionStyle = UITableViewCellSelectionStyleNone;
+        [self.contentView addSubview:self.photo];
         [self.contentView addSubview:self.textView2];
         [self.contentView addSubview:self.textView];
         [self.contentView addSubview:self.title];
@@ -48,6 +57,9 @@
 }
 - (void)layoutSubviews{
     [super layoutSubviews];
+    self.photo.right = self.contentView.width - 14;
+    self.photo.centerY = self.contentView.height / 2;
+    
     self.textView.centerY = self.contentView.height / 2;
     self.textView2.centerY = self.contentView.height / 2;
     self.title.centerY = self.contentView.height / 2;
@@ -57,6 +69,37 @@
     
     // Configure the view for the selected state
 }
+
+- (void)setStyle:(NSInteger)flage
+{
+    switch (flage) {
+        case 0:
+        {
+            self.photo.hidden = YES;
+            self.textView2.hidden = YES;
+            self.textView.hidden = NO;
+        }
+            break;
+        case 1:
+        {
+            self.photo.hidden = YES;
+            self.textView2.hidden = NO;
+            self.textView.hidden = YES;
+        }
+            break;
+        case 2:
+        {
+            self.photo.hidden = NO;
+            self.textView2.hidden = YES;
+            self.textView.hidden = YES;
+        }
+            break;
+            
+        default:
+            break;
+    }
+}
+
 - (void)reset{
     self.title.textColor = [UIColor blackColor];
     //self.photo.hidden = NO;

@@ -17,10 +17,24 @@
 #import "HNUploadImage.h"
 #import "HNComplaintApplyTableViewCell.h"
 
+@interface HNComplaint :NSObject
+@property (nonatomic, strong) NSString *body;//		商家编号
+@property (nonatomic, strong) NSString *complainant	;	//投诉人姓名（负责人）
+@property (nonatomic, strong) NSString *complainantId;	//	商家编号
+@property (nonatomic, strong) NSString *complainfile ;	//	投诉附件
+@property (nonatomic, strong) NSString *complainObject ;	//	投诉对象
+@property (nonatomic, strong) NSString *complainProblem ;//		投诉问题
+@property (nonatomic, strong) NSString *complainType ;	//	投诉类别
+@property (nonatomic, strong) UIImage *image;
+@end
+@implementation HNComplaint
+@end
+
+
 @interface HNComplaintApplyViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate,UITextViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource,HNDecorateChoiceViewDelegate,UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong)IBOutlet UIScrollView *mainView;
-
+@property (nonatomic, strong)HNComplaint *complaint;
 @property (nonatomic, strong)IBOutlet UILabel *houseInfMainLabel;
 @property (nonatomic, strong)IBOutlet UILabel *constructionInfMainLabel;
 @property (nonatomic, strong)IBOutlet UILabel *complaintInfMainLabel;
@@ -61,7 +75,9 @@
 
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) UIToolbar * topView;
-
+@property (nonatomic) CGFloat textViewHeight;
+@property (strong,nonatomic) UIView *commitView;
+@property (nonatomic)CGFloat contentSizeHeight;
 @end
 
 @implementation HNComplaintApplyViewController
@@ -69,7 +85,8 @@
 -(id)init
 {
     self = [super init];
-    self.temporaryModel = [[HNComplaintData alloc]init];;
+    self.temporaryModel = [[HNComplaintData alloc]init];
+    self.complaint = [[HNComplaint alloc]init];
     return self;
 }
 
@@ -190,7 +207,7 @@
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 88)];
+    self.commitView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 88)];
     UIButton *purchase = [UIButton buttonWithType:UIButtonTypeCustom];
     purchase.height = 40;
     purchase.width = self.view.width - 36;
@@ -201,12 +218,17 @@
     [purchase setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [purchase setBackgroundColor:[UIColor colorWithRed:245.0/255.0 green:72.0/255.0 blue:0.0 alpha:1.0]];
     [purchase addTarget:self action:@selector(commit:) forControlEvents:UIControlEventTouchUpInside];
-    [view addSubview:purchase];
+    [self.commitView addSubview:purchase];
+    [self movewButton];
+}
+-(void)movewButton
+{
     CGSize size = self.tableView.contentSize;
-    view.top = size.height;
-    [self.tableView addSubview:view];
-    size.height += view.height;
+    self.commitView.top = size.height;
+    [self.tableView addSubview:self.commitView];
+    size.height += self.commitView.height;
     self.tableView.contentSize = size;
+    self.contentSizeHeight = size.height;
 }
 
 - (void)labelWithTitle:(NSString *)title label:(UILabel*)lab
@@ -280,10 +302,7 @@
     complainType 		投诉类别
     declareId 		报建Id
      */
-    self.temporaryModel.complainObject = self.complaintObjectTF.text;
-    self.temporaryModel.complainType = self.complaintOCategoryTF.text;
-    self.temporaryModel.complainProblem = self.complaintContansTextView.text;
-    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:self.complaintBody.text,@"body", self.complaintComplainant.text,@"complainant",[HNLoginData shared].mshopid,@"complainantId",self.imageName,@"complainfile",self.temporaryModel.complainObject,@"complainObject",self.temporaryModel.complainProblem,@"complainProblem",self.temporaryModel.complainType,@"complainType",self.temporaryModel.declareId,@"declareId",nil];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:self.complaint.body,@"body", self.complaint.complainant,@"complainant",[HNLoginData shared].mshopid,@"complainantId",self.imageName,@"complainfile",self.complaint.complainObject,@"complainObject",self.complaint.complainProblem,@"complainProblem",self.complaint.complainType,@"complainType",self.temporaryModel.declareId,@"declareId",nil];
     return dic;
 }
 
@@ -296,6 +315,7 @@
 }
 
 - (IBAction)upload:(id)sender{
+    self.uploadButton = (UIButton*)sender;
     [self presentViewController:self.imagePicker animated:YES completion:nil];
 }
 
@@ -315,7 +335,8 @@
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         if (msg) {
             self.imageName = msg;
-            [self.uploadButton setTitle:@"已上传" forState:UIControlStateNormal];
+            self.complaint.image = image;
+            [self.uploadButton setImage:image forState:UIControlStateNormal];
         }
     }];
 }
@@ -337,25 +358,47 @@ bool bo = false;
 {
     bo = true;
     NSLog(@"textFieldShouldBeginEditing");
-    self.mainView.contentSize = CGSizeMake(self.view.bounds.size.width,self.view.bounds.size.height +216);//原始滑动距离增加键盘高度
-    CGPoint pt = [textField convertPoint:CGPointMake(0, 0) toView:self.mainView];//把当前的textField的坐标映射到scrollview上
-    if(self.mainView.contentOffset.y-pt.y+self.navigationController.navigationBar.height<=0)//判断最上面不要去滚动
-        [self.mainView setContentOffset:CGPointMake(0, pt.y-self.navigationController.navigationBar.height) animated:YES];//华东
+    self.tableView.contentSize = CGSizeMake(self.view.bounds.size.width,self.contentSizeHeight +216);//原始滑动距离增加键盘高度
+    CGPoint pt = [textField convertPoint:CGPointMake(0, 0) toView:self.tableView];//把当前的textField的坐标映射到scrollview上
+    if(self.tableView.contentOffset.y-pt.y+self.navigationController.navigationBar.height<=0)//判断最上面不要去滚动
+        [self.tableView setContentOffset:CGPointMake(0, pt.y-self.navigationController.navigationBar.height) animated:YES];//华东
     return YES;
 }
 
--(void)doKeyboard
-{
-}
 
 -(void)textFieldDidEndEditing:(UITextField *)textField{
-    self.textOKView.hidden = YES;
+    switch (textField.tag) {
+        case 0:
+        {
+            self.complaint.complainant = textField.text;
+        }
+            break;
+        case 1:
+        {
+            self.complaint.body = textField.text;
+        }
+            break;
+        case 2:
+        {
+            self.complaint.complainType = textField.text;
+        }
+            break;
+        case 3:
+        {
+            self.complaint.complainObject = textField.text;
+        }
+            break;
+            
+        default:
+            break;
+    }
+    
     
     if (!bo) {
         //开始动画
         [UIView animateWithDuration:0.30f animations:^{
-            self.mainView.frame = self.view.bounds;
-            self.mainView.contentSize = CGSizeMake(self.view.bounds.size.width, self.commitButton.bottom+20);
+            self.tableView.frame = self.view.bounds;
+            self.tableView.contentSize = CGSizeMake(self.view.bounds.size.width,self.contentSizeHeight);
         }];
     }
 }
@@ -373,33 +416,42 @@ bool bo = false;
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView
 {
     bo = true;
-    self.mainView.contentSize = CGSizeMake(self.view.bounds.size.width,self.view.bounds.size.height +216);//原始滑动距离增加键盘高度
-    CGPoint pt = [textView convertPoint:CGPointMake(0, 0) toView:self.mainView];//把当前的textField的坐标映射到scrollview上
-    if(self.mainView.contentOffset.y-pt.y+self.navigationController.navigationBar.height<=0)//判断最上面不要去滚动
-        [self.mainView setContentOffset:CGPointMake(0, pt.y-self.navigationController.navigationBar.height) animated:YES];//华东
+    self.tableView.contentSize = CGSizeMake(self.view.bounds.size.width,self.contentSizeHeight +216);//原始滑动距离增加键盘高度
+    CGPoint pt = [textView convertPoint:CGPointMake(0, 0) toView:self.tableView];//把当前的textField的坐标映射到scrollview上
+    if(self.tableView.contentOffset.y-pt.y+self.navigationController.navigationBar.height<=0)//判断最上面不要去滚动
+        [self.tableView setContentOffset:CGPointMake(0, pt.y-self.navigationController.navigationBar.height) animated:YES];//华东
     return YES;
 }
 
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
     bo = false;
-//    [UIView animateWithDuration:0.30f animations:^{
-//        self.view.top = -10;
-//    }];
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
-//    [UIView animateWithDuration:0.30f animations:^{
-//        self.view.top = self.mainViewFramRectTop;
-//    }];
+    self.complaint.complainProblem = textView.text;
+    if ([textView isEqual:self.complaintContansTextView]) {
+        self.complaintContansTextView.height = self.complaintContansTextView.contentSize.height;
+        self.textViewHeight = self.complaintContansTextView.height;
+        [self.tableView reloadData];
+        [self movewButton];
+    };
+    
     if (!bo) {
         //开始动画
         [UIView animateWithDuration:0.30f animations:^{
-            self.mainView.frame = self.view.bounds;
-            self.mainView.contentSize = CGSizeMake(self.view.bounds.size.width, self.commitButton.bottom+20);
+            self.tableView.frame = self.view.bounds;
+            self.tableView.contentSize = CGSizeMake(self.view.bounds.size.width,self.contentSizeHeight);
         }];
     }
+//
+//    
+    
+}
+
+- (void)textViewDidChange:(UITextView *)textView
+{
     
 }
 
@@ -464,10 +516,14 @@ bool bo = false;
     
     
     if (section == 0){
-        self.choiceDecorateView = [[HNDecorateChoiceView alloc]initWithFrame:CGRectMake(12, 12, self.view.bounds.size.width-24, 30)];
-        self.choiceDecorateView.delegate = self;
-        self.choiceDecorateView.left = 5;
-        self.choiceDecorateView.centerY = contentView.height / 2;
+        if(!self.choiceDecorateView)
+        {
+            self.choiceDecorateView = [[HNDecorateChoiceView alloc]initWithFrame:CGRectMake(12, 12, self.view.bounds.size.width-24, 30)];
+            self.choiceDecorateView.delegate = self;
+            self.choiceDecorateView.left = 5;
+            self.choiceDecorateView.centerY = contentView.height / 2;
+        
+        }
         [contentView addSubview:self.choiceDecorateView];
     }else
     {
@@ -488,7 +544,22 @@ bool bo = false;
     return view;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 30;
+    switch (indexPath.row)
+    {
+        case 5:
+            return 60;
+            break;
+        case 4:
+        {
+            return self.textViewHeight <=30?30:self.textViewHeight;
+        }
+            break;
+        default:
+            return 30;
+            break;
+            
+    }
+   
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -502,44 +573,50 @@ bool bo = false;
     if (1==indexPath.section){
         NSString *titleString = nil;
         NSString *detailString = nil;
-        
+        NSString *textString = nil;
+        [cell setStyle:0];
         switch (indexPath.row) {
             case 0:
             {
                 titleString = NSLocalizedString(@"投诉人姓名：", nil);
                 detailString = NSLocalizedString(@"点此输入投诉人姓名", nil);
-                self.complaintComplainant = cell.textView;
+                textString = self.complaint.complainant;
             }
                 break;
             case 1:
             {
                 titleString = NSLocalizedString(@"投诉内容：", nil);
                 detailString = NSLocalizedString(@"点此输入投诉内容", nil);
-                self.complaintBody = cell.textView;
+                textString = self.complaint.body;
             }
                 break;
             case 2:
             {
                 titleString = NSLocalizedString(@"投诉类别：", nil);
                 detailString = NSLocalizedString(@"点此输入投诉类别", nil);
-                self.complaintOCategoryTF = cell.textView;
+                textString = self.complaint.complainType;
             }
                 break;
             case 3:
             {
                 titleString = NSLocalizedString(@"投诉对象：", nil);
                 detailString = NSLocalizedString(@"点此输入投诉对象", nil);
-                self.complaintObjectTF = cell.textView;
+                textString = self.complaint.complainObject;
             }
                 break;
             case 4:
             {
                 titleString = NSLocalizedString(@"投诉问题：", nil);
                 detailString = NSLocalizedString(@"点此输入投诉问题", nil);
+                textString = self.complaint.complainProblem;
                 self.complaintContansTextView = cell.textView2;
-                cell.textView2.hidden = NO;
-                cell.textView.hidden = YES;
+                cell.textView2.text = textString;
+                if (self.textViewHeight>30) {
+                    cell.textView2.height = self.textViewHeight;
+                }
+                cell.textView2.delegate = self;
                 self.complaintContansTextView.inputAccessoryView = self.topView;
+                [cell setStyle:1];
 
             }
                 break;
@@ -547,7 +624,14 @@ bool bo = false;
             {
                 titleString = NSLocalizedString(@"证明材料：", nil);
                 detailString = NSLocalizedString(@"点此输入投诉人图片", nil);
-                self.complaintObjectTF = cell.textView;
+                [cell setStyle:2];
+                if(self.complaint.image)
+                {
+                    [cell.photo setImage:self.complaint.image forState:UIControlStateNormal];
+                }
+                [cell.photo addTarget:self action:@selector(upload:) forControlEvents:UIControlEventTouchUpInside];
+                self.uploadButton = cell.photo;
+                
                 
             }
                 break;
@@ -558,6 +642,9 @@ bool bo = false;
         cell.title.text = titleString;
         cell.textView.placeholder = detailString;
         cell.textView.delegate = self;
+        cell.textView.text = textString;
+        cell.textView.tag = indexPath.row;
+        
     }
     return cell;
 }
