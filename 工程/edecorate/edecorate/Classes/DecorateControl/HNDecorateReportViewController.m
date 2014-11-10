@@ -253,7 +253,9 @@
         NSString *contentType = @"text/html";
         [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
         [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+            });
             if (data)
             {
                 NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -278,17 +280,23 @@
                     }
                     else{
                         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:[dataArr[0] objectForKey:@"msg"] delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
-                        [alert show];
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [alert show];
+                        });
                     }
                 }
                 else{
                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"We don't get any data.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
-                    [alert show];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [alert show];
+                    });
                 }
             }
             else{
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection Error", nil) message:NSLocalizedString(@"Please check your network.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
-                [alert show];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [alert show];
+                });
             }
         }];
     }
