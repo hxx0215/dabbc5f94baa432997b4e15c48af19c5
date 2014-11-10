@@ -9,47 +9,18 @@
 #import "HNTemporaryDetailsViewController.h"
 #import "UIView+AHKit.h"
 
-@interface HNTemporaryDetailsViewController ()
-@property (nonatomic, strong)IBOutlet UIScrollView *mainView;
-@property (nonatomic, strong)IBOutlet UILabel *houseInfMainLabel;
-@property (nonatomic, strong)IBOutlet UILabel *constructionInfMainLabel;
-
-@property (nonatomic, strong)IBOutlet UILabel *houseInfTitleLabel;
-@property (nonatomic, strong)IBOutlet UILabel *houseInfLabel;
-@property (nonatomic, strong)IBOutlet UILabel *ownersLabel;
-@property (nonatomic, strong)IBOutlet UILabel *ownersPhoneNumberLabel;
-
-@property (nonatomic, strong)IBOutlet UILabel *constructionUnitTitleLabel;
-@property (nonatomic, strong)IBOutlet UILabel *constructionUnitLabel;
-@property (nonatomic, strong)IBOutlet UILabel *constructionPersonLabel;
-@property (nonatomic, strong)IBOutlet UILabel *constructionPersonPhoneNumberLabel;
-
-@property (strong, nonatomic) IBOutlet UILabel *temporaryApplyMainLable;
-@property (strong, nonatomic) IBOutlet UILabel *fireunitsTitleLabel;
-@property (strong, nonatomic) IBOutlet UILabel *useOfFireByTitleLabel;
-@property (strong, nonatomic) IBOutlet UILabel *fireToolsTitleLabel;
-@property (strong, nonatomic) IBOutlet UILabel *fireLoadTitleLabel;
-@property (strong, nonatomic) IBOutlet UILabel *startTimeTitleLabel;
-@property (strong, nonatomic) IBOutlet UILabel *endTimeTitleLabel;
-@property (strong, nonatomic) IBOutlet UILabel *operatorTitleUILabel;
-@property (strong, nonatomic) IBOutlet UILabel *phoneTitleLabel;
-@property (strong, nonatomic) IBOutlet UILabel *validDocumentsTitleLabel;
+@interface HNTemporaryDetailsViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (strong, nonatomic) IBOutlet UIButton *noticeFireButton;
-@property (strong, nonatomic) IBOutlet UILabel *uploadTitleLabel;
 @property (strong, nonatomic) IBOutlet UIButton *checkOutButton;
 
-@property (strong, nonatomic) IBOutlet UILabel *fireunitsLabel;
-@property (strong, nonatomic) IBOutlet UILabel *useOfFireByLabel;
-@property (strong, nonatomic) IBOutlet UILabel *fireToolsLabel;
-@property (strong, nonatomic) IBOutlet UILabel *fireLoadLabel;
-@property (strong, nonatomic) IBOutlet UILabel *startTimeLabel;
-@property (strong, nonatomic) IBOutlet UILabel *endTimeLabel;
-@property (strong, nonatomic) IBOutlet UILabel *operatorLabel;
-@property (strong, nonatomic) IBOutlet UILabel *phoneLabel;
-@property (strong, nonatomic) IBOutlet UILabel *validDocumentsLabel;
-@property (strong, nonatomic) IBOutlet UILabel *uploadStatusLable;
 
 @property (strong, nonatomic) IBOutlet UILabel *statusLable;
+
+@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) NSArray *titleArray1;
+@property (nonatomic, strong) NSArray *titleArray2;
+@property (nonatomic, strong) NSArray *dataArray1;
+@property (nonatomic, strong) NSArray *dataArray2;
 @end
 
 @implementation HNTemporaryDetailsViewController
@@ -65,105 +36,60 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.view.backgroundColor = [UIColor whiteColor];
-    self.houseInfMainLabel.text = NSLocalizedString(@"House Information", nil);
-    self.houseInfTitleLabel.text = NSLocalizedString(@"House Information", nil);
-    self.constructionUnitTitleLabel.text = NSLocalizedString(@"Construction unit", nil);
     
-    [self labelWithTitle:self.temporaryModel.huseInfo.houseInf label:self.houseInfLabel];
-    [self labelWithTitle:self.temporaryModel.huseInfo.constructionPerson label:self.constructionPersonLabel];
-    [self labelWithTitle:self.temporaryModel.huseInfo.ownersPhoneNumber label:self.ownersPhoneNumberLabel];
-    [self labelWithTitle:self.temporaryModel.huseInfo.owners label:self.ownersLabel];
-    self.ownersLabel.textColor = [UIColor colorWithRed:0xCC/255.0 green:0X91/255.0 blue:0X31/255.0 alpha:1];
-    self.ownersPhoneNumberLabel.textColor = [UIColor colorWithRed:0xCC/255.0 green:0X91/255.0 blue:0X31/255.0 alpha:1];
-    [self.ownersPhoneNumberLabel sizeToFit ];
-    [self.ownersLabel sizeToFit ];
-    self.ownersPhoneNumberLabel.right = self.view.width - 14;
-    self.ownersLabel.right = self.ownersPhoneNumberLabel.left-5;
+    self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-    [self labelWithTitle:self.temporaryModel.huseInfo.constructionUnit label:self.constructionUnitLabel];
-    [self labelWithTitle:self.temporaryModel.huseInfo.constructionPersonPhoneNumber label:self.constructionPersonPhoneNumberLabel];
-    self.constructionPersonLabel.textColor = [UIColor colorWithRed:0xCC/255.0 green:0X91/255.0 blue:0X31/255.0 alpha:1];
-    self.constructionPersonPhoneNumberLabel.textColor = [UIColor colorWithRed:0xCC/255.0 green:0X91/255.0 blue:0X31/255.0 alpha:1];
-    [self.constructionPersonPhoneNumberLabel sizeToFit ];
-    [self.constructionPersonLabel sizeToFit ];
-    self.constructionPersonPhoneNumberLabel.right = self.view.width - 14;
-    self.constructionPersonLabel.right = self.constructionPersonPhoneNumberLabel.left-5;
+    [self.view addSubview:self.tableView];
     
+    self.titleArray1 = [[NSArray alloc] initWithObjects:NSLocalizedString(@"Owners", nil),NSLocalizedString(@"Phone number", nil),NSLocalizedString(@"Construction unit", nil),NSLocalizedString(@"Person in charge of construction", nil),NSLocalizedString(@"Phone number", nil),nil];
     
-    [self labelWithTitle:NSLocalizedString(@"Start Time", nil) label:self.startTimeTitleLabel];
-    [self labelWithTitle:NSLocalizedString(@"End Time", nil) label:self.endTimeTitleLabel];
-    [self labelWithTitle:NSLocalizedString(@"Operator", nil) label:self.operatorTitleUILabel];
-    [self labelWithTitle:NSLocalizedString(@"Phone", nil) label:self.phoneTitleLabel];
-    [self labelWithTitle:NSLocalizedString(@"Valid documents", nil) label:self.validDocumentsTitleLabel];
-    [self labelWithTitle:NSLocalizedString(@"Upload", nil) label:self.uploadTitleLabel];
+    self.dataArray1 = [[NSArray alloc] initWithObjects:self.temporaryModel.huseInfo.owners,self.temporaryModel.huseInfo.ownersPhoneNumber,self.temporaryModel.huseInfo.constructionUnit,self.temporaryModel.huseInfo.constructionPerson,self.temporaryModel.huseInfo.constructionPersonPhoneNumber,nil];
     
     if (self.temporaryModel.type==FIRE) {
         HNTemporaryFireModel* fmodel = (HNTemporaryFireModel*)self.temporaryModel;
+        self.titleArray2 =   [[NSArray alloc] initWithObjects:NSLocalizedString(@"Fire units", nil),NSLocalizedString(@"Use of fire by", nil),NSLocalizedString(@"Fire tools", nil),NSLocalizedString(@"Fire load", nil),NSLocalizedString(@"Start Time", nil),NSLocalizedString(@"End Time", nil),NSLocalizedString(@"Operator", nil),NSLocalizedString(@"Phone", nil),NSLocalizedString(@"Valid documents", nil),nil];
         
-        [self labelWithTitle:NSLocalizedString(@"Fire Apply", nil) label:self.temporaryApplyMainLable];
-        [self labelWithTitle:NSLocalizedString(@"Fire units", nil) label:self.fireunitsTitleLabel];
-        [self labelWithTitle:NSLocalizedString(@"Use of fire by", nil) label:self.useOfFireByTitleLabel];
-        [self labelWithTitle:NSLocalizedString(@"Fire tools", nil) label:self.fireToolsTitleLabel];
-        [self labelWithTitle:NSLocalizedString(@"Fire load", nil) label:self.fireLoadTitleLabel];
-        [self.noticeFireButton setTitle:NSLocalizedString(@"Notice the use of fire", nil) forState:UIControlStateNormal];
+        self.dataArray2 = [[NSArray alloc] initWithObjects:fmodel.dataInfo.fireUnits,fmodel.dataInfo.useOfFireBy,fmodel.dataInfo.fireTools,fmodel.dataInfo.fireLoad,fmodel.dataInfo.startTime,fmodel.dataInfo.endTime,fmodel.dataInfo.operatorPerson,fmodel.dataInfo.phone,fmodel.dataInfo.validDocuments,nil];
         
-        
-        [self labelWithTitle:fmodel.dataInfo.fireUnits label:self.fireunitsLabel];
-        [self labelWithTitle:fmodel.dataInfo.useOfFireBy label:self.useOfFireByLabel];
-        [self labelWithTitle:fmodel.dataInfo.fireTools label:self.fireToolsLabel];
-        [self labelWithTitle:fmodel.dataInfo.fireLoad label:self.fireLoadLabel];
-        [self labelWithTitle:fmodel.dataInfo.startTime label:self.startTimeLabel];
-        [self labelWithTitle:fmodel.dataInfo.endTime label:self.endTimeLabel];
-        [self labelWithTitle:fmodel.dataInfo.operatorPerson label:self.operatorLabel];
-        [self labelWithTitle:fmodel.dataInfo.phone label:self.phoneLabel];
-        [self labelWithTitle:fmodel.dataInfo.validDocuments label:self.validDocumentsLabel];
-    }else{
+    }
+    else{
         HNTemporaryElectroModel* emodel = (HNTemporaryElectroModel*)self.temporaryModel;
+        self.titleArray2 =   [[NSArray alloc] initWithObjects:NSLocalizedString(@"Electro units", nil),NSLocalizedString(@"Use of electro by", nil),NSLocalizedString(@"Electro tools", nil),NSLocalizedString(@"Electro load", nil),NSLocalizedString(@"Start Time", nil),NSLocalizedString(@"End Time", nil),NSLocalizedString(@"Operator", nil),NSLocalizedString(@"Phone", nil),NSLocalizedString(@"Valid documents", nil),nil];
         
-        [self labelWithTitle:NSLocalizedString(@"Electro Apply", nil) label:self.temporaryApplyMainLable];
-        [self labelWithTitle:NSLocalizedString(@"Electro units", nil) label:self.fireunitsTitleLabel];
-        [self labelWithTitle:NSLocalizedString(@"Use of electro by", nil) label:self.useOfFireByTitleLabel];
-        [self labelWithTitle:NSLocalizedString(@"Electro tools", nil) label:self.fireToolsTitleLabel];
-        [self labelWithTitle:NSLocalizedString(@"Electro load", nil) label:self.fireLoadTitleLabel];
-        [self.noticeFireButton setTitle:NSLocalizedString(@"Notice the use of electro", nil) forState:UIControlStateNormal];
-        
-        [self labelWithTitle:emodel.dataInfo.electroEnterprise label:self.fireunitsLabel];
-        [self labelWithTitle:emodel.dataInfo.electroCause label:self.useOfFireByLabel];
-        [self labelWithTitle:emodel.dataInfo.electroTool label:self.fireToolsLabel];
-        [self labelWithTitle:emodel.dataInfo.electroLoad label:self.fireLoadLabel];
-        [self labelWithTitle:emodel.dataInfo.electroBTime label:self.startTimeLabel];
-        [self labelWithTitle:emodel.dataInfo.electroETime label:self.endTimeLabel];
-        [self labelWithTitle:emodel.dataInfo.electroOperator label:self.operatorLabel];
-        [self labelWithTitle:emodel.dataInfo.electroPhone label:self.phoneLabel];
-        [self labelWithTitle:emodel.dataInfo.PapersImg label:self.validDocumentsLabel];
+        self.dataArray2 = [[NSArray alloc] initWithObjects:emodel.dataInfo.electroEnterprise,emodel.dataInfo.electroCause,emodel.dataInfo.electroTool,emodel.dataInfo.electroLoad,emodel.dataInfo.electroBTime,emodel.dataInfo.electroETime,emodel.dataInfo.electroOperator,emodel.dataInfo.electroPhone,emodel.dataInfo.PapersImg ,nil];
     }
     
-    [self labelWithTitle:@"未上传" label:self.uploadStatusLable];
+
     
-    //@property (strong, nonatomic) IBOutlet UIButton *commitButton;
-    
-    [self.noticeFireButton sizeToFit];
-    
-    
-    [self.checkOutButton setTitle:NSLocalizedString(@"Check Out", nil) forState:UIControlStateNormal];
-    [self.checkOutButton sizeToFit];
-    self.checkOutButton.layer.borderWidth = 1.0;
-    self.checkOutButton.layer.borderColor = [UIColor blackColor].CGColor;
-    
-    [self.statusLable setText:@"正在审核"];
-    //[self.statusLable sizeToFit];
-    
-    [HNUIStyleSet UIStyleSetRoundView:self.houseInfMainLabel];
-    [HNUIStyleSet UIStyleSetRoundView:self.temporaryApplyMainLable];
-    [HNUIStyleSet UIStyleSetRoundView:self.constructionInfMainLabel];
-    [HNUIStyleSet UIStyleSetRoundView:self.statusLable];
+//    
+//    [self labelWithTitle:@"未上传" label:self.uploadStatusLable];
+//    
+//    //@property (strong, nonatomic) IBOutlet UIButton *commitButton;
+//    
+//    [self.noticeFireButton sizeToFit];
+//    
+//    
+//    [self.checkOutButton setTitle:NSLocalizedString(@"Check Out", nil) forState:UIControlStateNormal];
+//    [self.checkOutButton sizeToFit];
+//    self.checkOutButton.layer.borderWidth = 1.0;
+//    self.checkOutButton.layer.borderColor = [UIColor blackColor].CGColor;
+//    
+//    [self.statusLable setText:@"正在审核"];
+//    //[self.statusLable sizeToFit];
+//    
+//    [HNUIStyleSet UIStyleSetRoundView:self.houseInfMainLabel];
+//    [HNUIStyleSet UIStyleSetRoundView:self.temporaryApplyMainLable];
+//    [HNUIStyleSet UIStyleSetRoundView:self.constructionInfMainLabel];
+//    [HNUIStyleSet UIStyleSetRoundView:self.statusLable];
     
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    self.mainView.frame = [[UIScreen mainScreen] bounds];
-    self.mainView.contentSize = CGSizeMake(self.view.bounds.size.width, self.statusLable.bottom+20);
+    self.tableView.frame = self.view.bounds;
 }
 
 - (IBAction)checkOut:(id)sender
@@ -198,6 +124,128 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - tableView
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 2;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    if (0==section)
+    {
+        
+        return 5;
+    }
+    else
+        return 9;
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 55;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.width, 55)];
+    UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(10, 5, tableView.width - 20, 50)];
+    contentView.backgroundColor = [UIColor projectGreen];
+    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:contentView.bounds byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii:CGSizeMake(7, 7)];
+    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+    maskLayer.frame = contentView.bounds;
+    maskLayer.path = maskPath.CGPath;
+    contentView.layer.mask = maskLayer;
+    
+    UILabel *label = [[UILabel alloc] init];
+    if (section == 0){
+        label.text = self.temporaryModel.roomName;
+    }else
+        label.text = NSLocalizedString(@"申请", nil);
+    label.font = [UIFont systemFontOfSize:15];
+    label.width = contentView.width -10;
+    label.numberOfLines = 2;
+    [label sizeToFit];
+    label.textColor = [UIColor whiteColor];
+    label.left = 5;
+    label.centerY = contentView.height / 2;
+    [contentView addSubview:label];
+    [view addSubview:contentView];
+    return view;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 40;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *identy = @"complaintDetailCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
+    if (!cell)
+    {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:identy];
+    }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    if (0==indexPath.section) {
+        cell.textLabel.text = [self.titleArray1 objectAtIndex:indexPath.row];
+        cell.detailTextLabel.text = [self.dataArray1 objectAtIndex:indexPath.row];
+    }
+    else
+    {
+        cell.textLabel.text = [self.titleArray2 objectAtIndex:indexPath.row];
+        cell.detailTextLabel.text = [self.dataArray2 objectAtIndex:indexPath.row];
+    }
+    cell.textLabel.textColor = [UIColor darkTextColor];
+    
+    
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([cell respondsToSelector:@selector(tintColor)]) {
+        if (tableView == self.tableView) {
+            CGFloat cornerRadius = 7.f;
+            cell.backgroundColor = UIColor.clearColor;
+            CAShapeLayer *layer = [[CAShapeLayer alloc] init];
+            CGMutablePathRef pathRef = CGPathCreateMutable();
+            CGRect bounds = CGRectInset(cell.bounds, 10, 0);
+            BOOL addLine = NO;
+            if (indexPath.row == 0 && indexPath.row == [tableView numberOfRowsInSection:indexPath.section]-1) {
+                CGPathAddRoundedRect(pathRef, nil, bounds, cornerRadius, cornerRadius);
+                /*} else if (indexPath.row == 0) {
+                 CGPathMoveToPoint(pathRef, nil, CGRectGetMinX(bounds), CGRectGetMaxY(bounds));
+                 CGPathAddArcToPoint(pathRef, nil, CGRectGetMinX(bounds), CGRectGetMinY(bounds), CGRectGetMidX(bounds), CGRectGetMinY(bounds), cornerRadius);
+                 CGPathAddArcToPoint(pathRef, nil, CGRectGetMaxX(bounds), CGRectGetMinY(bounds), CGRectGetMaxX(bounds), CGRectGetMidY(bounds), cornerRadius);
+                 CGPathAddLineToPoint(pathRef, nil, CGRectGetMaxX(bounds), CGRectGetMaxY(bounds));
+                 addLine = YES;*/
+            } else if (indexPath.row == [tableView numberOfRowsInSection:indexPath.section]-1) {
+                CGPathMoveToPoint(pathRef, nil, CGRectGetMinX(bounds), CGRectGetMinY(bounds));
+                CGPathAddArcToPoint(pathRef, nil, CGRectGetMinX(bounds), CGRectGetMaxY(bounds), CGRectGetMidX(bounds), CGRectGetMaxY(bounds), cornerRadius);
+                CGPathAddArcToPoint(pathRef, nil, CGRectGetMaxX(bounds), CGRectGetMaxY(bounds), CGRectGetMaxX(bounds), CGRectGetMidY(bounds), cornerRadius);
+                CGPathAddLineToPoint(pathRef, nil, CGRectGetMaxX(bounds), CGRectGetMinY(bounds));
+            } else {
+                CGPathAddRect(pathRef, nil, bounds);
+                addLine = YES;
+            }
+            layer.path = pathRef;
+            CFRelease(pathRef);
+            layer.fillColor = [UIColor colorWithWhite:1.f alpha:0.8f].CGColor;
+            
+            if (addLine == YES) {
+                CALayer *lineLayer = [[CALayer alloc] init];
+                CGFloat lineHeight = (1.f / [UIScreen mainScreen].scale);
+                lineLayer.frame = CGRectMake(CGRectGetMinX(bounds)+10, bounds.size.height-lineHeight, bounds.size.width-10, lineHeight);
+                lineLayer.backgroundColor = tableView.separatorColor.CGColor;
+                [layer addSublayer:lineLayer];
+            }
+            UIView *testView = [[UIView alloc] initWithFrame:bounds];
+            
+            [testView.layer insertSublayer:layer atIndex:0];
+            testView.backgroundColor = UIColor.clearColor;
+            cell.backgroundView = testView;
+            
+        }
+    }
 }
 
 /*
