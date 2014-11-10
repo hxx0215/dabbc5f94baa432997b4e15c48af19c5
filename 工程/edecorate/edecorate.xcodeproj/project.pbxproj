@@ -80,6 +80,8 @@
 		B965E76019D04955004CD201 /* HNDeliverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B965E75F19D04955004CD201 /* HNDeliverViewController.m */; };
 		B965E76919D04CDA004CD201 /* HNDeliverDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B965E76719D04CDA004CD201 /* HNDeliverDetailViewController.m */; };
 		B965E76A19D04CDA004CD201 /* HNDeliverDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B965E76819D04CDA004CD201 /* HNDeliverDetailViewController.xib */; };
+		B97F70591A10DD9D00029C6F /* HNNewReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B97F70571A10DD9D00029C6F /* HNNewReportViewController.m */; };
+		B97F705A1A10DD9D00029C6F /* HNNewReportViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B97F70581A10DD9D00029C6F /* HNNewReportViewController.xib */; };
 		B9882DF219CB06D90093F0F4 /* HNDecorateReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9882DF119CB06D90093F0F4 /* HNDecorateReportViewController.m */; };
 		B9882DF519CB079A0093F0F4 /* HNReportTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B9882DF419CB079A0093F0F4 /* HNReportTableViewCell.m */; };
 		B9A09D7E1A0B9B4A00A88CD8 /* add_click@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B9A09D7C1A0B9B4A00A88CD8 /* add_click@2x.png */; };
@@ -341,6 +343,9 @@
 		B965E76619D04CDA004CD201 /* HNDeliverDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNDeliverDetailViewController.h; path = Classes/DecorateControl/HNDeliverDetailViewController.h; sourceTree = "<group>"; };
 		B965E76719D04CDA004CD201 /* HNDeliverDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNDeliverDetailViewController.m; path = Classes/DecorateControl/HNDeliverDetailViewController.m; sourceTree = "<group>"; };
 		B965E76819D04CDA004CD201 /* HNDeliverDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HNDeliverDetailViewController.xib; path = Classes/DecorateControl/HNDeliverDetailViewController.xib; sourceTree = "<group>"; };
+		B97F70561A10DD9D00029C6F /* HNNewReportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNNewReportViewController.h; path = Classes/DecorateControl/HNNewReportViewController.h; sourceTree = "<group>"; };
+		B97F70571A10DD9D00029C6F /* HNNewReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNNewReportViewController.m; path = Classes/DecorateControl/HNNewReportViewController.m; sourceTree = "<group>"; };
+		B97F70581A10DD9D00029C6F /* HNNewReportViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HNNewReportViewController.xib; path = Classes/DecorateControl/HNNewReportViewController.xib; sourceTree = "<group>"; };
 		B9882DF019CB06D90093F0F4 /* HNDecorateReportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNDecorateReportViewController.h; path = Classes/DecorateControl/HNDecorateReportViewController.h; sourceTree = "<group>"; };
 		B9882DF119CB06D90093F0F4 /* HNDecorateReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNDecorateReportViewController.m; path = Classes/DecorateControl/HNDecorateReportViewController.m; sourceTree = "<group>"; };
 		B9882DF319CB079A0093F0F4 /* HNReportTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNReportTableViewCell.h; path = Classes/DecorateControl/HNReportTableViewCell.h; sourceTree = "<group>"; };
@@ -888,6 +893,9 @@
 				B9882DF119CB06D90093F0F4 /* HNDecorateReportViewController.m */,
 				B9882DF319CB079A0093F0F4 /* HNReportTableViewCell.h */,
 				B9882DF419CB079A0093F0F4 /* HNReportTableViewCell.m */,
+				B97F70561A10DD9D00029C6F /* HNNewReportViewController.h */,
+				B97F70571A10DD9D00029C6F /* HNNewReportViewController.m */,
+				B97F70581A10DD9D00029C6F /* HNNewReportViewController.xib */,
 				B90C417719FA2674004EBC2B /* HNPurchaseItem.h */,
 				B90C417819FA2674004EBC2B /* HNPurchaseItem.m */,
 				B90C417A19FA282A004EBC2B /* HNPurchaseViewController.h */,
@@ -1409,6 +1417,7 @@
 				37F9D80519D8B5E1005CB18B /* HNCommentsTableViewCell.xib in Resources */,
 				D38615F41A03F80A005B4093 /* HNDeliveApplyTableViewCell.xib in Resources */,
 				B9B2BC1F19CF1F3000839AED /* CTAssetsPicker.xcassets in Resources */,
+				B97F705A1A10DD9D00029C6F /* HNNewReportViewController.xib in Resources */,
 				D38E009919D84EFC000F5263 /* HNReturnsTableViewCell.xib in Resources */,
 				B9E433611A063148000E2CA9 /* HNCheckViewController.xib in Resources */,
 				3732B12D19CFC46E00ADF3F5 /* HNOfficePassesDetailsViewController.xib in Resources */,
@@ -1544,6 +1553,7 @@
 				B9D72D5419D840960011CF83 /* HNOrderTableViewCell.m in Sources */,
 				B9B2BC1619CF1F3000839AED /* ALAsset+accessibilityLabel.m in Sources */,
 				B9E0667419DCDCB100893DBD /* AFNetworkReachabilityManager.m in Sources */,
+				B97F70591A10DD9D00029C6F /* HNNewReportViewController.m in Sources */,
 				37C8C3E019CC22470020458C /* HNOfficePassesViewController.m in Sources */,
 				B9E0667F19DCDCB100893DBD /* UIProgressView+AFNetworking.m in Sources */,
 				D3C07BC919CDC8CA003EA5E4 /* HNComplaintDetailsViewController.m in Sources */,

@@ -181,7 +181,7 @@
             cell.title.textColor = [UIColor colorWithWhite:200.0/255.0 alpha:1.0];
             cell.photo.hidden = YES;
         }
-        int offset = 0;
+        NSUInteger offset = 0;
         if (self.constructType < 2){
             offset = [self.companyData count] + 1;
         }
