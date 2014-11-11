@@ -48,4 +48,18 @@
     // Configure the view for the selected state
 }
 
+- (void)drawRect:(CGRect)rect
+{
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
+    CGContextFillRect(context, rect);
+    
+    CGContextSetStrokeColorWithColor(context, [UIColor colorWithRed:0xd9/255.0f green:0xd9/255.0f blue:0xd9/255.0f alpha:1].CGColor);
+    CGContextStrokeRect(context, CGRectMake(self.nameLabel.left-3, 0, 1, rect.size.height));
+    CGContextStrokeRect(context, CGRectMake(self.nameLabel.left-3, self.nameLabel.bottom, self.nameLabel.width, 1));
+    CGContextStrokeRect(context, CGRectMake(self.nameLabel.left-3, self.phoneLabel.bottom, self.nameLabel.width, 1));
+    CGContextStrokeRect(context, CGRectMake(self.nameLabel.left-3, self.cardLabel.bottom, self.nameLabel.width, 1));
+}
+
 @end
