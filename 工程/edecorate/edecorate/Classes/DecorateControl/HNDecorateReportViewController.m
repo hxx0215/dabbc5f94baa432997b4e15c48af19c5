@@ -246,7 +246,7 @@
     MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = NSLocalizedString(@"Loading", nil);
     if (buttonIndex == 1){
-        NSDictionary *dic = @{@"declareid": tf.text};
+        NSDictionary *dic = @{@"declareid": @"10006"};//tf.text};
         NSString *sendJson = [dic JSONString];
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
         request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"get.decorate.undertake" Params:sendJson]];

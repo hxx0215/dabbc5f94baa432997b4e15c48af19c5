@@ -8,9 +8,11 @@
 
 #import "HNNewReportViewController.h"
 #import "HNLoginData.h"
+#import "HNNewReportTableViewCell.h"
 
 @interface HNSeprateView : UIView
 @property (nonatomic, weak) UIView *hiddenWith;
+@property (nonatomic, weak) UIView *hiddenWith2;
 @end
 
 @implementation HNSeprateView
@@ -18,6 +20,7 @@
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     self.hidden = YES;
     self.hiddenWith.hidden = YES;
+    self.hiddenWith2.hidden = YES;
 }
 
 @end
@@ -34,6 +37,18 @@
 @property (nonatomic, strong) NSMutableArray *userList;
 @property (nonatomic, strong) UIButton *userButton;
 @property (nonatomic, strong) HNSeprateView *sepView;
+
+@property (nonatomic, strong) NSArray *userCellType;
+@property (nonatomic, strong) NSArray *companyCellType;
+@property (nonatomic, strong) NSArray *personalCellType;
+@property (nonatomic, strong) NSMutableArray *tableType;
+
+@property (nonatomic, strong) UIDatePicker *datePicker;
+@property (nonatomic, strong) NSIndexPath *curIndexPath;
+@property (nonatomic, strong) NSDate *selectedDate;
+@property (nonatomic, strong) NSString *beginDate;
+@property (nonatomic, strong) NSString *endDate;
+@property (nonatomic, strong) NSMutableDictionary *userDic;
 @end
 
 @implementation HNNewReportViewController
@@ -68,7 +83,41 @@
     [self.tableData addObject:personal];
     [self.tableData addObject:self.housePic];
     
+    self.userCellType = @[@"1",@"1",@"1",@"2",@"2"];
+    NSMutableArray *tArr = [[NSMutableArray alloc] init];
+    for (id o in self.companyData){
+        [tArr addObject:@"0"];
+    }
+    self.companyCellType = [tArr copy];
+    self.personalCellType = @[@"3",@"3",@"3"];
+    [tArr removeAllObjects];
+    for (id o in self.graphData){
+        [tArr addObject:@"0"];
+    }
+    NSMutableArray *persnalType = [NSMutableArray new];
+    [persnalType addObjectsFromArray:self.personalCellType];
+    [persnalType addObjectsFromArray:[tArr copy]];
+    [tArr removeAllObjects];
+    for (id o in self.housePic){
+        [tArr addObject:@"0"];
+    }
+    self.tableType = [NSMutableArray new];
+    [self.tableType addObject:self.userCellType];
+    [self.tableType addObject:[NSArray new]];
+    if (1==self.constructType){
+        [self.tableType addObject:self.companyCellType];
+    }
+    [self.tableType addObject:persnalType];
+    [self.tableType addObject:[tArr copy]];
+    [self initDateString];
     [self initPickView];
+    self.userDic = [@{@"idcard": @"",@"phone" : @"", @"population" :@""} mutableCopy];
+}
+- (void)initDateString{
+    NSDateFormatter *df = [[NSDateFormatter alloc] init];
+    [df setDateFormat:@"YYYY-MM-dd EEEE"];
+    self.beginDate = [df stringFromDate:[NSDate date]];
+    self.endDate = [df stringFromDate:[NSDate date]];
 }
 - (void)initPickView{
     self.listPick = [[UIPickerView alloc] initWithFrame:CGRectMake(0, self.view.height - 216, self.view.width, 216)];
@@ -86,6 +135,14 @@
     self.userButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.userButton addTarget:self action:@selector(showPick:) forControlEvents:UIControlEventTouchUpInside];
     self.userList = [[NSMutableArray alloc] init];
+    
+    self.datePicker = [[UIDatePicker alloc] initWithFrame:self.listPick.frame];
+    self.datePicker.datePickerMode = UIDatePickerModeDate;
+    self.datePicker.backgroundColor = [UIColor whiteColor];
+    [self.datePicker addTarget:self action:@selector(dateChange:) forControlEvents:UIControlEventValueChanged];
+    [self.view addSubview:self.datePicker];
+    self.datePicker.hidden = YES;
+    self.sepView.hiddenWith2 = self.datePicker;
 }
 - (void)loadUserList{
     NSDictionary *dic = @{@"mshopid": [HNLoginData shared].mshopid};
@@ -103,9 +160,12 @@
             NSInteger count = [[retDic objectForKey:@"total"] integerValue];
             if (count != 0){
                 self.userList = [retDic objectForKey:@"data"];
+                self.userDic[@"idcard"] = self.userList[0][@"idcard"];
+                self.userDic[@"phone"] = self.userList[0][@"phone"];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self.userButton setTitle:[self.userList[0] objectForKey:@"realname"] forState:UIControlStateNormal];
                     [self.listPick reloadAllComponents];
+                    [self.tableView reloadData];
                 });
             }
             else{
@@ -127,6 +187,7 @@
     self.listPick.bottom = self.view.height;
     self.sepView.top = 0;
     self.sepView.height = self.view.height - self.listPick.height;
+    self.datePicker.frame= self.listPick.frame;
     [self loadUserList];
 }
 #pragma mark - UITableViewDelegate && DataSource
@@ -139,12 +200,56 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *identy = @"NewReportCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
+    HNNewReportTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
     if (!cell){
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identy];
+        cell = [[HNNewReportTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identy];
     }
-    cell.textLabel.text = self.tableData[indexPath.section][indexPath.row];
+    cell.label.text = self.tableData[indexPath.section][indexPath.row];
+    cell.type = [self.tableType[indexPath.section][indexPath.row] intValue];
+    if (indexPath.section == 0){
+        switch (indexPath.row){
+            case 0:
+                cell.textField.keyboardType = UIKeyboardTypeASCIICapable;
+                cell.textField.text = self.userDic[@"idcard"];
+                break;
+            case 1:
+                cell.textField.keyboardType = UIKeyboardTypeNumberPad;
+                cell.textField.text = self.userDic[@"phone"];
+                break;
+            case 2:
+                cell.textField.keyboardType = UIKeyboardTypeNumberPad;
+                cell.textField.placeholder = NSLocalizedString(@"请输入施工总人数", nil);
+                cell.textField.text = self.userDic[@"population"];
+                break;
+            case 3:
+                cell.label.text = [NSString stringWithFormat:@"%@ %@",self.tableData[indexPath.section][indexPath.row],self.beginDate];
+                [cell.label sizeToFit];
+                break;
+            case 4:
+                cell.label.text = [NSString stringWithFormat:@"%@ %@",self.tableData[indexPath.section][indexPath.row],self.endDate];
+                [cell.label sizeToFit];
+                break;
+            default:
+                break;
+        }
+    }
     return cell;
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (0==indexPath.section){
+        if (3==indexPath.row || 4==indexPath.row){
+            self.curIndexPath = indexPath;
+            self.datePicker.hidden = NO;
+            self.sepView.hidden = NO;
+            NSDateFormatter *df = [[NSDateFormatter alloc] init];
+            [df setDateFormat:@"YYYY-MM-dd EEEE"];
+            if (3==indexPath.row)
+                [self.datePicker setDate:[df dateFromString:self.beginDate] animated:YES];
+            if (4==indexPath.row)
+                [self.datePicker setDate:[df dateFromString:self.endDate] animated:YES];
+        }
+    }
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.width, 55)];
@@ -240,13 +345,30 @@
 }
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
     [self.userButton setTitle:[self.userList[row] objectForKey:@"realname"] forState:UIControlStateNormal];
+    self.userDic[@"idcard"] = self.userList[row][@"idcard"];
+    self.userDic[@"phone"] = self.userList[row][@"phone"];
     pickerView.hidden = YES;
     self.sepView.hidden = YES;
+    [self.tableView reloadData];
 }
 - (void)showPick:(id)sender{
     [self.listPick reloadAllComponents];
     self.listPick.hidden = NO;
     self.sepView.hidden = NO;
+}
+- (void)dateChange:(UIDatePicker *)sender{
+    self.selectedDate = sender.date;
+    HNNewReportTableViewCell *cell = (HNNewReportTableViewCell *)[self.tableView cellForRowAtIndexPath:self.curIndexPath];
+    NSDateFormatter *df = [[NSDateFormatter alloc] init];
+//    [df setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"]];
+    [df setDateFormat:@"YYYY-MM-dd EEEE"];
+    cell.label.text = [NSString stringWithFormat:@"%@ %@",self.tableData[self.curIndexPath.section][self.curIndexPath.row],[df stringFromDate:self.selectedDate]];
+    if (3== self.curIndexPath.row)
+        self.beginDate = [df stringFromDate:self.selectedDate];
+    else
+        self.endDate = [df stringFromDate:self.selectedDate];
+    [cell.label sizeToFit];
+    cell.label.left = 20;
 }
 #pragma mark - network
 - (void)showNoNetwork{
