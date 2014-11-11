@@ -8,11 +8,14 @@
 
 #import <UIKit/UIKit.h>
 typedef enum HNNewReportTableViewCellType{
+    HNNewReportTableViewCellTypeButton,
     HNNewReportTableViewCellTypeText,
     HNNewReportTableViewCellTypeDate,
-    HNNewReportTableViewCellTypeButton,
     HNNewReportTableViewCellTypeLabel
 }HNNewReportTableViewCellType;
 @interface HNNewReportTableViewCell : UITableViewCell
-
+@property (strong, nonatomic) UILabel *label;
+@property (strong, nonatomic) UIButton *button;
+@property (strong, nonatomic) UITextField *textField;
+@property (assign, nonatomic) HNNewReportTableViewCellType type;
 @end
