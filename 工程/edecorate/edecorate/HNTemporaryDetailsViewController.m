@@ -187,12 +187,14 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     if (0==indexPath.section) {
         cell.textLabel.text = [self.titleArray1 objectAtIndex:indexPath.row];
-        cell.detailTextLabel.text = [self.dataArray1 objectAtIndex:indexPath.row];
+        if(indexPath.row<[self.dataArray1 count])
+            cell.detailTextLabel.text = [self.dataArray1 objectAtIndex:indexPath.row];
     }
     else
     {
         cell.textLabel.text = [self.titleArray2 objectAtIndex:indexPath.row];
-        cell.detailTextLabel.text = [self.dataArray2 objectAtIndex:indexPath.row];
+        if(indexPath.row<[self.dataArray2 count])
+            cell.detailTextLabel.text = [self.dataArray2 objectAtIndex:indexPath.row];
     }
     cell.textLabel.textColor = [UIColor darkTextColor];
     
