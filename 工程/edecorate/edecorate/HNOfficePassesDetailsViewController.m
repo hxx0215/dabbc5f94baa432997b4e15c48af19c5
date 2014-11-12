@@ -187,7 +187,9 @@
             cell = [[HNPersonDetailTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identy];
         }
         HNPassProposerData *proposer = [self.temporaryModel.proposerItems objectAtIndex:(indexPath.section-1)];
-        [cell setData:proposer];
+        cell.nameLabel.text = [NSString stringWithFormat:@"姓名：%@",proposer.name];
+        cell.phoneLabel.text = [NSString stringWithFormat:@"联系电话：%@",proposer.phone];
+        cell.cardLabel.text = [NSString stringWithFormat:@"身份证号码：%@",proposer.IDcard];
         return cell;
     }
     else
