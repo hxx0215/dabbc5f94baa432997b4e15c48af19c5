@@ -23,23 +23,15 @@
     self.phoneLabel = (UILabel *)[self viewWithTag:3];
     self.cardLabel = (UILabel *)[self viewWithTag:4];
     self.cardPhoto = (UIButton *)[self viewWithTag:5];
-    [self reloadData];
 }
 - (void)layoutSubviews{
     [super layoutSubviews];
 
 }
--(void)reloadData
-{
-    self.nameLabel.text = [NSString stringWithFormat:@"姓名：%@",self.proposerData.name];
-    self.phoneLabel.text = [NSString stringWithFormat:@"联系电话：%@",self.proposerData.phone];
-    self.cardLabel.text = [NSString stringWithFormat:@"身份证号码：%@",self.proposerData.IDcard];
-}
 
 -(void)setData:(HNPassProposerData*)proposer
 {
     self.proposerData = proposer;
-    [self reloadData];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -60,6 +52,7 @@
     CGContextStrokeRect(context, CGRectMake(self.nameLabel.left-3, self.nameLabel.bottom, self.nameLabel.width, 1));
     CGContextStrokeRect(context, CGRectMake(self.nameLabel.left-3, self.phoneLabel.bottom, self.nameLabel.width, 1));
     CGContextStrokeRect(context, CGRectMake(self.nameLabel.left-3, self.cardLabel.bottom, self.nameLabel.width, 1));
+    [super drawRect:rect];
 }
 
 @end
