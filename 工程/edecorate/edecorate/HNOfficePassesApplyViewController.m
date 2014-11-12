@@ -13,11 +13,11 @@
 #import "JSONKit.h"
 #import "MBProgressHUD.h"
 #import "HNLoginData.h"
-#import "HNPassAddNewTableViewCell.h"
+#import "HNPersonNewTableViewCell.h"
 #import "HNDecorateChoiceView.h"
 #import "HNUploadImage.h"
 
-@interface HNOfficePassesApplyViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate,HNDecorateChoiceViewDelegate,HNPassAddNewTableViewCellDelegate>
+@interface HNOfficePassesApplyViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate,HNDecorateChoiceViewDelegate>
 @property (nonatomic,strong) IBOutlet UIScrollView *mainView;
 
 @property (nonatomic,strong) IBOutlet UILabel *houseInfoMain;
@@ -55,26 +55,23 @@
 
 @property (nonatomic,strong) IBOutlet UIView *payView;
 
-@property (nonatomic,strong) IBOutlet UITableView *tableView;
 
 @property (nonatomic,strong) IBOutlet UIButton *uploadIdCardPic;
 @property (nonatomic,strong) IBOutlet UIButton *uploadPic;
 @property (nonatomic,strong) IBOutlet UIButton *submit;
 
 @property (nonatomic, strong) UIImagePickerController *imagePicker;
-@property (nonatomic, strong) HNPassAddNewTableViewCell *addNewCell;
+@property (nonatomic, strong) HNPersonNewTableViewCell *addNewCell;
 
 @property (strong, nonatomic) IBOutlet HNDecorateChoiceView *choiceDecorateView;
+
+@property (strong, nonatomic) UITableView *tableView;
+@property (strong, nonatomic) UIToolbar * topView;
+@property (strong,nonatomic) UIView *commitView;
+@property (nonatomic)CGFloat contentSizeHeight;
 @end
 
 @implementation HNOfficePassesApplyViewController
-
-//-(id)initWithModel:(HNPassData *)model
-//{
-//    self = [super init];
-//    self.temporaryModel = model;
-//    return self;
-//}
 
 
 - (void)viewDidLoad {
@@ -84,6 +81,17 @@
     
     self.view.backgroundColor=[UIColor whiteColor];
     self.navigationItem.title = NSLocalizedString(@"Pass Apply", nil);
+    
+    self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    [self.view addSubview:self.tableView];
+    
+    HNPassProposerData *Proposer = [[HNPassProposerData alloc]init];
+    [self.temporaryModel.proposerItems addObject:Proposer];
+    
     
     self.houseInfoMain.text = NSLocalizedString(@"House Information", nil) ;
     
@@ -148,12 +156,6 @@
     self.uploadPic.layer.borderColor = [UIColor blackColor].CGColor;
     
     
-    UINib *nib = [UINib nibWithNibName:NSStringFromClass([HNPassAddNewTableViewCell class]) bundle:nil];
-    [self.tableView registerNib:nib forCellReuseIdentifier:@"addNewCell"];
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-    self.tableView.hidden = YES;
-    
     self.AddPassCardMan.layer.cornerRadius = 5.0;
     
     self.payView.top = self.personsLabel.bottom+24;
@@ -178,6 +180,33 @@
     // Do any additional setup after loading the view from its nib.
 }
 
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    self.tableView.frame = self.view.bounds;
+    self.commitView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 88)];
+    UIButton *purchase = [UIButton buttonWithType:UIButtonTypeCustom];
+    purchase.height = 40;
+    purchase.width = self.view.width - 36;
+    purchase.left = 18;
+    purchase.centerY = 44;
+    purchase.layer.cornerRadius = 5.0;
+    [purchase setTitle:NSLocalizedString(@"提交申请", nil) forState:UIControlStateNormal];
+    [purchase setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [purchase setBackgroundColor:[UIColor colorWithRed:245.0/255.0 green:72.0/255.0 blue:0.0 alpha:1.0]];
+    [purchase addTarget:self action:@selector(checkOut:) forControlEvents:UIControlEventTouchUpInside];
+    [self.commitView addSubview:purchase];
+    [self movewButton];
+}
+
+-(void)movewButton
+{
+    CGSize size = self.tableView.contentSize;
+    self.commitView.top = size.height;
+    [self.tableView addSubview:self.commitView];
+    size.height += self.commitView.height;
+    self.tableView.contentSize = size;
+    self.contentSizeHeight = size.height;
+}
 
 - (void)updataDecorateInformation:(HNDecorateChoiceModel*)model
 {
@@ -208,14 +237,10 @@
 
 - (IBAction)addNewClick:(id)sender
 {
-    self.tableView.hidden = NO;
     HNPassProposerData* data = [[HNPassProposerData alloc]init];
     [self.temporaryModel.proposerItems addObject:data];
-    [self.tableView reloadData ];
-    self.tableView.height = [self.temporaryModel.proposerItems count]*101+2;
-    self.payView.top = self.tableView.bottom+24;
-    
-    self.mainView.contentSize = CGSizeMake(self.view.bounds.size.width, self.payView.bottom+20);
+    [self.tableView reloadData];
+    [self movewButton];
 }
 
 - (IBAction)checkOut:(id)sender
@@ -305,50 +330,183 @@
     // Dispose of any resources that can be recreated.
 }
 
--(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 101;
+#pragma mark - tableView
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 4+[self.temporaryModel.proposerItems count];
 }
 
--(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return  [self.temporaryModel.proposerItems count];
-}
-
-
-
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *reuseIdentifier = @"addNewCell";
-    HNPassAddNewTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
-    if (!cell){
-        cell = [[HNPassAddNewTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
-        
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    if (section==0) {
+        return 0;
     }
-    cell.delegate = self;
-    cell.proposerData = [self.temporaryModel.proposerItems objectAtIndex:indexPath.row];
-    return cell;
+    else if (section==1) {
+        return 1;
+    }
+    else if (section<[self.temporaryModel.proposerItems count]+2) {
+        return 1;
+    }
+    else if (section==2+[self.temporaryModel.proposerItems count]) {
+        return 0;
+    }
+    else if (section==3+[self.temporaryModel.proposerItems count]) {
+        return 1;
+    }
+    return 0;
 }
- #pragma mark - HNPassAddNewTableViewCellDelegate
 
-- (void)moveScrollView:(UITextField*)textFiled
-{
-    self.mainView.contentSize = CGSizeMake(self.view.bounds.size.width,self.payView.bottom+20+216);//原始滑动距离增加键盘高度
-    CGPoint pt = [textFiled convertPoint:CGPointMake(0, 0) toView:self.mainView];//把当前的textField的坐标映射到scrollview上
-    if(self.mainView.contentOffset.y-pt.y+self.navigationController.navigationBar.height<=0)//判断最上面不要去滚动
-        [self.mainView setContentOffset:CGPointMake(0, pt.y-self.navigationController.navigationBar.height) animated:YES];//华东
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 55;
 }
 
-- (void)finishMoveScrollView:(UITextField*)textFiled
-{
-    [UIView animateWithDuration:0.30f animations:^{
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.width, 55)];
+    UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(10, 5, tableView.width - 20, 50)];
+    contentView.backgroundColor = [UIColor projectGreen];
+    if (section==0 || section== 2+[self.temporaryModel.proposerItems count])
+    {
+        [HNUIStyleSet UIStyleSetRoundView:contentView];
+    }
+    
+    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:contentView.bounds byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii:CGSizeMake(7, 7)];
+    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+    maskLayer.frame = contentView.bounds;
+    maskLayer.path = maskPath.CGPath;
+    contentView.layer.mask = maskLayer;
+    
+    if (section==0) {
+        if(!self.choiceDecorateView)
+        {
+            self.choiceDecorateView = [[HNDecorateChoiceView alloc]initWithFrame:CGRectMake(12, 12, self.view.bounds.size.width-24, 30)];
+            self.choiceDecorateView.delegate = self;
+            self.choiceDecorateView.left = 5;
+            self.choiceDecorateView.centerY = contentView.height / 2;
+            
+        }
+        [contentView addSubview:self.choiceDecorateView];
+    }
+    else if (section==2+[self.temporaryModel.proposerItems count]) {
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         
-        self.mainView.contentSize = CGSizeMake(self.view.bounds.size.width, self.payView.bottom+20);
-    }];
+        btn.titleLabel.font = [UIFont systemFontOfSize:15];
+        btn.width = contentView.width -10;
+        btn.height = contentView.height -5;
+        btn.titleLabel.textColor = [UIColor whiteColor];
+        btn.left = 5;
+        btn.centerY = contentView.height / 2;
+        [contentView addSubview:btn];
+        [btn setImage:[UIImage imageNamed:@"+号_24"] forState:UIControlStateNormal];
+        [btn setTitle:NSLocalizedString(@"新增送货安装人员", nil) forState:UIControlStateNormal];
+        [btn addTarget:self action:@selector(addNewClick:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    else
+    {
+        UILabel *label = [[UILabel alloc] init];
+        
+        label.font = [UIFont systemFontOfSize:15];
+        label.width = contentView.width -10;
+        label.height = contentView.height -5;
+        label.numberOfLines = 2;
+        label.textColor = [UIColor whiteColor];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.left = 5;
+        label.centerY = contentView.height / 2;
+        [contentView addSubview:label];
+        if (section==1) {
+            label.text = NSLocalizedString(@"货物信息", nil);
+        }
+        else if (section<[self.temporaryModel.proposerItems count]+2) {
+            label.text = NSLocalizedString(@"施工人员信息", nil);
+        }
+        
+        else if (section==3+[self.temporaryModel.proposerItems count]) {
+            label.text = NSLocalizedString(@"缴费项目", nil);
+        }
+    }
+    [view addSubview:contentView];
+    
+    return view;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section<[self.temporaryModel.proposerItems count]+2)
+    {
+        return 145;
+    }
+    return 30;
+    
 }
 
-- (void)showImagePickView:(id)cell
-{
-    [self presentViewController:self.imagePicker animated:YES completion:nil];
-    self.addNewCell = cell;
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if (indexPath.section<[self.temporaryModel.proposerItems count]+2)
+    {
+        static NSString *identy = @"newPersonCell";
+        HNPersonNewTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
+        if (!cell)
+        {
+            cell = [[HNPersonNewTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identy];
+        }
+        return cell;
+    }
+    static NSString *identy = @"DefaultApplyCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
+    if (!cell)
+    {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:identy];
+    }
+    return cell;
+
 }
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([cell respondsToSelector:@selector(tintColor)]) {
+        if (tableView == self.tableView) {
+            CGFloat cornerRadius = 7.f;
+            cell.backgroundColor = UIColor.clearColor;
+            CAShapeLayer *layer = [[CAShapeLayer alloc] init];
+            CGMutablePathRef pathRef = CGPathCreateMutable();
+            CGRect bounds = CGRectInset(cell.bounds, 10, 0);
+            BOOL addLine = NO;
+            if (indexPath.row == 0 && indexPath.row == [tableView numberOfRowsInSection:indexPath.section]-1) {
+                CGPathAddRoundedRect(pathRef, nil, bounds, cornerRadius, cornerRadius);
+                /*} else if (indexPath.row == 0) {
+                 CGPathMoveToPoint(pathRef, nil, CGRectGetMinX(bounds), CGRectGetMaxY(bounds));
+                 CGPathAddArcToPoint(pathRef, nil, CGRectGetMinX(bounds), CGRectGetMinY(bounds), CGRectGetMidX(bounds), CGRectGetMinY(bounds), cornerRadius);
+                 CGPathAddArcToPoint(pathRef, nil, CGRectGetMaxX(bounds), CGRectGetMinY(bounds), CGRectGetMaxX(bounds), CGRectGetMidY(bounds), cornerRadius);
+                 CGPathAddLineToPoint(pathRef, nil, CGRectGetMaxX(bounds), CGRectGetMaxY(bounds));
+                 addLine = YES;*/
+            } else if (indexPath.row == [tableView numberOfRowsInSection:indexPath.section]-1) {
+                CGPathMoveToPoint(pathRef, nil, CGRectGetMinX(bounds), CGRectGetMinY(bounds));
+                CGPathAddArcToPoint(pathRef, nil, CGRectGetMinX(bounds), CGRectGetMaxY(bounds), CGRectGetMidX(bounds), CGRectGetMaxY(bounds), cornerRadius);
+                CGPathAddArcToPoint(pathRef, nil, CGRectGetMaxX(bounds), CGRectGetMaxY(bounds), CGRectGetMaxX(bounds), CGRectGetMidY(bounds), cornerRadius);
+                CGPathAddLineToPoint(pathRef, nil, CGRectGetMaxX(bounds), CGRectGetMinY(bounds));
+            } else {
+                CGPathAddRect(pathRef, nil, bounds);
+                addLine = YES;
+            }
+            layer.path = pathRef;
+            CFRelease(pathRef);
+            layer.fillColor = [UIColor colorWithWhite:1.f alpha:0.8f].CGColor;
+            
+            if (addLine == YES) {
+                CALayer *lineLayer = [[CALayer alloc] init];
+                CGFloat lineHeight = (1.f / [UIScreen mainScreen].scale);
+                lineLayer.frame = CGRectMake(CGRectGetMinX(bounds)+10, bounds.size.height-lineHeight, bounds.size.width-10, lineHeight);
+                lineLayer.backgroundColor = tableView.separatorColor.CGColor;
+                [layer addSublayer:lineLayer];
+            }
+            UIView *testView = [[UIView alloc] initWithFrame:bounds];
+            
+            [testView.layer insertSublayer:layer atIndex:0];
+            testView.backgroundColor = UIColor.clearColor;
+            cell.backgroundView = testView;
+            
+        }
+    }
+}
+
 
  #pragma mark - UIImagePickerControllerDelegate
 
@@ -369,7 +527,7 @@
     hud.labelText = NSLocalizedString(@"Loading", nil);
     [HNUploadImage UploadImage:scaledImage block:^(NSString *msg) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
-        [self.addNewCell updateImage:msg whithImage:image];
+        //[self.addNewCell updateImage:msg whithImage:image];
         self.addNewCell = nil;
     }];
     
