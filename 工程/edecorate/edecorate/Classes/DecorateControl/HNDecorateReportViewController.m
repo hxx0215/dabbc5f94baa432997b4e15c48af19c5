@@ -246,7 +246,7 @@
     MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = NSLocalizedString(@"Loading", nil);
     if (buttonIndex == 1){
-        NSDictionary *dic = @{@"declareid": @"10006"};//tf.text};
+        NSDictionary *dic = @{@"declareid": @"10010"};//tf.text};
         NSString *sendJson = [dic JSONString];
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
         request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"get.decorate.undertake" Params:sendJson]];
@@ -269,6 +269,9 @@
                         HNNewReportViewController *vc = [[HNNewReportViewController alloc] init];
                         NSInteger type = [[dataArr[0] objectForKey:@"type"] integerValue];
                         vc.constructType = type;
+                        vc.roomNumber = [dataArr[0] objectForKey:@"roomNumber"];
+                        vc.ownername = [dataArr[0] objectForKey:@"ownername"];
+                        vc.ownerphone = [dataArr[0] objectForKey:@"ownerphone"];
                         vc.declareId = [NSString stringWithFormat:@"%@",[dataArr[0] objectForKey:@"declareId"]];
                         dispatch_async(dispatch_get_main_queue(), ^{
                             [self.navigationController pushViewController:vc animated:YES];

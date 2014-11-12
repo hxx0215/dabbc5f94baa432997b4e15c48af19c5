@@ -9,6 +9,8 @@
 #import "HNNewReportViewController.h"
 #import "HNLoginData.h"
 #import "HNNewReportTableViewCell.h"
+#import "MBProgressHUD.h"
+#import "HNUploadImage.h"
 
 @interface HNSeprateView : UIView
 @property (nonatomic, weak) UIView *hiddenWith;
@@ -24,7 +26,7 @@
 }
 
 @end
-@interface HNNewReportViewController ()<UITableViewDelegate,UITableViewDataSource,UIPickerViewDelegate,UIPickerViewDataSource>
+@interface HNNewReportViewController ()<UITableViewDelegate,UITableViewDataSource,UIPickerViewDelegate,UIPickerViewDataSource,UITextFieldDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *tableData;
 @property (nonatomic, strong) NSArray *userTitle;
@@ -49,6 +51,8 @@
 @property (nonatomic, strong) NSString *beginDate;
 @property (nonatomic, strong) NSString *endDate;
 @property (nonatomic, strong) NSMutableDictionary *userDic;
+@property (nonatomic, strong) NSMutableDictionary *picDict;
+@property (nonatomic, assign) BOOL userLoaded;
 @end
 
 @implementation HNNewReportViewController
@@ -56,6 +60,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.userLoaded = NO;
     self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -64,7 +69,7 @@
     
     self.userTitle = @[NSLocalizedString(@"身份证号: ", nil),NSLocalizedString(@"手机号: ", nil),NSLocalizedString(@"施工总人数: ", nil),NSLocalizedString(@"开始时间: ", nil),NSLocalizedString(@"结束时间: ", nil)];
     self.companyData = @[NSLocalizedString(@"营业执照", nil),NSLocalizedString(@"税务登记证",nil),NSLocalizedString(@"组织代码登记证",nil),NSLocalizedString(@"资质证书", nil),NSLocalizedString(@"电工证", nil),NSLocalizedString(@"法人委托书",nil),NSLocalizedString(@"法人身份证", nil),NSLocalizedString(@"装修施工合同图证",nil),NSLocalizedString(@"施工负责人身份",nil)];
-    self.personalData = @[NSLocalizedString(@"房屋地址:", nil),NSLocalizedString(@"业主姓名:",nil),NSLocalizedString(@"手机号:",nil)];
+    self.personalData = @[[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"房屋地址:", nil),self.roomNumber],[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"业主姓名:",nil),self.ownername],[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"手机号:",nil),self.ownerphone]];
     self.graphData = @[NSLocalizedString(@"原始结构图", nil),NSLocalizedString(@"平面布置图",nil),NSLocalizedString(@"墙体改造图",nil),NSLocalizedString(@"天花布置图", nil),NSLocalizedString(@"水路布置图", nil),NSLocalizedString(@"电路分布图",nil)];
     if (self.constructType == 1)
         self.headerTitle = @[@"",NSLocalizedString(@"承包方式: ", nil),NSLocalizedString(@"装修公司资料", nil),NSLocalizedString(@"业主及图纸资料", nil),NSLocalizedString(@"业主房屋实景图", nil)];
@@ -111,6 +116,7 @@
     [self.tableType addObject:[tArr copy]];
     [self initDateString];
     [self initPickView];
+    [self initPicDict];
     self.userDic = [@{@"idcard": @"",@"phone" : @"", @"population" :@""} mutableCopy];
 }
 - (void)initDateString{
@@ -143,6 +149,31 @@
     [self.view addSubview:self.datePicker];
     self.datePicker.hidden = YES;
     self.sepView.hiddenWith2 = self.datePicker;
+    
+}
+- (void)initPicDict{
+    self.picDict = [[NSMutableDictionary alloc] init];
+    int offset = 2;
+    if (self.constructType == 1)
+    {
+        offset++;
+        for (int i = 0 ;i < [self.companyData count];i++)
+        {
+            NSString *key = [NSString stringWithFormat:@"%d",i + offset * 1000];
+            [self.picDict setObject:[NSNull null] forKey:key];
+        }
+    }
+    offset++;
+    for (int i=0; i< [self.graphData count];i ++){
+        NSString *key = [NSString stringWithFormat:@"%d", i + 3 + offset * 1000];
+        [self.picDict setObject:[NSNull null] forKey:key];
+    }
+    offset++;
+    for (int i = 0;i< [self.housePic count]; i++){
+        NSString *key = [NSString stringWithFormat:@"%d", i + offset * 1000];
+        [self.picDict setObject:[NSNull null] forKey:key];
+    }
+    
 }
 - (void)loadUserList{
     NSDictionary *dic = @{@"mshopid": [HNLoginData shared].mshopid};
@@ -188,7 +219,23 @@
     self.sepView.top = 0;
     self.sepView.height = self.view.height - self.listPick.height;
     self.datePicker.frame= self.listPick.frame;
-    [self loadUserList];
+    if (!self.userLoaded)
+    {
+        self.userLoaded = YES;
+        [self loadUserList];
+    }
+}
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    UIButton *purchase = [UIButton buttonWithType:UIButtonTypeCustom];
+    CGSize contentSize = self.tableView.contentSize;
+    purchase.frame = CGRectMake(10, contentSize.height, self.view.width - 20, 40);
+    purchase.layer.cornerRadius = 7.0;
+    [self.tableView addSubview:purchase];
+    self.tableView.contentSize = CGSizeMake(contentSize.width, contentSize.height + 60);
+    [purchase setBackgroundColor:[UIColor projectRed]];
+    [purchase setTitle:NSLocalizedString(@"前去支付费用", nil) forState:UIControlStateNormal];
+    [purchase addTarget:self action:@selector(purchase:) forControlEvents:UIControlEventTouchUpInside];
 }
 #pragma mark - UITableViewDelegate && DataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -197,12 +244,15 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return [self.tableData[section] count];
 }
-
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 60;
+}
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *identy = @"NewReportCell";
     HNNewReportTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
     if (!cell){
         cell = [[HNNewReportTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identy];
+        [cell.button addTarget:self action:@selector(upload:) forControlEvents:UIControlEventTouchUpInside];
     }
     cell.label.text = self.tableData[indexPath.section][indexPath.row];
     cell.type = [self.tableType[indexPath.section][indexPath.row] intValue];
@@ -211,15 +261,30 @@
             case 0:
                 cell.textField.keyboardType = UIKeyboardTypeASCIICapable;
                 cell.textField.text = self.userDic[@"idcard"];
+                if (!cell.textField.delegate)
+                {
+                    cell.textField.delegate = self;
+                    cell.textField.tag = 100;
+                }
                 break;
             case 1:
                 cell.textField.keyboardType = UIKeyboardTypeNumberPad;
                 cell.textField.text = self.userDic[@"phone"];
+                if (!cell.textField.delegate)
+                {
+                    cell.textField.delegate = self;
+                    cell.textField.tag = 101;
+                }
                 break;
             case 2:
                 cell.textField.keyboardType = UIKeyboardTypeNumberPad;
                 cell.textField.placeholder = NSLocalizedString(@"请输入施工总人数", nil);
                 cell.textField.text = self.userDic[@"population"];
+                if (!cell.textField.delegate)
+                {
+                    cell.textField.delegate = self;
+                    cell.textField.tag = 102;
+                }
                 break;
             case 3:
                 cell.label.text = [NSString stringWithFormat:@"%@ %@",self.tableData[indexPath.section][indexPath.row],self.beginDate];
@@ -233,6 +298,15 @@
                 break;
         }
     }
+    cell.button.tag = (indexPath.section + 1) * 1000 + indexPath.row;
+    if (cell.type == HNNewReportTableViewCellTypeButton){
+        NSString *key = [NSString stringWithFormat:@"%d",cell.button.tag];
+        if ([self.picDict objectForKey:key] != [NSNull null])
+            [cell.button setImage:[self.picDict objectForKey:key] forState:UIControlStateNormal];
+        else
+            [cell.button setImage:[UIImage imageNamed:@"selectphoto.png"] forState:UIControlStateNormal];
+    }
+    
     return cell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -383,6 +457,61 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [alert show];
     });
+}
+#pragma mark - UITextFieldDelegate
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+    NSLog(@"%d",textField.tag);
+}
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    switch (textField.tag) {
+        case 100:
+            self.userDic[@"idcard"] = textField.text;
+            break;
+        case 101:
+            self.userDic[@"phone"] = textField.text;
+            break;
+        case 102:
+            self.userDic[@"population"] = textField.text;
+            break;
+        default:
+            break;
+    }
+}
+#pragma mark - UIImagePickControllerDelegate
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
+    UIImage *image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
+    NSString *key = [NSString stringWithFormat:@"%d",picker.view.tag];
+    [self.picDict setObject:image forKey:key];
+    [picker dismissViewControllerAnimated:YES completion:^{
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.labelText = NSLocalizedString(@"上传中", nil);
+        CGFloat maxWH = 480;
+        CGFloat maxImg = MAX(image.size.width, image.size.height);
+        CGFloat scale = MIN(1, maxWH / maxImg);
+        UIImage *img = [HNUploadImage ScaledImage:image scale:scale];
+        [HNUploadImage UploadImage:img block:^(NSString *msg){
+            NSLog(@"%@",msg);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                hud.labelText = NSLocalizedString(@"上传成功", nil);
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+            });
+        }];
+    }];
+}
+- (void)textDone:(id)sender{
+    
+}
+- (void)purchase:(id)sender{
+
+}
+- (void)upload:(UIButton *)sender{
+    UIImagePickerController *pick = [[UIImagePickerController alloc] init];
+    pick.view.tag = sender.tag;
+    pick.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+    pick.delegate = self;
+    [self presentViewController:pick animated:YES completion:^{
+        
+    }];
 }
 @end
 
