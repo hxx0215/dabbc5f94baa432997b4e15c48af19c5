@@ -28,6 +28,7 @@
 @end
 @interface HNNewReportViewController ()<UITableViewDelegate,UITableViewDataSource,UIPickerViewDelegate,UIPickerViewDataSource,UITextFieldDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) UIToolbar *topView;
 @property (nonatomic, strong) NSMutableArray *tableData;
 @property (nonatomic, strong) NSArray *userTitle;
 @property (nonatomic, strong) NSArray *companyData;
@@ -53,6 +54,9 @@
 @property (nonatomic, strong) NSMutableDictionary *userDic;
 @property (nonatomic, strong) NSMutableDictionary *picDict;
 @property (nonatomic, assign) BOOL userLoaded;
+@property (nonatomic, weak) UITextField *curText;
+
+@property (nonatomic, strong) NSMutableDictionary *sendDic;
 @end
 
 @implementation HNNewReportViewController
@@ -117,7 +121,12 @@
     [self initDateString];
     [self initPickView];
     [self initPicDict];
-    self.userDic = [@{@"idcard": @"",@"phone" : @"", @"population" :@""} mutableCopy];
+    [self initTopView];
+    self.userDic = [@{@"idcard": @"",@"phone" : @"", @"population" :@"",@"realname":@""} mutableCopy];
+    [self initSendDic];
+}
+- (void)initSendDic{
+    self.sendDic = [@{@"declareid": self.declareId , @"shopid" : [HNLoginData shared].mshopid,@"principal":@"",@"EnterprisePhone":@"",@"EIDCard":@"",@"beginTime":@"",@"endTime": @"",@"population":@"",@"deadline":@"",@"OriginalSChart":@"",@"floorplan":@"",@"wallRemould":@"" , @"ceilingPlan":@"",@"WaterwayPlan":@"",@"BlockDiagram":@"",@"businessLicense":@"",@"TaxIMG":@"",@"organizeIMG":@"",@"qualificationIMG":@"" ,@"ElectricianIMG":@"",@"powerAttorney":@"",@"AttorneyIDcard":@"",@"EIDCardIMG":@"",@"compactIMG":@"",@"kitchenIMG":@"",@"WCIMG":@"",@"roomIMG":@"",@"gasLineIMG":@"",@"electricityBoxIMG":@"",@"waterPipeIMG":@"",@"proportion":@"",@"blueprint":@"" }mutableCopy];
 }
 - (void)initDateString{
     NSDateFormatter *df = [[NSDateFormatter alloc] init];
@@ -175,6 +184,14 @@
     }
     
 }
+- (void)initTopView{
+    self.topView = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 30)];
+    self.topView.backgroundColor = [UIColor whiteColor];
+    UIBarButtonItem * btnSpace = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+    UIBarButtonItem * doneButton = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(@"Done", nil) style:UIBarButtonItemStyleDone target:self action:@selector(textDone:)];
+    NSArray * buttonsArray = [NSArray arrayWithObjects:btnSpace,doneButton,nil];
+    [self.topView setItems:buttonsArray];
+}
 - (void)loadUserList{
     NSDictionary *dic = @{@"mshopid": [HNLoginData shared].mshopid};
     NSString *sendJson = [dic JSONString];
@@ -193,6 +210,7 @@
                 self.userList = [retDic objectForKey:@"data"];
                 self.userDic[@"idcard"] = self.userList[0][@"idcard"];
                 self.userDic[@"phone"] = self.userList[0][@"phone"];
+                self.userDic[@"realname"] = [self.userList[0] objectForKey:@"realname"];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self.userButton setTitle:[self.userList[0] objectForKey:@"realname"] forState:UIControlStateNormal];
                     [self.listPick reloadAllComponents];
@@ -265,6 +283,7 @@
                 {
                     cell.textField.delegate = self;
                     cell.textField.tag = 100;
+                    cell.textField.inputAccessoryView = self.topView;
                 }
                 break;
             case 1:
@@ -274,6 +293,7 @@
                 {
                     cell.textField.delegate = self;
                     cell.textField.tag = 101;
+                    cell.textField.inputAccessoryView = self.topView;
                 }
                 break;
             case 2:
@@ -284,6 +304,7 @@
                 {
                     cell.textField.delegate = self;
                     cell.textField.tag = 102;
+                    cell.textField.inputAccessoryView = self.topView;
                 }
                 break;
             case 3:
@@ -461,6 +482,7 @@
 #pragma mark - UITextFieldDelegate
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
     NSLog(@"%d",textField.tag);
+    self.curText = textField;
 }
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     switch (textField.tag) {
@@ -499,10 +521,34 @@
     }];
 }
 - (void)textDone:(id)sender{
-    
+    [self.curText resignFirstResponder];
 }
 - (void)purchase:(id)sender{
-
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    self.sendDic[@"principal"] = self.userDic[@"realname"];
+    self.sendDic[@"EnterprisePhone"] = self.userDic[@"phone"];
+    self.sendDic[@"EIDCard"] = self.userDic[@"idcard"];
+//    self.sendDic[@"beginTime"] = self.beginDate;
+//    self.sendDic[@"endTime"] = self.endDate;
+    self.sendDic[@"population"] = self.userDic[@"population"];
+    NSString *sendJson = [self.sendDic JSONString];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"set.decorate.undertake" Params:sendJson]];
+    NSString *contentType = @"text/html";
+    [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        if (data)
+        {
+            NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
+            NSDictionary *retDic = [retJson objectFromJSONString];
+            NSLog(@"%@",retDic);
+        }
+        else{
+            NSLog(@"%@",connectionError);
+        }
+    }];
 }
 - (void)upload:(UIButton *)sender{
     UIImagePickerController *pick = [[UIImagePickerController alloc] init];
