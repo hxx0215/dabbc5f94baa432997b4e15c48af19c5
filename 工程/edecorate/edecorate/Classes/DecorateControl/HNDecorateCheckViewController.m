@@ -49,6 +49,10 @@
        typeof(self) strongSelf = weakSelf;
         [strongSelf refreshData];
     }];
+    [self.cTableView addFooterWithCallback:^{
+        typeof(self) strongSelf = weakSelf;
+        [strongSelf loadMore];
+    }];
     self.checkList = [[NSMutableArray alloc] init];
     self.stageMap = @{@"-1": NSLocalizedString(@"验收不通过", nil),@"0": NSLocalizedString(@"等待验收", nil), @"1": NSLocalizedString(@"验收通过", nil)};
     [self initNaviButton];
@@ -130,6 +134,19 @@
                 NSArray *dataArr = [retDic objectForKey:@"data"];
                 HNCheckViewController *vc = [[HNCheckViewController alloc] init];
                 vc.contentArr = [dataArr[0] objectForKey:@"ItemType"];
+                vc.declaretime = [dataArr[0] objectForKey:@"declaretime"];
+                vc.shopreason = [dataArr[0] objectForKey:@"shopreason"];
+                vc.shopaccessory = [dataArr[0] objectForKey:@"shopaccessory"];
+                vc.manageAssessor = [dataArr[0] objectForKey:@"manageAssessor"];
+                vc.manageckreason = [dataArr[0] objectForKey:@"manageckreason"];
+                vc.managecktime = [dataArr[0] objectForKey:@"managecktime"];
+                vc.manageraccessory = [dataArr[0] objectForKey:@"manageraccessory"];
+                vc.owneraccessory = [dataArr[0] objectForKey:@"owneraccessory"];
+                vc.ownerAssessor = [dataArr[0] objectForKey:@"ownerAssessor"];
+                vc.ownerckreason = [dataArr[0] objectForKey:@"ownerckreason"];
+                vc.ownercktime = [dataArr[0] objectForKey:@"ownercktime"];
+                vc.processname = ((HNCheckModel *)self.checkList[indexPath.row]).checkSchedule;
+                vc.state = [[dataArr[0] objectForKey:@"state"] integerValue];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self.navigationController pushViewController:vc animated:YES];
                 });
@@ -143,7 +160,51 @@
         }
     }];
 }
-
+- (void)loadMore{
+    NSInteger nums = 8;
+    if (0!=[self.checkList count] % nums){
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.cTableView footerEndRefreshing];
+        });
+        return ;//已到最后。返回
+    }
+    NSInteger page = [self.checkList count] / nums + 1;
+    NSDictionary *sendDic = @{@"mshopid": [HNLoginData shared].mshopid,@"pageindex":[NSString stringWithFormat:@"%d",page],@"pagesize":[NSString stringWithFormat:@"%d",nums]};
+    NSString *sendJson = [sendDic JSONString];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"get.acceptance.list" Params:sendJson]];
+    NSString *contentType = @"text/html";
+    [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
+    
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.cTableView footerEndRefreshing];
+        });
+        if (data){
+            NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
+            NSDictionary *retDic = [retJson objectFromJSONString];
+            NSInteger count = [[retDic objectForKey:@"total"] integerValue];
+            if (0 != count){
+                NSArray *dataArr = [retDic objectForKey:@"data"];
+                for (int i = 0; i<count ;i ++){
+                    HNCheckModel *model = [[HNCheckModel alloc] init];
+                    model.roomName = [dataArr[i] objectForKey:@"room"];
+                    model.checkid = [dataArr[i] objectForKey:@"checkid"];
+                    model.checkSchedule = [dataArr[i] objectForKey:@"processname"];
+                    model.deployId = [dataArr[i] objectForKey:@"depolyId"];
+                    model.ownerAssessor = [dataArr[i] objectForKey:@"ownerAssessor"];
+                    model.manageAssessor = [dataArr[i] objectForKey:@"manageAssessor"];
+                    model.checkStage = [dataArr[i] objectForKey:@"state"];
+                    [self.checkList addObject:model];
+                }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.cTableView reloadData];
+                });
+            }
+        }
+    }];
+}
 - (void)refreshData{
     NSDictionary *sendDic = @{@"mshopid": [HNLoginData shared].mshopid};
     NSString *sendJson = [sendDic JSONString];
