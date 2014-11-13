@@ -11,4 +11,5 @@
 @interface HNCheckDetailTableViewCell : UITableViewCell
 @property (nonatomic, strong)UILabel *nameLabel;
 @property (nonatomic, strong)UILabel *contentLabel;
+@property (strong, nonatomic) UIButton *photo;
 @end

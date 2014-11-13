@@ -190,7 +190,15 @@
     return [outputStr stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 }
 - (NSString *)addPort{
+    NSRange r = [self rangeOfString:@"http://"];
+    if (r.location == NSNotFound){
+        return [NSString stringWithFormat:@"http://113.105.159.115:5030%@",self];
+    }
+    r = [self rangeOfString:@":5030"];
+    if (r.location == NSNotFound)
     return [self stringByReplacingOccurrencesOfString:@"http://113.105.159.115" withString:@"http://113.105.159.115:5030"];
+    else
+        return self;
 }
 @end
 
