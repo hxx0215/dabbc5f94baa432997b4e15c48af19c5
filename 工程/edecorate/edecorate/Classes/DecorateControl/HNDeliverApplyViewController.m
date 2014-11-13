@@ -250,14 +250,9 @@
 #pragma mark UITableViewDelegate
 - (IBAction)addNewClick:(id)sender
 {
-    self.tableView.hidden = NO;
     HNDeliverProposerItem* data = [[HNDeliverProposerItem alloc]init];
     [self.model.proposerItems addObject:data];
     [self.tableView reloadData ];
-    self.tableView.height = [self.model.proposerItems count]*105+2;
-    self.viewPrice.top = self.tableView.bottom+24;
-    
-    self.mainView.contentSize = CGSizeMake(self.view.bounds.size.width, self.viewPrice.bottom+20);
 }
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
