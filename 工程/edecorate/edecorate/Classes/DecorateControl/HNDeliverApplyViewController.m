@@ -532,36 +532,38 @@
         {
             self.model.eTime = destDateString;
         }
-        return;
     }
     else if(textField.tag == 7)
     {
         self.model.product = textField.text;
-        return;
     }
-    NSInteger section = textField.tag/10;
-    HNDeliverProposerItem *data = [self.model.proposerItems objectAtIndex:section];
-    NSInteger row = textField.tag%10;
-    switch (row) {
-        case 1:
-        {
-            data.name = textField.text;
+    else
+    {
+        NSInteger section = textField.tag/10;
+        HNDeliverProposerItem *data = [self.model.proposerItems objectAtIndex:section];
+        NSInteger row = textField.tag%10;
+        switch (row) {
+            case 1:
+            {
+                data.name = textField.text;
+            }
+                break;
+            case 2:
+            {
+                data.phone = textField.text;
+            }
+                break;
+            case 3:
+            {
+                data.IDcard = textField.text;
+            }
+                break;
+                
+            default:
+                break;
         }
-            break;
-        case 2:
-        {
-            data.phone = textField.text;
-        }
-            break;
-        case 3:
-        {
-            data.IDcard = textField.text;
-        }
-            break;
-            
-        default:
-            break;
     }
+    
     if (!self.bo) {
         //开始动画
         [UIView animateWithDuration:0.30f animations:^{
