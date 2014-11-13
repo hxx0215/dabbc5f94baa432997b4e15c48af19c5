@@ -34,6 +34,9 @@
 @property (nonatomic, strong)NSString *IDcardImg;
 @property (nonatomic, strong)NSString *Icon;//
 @property (nonatomic, strong)NSString *isTransaction;
+
+@property (nonatomic, strong)UIImage *imageIDcard;
+@property (nonatomic, strong)UIImage *imageIcon;
 -(BOOL)updateData:(NSDictionary *)dic;
 @end
 

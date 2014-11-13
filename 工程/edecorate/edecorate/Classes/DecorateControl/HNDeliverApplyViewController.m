@@ -14,48 +14,30 @@
 #import "HNLoginData.h"
 #import "HNDecorateChoiceView.h"
 #import "HNDeliverData.h"
-#import "HNDeliveApplyTableViewCell.h"
+#import "HNPersonNewTableViewCell.h"
+#import "HNUploadImage.h"
+#import "HNDeliverGodTableViewCell.h"
 
-@interface HNDeliverApplyViewController ()<UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate,HNDecorateChoiceViewDelegate,UITextFieldDelegate,HNDeliveApplyAddNewTableViewCellDelegate>
+@interface HNDeliverApplyViewController ()<UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate,HNDecorateChoiceViewDelegate,UITextFieldDelegate>
 @property bool bo;
 @property (strong, nonatomic) HNDecorateChoiceView *choiceDecorateView;
-@property (nonatomic, strong)IBOutlet UIScrollView *mainView;
-
-@property (nonatomic,strong) IBOutlet UILabel *houseInfoMain;
-@property (nonatomic,strong) IBOutlet UILabel *decorationMain;
-@property (nonatomic,strong) IBOutlet UILabel *personMain;
-@property (nonatomic,strong) IBOutlet UILabel *payMain;
-@property (nonatomic,strong) IBOutlet UILabel *godInfoMain;
-
-@property (nonatomic,strong) IBOutlet UILabel *houseInfoTitle;
-@property (nonatomic, strong)IBOutlet UILabel* roomNameLabel;
-@property (nonatomic, strong)IBOutlet UILabel* ownerphoneLabel;
-@property (nonatomic, strong)IBOutlet UILabel* ownernameLabel;
-
-@property (nonatomic,strong) IBOutlet UILabel *decorationCompanyTitle;
-
-@property (nonatomic, strong)IBOutlet UILabel* productTitle;
-@property (nonatomic, strong)IBOutlet UILabel* btimeTitleLabel;
-@property (nonatomic, strong)IBOutlet UILabel* etimeTitleLabel;
 
 @property (nonatomic, strong)IBOutlet UITextField* productTextField;
 @property (nonatomic, strong)IBOutlet UITextField* bTimeTextField;
 @property (nonatomic, strong)IBOutlet UITextField* eTimeTextField;
-@property (nonatomic, strong)IBOutlet UITextField* cField;
 
-@property (strong, nonatomic) IBOutlet UIView *viewRoom;
-@property (strong, nonatomic) IBOutlet UIView *viewPrincipal ;
-@property (strong, nonatomic) IBOutlet UIView *viewInformation;
-@property (strong, nonatomic) IBOutlet UIView *viewPrice;
-
-@property (strong, nonatomic) IBOutlet UITableView *tableView;
-
-@property (nonatomic,strong) IBOutlet UIButton *AddPassCardMan;
 
 @property (nonatomic, strong) HNDeliverData* model;
-@property (nonatomic, strong)IBOutlet UIButton* commitButton;
+
+@property (nonatomic, strong) UIImagePickerController *imagePicker;
+@property (strong, nonatomic) UIButton * imageButton;
 
 @property (strong, nonatomic) UIDatePicker *pickerView;
+
+@property (strong, nonatomic) UITableView *tableView;
+@property (strong, nonatomic) UIToolbar * topView;
+@property (strong,nonatomic) UIView *commitView;
+@property (nonatomic)CGFloat contentSizeHeight;
 @end
 
 @implementation HNDeliverApplyViewController
@@ -66,94 +48,83 @@
     self.bo = false;
     self.navigationItem.title = NSLocalizedString(@"Delivery&Installation Apply", nil);
     
-    self.houseInfoMain.text = NSLocalizedString(@"House Information", nil) ;
-    self.houseInfoTitle.text = NSLocalizedString(@"House Information", nil) ;
-    self.decorationCompanyTitle.text = NSLocalizedString(@"Construction unit", nil) ;
+    self.model = [[HNDeliverData alloc]init];
     
-    self.ownernameLabel.textColor = [UIColor colorWithRed:0xCC/255.0 green:0X91/255.0 blue:0X31/255.0 alpha:1];
-    self.ownerphoneLabel.textColor = [UIColor colorWithRed:0xCC/255.0 green:0X91/255.0 blue:0X31/255.0 alpha:1];
-    
-    self.productTitle.text = NSLocalizedString(@"送货安装产品", nil);
-    self.btimeTitleLabel.text = NSLocalizedString(@"Start Time", nil);
-    self.etimeTitleLabel.text = NSLocalizedString(@"End Time", nil);
-    
-    UINib *nib = [UINib nibWithNibName:NSStringFromClass([HNDeliveApplyTableViewCell class]) bundle:nil];
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, self.viewInformation.bottom, self.mainView.width, 150)];
-    [self.mainView addSubview:self.tableView];
-    [self.tableView registerNib:nib forCellReuseIdentifier:@"DeliverApplyCell"];
-    self.tableView.hidden = YES;
-    self.tableView.delegate = self;
+    self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     self.tableView.dataSource = self;
-    self.viewPrice.top = self.viewInformation.bottom+24;
+    self.tableView.delegate = self;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-    self.AddPassCardMan.layer.cornerRadius = 5.0;
+    [self.view addSubview:self.tableView];
     
-    self.commitButton.layer.cornerRadius = 5.0;
-    [self.commitButton setTitle:NSLocalizedString(@"在线支付", nil) forState:UIControlStateNormal];
-    [self.commitButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.commitButton setBackgroundColor:[UIColor colorWithRed:245.0/255.0 green:72.0/255.0 blue:0.0 alpha:1.0]];
+    HNDeliverProposerItem *Proposer = [[HNDeliverProposerItem alloc]init];
+    [self.model.proposerItems addObject:Proposer];
     
     
     self.choiceDecorateView = [[HNDecorateChoiceView alloc]initWithFrame:CGRectMake(12, 12, self.view.bounds.size.width-24, 25)];
-    [self.mainView addSubview:self.choiceDecorateView];
     self.choiceDecorateView.delegate = self;
-    
-    self.model = [[HNDeliverData alloc]init];
     
     
     self.pickerView = [[UIDatePicker alloc]init];
     self.pickerView.frame = CGRectMake(0, 500, 300, 200);
     self.pickerView.backgroundColor = [UIColor grayColor];
-    //self.pickerView.hidden = YES;
     self.pickerView.datePickerMode = UIDatePickerModeDate;
-    self.eTimeTextField.inputView = self.pickerView;
-    self.bTimeTextField.inputView = self.pickerView;
     
-    UIToolbar * topView = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 30)];
-    //[topView setBarStyle:UIBarStyleBlack];
-    topView.backgroundColor = [UIColor whiteColor];
+    self.topView = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 30)];
+    self.topView.backgroundColor = [UIColor whiteColor];
     UIBarButtonItem * btnSpace = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
     UIBarButtonItem * doneButton = [[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(OKTextClick)];
     NSArray * buttonsArray = [NSArray arrayWithObjects:btnSpace,doneButton,nil];
-    [topView setItems:buttonsArray];
-    self.eTimeTextField.inputAccessoryView = topView;
-    self.bTimeTextField.inputAccessoryView = topView;
+    [self.topView setItems:buttonsArray];
     
-    [HNUIStyleSet UIStyleSetRoundView:self.houseInfoMain];
-    [HNUIStyleSet UIStyleSetRoundView:self.decorationMain];
-    [HNUIStyleSet UIStyleSetRoundView:self.personMain];
-    [HNUIStyleSet UIStyleSetRoundView:self.payMain];
-    [HNUIStyleSet UIStyleSetRoundView:self.godInfoMain];
 }
 
 -(void)OKTextClick
 {
-    NSDate *selected = [self.pickerView date];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy/MM/dd"];
-    NSString *destDateString = [dateFormatter stringFromDate:selected];
-    self.cField.text = destDateString;
-    [self.cField resignFirstResponder];
+    [self.bTimeTextField resignFirstResponder];
+    [self.eTimeTextField resignFirstResponder];
 }
 
--(void)viewDidAppear:(BOOL)animated
-{
+- (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    
-    self.mainView.frame = self.view.bounds;
-    self.mainView.contentSize = CGSizeMake(self.view.bounds.size.width, self.viewPrice.bottom+20);
+    self.tableView.frame = self.view.bounds;
+    if(!self.commitView)
+        self.commitView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 88)];
+    UIButton *purchase = [UIButton buttonWithType:UIButtonTypeCustom];
+    purchase.height = 40;
+    purchase.width = self.view.width - 36;
+    purchase.left = 18;
+    purchase.centerY = 44;
+    purchase.layer.cornerRadius = 5.0;
+    [purchase setTitle:NSLocalizedString(@"提交申请", nil) forState:UIControlStateNormal];
+    [purchase setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [purchase setBackgroundColor:[UIColor colorWithRed:245.0/255.0 green:72.0/255.0 blue:0.0 alpha:1.0]];
+    [purchase addTarget:self action:@selector(commit:) forControlEvents:UIControlEventTouchUpInside];
+    [self.commitView addSubview:purchase];
+    [self movewButton];
+}
+
+-(void)movewButton
+{
+    CGSize size = self.tableView.contentSize;
+    self.commitView.top = size.height;
+    [self.tableView addSubview:self.commitView];
+    size.height += self.commitView.height;
+    self.tableView.contentSize = size;
+    self.contentSizeHeight = size.height;
+}
+
+- (IBAction)addNewClick:(id)sender
+{
+    HNDeliverProposerItem* data = [[HNDeliverProposerItem alloc]init];
+    [self.model.proposerItems addObject:data];
+    [self.tableView reloadData];
+    [self movewButton];
 }
 
 
 - (void)updataDecorateInformation:(HNDecorateChoiceModel*)model
 {
-    self.roomNameLabel.text = model.roomName;
-    self.ownerphoneLabel.text = model.ownerphone;
-    self.ownernameLabel.text = model.ownername;
-    [self.ownerphoneLabel sizeToFit];
-    [self.ownernameLabel sizeToFit ];
-    self.ownerphoneLabel.right = self.view.width - 14;
-    self.ownernameLabel.right = self.ownerphoneLabel.left-5;
     self.model.declareId = model.declareId;
 }
 
@@ -234,7 +205,7 @@
     array = [NSArray arrayWithArray:jsonArray];
     
     NSArray *array2 = [[NSArray alloc]init];
-    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:self.model.declareId,@"declareId", self.productTextField.text,@"product",self.bTimeTextField.text,@"btime",self.eTimeTextField.text,@"etime",[array JSONString],@"proposer",[array2 JSONString],@"needItem",nil];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:self.model.declareId,@"declareId", self.model.product,@"product",self.model.bTime,@"btime",self.model.eTime,@"etime",[array JSONString],@"proposer",[array2 JSONString],@"needItem",nil];
     NSLog(@"%@",[dic JSONString]);
     
     return dic;
@@ -247,94 +218,367 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-#pragma mark UITableViewDelegate
-- (IBAction)addNewClick:(id)sender
-{
-    HNDeliverProposerItem* data = [[HNDeliverProposerItem alloc]init];
-    [self.model.proposerItems addObject:data];
-    [self.tableView reloadData ];
+
+#pragma mark - tableView
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 4+[self.model.proposerItems count];
 }
 
--(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 105;
-}
-
--(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return  [self.model.proposerItems count];
-}
-
-
-
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    static NSString *reuseIdentifier = @"DeliverApplyCell";
-    HNDeliveApplyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
-    if (!cell){
-        cell = [[HNDeliveApplyTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
-        
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    if (section==0) {
+        return 0;
     }
-    [cell setTextFieldDelegate:self proposerData:[self.model.proposerItems objectAtIndex:indexPath.row]];
+    else if (section==1) {
+        return 1;
+    }
+    else if (section<[self.model.proposerItems count]+2) {
+        return 1;
+    }
+    else if (section==2+[self.model.proposerItems count]) {
+        return 0;
+    }
+    else if (section==3+[self.model.proposerItems count]) {
+        return 1;
+    }
+    return 0;
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 55;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.width, 55)];
+    UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(10, 5, tableView.width - 20, 50)];
+    contentView.backgroundColor = [UIColor projectGreen];
+    if (section==0 || section== 2+[self.model.proposerItems count])
+    {
+        [HNUIStyleSet UIStyleSetRoundView:contentView];
+    }
+    
+    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:contentView.bounds byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii:CGSizeMake(7, 7)];
+    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+    maskLayer.frame = contentView.bounds;
+    maskLayer.path = maskPath.CGPath;
+    contentView.layer.mask = maskLayer;
+    
+    if (section==0) {
+        if(!self.choiceDecorateView)
+        {
+            self.choiceDecorateView = [[HNDecorateChoiceView alloc]initWithFrame:CGRectMake(12, 12, self.view.bounds.size.width-24, 30)];
+            self.choiceDecorateView.delegate = self;
+            self.choiceDecorateView.left = 5;
+            self.choiceDecorateView.centerY = contentView.height / 2;
+            
+        }
+        [contentView addSubview:self.choiceDecorateView];
+    }
+    else if (section==2+[self.model.proposerItems count]) {
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        
+        btn.titleLabel.font = [UIFont systemFontOfSize:15];
+        btn.width = contentView.width -10;
+        btn.height = contentView.height -5;
+        btn.titleLabel.textColor = [UIColor whiteColor];
+        btn.left = 5;
+        btn.centerY = contentView.height / 2;
+        [contentView addSubview:btn];
+        [btn setImage:[UIImage imageNamed:@"+号_24"] forState:UIControlStateNormal];
+        [btn setTitle:NSLocalizedString(@"新增送货安装人员", nil) forState:UIControlStateNormal];
+        [btn addTarget:self action:@selector(addNewClick:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    else
+    {
+        UILabel *label = [[UILabel alloc] init];
+        
+        label.font = [UIFont systemFontOfSize:15];
+        label.width = contentView.width -10;
+        label.height = contentView.height -5;
+        label.numberOfLines = 2;
+        label.textColor = [UIColor whiteColor];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.left = 5;
+        label.centerY = contentView.height / 2;
+        [contentView addSubview:label];
+        if (section==1) {
+            label.text = NSLocalizedString(@"货物信息", nil);
+        }
+        else if (section<[self.model.proposerItems count]+2) {
+            label.text = NSLocalizedString(@"施工人员信息", nil);
+        }
+        
+        else if (section==3+[self.model.proposerItems count]) {
+            label.text = NSLocalizedString(@"缴费项目", nil);
+        }
+    }
+    [view addSubview:contentView];
+    
+    return view;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 1)
+    {
+        return 100;
+    }
+    else if (indexPath.section<[self.model.proposerItems count]+2)
+    {
+        return 145;
+    }
+    return 30;
+    
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if(indexPath.section == 1)
+    {
+        static NSString *identy = @"deliverGodCell";
+        HNDeliverGodTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
+        if (!cell)
+        {
+            cell = [[HNDeliverGodTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identy];
+        }
+        cell.nameTextField.text = self.model.product;
+        cell.bTimeTextField.text = self.model.bTime;
+        cell.endTimeTextField.text = self.model.eTime;
+        cell.nameTextField.tag = 7;
+        cell.bTimeTextField.tag = 8;
+        cell.endTimeTextField.tag = 9;
+        cell.nameTextField.delegate = self;
+        cell.bTimeTextField.delegate = self;
+        cell.endTimeTextField.delegate = self;
+        cell.bTimeTextField.inputView = self.pickerView;
+        cell.endTimeTextField.inputView = self.pickerView;
+        cell.bTimeTextField.inputAccessoryView = self.topView;
+        cell.endTimeTextField.inputAccessoryView = self.topView;
+        self.bTimeTextField = cell.bTimeTextField;
+        self.eTimeTextField = cell.endTimeTextField;
+        self.productTextField = cell.nameTextField;
+        return cell;
+    }
+    else if (indexPath.section<[self.model.proposerItems count]+2)
+    {
+        static NSString *identy = @"newPersonCell";
+        HNPersonNewTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
+        if (!cell)
+        {
+            cell = [[HNPersonNewTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identy];
+        }
+        HNDeliverProposerItem *peroposer = (HNDeliverProposerItem *)[self.model.proposerItems objectAtIndex:(indexPath.section -2)];
+        cell.nameTextField.delegate = self;
+        cell.nameTextField.text = peroposer.name;
+        cell.nameTextField.tag = (indexPath.section-2)*10+1;
+        cell.phoneTextField.delegate = self;
+        cell.phoneTextField.text = peroposer.phone;
+        cell.phoneTextField.tag = (indexPath.section-2)*10+2;
+        cell.cardNOTextField.delegate = self;
+        cell.cardNOTextField.text = peroposer.IDcard;
+        cell.cardNOTextField.tag = (indexPath.section-2)*10+3;
+        [cell.iconPhoto addTarget:self action:@selector(imageUploadClick:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.cardPhoto addTarget:self action:@selector(imageUploadClick:) forControlEvents:UIControlEventTouchUpInside];
+        cell.iconPhoto.tag = (indexPath.section-2)*10+4;
+        cell.cardPhoto.tag = (indexPath.section-2)*10+5;
+        [cell reSetPohoto];
+        if (peroposer.imageIcon) {
+            [cell.iconPhoto setImage:peroposer.imageIcon forState:UIControlStateNormal];
+        }
+        if (peroposer.imageIDcard) {
+            [cell.cardPhoto setImage:peroposer.imageIDcard forState:UIControlStateNormal];
+        }
+        return cell;
+    }
+    static NSString *identy = @"DefaultApplyCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
+    if (!cell)
+    {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:identy];
+    }
     return cell;
+    
 }
 
-#pragma mark HNDeliveApplyAddNewTableViewCellDelegate
-- (void)willDidMoveScrollView:(UITextField*)textFiled
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self textFieldShouldBeginEditing:textFiled];
+    if ([cell respondsToSelector:@selector(tintColor)]) {
+        if (tableView == self.tableView) {
+            CGFloat cornerRadius = 7.f;
+            cell.backgroundColor = UIColor.clearColor;
+            CAShapeLayer *layer = [[CAShapeLayer alloc] init];
+            CGMutablePathRef pathRef = CGPathCreateMutable();
+            CGRect bounds = CGRectInset(cell.bounds, 10, 0);
+            BOOL addLine = NO;
+            if (indexPath.row == 0 && indexPath.row == [tableView numberOfRowsInSection:indexPath.section]-1) {
+                CGPathAddRoundedRect(pathRef, nil, bounds, cornerRadius, cornerRadius);
+                /*} else if (indexPath.row == 0) {
+                 CGPathMoveToPoint(pathRef, nil, CGRectGetMinX(bounds), CGRectGetMaxY(bounds));
+                 CGPathAddArcToPoint(pathRef, nil, CGRectGetMinX(bounds), CGRectGetMinY(bounds), CGRectGetMidX(bounds), CGRectGetMinY(bounds), cornerRadius);
+                 CGPathAddArcToPoint(pathRef, nil, CGRectGetMaxX(bounds), CGRectGetMinY(bounds), CGRectGetMaxX(bounds), CGRectGetMidY(bounds), cornerRadius);
+                 CGPathAddLineToPoint(pathRef, nil, CGRectGetMaxX(bounds), CGRectGetMaxY(bounds));
+                 addLine = YES;*/
+            } else if (indexPath.row == [tableView numberOfRowsInSection:indexPath.section]-1) {
+                CGPathMoveToPoint(pathRef, nil, CGRectGetMinX(bounds), CGRectGetMinY(bounds));
+                CGPathAddArcToPoint(pathRef, nil, CGRectGetMinX(bounds), CGRectGetMaxY(bounds), CGRectGetMidX(bounds), CGRectGetMaxY(bounds), cornerRadius);
+                CGPathAddArcToPoint(pathRef, nil, CGRectGetMaxX(bounds), CGRectGetMaxY(bounds), CGRectGetMaxX(bounds), CGRectGetMidY(bounds), cornerRadius);
+                CGPathAddLineToPoint(pathRef, nil, CGRectGetMaxX(bounds), CGRectGetMinY(bounds));
+            } else {
+                CGPathAddRect(pathRef, nil, bounds);
+                addLine = YES;
+            }
+            layer.path = pathRef;
+            CFRelease(pathRef);
+            layer.fillColor = [UIColor colorWithWhite:1.f alpha:0.8f].CGColor;
+            
+            if (addLine == YES) {
+                CALayer *lineLayer = [[CALayer alloc] init];
+                CGFloat lineHeight = (1.f / [UIScreen mainScreen].scale);
+                lineLayer.frame = CGRectMake(CGRectGetMinX(bounds)+10, bounds.size.height-lineHeight, bounds.size.width-10, lineHeight);
+                lineLayer.backgroundColor = tableView.separatorColor.CGColor;
+                [layer addSublayer:lineLayer];
+            }
+            UIView *testView = [[UIView alloc] initWithFrame:bounds];
+            
+            [testView.layer insertSublayer:layer atIndex:0];
+            testView.backgroundColor = UIColor.clearColor;
+            cell.backgroundView = testView;
+            
+        }
+    }
 }
 
-- (void)didMoveScrollView:(UITextField*)textFiled
-{
-    [self textFieldDidBeginEditing:textFiled];
-}
 
-- (void)finishMoveScrollView:(UITextField*)textFiled
-{
-    [self textFieldDidEndEditing:textFiled];
-}
 
 #pragma mark UITextFieldDelegate
 
-- (void)textFieldDidBeginEditing:(UITextField *)textField           // became first responder
+#pragma mark - UIImagePickerControllerDelegate
+
+- (void)imageUploadClick:(id)sender
 {
-    self.cField = textField;
-    self.bo = false;
-    NSLog(@"textFieldDidBeginEditing");
+    self.imageButton = sender;
+    [self presentViewController:self.imagePicker animated:YES completion:nil];
 }
 
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
+    UIImage *image=[info objectForKey:UIImagePickerControllerOriginalImage];
+    [self.imagePicker dismissViewControllerAnimated:YES completion:nil];
+    
+    CGFloat scaleSize = 0.1f;
+    UIGraphicsBeginImageContext(CGSizeMake(image.size.width * scaleSize, image.size.height * scaleSize));
+    [image drawInRect:CGRectMake(0, 0, image.size.width * scaleSize, image.size.height * scaleSize)];
+    UIImage *scaledImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = NSLocalizedString(@"Loading", nil);
+    [HNUploadImage UploadImage:scaledImage block:^(NSString *msg) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        if (msg) {
+            [self.imageButton setImage:image forState:UIControlStateNormal];
+            
+            NSInteger section = self.imageButton.tag/10;
+            HNDeliverProposerItem *data = [self.model.proposerItems objectAtIndex:section];
+            NSInteger row = self.imageButton.tag%10;
+            switch (row) {
+                case 4:
+                {
+                    data.imageIcon = image;
+                    data.Icon = msg;
+                }
+                    break;
+                case 5:
+                {
+                    data.imageIDcard = image;
+                    data.IDcardImg = msg;
+                }
+                    
+                default:
+                    break;
+            }
+            
+        }
+    }];
+    
+}
+
+#pragma mark textField
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField        // return NO to disallow editing.
 {
     self.bo = true;
     NSLog(@"textFieldShouldBeginEditing");
-    self.mainView.contentSize = CGSizeMake(self.view.bounds.size.width,self.viewPrice.bottom+20+216);//原始滑动距离增加键盘高度
-    CGPoint pt = [textField convertPoint:CGPointMake(0, 0) toView:self.mainView];//把当前的textField的坐标映射到scrollview上
-    if(self.mainView.contentOffset.y-pt.y+self.navigationController.navigationBar.height<=0)//判断最上面不要去滚动
-        [self.mainView setContentOffset:CGPointMake(0, pt.y-self.navigationController.navigationBar.height) animated:YES];//华东
+    self.tableView.contentSize = CGSizeMake(self.view.bounds.size.width,self.contentSizeHeight+216);//原始滑动距离增加键盘高度
+    CGPoint pt = [textField convertPoint:CGPointMake(0, 0) toView:self.tableView];//把当前的textField的坐标映射到scrollview上
+    if(self.tableView.contentOffset.y-pt.y<=0)//判断最上面不要去滚动
+        [self.tableView setContentOffset:CGPointMake(0, pt.y) animated:YES];//华东
     return YES;
 }
 
--(void)doKeyboard
+- (void)textFieldDidBeginEditing:(UITextField *)textField           // became first responder
 {
+    self.bo = false;
 }
 
--(void)textFieldDidEndEditing:(UITextField *)textField{
-    
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    if (textField.tag==8||textField.tag==9) {
+        NSDate *selected = [self.pickerView date];
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy/MM/dd"];
+        NSString *destDateString = [dateFormatter stringFromDate:selected];
+        textField.text = destDateString;
+        if (textField.tag==8) {
+            self.model.bTime = destDateString;
+        }
+        else
+        {
+            self.model.eTime = destDateString;
+        }
+        return;
+    }
+    else if(textField.tag == 7)
+    {
+        self.model.product = textField.text;
+        return;
+    }
+    NSInteger section = textField.tag/10;
+    HNDeliverProposerItem *data = [self.model.proposerItems objectAtIndex:section];
+    NSInteger row = textField.tag%10;
+    switch (row) {
+        case 1:
+        {
+            data.name = textField.text;
+        }
+            break;
+        case 2:
+        {
+            data.phone = textField.text;
+        }
+            break;
+        case 3:
+        {
+            data.IDcard = textField.text;
+        }
+            break;
+            
+        default:
+            break;
+    }
     if (!self.bo) {
         //开始动画
         [UIView animateWithDuration:0.30f animations:^{
-            self.mainView.frame = self.view.bounds;
-            self.mainView.contentSize = CGSizeMake(self.view.bounds.size.width, self.viewPrice.bottom+20);
+            self.tableView.contentSize = CGSizeMake(self.view.bounds.size.width, self.contentSizeHeight);
         }];
     }
 }
 
-- (BOOL)textFieldShouldClear:(UITextField *)textField               // called when clear button pressed. return NO to ignore (no notifications)
-{
-    return YES;
-}
-- (BOOL)textFieldShouldReturn:(UITextField *)textField              // called when 'return' key pressed. return NO to ignore.
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
+    return YES;
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
+{
     return YES;
 }
 

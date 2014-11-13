@@ -100,6 +100,13 @@
     // Initialization code
 }
 
+-(void)reSetPohoto
+{
+    [self.iconPhoto setImage:[UIImage imageNamed:@"添加照片_18"] forState:UIControlStateNormal];
+    [self.cardPhoto setImage:[UIImage imageNamed:@"selectphoto.png"] forState:UIControlStateNormal];
+    [self.cardPhoto setImage:[UIImage imageNamed:@"selectphotoclick.png"] forState:UIControlStateHighlighted];
+}
+
 
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

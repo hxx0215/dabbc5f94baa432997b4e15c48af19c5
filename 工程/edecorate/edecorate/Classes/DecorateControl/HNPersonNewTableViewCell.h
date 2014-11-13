@@ -20,4 +20,5 @@
 @property (nonatomic, strong)UILabel *nameLabel;
 @property (nonatomic, strong)UILabel *phoneLabel;
 @property (nonatomic, strong)UILabel *cardLabel;
+-(void)reSetPohoto;
 @end

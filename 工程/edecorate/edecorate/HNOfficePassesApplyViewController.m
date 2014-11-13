@@ -17,58 +17,23 @@
 #import "HNDecorateChoiceView.h"
 #import "HNUploadImage.h"
 
-@interface HNOfficePassesApplyViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate,HNDecorateChoiceViewDelegate>
-@property (nonatomic,strong) IBOutlet UIScrollView *mainView;
-
-@property (nonatomic,strong) IBOutlet UILabel *houseInfoMain;
-@property (nonatomic,strong) IBOutlet UILabel *decorationInfoMain;
-@property (nonatomic,strong) IBOutlet UILabel *payInfoMain;
-
-@property (nonatomic,strong) IBOutlet UILabel *houseInfoTitle;
-@property (nonatomic,strong) IBOutlet UILabel *houseInfo;
-@property (nonatomic,strong) IBOutlet UILabel *houseOnwer;
-@property (nonatomic,strong) IBOutlet UILabel *houseOnwerMobile;
-
-@property (nonatomic,strong) IBOutlet UILabel *decorationCompanyTitle;
-@property (nonatomic,strong) IBOutlet UILabel *decorationCompany;
-@property (nonatomic,strong) IBOutlet UILabel *decorationChargeMan;
-@property (nonatomic,strong) IBOutlet UILabel *decorationChargeMobile;
-
-@property (nonatomic,strong) IBOutlet UILabel *personsLabel;
-
-//@property (nonatomic,strong) IBOutlet UILabel *PasscardInfo;
-//@property (nonatomic,strong) IBOutlet UILabel *passcardsum;
-//@property (nonatomic,strong) IBOutlet UILabel *passcardManList;
-@property (nonatomic,strong) IBOutlet UITextField *passcardName;
-@property (nonatomic,strong) IBOutlet UITextField *passcardMobile;
-@property (nonatomic,strong) IBOutlet UITextField *passcardIdcardNo;
-
-@property (nonatomic,strong) IBOutlet UIButton *AddPassCardMan;
-
-@property (nonatomic,strong) IBOutlet UILabel *passcardPerFee;
-@property (nonatomic,strong) IBOutlet UILabel *passcardCount;
-@property (nonatomic,strong) IBOutlet UILabel *passcardSumFee;
-@property (nonatomic,strong) IBOutlet UILabel *depositPerFee;
-@property (nonatomic,strong) IBOutlet UILabel *depositCount;
-@property (nonatomic,strong) IBOutlet UILabel *depositSumFee;
-@property (nonatomic,strong) IBOutlet UILabel *sumMoney;
-
-@property (nonatomic,strong) IBOutlet UIView *payView;
+@interface HNOfficePassesApplyViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate,HNDecorateChoiceViewDelegate,UITextFieldDelegate>
 
 
-@property (nonatomic,strong) IBOutlet UIButton *uploadIdCardPic;
-@property (nonatomic,strong) IBOutlet UIButton *uploadPic;
-@property (nonatomic,strong) IBOutlet UIButton *submit;
+
 
 @property (nonatomic, strong) UIImagePickerController *imagePicker;
 @property (nonatomic, strong) HNPersonNewTableViewCell *addNewCell;
 
-@property (strong, nonatomic) IBOutlet HNDecorateChoiceView *choiceDecorateView;
+@property (strong, nonatomic) HNDecorateChoiceView *choiceDecorateView;
+
+@property (strong, nonatomic) UIButton * imageButton;
 
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) UIToolbar * topView;
 @property (strong,nonatomic) UIView *commitView;
 @property (nonatomic)CGFloat contentSizeHeight;
+@property (nonatomic) BOOL bo;
 @end
 
 @implementation HNOfficePassesApplyViewController
@@ -91,83 +56,8 @@
     
     HNPassProposerData *Proposer = [[HNPassProposerData alloc]init];
     [self.temporaryModel.proposerItems addObject:Proposer];
-    
-    
-    self.houseInfoMain.text = NSLocalizedString(@"House Information", nil) ;
-    
-    [HNUIStyleSet UIStyleSetRoundView:self.houseInfoMain];
-    [HNUIStyleSet UIStyleSetRoundView:self.decorationInfoMain];
-    [HNUIStyleSet UIStyleSetRoundView:self.payInfoMain];
-    
-    [self labelWithTitle:NSLocalizedString(@"House Information", nil) label:self.houseInfoTitle];
-    [self labelWithTitle:NSLocalizedString(@"Construction unit", nil) label:self.decorationCompanyTitle];
-    
-    [self labelWithTitle:self.temporaryModel.roomnumber label:self.houseInfo];
-    [self labelWithTitle:self.temporaryModel.ownername label:self.houseOnwer];
-    [self labelWithTitle:self.temporaryModel.ownerphone label:self.houseOnwerMobile];
-    self.houseOnwer.textColor = [UIColor colorWithRed:0xCC/255.0 green:0X91/255.0 blue:0X31/255.0 alpha:1];
-    self.houseOnwerMobile.textColor = [UIColor colorWithRed:0xCC/255.0 green:0X91/255.0 blue:0X31/255.0 alpha:1];
-    [self.houseOnwerMobile sizeToFit ];
-    [self.houseOnwer sizeToFit ];
-    self.houseOnwerMobile.right = self.view.width - 14;
-    self.houseOnwer.right = self.houseOnwerMobile.left-5;
-    
-    [self labelWithTitle:self.temporaryModel.shopname label:self.decorationCompany];
-    [self labelWithTitle:self.temporaryModel.principal label:self.decorationChargeMan];
-    [self labelWithTitle:self.temporaryModel.EnterprisePhone label:self.decorationChargeMobile];
-    self.decorationChargeMan.textColor = [UIColor colorWithRed:0xCC/255.0 green:0X91/255.0 blue:0X31/255.0 alpha:1];
-    self.decorationChargeMobile.textColor = [UIColor colorWithRed:0xCC/255.0 green:0X91/255.0 blue:0X31/255.0 alpha:1];
-    [self.decorationChargeMobile sizeToFit ];
-    [self.decorationChargeMan sizeToFit ];
-    self.decorationChargeMobile.right = self.view.width - 14;
-    self.decorationChargeMan.right = self.decorationChargeMobile.left-5;
-    
-    NSString *str = [[NSString alloc]init];
-    for (int i=0; i<[self.temporaryModel.proposerItems count];i++) {
-        HNPassProposerData* proposerData = self.temporaryModel.proposerItems[i];
-        str = [str stringByAppendingString:[NSString stringWithFormat:@"%@ ",proposerData.name]];
-    }
-    if ([self.temporaryModel.proposerItems count]) {
-        
-        //        [self labelWithTitle:proposerData.name label:self.decortionMan];
-        //        [self labelWithTitle:proposerData.phone label:self.decorationManMobile];
-        //        [self labelWithTitle:proposerData.IDcard  label:self.decorationIdCardNo];
-        //        [self labelWithTitle:proposerData.Icon label:self.decorationIdCardPic];
-        //        [self labelWithTitle:proposerData.isTransaction label:self.decorationPic];
-    }
-    self.personsLabel.text = str;
-    
-    int officepassPerFee=10,depositFee=30;
-    int officepassCount=1,depositCount=1;
-    [self labelWithTitle:[NSString stringWithFormat:@"%d",officepassPerFee] label:self.passcardPerFee];
-    [self labelWithTitle:[NSString stringWithFormat:@"%d",officepassCount] label:self.passcardCount];
-    [self labelWithTitle:[NSString stringWithFormat:@"%d",officepassCount*officepassPerFee] label:self.passcardSumFee];
-    [self labelWithTitle:[NSString stringWithFormat:@"%d",depositFee] label:self.depositPerFee];
-    [self labelWithTitle:[NSString stringWithFormat:@"%d",depositCount] label:self.depositCount];
-    [self labelWithTitle:[NSString stringWithFormat:@"%d",depositCount*depositFee] label:self.depositSumFee];
-    [self labelWithTitle:[NSString stringWithFormat:@"%d",depositCount*depositFee+officepassCount*officepassPerFee] label:self.sumMoney];
-    
-    
-    [self.uploadIdCardPic sizeToFit];
-    self.uploadIdCardPic.layer.borderWidth = 1.0;
-    self.uploadIdCardPic.layer.borderColor = [UIColor blackColor].CGColor;
-    [self.uploadPic sizeToFit];
-    self.uploadPic.layer.borderWidth = 1.0;
-    self.uploadPic.layer.borderColor = [UIColor blackColor].CGColor;
-    
-    
-    self.AddPassCardMan.layer.cornerRadius = 5.0;
-    
-    self.payView.top = self.personsLabel.bottom+24;
-    [self.AddPassCardMan setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    self.submit.layer.cornerRadius = 5.0;
-    [self.submit setTitle:NSLocalizedString(@"在线支付", nil) forState:UIControlStateNormal];
-    [self.submit setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.submit setBackgroundColor:[UIColor colorWithRed:245.0/255.0 green:72.0/255.0 blue:0.0 alpha:1.0]];
-    
-    self.choiceDecorateView = [[HNDecorateChoiceView alloc]initWithFrame:CGRectMake(12, 12, self.view.bounds.size.width-24, 30)];
-    [self.mainView addSubview:self.choiceDecorateView];
-    self.choiceDecorateView.delegate = self;
+ 
+
     
     UIImagePickerControllerSourceType sourceType=UIImagePickerControllerSourceTypePhotoLibrary;
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
@@ -183,14 +73,15 @@
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     self.tableView.frame = self.view.bounds;
-    self.commitView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 88)];
+    if(!self.commitView)
+        self.commitView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 88)];
     UIButton *purchase = [UIButton buttonWithType:UIButtonTypeCustom];
     purchase.height = 40;
     purchase.width = self.view.width - 36;
     purchase.left = 18;
     purchase.centerY = 44;
     purchase.layer.cornerRadius = 5.0;
-    [purchase setTitle:NSLocalizedString(@"提交申请", nil) forState:UIControlStateNormal];
+    [purchase setTitle:NSLocalizedString(@"在线支付", nil) forState:UIControlStateNormal];
     [purchase setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [purchase setBackgroundColor:[UIColor colorWithRed:245.0/255.0 green:72.0/255.0 blue:0.0 alpha:1.0]];
     [purchase addTarget:self action:@selector(checkOut:) forControlEvents:UIControlEventTouchUpInside];
@@ -210,13 +101,13 @@
 
 - (void)updataDecorateInformation:(HNDecorateChoiceModel*)model
 {
-    self.houseInfo.text = model.roomName;
-    self.houseOnwerMobile.text = model.ownerphone;
-    self.houseOnwer.text = model.ownername;
-    [self.houseOnwerMobile sizeToFit];
-    [self.houseOnwer sizeToFit ];
-    self.houseOnwerMobile.right = self.view.width - 14;
-    self.houseOnwer.right = self.houseOnwerMobile.left-5;
+//    self.houseInfo.text = model.roomName;
+//    self.houseOnwerMobile.text = model.ownerphone;
+//    self.houseOnwer.text = model.ownername;
+//    [self.houseOnwerMobile sizeToFit];
+//    [self.houseOnwer sizeToFit ];
+//    self.houseOnwerMobile.right = self.view.width - 14;
+//    self.houseOnwer.right = self.houseOnwerMobile.left-5;
     self.temporaryModel.declareId = model.declareId;
 }
 
@@ -231,8 +122,7 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    self.mainView.frame = [[UIScreen mainScreen] bounds];
-    self.mainView.contentSize = CGSizeMake(self.view.bounds.size.width, self.payView.bottom+20);
+    self.tableView.frame =self.view.bounds;
 }
 
 - (IBAction)addNewClick:(id)sender
@@ -333,24 +223,21 @@
 #pragma mark - tableView
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 4+[self.temporaryModel.proposerItems count];
+    return 3+[self.temporaryModel.proposerItems count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section==0) {
         return 0;
     }
-    else if (section==1) {
+    else if (section<[self.temporaryModel.proposerItems count]+1) {
         return 1;
     }
-    else if (section<[self.temporaryModel.proposerItems count]+2) {
-        return 1;
+    else if (section==1+[self.temporaryModel.proposerItems count]) {
+        return 0;
     }
     else if (section==2+[self.temporaryModel.proposerItems count]) {
         return 0;
-    }
-    else if (section==3+[self.temporaryModel.proposerItems count]) {
-        return 1;
     }
     return 0;
 }
@@ -364,7 +251,7 @@
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.width, 55)];
     UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(10, 5, tableView.width - 20, 50)];
     contentView.backgroundColor = [UIColor projectGreen];
-    if (section==0 || section== 2+[self.temporaryModel.proposerItems count])
+    if (section==0 || section>= 1+[self.temporaryModel.proposerItems count])
     {
         [HNUIStyleSet UIStyleSetRoundView:contentView];
     }
@@ -386,7 +273,7 @@
         }
         [contentView addSubview:self.choiceDecorateView];
     }
-    else if (section==2+[self.temporaryModel.proposerItems count]) {
+    else if (section==1+[self.temporaryModel.proposerItems count]) {
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         
         btn.titleLabel.font = [UIFont systemFontOfSize:15];
@@ -397,7 +284,7 @@
         btn.centerY = contentView.height / 2;
         [contentView addSubview:btn];
         [btn setImage:[UIImage imageNamed:@"+号_24"] forState:UIControlStateNormal];
-        [btn setTitle:NSLocalizedString(@"新增送货安装人员", nil) forState:UIControlStateNormal];
+        [btn setTitle:NSLocalizedString(@"新增施工人员", nil) forState:UIControlStateNormal];
         [btn addTarget:self action:@selector(addNewClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     else
@@ -413,14 +300,11 @@
         label.left = 5;
         label.centerY = contentView.height / 2;
         [contentView addSubview:label];
-        if (section==1) {
-            label.text = NSLocalizedString(@"货物信息", nil);
-        }
-        else if (section<[self.temporaryModel.proposerItems count]+2) {
+        if (section<[self.temporaryModel.proposerItems count]+1) {
             label.text = NSLocalizedString(@"施工人员信息", nil);
         }
         
-        else if (section==3+[self.temporaryModel.proposerItems count]) {
+        else if (section==2+[self.temporaryModel.proposerItems count]) {
             label.text = NSLocalizedString(@"缴费项目", nil);
         }
     }
@@ -439,13 +323,34 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if (indexPath.section<[self.temporaryModel.proposerItems count]+2)
+    if (indexPath.section<[self.temporaryModel.proposerItems count]+1)
     {
         static NSString *identy = @"newPersonCell";
         HNPersonNewTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
         if (!cell)
         {
             cell = [[HNPersonNewTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identy];
+        }
+        HNPassProposerData *peroposer = (HNPassProposerData *)[self.temporaryModel.proposerItems objectAtIndex:(indexPath.section -1)];
+        cell.nameTextField.delegate = self;
+        cell.nameTextField.text = peroposer.name;
+        cell.nameTextField.tag = (indexPath.section-1)*10+1;
+        cell.phoneTextField.delegate = self;
+        cell.phoneTextField.text = peroposer.phone;
+        cell.phoneTextField.tag = (indexPath.section-1)*10+2;
+        cell.cardNOTextField.delegate = self;
+        cell.cardNOTextField.text = peroposer.IDcard;
+        cell.cardNOTextField.tag = (indexPath.section-1)*10+3;
+        [cell.iconPhoto addTarget:self action:@selector(imageUploadClick:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.cardPhoto addTarget:self action:@selector(imageUploadClick:) forControlEvents:UIControlEventTouchUpInside];
+        cell.iconPhoto.tag = (indexPath.section-1)*10+4;
+        cell.cardPhoto.tag = (indexPath.section-1)*10+5;
+        [cell reSetPohoto];
+        if (peroposer.imageIcon) {
+            [cell.iconPhoto setImage:peroposer.imageIcon forState:UIControlStateNormal];
+        }
+        if (peroposer.imageIDcard) {
+            [cell.cardPhoto setImage:peroposer.imageIDcard forState:UIControlStateNormal];
         }
         return cell;
     }
@@ -510,13 +415,15 @@
 
  #pragma mark - UIImagePickerControllerDelegate
 
+- (void)imageUploadClick:(id)sender
+{
+    self.imageButton = sender;
+    [self presentViewController:self.imagePicker animated:YES completion:nil];
+}
+
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
     UIImage *image=[info objectForKey:UIImagePickerControllerOriginalImage];
     [self.imagePicker dismissViewControllerAnimated:YES completion:nil];
-    
-    if (!self.addNewCell) {
-        return;
-    }
     
     CGFloat scaleSize = 0.1f;
     UIGraphicsBeginImageContext(CGSizeMake(image.size.width * scaleSize, image.size.height * scaleSize));
@@ -527,10 +434,94 @@
     hud.labelText = NSLocalizedString(@"Loading", nil);
     [HNUploadImage UploadImage:scaledImage block:^(NSString *msg) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
-        //[self.addNewCell updateImage:msg whithImage:image];
-        self.addNewCell = nil;
+        if (msg) {
+            [self.imageButton setImage:image forState:UIControlStateNormal];
+            
+            NSInteger section = self.imageButton.tag/10;
+            HNPassProposerData *data = [self.temporaryModel.proposerItems objectAtIndex:section];
+            NSInteger row = self.imageButton.tag%10;
+            switch (row) {
+                case 4:
+                {
+                    data.imageIcon = image;
+                    data.Icon = msg;
+                }
+                    break;
+                case 5:
+                {
+                    data.imageIDcard = image;
+                    data.IDcardImg = msg;
+                }
+                    
+                default:
+                    break;
+            }
+
+        }
     }];
     
+}
+
+ #pragma mark textField
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField        // return NO to disallow editing.
+{
+    self.bo = true;
+    NSLog(@"textFieldShouldBeginEditing");
+    self.tableView.contentSize = CGSizeMake(self.view.bounds.size.width,self.contentSizeHeight+216);//原始滑动距离增加键盘高度
+    CGPoint pt = [textField convertPoint:CGPointMake(0, 0) toView:self.tableView];//把当前的textField的坐标映射到scrollview上
+    if(self.tableView.contentOffset.y-pt.y<=0)//判断最上面不要去滚动
+        [self.tableView setContentOffset:CGPointMake(0, pt.y) animated:YES];//华东
+    return YES;
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField           // became first responder
+{
+    self.bo = false;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    NSInteger section = textField.tag/10;
+    HNPassProposerData *data = [self.temporaryModel.proposerItems objectAtIndex:section];
+    NSInteger row = textField.tag%10;
+    switch (row) {
+        case 1:
+        {
+            data.name = textField.text;
+        }
+            break;
+        case 2:
+        {
+            data.phone = textField.text;
+        }
+            break;
+        case 3:
+        {
+            data.IDcard = textField.text;
+        }
+            break;
+            
+        default:
+            break;
+    }
+    if (!self.bo) {
+        //开始动画
+        [UIView animateWithDuration:0.30f animations:^{
+            self.tableView.contentSize = CGSizeMake(self.view.bounds.size.width, self.contentSizeHeight);
+        }];
+    }
+}
+
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
+{
+    return YES;
 }
 /*
  #pragma mark - Navigation

@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		3732B12C19CFC46E00ADF3F5 /* HNOfficePassesDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3732B12A19CFC46E00ADF3F5 /* HNOfficePassesDetailsViewController.m */; };
 		3732B13119D0182100ADF3F5 /* HNOfficePassesApplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3732B12F19D0182100ADF3F5 /* HNOfficePassesApplyViewController.m */; };
-		3732B13219D0182100ADF3F5 /* HNOfficePassesApplyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3732B13019D0182100ADF3F5 /* HNOfficePassesApplyViewController.xib */; };
 		37724D7719D8F69700A9B7EC /* HNCommentsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37724D7519D8F69700A9B7EC /* HNCommentsDetailViewController.m */; };
 		37724D7819D8F69700A9B7EC /* HNCommentsDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37724D7619D8F69700A9B7EC /* HNCommentsDetailViewController.xib */; };
 		37C8C3E019CC22470020458C /* HNOfficePassesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C8C3DF19CC22470020458C /* HNOfficePassesViewController.m */; };
@@ -157,6 +156,7 @@
 		D32700591A1243BE00C05CA5 /* HNTemporaryApplyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D32700581A1243BE00C05CA5 /* HNTemporaryApplyTableViewCell.m */; };
 		D327005D1A12645E00C05CA5 /* HNPersonDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D327005B1A12645E00C05CA5 /* HNPersonDetailTableViewCell.m */; };
 		D327005E1A12645E00C05CA5 /* HNPersonDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D327005C1A12645E00C05CA5 /* HNPersonDetailTableViewCell.xib */; };
+		D334365D1A1501E8004C3EB4 /* HNDeliverGodTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D334365C1A1501E8004C3EB4 /* HNDeliverGodTableViewCell.m */; };
 		D33549F719FEB3D300135800 /* HNPersonNewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D33549F519FEB3D300135800 /* HNPersonNewTableViewCell.m */; };
 		D33EEA5E19D69F3200D6F106 /* HNBusinessBKControlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D33EEA5C19D69F3200D6F106 /* HNBusinessBKControlViewController.m */; };
 		D33EEA5F19D69F3200D6F106 /* HNBusinessBKControlViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D33EEA5D19D69F3200D6F106 /* HNBusinessBKControlViewController.xib */; };
@@ -174,9 +174,6 @@
 		D351B9701A0FC38D0015D261 /* HNComplaintApplyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D351B96F1A0FC38D0015D261 /* HNComplaintApplyTableViewCell.m */; };
 		D35EE4DE19EECFC100D889A3 /* HNHttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = D35EE4DD19EECFC100D889A3 /* HNHttpRequest.m */; };
 		D38615EE1A03E9DC005B4093 /* HNDeliverApplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D38615EC1A03E9DC005B4093 /* HNDeliverApplyViewController.m */; };
-		D38615EF1A03E9DC005B4093 /* HNDeliverApplyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38615ED1A03E9DC005B4093 /* HNDeliverApplyViewController.xib */; };
-		D38615F31A03F80A005B4093 /* HNDeliveApplyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D38615F11A03F80A005B4093 /* HNDeliveApplyTableViewCell.m */; };
-		D38615F41A03F80A005B4093 /* HNDeliveApplyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38615F21A03F80A005B4093 /* HNDeliveApplyTableViewCell.xib */; };
 		D38DD5611A0BB1E100886933 /* HNMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D38DD55F1A0BB1E100886933 /* HNMessageTableViewCell.m */; };
 		D38DD5621A0BB1E100886933 /* HNMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38DD5601A0BB1E100886933 /* HNMessageTableViewCell.xib */; };
 		D38DD5651A0BC8DC00886933 /* HNUIStyleSet.m in Sources */ = {isa = PBXBuildFile; fileRef = D38DD5641A0BC8DC00886933 /* HNUIStyleSet.m */; };
@@ -230,7 +227,6 @@
 		3732B12A19CFC46E00ADF3F5 /* HNOfficePassesDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNOfficePassesDetailsViewController.m; sourceTree = "<group>"; };
 		3732B12E19D0182100ADF3F5 /* HNOfficePassesApplyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNOfficePassesApplyViewController.h; sourceTree = "<group>"; };
 		3732B12F19D0182100ADF3F5 /* HNOfficePassesApplyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNOfficePassesApplyViewController.m; sourceTree = "<group>"; };
-		3732B13019D0182100ADF3F5 /* HNOfficePassesApplyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HNOfficePassesApplyViewController.xib; sourceTree = "<group>"; };
 		37724D7419D8F69700A9B7EC /* HNCommentsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNCommentsDetailViewController.h; sourceTree = "<group>"; };
 		37724D7519D8F69700A9B7EC /* HNCommentsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNCommentsDetailViewController.m; sourceTree = "<group>"; };
 		37724D7619D8F69700A9B7EC /* HNCommentsDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HNCommentsDetailViewController.xib; sourceTree = "<group>"; };
@@ -482,6 +478,8 @@
 		D327005A1A12645E00C05CA5 /* HNPersonDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNPersonDetailTableViewCell.h; path = Classes/DecorateControl/HNPersonDetailTableViewCell.h; sourceTree = "<group>"; };
 		D327005B1A12645E00C05CA5 /* HNPersonDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNPersonDetailTableViewCell.m; path = Classes/DecorateControl/HNPersonDetailTableViewCell.m; sourceTree = "<group>"; };
 		D327005C1A12645E00C05CA5 /* HNPersonDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HNPersonDetailTableViewCell.xib; path = Classes/DecorateControl/HNPersonDetailTableViewCell.xib; sourceTree = "<group>"; };
+		D334365B1A1501E8004C3EB4 /* HNDeliverGodTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNDeliverGodTableViewCell.h; path = Classes/DecorateControl/HNDeliverGodTableViewCell.h; sourceTree = "<group>"; };
+		D334365C1A1501E8004C3EB4 /* HNDeliverGodTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNDeliverGodTableViewCell.m; path = Classes/DecorateControl/HNDeliverGodTableViewCell.m; sourceTree = "<group>"; };
 		D33549F419FEB3D300135800 /* HNPersonNewTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNPersonNewTableViewCell.h; path = Classes/DecorateControl/HNPersonNewTableViewCell.h; sourceTree = "<group>"; };
 		D33549F519FEB3D300135800 /* HNPersonNewTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNPersonNewTableViewCell.m; path = Classes/DecorateControl/HNPersonNewTableViewCell.m; sourceTree = "<group>"; };
 		D33EEA5B19D69F3200D6F106 /* HNBusinessBKControlViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNBusinessBKControlViewController.h; sourceTree = "<group>"; };
@@ -509,10 +507,6 @@
 		D35EE4DD19EECFC100D889A3 /* HNHttpRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNHttpRequest.m; sourceTree = "<group>"; };
 		D38615EB1A03E9DC005B4093 /* HNDeliverApplyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNDeliverApplyViewController.h; path = Classes/DecorateControl/HNDeliverApplyViewController.h; sourceTree = "<group>"; };
 		D38615EC1A03E9DC005B4093 /* HNDeliverApplyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNDeliverApplyViewController.m; path = Classes/DecorateControl/HNDeliverApplyViewController.m; sourceTree = "<group>"; };
-		D38615ED1A03E9DC005B4093 /* HNDeliverApplyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HNDeliverApplyViewController.xib; path = Classes/DecorateControl/HNDeliverApplyViewController.xib; sourceTree = "<group>"; };
-		D38615F01A03F80A005B4093 /* HNDeliveApplyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNDeliveApplyTableViewCell.h; path = Classes/DecorateControl/HNDeliveApplyTableViewCell.h; sourceTree = "<group>"; };
-		D38615F11A03F80A005B4093 /* HNDeliveApplyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNDeliveApplyTableViewCell.m; path = Classes/DecorateControl/HNDeliveApplyTableViewCell.m; sourceTree = "<group>"; };
-		D38615F21A03F80A005B4093 /* HNDeliveApplyTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HNDeliveApplyTableViewCell.xib; path = Classes/DecorateControl/HNDeliveApplyTableViewCell.xib; sourceTree = "<group>"; };
 		D38DD55E1A0BB1E100886933 /* HNMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNMessageTableViewCell.h; path = Classes/Message/HNMessageTableViewCell.h; sourceTree = "<group>"; };
 		D38DD55F1A0BB1E100886933 /* HNMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNMessageTableViewCell.m; path = Classes/Message/HNMessageTableViewCell.m; sourceTree = "<group>"; };
 		D38DD5601A0BB1E100886933 /* HNMessageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HNMessageTableViewCell.xib; path = Classes/Message/HNMessageTableViewCell.xib; sourceTree = "<group>"; };
@@ -935,7 +929,6 @@
 			children = (
 				3732B12E19D0182100ADF3F5 /* HNOfficePassesApplyViewController.h */,
 				3732B12F19D0182100ADF3F5 /* HNOfficePassesApplyViewController.m */,
-				3732B13019D0182100ADF3F5 /* HNOfficePassesApplyViewController.xib */,
 				3732B12919CFC46E00ADF3F5 /* HNOfficePassesDetailsViewController.h */,
 				3732B12A19CFC46E00ADF3F5 /* HNOfficePassesDetailsViewController.m */,
 				D327005A1A12645E00C05CA5 /* HNPersonDetailTableViewCell.h */,
@@ -964,10 +957,8 @@
 				D3F4B5A219E82C93001CA79C /* HNDeliverData.m */,
 				D38615EB1A03E9DC005B4093 /* HNDeliverApplyViewController.h */,
 				D38615EC1A03E9DC005B4093 /* HNDeliverApplyViewController.m */,
-				D38615ED1A03E9DC005B4093 /* HNDeliverApplyViewController.xib */,
-				D38615F01A03F80A005B4093 /* HNDeliveApplyTableViewCell.h */,
-				D38615F11A03F80A005B4093 /* HNDeliveApplyTableViewCell.m */,
-				D38615F21A03F80A005B4093 /* HNDeliveApplyTableViewCell.xib */,
+				D334365B1A1501E8004C3EB4 /* HNDeliverGodTableViewCell.h */,
+				D334365C1A1501E8004C3EB4 /* HNDeliverGodTableViewCell.m */,
 			);
 			name = Deliver;
 			sourceTree = "<group>";
@@ -1386,7 +1377,6 @@
 				B9DE560419C9C40B00280EC7 /* Localizable.strings in Resources */,
 				B95D15C519D9AE4B00689B4D /* HNEditPriceViewController.xib in Resources */,
 				D33EEAC719D70C8800D6F106 /* HNProfileChangeViewController.xib in Resources */,
-				D38615EF1A03E9DC005B4093 /* HNDeliverApplyViewController.xib in Resources */,
 				D33EEABD19D6FF5D00D6F106 /* city.plist in Resources */,
 				D327005E1A12645E00C05CA5 /* HNPersonDetailTableViewCell.xib in Resources */,
 				D3C07BCA19CDC8CA003EA5E4 /* HNComplaintDetailsViewController.xib in Resources */,
@@ -1407,7 +1397,6 @@
 				B93ED05E1A085B9F008B99B2 /* btn_scanner01@2x.png in Resources */,
 				B90C418019FA3365004EBC2B /* purchasecheck@2x.png in Resources */,
 				37F9D80519D8B5E1005CB18B /* HNCommentsTableViewCell.xib in Resources */,
-				D38615F41A03F80A005B4093 /* HNDeliveApplyTableViewCell.xib in Resources */,
 				B9B2BC1F19CF1F3000839AED /* CTAssetsPicker.xcassets in Resources */,
 				B97F705A1A10DD9D00029C6F /* HNNewReportViewController.xib in Resources */,
 				D38E009919D84EFC000F5263 /* HNReturnsTableViewCell.xib in Resources */,
@@ -1421,7 +1410,6 @@
 				D33EEAC219D7000E00D6F106 /* HNAreaPickerView.xib in Resources */,
 				B9D72D5519D840960011CF83 /* HNOrderTableViewCell.xib in Resources */,
 				B965864219F7E38E00EB4766 /* accept@2x.png in Resources */,
-				3732B13219D0182100ADF3F5 /* HNOfficePassesApplyViewController.xib in Resources */,
 				B9A09D7F1A0B9B4A00A88CD8 /* add@2x.png in Resources */,
 				B965863E19F6A56000EB4766 /* rememberit@2x.png in Resources */,
 				B91A3AD219D6F9D4000F3823 /* HNGoodsViewController.xib in Resources */,
@@ -1475,7 +1463,6 @@
 				D39662F519CD4E6300EE49B8 /* HNTemporaryDetailsViewController.m in Sources */,
 				B916F0AE19C8781D00A849C7 /* main.m in Sources */,
 				D327005D1A12645E00C05CA5 /* HNPersonDetailTableViewCell.m in Sources */,
-				D38615F31A03F80A005B4093 /* HNDeliveApplyTableViewCell.m in Sources */,
 				B9B2BC1A19CF1F3000839AED /* CTAssetItemViewController.m in Sources */,
 				D32700591A1243BE00C05CA5 /* HNTemporaryApplyTableViewCell.m in Sources */,
 				D3CD90F419CED1FA00E76AF4 /* HNCommbox.m in Sources */,
@@ -1533,6 +1520,7 @@
 				B97F70671A12294000029C6F /* HNNewReportTableViewCell.m in Sources */,
 				B965863619F693CF00EB4766 /* HNLoginView.m in Sources */,
 				37724D7719D8F69700A9B7EC /* HNCommentsDetailViewController.m in Sources */,
+				D334365D1A1501E8004C3EB4 /* HNDeliverGodTableViewCell.m in Sources */,
 				B9E0660919DAED6100893DBD /* HNDeliverGoodsViewController.m in Sources */,
 				D3C07BC419CDC8A0003EA5E4 /* HNComplaintApplyViewController.m in Sources */,
 				B965E76019D04955004CD201 /* HNDeliverViewController.m in Sources */,
