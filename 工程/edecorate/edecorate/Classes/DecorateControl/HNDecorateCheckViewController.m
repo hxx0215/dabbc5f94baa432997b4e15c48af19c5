@@ -32,6 +32,7 @@
 @property (nonatomic, strong)NSMutableArray *checkList;
 @property (nonatomic, strong)NSDictionary *stageMap;
 @property (nonatomic, strong)UIBarButtonItem *createButton;
+@property (nonatomic, assign)BOOL firstLoad;
 @end
 
 @implementation HNDecorateCheckViewController
@@ -56,6 +57,7 @@
     self.checkList = [[NSMutableArray alloc] init];
     self.stageMap = @{@"-1": NSLocalizedString(@"验收不通过", nil),@"0": NSLocalizedString(@"等待验收", nil), @"1": NSLocalizedString(@"验收通过", nil)};
     [self initNaviButton];
+    self.firstLoad = YES;
     
 //    HNCheckModel *model = [[HNCheckModel alloc] init];
 //    model.roomName =@"小区名房间号";
@@ -75,10 +77,14 @@
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.labelText = NSLocalizedString(@"Loading", nil);
+    
     self.cTableView.frame = self.view.bounds;
-    [self refreshData];
+    if (self.firstLoad){
+        MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.labelText = NSLocalizedString(@"Loading", nil);
+        [self refreshData];
+        self.firstLoad = NO;
+    }
 }
 
 - (void)didReceiveMemoryWarning {
