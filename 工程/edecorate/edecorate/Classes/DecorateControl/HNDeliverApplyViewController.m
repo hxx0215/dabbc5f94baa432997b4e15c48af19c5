@@ -18,7 +18,7 @@
 #import "HNUploadImage.h"
 #import "HNDeliverGodTableViewCell.h"
 
-@interface HNDeliverApplyViewController ()<UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate,HNDecorateChoiceViewDelegate,UITextFieldDelegate>
+@interface HNDeliverApplyViewController ()<UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate,HNDecorateChoiceViewDelegate,UITextFieldDelegate,UIImagePickerControllerDelegate>
 @property bool bo;
 @property (strong, nonatomic) HNDecorateChoiceView *choiceDecorateView;
 
@@ -76,6 +76,15 @@
     UIBarButtonItem * doneButton = [[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(OKTextClick)];
     NSArray * buttonsArray = [NSArray arrayWithObjects:btnSpace,doneButton,nil];
     [self.topView setItems:buttonsArray];
+    
+    UIImagePickerControllerSourceType sourceType=UIImagePickerControllerSourceTypePhotoLibrary;
+    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        sourceType=UIImagePickerControllerSourceTypePhotoLibrary;
+    }
+    self.imagePicker = [[UIImagePickerController alloc] init];
+    self.imagePicker.delegate =self;
+    self.imagePicker.sourceType = sourceType;
+    self.imagePicker.allowsEditing = NO;
     
 }
 

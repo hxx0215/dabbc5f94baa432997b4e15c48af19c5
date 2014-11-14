@@ -10,7 +10,7 @@
 #import "UIView+AHKit.h"
 #import "HNPersonDetailTableViewCell.h"
 
-@interface HNDeliverDetailViewController ()<UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource>
+@interface HNDeliverDetailViewController ()<UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,UINavigationControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSArray *titleArray1;
@@ -40,7 +40,6 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     UINib *nib = [UINib nibWithNibName:NSStringFromClass([HNPersonDetailTableViewCell class]) bundle:nil];
     [self.tableView registerNib:nib forCellReuseIdentifier:@"PersonDetailCell"];
-    
     [self.view addSubview:self.tableView];
     
     self.titleArray1 = [[NSArray alloc] initWithObjects:NSLocalizedString(@"Owners", nil),NSLocalizedString(@"Phone number", nil),NSLocalizedString(@"Construction unit", nil),NSLocalizedString(@"Person in charge of construction", nil),NSLocalizedString(@"Phone number", nil),nil];

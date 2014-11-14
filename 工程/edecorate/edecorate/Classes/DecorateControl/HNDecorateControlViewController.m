@@ -16,6 +16,7 @@
 #import "HNRefundTableViewController.h"
 #import "HNOfficePassesApplyViewController.h"
 #import "HNDeliverViewController.h"
+#import "HNArchivesViewController.h"
 
 
 /*
@@ -48,6 +49,7 @@
 @property (nonatomic, strong)UIButton *deliveryAndInstallation;
 @property (nonatomic, strong)UIButton *depositRefund;
 @property (nonatomic, strong)UIButton *IHaveAComplaint;
+@property (nonatomic, strong)UIButton *archives;
 @end
 
 
@@ -79,6 +81,8 @@
     self.IHaveAComplaint = [self createButtonWithTitle:NSLocalizedString(@"I have a complaint", nil) selector:@selector(IHaveAComplaintButton_Clicked:) row:2 coloum:0 image:[UIImage imageNamed:@"decorate_complain_button_normal"] imageClick:[UIImage imageNamed:@"decorate_complain_button_pressed"]];
     
     self.temporaryPower = [self createButtonWithTitle:NSLocalizedString(@"Temporary power", nil) selector:@selector(temporaryPowerButton_Clicked:) row:2 coloum:1 image:[UIImage imageNamed:@"decorate_electric_button_normal"] imageClick:[UIImage imageNamed:@"decorate_electric_button_pressed"]];
+    
+    self.archives = [self createButtonWithTitle:NSLocalizedString(@"Archives", nil) selector:@selector(archivesButton_Clicked:) row:2 coloum:2 image:[UIImage imageNamed:@"Archives_but"] imageClick:[UIImage imageNamed:@"Archives_but_click"]];
 }
 
 - (UIButton *)createButtonWithTitle:(NSString *)title selector:(SEL)selector row:(int)ro coloum:(int)col image:(UIImage* )image imageClick:(UIImage* )imageClick{
@@ -175,6 +179,13 @@
     complaintViewController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:complaintViewController animated:YES];
 }
+
+-(void)archivesButton_Clicked:(id)sender{
+    HNArchivesViewController *vc = [[HNArchivesViewController alloc] init];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
