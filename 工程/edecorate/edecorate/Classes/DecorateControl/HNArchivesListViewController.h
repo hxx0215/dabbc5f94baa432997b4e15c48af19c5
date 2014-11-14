@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface HNArchivesListViewController : UIViewController
-
+@property (nonatomic, strong)NSString *dID;
 @end

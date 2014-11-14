@@ -13,8 +13,8 @@
 #import "NSString+Crypt.h"
 #import "HNLoginData.h"
 #import "MJRefresh.h"
-#import "HNArchivesData.h"
 #import "HNDecorateData.h"
+#import "HNArchivesListViewController.h"
 
 @interface HNArchivesDecorateModel : NSObject
 @property (nonatomic, strong)NSString *roomName;
@@ -91,10 +91,11 @@
     
     NSInteger row = indexPath.row;
     HNArchivesDecorateModel* model = self.modelList[row];
-//    {
-//        HNComplaintDetailsViewController* dac = [[HNComplaintDetailsViewController alloc]initWithModel:model];
-//        [self.navigationController pushViewController:dac animated:YES];
-//    }
+    {
+        HNArchivesListViewController* dac = [[HNArchivesListViewController alloc]init];
+        dac.dID = model.declareId;
+        [self.navigationController pushViewController:dac animated:YES];
+    }
     
 }
 

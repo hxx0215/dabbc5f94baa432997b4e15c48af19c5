@@ -79,17 +79,13 @@
 
 - (void)setStatusByintValue:(NSInteger)status
 {
-    if (status ==0){
-        self.statusLabel.text = @"审核进度:未审核";
-        self.statusImage.image = [UIImage new];
-    }
-    else if (status ==1){
-        self.statusLabel.text = @"审核进度:已审核";
+    if (status ==1){
+        self.statusLabel.text = @"满意";
         self.statusImage.image = [UIImage imageNamed:@"accept.png"];
     }
     else
     {
-        self.statusLabel.text = @"审核进度:审核未通过";
+        self.statusLabel.text = @"不满意";
         self.statusImage.image = [UIImage imageNamed:@"unsubmit.png"];
         
     }
