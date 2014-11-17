@@ -20,8 +20,10 @@
         self.photo.right = self.contentView.width - 14;
         self.photo.centerY = self.contentView.height / 2;
         
-        self.title = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 200, 18)];;
+        self.title = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 90, 18)];;
         self.title.centerY = self.contentView.height / 2;
+        self.title.textAlignment = NSTextAlignmentRight;
+        self.title.font = [UIFont systemFontOfSize:13];
         self.title.numberOfLines = 0;
         self.title.lineBreakMode = NSLineBreakByWordWrapping;
         self.selectionStyle = UITableViewCellSelectionStyleNone;

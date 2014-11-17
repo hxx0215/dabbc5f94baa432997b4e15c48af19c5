@@ -60,6 +60,7 @@ typedef NS_ENUM(NSInteger, HNTemporaryStatus)
 @property (nonatomic, strong)HNTemporaryHouseInfoModel *huseInfo;
 @property (nonatomic)HNTemporaryStatus status;
 @property (nonatomic) HNTemporaryType type;
+@property (nonatomic) UIImage *image;
 @end
 
 @interface HNTemporaryFireModel : HNTemporaryModel

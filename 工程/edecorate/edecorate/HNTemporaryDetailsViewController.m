@@ -8,6 +8,7 @@
 
 #import "HNTemporaryDetailsViewController.h"
 #import "UIView+AHKit.h"
+#import "HNImageUploadTableViewCell.h"
 
 @interface HNTemporaryDetailsViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (strong, nonatomic) IBOutlet UIButton *noticeFireButton;
@@ -174,10 +175,34 @@
     return view;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section==1&&indexPath.row==8) {
+        return 55;
+    }
     return 40;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if (indexPath.section==1&&indexPath.row==8) {
+        static NSString *identy = @"imageCell";
+        HNImageUploadTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
+        if (!cell)
+        {
+            cell = [[HNImageUploadTableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:identy];
+            [cell.photo addTarget:self action:@selector(showPic:) forControlEvents:UIControlEventTouchUpInside];
+        }
+        UIImage *image = self.temporaryModel.image;
+        if (!image) {
+            image = [HNUIStyleSet imageWithLink:[self.dataArray2 objectAtIndex:indexPath.row]];
+            self.temporaryModel.image = image;
+        }
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.title.text = [self.titleArray2 objectAtIndex:indexPath.row];
+        [cell.photo setImage:image forState:UIControlStateNormal];
+        [cell.photo setImage:image forState:UIControlStateHighlighted];
+        return cell;
+    }
+    
     static NSString *identy = @"complaintDetailCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
     if (!cell)
@@ -248,6 +273,16 @@
             
         }
     }
+}
+
+
+
+- (void)showPic:(UIButton *)sender{
+    HNBrowseImageViewController *vc = [[HNBrowseImageViewController alloc] init];
+    vc.image = sender.currentImage;
+    [self presentViewController:vc animated:NO completion:^{
+        
+    }];
 }
 
 /*

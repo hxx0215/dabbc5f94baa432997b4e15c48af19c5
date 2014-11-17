@@ -506,7 +506,10 @@ bool bo = false;
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.width, 55)];
+    
     UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(10, 5, tableView.width - 20, 50)];
+    if(section==0)
+        [HNUIStyleSet UIStyleSetRoundView:contentView];
     contentView.backgroundColor = [UIColor projectGreen];
     UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:contentView.bounds byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii:CGSizeMake(7, 7)];
     CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];

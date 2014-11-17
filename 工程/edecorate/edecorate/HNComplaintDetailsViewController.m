@@ -175,6 +175,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
     static NSString *identy = @"complaintDetailCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
     if (!cell)
@@ -287,6 +288,7 @@
         }
     }
 }
+
 
 /*
 #pragma mark - Navigation
