@@ -30,14 +30,14 @@
     [super layoutSubviews];
     [self.name sizeToFit];
     self.name.top = 5;
-    self.name.left = 5;
+    self.name.left = 15;
     if ([self.type isEqualToString:@"1"]){
         self.hintLabel.text = NSLocalizedString(@"点击以输入内容", nil);
     }else{
         self.hintLabel.text = NSLocalizedString(@"点击以上传图片", nil);
     }
     [self.hintLabel sizeToFit];
-    self.hintLabel.left = 5;
+    self.hintLabel.left = 15;
     self.hintLabel.top = self.name.bottom + 5;
 
 }
