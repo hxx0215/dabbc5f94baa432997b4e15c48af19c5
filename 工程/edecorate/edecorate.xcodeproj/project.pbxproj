@@ -205,6 +205,7 @@
 		D3CD90FF19CF13DE00E76AF4 /* HNRefundApplyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3CD90FD19CF13DE00E76AF4 /* HNRefundApplyViewController.xib */; };
 		D3CD910319CF141C00E76AF4 /* HNRefundDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3CD910119CF141C00E76AF4 /* HNRefundDetailViewController.m */; };
 		D3CD910419CF141C00E76AF4 /* HNRefundDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3CD910219CF141C00E76AF4 /* HNRefundDetailViewController.xib */; };
+		D3DDF5221A1A31F2000DC300 /* HNImageData.m in Sources */ = {isa = PBXBuildFile; fileRef = D3DDF5211A1A31F2000DC300 /* HNImageData.m */; };
 		D3F4B5A319E82C93001CA79C /* HNDeliverData.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F4B5A219E82C93001CA79C /* HNDeliverData.m */; };
 		D3F4B5A619E83EF9001CA79C /* HNPassData.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F4B5A519E83EF9001CA79C /* HNPassData.m */; };
 		D3F90F1019CB13CA000C95E4 /* HNTemporaryFireViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F90F0F19CB13CA000C95E4 /* HNTemporaryFireViewController.m */; };
@@ -566,6 +567,8 @@
 		D3CD910019CF141C00E76AF4 /* HNRefundDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNRefundDetailViewController.h; sourceTree = "<group>"; };
 		D3CD910119CF141C00E76AF4 /* HNRefundDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNRefundDetailViewController.m; sourceTree = "<group>"; };
 		D3CD910219CF141C00E76AF4 /* HNRefundDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HNRefundDetailViewController.xib; sourceTree = "<group>"; };
+		D3DDF5201A1A31F2000DC300 /* HNImageData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNImageData.h; path = Classes/HNImageData.h; sourceTree = "<group>"; };
+		D3DDF5211A1A31F2000DC300 /* HNImageData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNImageData.m; path = Classes/HNImageData.m; sourceTree = "<group>"; };
 		D3F4B5A119E82C93001CA79C /* HNDeliverData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNDeliverData.h; path = Classes/DecorateControl/HNDeliverData.h; sourceTree = "<group>"; };
 		D3F4B5A219E82C93001CA79C /* HNDeliverData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNDeliverData.m; path = Classes/DecorateControl/HNDeliverData.m; sourceTree = "<group>"; };
 		D3F4B5A419E83EF9001CA79C /* HNPassData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNPassData.h; path = Classes/DecorateControl/HNPassData.h; sourceTree = "<group>"; };
@@ -1175,6 +1178,8 @@
 				B965863519F693CF00EB4766 /* HNLoginView.m */,
 				B91BFCFD19E2D11F00FD468F /* HNLoginData.h */,
 				B91BFCFE19E2D11F00FD468F /* HNLoginData.m */,
+				D3DDF5201A1A31F2000DC300 /* HNImageData.h */,
+				D3DDF5211A1A31F2000DC300 /* HNImageData.m */,
 				B94B7A6219C9BE73000112ED /* Message */,
 				B94B7A6119C9BE4E000112ED /* BusinessBackground */,
 				B94B7A6019C9BE25000112ED /* DecorateControl */,
@@ -1601,6 +1606,7 @@
 				37D2354519D1171400295572 /* HNOfficePassedTableViewCell.m in Sources */,
 				B90C417919FA2674004EBC2B /* HNPurchaseItem.m in Sources */,
 				D3F90F1319CB1474000C95E4 /* HNTemporaryTableViewCell.m in Sources */,
+				D3DDF5221A1A31F2000DC300 /* HNImageData.m in Sources */,
 				B9B2BC2119CF1F3000839AED /* CTAssetsPickerController.m in Sources */,
 				B94C854819C9CA770040D47E /* HNMessageModel.m in Sources */,
 				B9D3DECF19CD18C10020CDC9 /* HNDecorateCheckViewController.m in Sources */,

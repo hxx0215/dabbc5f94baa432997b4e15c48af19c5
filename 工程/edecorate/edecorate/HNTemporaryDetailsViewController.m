@@ -9,6 +9,7 @@
 #import "HNTemporaryDetailsViewController.h"
 #import "UIView+AHKit.h"
 #import "HNImageUploadTableViewCell.h"
+#import "HNImageData.h"
 
 @interface HNTemporaryDetailsViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (strong, nonatomic) IBOutlet UIButton *noticeFireButton;
@@ -193,7 +194,8 @@
         }
         UIImage *image = self.temporaryModel.image;
         if (!image) {
-            image = [HNUIStyleSet imageWithLink:[self.dataArray2 objectAtIndex:indexPath.row]];
+            
+            image = [[HNImageData shared]imageWithLink:[self.dataArray2 objectAtIndex:indexPath.row]];
             self.temporaryModel.image = image;
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;

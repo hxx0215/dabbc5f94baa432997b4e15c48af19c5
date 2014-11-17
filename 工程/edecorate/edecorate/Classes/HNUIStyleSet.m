@@ -17,11 +17,6 @@
     label.layer.masksToBounds = YES;
 }
 
-+(UIImage *)imageWithLink:(NSString *)link{
-    UIImage *image =[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[link addPort]]]];
-    return image? image : [UIImage imageNamed:@"selectphoto.png"];
-}
-
 +(UIColor *)projectGreen{
     return [UIColor colorWithRed:144.0/255.0 green:197.0/255.0 blue:31.0/255.0 alpha:1.0];
 }

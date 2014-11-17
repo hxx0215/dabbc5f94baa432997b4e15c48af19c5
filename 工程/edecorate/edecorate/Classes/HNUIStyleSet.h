@@ -12,5 +12,4 @@
 +(void)UIStyleSetRoundView:(UIView*)label;
 +(UIColor *)projectGreen;
 +(UIColor *)projectRed;
-+(UIImage *)imageWithLink:(NSString *)link;
 @end
