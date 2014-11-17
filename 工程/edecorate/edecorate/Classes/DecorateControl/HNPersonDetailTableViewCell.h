@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "HNPassData.h"
+#import "HNImageData.h"
 
 @interface HNPersonDetailTableViewCell : UITableViewCell
 @property (nonatomic, strong)UIButton *iconPhoto;

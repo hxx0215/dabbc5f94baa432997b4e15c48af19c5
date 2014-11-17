@@ -198,6 +198,15 @@
         cell.nameLabel.text = [NSString stringWithFormat:@"姓名：%@",proposer.name];
         cell.phoneLabel.text = [NSString stringWithFormat:@"联系电话：%@",proposer.phone];
         cell.cardLabel.text = [NSString stringWithFormat:@"身份证号码：%@",proposer.IDcard];
+        
+        [cell.iconPhoto addTarget:self action:@selector(showPic:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.cardPhoto addTarget:self action:@selector(showPic:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [cell.iconPhoto setImage:[[HNImageData shared]imageWithLink:proposer.Icon] forState:UIControlStateNormal];
+        [cell.iconPhoto setImage:[[HNImageData shared]imageWithLink:proposer.Icon] forState:UIControlStateHighlighted];
+        [cell.cardPhoto setImage:[[HNImageData shared]imageWithLink:proposer.IDcardImg] forState:UIControlStateNormal];
+        [cell.cardPhoto setImage:[[HNImageData shared]imageWithLink:proposer.IDcardImg] forState:UIControlStateHighlighted];
+        
         return cell;
     }
     else
@@ -265,6 +274,14 @@
             
         }
     }
+}
+
+- (void)showPic:(UIButton *)sender{
+    HNBrowseImageViewController *vc = [[HNBrowseImageViewController alloc] init];
+    vc.image = sender.currentImage;
+    [self presentViewController:vc animated:NO completion:^{
+        
+    }];
 }
 
 

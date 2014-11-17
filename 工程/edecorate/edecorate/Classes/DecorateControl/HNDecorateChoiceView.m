@@ -12,6 +12,9 @@
 #import "NSString+Crypt.h"
 #import "HNLoginData.h"
 
+@implementation HNDecoratePayModel
+@end
+
 @implementation HNDecorateChoiceModel
 @end
 
@@ -19,7 +22,6 @@
 @property (nonatomic, strong) UITextField* textFiled;
 @property (nonatomic, strong) UIButton* button;
 @property (strong, nonatomic) UIPickerView *selectPicker;
-@property (strong, nonatomic) HNDecorateChoiceModel *currentModel;
 @end
 
 @implementation HNDecorateChoiceView
@@ -28,7 +30,7 @@
 -(id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-    self.updataDecorateInformation = TRUE;
+    self.updataDecorateInformation = FALSE;
     UIImage* image = [UIImage imageNamed:@"down_box_triangle.png"];
     self.button = [UIButton buttonWithType:UIButtonTypeCustom];
     self.button.frame = CGRectMake(self.width-image.size.width-10, (self.height-image.size.height)/2.0, image.size.width, image.size.height);
@@ -64,6 +66,8 @@
     [[HNDecorateData shared] loadingDecorateData:[HNLoginData shared].mshopid block:^(NSURLResponse *response, NSData *data, NSError *connectionError){
         [self performSelectorOnMainThread:@selector(doDecorateData:) withObject:data waitUntilDone:YES];
     }];
+    
+    self.payType = KHNPayTypeNo;
     
     return self;
 }
@@ -140,8 +144,8 @@
 
 -(void)textFieldDidEndEditing:(UITextField *)textField{
     NSInteger row = [self.selectPicker selectedRowInComponent:0];
-    HNDecorateChoiceModel *model = (HNDecorateChoiceModel*)[self.decorateList objectAtIndex:row];
-    self.textFiled.text = model.roomName;
+    self.model = (HNDecorateChoiceModel*)[self.decorateList objectAtIndex:row];
+    self.textFiled.text = self.model.roomName;
     
     
     if (!self.delegate) {
@@ -149,20 +153,20 @@
     }
     if(!self.updataDecorateInformation)
     {
-        [self.delegate updataDecorateInformation:model];
+        [self.delegate updataDecorateInformation:self.model];
         return;
     }
-    if (model.ownername) {
+    
+    if (self.model.ownername) {
         if ([self.delegate respondsToSelector:@selector(updataDecorateInformation:)])
         {
-            [self.delegate updataDecorateInformation:model];
+            [self.delegate updataDecorateInformation:self.model];
         }
         return;
     }
     MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.superview animated:YES];
     hud.labelText = NSLocalizedString(@"Loading", nil);
-    [[HNDecorateData shared] loadingDetail:[HNLoginData shared].mshopid declare:model.declareId block:^(NSURLResponse *response, NSData *data, NSError *connectionError){
-        self.currentModel = model;
+    [[HNDecorateData shared] loadingDetail:[HNLoginData shared].mshopid declare:self.model.declareId block:^(NSURLResponse *response, NSData *data, NSError *connectionError){
 //        [self performSelector:@selector(doLoadingDetail:) withObject:data afterDelay:YES];
         [self performSelectorOnMainThread:@selector(doLoadingDetail:) withObject:data waitUntilDone:YES];
     }];
@@ -170,22 +174,20 @@
 
 -(void)doLoadingDetail:(NSData *)data
 {
-    [MBProgressHUD hideHUDForView:self.superview animated:YES];
+    
     if (data)
     {
         NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
-        NSLog(@"%@",retJson);
+        //NSLog(@"%@",retJson);
         NSDictionary* dic = [retJson objectFromJSONString];
         NSInteger count = [[dic objectForKey:@"total"] integerValue];
         if (0!=count)
         {
             NSArray *dataArr = [dic objectForKey:@"data"];
             NSDictionary *dicData = [dataArr objectAtIndex:0];
-            self.currentModel.ownername = [dicData objectForKey:@"ownername"];
-            self.currentModel.ownerphone = [dicData objectForKey:@"ownerphone"];
-            
-            [self.delegate updataDecorateInformation:self.currentModel];
+            self.model.ownername = [dicData objectForKey:@"ownername"];
+            self.model.ownerphone = [dicData objectForKey:@"ownerphone"];
         }
         else
         {
@@ -197,8 +199,68 @@
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection Error", nil) message:NSLocalizedString(@"Please check your network.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
         [alert show];
     }
-    self.currentModel = nil;
     
+    
+    if (self.payType) {
+        NSMutableDictionary *sendDic = [[NSMutableDictionary alloc] init];
+        [sendDic setObject:[HNLoginData shared].mshopid forKey:@"mshopid"];
+        [sendDic setObject:self.model.declareId forKey:@"id"];
+        [sendDic setObject:[NSNumber numberWithInteger:(self.payType-1)]forKey:@"type"];
+        NSString *sendJson = [sendDic JSONString];
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+        request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"get.pay.info" Params:sendJson]];
+        NSString *contentType = @"text/html";
+        [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
+        [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
+            
+            [self performSelectorOnMainThread:@selector(doLoadingPay:) withObject:data waitUntilDone:YES];
+        }];
+    }
+    else
+    {
+        [MBProgressHUD hideHUDForView:self.superview animated:YES];
+        [self.delegate updataDecorateInformation:self.model];
+    }
+}
+
+-(void)doLoadingPay:(NSData *)data
+{
+    [MBProgressHUD hideHUDForView:self.superview animated:YES];
+    if (data)
+    {
+        NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
+        NSLog(@"%@",retJson);
+        NSDictionary* dic = [retJson objectFromJSONString];
+        NSInteger count = [[dic objectForKey:@"total"] integerValue];
+        if (0!=count)
+        {
+            HNDecoratePayModel *pay = [[HNDecoratePayModel alloc]init];
+            self.model.payModel = pay;
+            NSArray *dataArr = [dic objectForKey:@"data"];
+            NSDictionary *dicData = [dataArr objectAtIndex:0];
+            pay.partner = [dicData objectForKey:@"partner"];
+            pay.seller = [dicData objectForKey:@"seller"];
+            pay.out_trade_no = [dicData objectForKey:@"out_trade_no"];
+            pay.subject = [dicData objectForKey:@"subject"];
+            pay.body = [dicData objectForKey:@"body"];
+            pay.total_fee = [dicData objectForKey:@"total_fee"];
+            pay.notify_url = [dicData objectForKey:@"notify_url"];
+            pay.mysign = [dicData objectForKey:@"mysign"];
+            pay.privateKey = [dicData objectForKey:@"privateKey"];
+        }
+        else
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login Fail", nil) message:NSLocalizedString(@"Please input correct username and password", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+            [alert show];
+        }
+    }
+    else{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection Error", nil) message:NSLocalizedString(@"Please check your network.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+        [alert show];
+    }
+    
+    [self.delegate updataDecorateInformation:self.model];
 }
 
 /*

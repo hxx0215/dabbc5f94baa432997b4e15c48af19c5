@@ -192,12 +192,7 @@
             cell = [[HNImageUploadTableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:identy];
             [cell.photo addTarget:self action:@selector(showPic:) forControlEvents:UIControlEventTouchUpInside];
         }
-        UIImage *image = self.temporaryModel.image;
-        if (!image) {
-            
-            image = [[HNImageData shared]imageWithLink:[self.dataArray2 objectAtIndex:indexPath.row]];
-            self.temporaryModel.image = image;
-        }
+        UIImage *image = [[HNImageData shared]imageWithLink:[self.dataArray2 objectAtIndex:indexPath.row]];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.title.text = [self.titleArray2 objectAtIndex:indexPath.row];
         [cell.photo setImage:image forState:UIControlStateNormal];

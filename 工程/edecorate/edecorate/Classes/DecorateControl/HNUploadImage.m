@@ -9,8 +9,27 @@
 #import "HNUploadImage.h"
 
 @implementation HNUploadImage
+
++(UIImage*) OriginImage:(UIImage *)image scaleToSize:(CGSize)size
+{
+    UIGraphicsBeginImageContext(size);  //size 为CGSize类型，即你所需要的图片尺寸
+    
+    [image drawInRect:CGRectMake(0, 0, size.width, size.height)];
+    
+    UIImage* scaledImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    
+    return scaledImage;   //返回的就是已经改变的图片
+}
+
 +(void)UploadImage:(UIImage*)image block:(void (^)(NSString *msg))UploadComplete
 {
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    if (image.size.width> width) {
+        CGSize size = CGSizeMake(width, width/image.size.width*image.size.height);
+        image = [self OriginImage:image scaleToSize:size];
+    }
     
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:@"testImage.png",@"name",nil];
     NSString *jsonStr = [dic JSONString];

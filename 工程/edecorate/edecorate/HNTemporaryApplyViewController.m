@@ -579,8 +579,8 @@
             self.choiceDecorateView.delegate = self;
             self.choiceDecorateView.left = 5;
             self.choiceDecorateView.centerY = contentView.height / 2;
-            
         }
+        self.choiceDecorateView.updataDecorateInformation = YES;
         [contentView addSubview:self.choiceDecorateView];
     }else
     {

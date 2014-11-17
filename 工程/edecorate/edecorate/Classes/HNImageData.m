@@ -39,14 +39,9 @@
     else
     {
         image =[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[link addPort]]]];
-        if (image) {
-            [self.imageDict setObject:image forKey:link];
-            return image;
-        }
-        else
-        {
-            return [UIImage imageNamed:@"selectphoto.png"];
-        }
+        image = image? image : [UIImage imageNamed:@"selectphoto.png"];
+        [self.imageDict setObject:image forKey:link];
+        return image;
     }
 }
 @end
