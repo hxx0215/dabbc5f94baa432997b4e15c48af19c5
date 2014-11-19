@@ -12,8 +12,20 @@
 #import "HNNewCheckTableViewCell.h"
 #import "HNUploadImage.h"
 #import "MBProgressHUD.h"
+@interface HNSeprateCheckView : UIView
+@property (nonatomic, weak) UIView *hiddenWith;
+@property (nonatomic, weak) UIView *hiddenWith2;
+@end
 
-@interface HNNewCheckViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate>
+@implementation HNSeprateCheckView
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    self.hidden = YES;
+    self.hiddenWith.hidden = YES;
+    self.hiddenWith2.hidden = YES;
+}
+@end
+@interface HNNewCheckViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate,UIPickerViewDelegate,UIPickerViewDataSource>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArr;
@@ -22,6 +34,9 @@
 @property (nonatomic, strong) NSMutableArray *pickViewData;
 @property (nonatomic, assign) NSInteger curPickViewIndex;
 @property (nonatomic, assign) BOOL firstIn;
+@property (nonatomic, strong) UIPickerView *listPick;
+@property (nonatomic, strong) HNSeprateCheckView *sepView;
+@property (nonatomic, strong) UIButton *showPick;
 @end
 
 @implementation HNNewCheckViewController
@@ -38,8 +53,26 @@
     [self.view addSubview:self.tableView];
     self.pickViewData = [[NSMutableArray alloc] init];
     self.dataArr = [[NSMutableArray alloc] init];
-    [self loadList];
+    
     self.firstIn = YES;
+    [self initPickView];
+    [self loadList];
+}
+- (void)initPickView{
+    self.listPick = [[UIPickerView alloc] initWithFrame:CGRectMake(0, self.view.height - 216, self.view.width, 216)];
+    self.sepView = [[HNSeprateCheckView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height - 216)];
+    self.sepView.backgroundColor = [UIColor clearColor];
+    self.listPick.backgroundColor = [UIColor whiteColor];
+    self.listPick.showsSelectionIndicator = YES;
+    self.listPick.hidden = YES;
+    self.listPick.delegate = self;
+    self.listPick.dataSource = self;
+    self.sepView.hidden = YES;
+    self.sepView.hiddenWith = self.listPick;
+    [self.view addSubview:self.listPick];
+    [self.view addSubview:self.sepView];
+    self.showPick = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.showPick addTarget:self action:@selector(showPick:) forControlEvents:UIControlEventTouchUpInside];
 }
 - (void)loadList{
     [[HNDecorateData shared] loadingDecorateData:[HNLoginData shared].mshopid block:^(NSURLResponse *response, NSData *data, NSError *connectionError){
@@ -59,6 +92,7 @@
                     }
                 }
                 dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.showPick setTitle:[self.pickViewData[0] objectForKey:@"roomnumber"] forState:UIControlStateNormal];
                     self.curPickViewIndex = 0;
                     [self loadTableData:[self.pickViewData[0] objectForKey:@"declareId"]];
                 });
@@ -108,9 +142,13 @@
         self.firstIn = NO;
         if ([self.pickViewData count]>0){
             self.curPickViewIndex = 0;
+            [self.showPick setTitle:[self.pickViewData[0] objectForKey:@"roomnumber"] forState:UIControlStateNormal];
             [self loadTableData:[self.pickViewData[0] objectForKey:@"declareId"]];
         }
     }
+    self.listPick.bottom = self.view.height;
+    self.sepView.top = 0;
+    self.sepView.height = self.view.height - self.listPick.height;
 }
 
 - (void)showNoNet{
@@ -147,7 +185,13 @@
     [view addSubview:contentView];
     UILabel *label = [[UILabel alloc] init];
     if (section == 0)
-        label.text = [self.pickViewData[self.curPickViewIndex] objectForKey:@"roomnumber"];
+    {
+//        label.text = [self.pickViewData[self.curPickViewIndex] objectForKey:@"roomnumber"];
+        self.showPick.frame = contentView.bounds;
+        self.showPick.layer.cornerRadius = 7.0;
+        [contentView addSubview:self.showPick];
+        return view;
+    }
     else
     if (section == 1)
         label.text = NSLocalizedString(@"装修验收", nil);
@@ -286,5 +330,22 @@
             });
         }
     }];
+}
+#pragma mark - UIPickerView Delegate && DataSource
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
+    return 1;
+}
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
+    return [self.pickViewData count];
+}
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
+    return [self.pickViewData[row] objectForKey:@"roomnumber"];
+}
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
+}
+- (void)showPick:(UIButton *)sender{
+    [self.listPick reloadAllComponents];
+    self.listPick.hidden = NO;
+    self.sepView.hidden = NO;
 }
 @end
