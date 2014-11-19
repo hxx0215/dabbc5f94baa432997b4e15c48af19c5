@@ -25,7 +25,7 @@
     self.hiddenWith2.hidden = YES;
 }
 @end
-@interface HNNewCheckViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate,UIPickerViewDelegate,UIPickerViewDataSource>
+@interface HNNewCheckViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate,UIPickerViewDelegate,UIPickerViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArr;
@@ -37,6 +37,7 @@
 @property (nonatomic, strong) UIPickerView *listPick;
 @property (nonatomic, strong) HNSeprateCheckView *sepView;
 @property (nonatomic, strong) UIButton *showPick;
+@property (nonatomic, strong) NSMutableDictionary *imageSet;
 @end
 
 @implementation HNNewCheckViewController
@@ -53,7 +54,7 @@
     [self.view addSubview:self.tableView];
     self.pickViewData = [[NSMutableArray alloc] init];
     self.dataArr = [[NSMutableArray alloc] init];
-    
+    self.imageSet = [[NSMutableDictionary alloc] init];
     self.firstIn = YES;
     [self initPickView];
     [self loadList];
@@ -138,6 +139,9 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.tableView.frame = self.view.bounds;
+    self.listPick.bottom = self.view.height;
+    self.sepView.top = 0;
+    self.sepView.height = self.view.height - self.listPick.height;
     if (self.firstIn){
         self.firstIn = NO;
         if ([self.pickViewData count]>0){
@@ -146,9 +150,9 @@
             [self loadTableData:[self.pickViewData[0] objectForKey:@"declareId"]];
         }
     }
-    self.listPick.bottom = self.view.height;
-    self.sepView.top = 0;
-    self.sepView.height = self.view.height - self.listPick.height;
+    else{
+        [self.tableView reloadData];
+    }
 }
 
 - (void)showNoNet{
@@ -215,6 +219,12 @@
         return 2;
     return [[self.dataArr[section - 2] objectForKey:@"ItemBody"] count];
 }
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if ([self.imageSet objectForKey:indexPath])
+        return 84;
+    else
+    return 44;
+}
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *identify = @"newCheckCell";
     HNNewCheckTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identify];
@@ -226,6 +236,29 @@
         cell.name.text = [[self.dataArr[indexPath.section - 2] objectForKey:@"ItemBody"][indexPath.row] objectForKey:@"bodyname"];
         cell.type = [[self.dataArr[indexPath.section - 2] objectForKey:@"ItemBody"][indexPath.row] objectForKey:@"bodytype"];
         cell.itemId =[self.dataArr[indexPath.section - 2] objectForKey:@"itemId"];
+    }
+    else{
+        if (indexPath.row == 0){
+            cell.name.text = NSLocalizedString(@"施工方备注", nil);
+            cell.type = @"1";
+            
+        }
+        else{
+            cell.name.text = NSLocalizedString(@"施工方附件", nil);
+            cell.type = @"2";
+        }
+    }
+    if ([cell.type isEqualToString:@"2"])
+    {
+        cell.upload.tag = indexPath.section * 100 + indexPath.row;
+        [cell.upload addTarget:self action:@selector(uploadImg:) forControlEvents:UIControlEventTouchUpInside];
+        NSMutableArray *imgArr = [self.imageSet objectForKey:indexPath];
+        if (imgArr)
+        {
+            cell.del.hidden = NO;
+            cell.curImageView.hidden = NO;
+            cell.curImageView.image = imgArr[0];
+        }
     }
     return cell;
 }
@@ -311,26 +344,6 @@
     
 }
 
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
-    UIImage *image=[info objectForKey:UIImagePickerControllerOriginalImage];
-    
-    UIImage *scaledImage = [HNUploadImage ScaledImage:image scale:0.5];
-    MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.labelText = NSLocalizedString(@"Uploading", nil);
-    
-    [picker dismissViewControllerAnimated:YES completion:^{
-        
-    }];
-    [HNUploadImage UploadImage:scaledImage block:^(NSString *msg) {
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-        if (msg) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:msg delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
-                [alert show];
-            });
-        }
-    }];
-}
 #pragma mark - UIPickerView Delegate && DataSource
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
     return 1;
@@ -342,10 +355,54 @@
     return [self.pickViewData[row] objectForKey:@"roomnumber"];
 }
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
+    self.curPickViewIndex = row;
+    self.listPick.hidden = YES;
+    self.sepView.hidden = YES;
+    [self.showPick setTitle:[self.pickViewData[self.curPickViewIndex] objectForKey:@"roomnumber"] forState:UIControlStateNormal];
+    [self loadTableData:[self.pickViewData[row] objectForKey:@"declareId"]];
 }
+#pragma mark - UIImagePickController
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
+    UIImage *image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
+    NSMutableArray *imageArr = [self.imageSet objectForKey:self.curIndexPath];
+    if (!imageArr)
+        imageArr = [[NSMutableArray alloc] init];
+    [imageArr addObject:image];
+    [self.imageSet setObject:imageArr forKey:self.curIndexPath];
+    [picker dismissViewControllerAnimated:YES completion:^{
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.labelText = NSLocalizedString(@"上传中", nil);
+        CGFloat maxWH = 480;
+        CGFloat maxImg = MAX(image.size.width, image.size.height);
+        CGFloat scale = MIN(1, maxWH / maxImg);
+        UIImage *img = [HNUploadImage ScaledImage:image scale:scale];
+        [HNUploadImage UploadImage:img block:^(NSString *msg){
+            NSLog(@"%@",msg);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                hud.labelText = NSLocalizedString(@"上传成功", nil);
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                [self.tableView reloadData];
+            });
+        }];
+    }];
+}
+#pragma mark - ButtonActions
 - (void)showPick:(UIButton *)sender{
     [self.listPick reloadAllComponents];
     self.listPick.hidden = NO;
     self.sepView.hidden = NO;
+}
+- (void)uploadImg:(UIButton *)sender{
+    NSInteger section = sender.tag / 100;
+    NSInteger row = sender.tag % 100;
+    self.curIndexPath = [NSIndexPath indexPathForRow:row inSection:section];
+    
+    UIImagePickerController *pick = [[UIImagePickerController alloc] init];
+    pick.view.tag = sender.tag;
+    pick.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+    pick.delegate = self;
+    [self presentViewController:pick animated:YES completion:^{
+        
+    }];
 }
 @end
