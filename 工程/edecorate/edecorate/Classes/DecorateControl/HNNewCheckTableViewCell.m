@@ -47,6 +47,18 @@
         self.curImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 36, 36)];
         [self.contentView addSubview:self.curImageView];
         self.curImageView.hidden = YES;
+        
+        self.leftImg = [UIButton buttonWithType:UIButtonTypeCustom];
+        [self.leftImg setImage:[UIImage imageNamed:@"arrowBack.png"] forState:UIControlStateNormal];
+        [self.leftImg sizeToFit];
+        [self.contentView addSubview:self.leftImg];
+        self.leftImg.hidden = YES;
+        
+        self.rightImg = [UIButton buttonWithType:UIButtonTypeCustom];
+        [self.rightImg setImage:[UIImage imageNamed:@"add.png"] forState:UIControlStateNormal];
+        [self.rightImg sizeToFit];
+        [self.contentView addSubview:self.rightImg];
+        self.rightImg.hidden = YES;
     }
     return self;
 }
@@ -77,6 +89,10 @@
         self.del.centerY = 22;
         self.curImageView.centerX = self.contentView.width / 2;
         self.curImageView.top = 44;
+        self.leftImg.left = 15;
+        self.leftImg.centerY = self.curImageView.centerY;
+        self.rightImg.right = self.contentView.width - 20;
+        self.rightImg.centerY = self.leftImg.centerY;
     }
 }
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{

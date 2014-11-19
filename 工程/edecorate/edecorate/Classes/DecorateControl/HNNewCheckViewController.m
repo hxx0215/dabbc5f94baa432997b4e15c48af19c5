@@ -38,6 +38,7 @@
 @property (nonatomic, strong) HNSeprateCheckView *sepView;
 @property (nonatomic, strong) UIButton *showPick;
 @property (nonatomic, strong) NSMutableDictionary *imageSet;
+@property (strong, nonatomic) NSMutableDictionary *curImage;
 @end
 
 @implementation HNNewCheckViewController
@@ -55,6 +56,7 @@
     self.pickViewData = [[NSMutableArray alloc] init];
     self.dataArr = [[NSMutableArray alloc] init];
     self.imageSet = [[NSMutableDictionary alloc] init];
+    self.curImage = [[NSMutableDictionary alloc] init];
     self.firstIn = YES;
     [self initPickView];
     [self loadList];
@@ -105,6 +107,8 @@
 - (void)loadTableData:(NSString *)declareId{
     if (!declareId || [declareId isEqualToString:@""])
         return ;
+    [self.imageSet removeAllObjects];
+    [self.curImage removeAllObjects];
     NSDictionary *sendDic = @{@"mshopid": [HNLoginData shared].mshopid,@"declareid" : declareId};
     NSString *sendJson = [sendDic JSONString];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
@@ -220,7 +224,8 @@
     return [[self.dataArr[section - 2] objectForKey:@"ItemBody"] count];
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if ([self.imageSet objectForKey:indexPath])
+    NSIndexPath *key = [NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section];
+    if ([self.imageSet objectForKey:key])
         return 84;
     else
     return 44;
@@ -258,6 +263,14 @@
             cell.del.hidden = NO;
             cell.curImageView.hidden = NO;
             cell.curImageView.image = imgArr[0];
+            cell.leftImg.hidden = NO;
+            cell.rightImg.hidden = NO;
+        }
+        else{
+            cell.del.hidden = YES;
+            cell.curImageView.hidden = YES;
+            cell.leftImg.hidden = YES;
+            cell.rightImg.hidden = YES;
         }
     }
     return cell;
