@@ -151,6 +151,18 @@
 		B9E433681A06515E000E2CA9 /* HNNewCheckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9E433661A06515E000E2CA9 /* HNNewCheckViewController.m */; };
 		B9E433691A06515E000E2CA9 /* HNNewCheckViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9E433671A06515E000E2CA9 /* HNNewCheckViewController.xib */; };
 		B9EBC8491A0E4D79008523E2 /* HNBrowseImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9EBC8481A0E4D79008523E2 /* HNBrowseImageViewController.m */; };
+		D311A7901A1E41FD000E8A4F /* 订单管理@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D311A7841A1E41FD000E8A4F /* 订单管理@2x.png */; };
+		D311A7911A1E41FD000E8A4F /* 订单管理c@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D311A7851A1E41FD000E8A4F /* 订单管理c@2x.png */; };
+		D311A7921A1E41FD000E8A4F /* 评论留言@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D311A7861A1E41FD000E8A4F /* 评论留言@2x.png */; };
+		D311A7931A1E41FD000E8A4F /* 评论留言c@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D311A7871A1E41FD000E8A4F /* 评论留言c@2x.png */; };
+		D311A7941A1E41FD000E8A4F /* 退换货管理@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D311A7881A1E41FD000E8A4F /* 退换货管理@2x.png */; };
+		D311A7951A1E41FD000E8A4F /* 退换货管理c@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D311A7891A1E41FD000E8A4F /* 退换货管理c@2x.png */; };
+		D311A7961A1E41FD000E8A4F /* 我的商品@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D311A78A1A1E41FD000E8A4F /* 我的商品@2x.png */; };
+		D311A7971A1E41FD000E8A4F /* 我的商品c@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D311A78B1A1E41FD000E8A4F /* 我的商品c@2x.png */; };
+		D311A7981A1E41FD000E8A4F /* 我的资料@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D311A78C1A1E41FD000E8A4F /* 我的资料@2x.png */; };
+		D311A7991A1E41FD000E8A4F /* 我的资料c@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D311A78D1A1E41FD000E8A4F /* 我的资料c@2x.png */; };
+		D311A79A1A1E41FD000E8A4F /* 消费卷验证@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D311A78E1A1E41FD000E8A4F /* 消费卷验证@2x.png */; };
+		D311A79B1A1E41FD000E8A4F /* 消费卷验证c@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D311A78F1A1E41FD000E8A4F /* 消费卷验证c@2x.png */; };
 		D3201FAE1A0A640C00236B08 /* HNSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3201FAC1A0A640C00236B08 /* HNSettingViewController.m */; };
 		D3201FAF1A0A640C00236B08 /* HNSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3201FAD1A0A640C00236B08 /* HNSettingViewController.xib */; };
 		D32700591A1243BE00C05CA5 /* HNTemporaryApplyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D32700581A1243BE00C05CA5 /* HNTemporaryApplyTableViewCell.m */; };
@@ -159,7 +171,6 @@
 		D334365D1A1501E8004C3EB4 /* HNDeliverGodTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D334365C1A1501E8004C3EB4 /* HNDeliverGodTableViewCell.m */; };
 		D33549F719FEB3D300135800 /* HNPersonNewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D33549F519FEB3D300135800 /* HNPersonNewTableViewCell.m */; };
 		D33EEA5E19D69F3200D6F106 /* HNBusinessBKControlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D33EEA5C19D69F3200D6F106 /* HNBusinessBKControlViewController.m */; };
-		D33EEA5F19D69F3200D6F106 /* HNBusinessBKControlViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D33EEA5D19D69F3200D6F106 /* HNBusinessBKControlViewController.xib */; };
 		D33EEA6419D6C2B700D6F106 /* HNVolumeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D33EEA6219D6C2B700D6F106 /* HNVolumeViewController.m */; };
 		D33EEA6519D6C2B700D6F106 /* HNVolumeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D33EEA6319D6C2B700D6F106 /* HNVolumeViewController.xib */; };
 		D33EEA6A19D6D9E600D6F106 /* HNProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D33EEA6819D6D9E600D6F106 /* HNProfileViewController.m */; };
@@ -475,6 +486,18 @@
 		B9E433671A06515E000E2CA9 /* HNNewCheckViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HNNewCheckViewController.xib; path = Classes/DecorateControl/HNNewCheckViewController.xib; sourceTree = "<group>"; };
 		B9EBC8471A0E4D79008523E2 /* HNBrowseImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNBrowseImageViewController.h; path = Resources/HNBrowseImageViewController.h; sourceTree = "<group>"; };
 		B9EBC8481A0E4D79008523E2 /* HNBrowseImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNBrowseImageViewController.m; path = Resources/HNBrowseImageViewController.m; sourceTree = "<group>"; };
+		D311A7841A1E41FD000E8A4F /* 订单管理@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "订单管理@2x.png"; sourceTree = "<group>"; };
+		D311A7851A1E41FD000E8A4F /* 订单管理c@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "订单管理c@2x.png"; sourceTree = "<group>"; };
+		D311A7861A1E41FD000E8A4F /* 评论留言@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "评论留言@2x.png"; sourceTree = "<group>"; };
+		D311A7871A1E41FD000E8A4F /* 评论留言c@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "评论留言c@2x.png"; sourceTree = "<group>"; };
+		D311A7881A1E41FD000E8A4F /* 退换货管理@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "退换货管理@2x.png"; sourceTree = "<group>"; };
+		D311A7891A1E41FD000E8A4F /* 退换货管理c@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "退换货管理c@2x.png"; sourceTree = "<group>"; };
+		D311A78A1A1E41FD000E8A4F /* 我的商品@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "我的商品@2x.png"; sourceTree = "<group>"; };
+		D311A78B1A1E41FD000E8A4F /* 我的商品c@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "我的商品c@2x.png"; sourceTree = "<group>"; };
+		D311A78C1A1E41FD000E8A4F /* 我的资料@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "我的资料@2x.png"; sourceTree = "<group>"; };
+		D311A78D1A1E41FD000E8A4F /* 我的资料c@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "我的资料c@2x.png"; sourceTree = "<group>"; };
+		D311A78E1A1E41FD000E8A4F /* 消费卷验证@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "消费卷验证@2x.png"; sourceTree = "<group>"; };
+		D311A78F1A1E41FD000E8A4F /* 消费卷验证c@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "消费卷验证c@2x.png"; sourceTree = "<group>"; };
 		D3201FAB1A0A640C00236B08 /* HNSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNSettingViewController.h; path = Classes/Setting/HNSettingViewController.h; sourceTree = "<group>"; };
 		D3201FAC1A0A640C00236B08 /* HNSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNSettingViewController.m; path = Classes/Setting/HNSettingViewController.m; sourceTree = "<group>"; };
 		D3201FAD1A0A640C00236B08 /* HNSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HNSettingViewController.xib; path = Classes/Setting/HNSettingViewController.xib; sourceTree = "<group>"; };
@@ -489,7 +512,6 @@
 		D33549F519FEB3D300135800 /* HNPersonNewTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNPersonNewTableViewCell.m; path = Classes/DecorateControl/HNPersonNewTableViewCell.m; sourceTree = "<group>"; };
 		D33EEA5B19D69F3200D6F106 /* HNBusinessBKControlViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNBusinessBKControlViewController.h; sourceTree = "<group>"; };
 		D33EEA5C19D69F3200D6F106 /* HNBusinessBKControlViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNBusinessBKControlViewController.m; sourceTree = "<group>"; };
-		D33EEA5D19D69F3200D6F106 /* HNBusinessBKControlViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HNBusinessBKControlViewController.xib; sourceTree = "<group>"; };
 		D33EEA6119D6C2B700D6F106 /* HNVolumeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNVolumeViewController.h; sourceTree = "<group>"; };
 		D33EEA6219D6C2B700D6F106 /* HNVolumeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNVolumeViewController.m; sourceTree = "<group>"; };
 		D33EEA6319D6C2B700D6F106 /* HNVolumeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HNVolumeViewController.xib; sourceTree = "<group>"; };
@@ -825,7 +847,6 @@
 				B91A3AAE19D6E1B6000F3823 /* HNBusinessListViewController.m */,
 				D33EEA5B19D69F3200D6F106 /* HNBusinessBKControlViewController.h */,
 				D33EEA5C19D69F3200D6F106 /* HNBusinessBKControlViewController.m */,
-				D33EEA5D19D69F3200D6F106 /* HNBusinessBKControlViewController.xib */,
 				D33EEA7119D6F39500D6F106 /* HNBusinessBackgroundModel.h */,
 				D33EEA7219D6F39500D6F106 /* HNBusinessBackgroundModel.m */,
 			);
@@ -858,6 +879,7 @@
 		B965862B19F68CBD00EB4766 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				D311A7831A1E41D5000E8A4F /* BusinessIcon */,
 				B9A09D7B1A0B9B3400A88CD8 /* NavigationItem */,
 				D3201FB01A0A654900236B08 /* TabBar */,
 				B93ED05D1A085B9F008B99B2 /* btn_scanner01@2x.png */,
@@ -1209,6 +1231,25 @@
 			name = "Third Party";
 			sourceTree = "<group>";
 		};
+		D311A7831A1E41D5000E8A4F /* BusinessIcon */ = {
+			isa = PBXGroup;
+			children = (
+				D311A7841A1E41FD000E8A4F /* 订单管理@2x.png */,
+				D311A7851A1E41FD000E8A4F /* 订单管理c@2x.png */,
+				D311A7861A1E41FD000E8A4F /* 评论留言@2x.png */,
+				D311A7871A1E41FD000E8A4F /* 评论留言c@2x.png */,
+				D311A7881A1E41FD000E8A4F /* 退换货管理@2x.png */,
+				D311A7891A1E41FD000E8A4F /* 退换货管理c@2x.png */,
+				D311A78A1A1E41FD000E8A4F /* 我的商品@2x.png */,
+				D311A78B1A1E41FD000E8A4F /* 我的商品c@2x.png */,
+				D311A78C1A1E41FD000E8A4F /* 我的资料@2x.png */,
+				D311A78D1A1E41FD000E8A4F /* 我的资料c@2x.png */,
+				D311A78E1A1E41FD000E8A4F /* 消费卷验证@2x.png */,
+				D311A78F1A1E41FD000E8A4F /* 消费卷验证c@2x.png */,
+			);
+			name = BusinessIcon;
+			sourceTree = "<group>";
+		};
 		D3201FAA1A0A63D900236B08 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
@@ -1402,10 +1443,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D311A7931A1E41FD000E8A4F /* 评论留言c@2x.png in Resources */,
 				B9D72D5A19D846FC0011CF83 /* HNOrderViewController.xib in Resources */,
 				D33EEA6B19D6D9E600D6F106 /* HNProfileViewController.xib in Resources */,
 				D3201FAF1A0A640C00236B08 /* HNSettingViewController.xib in Resources */,
 				B90C418119FA3365004EBC2B /* purchasecheckbox@2x.png in Resources */,
+				D311A79B1A1E41FD000E8A4F /* 消费卷验证c@2x.png in Resources */,
 				D38E009119D84BE0000F5263 /* HNReimburseViewController.xib in Resources */,
 				B9DE560419C9C40B00280EC7 /* Localizable.strings in Resources */,
 				B95D15C519D9AE4B00689B4D /* HNEditPriceViewController.xib in Resources */,
@@ -1413,6 +1456,10 @@
 				D33EEABD19D6FF5D00D6F106 /* city.plist in Resources */,
 				D327005E1A12645E00C05CA5 /* HNPersonDetailTableViewCell.xib in Resources */,
 				D3C07BCA19CDC8CA003EA5E4 /* HNComplaintDetailsViewController.xib in Resources */,
+				D311A7911A1E41FD000E8A4F /* 订单管理c@2x.png in Resources */,
+				D311A7991A1E41FD000E8A4F /* 我的资料c@2x.png in Resources */,
+				D311A7951A1E41FD000E8A4F /* 退换货管理c@2x.png in Resources */,
+				D311A7941A1E41FD000E8A4F /* 退换货管理@2x.png in Resources */,
 				B9A09D821A0B9CA500A88CD8 /* arrowBack@2x.png in Resources */,
 				B9E0660A19DAED6100893DBD /* HNDeliverGoodsViewController.xib in Resources */,
 				B9A09D831A0B9CA500A88CD8 /* arrowBackClick@2x.png in Resources */,
@@ -1426,17 +1473,21 @@
 				D3CD910419CF141C00E76AF4 /* HNRefundDetailViewController.xib in Resources */,
 				B9C2B41F19FE8C6900C93D59 /* selectphoto@2x.png in Resources */,
 				B916F0BA19C8781D00A849C7 /* Images.xcassets in Resources */,
+				D311A7961A1E41FD000E8A4F /* 我的商品@2x.png in Resources */,
 				B9C2B42019FE8C6900C93D59 /* selectphotoclick@2x.png in Resources */,
 				B93ED05E1A085B9F008B99B2 /* btn_scanner01@2x.png in Resources */,
 				B90C418019FA3365004EBC2B /* purchasecheck@2x.png in Resources */,
+				D311A7981A1E41FD000E8A4F /* 我的资料@2x.png in Resources */,
 				37F9D80519D8B5E1005CB18B /* HNCommentsTableViewCell.xib in Resources */,
 				B9B2BC1F19CF1F3000839AED /* CTAssetsPicker.xcassets in Resources */,
 				B97F705A1A10DD9D00029C6F /* HNNewReportViewController.xib in Resources */,
+				D311A7921A1E41FD000E8A4F /* 评论留言@2x.png in Resources */,
+				D311A79A1A1E41FD000E8A4F /* 消费卷验证@2x.png in Resources */,
 				D38E009919D84EFC000F5263 /* HNReturnsTableViewCell.xib in Resources */,
 				B9E433611A063148000E2CA9 /* HNCheckViewController.xib in Resources */,
+				D311A7971A1E41FD000E8A4F /* 我的商品c@2x.png in Resources */,
 				B965863C19F6A4FC00EB4766 /* remember@2x.png in Resources */,
 				37724D7819D8F69700A9B7EC /* HNCommentsDetailViewController.xib in Resources */,
-				D33EEA5F19D69F3200D6F106 /* HNBusinessBKControlViewController.xib in Resources */,
 				D33EEA6519D6C2B700D6F106 /* HNVolumeViewController.xib in Resources */,
 				B965863819F69B7000EB4766 /* loginback@2x.png in Resources */,
 				B916F0AC19C8781D00A849C7 /* InfoPlist.strings in Resources */,
@@ -1446,6 +1497,7 @@
 				B9A09D7F1A0B9B4A00A88CD8 /* add@2x.png in Resources */,
 				B965863E19F6A56000EB4766 /* rememberit@2x.png in Resources */,
 				B91A3AD219D6F9D4000F3823 /* HNGoodsViewController.xib in Resources */,
+				D311A7901A1E41FD000E8A4F /* 订单管理@2x.png in Resources */,
 				B9D3DEDF19CD25430020CDC9 /* HNCheckDetailViewController.xib in Resources */,
 				D38DD5621A0BB1E100886933 /* HNMessageTableViewCell.xib in Resources */,
 				B916F0B519C8781D00A849C7 /* Main.storyboard in Resources */,
