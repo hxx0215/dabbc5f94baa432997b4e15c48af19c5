@@ -9,6 +9,7 @@
 #import "HNBusinessListViewController.h"
 #import "MJRefresh.h"
 #import "UIView+AHKit.h"
+#import "HNLoginData.h"
 
 #import "HNGoodsTableViewCell.h"
 #import "HNGoodsViewController.h"
@@ -27,12 +28,15 @@
 #import "HNOrderTableViewCell.h"
 #import "HNOrderViewController.h"
 
-@interface HNBusinessListViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface HNBusinessListViewController ()<UITableViewDelegate,UITableViewDataSource,HNGoodsCategoriesDelegate>
 @property (nonatomic, assign)HNBusinessType businessType;
+@property (nonatomic, assign)BOOL shouldRefresh;
 @property (nonatomic, strong)UITableView *tableView;
 @property (nonatomic, strong)NSMutableArray *businessList;
 @property (nonatomic, strong)UIView *headerView;
 @property (nonatomic, strong)UIBarButtonItem *filter;
+
+@property (nonatomic, strong)NSMutableDictionary *goodsSearchDic;
 @end
 
 static NSString *reuseId = @"businessCell";
@@ -42,6 +46,7 @@ static NSString *reuseId = @"businessCell";
     self = [super init];
     if (self){
         self.businessType = type;
+        self.shouldRefresh = YES;
     }
     return self;
 }
@@ -54,13 +59,11 @@ static NSString *reuseId = @"businessCell";
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];
     
+    self.businessList = [[NSMutableArray alloc] init];
     __weak typeof (self) wself = self;
     [self.tableView addHeaderWithCallback:^{
-        NSLog(@"下拉刷新中");
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 3ull * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-            typeof (self) sself = wself;
-            [sself.tableView headerEndRefreshing];
-        });
+        typeof (self) sself = wself;
+        [sself refreshList];
     }];
     self.tableView.headerRefreshingText = @"刷新中";
     
@@ -73,6 +76,10 @@ static NSString *reuseId = @"businessCell";
     [self loadCellWithType:self.businessType];
     [self initNavi];
 }
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [self.tableView headerBeginRefreshing];
+}
 - (void)initNavi{
     self.filter = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"筛选", nil) style:UIBarButtonItemStylePlain target:self action:@selector(filterData:)];
     self.navigationItem.rightBarButtonItem = self.filter;
@@ -83,6 +90,7 @@ static NSString *reuseId = @"businessCell";
         {
             UINib *nib = [UINib nibWithNibName:NSStringFromClass([HNGoodsTableViewCell class]) bundle:nil];
             [self.tableView registerNib:nib forCellReuseIdentifier:reuseId];
+            self.goodsSearchDic = [@{@"mshopid": [HNLoginData shared].mshopid , @"areaid":@"",@"goodsname":@"",@"classid":@"",@"goodstype":@"",@"ordertype":@"",@"imgwidth":@"100",@"imgheight":@"75",@"pagesize":@"",@"pageindex":@""}mutableCopy];
         }
             break;
         case kReturnGoods:
@@ -144,6 +152,7 @@ static NSString *reuseId = @"businessCell";
 
 #pragma mark UITableViewDelegate & UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return [self.businessList count];
     switch (self.businessType){
         case kReturnGoods:
             return 2;
@@ -161,6 +170,7 @@ static NSString *reuseId = @"businessCell";
     switch (self.businessType){
         case kGoods:{
             HNGoodsTableViewCell *tCell = [tableView dequeueReusableCellWithIdentifier:reuseId];
+            [tCell setContet:self.businessList[indexPath.row]];
             cell = tCell;
         }
             break;
@@ -230,7 +240,7 @@ static NSString *reuseId = @"businessCell";
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     switch (self.businessType){
         case kGoods:
-            return 80;
+            return 130;
             break;
         case kComment:
             return 120;
@@ -247,6 +257,87 @@ static NSString *reuseId = @"businessCell";
             break;
     }
 }
+#pragma mark - LoadDataFromNet
+- (void)refreshList{
+    switch (self.businessType) {
+        case kGoods:
+            [self loadDataWithDic:self.goodsSearchDic withMethod:@"get.goods.list"];
+            break;
+            
+        default:
+            break;
+    }
+}
+- (void)loadThumbnail{
+    switch (self.businessType) {
+        case kGoods:
+            [self loadThumbnailWithKey:@"pics"];
+            break;
+            
+        default:
+            break;
+    }
+}
+
+- (void)loadThumbnailWithKey:(NSString *)key{
+    for (int i=0;i<[self.businessList count];i++)
+    {
+        id obj = self.businessList[i];
+        UIImage *image = [self imageWithLink:[obj objectForKey:key]];
+        NSMutableDictionary *dic = [obj mutableCopy];
+        [dic setObject:image forKey:@"uiimage"];
+        [self.businessList replaceObjectAtIndex:i withObject:dic];
+    }
+}
+- (UIImage *)imageWithLink:(NSString *)link{
+    UIImage *image =[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[link addPort]]]];
+    return image? image : [UIImage imageNamed:@"selectphoto.png"];
+}
+- (void)loadDataWithDic:(NSMutableDictionary *)sendDic withMethod:(NSString *)method{
+    NSString *sendJson = [sendDic JSONString];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:method Params:sendJson]];
+    NSString *contentType = @"text/html";
+    [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView headerEndRefreshing];
+        });
+        if (data){
+            NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
+            NSDictionary *retDic = [retJson objectFromJSONString];
+            NSInteger count = [[retDic objectForKey:@"total"] integerValue];
+            if (0!=count){
+                [self.businessList removeAllObjects];
+                for (int i = 0; i< count; i++) {
+                    [self.businessList addObject:[[retDic objectForKey:@"data"] objectAtIndex:i]];
+                }
+                [self loadThumbnail];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.tableView reloadData];
+                });
+            }
+            else
+                [self showNoData];
+        }else
+            [self showNoNetwork];
+    }];
+}
+
+- (void)showNoNetwork{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection Error", nil) message:NSLocalizedString(@"Please check your network.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [alert show];
+    });
+    
+}
+- (void)showNoData{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"We don't get any data.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [alert show];
+    });
+}
 #pragma mark - actions
 - (void)filterData:(id)sender{
     
@@ -254,6 +345,12 @@ static NSString *reuseId = @"businessCell";
 - (void)goodsCategory:(id)sender{
     HNGoodsCategoriesViewController *vc = [[HNGoodsCategoriesViewController alloc] init];
     vc.headid = @"";
+    vc.root = self;
+    vc.goodsDelegate = self;
     [self.navigationController pushViewController:vc animated:YES];
+}
+#pragma mark - HNGoodsCategoryDelegate
+- (void)didSelectGoods:(NSString *)classid{
+    NSLog(@"%@",classid);
 }
 @end
