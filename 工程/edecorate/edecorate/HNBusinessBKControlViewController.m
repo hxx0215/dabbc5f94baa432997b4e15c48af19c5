@@ -116,24 +116,29 @@
 
 - (IBAction)merchandiseClicked:(id)sender {
     HNBusinessListViewController *merchandise = [[HNBusinessListViewController alloc] initWithType:kGoods];
+    merchandise.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:merchandise animated:YES];
 }
 - (IBAction)orderClicked:(id)sender {
     HNBusinessListViewController *order = [[HNBusinessListViewController alloc] initWithType:kOrder];
+    order.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:order animated:YES];
 }
 - (IBAction)returnsClicked:(id)sender {
     HNBusinessListViewController *comment=[[HNBusinessListViewController alloc] initWithType:kReturnGoods];
+    comment.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:comment animated:YES];
 
 }
 - (IBAction)commentsClicked:(id)sender {
     HNBusinessListViewController *comment=[[HNBusinessListViewController alloc] initWithType:kComment];
     //HNCommentsAndMessageViewController* comments=[[HNCommentsAndMessageViewController alloc] init];
+    comment.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:comment animated:YES];
 }
 - (IBAction)profileClicked:(id)sender{
     HNProfileViewController* pc = [[HNProfileViewController alloc]init];
+    pc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:pc animated:YES];
 }
 - (IBAction)volumeClicked:(id)sender {
