@@ -11,5 +11,5 @@
 @interface HNGoodsHeaderView : UIView
 @property (nonatomic, strong)UISearchBar *search;
 @property (nonatomic, strong)UIButton *categoryButton;
-@property (nonatomic, strong)UIButton *statusButton;
+//@property (nonatomic, strong)UIButton *statusButton;
 @end

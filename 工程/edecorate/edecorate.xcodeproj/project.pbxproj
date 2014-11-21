@@ -77,6 +77,7 @@
 		B965864619F9387700EB4766 /* HNConstructViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B965864519F9387700EB4766 /* HNConstructViewController.m */; };
 		B965E76019D04955004CD201 /* HNDeliverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B965E75F19D04955004CD201 /* HNDeliverViewController.m */; };
 		B965E76919D04CDA004CD201 /* HNDeliverDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B965E76719D04CDA004CD201 /* HNDeliverDetailViewController.m */; };
+		B979EDEE1A1F74A800DC22FB /* HNGoodsCategoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B979EDED1A1F74A800DC22FB /* HNGoodsCategoriesViewController.m */; };
 		B97F70591A10DD9D00029C6F /* HNNewReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B97F70571A10DD9D00029C6F /* HNNewReportViewController.m */; };
 		B97F705A1A10DD9D00029C6F /* HNNewReportViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B97F70581A10DD9D00029C6F /* HNNewReportViewController.xib */; };
 		B97F70671A12294000029C6F /* HNNewReportTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B97F70661A12294000029C6F /* HNNewReportTableViewCell.m */; };
@@ -350,6 +351,8 @@
 		B965E75F19D04955004CD201 /* HNDeliverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNDeliverViewController.m; path = Classes/DecorateControl/HNDeliverViewController.m; sourceTree = "<group>"; };
 		B965E76619D04CDA004CD201 /* HNDeliverDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNDeliverDetailViewController.h; path = Classes/DecorateControl/HNDeliverDetailViewController.h; sourceTree = "<group>"; };
 		B965E76719D04CDA004CD201 /* HNDeliverDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNDeliverDetailViewController.m; path = Classes/DecorateControl/HNDeliverDetailViewController.m; sourceTree = "<group>"; };
+		B979EDEC1A1F74A800DC22FB /* HNGoodsCategoriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNGoodsCategoriesViewController.h; path = Classes/BusinessBackground/HNGoodsCategoriesViewController.h; sourceTree = "<group>"; };
+		B979EDED1A1F74A800DC22FB /* HNGoodsCategoriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNGoodsCategoriesViewController.m; path = Classes/BusinessBackground/HNGoodsCategoriesViewController.m; sourceTree = "<group>"; };
 		B97F70561A10DD9D00029C6F /* HNNewReportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNNewReportViewController.h; path = Classes/DecorateControl/HNNewReportViewController.h; sourceTree = "<group>"; };
 		B97F70571A10DD9D00029C6F /* HNNewReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNNewReportViewController.m; path = Classes/DecorateControl/HNNewReportViewController.m; sourceTree = "<group>"; };
 		B97F70581A10DD9D00029C6F /* HNNewReportViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HNNewReportViewController.xib; path = Classes/DecorateControl/HNNewReportViewController.xib; sourceTree = "<group>"; };
@@ -772,6 +775,8 @@
 			children = (
 				B91A3AD319D703C5000F3823 /* HNGoodsHeaderView.h */,
 				B91A3AD419D703C5000F3823 /* HNGoodsHeaderView.m */,
+				B979EDEC1A1F74A800DC22FB /* HNGoodsCategoriesViewController.h */,
+				B979EDED1A1F74A800DC22FB /* HNGoodsCategoriesViewController.m */,
 				B91A3ACE19D6F9D4000F3823 /* HNGoodsViewController.h */,
 				B91A3ACF19D6F9D4000F3823 /* HNGoodsViewController.m */,
 				B91A3AD019D6F9D4000F3823 /* HNGoodsViewController.xib */,
@@ -1638,6 +1643,7 @@
 				D3FA3E381A1651EC00D98861 /* HNArchivesTableViewCell.m in Sources */,
 				B9B2BC1919CF1F3000839AED /* ALAssetsGroup+isEqual.m in Sources */,
 				D3FA3E351A164F4700D98861 /* HNArchivesViewController.m in Sources */,
+				B979EDEE1A1F74A800DC22FB /* HNGoodsCategoriesViewController.m in Sources */,
 				B9E0667219DCDCB100893DBD /* AFHTTPRequestOperationManager.m in Sources */,
 				B9B2BC2619CF1F3000839AED /* NSDateFormatter+timeIntervalFormatter.m in Sources */,
 				B91A3AC519D6E6E9000F3823 /* MJRefreshHeaderView.m in Sources */,

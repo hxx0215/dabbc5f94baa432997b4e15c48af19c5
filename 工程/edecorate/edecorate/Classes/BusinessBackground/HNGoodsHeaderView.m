@@ -12,14 +12,17 @@
 - (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self){
-        self.search = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, 44)];
-        self.categoryButton = [self createButtonWithTitle:NSLocalizedString(@"All Categories", nil)];
-        self.statusButton = [self createButtonWithTitle:NSLocalizedString(@"All Goods", nil)];
-        self.categoryButton.top = self.search.bottom;
-        self.statusButton.top = self.search.bottom;
-        self.statusButton.right = frame.size.width;
+        self.backgroundColor = [UIColor colorWithWhite:245.0/255.0 alpha:1.0];
+        self.search = [[UISearchBar alloc] initWithFrame:CGRectMake(100, 0, frame.size.width - 100, 44)];
+        self.search.layer.cornerRadius = 7.0;
+        self.categoryButton = [self createButtonWithTitle:NSLocalizedString(@"选择分类", nil)];
+        self.categoryButton.frame = CGRectMake(0, 0, 100, 44);
+        [self.categoryButton setTitleColor:[UIColor projectGreen] forState:UIControlStateNormal];
+//        self.statusButton = [self createButtonWithTitle:NSLocalizedString(@"All Goods", nil)];
+//        self.statusButton.top = self.search.bottom;
+//        self.statusButton.right = frame.size.width;
         [self addSubview:self.search];
-        [self.statusButton addTarget:self action:@selector(algoods:) forControlEvents:UIControlEventTouchUpInside];
+//        [self.statusButton addTarget:self action:@selector(algoods:) forControlEvents:UIControlEventTouchUpInside];
     }
     return self;
 }
@@ -31,7 +34,5 @@
     [self addSubview:btn];
     return btn;
 }
-- (void)algoods:(id)sender{
-    NSLog(@"ALL goods");
-}
+
 @end

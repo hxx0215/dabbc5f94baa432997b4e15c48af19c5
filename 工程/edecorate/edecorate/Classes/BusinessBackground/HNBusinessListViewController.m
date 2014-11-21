@@ -13,6 +13,7 @@
 #import "HNGoodsTableViewCell.h"
 #import "HNGoodsViewController.h"
 #import "HNGoodsHeaderView.h"
+#import "HNGoodsCategoriesViewController.h"
 
 #import "HNReturnsHeaderView.h"
 #import "HNReimburseViewController.h"
@@ -31,6 +32,7 @@
 @property (nonatomic, strong)UITableView *tableView;
 @property (nonatomic, strong)NSMutableArray *businessList;
 @property (nonatomic, strong)UIView *headerView;
+@property (nonatomic, strong)UIBarButtonItem *filter;
 @end
 
 static NSString *reuseId = @"businessCell";
@@ -69,6 +71,11 @@ static NSString *reuseId = @"businessCell";
     self.tableView.height -= self.headerView.height;
     
     [self loadCellWithType:self.businessType];
+    [self initNavi];
+}
+- (void)initNavi{
+    self.filter = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"筛选", nil) style:UIBarButtonItemStylePlain target:self action:@selector(filterData:)];
+    self.navigationItem.rightBarButtonItem = self.filter;
 }
 - (void)loadCellWithType:(HNBusinessType)type{
     switch (type){
@@ -104,8 +111,9 @@ static NSString *reuseId = @"businessCell";
     switch (type){
         case kGoods:
         {
-            self.headerView = [[HNGoodsHeaderView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 74)];
-            
+            HNGoodsHeaderView *view = [[HNGoodsHeaderView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 44)];
+            [view.categoryButton addTarget:self action:@selector(goodsCategory:) forControlEvents:UIControlEventTouchUpInside];
+            self.headerView = view;
         }
             break;
         case kReturnGoods:
@@ -238,5 +246,14 @@ static NSString *reuseId = @"businessCell";
             return 44;
             break;
     }
+}
+#pragma mark - actions
+- (void)filterData:(id)sender{
+    
+}
+- (void)goodsCategory:(id)sender{
+    HNGoodsCategoriesViewController *vc = [[HNGoodsCategoriesViewController alloc] init];
+    vc.headid = @"";
+    [self.navigationController pushViewController:vc animated:YES];
 }
 @end
