@@ -55,7 +55,6 @@
     self.view.backgroundColor = [UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1];
     
     self.merchandiseButton = [self createButtonWithTitle:NSLocalizedString(@"My merchandise", nil) selector:@selector(merchandiseClicked:) row:0 coloum:0 image:[UIImage imageNamed:@"我的商品"] imageClick:[UIImage imageNamed:@"我的商品c"]];
-    
     self.orderButton = [self createButtonWithTitle:NSLocalizedString(@"Order Management", nil) selector:@selector(orderClicked:) row:0 coloum:1 image:[UIImage imageNamed:@"订单管理"] imageClick:[UIImage imageNamed:@"订单管理c"]];
     self.returnsButton = [self createButtonWithTitle:NSLocalizedString(@"Returns Management", nil) selector:@selector(returnsClicked:) row:0 coloum:2 image:[UIImage imageNamed:@"退换货管理"] imageClick:[UIImage imageNamed:@"退换货管理c"]];
     self.commentsButton = [self createButtonWithTitle:NSLocalizedString(@"Comments", nil) selector:@selector(commentsClicked:) row:1 coloum:0 image:[UIImage imageNamed:@"评论留言"] imageClick:[UIImage imageNamed:@"评论留言c"]];
@@ -97,21 +96,7 @@
     return btn;
 }
 
-- (UIButton *)messageButtonWithTitle:(NSString *)title button:(UIButton*)btn numMessage:(NSInteger)num index:(NSInteger)colom
-{
-    NSString *str = [[NSString alloc]initWithFormat:@"%@\n%d",title,num];
-    [btn setTitle:str forState:UIControlStateNormal];
-    [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    btn.width = self.view.width/4;
-    btn.height = 50;
-    btn.left = self.view.width/4*colom;
-    btn.layer.borderWidth = 1.0;
-    btn.layer.borderColor = [UIColor blackColor].CGColor;
-    btn.titleLabel.textAlignment = NSTextAlignmentLeft;
-    btn.titleLabel.numberOfLines = 2;
-    //btn.font = [UIFont systemFontOfSize:12];
-    return btn;
-}
+
 
 
 - (IBAction)merchandiseClicked:(id)sender {
