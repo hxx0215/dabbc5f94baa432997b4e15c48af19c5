@@ -201,6 +201,8 @@ static NSString *reuseId = @"businessCell";
         case kGoods:
         {
             HNGoodsViewController *goods = [[HNGoodsViewController alloc] init];
+            NSString *goodsid = [NSString stringWithFormat:@"%@",self.businessList[indexPath.row][@"id"]];
+            goods.goodsid = goodsid;
             [self.navigationController pushViewController:goods animated:YES];
         }
             break;

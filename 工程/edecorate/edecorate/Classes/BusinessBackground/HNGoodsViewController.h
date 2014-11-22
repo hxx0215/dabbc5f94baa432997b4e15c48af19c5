@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface HNGoodsViewController : UIViewController
-
+@property (nonatomic, strong) NSString *goodsid;
 @end
