@@ -10,59 +10,45 @@
 #import "HNProfileChangeViewController.h"
 #import "UIView+AHKit.h"
 #import "HNBusinessBackgroundModel.h"
+#import "MBProgressHUD.h"
+#import "JSONKit.h"
+#import "HNLoginData.h"
+#import "HNProfileData.h"
 
-@interface HNProfileViewController ()
-@property (strong, nonatomic) IBOutlet UILabel *nameTitleLabel;
-@property (strong, nonatomic) IBOutlet UILabel *categoryTitleLabel;
-@property (strong, nonatomic) IBOutlet UILabel *addressTitleLabel;
-@property (strong, nonatomic) IBOutlet UILabel *shopkeeperTitleLabel;
-@property (strong, nonatomic) IBOutlet UILabel *phoneTitleLabel;
-@property (strong, nonatomic) IBOutlet UILabel *onlineServiceTitleLabel;
-@property (strong, nonatomic) IBOutlet UILabel *nameLabel;
-@property (strong, nonatomic) IBOutlet UILabel *categoryLabel;
-@property (strong, nonatomic) IBOutlet UILabel *addressLabel;
-@property (strong, nonatomic) IBOutlet UILabel *shopkeeperLabel;
-@property (strong, nonatomic) IBOutlet UILabel *phoneLabel;
-@property (strong, nonatomic) IBOutlet UILabel *onlineServiceLabel;
-
-@property (strong, nonatomic) IBOutlet UIButton *changeButton;
-
-@property (strong, nonatomic) HNBusinessBKProfileModel *model;
-
+@interface HNProfileViewController ()<UITableViewDataSource,UITableViewDelegate>
+@property (strong, nonatomic) HNProfileData *model;
+@property (nonatomic, strong) UITableView *tableView;
 @end
 
 @implementation HNProfileViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.view.backgroundColor = [UIColor whiteColor];
+    
+    self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    [self.view addSubview:self.tableView];
     // Do any additional setup after loading the view from its nib.
-    [self labelWithTitle:NSLocalizedString(@"Name", nil) label:self.nameTitleLabel];
-    [self labelWithTitle:NSLocalizedString(@"Category", nil) label:self.categoryTitleLabel];
-    [self labelWithTitle:NSLocalizedString(@"Address", nil) label:self.addressTitleLabel];
-    [self labelWithTitle:NSLocalizedString(@"Shopkeeper", nil) label:self.shopkeeperTitleLabel];
-    [self labelWithTitle:NSLocalizedString(@"Phone", nil) label:self.phoneTitleLabel];
-    [self labelWithTitle:NSLocalizedString(@"Online Service (QQ)", nil) label:self.onlineServiceTitleLabel];
+//    [self labelWithTitle:NSLocalizedString(@"Name", nil) label:self.nameTitleLabel];
+//    [self labelWithTitle:NSLocalizedString(@"Category", nil) label:self.categoryTitleLabel];
+//    [self labelWithTitle:NSLocalizedString(@"Address", nil) label:self.addressTitleLabel];
+//    [self labelWithTitle:NSLocalizedString(@"Shopkeeper", nil) label:self.shopkeeperTitleLabel];
+//    [self labelWithTitle:NSLocalizedString(@"Phone", nil) label:self.phoneTitleLabel];
+//    [self labelWithTitle:NSLocalizedString(@"Online Service (QQ)", nil) label:self.onlineServiceTitleLabel];
+    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"修改" style:UIBarButtonItemStyleDone target:self action:@selector(changButtonClick:)];
+    self.navigationItem.rightBarButtonItem = rightButton;
     
-    self.model = [[HNBusinessBKProfileModel alloc]init];
+    self.model = [[HNProfileData alloc]init];
 
-    
-    self.changeButton.layer.borderWidth = 1.0;
-    self.changeButton.layer.borderColor = [UIColor blackColor].CGColor;
-    [self.changeButton setTitle:NSLocalizedString(@"Change2", nil) forState:UIControlStateNormal];
 
     
 }
 
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [self labelWithTitle:self.model.name leftLabel:self.nameTitleLabel label:self.nameLabel];
-    [self labelWithTitle:self.model.category leftLabel:self.categoryTitleLabel label:self.categoryLabel];
-    [self labelWithTitle:self.model.address leftLabel:self.addressTitleLabel label:self.addressLabel];
-    [self labelWithTitle:self.model.shopkeeper leftLabel:self.shopkeeperTitleLabel label:self.shopkeeperLabel];
-    [self labelWithTitle:self.model.phone leftLabel:self.phoneTitleLabel label:self.phoneLabel];
-    [self labelWithTitle:self.model.onlineService leftLabel:self.onlineServiceTitleLabel label:self.onlineServiceLabel];
-}
 
 - (IBAction)changButtonClick:(id)sender {
     HNProfileChangeViewController *controller = [[HNProfileChangeViewController alloc] init];
@@ -75,29 +61,223 @@
         [self.navigationController.view setUserInteractionEnabled:YES];
     }];
 }
-
-- (void)labelWithTitle:(NSString *)title label:(UILabel*)lab
+#pragma mark - loadMyData
+-(void)loadMyData
 {
-    [lab setText:title];
-    [lab sizeToFit];
-    lab.font = [UIFont systemFontOfSize:12];
-    lab.numberOfLines = 2;
-    
-    lab.layer.borderColor = [UIColor blackColor].CGColor;
+    MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = NSLocalizedString(@"Loading", nil);
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    //HNLoginModel *model = [[HNLoginModel alloc] init];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[HNLoginData shared].uid,@"userid", nil];
+    NSString *jsonStr = [dic JSONString];
+    request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"get.user.details" Params:jsonStr]];
+    NSString *contentType = @"text/html";
+    [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
+        [self performSelectorOnMainThread:@selector(didloadMyData:) withObject:data waitUntilDone:YES];
+    }];
 }
 
-- (void)labelWithTitle:(NSString *)title leftLabel:(UILabel*)leftlab label:(UILabel*)lab
+- (void)didloadMyData:(NSData *)data
 {
-    [lab setText:title];
-    lab.width = self.view.width-leftlab.right;
-    [lab sizeToFit];
-    lab.font = [UIFont systemFontOfSize:12];
-    lab.numberOfLines = 2;
-    lab.left = leftlab.left+leftlab.width;
-    lab.top = leftlab.top;
-    lab.height = leftlab.height;
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     
-    lab.layer.borderColor = [UIColor blackColor].CGColor;
+    if (data)
+    {
+        NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
+        NSLog(@"%@",retJson);
+        NSDictionary* dic = [retJson objectFromJSONString];
+        NSNumber* total = [dic objectForKey:@"total"];
+        
+        if (total.intValue){//之后需要替换成status
+            NSArray* array = [dic objectForKey:@"data"];
+            [self.model updateData:[array objectAtIndex:0]];
+            [self.tableView reloadData];
+        }
+        else
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login Fail", nil) message:NSLocalizedString(@"Please input correct username and password", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+            [alert show];
+        }
+    }
+    else{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection Error", nil) message:NSLocalizedString(@"Please check your network.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+        [alert show];
+    }
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self loadMyData];
+    
+}
+#pragma mark - tableView
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 9;
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 55;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.width, 55)];
+    UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(10, 5, tableView.width - 20, 50)];
+    contentView.backgroundColor = [UIColor projectGreen];
+    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:contentView.bounds byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii:CGSizeMake(7, 7)];
+    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+    maskLayer.frame = contentView.bounds;
+    maskLayer.path = maskPath.CGPath;
+    contentView.layer.mask = maskLayer;
+    
+    UILabel *label = [[UILabel alloc] init];
+    label.text = NSLocalizedString(@"我的资料", nil);
+    label.font = [UIFont systemFontOfSize:15];
+    label.width = contentView.width -10;
+    label.numberOfLines = 2;
+    [label sizeToFit];
+    label.textColor = [UIColor whiteColor];
+    label.left = 5;
+    label.centerY = contentView.height / 2;
+    [contentView addSubview:label];
+    [view addSubview:contentView];
+    return view;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 35;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    static NSString *identy = @"complaintDetailCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
+    if (!cell)
+    {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:identy];
+    }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    NSString *titleString = nil;
+    NSString *detailString = nil;
+    switch (indexPath.row) {
+            
+        case 0:
+        {
+            titleString = @"商户编号：";
+            detailString = [NSString stringWithFormat:@"%ld",self.model.mshopid.integerValue] ;
+        }
+            break;
+        case 1:
+        {
+            titleString = @"注册时间：";
+            detailString = self.model.createtime;
+        }
+            break;
+        case 2:
+        {
+            titleString = @"上次登录时间：";
+            detailString = self.model.lastlogintime;
+        }
+            break;
+        case 3:
+        {
+            titleString = @"登录名：";
+            detailString = self.model.shopusername;
+        }
+            break;
+        case 4:
+        {
+            titleString = @"真实姓名：";
+            detailString = self.model.realname;
+        }
+            break;
+        case 5:
+        {
+            titleString = @"联系方式：";
+            detailString = self.model.phone;
+        }
+            break;
+        case 6:
+        {
+            titleString = @"电子邮箱：";
+            detailString = self.model.email;
+        }
+            break;
+        case 7:
+        {
+            titleString = @"身份证号：";
+            detailString = self.model.idcard;
+        }
+            break;
+        case 8:
+        {
+            titleString = @"身份证照片：";
+            detailString = self.model.attorneyIDcard;
+        }
+            break;
+        default:
+            break;
+    }
+    cell.textLabel.textColor = [UIColor darkTextColor];
+    cell.textLabel.text = titleString;
+    cell.detailTextLabel.text = detailString;
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([cell respondsToSelector:@selector(tintColor)]) {
+        if (tableView == self.tableView) {
+            CGFloat cornerRadius = 7.f;
+            cell.backgroundColor = UIColor.clearColor;
+            CAShapeLayer *layer = [[CAShapeLayer alloc] init];
+            CGMutablePathRef pathRef = CGPathCreateMutable();
+            CGRect bounds = CGRectInset(cell.bounds, 10, 0);
+            BOOL addLine = NO;
+            if (indexPath.row == 0 && indexPath.row == [tableView numberOfRowsInSection:indexPath.section]-1) {
+                CGPathAddRoundedRect(pathRef, nil, bounds, cornerRadius, cornerRadius);
+                /*} else if (indexPath.row == 0) {
+                 CGPathMoveToPoint(pathRef, nil, CGRectGetMinX(bounds), CGRectGetMaxY(bounds));
+                 CGPathAddArcToPoint(pathRef, nil, CGRectGetMinX(bounds), CGRectGetMinY(bounds), CGRectGetMidX(bounds), CGRectGetMinY(bounds), cornerRadius);
+                 CGPathAddArcToPoint(pathRef, nil, CGRectGetMaxX(bounds), CGRectGetMinY(bounds), CGRectGetMaxX(bounds), CGRectGetMidY(bounds), cornerRadius);
+                 CGPathAddLineToPoint(pathRef, nil, CGRectGetMaxX(bounds), CGRectGetMaxY(bounds));
+                 addLine = YES;*/
+            } else if (indexPath.row == [tableView numberOfRowsInSection:indexPath.section]-1) {
+                CGPathMoveToPoint(pathRef, nil, CGRectGetMinX(bounds), CGRectGetMinY(bounds));
+                CGPathAddArcToPoint(pathRef, nil, CGRectGetMinX(bounds), CGRectGetMaxY(bounds), CGRectGetMidX(bounds), CGRectGetMaxY(bounds), cornerRadius);
+                CGPathAddArcToPoint(pathRef, nil, CGRectGetMaxX(bounds), CGRectGetMaxY(bounds), CGRectGetMaxX(bounds), CGRectGetMidY(bounds), cornerRadius);
+                CGPathAddLineToPoint(pathRef, nil, CGRectGetMaxX(bounds), CGRectGetMinY(bounds));
+            } else {
+                CGPathAddRect(pathRef, nil, bounds);
+                addLine = YES;
+            }
+            layer.path = pathRef;
+            CFRelease(pathRef);
+            layer.fillColor = [UIColor colorWithWhite:1.f alpha:0.8f].CGColor;
+            
+            if (addLine == YES) {
+                CALayer *lineLayer = [[CALayer alloc] init];
+                CGFloat lineHeight = (1.f / [UIScreen mainScreen].scale);
+                lineLayer.frame = CGRectMake(CGRectGetMinX(bounds)+10, bounds.size.height-lineHeight, bounds.size.width-10, lineHeight);
+                lineLayer.backgroundColor = tableView.separatorColor.CGColor;
+                [layer addSublayer:lineLayer];
+            }
+            UIView *testView = [[UIView alloc] initWithFrame:bounds];
+            
+            [testView.layer insertSublayer:layer atIndex:0];
+            testView.backgroundColor = UIColor.clearColor;
+            cell.backgroundView = testView;
+            
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning {

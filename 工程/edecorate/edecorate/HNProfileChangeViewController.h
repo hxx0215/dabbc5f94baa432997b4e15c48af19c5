@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "HNBusinessBackgroundModel.h"
+#import "HNProfileData.h"
 
 @interface HNProfileChangeViewController : UIViewController
-@property (strong, nonatomic) HNBusinessBKProfileModel *model;
+@property (strong, nonatomic) HNProfileData *model;
 @end

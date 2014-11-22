@@ -10,41 +10,6 @@
 #import "UIView+AHKit.h"
 
 @interface HNComplaintDetailsViewController ()<UITableViewDataSource,UITableViewDelegate>
-@property (nonatomic, strong)IBOutlet UILabel *houseInfMainLabel;
-@property (nonatomic, strong)IBOutlet UILabel *constructionInfMainLabel;
-@property (nonatomic, strong)IBOutlet UILabel *complaintInfMainLabel;
-
-@property (nonatomic, strong)IBOutlet UILabel *houseInfTitleLabel;
-@property (nonatomic, strong)IBOutlet UILabel *houseInfLabel;
-@property (nonatomic, strong)IBOutlet UILabel *ownersLabel;
-@property (nonatomic, strong)IBOutlet UILabel *ownersPhoneNumberLabel;
-
-@property (nonatomic, strong)IBOutlet UILabel *constructionUnitTitleLabel;
-@property (nonatomic, strong)IBOutlet UILabel *constructionUnitLabel;
-@property (nonatomic, strong)IBOutlet UILabel *constructionPersonLabel;
-@property (nonatomic, strong)IBOutlet UILabel *constructionPersonPhoneNumberLabel;
-
-@property (nonatomic, strong)IBOutlet UILabel *complaintInformationTitleLable;
-@property (nonatomic, strong)IBOutlet UILabel *complaintCategoryTitleLable;
-@property (nonatomic, strong)IBOutlet UILabel *complaintObjectTitleLable;
-@property (nonatomic, strong)IBOutlet UILabel *complaintIssueTitleLable;
-@property (nonatomic, strong)IBOutlet UILabel *evidenceTitleLable;
-
-@property (nonatomic, strong)IBOutlet UILabel *complaintCategoryLable;
-@property (nonatomic, strong)IBOutlet UILabel *complaintObjectLable;
-@property (nonatomic, strong)IBOutlet UILabel *complaintIssueLable;
-
-@property (nonatomic, strong)IBOutlet UILabel *uploadStatusLable;
-@property (nonatomic, strong)IBOutlet UILabel *complaintStatusLable;
-@property (nonatomic, strong)IBOutlet UIButton *checkOutButton;
-
-@property (nonatomic, strong)IBOutlet UILabel *complaintbodyLable;
-@property (nonatomic, strong)IBOutlet UILabel *complaintCreateTimeLable;
-@property (nonatomic, strong)IBOutlet UILabel *complaintconstructionTeamLable;
-@property (nonatomic, strong)IBOutlet UILabel *complaintmanagementLable;
-@property (nonatomic, strong)IBOutlet UILabel *complaintconstructionTeamTitleLable;
-@property (nonatomic, strong)IBOutlet UILabel *complaintmanagementTitleLable;
-
 @property (nonatomic, strong) UITableView *tableView;
 @end
 
@@ -70,37 +35,7 @@
     
     [self.view addSubview:self.tableView];
     
-//    [self labelWithTitle:NSLocalizedString(@"House Information", nil) label:self.houseInfMainLabel];
-//    
-//    [self labelWithTitle:NSLocalizedString(@"House Information", nil) label:self.houseInfTitleLabel];
-//    [self labelWithTitle:self.temporaryModel.room label:self.houseInfLabel];
-//    
-    
-    //Complaint Information
 
-    
-
-    CGFloat pos = self.complaintIssueLable.bottom>self.complaintIssueTitleLable.bottom?self.complaintIssueLable.bottom:self.complaintIssueTitleLable.bottom;
-    
-    CGFloat space = self.complaintIssueTitleLable.top-self.complaintObjectTitleLable.bottom;
-    self.complaintconstructionTeamLable.top = pos+space;
-    self.complaintconstructionTeamTitleLable.top = self.complaintconstructionTeamLable.top;
-    self.complaintmanagementLable.top = self.complaintconstructionTeamLable.bottom+space;
-    self.complaintmanagementTitleLable.top = self.complaintmanagementLable.top;
-    self.checkOutButton.top = self.complaintmanagementLable.bottom+space;
-
-    self.uploadStatusLable.top = self.checkOutButton.top;
-    self.evidenceTitleLable.top = self.checkOutButton.top;
-    self.complaintStatusLable.top = self.checkOutButton.bottom+2;
-    
-    [self.checkOutButton setTitle:NSLocalizedString(@"Check Out", nil) forState:UIControlStateNormal];
-    self.checkOutButton.layer.borderWidth = 1.0;
-    self.checkOutButton.layer.borderColor = [UIColor blackColor].CGColor;
-    
-    [self.complaintStatusLable setText:NSLocalizedString(@"Processing", nil)];
-    [HNUIStyleSet UIStyleSetRoundView:self.houseInfMainLabel];
-    [HNUIStyleSet UIStyleSetRoundView:self.complaintInfMainLabel];
-    [HNUIStyleSet UIStyleSetRoundView:self.complaintStatusLable];
     /*
      "Processing" ＝ "正在处理";*/
     
