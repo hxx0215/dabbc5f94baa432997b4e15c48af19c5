@@ -7,12 +7,19 @@
 //
 
 #import "HNOrderTableViewCell.h"
+@interface HNOrderTableViewCell()
+@property (strong, nonatomic) IBOutlet UILabel *orderid;
+@property (strong, nonatomic) IBOutlet UILabel *title;
+@property (strong, nonatomic) IBOutlet UILabel *orderstime;
+@property (strong, nonatomic) IBOutlet UILabel *statusid;
 
+
+@end
 @implementation HNOrderTableViewCell
 
 - (void)awakeFromNib {
     // Initialization code
-    self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

@@ -37,6 +37,7 @@
 @property (nonatomic, strong)UIBarButtonItem *filter;
 
 @property (nonatomic, strong)NSMutableDictionary *goodsSearchDic;
+@property (nonatomic, strong)NSMutableDictionary *orderSearchDic;
 @end
 
 static NSString *reuseId = @"businessCell";
@@ -78,6 +79,7 @@ static NSString *reuseId = @"businessCell";
 }
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+    self.tableView.height = self.view.height - self.headerView.height;
     [self.tableView headerBeginRefreshing];
 }
 - (void)initNavi{
@@ -97,6 +99,7 @@ static NSString *reuseId = @"businessCell";
         {
             UINib *nib=[UINib nibWithNibName:NSStringFromClass([HNReturnsTableViewCell class]) bundle:nil];
             [self.tableView registerNib:nib forCellReuseIdentifier:reuseId];
+            
         }
             break;
         case kComment:
@@ -109,6 +112,7 @@ static NSString *reuseId = @"businessCell";
         {
             UINib *nib = [UINib nibWithNibName:NSStringFromClass([HNOrderTableViewCell class]) bundle:nil];
             [self.tableView registerNib:nib forCellReuseIdentifier:reuseId];
+            self.orderSearchDic = [@{@"mshopid": [HNLoginData shared].mshopid ,@"orderstate":@"",@"userid" : @"",@"orderid" : @"",@"timetype":@"",@"pagesize":@"",@"pageindex":@""} mutableCopy];
         }
             break;
         default:
@@ -245,14 +249,14 @@ static NSString *reuseId = @"businessCell";
             return 130;
             break;
         case kComment:
-            return 120;
+            return 160;
             break;
         case kReturnGoods:
             return [HNReturnsTableViewCell cellHeight];
             break;
             
         case kOrder:
-            return 112;
+            return 160;
             break;
         default:
             return 44;
@@ -265,7 +269,9 @@ static NSString *reuseId = @"businessCell";
         case kGoods:
             [self loadDataWithDic:self.goodsSearchDic withMethod:@"get.goods.list"];
             break;
-            
+        case kOrder:
+            [self loadDataWithDic:self.orderSearchDic withMethod:@"get.order.list"];
+            break;
         default:
             break;
     }
