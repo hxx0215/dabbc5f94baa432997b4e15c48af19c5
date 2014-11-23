@@ -175,16 +175,16 @@
 		D33EEA6419D6C2B700D6F106 /* HNVolumeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D33EEA6219D6C2B700D6F106 /* HNVolumeViewController.m */; };
 		D33EEA6519D6C2B700D6F106 /* HNVolumeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D33EEA6319D6C2B700D6F106 /* HNVolumeViewController.xib */; };
 		D33EEA6A19D6D9E600D6F106 /* HNProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D33EEA6819D6D9E600D6F106 /* HNProfileViewController.m */; };
-		D33EEA6B19D6D9E600D6F106 /* HNProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D33EEA6919D6D9E600D6F106 /* HNProfileViewController.xib */; };
 		D33EEA7319D6F39500D6F106 /* HNBusinessBackgroundModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D33EEA7219D6F39500D6F106 /* HNBusinessBackgroundModel.m */; };
 		D33EEABC19D6FF5D00D6F106 /* area.plist in Resources */ = {isa = PBXBuildFile; fileRef = D33EEABA19D6FF5D00D6F106 /* area.plist */; };
 		D33EEABD19D6FF5D00D6F106 /* city.plist in Resources */ = {isa = PBXBuildFile; fileRef = D33EEABB19D6FF5D00D6F106 /* city.plist */; };
 		D33EEAC119D7000E00D6F106 /* HNAreaPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = D33EEABF19D7000E00D6F106 /* HNAreaPickerView.m */; };
 		D33EEAC219D7000E00D6F106 /* HNAreaPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D33EEAC019D7000E00D6F106 /* HNAreaPickerView.xib */; };
 		D33EEAC619D70C8800D6F106 /* HNProfileChangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D33EEAC419D70C8800D6F106 /* HNProfileChangeViewController.m */; };
-		D33EEAC719D70C8800D6F106 /* HNProfileChangeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D33EEAC519D70C8800D6F106 /* HNProfileChangeViewController.xib */; };
 		D351B9701A0FC38D0015D261 /* HNComplaintApplyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D351B96F1A0FC38D0015D261 /* HNComplaintApplyTableViewCell.m */; };
 		D35EE4DE19EECFC100D889A3 /* HNHttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = D35EE4DD19EECFC100D889A3 /* HNHttpRequest.m */; };
+		D37642D61A20E84600F37956 /* HNProfileData.m in Sources */ = {isa = PBXBuildFile; fileRef = D37642D51A20E84600F37956 /* HNProfileData.m */; };
+		D37642D91A20EF5100F37956 /* HNEditTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D37642D81A20EF5100F37956 /* HNEditTableViewCell.m */; };
 		D38615EE1A03E9DC005B4093 /* HNDeliverApplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D38615EC1A03E9DC005B4093 /* HNDeliverApplyViewController.m */; };
 		D38DD5611A0BB1E100886933 /* HNMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D38DD55F1A0BB1E100886933 /* HNMessageTableViewCell.m */; };
 		D38DD5621A0BB1E100886933 /* HNMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38DD5601A0BB1E100886933 /* HNMessageTableViewCell.xib */; };
@@ -520,7 +520,6 @@
 		D33EEA6319D6C2B700D6F106 /* HNVolumeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HNVolumeViewController.xib; sourceTree = "<group>"; };
 		D33EEA6719D6D9E600D6F106 /* HNProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNProfileViewController.h; sourceTree = "<group>"; };
 		D33EEA6819D6D9E600D6F106 /* HNProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNProfileViewController.m; sourceTree = "<group>"; };
-		D33EEA6919D6D9E600D6F106 /* HNProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HNProfileViewController.xib; sourceTree = "<group>"; };
 		D33EEA7119D6F39500D6F106 /* HNBusinessBackgroundModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNBusinessBackgroundModel.h; sourceTree = "<group>"; };
 		D33EEA7219D6F39500D6F106 /* HNBusinessBackgroundModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNBusinessBackgroundModel.m; sourceTree = "<group>"; };
 		D33EEABA19D6FF5D00D6F106 /* area.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = area.plist; path = Classes/BusinessBackground/area.plist; sourceTree = "<group>"; };
@@ -530,11 +529,14 @@
 		D33EEAC019D7000E00D6F106 /* HNAreaPickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HNAreaPickerView.xib; path = Classes/BusinessBackground/HNAreaPickerView.xib; sourceTree = "<group>"; };
 		D33EEAC319D70C8800D6F106 /* HNProfileChangeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNProfileChangeViewController.h; sourceTree = "<group>"; };
 		D33EEAC419D70C8800D6F106 /* HNProfileChangeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNProfileChangeViewController.m; sourceTree = "<group>"; };
-		D33EEAC519D70C8800D6F106 /* HNProfileChangeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HNProfileChangeViewController.xib; sourceTree = "<group>"; };
 		D351B96E1A0FC38D0015D261 /* HNComplaintApplyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNComplaintApplyTableViewCell.h; path = Classes/DecorateControl/HNComplaintApplyTableViewCell.h; sourceTree = "<group>"; };
 		D351B96F1A0FC38D0015D261 /* HNComplaintApplyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNComplaintApplyTableViewCell.m; path = Classes/DecorateControl/HNComplaintApplyTableViewCell.m; sourceTree = "<group>"; };
 		D35EE4DC19EECFC100D889A3 /* HNHttpRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNHttpRequest.h; sourceTree = "<group>"; };
 		D35EE4DD19EECFC100D889A3 /* HNHttpRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNHttpRequest.m; sourceTree = "<group>"; };
+		D37642D41A20E84600F37956 /* HNProfileData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNProfileData.h; sourceTree = "<group>"; };
+		D37642D51A20E84600F37956 /* HNProfileData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNProfileData.m; sourceTree = "<group>"; };
+		D37642D71A20EF5100F37956 /* HNEditTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNEditTableViewCell.h; sourceTree = "<group>"; };
+		D37642D81A20EF5100F37956 /* HNEditTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNEditTableViewCell.m; sourceTree = "<group>"; };
 		D38615EB1A03E9DC005B4093 /* HNDeliverApplyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNDeliverApplyViewController.h; path = Classes/DecorateControl/HNDeliverApplyViewController.h; sourceTree = "<group>"; };
 		D38615EC1A03E9DC005B4093 /* HNDeliverApplyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNDeliverApplyViewController.m; path = Classes/DecorateControl/HNDeliverApplyViewController.m; sourceTree = "<group>"; };
 		D38DD55E1A0BB1E100886933 /* HNMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNMessageTableViewCell.h; path = Classes/Message/HNMessageTableViewCell.h; sourceTree = "<group>"; };
@@ -854,6 +856,8 @@
 				D33EEA5C19D69F3200D6F106 /* HNBusinessBKControlViewController.m */,
 				D33EEA7119D6F39500D6F106 /* HNBusinessBackgroundModel.h */,
 				D33EEA7219D6F39500D6F106 /* HNBusinessBackgroundModel.m */,
+				D37642D71A20EF5100F37956 /* HNEditTableViewCell.h */,
+				D37642D81A20EF5100F37956 /* HNEditTableViewCell.m */,
 			);
 			name = BusinessBackground;
 			sourceTree = "<group>";
@@ -1287,10 +1291,10 @@
 			children = (
 				D33EEAC319D70C8800D6F106 /* HNProfileChangeViewController.h */,
 				D33EEAC419D70C8800D6F106 /* HNProfileChangeViewController.m */,
-				D33EEAC519D70C8800D6F106 /* HNProfileChangeViewController.xib */,
 				D33EEA6719D6D9E600D6F106 /* HNProfileViewController.h */,
 				D33EEA6819D6D9E600D6F106 /* HNProfileViewController.m */,
-				D33EEA6919D6D9E600D6F106 /* HNProfileViewController.xib */,
+				D37642D41A20E84600F37956 /* HNProfileData.h */,
+				D37642D51A20E84600F37956 /* HNProfileData.m */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -1450,14 +1454,12 @@
 			files = (
 				D311A7931A1E41FD000E8A4F /* 评论留言c@2x.png in Resources */,
 				B9D72D5A19D846FC0011CF83 /* HNOrderViewController.xib in Resources */,
-				D33EEA6B19D6D9E600D6F106 /* HNProfileViewController.xib in Resources */,
 				D3201FAF1A0A640C00236B08 /* HNSettingViewController.xib in Resources */,
 				B90C418119FA3365004EBC2B /* purchasecheckbox@2x.png in Resources */,
 				D311A79B1A1E41FD000E8A4F /* 消费卷验证c@2x.png in Resources */,
 				D38E009119D84BE0000F5263 /* HNReimburseViewController.xib in Resources */,
 				B9DE560419C9C40B00280EC7 /* Localizable.strings in Resources */,
 				B95D15C519D9AE4B00689B4D /* HNEditPriceViewController.xib in Resources */,
-				D33EEAC719D70C8800D6F106 /* HNProfileChangeViewController.xib in Resources */,
 				D33EEABD19D6FF5D00D6F106 /* city.plist in Resources */,
 				D327005E1A12645E00C05CA5 /* HNPersonDetailTableViewCell.xib in Resources */,
 				D3C07BCA19CDC8CA003EA5E4 /* HNComplaintDetailsViewController.xib in Resources */,
@@ -1618,6 +1620,7 @@
 				B965E76019D04955004CD201 /* HNDeliverViewController.m in Sources */,
 				B9B2BC1D19CF1F3000839AED /* CTAssetsGroupViewController.m in Sources */,
 				B9E0667319DCDCB100893DBD /* AFHTTPSessionManager.m in Sources */,
+				D37642D61A20E84600F37956 /* HNProfileData.m in Sources */,
 				37F9D80019D8B481005CB18B /* HNCommentsHeaderView.m in Sources */,
 				B9D3DEE619CD65500020CDC9 /* HNCheckDetailView.m in Sources */,
 				D3F90F1019CB13CA000C95E4 /* HNTemporaryFireViewController.m in Sources */,
@@ -1652,6 +1655,7 @@
 				D3CD910319CF141C00E76AF4 /* HNRefundDetailViewController.m in Sources */,
 				B9E0667A19DCDCB100893DBD /* AFNetworkActivityIndicatorManager.m in Sources */,
 				B9E0667119DCDCB100893DBD /* AFHTTPRequestOperation.m in Sources */,
+				D37642D91A20EF5100F37956 /* HNEditTableViewCell.m in Sources */,
 				B9D72D5919D846FC0011CF83 /* HNOrderViewController.m in Sources */,
 				D33549F719FEB3D300135800 /* HNPersonNewTableViewCell.m in Sources */,
 				B9AD9E0819DEC90D00D82439 /* NSString+Crypt.m in Sources */,

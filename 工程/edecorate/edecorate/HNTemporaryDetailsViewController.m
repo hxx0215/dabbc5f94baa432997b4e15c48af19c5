@@ -65,6 +65,7 @@
     }
     
 
+
     
 //    
 //    [self labelWithTitle:@"未上传" label:self.uploadStatusLable];
@@ -192,11 +193,10 @@
             cell = [[HNImageUploadTableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:identy];
             [cell.photo addTarget:self action:@selector(showPic:) forControlEvents:UIControlEventTouchUpInside];
         }
-        UIImage *image = [[HNImageData shared]imageWithLink:[self.dataArray2 objectAtIndex:indexPath.row]];
+        //UIImage *image = [[HNImageData shared]imageWithLink:[self.dataArray2 objectAtIndex:indexPath.row]];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.title.text = [self.titleArray2 objectAtIndex:indexPath.row];
-        [cell.photo setImage:image forState:UIControlStateNormal];
-        [cell.photo setImage:image forState:UIControlStateHighlighted];
+        [cell reset:[self.dataArray2 objectAtIndex:indexPath.row]];
         return cell;
     }
     
