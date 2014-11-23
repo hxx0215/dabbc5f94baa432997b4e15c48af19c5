@@ -8,6 +8,8 @@
 
 #import "HNVolumeViewController.h"
 #include "UIView+AHKit.h"
+#include "JSONKit.h"
+#include "MBProgressHUD.h"
 
 @interface HNVolumeViewController ()<UITextFieldDelegate>
 @property (strong, nonatomic) IBOutlet UISegmentedControl *viewSegmentedControl;
@@ -18,6 +20,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *volumePWTextField;
 @property (strong, nonatomic) IBOutlet UIButton *OKButton;
 @property (strong, nonatomic) IBOutlet UIButton *cancelButton;
+@property (strong, nonatomic) IBOutlet UIView *view2;
 @end
 
 @implementation HNVolumeViewController
@@ -25,16 +28,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.view.backgroundColor = [UIColor colorWithRed:240.0/255 green:240.0/255 blue:240.0/255 alpha:1];
+    
     [self.viewSegmentedControl setTitle:NSLocalizedString(@"Consumer verification", nil) forSegmentAtIndex:0];
     [self.viewSegmentedControl setTitle:NSLocalizedString(@"Verify effective", nil) forSegmentAtIndex:1];
     
     self.volumeNOTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
     self.volumeNOTextField.delegate = self;
+    self.volumeNOTextField.placeholder = NSLocalizedString(@"在此输入消费券号", nil);
     self.volumePWTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
     self.volumePWTextField.delegate = self;
     self.volumePWTextField.secureTextEntry = YES;
     [self labelWithTitle:NSLocalizedString(@"Volume No.", nil) label:self.volumeNOTitleLabel];
     [self labelWithTitle:NSLocalizedString(@"Consumer password", nil) label:self.volumePWTitleLabel];
+    self.volumePWTextField.placeholder = NSLocalizedString(@"在此输入消费券密码", nil);
     
     self.OKButton.layer.borderWidth = 1.0;
     self.OKButton.layer.borderColor = [UIColor blackColor].CGColor;
@@ -61,27 +68,83 @@
 - (void)labelWithTitle:(NSString *)title label:(UILabel*)lab
 {
     [lab setText:title];
-    [lab sizeToFit];
-    lab.font = [UIFont systemFontOfSize:12];
-    lab.numberOfLines = 2;
+//    [lab sizeToFit];
+//    lab.font = [UIFont systemFontOfSize:12];
+//    lab.numberOfLines = 2;
     
-    lab.layer.borderColor = [UIColor blackColor].CGColor;
+    //lab.layer.borderColor = [UIColor blackColor].CGColor;
 }
 
 
 - (IBAction)OKButtonClick:(id)sender
 {
+//    if (!self.volumeNOTextField.text) {
+//        UIAlertView* alert=[[UIAlertView alloc]initWithTitle:nil message:@"请输入消费券号" delegate:self cancelButtonTitle:@"OK"otherButtonTitles:nil,nil];
+//        [alert show];
+//        return;
+//    }
+    
     NSInteger Index = self.viewSegmentedControl.selectedSegmentIndex;
+    MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = NSLocalizedString(@"Loading", nil);
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    
+    
     switch (Index)
     {
         case 0:
-            self.volumeStatusLabel.text = @"验证通过";
+        {
+            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:self.volumeNOTextField.text,@"couponid",self.volumePWTextField.text,@"couponpwd",nil];
+            NSString *jsonStr = [dic JSONString];
+            request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"set.coupon.validation" Params:jsonStr]];
+            
+        }
             break;
         case 1:
-            self.volumeStatusLabel.text = @"此消费卷有效";
+        {
+            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:self.volumeNOTextField.text,@"couponid",nil];
+            NSString *jsonStr = [dic JSONString];
+            request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"get.coupon.validation" Params:jsonStr]];
+            
+        }
             break;
         default:
             break;
+    }
+    NSString *contentType = @"text/html";
+    [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
+    
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
+        [self performSelectorOnMainThread:@selector(didCommit:) withObject:data waitUntilDone:YES];
+    }];
+}
+
+
+-(void)didCommit:(NSData *)data
+{
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    if (data)
+    {
+        NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
+        NSLog(@"%@",retJson);
+        NSDictionary* dic = [retJson objectFromJSONString];
+        NSString *total = [dic objectForKey:@"total"];
+        if (total.integerValue)
+        {
+            NSArray *array = [dic objectForKey:@"data"];
+            NSDictionary *dic2 = [array objectAtIndex:0];
+            self.volumeStatusLabel.text = [dic2 objectForKey:@"msg"];
+        }
+        else
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Loading Fail", nil) message:NSLocalizedString(@"Please try again", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+            [alert show];
+        }
+    }
+    else{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection Error", nil) message:NSLocalizedString(@"Please check your network.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+        [alert show];
     }
 }
 
@@ -100,12 +163,10 @@
     switch (Index)
     {
         case 0:
-            self.volumePWTextField.hidden = NO;
-            self.volumePWTitleLabel.hidden = NO;
+            self.view2.hidden = NO;
             break;
         case 1:
-            self.volumePWTextField.hidden = YES;
-            self.volumePWTitleLabel.hidden = YES;
+            self.view2.hidden = YES;
             break;
         default:
             break;
