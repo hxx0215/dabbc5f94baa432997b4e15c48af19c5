@@ -42,7 +42,9 @@
         image = [[UIImage alloc]initWithData:data];
         //image =[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[link addPort]]]];
         image = image? image : [UIImage imageNamed:@"selectphoto.png"];
-        [self.imageDict setObject:image forKey:link];
+        if (link) {
+            [self.imageDict setObject:image forKey:link];
+        }
         return image;
     }
 }

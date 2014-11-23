@@ -209,7 +209,6 @@
 		D3C07BC019CDAC7A003EA5E4 /* HNComplaintTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C07BBF19CDAC7A003EA5E4 /* HNComplaintTableViewCell.m */; };
 		D3C07BC419CDC8A0003EA5E4 /* HNComplaintApplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C07BC219CDC8A0003EA5E4 /* HNComplaintApplyViewController.m */; };
 		D3C07BC919CDC8CA003EA5E4 /* HNComplaintDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C07BC719CDC8CA003EA5E4 /* HNComplaintDetailsViewController.m */; };
-		D3C07BCA19CDC8CA003EA5E4 /* HNComplaintDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3C07BC819CDC8CA003EA5E4 /* HNComplaintDetailsViewController.xib */; };
 		D3CD90F419CED1FA00E76AF4 /* HNCommbox.m in Sources */ = {isa = PBXBuildFile; fileRef = D3CD90F319CED1FA00E76AF4 /* HNCommbox.m */; };
 		D3CD90F719CF09B500E76AF4 /* HNRefundTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3CD90F619CF09B500E76AF4 /* HNRefundTableViewController.m */; };
 		D3CD90FA19CF09E000E76AF4 /* HNRefundTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3CD90F919CF09E000E76AF4 /* HNRefundTableViewCell.m */; };
@@ -581,7 +580,6 @@
 		D3C07BC219CDC8A0003EA5E4 /* HNComplaintApplyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNComplaintApplyViewController.m; sourceTree = "<group>"; };
 		D3C07BC619CDC8CA003EA5E4 /* HNComplaintDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNComplaintDetailsViewController.h; sourceTree = "<group>"; };
 		D3C07BC719CDC8CA003EA5E4 /* HNComplaintDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNComplaintDetailsViewController.m; sourceTree = "<group>"; };
-		D3C07BC819CDC8CA003EA5E4 /* HNComplaintDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HNComplaintDetailsViewController.xib; sourceTree = "<group>"; };
 		D3CD90F219CED1FA00E76AF4 /* HNCommbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNCommbox.h; sourceTree = "<group>"; };
 		D3CD90F319CED1FA00E76AF4 /* HNCommbox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNCommbox.m; sourceTree = "<group>"; };
 		D3CD90F519CF09B500E76AF4 /* HNRefundTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNRefundTableViewController.h; sourceTree = "<group>"; };
@@ -1339,7 +1337,6 @@
 				D3C07BC219CDC8A0003EA5E4 /* HNComplaintApplyViewController.m */,
 				D3C07BC619CDC8CA003EA5E4 /* HNComplaintDetailsViewController.h */,
 				D3C07BC719CDC8CA003EA5E4 /* HNComplaintDetailsViewController.m */,
-				D3C07BC819CDC8CA003EA5E4 /* HNComplaintDetailsViewController.xib */,
 				D3C07BBE19CDAC7A003EA5E4 /* HNComplaintTableViewCell.h */,
 				D3C07BBF19CDAC7A003EA5E4 /* HNComplaintTableViewCell.m */,
 				D391EE8A19CD787D00DE3363 /* HNComplaintTableViewController.h */,
@@ -1462,7 +1459,6 @@
 				B95D15C519D9AE4B00689B4D /* HNEditPriceViewController.xib in Resources */,
 				D33EEABD19D6FF5D00D6F106 /* city.plist in Resources */,
 				D327005E1A12645E00C05CA5 /* HNPersonDetailTableViewCell.xib in Resources */,
-				D3C07BCA19CDC8CA003EA5E4 /* HNComplaintDetailsViewController.xib in Resources */,
 				D311A7911A1E41FD000E8A4F /* 订单管理c@2x.png in Resources */,
 				D311A7991A1E41FD000E8A4F /* 我的资料c@2x.png in Resources */,
 				D311A7951A1E41FD000E8A4F /* 退换货管理c@2x.png in Resources */,
