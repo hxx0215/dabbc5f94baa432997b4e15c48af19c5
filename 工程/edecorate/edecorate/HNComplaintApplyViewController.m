@@ -302,7 +302,8 @@
     complainType 		投诉类别
     declareId 		报建Id
      */
-    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:self.complaint.body,@"body", self.complaint.complainant,@"complainant",[HNLoginData shared].mshopid,@"complainantId",self.imageName,@"complainfile",self.complaint.complainObject,@"complainObject",self.complaint.complainProblem,@"complainProblem",self.complaint.complainType,@"complainType",self.temporaryModel.declareId,@"declareId",nil];
+    //我要投诉中，投诉类别和投诉内容删除self.complaint.body,@"body"self.complaint.complainType,@"complainType",
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys: self.complaint.complainant,@"complainant",[HNLoginData shared].mshopid,@"complainantId",self.imageName,@"complainfile",self.complaint.complainObject,@"complainObject",self.complaint.complainProblem,@"complainProblem",self.temporaryModel.declareId,@"declareId",nil];
     return dic;
 }
 
@@ -373,17 +374,17 @@ bool bo = false;
             self.complaint.complainant = textField.text;
         }
             break;
+//        case 1:
+//        {
+//            self.complaint.body = textField.text;
+//        }
+//            break;
+//        case 2:
+//        {
+//            self.complaint.complainType = textField.text;
+//        }
+//            break;
         case 1:
-        {
-            self.complaint.body = textField.text;
-        }
-            break;
-        case 2:
-        {
-            self.complaint.complainType = textField.text;
-        }
-            break;
-        case 3:
         {
             self.complaint.complainObject = textField.text;
         }
@@ -496,7 +497,7 @@ bool bo = false;
         return 0;
     }
     else
-        return 6;
+        return 4;
 }
 
 
@@ -549,10 +550,10 @@ bool bo = false;
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     switch (indexPath.row)
     {
-        case 5:
+        case 3:
             return 60;
             break;
-        case 4:
+        case 2:
         {
             return self.textViewHeight <=30?30:self.textViewHeight;
         }
@@ -586,28 +587,28 @@ bool bo = false;
                 textString = self.complaint.complainant;
             }
                 break;
+//            case 1:
+//            {
+//                titleString = NSLocalizedString(@"投诉内容：", nil);
+//                detailString = NSLocalizedString(@"点此输入投诉内容", nil);
+//                textString = self.complaint.body;
+//            }
+//                break;
+//            case 2:
+//            {
+//                titleString = NSLocalizedString(@"投诉类别：", nil);
+//                detailString = NSLocalizedString(@"点此输入投诉类别", nil);
+//                textString = self.complaint.complainType;
+//            }
+//                break;
             case 1:
-            {
-                titleString = NSLocalizedString(@"投诉内容：", nil);
-                detailString = NSLocalizedString(@"点此输入投诉内容", nil);
-                textString = self.complaint.body;
-            }
-                break;
-            case 2:
-            {
-                titleString = NSLocalizedString(@"投诉类别：", nil);
-                detailString = NSLocalizedString(@"点此输入投诉类别", nil);
-                textString = self.complaint.complainType;
-            }
-                break;
-            case 3:
             {
                 titleString = NSLocalizedString(@"投诉对象：", nil);
                 detailString = NSLocalizedString(@"点此输入投诉对象", nil);
                 textString = self.complaint.complainObject;
             }
                 break;
-            case 4:
+            case 2:
             {
                 titleString = NSLocalizedString(@"投诉问题：", nil);
                 detailString = NSLocalizedString(@"点此输入投诉问题", nil);
@@ -623,7 +624,7 @@ bool bo = false;
 
             }
                 break;
-            case 5:
+            case 3:
             {
                 titleString = NSLocalizedString(@"证明材料：", nil);
                 detailString = NSLocalizedString(@"点此输入投诉人图片", nil);
