@@ -38,6 +38,7 @@
 
 @property (nonatomic, strong)NSMutableDictionary *goodsSearchDic;
 @property (nonatomic, strong)NSMutableDictionary *orderSearchDic;
+@property (nonatomic, strong)NSMutableDictionary *returnGoodsSearchDic;
 @end
 
 static NSString *reuseId = @"businessCell";
@@ -99,7 +100,7 @@ static NSString *reuseId = @"businessCell";
         {
             UINib *nib=[UINib nibWithNibName:NSStringFromClass([HNReturnsTableViewCell class]) bundle:nil];
             [self.tableView registerNib:nib forCellReuseIdentifier:reuseId];
-            
+            self.returnGoodsSearchDic = [@{@"mshopid": [HNLoginData shared].mshopid ,@"type":@"",@"orderid" : @"",@"pagesize":@"",@"pageindex":@""} mutableCopy];
         }
             break;
         case kComment:
@@ -273,6 +274,8 @@ static NSString *reuseId = @"businessCell";
         case kOrder:
             [self loadDataWithDic:self.orderSearchDic withMethod:@"get.order.list"];
             break;
+        case kReturnGoods:
+            [self loadDataWithDic:self.returnGoodsSearchDic withMethod:@"get.order.return"];
         default:
             break;
     }
