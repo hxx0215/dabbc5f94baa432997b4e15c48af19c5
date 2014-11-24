@@ -12,6 +12,8 @@
 @interface HNGoodsViewController ()
 @property (strong, nonatomic) IBOutlet UIScrollView *backView;
 @property (strong, nonatomic) NSMutableDictionary *goodsDetail;
+
+
 @end
 
 @implementation HNGoodsViewController
@@ -40,20 +42,34 @@
     NSString *contentType = @"text/html";
     [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
-        NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
-        NSDictionary *retDic = [retJson objectFromJSONString];
-        NSLog(@"%@",retDic);
+        if (data)
+        {
+            NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
+            NSDictionary *retDic = [retJson objectFromJSONString];
+            NSInteger count = [[retDic objectForKey:@"total"] integerValue];
+            if (0!=count){
+
+            }
+            else
+                [self showNoData];
+        }
+        else
+            [self showNoNetwork];
     }];
 }
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)showNoNetwork{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection Error", nil) message:NSLocalizedString(@"Please check your network.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [alert show];
+    });
+    
 }
-*/
+- (void)showNoData{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"We don't get any data.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [alert show];
+    });
+}
 
 @end
