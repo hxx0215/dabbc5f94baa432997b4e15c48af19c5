@@ -39,6 +39,7 @@
 @property (nonatomic, strong)NSMutableDictionary *goodsSearchDic;
 @property (nonatomic, strong)NSMutableDictionary *orderSearchDic;
 @property (nonatomic, strong)NSMutableDictionary *returnGoodsSearchDic;
+@property (nonatomic, strong)NSMutableDictionary *commentDic;
 @end
 
 static NSString *reuseId = @"businessCell";
@@ -107,6 +108,7 @@ static NSString *reuseId = @"businessCell";
         {
             UINib *nib=[UINib nibWithNibName:NSStringFromClass([HNCommentsTableViewCell class]) bundle:nil];
             [self.tableView registerNib:nib forCellReuseIdentifier:reuseId];
+            self.commentDic = [@{@"mshopid": [HNLoginData shared].mshopid ,@"goodsid":@"",@"pagesize":@"",@"pageindex":@""} mutableCopy];
         }
             break;
         case kOrder:
@@ -138,7 +140,8 @@ static NSString *reuseId = @"businessCell";
 
         case kComment:
         {
-            self.headerView=[[HNCommentsHeaderView alloc] initWithFrame:CGRectMake(0,0, self.view.width, 74)];
+//            self.headerView=[[HNCommentsHeaderView alloc] initWithFrame:CGRectMake(0,0, self.view.width, 74)];
+            self.headerView = [UIView new];
         }
             break;
         case kOrder:
@@ -187,6 +190,7 @@ static NSString *reuseId = @"businessCell";
             break;
         case kComment:{
             HNCommentsTableViewCell *cCell=[tableView dequeueReusableCellWithIdentifier:reuseId];
+            [cCell setContent:self.businessList[indexPath.row]];
             cell=cCell;
         }
             break;
@@ -235,7 +239,7 @@ static NSString *reuseId = @"businessCell";
         case kComment:
         {
             HNCommentsDetailViewController *commentDetail=[[HNCommentsDetailViewController alloc] init];
-            commentDetail.index = ((HNCommentsHeaderView*)self.headerView).segment.selectedSegmentIndex;
+            commentDetail.index = 0;//((HNCommentsHeaderView*)self.headerView).segment.selectedSegmentIndex;
             [self.navigationController pushViewController:commentDetail animated:YES];
         }
             break;
@@ -252,7 +256,7 @@ static NSString *reuseId = @"businessCell";
             return 130;
             break;
         case kComment:
-            return 160;
+            return 100;
             break;
         case kReturnGoods:
             return 130;
@@ -277,6 +281,8 @@ static NSString *reuseId = @"businessCell";
             break;
         case kReturnGoods:
             [self loadDataWithDic:self.returnGoodsSearchDic withMethod:@"get.order.return"];
+        case kComment:
+            [self loadDataWithDic:self.commentDic withMethod:@"get.goods.comment"];
         default:
             break;
     }

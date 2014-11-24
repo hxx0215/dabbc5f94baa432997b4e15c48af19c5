@@ -12,5 +12,5 @@
 
 -(void) SetTableByType:(int)type;
 
-
+- (void)setContent:(NSDictionary *)content;
 @end

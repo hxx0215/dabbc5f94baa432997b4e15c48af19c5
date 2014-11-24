@@ -15,6 +15,9 @@
 @property(nonatomic,strong) IBOutlet UILabel *commentName;
 @property(nonatomic,strong) IBOutlet UILabel *commentRemarks;
 @property (nonatomic,strong) IBOutlet UILabel *CommentTime;
+@property (strong, nonatomic) IBOutlet UILabel *goodsid;
+@property (strong, nonatomic) IBOutlet UILabel *contentLabel;
+@property (strong, nonatomic) IBOutlet UILabel *fen;
 
 //@property(nonatomic,strong) IBOutlet UILabel *messageName;
 //@property(nonatomic,strong) IBOutlet UILabel *messageRemarks;
@@ -27,7 +30,7 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -66,5 +69,12 @@
         default:
             break;
     }
+}
+- (void)setContent:(NSDictionary *)content{
+    self.commentName.text = [NSString stringWithFormat:@"%@",content[@"username"]];
+    self.CommentTime.text = [NSString stringWithFormat:@"%@",content[@"commtime"]];
+    self.contentLabel.text = [NSString stringWithFormat:@"%@",content[@"content"]];
+    self.fen.text = [NSString stringWithFormat:@"%@",content[@"fen"]];
+    self.goodsid.text = [NSString stringWithFormat:@"%@",content[@"goodsid"]];
 }
 @end
