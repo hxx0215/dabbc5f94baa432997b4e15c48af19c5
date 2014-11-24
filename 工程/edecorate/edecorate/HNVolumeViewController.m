@@ -32,7 +32,7 @@
     
     [self.viewSegmentedControl setTitle:NSLocalizedString(@"Consumer verification", nil) forSegmentAtIndex:0];
     [self.viewSegmentedControl setTitle:NSLocalizedString(@"Verify effective", nil) forSegmentAtIndex:1];
-    
+    self.viewSegmentedControl.tintColor = [UIColor projectGreen];
     self.volumeNOTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
     self.volumeNOTextField.delegate = self;
     self.volumeNOTextField.placeholder = NSLocalizedString(@"在此输入消费券号", nil);
