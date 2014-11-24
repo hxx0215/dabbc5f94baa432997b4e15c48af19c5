@@ -152,6 +152,7 @@
 		B9E433681A06515E000E2CA9 /* HNNewCheckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9E433661A06515E000E2CA9 /* HNNewCheckViewController.m */; };
 		B9E433691A06515E000E2CA9 /* HNNewCheckViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9E433671A06515E000E2CA9 /* HNNewCheckViewController.xib */; };
 		B9EBC8491A0E4D79008523E2 /* HNBrowseImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9EBC8481A0E4D79008523E2 /* HNBrowseImageViewController.m */; };
+		D30E62FD1A237FE80028168B /* HNNeedPayTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D30E62FC1A237FE80028168B /* HNNeedPayTableViewCell.m */; };
 		D311A7901A1E41FD000E8A4F /* 订单管理@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D311A7841A1E41FD000E8A4F /* 订单管理@2x.png */; };
 		D311A7911A1E41FD000E8A4F /* 订单管理c@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D311A7851A1E41FD000E8A4F /* 订单管理c@2x.png */; };
 		D311A7921A1E41FD000E8A4F /* 评论留言@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D311A7861A1E41FD000E8A4F /* 评论留言@2x.png */; };
@@ -488,6 +489,8 @@
 		B9E433671A06515E000E2CA9 /* HNNewCheckViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HNNewCheckViewController.xib; path = Classes/DecorateControl/HNNewCheckViewController.xib; sourceTree = "<group>"; };
 		B9EBC8471A0E4D79008523E2 /* HNBrowseImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNBrowseImageViewController.h; path = Resources/HNBrowseImageViewController.h; sourceTree = "<group>"; };
 		B9EBC8481A0E4D79008523E2 /* HNBrowseImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNBrowseImageViewController.m; path = Resources/HNBrowseImageViewController.m; sourceTree = "<group>"; };
+		D30E62FB1A237FE80028168B /* HNNeedPayTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNNeedPayTableViewCell.h; sourceTree = "<group>"; };
+		D30E62FC1A237FE80028168B /* HNNeedPayTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNNeedPayTableViewCell.m; sourceTree = "<group>"; };
 		D311A7841A1E41FD000E8A4F /* 订单管理@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "订单管理@2x.png"; sourceTree = "<group>"; };
 		D311A7851A1E41FD000E8A4F /* 订单管理c@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "订单管理c@2x.png"; sourceTree = "<group>"; };
 		D311A7861A1E41FD000E8A4F /* 评论留言@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "评论留言@2x.png"; sourceTree = "<group>"; };
@@ -987,6 +990,8 @@
 				D3F4B5A519E83EF9001CA79C /* HNPassData.m */,
 				D33549F419FEB3D300135800 /* HNPersonNewTableViewCell.h */,
 				D33549F519FEB3D300135800 /* HNPersonNewTableViewCell.m */,
+				D30E62FB1A237FE80028168B /* HNNeedPayTableViewCell.h */,
+				D30E62FC1A237FE80028168B /* HNNeedPayTableViewCell.m */,
 			);
 			name = Pass;
 			sourceTree = "<group>";
@@ -1610,6 +1615,7 @@
 				B97F70671A12294000029C6F /* HNNewReportTableViewCell.m in Sources */,
 				B965863619F693CF00EB4766 /* HNLoginView.m in Sources */,
 				37724D7719D8F69700A9B7EC /* HNCommentsDetailViewController.m in Sources */,
+				D30E62FD1A237FE80028168B /* HNNeedPayTableViewCell.m in Sources */,
 				D334365D1A1501E8004C3EB4 /* HNDeliverGodTableViewCell.m in Sources */,
 				B9E0660919DAED6100893DBD /* HNDeliverGoodsViewController.m in Sources */,
 				D3C07BC419CDC8A0003EA5E4 /* HNComplaintApplyViewController.m in Sources */,

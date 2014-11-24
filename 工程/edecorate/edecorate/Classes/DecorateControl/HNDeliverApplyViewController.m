@@ -17,6 +17,7 @@
 #import "HNPersonNewTableViewCell.h"
 #import "HNUploadImage.h"
 #import "HNDeliverGodTableViewCell.h"
+#import "HNNeedPayTableViewCell.h"
 
 @interface HNDeliverApplyViewController ()<UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate,HNDecorateChoiceViewDelegate,UITextFieldDelegate,UIImagePickerControllerDelegate>
 @property bool bo;
@@ -25,6 +26,7 @@
 @property (nonatomic, strong)IBOutlet UITextField* productTextField;
 @property (nonatomic, strong)IBOutlet UITextField* bTimeTextField;
 @property (nonatomic, strong)IBOutlet UITextField* eTimeTextField;
+@property (strong,nonatomic) NSIndexPath* selectIndex;
 
 
 @property (nonatomic, strong) HNDeliverData* model;
@@ -38,6 +40,7 @@
 @property (strong, nonatomic) UIToolbar * topView;
 @property (strong,nonatomic) UIView *commitView;
 @property (nonatomic)CGFloat contentSizeHeight;
+@property (nonatomic, strong)HNDecoratePayModel *payModel;
 @end
 
 @implementation HNDeliverApplyViewController
@@ -135,6 +138,60 @@
 - (void)updataDecorateInformation:(HNDecorateChoiceModel*)model
 {
     self.model.declareId = model.declareId;
+    self.payModel = model.payModel;
+    
+    MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = NSLocalizedString(@"Loading", nil);
+    NSMutableDictionary *sendDic = [[NSMutableDictionary alloc] init];
+    [sendDic setObject:self.model.declareId forKey:@"declareid"];
+    [sendDic setObject:[NSNumber numberWithInteger:(3)]forKey:@"type"];
+    NSString *sendJson = [sendDic JSONString];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"get.prices.list" Params:sendJson]];
+    NSString *contentType = @"text/html";
+    [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
+        
+        [self performSelectorOnMainThread:@selector(doLoadingPay:) withObject:data waitUntilDone:YES];
+    }];
+    
+}
+
+- (void)doLoadingPay:(NSData*)data
+{
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    if (data)
+    {
+        NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
+        NSLog(@"%@",retJson);
+        NSDictionary* dic = [retJson objectFromJSONString];
+        NSInteger count = [[dic objectForKey:@"total"] integerValue];
+        if (0!=count)
+        {
+            NSArray *dataArr = [dic objectForKey:@"data"];
+            [self.model.needItems removeAllObjects];
+            for (int i=0; i<[dataArr count]; i++) {
+                HNPassNeedItem *pay = [[HNPassNeedItem alloc]init];
+                NSDictionary *dicData = [dataArr objectAtIndex:i];
+                [pay updateData:dicData];
+                pay.number = @"0";
+                pay.totalMoney = @"¥0.00";
+                [self.model.needItems addObject:pay];
+            }
+            [self.tableView reloadData];
+            [self movewButton];
+        }
+        else
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login Fail", nil) message:NSLocalizedString(@"Please input correct username and password", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+            [alert show];
+        }
+    }
+    else{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection Error", nil) message:NSLocalizedString(@"Please check your network.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+        [alert show];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -164,6 +221,9 @@
     if (data)
     {
         NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        if (!retStr) {
+            return;
+        }
         NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
         NSLog(@"%@",retJson);
         NSDictionary* dic = [retJson objectFromJSONString];
@@ -214,18 +274,29 @@
     array = [NSArray arrayWithArray:jsonArray];
     
     NSArray *array2 = [[NSArray alloc]init];
+    NSMutableArray *jsonArray2 = [[NSMutableArray alloc]init];//创建最外层的数组
+    for (int i=0; i<[self.model.needItems count]; i++) {
+        HNPassNeedItem *tModel = [self.model.needItems objectAtIndex:i];
+        
+        NSDictionary *dic = [[NSMutableDictionary alloc]init];//创建内层的字典
+        //（name：缴费项名称，price:缴费金额，numer：数量，totalMoney：总金额，useUnit：单位）"
+        [dic setValue:tModel.name forKey:@"name"];
+        [dic setValue:[NSNumber numberWithFloat:tModel.price.floatValue]  forKey:@"price"];
+        [dic setValue:[NSNumber numberWithInteger:tModel.number.integerValue] forKey:@"number"];
+        [dic setValue:tModel.useUnit forKey:@"useUnit"];
+        [dic setValue:tModel.IsSubmit forKey:@"IsSubmit"];
+        [dic setValue:tModel.Isrefund forKey:@"Isrefund"];
+        
+        [jsonArray2 addObject:dic];
+    }
+    array2 = [NSArray arrayWithArray:jsonArray2];
+    
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:self.model.declareId,@"declareId", self.model.product,@"product",self.model.bTime,@"btime",self.model.eTime,@"etime",[array JSONString],@"proposer",[array2 JSONString],@"needItem",nil];
     NSLog(@"%@",[dic JSONString]);
     
     return dic;
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    //if(alertView.tag==1)
-    //self.temporaryModel.status = TemporaryStatusApplying;
-    [self.navigationController popViewControllerAnimated:YES];
-}
 
 
 #pragma mark - tableView
@@ -248,7 +319,7 @@
         return 0;
     }
     else if (section==3+[self.model.proposerItems count]) {
-        return 1;
+        return [self.model.needItems count];
     }
     return 0;
 }
@@ -300,6 +371,7 @@
         [btn setTitle:NSLocalizedString(@"新增送货安装人员", nil) forState:UIControlStateNormal];
         [btn addTarget:self action:@selector(addNewClick:) forControlEvents:UIControlEventTouchUpInside];
     }
+    
     else
     {
         UILabel *label = [[UILabel alloc] init];
@@ -336,6 +408,9 @@
     else if (indexPath.section<[self.model.proposerItems count]+2)
     {
         return 145;
+    }
+    else if (indexPath.section==3+[self.model.proposerItems count]) {
+        return 65;
     }
     return 30;
     
@@ -400,6 +475,27 @@
         }
         return cell;
     }
+    if (indexPath.section == [self.model.proposerItems count]+3) {
+        static NSString *identy = @"purchaseIdenty";
+        HNNeedPayTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
+        HNDeliverNeedItem *neddItem = [self.model.needItems objectAtIndex:indexPath.row];
+        if (!cell){
+            cell = [[HNNeedPayTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identy];
+            //[cell.checkButton addTarget:self action:@selector(check:) forControlEvents:UIControlEventTouchUpInside];
+        }
+        {
+            //        cell.textLabel.text = [self.mustPay[indexPath.row] title];
+            cell.detail.textColor = [UIColor colorWithWhite:128.0/255.0 alpha:1.0];
+            cell.checkButton.hidden = YES;
+        }
+        
+        cell.checkButton.tag = indexPath.row;
+        cell.title.text = neddItem.name;
+        cell.price.text = neddItem.totalMoney;
+        cell.detail.text = [NSString stringWithFormat:@"单价%@   数量%@%@",neddItem.price,neddItem.number,neddItem.useUnit];
+        return cell;
+    }
+
     static NSString *identy = @"DefaultApplyCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
     if (!cell)
@@ -408,6 +504,33 @@
     }
     return cell;
     
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.section == [self.model.proposerItems count]+3)
+    {
+        HNDeliverNeedItem *neddItem = [self.model.needItems objectAtIndex:indexPath.row];
+        self.selectIndex = indexPath;
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:NSLocalizedString(@"请输入数量", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"取消", nil) otherButtonTitles:NSLocalizedString(@"确定", nil), nil];
+        alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+        UITextField *tf=[alert textFieldAtIndex:0];
+        tf.text = [NSString stringWithFormat:@"%@",neddItem.number];
+        tf.keyboardType = UIKeyboardTypeNumberPad;
+        [alert show];
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{
+    UITextField *tf=[alertView textFieldAtIndex:0];
+    if (1==buttonIndex){
+        HNDeliverNeedItem *neddItem = [self.model.needItems objectAtIndex:self.selectIndex.row];
+        HNNeedPayTableViewCell *cell = (HNNeedPayTableViewCell *)[self.tableView cellForRowAtIndexPath:self.selectIndex];
+        neddItem.number = [NSString stringWithFormat:@"%ld", tf.text.integerValue];
+        neddItem.totalMoney = [NSString stringWithFormat:@"¥%.2f",neddItem.number.integerValue*1.00*neddItem.price.floatValue];
+        cell.price.text = neddItem.totalMoney;
+        cell.detail.text = [NSString stringWithFormat:@"单价%@   数量%@%@",neddItem.price,neddItem.number,neddItem.useUnit];
+    }
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath

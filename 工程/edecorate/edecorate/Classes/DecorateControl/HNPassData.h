@@ -43,12 +43,17 @@
 
 //"出入证缴费项详情JSON【已申请的详情项】
 //（name：缴费项名称，price:缴费金额，numer：数量，totalMoney：总金额，useUnit：单位）"
+//缴费项json([{name:名称,price:价格,useUnit:单位,number:数量,IsSubmit:是否必缴,Isrefund:是否可退,totalMoney:总金额,sort:排序},{...}]
 @interface HNPassNeedItem : NSObject
 @property (nonatomic, strong)NSString *name;
 @property (nonatomic, strong)NSString *price;
-@property (nonatomic, strong)NSString *numer;//
+@property (nonatomic, strong)NSString *number;//
 @property (nonatomic, strong)NSString *totalMoney;
 @property (nonatomic, strong)NSString *useUnit;
+@property (nonatomic, strong)NSString *explain;
+@property (nonatomic, strong)NSString *IsSubmit;
+@property (nonatomic, strong)NSString *Isrefund;
+@property (nonatomic, strong)NSString *sort;
 -(BOOL)updateData:(NSDictionary *)dic;
 @end
 

@@ -176,9 +176,6 @@
     [self.topView setItems:buttonsArray];
     
     
-    [HNUIStyleSet UIStyleSetRoundView:self.houseInfMainLabel];
-    [HNUIStyleSet UIStyleSetRoundView:self.complaintInfMainLabel];
-    [HNUIStyleSet UIStyleSetRoundView:self.constructionInfMainLabel];
 }
 
 
@@ -219,13 +216,13 @@
     [purchase setBackgroundColor:[UIColor colorWithRed:245.0/255.0 green:72.0/255.0 blue:0.0 alpha:1.0]];
     [purchase addTarget:self action:@selector(commit:) forControlEvents:UIControlEventTouchUpInside];
     [self.commitView addSubview:purchase];
+    [self.tableView addSubview:self.commitView];
     [self movewButton];
 }
 -(void)movewButton
 {
     CGSize size = self.tableView.contentSize;
     self.commitView.top = size.height;
-    [self.tableView addSubview:self.commitView];
     size.height += self.commitView.height;
     self.tableView.contentSize = size;
     self.contentSizeHeight = size.height;

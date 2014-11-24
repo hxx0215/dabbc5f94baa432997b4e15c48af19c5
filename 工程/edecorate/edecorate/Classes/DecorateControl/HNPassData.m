@@ -89,9 +89,13 @@
         return NO;
     [self setValue:[dic objectForKey:@"name"] forKey:@"name"];
     [self setValue:[dic objectForKey:@"price"] forKey:@"price"];
-    [self setValue:[dic objectForKey:@"numer"] forKey:@"numer"];
+    [self setValue:[dic objectForKey:@"number"] forKey:@"number"];
     [self setValue:[dic objectForKey:@"totalMoney"] forKey:@"totalMoney"];
     [self setValue:[dic objectForKey:@"useUnit"] forKey:@"useUnit"];
+    [self setValue:[dic objectForKey:@"explain"] forKey:@"explain"];
+    [self setValue:[dic objectForKey:@"IsSubmit"] forKey:@"IsSubmit"];
+    [self setValue:[dic objectForKey:@"Isrefund"] forKey:@"Isrefund"];
+    
     return YES;
 }
 @end

@@ -9,6 +9,7 @@
 #import "HNOfficePassesDetailsViewController.h"
 #import "UIView+AHKit.h"
 #import "HNPersonDetailTableViewCell.h"
+#import "HNNeedPayTableViewCell.h"
 
 @interface HNOfficePassesDetailsViewController ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -106,6 +107,9 @@
         
         return 5;
     }
+    else if (section==[self.temporaryModel.proposerItems count]+1){
+        return [self.temporaryModel.needItems count];
+    }
     else if([self.temporaryModel.proposerItems count]>=section)
     {
         return 1;
@@ -155,6 +159,9 @@
         
         return 30;
     }
+    else if (indexPath.section==[self.temporaryModel.proposerItems count]+1){
+        return 60;
+    }
     else if([self.temporaryModel.proposerItems count]>=indexPath.section)
     {
         return 155;
@@ -178,7 +185,28 @@
             cell.detailTextLabel.text = [self.dataArray1 objectAtIndex:indexPath.row];
         cell.textLabel.textColor = [UIColor darkTextColor];
         return cell;
-    }else if([self.temporaryModel.proposerItems count]>=indexPath.section)
+    }
+    if (indexPath.section == [self.temporaryModel.proposerItems count]+1) {
+        static NSString *identy = @"purchaseIdenty";
+        HNNeedPayTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
+        HNPassNeedItem *neddItem = [self.temporaryModel.needItems objectAtIndex:indexPath.row];
+        if (!cell){
+            cell = [[HNNeedPayTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identy];
+            //[cell.checkButton addTarget:self action:@selector(check:) forControlEvents:UIControlEventTouchUpInside];
+        }
+        {
+            //        cell.textLabel.text = [self.mustPay[indexPath.row] title];
+            cell.detail.textColor = [UIColor colorWithWhite:128.0/255.0 alpha:1.0];
+            cell.checkButton.hidden = YES;
+        }
+        
+        //cell.checkButton.tag = indexPath.row;
+        cell.title.text =  neddItem.name;
+        cell.price.text = [NSString stringWithFormat:@"%.2f",neddItem.totalMoney.floatValue];
+        cell.detail.text = [NSString stringWithFormat:@"单价%@   数量%@%@",[NSString stringWithFormat:@"%.2f",neddItem.price.floatValue],[NSString stringWithFormat:@"%ld",neddItem.number.integerValue],neddItem.useUnit];
+        return cell;
+    }
+    else if([self.temporaryModel.proposerItems count]>=indexPath.section)
     {
         static NSString *identy = @"PersonDetailCell";
         HNPersonDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];

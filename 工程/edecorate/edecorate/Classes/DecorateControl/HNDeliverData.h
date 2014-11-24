@@ -46,9 +46,13 @@
 @interface HNDeliverNeedItem : NSObject
 @property (nonatomic, strong)NSString *name;
 @property (nonatomic, strong)NSString *price;
-@property (nonatomic, strong)NSString *numer;//
+@property (nonatomic, strong)NSString *number;//
 @property (nonatomic, strong)NSString *totalMoney;
 @property (nonatomic, strong)NSString *useUnit;
+@property (nonatomic, strong)NSString *explain;
+@property (nonatomic, strong)NSString *IsSubmit;
+@property (nonatomic, strong)NSString *Isrefund;
+@property (nonatomic, strong)NSString *sort;
 -(BOOL)updateData:(NSDictionary *)dic;
 @end
 

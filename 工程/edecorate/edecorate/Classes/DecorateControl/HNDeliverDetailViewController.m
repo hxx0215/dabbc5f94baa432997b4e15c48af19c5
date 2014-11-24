@@ -9,6 +9,7 @@
 #import "HNDeliverDetailViewController.h"
 #import "UIView+AHKit.h"
 #import "HNPersonDetailTableViewCell.h"
+#import "HNNeedPayTableViewCell.h"
 
 @interface HNDeliverDetailViewController ()<UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,UINavigationControllerDelegate>
 
@@ -95,12 +96,12 @@
         
         return 3;
     }
-    else if([self.deliverModel.proposerItems count]>=section)
+    else if(section<[self.deliverModel.proposerItems count]+2)
     {
         return 1;
     }
     else
-        return 1;
+        return [self.deliverModel.needItems count];
 }
 
 
@@ -147,6 +148,10 @@
     {
         
         return 30;
+    }
+    else if([self.deliverModel.proposerItems count]==indexPath.section-2)
+    {
+        return 65;
     }
     else if([self.deliverModel.proposerItems count]>(indexPath.section-2))
     {
@@ -209,6 +214,26 @@
         
         return cell;
     }
+    else if (indexPath.section == [self.deliverModel.proposerItems count]+2) {
+        static NSString *identy = @"purchaseIdenty";
+        HNNeedPayTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
+        HNDeliverNeedItem *neddItem = [self.deliverModel.needItems objectAtIndex:indexPath.row];
+        if (!cell){
+            cell = [[HNNeedPayTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identy];
+            //[cell.checkButton addTarget:self action:@selector(check:) forControlEvents:UIControlEventTouchUpInside];
+        }
+        {
+            //        cell.textLabel.text = [self.mustPay[indexPath.row] title];
+            cell.detail.textColor = [UIColor colorWithWhite:128.0/255.0 alpha:1.0];
+            cell.checkButton.hidden = YES;
+        }
+        
+        //cell.checkButton.tag = indexPath.row;
+        cell.title.text =  neddItem.name;
+        cell.price.text = [NSString stringWithFormat:@"%.2f",neddItem.totalMoney.floatValue];
+        cell.detail.text = [NSString stringWithFormat:@"单价%@   数量%@%@",[NSString stringWithFormat:@"%.2f",neddItem.price.floatValue],[NSString stringWithFormat:@"%ld",neddItem.number.integerValue],neddItem.useUnit];
+        return cell;
+    }
     else
     {
         static NSString *identy = @"complaintDetailCell";
@@ -227,6 +252,8 @@
     
     
 }
+
+
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
