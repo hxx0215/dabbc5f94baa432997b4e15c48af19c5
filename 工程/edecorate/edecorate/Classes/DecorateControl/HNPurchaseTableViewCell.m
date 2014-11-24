@@ -16,12 +16,13 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self){
-        self.title = [[UILabel alloc] initWithFrame:CGRectMake(27, 0, 200, 18)];
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
+        self.title = [[UILabel alloc] initWithFrame:CGRectMake(37, 0, 200, 18)];
         self.title.font = [UIFont systemFontOfSize:18.0];
         self.price = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 19)];
         self.price.font = [UIFont systemFontOfSize:19.0];
         self.price.textAlignment = NSTextAlignmentRight;
-        self.detail = [[UILabel alloc] initWithFrame:CGRectMake(27, 0, 200, 13)];;
+        self.detail = [[UILabel alloc] initWithFrame:CGRectMake(37, 0, 200, 13)];;
         self.detail.font = [UIFont systemFontOfSize:13.0];
         self.checkButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [self.checkButton setBackgroundImage:[UIImage imageNamed:@"purchasecheckbox.png"] forState:UIControlStateNormal];
@@ -44,7 +45,7 @@
         self.title.centerY = self.contentView.height / 2;
     else
         self.title.top = 12;
-    self.price.right = self.contentView.width - 14;
+    self.price.right = self.contentView.width - 24;
     self.price.centerY = self.title.centerY;
     if (0 == self.single)
     {
@@ -52,10 +53,10 @@
     }
     else{
         self.detail.hidden = NO;
-        self.detail.left = 27;
+        self.detail.left = 37;
         self.detail.bottom = self.contentView.height - 12;
     }
-    self.checkButton.left = 4;
+    self.checkButton.left = 14;
     self.checkButton.top = 12;
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
