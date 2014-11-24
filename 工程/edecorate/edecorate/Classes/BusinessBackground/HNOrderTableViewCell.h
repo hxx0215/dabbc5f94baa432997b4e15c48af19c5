@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface HNOrderTableViewCell : UITableViewCell
-
+- (void)setContent:(NSDictionary *)content;
 @end

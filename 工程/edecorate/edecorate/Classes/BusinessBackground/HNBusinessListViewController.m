@@ -174,7 +174,7 @@ static NSString *reuseId = @"businessCell";
     switch (self.businessType){
         case kGoods:{
             HNGoodsTableViewCell *tCell = [tableView dequeueReusableCellWithIdentifier:reuseId];
-            [tCell setContet:self.businessList[indexPath.row]];
+            [tCell setContent:self.businessList[indexPath.row]];
             cell = tCell;
         }
             break;
@@ -190,6 +190,7 @@ static NSString *reuseId = @"businessCell";
             break;
         case kOrder:{
             HNOrderTableViewCell *tCell = [tableView dequeueReusableCellWithIdentifier:reuseId];
+            [tCell setContent:self.businessList[indexPath.row]];
             cell = tCell;
         }
         default:
@@ -281,12 +282,32 @@ static NSString *reuseId = @"businessCell";
         case kGoods:
             [self loadThumbnailWithKey:@"pics"];
             break;
-            
+        case kOrder:
+            [self loadOrderThumbnail];
         default:
             break;
     }
 }
-
+- (void)loadDefault{
+    for (int i=0;i<[self.businessList count];i++)
+    {
+        id obj = self.businessList[i];
+        NSMutableDictionary *dic = [obj mutableCopy];
+        UIImage *defaultImage = [UIImage imageNamed:@"selectphoto.png"];
+        [dic setObject:defaultImage forKey:@"uiimage"];
+        [self.businessList replaceObjectAtIndex:i withObject:dic];
+    }
+}
+- (void)loadOrderThumbnail{
+    for (int i=0;i<[self.businessList count];i++){
+        id obj = self.businessList[i];
+        NSString *imgURL = [self.businessList[i] objectForKey:@"OrderGoods"][0][@"image"];
+        NSMutableDictionary *dic = [obj mutableCopy];
+        UIImage *image = [self imageWithLink:imgURL];
+        [dic setObject:image forKey:@"uiimage"];
+        [self.businessList replaceObjectAtIndex:i withObject:dic];
+    }
+}
 - (void)loadThumbnailWithKey:(NSString *)key{
     for (int i=0;i<[self.businessList count];i++)
     {
@@ -321,7 +342,14 @@ static NSString *reuseId = @"businessCell";
                 for (int i = 0; i< count; i++) {
                     [self.businessList addObject:[[retDic objectForKey:@"data"] objectAtIndex:i]];
                 }
-                [self loadThumbnail];
+                [self loadDefault];
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                    [self loadThumbnail];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self.tableView reloadData];
+                    });
+                });
+                
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self.tableView reloadData];
                 });

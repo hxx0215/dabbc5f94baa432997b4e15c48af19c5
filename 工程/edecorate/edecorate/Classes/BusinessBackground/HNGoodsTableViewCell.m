@@ -28,7 +28,7 @@
 
     // Configure the view for the selected state
 }
-- (void)setContet:(NSDictionary *)content{
+- (void)setContent:(NSDictionary *)content{
     self.pics.height =75;
     self.pics.image = [content objectForKey:@"uiimage"];
     self.name.text = [content objectForKey:@"name"];

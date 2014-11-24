@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface HNGoodsTableViewCell : UITableViewCell
-- (void)setContet:(NSDictionary *)content;
+- (void)setContent:(NSDictionary *)content;
 @end
