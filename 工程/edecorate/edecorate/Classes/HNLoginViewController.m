@@ -90,7 +90,7 @@
     [self.view addSubview:self.forget];
 
     [self.view addSubview:self.loginButton];
-    self.loginView.userName.text = @"admin";
+    self.loginView.userName.text = @"zhangdongfang1";
     self.loginView.password.text = @"123456";
     [self initTabBar];
 
