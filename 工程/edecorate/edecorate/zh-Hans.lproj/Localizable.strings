@@ -113,8 +113,8 @@
 "My Profile" = "我的资料";
 "Consumption volume verification" = "消费卷验证";
 
-"Volume No." = "卷号";
-"Consumer password" = "消费密码";
+"Volume No." = "消费券号：";
+"Consumer password" = "消费密码：";
 "Consumer verification" = "消费验证";
 "Verify effective" = "验证是否有效";
 

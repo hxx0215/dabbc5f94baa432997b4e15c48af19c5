@@ -14,6 +14,7 @@
 #import "JSONKit.h"
 #import "HNLoginData.h"
 #import "HNProfileData.h"
+#import "HNImageUploadTableViewCell.h"
 
 @interface HNProfileViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (strong, nonatomic) HNProfileData *model;
@@ -152,11 +153,26 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.row==8)
+    {
+        return 60;
+    }
     return 35;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+    if (indexPath.row==8) {
+        static NSString *identy = @"HNImageUploadTableViewCell";
+        HNImageUploadTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
+        if (!cell)
+        {
+            cell = [[HNImageUploadTableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:identy];
+        }
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.title.text = @"身份证照片：";
+        [cell reset:self.model.attorneyIDcard];
+        return cell;
+    }
     static NSString *identy = @"complaintDetailCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
     if (!cell)

@@ -71,7 +71,7 @@
         return 0;
     }
     else
-        return 7;
+        return 5;
 }
 
 
@@ -91,6 +91,7 @@
     
     UILabel *label = [[UILabel alloc] init];
     if (section == 0){
+        [HNUIStyleSet UIStyleSetRoundView:contentView];
         label.text = self.temporaryModel.room;
     }else
         label.text = NSLocalizedString(@"投诉信息", nil);
@@ -129,37 +130,37 @@
                 detailString = self.temporaryModel.CreateTime;
             }
                 break;
+//            case 1:
+//            {
+//                titleString = NSLocalizedString(@"Complaint Content", nil);
+//                detailString = self.temporaryModel.body;
+//            }
+//                break;
+//            case 2:
+//            {
+//                titleString = NSLocalizedString(@"Complaint Category", nil);
+//                detailString = self.temporaryModel.complainType;
+//            }
+//                break;
             case 1:
-            {
-                titleString = NSLocalizedString(@"Complaint Content", nil);
-                detailString = self.temporaryModel.body;
-            }
-                break;
-            case 2:
-            {
-                titleString = NSLocalizedString(@"Complaint Category", nil);
-                detailString = self.temporaryModel.complainType;
-            }
-                break;
-            case 3:
             {
                 titleString = NSLocalizedString(@"Complaint Object", nil);
                 detailString = self.temporaryModel.complainObject;
             }
                 break;
-            case 4:
+            case 2:
             {
                 titleString = NSLocalizedString(@"Complaint Issue", nil);
                 detailString = self.temporaryModel.complainProblem;
             }
                 break;
-            case 5:
+            case 3:
             {
                 titleString = NSLocalizedString(@"constructionTeam result", nil);
                 detailString = self.temporaryModel.constructionTeam;
             }
                 break;
-            case 6:
+            case 4:
             {
                 titleString = NSLocalizedString(@"management result", nil);
                 detailString = self.temporaryModel.management;

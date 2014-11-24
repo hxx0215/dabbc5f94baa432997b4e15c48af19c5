@@ -161,7 +161,7 @@
     
     self.topView = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 30)];
     //[topView setBarStyle:UIBarStyleBlack];
-    self.topView .backgroundColor = [UIColor whiteColor];
+    self.topView.backgroundColor = [UIColor whiteColor];
     UIBarButtonItem * btnSpace = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
     UIBarButtonItem * doneButton = [[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(OKTextClick)];
     NSArray * buttonsArray = [NSArray arrayWithObjects:btnSpace,doneButton,nil];
