@@ -102,6 +102,11 @@
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    self.rTableView.frame = self.view.bounds;
+    
+}
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
     [self.rTableView headerBeginRefreshing];
 }
 - (void)reportButton_Clicked:(id)sender{

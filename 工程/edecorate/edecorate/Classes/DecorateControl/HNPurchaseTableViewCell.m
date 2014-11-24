@@ -24,7 +24,7 @@
         self.detail = [[UILabel alloc] initWithFrame:CGRectMake(27, 0, 200, 13)];;
         self.detail.font = [UIFont systemFontOfSize:13.0];
         self.checkButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [self.checkButton setBackgroundImage:[UIImage imageNamed:@"purchasechekbox.png"] forState:UIControlStateNormal];
+        [self.checkButton setBackgroundImage:[UIImage imageNamed:@"purchasecheckbox.png"] forState:UIControlStateNormal];
         [self.checkButton setImage:[UIImage imageNamed:@"purchasecheck.png"] forState:UIControlStateSelected];
         [self.checkButton sizeToFit];
         [self.contentView addSubview:self.title];

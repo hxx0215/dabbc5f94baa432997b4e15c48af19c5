@@ -62,6 +62,7 @@
     [super viewWillAppear:animated];
     MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = NSLocalizedString(@"Loading", nil);
+    self.tableView.frame = self.view.bounds;
 }
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
@@ -103,7 +104,7 @@
         view.backgroundColor = [UIColor colorWithRed:5.0/255.0 green:155.0/255.0 blue:239.0/255.0 alpha:1.0];
         label.text = NSLocalizedString(@"可选项目(单位:元)", nil);
         UIButton *checkBox = [UIButton buttonWithType:UIButtonTypeCustom];
-        [checkBox setBackgroundImage:[UIImage imageNamed:@"purchasechekbox.png"] forState:UIControlStateNormal];
+        [checkBox setBackgroundImage:[UIImage imageNamed:@"purchasecheckbox.png"] forState:UIControlStateNormal];
         [checkBox setImage:[UIImage imageNamed:@"purchasecheck.png"] forState:UIControlStateSelected];
         [checkBox addTarget:self action:@selector(checkAll:) forControlEvents:UIControlEventTouchUpInside];
         [checkBox sizeToFit];
