@@ -77,7 +77,8 @@ static NSString *reuseId = @"businessCell";
     self.tableView.height -= self.headerView.height;
     
     [self loadCellWithType:self.businessType];
-    [self initNavi];
+    if (self.businessType == kGoods)
+        [self initNavi];
 }
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
@@ -281,6 +282,7 @@ static NSString *reuseId = @"businessCell";
             break;
         case kReturnGoods:
             [self loadDataWithDic:self.returnGoodsSearchDic withMethod:@"get.order.return"];
+            break;
         case kComment:
             [self loadDataWithDic:self.commentDic withMethod:@"get.goods.comment"];
         default:
