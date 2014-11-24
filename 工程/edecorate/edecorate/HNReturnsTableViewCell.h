@@ -10,4 +10,5 @@
 
 @interface HNReturnsTableViewCell : UITableViewCell
 +(CGFloat)cellHeight;
+- (void)setContent:(NSDictionary *)content;
 @end

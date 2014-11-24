@@ -181,6 +181,7 @@ static NSString *reuseId = @"businessCell";
             break;
         case kReturnGoods:{
             HNReturnsTableViewCell *cCell=[tableView dequeueReusableCellWithIdentifier:reuseId];
+            [cCell setContent:self.businessList[indexPath.row]];
             cell=cCell;
         }
             break;
@@ -254,7 +255,7 @@ static NSString *reuseId = @"businessCell";
             return 160;
             break;
         case kReturnGoods:
-            return [HNReturnsTableViewCell cellHeight];
+            return 130;
             break;
             
         case kOrder:
