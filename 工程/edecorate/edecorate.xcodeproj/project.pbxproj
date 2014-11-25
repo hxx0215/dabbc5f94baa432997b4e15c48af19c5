@@ -152,6 +152,32 @@
 		B9E433681A06515E000E2CA9 /* HNNewCheckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9E433661A06515E000E2CA9 /* HNNewCheckViewController.m */; };
 		B9E433691A06515E000E2CA9 /* HNNewCheckViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9E433671A06515E000E2CA9 /* HNNewCheckViewController.xib */; };
 		B9EBC8491A0E4D79008523E2 /* HNBrowseImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9EBC8481A0E4D79008523E2 /* HNBrowseImageViewController.m */; };
+		D3052B791A24E2DE00ECD7A1 /* UIImage+StrethImage.m in Sources */ = {isa = PBXBuildFile; fileRef = D3052B761A24E2DE00ECD7A1 /* UIImage+StrethImage.m */; };
+		D3052B7A1A24E2DE00ECD7A1 /* NSString+DocumentPath.m in Sources */ = {isa = PBXBuildFile; fileRef = D3052B781A24E2DE00ECD7A1 /* NSString+DocumentPath.m */; };
+		D3052B7F1A24E2F100ECD7A1 /* ChartCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3052B7C1A24E2F100ECD7A1 /* ChartCell.m */; };
+		D3052B801A24E2F100ECD7A1 /* ChartCellFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = D3052B7E1A24E2F100ECD7A1 /* ChartCellFrame.m */; };
+		D3052B831A24E2FC00ECD7A1 /* ChartMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = D3052B821A24E2FC00ECD7A1 /* ChartMessage.m */; };
+		D3052B851A24E31900ECD7A1 /* messages.plist in Resources */ = {isa = PBXBuildFile; fileRef = D3052B841A24E31900ECD7A1 /* messages.plist */; };
+		D3052B8A1A24E35900ECD7A1 /* ChartContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3052B871A24E35900ECD7A1 /* ChartContentView.m */; };
+		D3052B8B1A24E35900ECD7A1 /* KeyBordVIew.m in Sources */ = {isa = PBXBuildFile; fileRef = D3052B891A24E35900ECD7A1 /* KeyBordVIew.m */; };
+		D3052B8E1A24E37D00ECD7A1 /* HNCommentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3052B8D1A24E37D00ECD7A1 /* HNCommentsViewController.m */; };
+		D3052BA11A24E43000ECD7A1 /* chatfrom_bg_focused.png in Resources */ = {isa = PBXBuildFile; fileRef = D3052B901A24E43000ECD7A1 /* chatfrom_bg_focused.png */; };
+		D3052BA21A24E43000ECD7A1 /* chatto_bg_focused.png in Resources */ = {isa = PBXBuildFile; fileRef = D3052B911A24E43000ECD7A1 /* chatto_bg_focused.png */; };
+		D3052BA31A24E43000ECD7A1 /* chat_bottom_voice_nor.png in Resources */ = {isa = PBXBuildFile; fileRef = D3052B921A24E43000ECD7A1 /* chat_bottom_voice_nor.png */; };
+		D3052BA41A24E43000ECD7A1 /* chat_bottom_voice_press.png in Resources */ = {isa = PBXBuildFile; fileRef = D3052B931A24E43000ECD7A1 /* chat_bottom_voice_press.png */; };
+		D3052BA51A24E43000ECD7A1 /* chat_bottom_textfield.png in Resources */ = {isa = PBXBuildFile; fileRef = D3052B941A24E43000ECD7A1 /* chat_bottom_textfield.png */; };
+		D3052BA61A24E43000ECD7A1 /* chat_bottom_up_nor.png in Resources */ = {isa = PBXBuildFile; fileRef = D3052B951A24E43000ECD7A1 /* chat_bottom_up_nor.png */; };
+		D3052BA71A24E43000ECD7A1 /* chat_bottom_up_press.png in Resources */ = {isa = PBXBuildFile; fileRef = D3052B961A24E43000ECD7A1 /* chat_bottom_up_press.png */; };
+		D3052BA81A24E43000ECD7A1 /* chat_bottom_smile_nor.png in Resources */ = {isa = PBXBuildFile; fileRef = D3052B971A24E43000ECD7A1 /* chat_bottom_smile_nor.png */; };
+		D3052BA91A24E43000ECD7A1 /* chat_bottom_smile_press.png in Resources */ = {isa = PBXBuildFile; fileRef = D3052B981A24E43000ECD7A1 /* chat_bottom_smile_press.png */; };
+		D3052BAA1A24E43000ECD7A1 /* chat_bottom_keyboard_nor.png in Resources */ = {isa = PBXBuildFile; fileRef = D3052B991A24E43000ECD7A1 /* chat_bottom_keyboard_nor.png */; };
+		D3052BAB1A24E43000ECD7A1 /* chat_bottom_keyboard_press.png in Resources */ = {isa = PBXBuildFile; fileRef = D3052B9A1A24E43000ECD7A1 /* chat_bottom_keyboard_press.png */; };
+		D3052BAC1A24E43000ECD7A1 /* toolbar_bottom_bar.png in Resources */ = {isa = PBXBuildFile; fileRef = D3052B9B1A24E43000ECD7A1 /* toolbar_bottom_bar.png */; };
+		D3052BAD1A24E43000ECD7A1 /* icon01.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D3052B9C1A24E43000ECD7A1 /* icon01.jpg */; };
+		D3052BAE1A24E43000ECD7A1 /* icon02.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D3052B9D1A24E43000ECD7A1 /* icon02.jpg */; };
+		D3052BAF1A24E43000ECD7A1 /* chat_bg_default.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D3052B9E1A24E43000ECD7A1 /* chat_bg_default.jpg */; };
+		D3052BB01A24E43000ECD7A1 /* chatfrom_bg_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = D3052B9F1A24E43000ECD7A1 /* chatfrom_bg_normal.png */; };
+		D3052BB11A24E43000ECD7A1 /* chatto_bg_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = D3052BA01A24E43000ECD7A1 /* chatto_bg_normal.png */; };
 		D30E62FD1A237FE80028168B /* HNNeedPayTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D30E62FC1A237FE80028168B /* HNNeedPayTableViewCell.m */; };
 		D311A7901A1E41FD000E8A4F /* 订单管理@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D311A7841A1E41FD000E8A4F /* 订单管理@2x.png */; };
 		D311A7911A1E41FD000E8A4F /* 订单管理c@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D311A7851A1E41FD000E8A4F /* 订单管理c@2x.png */; };
@@ -489,6 +515,40 @@
 		B9E433671A06515E000E2CA9 /* HNNewCheckViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HNNewCheckViewController.xib; path = Classes/DecorateControl/HNNewCheckViewController.xib; sourceTree = "<group>"; };
 		B9EBC8471A0E4D79008523E2 /* HNBrowseImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNBrowseImageViewController.h; path = Resources/HNBrowseImageViewController.h; sourceTree = "<group>"; };
 		B9EBC8481A0E4D79008523E2 /* HNBrowseImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNBrowseImageViewController.m; path = Resources/HNBrowseImageViewController.m; sourceTree = "<group>"; };
+		D3052B751A24E2DE00ECD7A1 /* UIImage+StrethImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+StrethImage.h"; sourceTree = "<group>"; };
+		D3052B761A24E2DE00ECD7A1 /* UIImage+StrethImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+StrethImage.m"; sourceTree = "<group>"; };
+		D3052B771A24E2DE00ECD7A1 /* NSString+DocumentPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+DocumentPath.h"; sourceTree = "<group>"; };
+		D3052B781A24E2DE00ECD7A1 /* NSString+DocumentPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+DocumentPath.m"; sourceTree = "<group>"; };
+		D3052B7B1A24E2F100ECD7A1 /* ChartCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartCell.h; sourceTree = "<group>"; };
+		D3052B7C1A24E2F100ECD7A1 /* ChartCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartCell.m; sourceTree = "<group>"; };
+		D3052B7D1A24E2F100ECD7A1 /* ChartCellFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartCellFrame.h; sourceTree = "<group>"; };
+		D3052B7E1A24E2F100ECD7A1 /* ChartCellFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartCellFrame.m; sourceTree = "<group>"; };
+		D3052B811A24E2FC00ECD7A1 /* ChartMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartMessage.h; sourceTree = "<group>"; };
+		D3052B821A24E2FC00ECD7A1 /* ChartMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartMessage.m; sourceTree = "<group>"; };
+		D3052B841A24E31900ECD7A1 /* messages.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = messages.plist; sourceTree = "<group>"; };
+		D3052B861A24E35900ECD7A1 /* ChartContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartContentView.h; sourceTree = "<group>"; };
+		D3052B871A24E35900ECD7A1 /* ChartContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartContentView.m; sourceTree = "<group>"; };
+		D3052B881A24E35900ECD7A1 /* KeyBordVIew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyBordVIew.h; sourceTree = "<group>"; };
+		D3052B891A24E35900ECD7A1 /* KeyBordVIew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyBordVIew.m; sourceTree = "<group>"; };
+		D3052B8C1A24E37D00ECD7A1 /* HNCommentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNCommentsViewController.h; sourceTree = "<group>"; };
+		D3052B8D1A24E37D00ECD7A1 /* HNCommentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNCommentsViewController.m; sourceTree = "<group>"; };
+		D3052B901A24E43000ECD7A1 /* chatfrom_bg_focused.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chatfrom_bg_focused.png; sourceTree = "<group>"; };
+		D3052B911A24E43000ECD7A1 /* chatto_bg_focused.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chatto_bg_focused.png; sourceTree = "<group>"; };
+		D3052B921A24E43000ECD7A1 /* chat_bottom_voice_nor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat_bottom_voice_nor.png; sourceTree = "<group>"; };
+		D3052B931A24E43000ECD7A1 /* chat_bottom_voice_press.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat_bottom_voice_press.png; sourceTree = "<group>"; };
+		D3052B941A24E43000ECD7A1 /* chat_bottom_textfield.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat_bottom_textfield.png; sourceTree = "<group>"; };
+		D3052B951A24E43000ECD7A1 /* chat_bottom_up_nor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat_bottom_up_nor.png; sourceTree = "<group>"; };
+		D3052B961A24E43000ECD7A1 /* chat_bottom_up_press.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat_bottom_up_press.png; sourceTree = "<group>"; };
+		D3052B971A24E43000ECD7A1 /* chat_bottom_smile_nor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat_bottom_smile_nor.png; sourceTree = "<group>"; };
+		D3052B981A24E43000ECD7A1 /* chat_bottom_smile_press.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat_bottom_smile_press.png; sourceTree = "<group>"; };
+		D3052B991A24E43000ECD7A1 /* chat_bottom_keyboard_nor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat_bottom_keyboard_nor.png; sourceTree = "<group>"; };
+		D3052B9A1A24E43000ECD7A1 /* chat_bottom_keyboard_press.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat_bottom_keyboard_press.png; sourceTree = "<group>"; };
+		D3052B9B1A24E43000ECD7A1 /* toolbar_bottom_bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = toolbar_bottom_bar.png; sourceTree = "<group>"; };
+		D3052B9C1A24E43000ECD7A1 /* icon01.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = icon01.jpg; sourceTree = "<group>"; };
+		D3052B9D1A24E43000ECD7A1 /* icon02.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = icon02.jpg; sourceTree = "<group>"; };
+		D3052B9E1A24E43000ECD7A1 /* chat_bg_default.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = chat_bg_default.jpg; sourceTree = "<group>"; };
+		D3052B9F1A24E43000ECD7A1 /* chatfrom_bg_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chatfrom_bg_normal.png; sourceTree = "<group>"; };
+		D3052BA01A24E43000ECD7A1 /* chatto_bg_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chatto_bg_normal.png; sourceTree = "<group>"; };
 		D30E62FB1A237FE80028168B /* HNNeedPayTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNNeedPayTableViewCell.h; sourceTree = "<group>"; };
 		D30E62FC1A237FE80028168B /* HNNeedPayTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNNeedPayTableViewCell.m; sourceTree = "<group>"; };
 		D311A7841A1E41FD000E8A4F /* 订单管理@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "订单管理@2x.png"; sourceTree = "<group>"; };
@@ -654,6 +714,8 @@
 		37F9D7E219D87B6B005CB18B /* Comments */ = {
 			isa = PBXGroup;
 			children = (
+				D3052B8C1A24E37D00ECD7A1 /* HNCommentsViewController.h */,
+				D3052B8D1A24E37D00ECD7A1 /* HNCommentsViewController.m */,
 				37F9D7FE19D8B481005CB18B /* HNCommentsHeaderView.h */,
 				37F9D7FF19D8B481005CB18B /* HNCommentsHeaderView.m */,
 				37F9D80119D8B5E1005CB18B /* HNCommentsTableViewCell.h */,
@@ -889,6 +951,7 @@
 		B965862B19F68CBD00EB4766 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				D3052B8F1A24E41D00ECD7A1 /* Comments */,
 				D311A7831A1E41D5000E8A4F /* BusinessIcon */,
 				B9A09D7B1A0B9B3400A88CD8 /* NavigationItem */,
 				D3201FB01A0A654900236B08 /* TabBar */,
@@ -1227,6 +1290,7 @@
 		B9F295E319C9A961003242DF /* Third Party */ = {
 			isa = PBXGroup;
 			children = (
+				D3052B741A24E27900ECD7A1 /* Comments */,
 				B91BFCFA19E2C89A00FD468F /* MBProgressHUD.h */,
 				B91BFCFB19E2C89A00FD468F /* MBProgressHUD.m */,
 				B9AD9E0919E01A7900D82439 /* JSONKit.h */,
@@ -1241,6 +1305,52 @@
 				B94C773919D3082D0046AC58 /* CALayer+XibConfiguration.m */,
 			);
 			name = "Third Party";
+			sourceTree = "<group>";
+		};
+		D3052B741A24E27900ECD7A1 /* Comments */ = {
+			isa = PBXGroup;
+			children = (
+				D3052B841A24E31900ECD7A1 /* messages.plist */,
+				D3052B751A24E2DE00ECD7A1 /* UIImage+StrethImage.h */,
+				D3052B761A24E2DE00ECD7A1 /* UIImage+StrethImage.m */,
+				D3052B771A24E2DE00ECD7A1 /* NSString+DocumentPath.h */,
+				D3052B781A24E2DE00ECD7A1 /* NSString+DocumentPath.m */,
+				D3052B7B1A24E2F100ECD7A1 /* ChartCell.h */,
+				D3052B7C1A24E2F100ECD7A1 /* ChartCell.m */,
+				D3052B7D1A24E2F100ECD7A1 /* ChartCellFrame.h */,
+				D3052B7E1A24E2F100ECD7A1 /* ChartCellFrame.m */,
+				D3052B811A24E2FC00ECD7A1 /* ChartMessage.h */,
+				D3052B821A24E2FC00ECD7A1 /* ChartMessage.m */,
+				D3052B861A24E35900ECD7A1 /* ChartContentView.h */,
+				D3052B871A24E35900ECD7A1 /* ChartContentView.m */,
+				D3052B881A24E35900ECD7A1 /* KeyBordVIew.h */,
+				D3052B891A24E35900ECD7A1 /* KeyBordVIew.m */,
+			);
+			name = Comments;
+			sourceTree = "<group>";
+		};
+		D3052B8F1A24E41D00ECD7A1 /* Comments */ = {
+			isa = PBXGroup;
+			children = (
+				D3052B901A24E43000ECD7A1 /* chatfrom_bg_focused.png */,
+				D3052B911A24E43000ECD7A1 /* chatto_bg_focused.png */,
+				D3052B921A24E43000ECD7A1 /* chat_bottom_voice_nor.png */,
+				D3052B931A24E43000ECD7A1 /* chat_bottom_voice_press.png */,
+				D3052B941A24E43000ECD7A1 /* chat_bottom_textfield.png */,
+				D3052B951A24E43000ECD7A1 /* chat_bottom_up_nor.png */,
+				D3052B961A24E43000ECD7A1 /* chat_bottom_up_press.png */,
+				D3052B971A24E43000ECD7A1 /* chat_bottom_smile_nor.png */,
+				D3052B981A24E43000ECD7A1 /* chat_bottom_smile_press.png */,
+				D3052B991A24E43000ECD7A1 /* chat_bottom_keyboard_nor.png */,
+				D3052B9A1A24E43000ECD7A1 /* chat_bottom_keyboard_press.png */,
+				D3052B9B1A24E43000ECD7A1 /* toolbar_bottom_bar.png */,
+				D3052B9C1A24E43000ECD7A1 /* icon01.jpg */,
+				D3052B9D1A24E43000ECD7A1 /* icon02.jpg */,
+				D3052B9E1A24E43000ECD7A1 /* chat_bg_default.jpg */,
+				D3052B9F1A24E43000ECD7A1 /* chatfrom_bg_normal.png */,
+				D3052BA01A24E43000ECD7A1 /* chatto_bg_normal.png */,
+			);
+			name = Comments;
 			sourceTree = "<group>";
 		};
 		D311A7831A1E41D5000E8A4F /* BusinessIcon */ = {
@@ -1458,31 +1568,45 @@
 				B9D72D5A19D846FC0011CF83 /* HNOrderViewController.xib in Resources */,
 				D3201FAF1A0A640C00236B08 /* HNSettingViewController.xib in Resources */,
 				B90C418119FA3365004EBC2B /* purchasecheckbox@2x.png in Resources */,
+				D3052BAC1A24E43000ECD7A1 /* toolbar_bottom_bar.png in Resources */,
 				D311A79B1A1E41FD000E8A4F /* 消费卷验证c@2x.png in Resources */,
 				D38E009119D84BE0000F5263 /* HNReimburseViewController.xib in Resources */,
+				D3052B851A24E31900ECD7A1 /* messages.plist in Resources */,
 				B9DE560419C9C40B00280EC7 /* Localizable.strings in Resources */,
 				B95D15C519D9AE4B00689B4D /* HNEditPriceViewController.xib in Resources */,
 				D33EEABD19D6FF5D00D6F106 /* city.plist in Resources */,
 				D327005E1A12645E00C05CA5 /* HNPersonDetailTableViewCell.xib in Resources */,
+				D3052BB11A24E43000ECD7A1 /* chatto_bg_normal.png in Resources */,
 				D311A7911A1E41FD000E8A4F /* 订单管理c@2x.png in Resources */,
+				D3052BA31A24E43000ECD7A1 /* chat_bottom_voice_nor.png in Resources */,
 				D311A7991A1E41FD000E8A4F /* 我的资料c@2x.png in Resources */,
 				D311A7951A1E41FD000E8A4F /* 退换货管理c@2x.png in Resources */,
+				D3052BA81A24E43000ECD7A1 /* chat_bottom_smile_nor.png in Resources */,
+				D3052BA61A24E43000ECD7A1 /* chat_bottom_up_nor.png in Resources */,
 				D311A7941A1E41FD000E8A4F /* 退换货管理@2x.png in Resources */,
 				B9A09D821A0B9CA500A88CD8 /* arrowBack@2x.png in Resources */,
 				B9E0660A19DAED6100893DBD /* HNDeliverGoodsViewController.xib in Resources */,
+				D3052BB01A24E43000ECD7A1 /* chatfrom_bg_normal.png in Resources */,
+				D3052BA71A24E43000ECD7A1 /* chat_bottom_up_press.png in Resources */,
 				B9A09D831A0B9CA500A88CD8 /* arrowBackClick@2x.png in Resources */,
 				B91A3AC119D6E6E9000F3823 /* MJRefresh.bundle in Resources */,
+				D3052BA21A24E43000ECD7A1 /* chatto_bg_focused.png in Resources */,
+				D3052BAB1A24E43000ECD7A1 /* chat_bottom_keyboard_press.png in Resources */,
 				B9A09D7E1A0B9B4A00A88CD8 /* add_click@2x.png in Resources */,
 				B965864319F7E38E00EB4766 /* unsubmit@2x.png in Resources */,
 				D33EEABC19D6FF5D00D6F106 /* area.plist in Resources */,
 				B91A3ACD19D6F2FA000F3823 /* HNGoodsTableViewCell.xib in Resources */,
 				D3A96D8F19D98BE80059CF62 /* HNAcceptReturnGoodViewController.xib in Resources */,
+				D3052BAD1A24E43000ECD7A1 /* icon01.jpg in Resources */,
 				B916F0E319C878AC00A849C7 /* PushConfig.plist in Resources */,
 				D3CD910419CF141C00E76AF4 /* HNRefundDetailViewController.xib in Resources */,
 				B9C2B41F19FE8C6900C93D59 /* selectphoto@2x.png in Resources */,
 				B916F0BA19C8781D00A849C7 /* Images.xcassets in Resources */,
+				D3052BAF1A24E43000ECD7A1 /* chat_bg_default.jpg in Resources */,
+				D3052BAE1A24E43000ECD7A1 /* icon02.jpg in Resources */,
 				D311A7961A1E41FD000E8A4F /* 我的商品@2x.png in Resources */,
 				B9C2B42019FE8C6900C93D59 /* selectphotoclick@2x.png in Resources */,
+				D3052BA91A24E43000ECD7A1 /* chat_bottom_smile_press.png in Resources */,
 				B93ED05E1A085B9F008B99B2 /* btn_scanner01@2x.png in Resources */,
 				B90C418019FA3365004EBC2B /* purchasecheck@2x.png in Resources */,
 				D311A7981A1E41FD000E8A4F /* 我的资料@2x.png in Resources */,
@@ -1500,17 +1624,21 @@
 				B965863819F69B7000EB4766 /* loginback@2x.png in Resources */,
 				B916F0AC19C8781D00A849C7 /* InfoPlist.strings in Resources */,
 				D33EEAC219D7000E00D6F106 /* HNAreaPickerView.xib in Resources */,
+				D3052BAA1A24E43000ECD7A1 /* chat_bottom_keyboard_nor.png in Resources */,
 				B9D72D5519D840960011CF83 /* HNOrderTableViewCell.xib in Resources */,
 				B965864219F7E38E00EB4766 /* accept@2x.png in Resources */,
 				B9A09D7F1A0B9B4A00A88CD8 /* add@2x.png in Resources */,
 				B965863E19F6A56000EB4766 /* rememberit@2x.png in Resources */,
+				D3052BA11A24E43000ECD7A1 /* chatfrom_bg_focused.png in Resources */,
 				B91A3AD219D6F9D4000F3823 /* HNGoodsViewController.xib in Resources */,
 				D311A7901A1E41FD000E8A4F /* 订单管理@2x.png in Resources */,
+				D3052BA51A24E43000ECD7A1 /* chat_bottom_textfield.png in Resources */,
 				B9D3DEDF19CD25430020CDC9 /* HNCheckDetailViewController.xib in Resources */,
 				D38DD5621A0BB1E100886933 /* HNMessageTableViewCell.xib in Resources */,
 				B916F0B519C8781D00A849C7 /* Main.storyboard in Resources */,
 				B9E433691A06515E000E2CA9 /* HNNewCheckViewController.xib in Resources */,
 				D3CD90FF19CF13DE00E76AF4 /* HNRefundApplyViewController.xib in Resources */,
+				D3052BA41A24E43000ECD7A1 /* chat_bottom_voice_press.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1529,6 +1657,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3052B831A24E2FC00ECD7A1 /* ChartMessage.m in Sources */,
 				B91A3AC419D6E6E9000F3823 /* MJRefreshFooterView.m in Sources */,
 				B9E433641A064706000E2CA9 /* HNCheckDetailTableViewCell.m in Sources */,
 				D3C07BBD19CD60AF003EA5E4 /* HNTemporaryModel.m in Sources */,
@@ -1536,6 +1665,7 @@
 				B9DE560D19C9C5D300280EC7 /* HNMessageViewController.m in Sources */,
 				B9B2BC2319CF1F3000839AED /* CTAssetsViewCell.m in Sources */,
 				D3A96D8E19D98BE80059CF62 /* HNAcceptReturnGoodViewController.m in Sources */,
+				D3052B7A1A24E2DE00ECD7A1 /* NSString+DocumentPath.m in Sources */,
 				D38E009819D84EFC000F5263 /* HNReturnsTableViewCell.m in Sources */,
 				B9882DF519CB079A0093F0F4 /* HNReportTableViewCell.m in Sources */,
 				D3F90F1619CB1F0B000C95E4 /* HNTemporaryApplyViewController.m in Sources */,
@@ -1546,6 +1676,7 @@
 				D33EEAC619D70C8800D6F106 /* HNProfileChangeViewController.m in Sources */,
 				B91A3AC719D6E6E9000F3823 /* UIScrollView+MJRefresh.m in Sources */,
 				B916F0B819C8781D00A849C7 /* ViewController.m in Sources */,
+				D3052B8B1A24E35900ECD7A1 /* KeyBordVIew.m in Sources */,
 				B916F0B219C8781D00A849C7 /* AppDelegate.m in Sources */,
 				D3CD90FA19CF09E000E76AF4 /* HNRefundTableViewCell.m in Sources */,
 				B9E433601A063148000E2CA9 /* HNCheckViewController.m in Sources */,
@@ -1614,6 +1745,7 @@
 				B9E0668119DCDCB100893DBD /* UIWebView+AFNetworking.m in Sources */,
 				B97F70671A12294000029C6F /* HNNewReportTableViewCell.m in Sources */,
 				B965863619F693CF00EB4766 /* HNLoginView.m in Sources */,
+				D3052B791A24E2DE00ECD7A1 /* UIImage+StrethImage.m in Sources */,
 				37724D7719D8F69700A9B7EC /* HNCommentsDetailViewController.m in Sources */,
 				D30E62FD1A237FE80028168B /* HNNeedPayTableViewCell.m in Sources */,
 				D334365D1A1501E8004C3EB4 /* HNDeliverGodTableViewCell.m in Sources */,
@@ -1623,7 +1755,9 @@
 				B9B2BC1D19CF1F3000839AED /* CTAssetsGroupViewController.m in Sources */,
 				B9E0667319DCDCB100893DBD /* AFHTTPSessionManager.m in Sources */,
 				D37642D61A20E84600F37956 /* HNProfileData.m in Sources */,
+				D3052B7F1A24E2F100ECD7A1 /* ChartCell.m in Sources */,
 				37F9D80019D8B481005CB18B /* HNCommentsHeaderView.m in Sources */,
+				D3052B8E1A24E37D00ECD7A1 /* HNCommentsViewController.m in Sources */,
 				B9D3DEE619CD65500020CDC9 /* HNCheckDetailView.m in Sources */,
 				D3F90F1019CB13CA000C95E4 /* HNTemporaryFireViewController.m in Sources */,
 				B9D3DEDE19CD25430020CDC9 /* HNCheckDetailViewController.m in Sources */,
@@ -1646,7 +1780,9 @@
 				B9B2BC1C19CF1F3000839AED /* CTAssetsGroupViewCell.m in Sources */,
 				D38DD5611A0BB1E100886933 /* HNMessageTableViewCell.m in Sources */,
 				D3FA3E381A1651EC00D98861 /* HNArchivesTableViewCell.m in Sources */,
+				D3052B8A1A24E35900ECD7A1 /* ChartContentView.m in Sources */,
 				B9B2BC1919CF1F3000839AED /* ALAssetsGroup+isEqual.m in Sources */,
+				D3052B801A24E2F100ECD7A1 /* ChartCellFrame.m in Sources */,
 				D3FA3E351A164F4700D98861 /* HNArchivesViewController.m in Sources */,
 				B979EDEE1A1F74A800DC22FB /* HNGoodsCategoriesViewController.m in Sources */,
 				B9E0667219DCDCB100893DBD /* AFHTTPRequestOperationManager.m in Sources */,

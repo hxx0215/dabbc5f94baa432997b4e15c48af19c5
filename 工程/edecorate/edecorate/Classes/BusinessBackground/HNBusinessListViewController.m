@@ -23,6 +23,7 @@
 #import "HNCommentsTableViewCell.h"
 #import "HNCommentsHeaderView.h"
 #import "HNCommentsDetailViewController.h"
+#import "HNCommentsViewController.h"
 
 #import "HNOrderHeaderView.h"
 #import "HNOrderTableViewCell.h"
@@ -239,8 +240,8 @@ static NSString *reuseId = @"businessCell";
             break;
         case kComment:
         {
-            HNCommentsDetailViewController *commentDetail=[[HNCommentsDetailViewController alloc] init];
-            commentDetail.index = 0;//((HNCommentsHeaderView*)self.headerView).segment.selectedSegmentIndex;
+            HNCommentsViewController *commentDetail=[[HNCommentsViewController alloc] init];
+            //commentDetail.index = 0;//((HNCommentsHeaderView*)self.headerView).segment.selectedSegmentIndex;
             [self.navigationController pushViewController:commentDetail animated:YES];
         }
             break;

@@ -20,3 +20,5 @@
 #import "JSONKit.h"
 #import "NSString+Crypt.h"
 #import "HNBrowseImageViewController.h"
+#import "UIImage+StrethImage.h"
+#import "NSString+DocumentPath.h"
