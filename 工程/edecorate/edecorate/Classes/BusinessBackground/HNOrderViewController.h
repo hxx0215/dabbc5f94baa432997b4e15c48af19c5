@@ -14,5 +14,5 @@ typedef enum HNOrderType{
     kDone
 }HNOrderType;
 @interface HNOrderViewController : UIViewController
-- (instancetype)initWithType:(HNOrderType)type;
+@property (strong, nonatomic) NSString *orderid;
 @end

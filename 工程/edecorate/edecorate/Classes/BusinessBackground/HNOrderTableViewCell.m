@@ -7,6 +7,8 @@
 //
 
 #import "HNOrderTableViewCell.h"
+#import "HNLoginData.h"
+
 @interface HNOrderTableViewCell()
 @property (strong, nonatomic) IBOutlet UILabel *orderid;
 @property (strong, nonatomic) IBOutlet UILabel *title;
@@ -38,7 +40,7 @@
     self.orderstime.text = [NSString stringWithFormat:@"%@",content[@"orderstime"]];
     [self.orderstime sizeToFit];
     self.orderstime.right = self.contentView.width - 5;
-    self.statusid.text = [NSString stringWithFormat:@"%@",content[@"statusid"]];
+    self.statusid.text = [[HNLoginData shared] mapOrderStatusID:[NSString stringWithFormat:@"%@",content[@"statusid"]]];
     self.username.text = content[@"username"];
     [self.username sizeToFit];
     if ([content[@"OrderGoods"] count]>0){

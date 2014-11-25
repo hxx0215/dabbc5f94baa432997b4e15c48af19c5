@@ -24,5 +24,6 @@
 @property (nonatomic, strong)NSString *idcard;
 @property (nonatomic, strong)NSString *state;
 -(BOOL)updateData:(NSDictionary *)dic;
+- (NSString *)mapOrderStatusID:(NSString *)statusID;//共用方法
 @end
 //注意，此处单例并不是严格的按照单例方式实现可以自行创建其他实例，本项目中只有这么几个人就算了..

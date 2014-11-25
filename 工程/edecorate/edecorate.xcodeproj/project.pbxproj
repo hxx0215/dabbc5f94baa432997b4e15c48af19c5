@@ -64,6 +64,8 @@
 		B94B7A6519C9BF3E000112ED /* HNHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B94B7A6419C9BF3E000112ED /* HNHomeViewController.m */; };
 		B94C773A19D3082D0046AC58 /* CALayer+XibConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = B94C773919D3082D0046AC58 /* CALayer+XibConfiguration.m */; };
 		B94C854819C9CA770040D47E /* HNMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B94C854719C9CA770040D47E /* HNMessageModel.m */; };
+		B952DAF21A24B1F400EE569D /* HNOrderDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B952DAF01A24B1F400EE569D /* HNOrderDetailTableViewCell.m */; };
+		B952DAF31A24B1F400EE569D /* HNOrderDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B952DAF11A24B1F400EE569D /* HNOrderDetailTableViewCell.xib */; };
 		B953CE0E19CAFBE000BD57DF /* HNLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B953CE0D19CAFBE000BD57DF /* HNLoginViewController.m */; };
 		B95D15BF19D9A28200689B4D /* CustomIOS7AlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = B95D15BE19D9A28200689B4D /* CustomIOS7AlertView.m */; };
 		B95D15C419D9AE4B00689B4D /* HNEditPriceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B95D15C219D9AE4B00689B4D /* HNEditPriceViewController.m */; };
@@ -357,6 +359,9 @@
 		B94C773919D3082D0046AC58 /* CALayer+XibConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+XibConfiguration.m"; sourceTree = "<group>"; };
 		B94C854619C9CA770040D47E /* HNMessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNMessageModel.h; path = Classes/Message/HNMessageModel.h; sourceTree = "<group>"; };
 		B94C854719C9CA770040D47E /* HNMessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNMessageModel.m; path = Classes/Message/HNMessageModel.m; sourceTree = "<group>"; };
+		B952DAEF1A24B1F400EE569D /* HNOrderDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNOrderDetailTableViewCell.h; path = Classes/BusinessBackground/HNOrderDetailTableViewCell.h; sourceTree = "<group>"; };
+		B952DAF01A24B1F400EE569D /* HNOrderDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNOrderDetailTableViewCell.m; path = Classes/BusinessBackground/HNOrderDetailTableViewCell.m; sourceTree = "<group>"; };
+		B952DAF11A24B1F400EE569D /* HNOrderDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HNOrderDetailTableViewCell.xib; path = Classes/BusinessBackground/HNOrderDetailTableViewCell.xib; sourceTree = "<group>"; };
 		B953CE0C19CAFBE000BD57DF /* HNLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNLoginViewController.h; path = Classes/HNLoginViewController.h; sourceTree = "<group>"; };
 		B953CE0D19CAFBE000BD57DF /* HNLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNLoginViewController.m; path = Classes/HNLoginViewController.m; sourceTree = "<group>"; };
 		B95D15BD19D9A28200689B4D /* CustomIOS7AlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomIOS7AlertView.h; sourceTree = "<group>"; };
@@ -1179,6 +1184,9 @@
 				B9D72D5619D846FC0011CF83 /* HNOrderViewController.h */,
 				B9D72D5719D846FC0011CF83 /* HNOrderViewController.m */,
 				B9D72D5819D846FC0011CF83 /* HNOrderViewController.xib */,
+				B952DAEF1A24B1F400EE569D /* HNOrderDetailTableViewCell.h */,
+				B952DAF01A24B1F400EE569D /* HNOrderDetailTableViewCell.m */,
+				B952DAF11A24B1F400EE569D /* HNOrderDetailTableViewCell.xib */,
 				B9D72D4E19D83E440011CF83 /* HNOrderHeaderView.h */,
 				B9D72D4F19D83E440011CF83 /* HNOrderHeaderView.m */,
 				B9D72D5119D840960011CF83 /* HNOrderTableViewCell.h */,
@@ -1611,6 +1619,7 @@
 				B90C418019FA3365004EBC2B /* purchasecheck@2x.png in Resources */,
 				D311A7981A1E41FD000E8A4F /* 我的资料@2x.png in Resources */,
 				37F9D80519D8B5E1005CB18B /* HNCommentsTableViewCell.xib in Resources */,
+				B952DAF31A24B1F400EE569D /* HNOrderDetailTableViewCell.xib in Resources */,
 				B9B2BC1F19CF1F3000839AED /* CTAssetsPicker.xcassets in Resources */,
 				B97F705A1A10DD9D00029C6F /* HNNewReportViewController.xib in Resources */,
 				D311A7921A1E41FD000E8A4F /* 评论留言@2x.png in Resources */,
@@ -1717,6 +1726,7 @@
 				B9B2BC2519CF1F3000839AED /* CTAssetsViewControllerTransition.m in Sources */,
 				B953CE0E19CAFBE000BD57DF /* HNLoginViewController.m in Sources */,
 				B94B7A6519C9BF3E000112ED /* HNHomeViewController.m in Sources */,
+				B952DAF21A24B1F400EE569D /* HNOrderDetailTableViewCell.m in Sources */,
 				D3201FAE1A0A640C00236B08 /* HNSettingViewController.m in Sources */,
 				B95D15C419D9AE4B00689B4D /* HNEditPriceViewController.m in Sources */,
 				B9C2B42319FFE1E200C93D59 /* HNDecorateData.m in Sources */,
