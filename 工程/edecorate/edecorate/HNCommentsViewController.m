@@ -13,6 +13,11 @@
 #import "KeyBordVIew.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import <AVFoundation/AVFoundation.h>
+#import "HNImageData.h"
+#import "HNLoginData.h"
+#import "JSONKit.h"
+#import "MBProgressHUD.h"
+
 @interface HNCommentsViewController ()<UITableViewDataSource,UITableViewDelegate,KeyBordVIewDelegate,ChartCellDelegate,AVAudioPlayerDelegate>
 @property (nonatomic,strong) UITableView *tableView;
 @property (nonatomic,strong) KeyBordVIew *keyBordView;
@@ -81,8 +86,28 @@ static NSString *const cellIdentifier=@"QQChart";
 
     self.cellFrames=[NSMutableArray array];
     
-    NSString *path=[[NSBundle mainBundle] pathForResource:@"messages" ofType:@"plist"];
-    NSArray *data=[NSArray arrayWithContentsOfFile:path];
+//    NSString *path=[[NSBundle mainBundle] pathForResource:@"messages" ofType:@"plist"];
+//    NSArray *data=[NSArray arrayWithContentsOfFile:path];
+    
+    /*
+    self.icon=dict[@"icon"];
+    //    self.time=dict[@"time"];
+    self.content=dict[@"content"];
+    self.messageType=[dict[@"type"] intValue];
+    */
+    /*commid	评论编号
+    content	评论内容
+    fen	评分
+    userid	用户编号
+    commtime	评论时间
+    username	用户名
+    Icon	用户头像
+    reply	回复内容[{commid:XXX,content:XxX,commtime:XXXx}]
+    */
+    NSMutableArray *data = [[NSMutableArray alloc] init];
+    [self.content objectForKey:@"content"];
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[self.content objectForKey:@"content"],@"content",[self.content objectForKey:@"commtime"],@"time",@"0",@"type",[self.content objectForKey:@"Icon"],@"Icon" ,nil];
+    [data addObject:dict];
     
     for(NSDictionary *dict in data){
       
@@ -92,8 +117,72 @@ static NSString *const cellIdentifier=@"QQChart";
         cellFrame.chartMessage=chartMessage;
         [self.cellFrames addObject:cellFrame];
     }
+    [self loadMyData];
 
 }
+
+
+-(void)loadMyData
+{
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    //HNLoginModel *model = [[HNLoginModel alloc] init];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[self.content objectForKey:@"commid"],@"commentid", nil];
+    NSString *jsonStr = [dic JSONString];
+    NSLog(@"%@",jsonStr);
+    request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"get.goods.commentdetail" Params:jsonStr]];
+    NSString *contentType = @"text/html";
+    [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
+        [self performSelectorOnMainThread:@selector(didloadMyData:) withObject:data waitUntilDone:YES];
+    }];
+}
+
+- (void)didloadMyData:(NSData *)data
+{
+    if (data)
+    {
+        NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
+        NSLog(@"%@",retJson);
+        NSDictionary* dic = [retJson objectFromJSONString];
+        NSNumber* total = [dic objectForKey:@"total"];
+        
+        if (total.intValue){//之后需要替换成status
+            NSArray* array = [dic objectForKey:@"data"];
+            NSMutableArray *data = [[NSMutableArray alloc] init];
+            for (int i = 0; i<[array count]; i++) {
+                NSArray *replyarray = [[array objectAtIndex:i] objectForKey:@"reply"];
+                for (NSDictionary *reply in replyarray) {
+                    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[reply objectForKey:@"content"],@"content",[reply objectForKey:@"commtime"],@"time",@"1",@"type",[HNLoginData shared].icon,@"Icon" ,nil];
+                    [data addObject:dict];
+                }
+                
+                
+                
+            }
+            for(NSDictionary *dict in data){
+                
+                ChartCellFrame *cellFrame=[[ChartCellFrame alloc]init];
+                ChartMessage *chartMessage=[[ChartMessage alloc]init];
+                chartMessage.dict=dict;
+                cellFrame.chartMessage=chartMessage;
+                [self.cellFrames addObject:cellFrame];
+            }
+            [self.tableView reloadData];
+        }
+        else
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login Fail", nil) message:NSLocalizedString(@"Please input correct username and password", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+            [alert show];
+        }
+    }
+    else{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection Error", nil) message:NSLocalizedString(@"Please check your network.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+        [alert show];
+    }
+}
+
+
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.cellFrames.count;

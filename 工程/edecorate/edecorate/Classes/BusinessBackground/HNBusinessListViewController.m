@@ -243,7 +243,7 @@ static NSString *reuseId = @"businessCell";
         case kComment:
         {
             HNCommentsViewController *commentDetail=[[HNCommentsViewController alloc] init];
-            //commentDetail.index = 0;//((HNCommentsHeaderView*)self.headerView).segment.selectedSegmentIndex;
+            commentDetail.content = self.businessList[indexPath.row];
             [self.navigationController pushViewController:commentDetail animated:YES];
         }
             break;

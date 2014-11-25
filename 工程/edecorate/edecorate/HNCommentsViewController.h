@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface HNCommentsViewController : UIViewController
-
+@property (nonatomic,strong) NSDictionary *content;
 @end

@@ -8,6 +8,7 @@
 
 #import "ChartCell.h"
 #import "ChartContentView.h"
+#import "HNImageData.h"
 @interface ChartCell()<ChartContentViewDelegate>
 @property (nonatomic,strong) UIImageView *icon;
 @property (nonatomic,strong) ChartContentView *chartView;
@@ -38,7 +39,7 @@
     ChartMessage *chartMessage=cellFrame.chartMessage;
     
     self.icon.frame=cellFrame.iconRect;
-    self.icon.image=[UIImage imageNamed:chartMessage.icon];
+    self.icon.image=[[HNImageData shared]imageWithLink:chartMessage.icon]; //[UIImage imageNamed:chartMessage.icon];
    
     self.chartView.chartMessage=chartMessage;
     self.chartView.frame=cellFrame.chartViewRect;
