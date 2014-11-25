@@ -58,7 +58,7 @@ static NSString *const cellIdentifier=@"QQChart";
 {
     [super viewDidLoad];
     
-    self.title=@"QQ chat";
+    self.title=@"评论留言";
     self.view.backgroundColor=[UIColor whiteColor];
     
     //add UItableView
