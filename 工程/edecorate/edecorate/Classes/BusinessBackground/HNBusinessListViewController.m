@@ -221,7 +221,9 @@ static NSString *reuseId = @"businessCell";
 
         case kOrder:
         {
-            HNOrderViewController *order = [[HNOrderViewController alloc] initWithType:kWaiting];
+            HNOrderViewController *order = [[HNOrderViewController alloc] init];
+            NSString *orderid = [NSString stringWithFormat:@"%@",self.businessList[indexPath.row][@"orderid"]];
+            order.orderid = orderid;
             [self.navigationController pushViewController:order animated:YES];
         }
             break;
