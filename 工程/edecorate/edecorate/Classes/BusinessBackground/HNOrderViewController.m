@@ -137,13 +137,16 @@ static NSString *identy = @"orderDetailCell";
         [cpy setObject:img forKey:@"uiimage"];
         [self.goodsInfo replaceObjectAtIndex:i withObject:cpy];
     }
-    for (int i = 0;i<[self.goodsInfo count];i++){
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        for (int i = 0;i<[self.goodsInfo count];i++){
             id obj = [self.goodsInfo objectAtIndex:i];
             UIImage *image = [[HNImageData shared] imageWithLink:obj[@"imgurl"]];
             [obj setObject:image forKey:@"uiimage"];
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
         });
-    }
+    });
 }
 - (void)showNoNetwork{
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection Error", nil) message:NSLocalizedString(@"Please check your network.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
@@ -199,7 +202,7 @@ static NSString *identy = @"orderDetailCell";
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 2)
         return [self.goodsInfo count];
-    if (section == 44)
+    if (section == 4)
         return [self.stateLog count];
     return 1;
 }

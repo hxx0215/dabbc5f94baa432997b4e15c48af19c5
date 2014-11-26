@@ -10,308 +10,271 @@
 #include "UIView+AHKit.h"
 #include "HNAcceptReturnGoodViewController.h"
 #import "CustomIOS7AlertView.h"
+#import "HNReturnDetailTableViewCell.h"
+#import "HNImageData.h"
 
-@interface HNReimburseViewController ()<CustomIOS7AlertViewDelegate>
-@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (strong, nonatomic) IBOutlet UIButton *acceptButton;
-@property (strong, nonatomic) IBOutlet UIButton *rejectButton;
+@interface HNReimburseViewController ()<CustomIOS7AlertViewDelegate,UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,UITextViewDelegate>
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) IBOutlet UITableViewCell *returnidCell;
+@property (strong, nonatomic) IBOutlet UITableViewCell *returnMessCell;
 
-@property (strong, nonatomic) IBOutlet UILabel *orderNumberTitleLabel;
-@property (strong, nonatomic) IBOutlet UILabel *refundNumberTitleLabel;
-@property (strong, nonatomic) IBOutlet UILabel *refundTimeTitlesLabel;
-@property (strong, nonatomic) IBOutlet UILabel *refundTypeTitleLabel;
-@property (strong, nonatomic) IBOutlet UILabel *refundStatusTitleLabel;
-@property (strong, nonatomic) IBOutlet UILabel *buyersTitleLabel;
-@property (strong, nonatomic) IBOutlet UILabel *refundAmountTitleLabel;
-@property (strong, nonatomic) IBOutlet UILabel *refundReasonTitleLabel;
-@property (strong, nonatomic) IBOutlet UILabel *refundDescriptionTitleLabel;
+@property (strong, nonatomic) IBOutlet UILabel *orderid;
+@property (strong, nonatomic) IBOutlet UILabel *userPayPrice;
+@property (strong, nonatomic) IBOutlet UILabel *onlinePayPrice;
 
-@property (strong, nonatomic) IBOutlet UILabel *orderNumberLabel;
-@property (strong, nonatomic) IBOutlet UILabel *refundNumberLabel;
-@property (strong, nonatomic) IBOutlet UILabel *refundTimeLabel;
-@property (strong, nonatomic) IBOutlet UILabel *refundTypeLabel;
-@property (strong, nonatomic) IBOutlet UILabel *refundStatusLabel;
-@property (strong, nonatomic) IBOutlet UILabel *buyersLabel;
-@property (strong, nonatomic) IBOutlet UILabel *refundAmountLabel;
-@property (strong, nonatomic) IBOutlet UILabel *refundReasonLabel;
-@property (strong, nonatomic) IBOutlet UILabel *refundDescriptionLabel;
+@property (strong, nonatomic) IBOutlet UISwitch *isAgree;
+@property (strong, nonatomic) IBOutlet UITextField *takeAddr;
+@property (strong, nonatomic) IBOutlet UITextView *memo;
+@property (strong, nonatomic) IBOutlet UIButton *confirm;
 
-@property (strong, nonatomic) IBOutlet UILabel *productInformationTitleLabel;
-@property (strong, nonatomic) IBOutlet UILabel *refundRecordTitleLabel;
-
-@property (strong, nonatomic) IBOutlet UILabel *refundFlagLabel;
-@property (strong, nonatomic) IBOutlet UILabel *tipsLabel;
-@property (strong, nonatomic) IBOutlet UILabel *tips2Label;
-
-@property (strong, nonatomic) UIView *alertContent;
-@property (strong, nonatomic) UITextView *cancelMemo;
-@property (strong, nonatomic) UILabel *cancelLabel;
-
-@property (strong, nonatomic) UITextField *moneyTextField;
-
-/*
-"Order details" = "订单详情";
-"Order number" = "订单单号";
-"Refund number" = "退款单号";
-"Refund Type" = "退款申请类型";
-"Refund status" = "退款状态";
-"Buyers" = "买家";
-"Refund Amount" = "退款金额";
-"Refund Reason" = "退款原因";
-"Refund Description" = "退款说明";
-"Product Information" = "商品信息";
-"Refund Record" = "退款记录";
-"Agree to a refund" = "同意退款";
-"Refused to refund" = "拒绝退款";
-"Product Name" = "商品名称";
-"Refund" = "退款";
-"Returns" = "退货";
-"Repair" = "报修";
-"Replacement" = "换货";
- */
-
+@property (assign, nonatomic) BOOL shouldRefresh;
+@property (strong, nonatomic) NSMutableDictionary *contentDic;
+@property (strong, nonatomic) NSMutableArray *exchangeGoods;
 @end
-
+static NSString *kHNReturnCellIdenty = @"HNReturnCell";
 @implementation HNReimburseViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
-    [self labelWithTitle:NSLocalizedString(@"Order number", nil) label:self.orderNumberTitleLabel];
-    [self labelWithTitle:NSLocalizedString(@"Refund number", nil) label:self.refundNumberTitleLabel];
-    [self labelWithTitle:NSLocalizedString(@"Time to apply for a refund", nil) label:self.refundTimeTitlesLabel];
-    [self labelWithTitle:NSLocalizedString(@"Refund Type", nil) label:self.refundTypeTitleLabel];
-    [self labelWithTitle:NSLocalizedString(@"Refund status", nil) label:self.refundStatusTitleLabel];
-    [self labelWithTitle:NSLocalizedString(@"Buyers", nil) label:self.buyersTitleLabel];
-    [self labelWithTitle:NSLocalizedString(@"Refund Amount", nil) label:self.refundAmountTitleLabel];
-    [self labelWithTitle:NSLocalizedString(@"Refund Reason", nil) label:self.refundReasonTitleLabel];
-    [self labelWithTitle:NSLocalizedString(@"Refund Description", nil) label:self.refundDescriptionTitleLabel];
-    
-    //[self labelWithTitle:NSLocalizedString(@"Product Information", nil) label:self.productInformationTitleLabel];
-    [self labelWithTitle:NSLocalizedString(@"Refund Record", nil) label:self.refundRecordTitleLabel];
-    self.tipsLabel.font = [UIFont systemFontOfSize:12];
-    self.tips2Label.font = [UIFont systemFontOfSize:12];
-    self.tips2Label.text = @"";
-    
-    self.acceptButton.layer.borderWidth = 1.0;
-    self.acceptButton.layer.borderColor = [UIColor blackColor].CGColor;
-    self.rejectButton.layer.borderWidth = 1.0;
-    self.rejectButton.layer.borderColor = [UIColor blackColor].CGColor;
     self.navigationItem.title = NSLocalizedString(@"Order details", nil);
+    self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
+    UINib *nib = [UINib nibWithNibName:NSStringFromClass([HNReturnDetailTableViewCell class]) bundle:nil];
+    [self.tableView registerNib:nib forCellReuseIdentifier:kHNReturnCellIdenty];
+    [self.view addSubview:self.tableView];
+    self.shouldRefresh = YES;
     
+    self.memo.layer.cornerRadius = 7.0;
+    self.memo.backgroundColor = [UIColor colorWithWhite:245.0/255.0 alpha:1.0];
+    [self initAccessoryView];
+    
+    self.confirm.layer.cornerRadius = 7.0;
+    [self.confirm setBackgroundColor:[UIColor projectGreen]];
 }
-
+- (void)initAccessoryView{
+    //定义一个toolBar
+    UIToolbar * topView = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 30)];
+    
+    //设置style
+    [topView setBarStyle:UIBarStyleDefault];
+    
+    //定义两个flexibleSpace的button，放在toolBar上，这样完成按钮就会在最右边
+    UIBarButtonItem * button1 =[[UIBarButtonItem  alloc]initWithBarButtonSystemItem:                                        UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+    
+    UIBarButtonItem * button2 = [[UIBarButtonItem  alloc]initWithBarButtonSystemItem:                                        UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+    
+    //定义完成按钮
+    UIBarButtonItem * doneButton = [[UIBarButtonItem alloc]initWithTitle:NSLocalizedString(@"完成", nil) style:UIBarButtonItemStyleDone  target:self action:@selector(resignKeyboard)];
+    
+    //在toolBar上加上这些按钮
+    NSArray * buttonsArray = [NSArray arrayWithObjects:button1,button2,doneButton,nil];
+    [topView setItems:buttonsArray];
+    //    [textView setInputView:topView];
+    [self.memo setInputAccessoryView:topView];
+}
+- (void)resignKeyboard{
+    self.tableView.frame = self.view.bounds;
+    [self.memo resignFirstResponder];
+}
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self updateData];
-    self.scrollView.frame = self.view.bounds;
-    self.scrollView.contentSize = CGSizeMake(self.view.width, self.acceptButton.bottom+20);
-}
-
--(void)updateData
-{
-    switch (self.model.returnsType) {
-        case kReturnGood:
-        {
-            [self labelWithTitle:@"买家收到货物，退货且退款" leftLabel:self.refundTypeTitleLabel label:self.refundTypeLabel];
-            [self labelWithTitle:@"买家申请退款，等待卖家同意" leftLabel:self.refundStatusTitleLabel label:self.refundStatusLabel];
-            
-            [self.acceptButton setTitle:NSLocalizedString(@"Agree to a refund", nil) forState:UIControlStateNormal];
-            [self.rejectButton setTitle:NSLocalizedString(@"Refused to refund", nil) forState:UIControlStateNormal];
-        }
-            break;
-        case kReturnMoney:
-        {
-            [self labelWithTitle:@"买家收到货物，退货且退款" leftLabel:self.refundTypeTitleLabel label:self.refundTypeLabel];
-            [self labelWithTitle:@"买家申请退款，卖家已收到退货，等待卖家同意" leftLabel:self.refundStatusTitleLabel label:self.refundStatusLabel];
-            self.tips2Label.text = @"卖家(XXX)于2014/10/01 11:20:34同意了退款申请";
-            [self.tips2Label sizeToFit];
-            [self.acceptButton setTitle:NSLocalizedString(@"Receive a return, agree to a refund", nil) forState:UIControlStateNormal];
-            [self.rejectButton setTitle:NSLocalizedString(@"Refused to refund Money", nil) forState:UIControlStateNormal];
-        }
-            
-            break;
-        case kReplaceGood:
-        {
-            [self labelWithTitle:@"买家收到货物，换货" leftLabel:self.refundTypeTitleLabel label:self.refundTypeLabel];
-            [self labelWithTitle:@"买家申请换货，等待卖家同意" leftLabel:self.refundStatusTitleLabel label:self.refundStatusLabel];
-            
-            [self.acceptButton setTitle:NSLocalizedString(@"Agree to a refund", nil) forState:UIControlStateNormal];
-            [self.rejectButton setTitle:NSLocalizedString(@"Refused to refund", nil) forState:UIControlStateNormal];
-        }
-            break;
-        case kRedeliver:
-        {
-            [self labelWithTitle:@"买家收到货物，换货" leftLabel:self.refundTypeTitleLabel label:self.refundTypeLabel];
-            [self labelWithTitle:@"买家申请换货，卖家已收到退货，等待卖家重新发货" leftLabel:self.refundStatusTitleLabel label:self.refundStatusLabel];
-            self.tips2Label.text = @"卖家(XXX)于2014/10/01 11:20:34同意了换货申请";
-            [self.tips2Label sizeToFit];
-            [self.acceptButton setTitle:NSLocalizedString(@"Receive a return, re-send", nil) forState:UIControlStateNormal];
-            [self.rejectButton setTitle:NSLocalizedString(@"Refused to refund", nil) forState:UIControlStateNormal];
-        }
-            break;
-        default:
-            break;
+    self.tableView.frame = self.view.bounds;
+    if (self.shouldRefresh){
+        self.shouldRefresh = NO;
+        [self loadData];
     }
-
-    [self labelWithTitle:@"12345000000" leftLabel:self.orderNumberTitleLabel label:self.orderNumberLabel];
-    [self labelWithTitle:@"12345000012" leftLabel:self.refundNumberTitleLabel label:self.refundNumberLabel];
-    [self labelWithTitle:@"2014/10／01 14:20" leftLabel:self.refundTimeTitlesLabel label:self.refundTimeLabel];
-    
-    [self labelWithTitle:@"熊主管" leftLabel:self.buyersTitleLabel label:self.buyersLabel];
-    [self labelWithTitle:@"20" leftLabel:self.refundAmountTitleLabel label:self.refundAmountLabel];
-    [self labelWithTitle:@"没钱" leftLabel:self.refundReasonTitleLabel label:self.refundReasonLabel];
-    [self labelWithTitle:@"快点" leftLabel:self.refundDescriptionTitleLabel label:self.refundDescriptionLabel];
+    [self.tableView reloadData];
 }
-
-
-- (void)labelWithTitle:(NSString *)title label:(UILabel*)lab
-{
-    [lab setText:title];
-    [lab sizeToFit];
-    lab.font = [UIFont systemFontOfSize:12];
-    lab.numberOfLines = 2;
-    
-    lab.layer.borderColor = [UIColor blackColor].CGColor;
-}
-
-- (void)labelWithTitle:(NSString *)title leftLabel:(UILabel*)leftlab label:(UILabel*)lab
-{
-    [lab setText:title];
-    [lab sizeToFit];
-    lab.font = [UIFont systemFontOfSize:11];
-    lab.numberOfLines = 2;
-    lab.left = leftlab.left+leftlab.width;
-    lab.top = leftlab.top;
-    lab.height = leftlab.height;
-    
-    lab.layer.borderColor = [UIColor blackColor].CGColor;
-}
-
-- (IBAction)acceptButtonClick:(id)sender
-{
-    switch (self.model.returnsType) {
-        case kReturnGood:
-        {
-            HNAcceptReturnGoodViewController *ac = [[HNAcceptReturnGoodViewController alloc]init];
-            ac.model = self.model;
-            //[self.navigationController pushViewController:ac animated:YES];
-            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:ac];
-            nav.navigationBar.translucent = NO;
-            [self.navigationController.view setUserInteractionEnabled:NO];
-            [self presentViewController:nav animated:YES completion:^{
-                [self.navigationController.view setUserInteractionEnabled:YES];
-            }];
-        }
-            break;
-        case kReturnMoney:
-        {
-            UIView* view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 280, 80)];
-            self.cancelLabel = [[UILabel alloc] init];
-            self.cancelLabel.text = NSLocalizedString(@"退款金额", nil);
-            [self.cancelLabel sizeToFit];
-            [view addSubview:self.cancelLabel];
-            self.moneyTextField = [[UITextField alloc] initWithFrame:CGRectMake(10, 30, 260, 60)];
-            self.moneyTextField.backgroundColor = [UIColor whiteColor];
-            [view addSubview:self.moneyTextField];
-            
-            CustomIOS7AlertView *alertView = [[CustomIOS7AlertView alloc] init];
-            alertView.delegate = self;
-            alertView.parentView = self.navigationController.view;
-            alertView.containerView  = view;
-            [alertView setButtonTitles:@[NSLocalizedString(@"OK", nil),NSLocalizedString(@"Cancel", nil)]];
-            [alertView show];
-        }
-            break;
-        case kReplaceGood:
-        {
-            self.model.returnsType = kRedeliver;
-            [self updateData];
-        }
-            break;
-        case kRedeliver:
-        {
-        }
-            break;
-            
-        default:
-            break;
-    }
-}
-
-- (IBAction)rejectButtonClick:(id)sender
-{
-    CustomIOS7AlertView *alertView = [[CustomIOS7AlertView alloc] init];
-    alertView.delegate = self;
-    alertView.parentView = self.navigationController.view;
-    alertView.containerView  = self.alertContent;
-    [alertView setButtonTitles:@[NSLocalizedString(@"OK", nil),NSLocalizedString(@"Cancel", nil)]];
-    [alertView show];
-    
-    //[self.navigationController popViewControllerAnimated:YES];
-    
-}
-- (void)customIOS7dialogButtonTouchUpInside:(id)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    [alertView close];
-    if (buttonIndex == 0) {
-        [self.navigationController popViewControllerAnimated:YES];
-    };
-}
-
-- (UIView *)alertContent{
-    if (!_alertContent){
-        _alertContent = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 280, 200)];
-        self.cancelLabel = [[UILabel alloc] init];
-        switch (self.model.returnsType) {
-            case kReturnGood:
-            {
-                self.cancelLabel.text = NSLocalizedString(@"拒绝退货说明", nil);
-            }
-                break;
-            case kReturnMoney:
-            {
-                self.cancelLabel.text = NSLocalizedString(@"拒绝退款说明", nil);
-            }
-                break;
-            case kReplaceGood:
-            {
-                self.cancelLabel.text = NSLocalizedString(@"拒绝换货说明", nil);
-            }
-                break;
-            case kRedeliver:
-            {
-                self.cancelLabel.text = NSLocalizedString(@"拒绝重发说明", nil);
-            }
-                break;
+- (void)loadData{
+    NSDictionary *sendDic = @{@"returnid": self.returnid};
+    NSString *sendJson = [sendDic JSONString];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"get.order.returndetail" Params:sendJson]];
+    NSString *contentType = @"text/html";
+    [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
+        if (data){
+            NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
+            NSDictionary *retDic = [retJson objectFromJSONString];
+            NSInteger count = [[retDic objectForKey:@"total"] integerValue];
+            if (count != 0){
+                self.contentDic = [[retDic[@"data"] objectAtIndex:0] mutableCopy];
+                [self loadPic];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.tableView reloadData];
+                });
                 
-            default:
-                break;
-        }
-
-        [self.cancelLabel sizeToFit];
-        [_alertContent addSubview:self.cancelLabel];
-        self.cancelMemo = [[UITextView alloc] initWithFrame:CGRectMake(10, 30, 260, 160)];
-        [_alertContent addSubview:self.cancelMemo];
+            }
+            else
+                [self showNoData];
+        }else
+            [self showNoNetwork];
+    }];
+}
+- (void)loadPic{
+    self.exchangeGoods = [self.contentDic[@"exchangeGoods"] mutableCopy];
+    for (int i = 0;i<[self.exchangeGoods count];i++){
+        id obj = [self.exchangeGoods objectAtIndex:i];
+        __block NSMutableDictionary *cpy = [obj mutableCopy];
+        UIImage *img = [UIImage imageNamed:@"selectphoto.png"];
+        [cpy setObject:img forKey:@"uiimage"];
+        [self.exchangeGoods replaceObjectAtIndex:i withObject:cpy];
     }
-    return _alertContent;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        for (int i = 0;i<[self.exchangeGoods count];i++){
+            id obj = [self.exchangeGoods objectAtIndex:i];
+            UIImage *image = [[HNImageData shared] imageWithLink:obj[@"image"]];
+            [obj setObject:image forKey:@"uiimage"];
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
+    });
+}
+- (void)showNoNetwork{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection Error", nil) message:NSLocalizedString(@"Please check your network.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [alert show];
+    });
+    
+}
+- (void)showNoData{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"We don't get any data.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [alert show];
+    });
+}
+- (void)customIOS7dialogButtonTouchUpInside:(id)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 4;
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if (section ==0)
+        return 0;
+    if (section <4)
+        return 44;
+    return 0;
 }
-*/
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UIView *view = [UIView new];
+    if (section == 0)
+        return view;
+    view.backgroundColor = [UIColor whiteColor];
+    view.frame = CGRectMake(0, 0, 320, 44);
+    UILabel *label = [UILabel new];
+    switch (section) {
+        case 1:
+            label.text = NSLocalizedString(@"商品信息", nil);
+            break;
+        case 2:
+            label.text = NSLocalizedString(@"退换货记录", nil);
+            break;
+        case 3:
+            label.text = NSLocalizedString(@"退款信息", nil);
+            break;
+        default:
+            break;
+    }
+    [label sizeToFit];
+    label.textColor = [UIColor projectGreen];
+    label.left = 10;
+    label.centerY = view.height / 2;
+    [view addSubview:label];
+    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(10, 43, 310, 1)];
+    line.backgroundColor = [UIColor grayColor];
+    [view addSubview:line];
+    return view;
+}
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    if (section == 0)
+        return 1;
+    if (section == 1)
+        return [self.contentDic[@"exchangeGoods"] count];
+    if (section == 2)
+        return [self.contentDic[@"exchangelog"] count];
+    if (section == 3)
+        return 1;
+    return 0;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 0)
+        return 100;
+    if (indexPath.section == 1)
+        return 110;
+    if (indexPath.section == 2)
+        return 80;
+    if (indexPath.section == 3)
+        return 235;
+    return 44;
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *exchangelogCellIndety = @"ExchangeLogCell";
+    UITableViewCell *cell = nil;
+    if (indexPath.section == 0)
+    {
+        cell = self.returnidCell;
+        self.orderid.text = self.contentDic[@"orderid"];
+        self.userPayPrice.text = [NSString stringWithFormat:@"%@",self.contentDic[@"userPayPrice"]];
+        self.onlinePayPrice.text = [NSString stringWithFormat:@"%@",self.contentDic[@"onlinePayPrice"]];
+    }
+    if (indexPath.section == 1){
+        HNReturnDetailTableViewCell *tCell = [tableView dequeueReusableCellWithIdentifier:kHNReturnCellIdenty];
+        [tCell setContent:self.exchangeGoods[indexPath.row]];
+        cell = tCell;
+    }
+    if (indexPath.section == 2){
+        cell = [tableView dequeueReusableCellWithIdentifier:exchangelogCellIndety];
+        if (!cell){
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:exchangelogCellIndety];
+        }
+        cell.textLabel.font = [UIFont systemFontOfSize:13.0];
+        NSDictionary *dic = self.contentDic[@"exchangelog"][indexPath.row];
+        NSString *content = [dic[@"content"] stringByReplacingOccurrencesOfString:@"<br>" withString:@"\n"];
+        cell.textLabel.text = [NSString stringWithFormat:@"%@ %@\n%@",dic[@"username"],dic[@"createtime"],content];
+        cell.textLabel.numberOfLines = 5;
+    }
+    if (indexPath.section == 3){
+        cell = self.returnMessCell;
+    }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    return cell;
+}
+#pragma mark - UITextFieldDelegate
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+    self.tableView.height = self.view.height - 216;
+    return YES;
+}
+-(void)textFieldDidBeginEditing:(UITextField *)textField{
+    self.tableView.height = self.view.height - 216;
+}
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField{
+    self.tableView.frame = self.view.bounds;
+    return YES;
+}
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    self.tableView.frame = self.view.bounds;
+    return YES;
+}
+#pragma mark - UITextViewDelegate
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView{
+    self.tableView.height = self.view.height - 216;
+    return YES;
+}
+-(void)textViewDidBeginEditing:(UITextView *)textView{
+    self.tableView.height = self.view.height - 216;
+}
+- (BOOL)textViewShouldEndEditing:(UITextView *)textView{
+    self.tableView.frame = self.view.bounds;
+    return YES;
+}
 
 @end

@@ -230,12 +230,12 @@ static NSString *reuseId = @"businessCell";
             break;
         case kReturnGoods:
         {
-            HNBusinessBKReturnsModel *model = [[HNBusinessBKReturnsModel alloc]init];
-            if (indexPath.row!=0) {
-                model.returnsType = kReplaceGood;
-            }
+//            HNBusinessBKReturnsModel *model = [[HNBusinessBKReturnsModel alloc]init];
+//            if (indexPath.row!=0) {
+//                model.returnsType = kReplaceGood;
+//            }
             HNReimburseViewController *reumburse = [[HNReimburseViewController alloc] init];
-            reumburse.model = model;
+            reumburse.returnid = self.businessList[indexPath.row][@"returnid"];
             [self.navigationController pushViewController:reumburse animated:YES];
 
         }

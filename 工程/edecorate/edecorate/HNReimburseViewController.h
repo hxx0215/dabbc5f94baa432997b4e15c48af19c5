@@ -10,5 +10,5 @@
 #import "HNBusinessBackgroundModel.h"
 
 @interface HNReimburseViewController : UIViewController
-@property (strong, nonatomic) HNBusinessBKReturnsModel* model;
+@property (nonatomic, copy)NSString *returnid;
 @end
