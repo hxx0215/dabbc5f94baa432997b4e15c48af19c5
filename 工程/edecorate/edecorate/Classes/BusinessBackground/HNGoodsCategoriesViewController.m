@@ -40,6 +40,9 @@
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];
     self.list = [[NSMutableArray alloc] init];
+    
+    UIBarButtonItem *right = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"所有分类", nil) style:UIBarButtonItemStylePlain target:self action:@selector(allcate:)];
+    self.navigationItem.rightBarButtonItem = right;
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -100,10 +103,16 @@
         vc.goodsDelegate = self.goodsDelegate;
         [self.navigationController pushViewController:vc animated:YES];
     }else{
-        if (self.goodsDelegate && [self.goodsDelegate respondsToSelector:@selector(didSelectGoods:)]){
-            [self.goodsDelegate didSelectGoods:self.list[indexPath.row][@"classid"]];
+        if (self.goodsDelegate && [self.goodsDelegate respondsToSelector:@selector(didSelectGoods:title:)]){
+            [self.goodsDelegate didSelectGoods:self.list[indexPath.row][@"classid"] title:self.list[indexPath.row][@"catename"]];
         }
         [self.navigationController popToViewController:self.root animated:YES];
     }
+}
+- (void)allcate:(id)sender{
+    if (self.goodsDelegate && [self.goodsDelegate respondsToSelector:@selector(didSelectGoods:title:)]){
+        [self.goodsDelegate didSelectGoods:@"" title:NSLocalizedString(@"所有分类", nil)];
+    }
+    [self.navigationController popToViewController:self.root animated:YES];
 }
 @end

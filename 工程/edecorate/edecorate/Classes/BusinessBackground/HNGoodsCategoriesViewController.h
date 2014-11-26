@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 @protocol HNGoodsCategoriesDelegate <NSObject>
-- (void)didSelectGoods:(NSString *)classid;
+- (void)didSelectGoods:(NSString *)classid title:(NSString *)title;
 @end
 @interface HNGoodsCategoriesViewController : UIViewController
 @property (nonatomic,strong) NSString *headid;

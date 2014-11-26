@@ -15,7 +15,7 @@
         self.backgroundColor = [UIColor colorWithWhite:245.0/255.0 alpha:1.0];
         self.search = [[UISearchBar alloc] initWithFrame:CGRectMake(100, 0, frame.size.width - 100, 44)];
         self.search.layer.cornerRadius = 7.0;
-        self.categoryButton = [self createButtonWithTitle:NSLocalizedString(@"选择分类", nil)];
+        self.categoryButton = [self createButtonWithTitle:NSLocalizedString(@"所有分类", nil)];
         self.categoryButton.frame = CGRectMake(0, 0, 100, 44);
         [self.categoryButton setTitleColor:[UIColor projectGreen] forState:UIControlStateNormal];
 //        self.statusButton = [self createButtonWithTitle:NSLocalizedString(@"All Goods", nil)];

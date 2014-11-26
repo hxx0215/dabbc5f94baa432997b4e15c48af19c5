@@ -401,7 +401,8 @@ static NSString *reuseId = @"businessCell";
     [self.navigationController pushViewController:vc animated:YES];
 }
 #pragma mark - HNGoodsCategoryDelegate
-- (void)didSelectGoods:(NSString *)classid{
-    NSLog(@"%@",classid);
+- (void)didSelectGoods:(NSString *)classid title:(NSString *)title{
+    HNGoodsHeaderView *head = (HNGoodsHeaderView *)self.headerView;
+    [head.categoryButton setTitle:title forState:UIControlStateNormal];
 }
 @end
