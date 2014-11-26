@@ -44,6 +44,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *receivename;
 @property (strong, nonatomic) IBOutlet UILabel *receivemobile;
 @property (strong, nonatomic) IBOutlet UILabel *receiveaddress;
+@property (strong, nonatomic) IBOutlet UIButton *editPrice;
+@property (strong, nonatomic) IBOutlet UIButton *cancelOrder;
 
 @property (nonatomic, assign) BOOL firstLoad;
 @property (nonatomic, strong) NSDictionary *statusidMap;
@@ -65,6 +67,11 @@ static NSString *identy = @"orderDetailCell";
     
     self.firstLoad = YES;
     self.orderDetail = [NSMutableDictionary new];
+    
+    self.editPrice.layer.cornerRadius = 7.0;
+    [self.editPrice setBackgroundColor:[UIColor projectGreen]];
+    self.cancelOrder.layer.cornerRadius = 7.0;
+    [self.cancelOrder setBackgroundColor:[UIColor projectGreen]];
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];

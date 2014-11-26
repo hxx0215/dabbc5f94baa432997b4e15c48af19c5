@@ -7,6 +7,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HNOrderViewController">
             <connections>
                 <outlet property="buttonCell" destination="M5n-Sv-yWT" id="NNb-4O-E9S"/>
+                <outlet property="cancelOrder" destination="mJS-CJ-cnM" id="pMj-Uh-N2Y"/>
+                <outlet property="editPrice" destination="6hT-Xq-KkL" id="G39-Lg-d3E"/>
                 <outlet property="freightprice" destination="Wxo-Yu-Z7v" id="0l9-G5-OXc"/>
                 <outlet property="invoiceView" destination="8Kz-p5-8VN" id="Tf8-cp-XHe"/>
                 <outlet property="invoicecontent" destination="h6p-Mp-0z9" id="wim-OK-F5a"/>
@@ -263,15 +265,23 @@
                         <rect key="frame" x="10" y="7" width="140" height="30"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <state key="normal" title="修改价格">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
+                        <connections>
+                            <action selector="changePrice:" destination="-1" eventType="touchUpInside" id="Mc5-GZ-MDl"/>
+                        </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="mJS-CJ-cnM">
                         <rect key="frame" x="170" y="8" width="140" height="30"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <state key="normal" title="取消订单">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
+                        <connections>
+                            <action selector="cancelOrder:" destination="-1" eventType="touchUpInside" id="ncd-EE-59x"/>
+                        </connections>
                     </button>
                 </subviews>
             </tableViewCellContentView>
