@@ -45,39 +45,40 @@
     self.backImageView.image=[UIImage strethImageWith:@"toolbar_bottom_bar.png"];
     [self addSubview:self.backImageView];
     
-    self.voiceBtn=[self buttonWith:@"chat_bottom_voice_nor.png" hightLight:@"chat_bottom_voice_press.png" action:@selector(voiceBtnPress:)];
-    [self.voiceBtn setFrame:CGRectMake(0,0, 33, 33)];
-    [self.voiceBtn setCenter:CGPointMake(30, self.frame.size.height*0.5)];
-    [self addSubview:self.voiceBtn];
+//    self.voiceBtn=[self buttonWith:@"chat_bottom_voice_nor.png" hightLight:@"chat_bottom_voice_press.png" action:@selector(voiceBtnPress:)];
+//    [self.voiceBtn setFrame:CGRectMake(0,0, 33, 33)];
+//    [self.voiceBtn setCenter:CGPointMake(30, self.frame.size.height*0.5)];
+//    [self addSubview:self.voiceBtn];
     
-    self.textField=[[UITextField alloc]initWithFrame:CGRectMake(0, 0, 180, self.frame.size.height*0.8)];
+    self.textField=[[UITextField alloc]initWithFrame:CGRectMake(10, self.frame.size.height*0.1, self.width-20, self.frame.size.height*0.8)];
     self.textField.returnKeyType=UIReturnKeySend;
-    self.textField.center=CGPointMake(145, self.frame.size.height*0.5);
-    self.textField.font=[UIFont fontWithName:@"HelveticaNeue" size:14];
+    self.textField.font = [UIFont systemFontOfSize:14];
+    //self.textField.center=CGPointMake(145, self.frame.size.height*0.5);
+    //self.textField.font=[UIFont fontWithName:@"HelveticaNeue" size:14];
     self.textField.placeholder=@"请输入...";
     self.textField.background=[UIImage imageNamed:@"chat_bottom_textfield.png"];
     self.textField.delegate=self;
     [self addSubview:self.textField];
     
-    self.imageBtn=[self buttonWith:@"chat_bottom_smile_nor.png" hightLight:@"chat_bottom_smile_press.png" action:@selector(imageBtnPress:)];
-    [self.imageBtn setFrame:CGRectMake(0, 0, 33, 33)];
-    [self.imageBtn setCenter:CGPointMake(260, self.frame.size.height*0.5)];
-    [self addSubview:self.imageBtn];
-    
-    self.addBtn=[self buttonWith:@"chat_bottom_up_nor.png" hightLight:@"chat_bottom_up_press.png" action:@selector(addBtnPress:)];
-    [self.addBtn setFrame:CGRectMake(0, 0, 33, 33)];
-    [self.addBtn setCenter:CGPointMake(300, self.frame.size.height*0.5)];
-    [self addSubview:self.addBtn];
-    
-    self.speakBtn=[self buttonWith:nil hightLight:nil action:@selector(speakBtnPress:)];
-    [self.speakBtn setTitle:@"按住说话" forState:UIControlStateNormal];
-    [self.speakBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-    [self.speakBtn addTarget:self action:@selector(touchDown:) forControlEvents:UIControlEventTouchDown];
-    [self.speakBtn setTitleColor:[UIColor redColor] forState:(UIControlState)UIControlEventTouchDown];
-    [self.speakBtn setBackgroundColor:[UIColor whiteColor]];
-    [self.speakBtn setFrame:self.textField.frame];
-    self.speakBtn.hidden=YES;
-    [self addSubview:self.speakBtn];
+//    self.imageBtn=[self buttonWith:@"chat_bottom_smile_nor.png" hightLight:@"chat_bottom_smile_press.png" action:@selector(imageBtnPress:)];
+//    [self.imageBtn setFrame:CGRectMake(0, 0, 33, 33)];
+//    [self.imageBtn setCenter:CGPointMake(260, self.frame.size.height*0.5)];
+//    [self addSubview:self.imageBtn];
+//    
+//    self.addBtn=[self buttonWith:@"chat_bottom_up_nor.png" hightLight:@"chat_bottom_up_press.png" action:@selector(addBtnPress:)];
+//    [self.addBtn setFrame:CGRectMake(0, 0, 33, 33)];
+//    [self.addBtn setCenter:CGPointMake(300, self.frame.size.height*0.5)];
+//    [self addSubview:self.addBtn];
+//    
+//    self.speakBtn=[self buttonWith:nil hightLight:nil action:@selector(speakBtnPress:)];
+//    [self.speakBtn setTitle:@"按住说话" forState:UIControlStateNormal];
+//    [self.speakBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+//    [self.speakBtn addTarget:self action:@selector(touchDown:) forControlEvents:UIControlEventTouchDown];
+//    [self.speakBtn setTitleColor:[UIColor redColor] forState:(UIControlState)UIControlEventTouchDown];
+//    [self.speakBtn setBackgroundColor:[UIColor whiteColor]];
+//    [self.speakBtn setFrame:self.textField.frame];
+//    self.speakBtn.hidden=YES;
+//    [self addSubview:self.speakBtn];
 }
 -(void)touchDown:(UIButton *)voice
 {
