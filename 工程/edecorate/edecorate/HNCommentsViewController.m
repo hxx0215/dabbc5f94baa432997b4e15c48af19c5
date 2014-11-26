@@ -26,6 +26,7 @@
 @property (nonatomic,strong) NSString *fileName;
 @property (nonatomic,strong) AVAudioRecorder *recorder;
 @property (nonatomic,strong) AVAudioPlayer *player;
+@property (nonatomic,strong) NSString *resultString;
 @end
 static NSString *const cellIdentifier=@"QQChart";
 @implementation HNCommentsViewController
@@ -105,7 +106,6 @@ static NSString *const cellIdentifier=@"QQChart";
     reply	回复内容[{commid:XXX,content:XxX,commtime:XXXx}]
     */
     NSMutableArray *data = [[NSMutableArray alloc] init];
-    [self.content objectForKey:@"content"];
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[self.content objectForKey:@"content"],@"content",[self.content objectForKey:@"commtime"],@"time",@"0",@"type",[self.content objectForKey:@"Icon"],@"Icon" ,nil];
     [data addObject:dict];
     
@@ -160,8 +160,8 @@ static NSString *const cellIdentifier=@"QQChart";
                 
                 
             }
-            for(NSDictionary *dict in data){
-                
+            for (NSInteger i=([data count]-1); i>=0; i--) {
+                NSDictionary *dict = [data objectAtIndex:i];
                 ChartCellFrame *cellFrame=[[ChartCellFrame alloc]init];
                 ChartMessage *chartMessage=[[ChartMessage alloc]init];
                 chartMessage.dict=dict;
@@ -201,6 +201,7 @@ static NSString *const cellIdentifier=@"QQChart";
 }
 -(void)chartCell:(ChartCell *)chartCell tapContent:(NSString *)content
 {
+    return;
     if(self.player.isPlaying){
     
         [self.player stop];
@@ -208,7 +209,7 @@ static NSString *const cellIdentifier=@"QQChart";
     //播放
     NSString *filePath=[NSString documentPathWith:content];
     NSURL *fileUrl=[NSURL fileURLWithPath:filePath];
-    [self initPlayer];
+    //[self initPlayer];
     NSError *error;
     self.player=[[AVAudioPlayer alloc]initWithContentsOfURL:fileUrl error:&error];
     [self.player setVolume:1];
@@ -230,25 +231,80 @@ static NSString *const cellIdentifier=@"QQChart";
 }
 -(void)KeyBordView:(KeyBordVIew *)keyBoardView textFiledReturn:(UITextField *)textFiled
 {
-    ChartCellFrame *cellFrame=[[ChartCellFrame alloc]init];
-    ChartMessage *chartMessage=[[ChartMessage alloc]init];
+    self.resultString = textFiled.text;
+    if (self.resultString.length<1) {
+        return;
+    }
     
-    int random=arc4random_uniform(2);
-    NSLog(@"%d",random);
-    chartMessage.icon=[NSString stringWithFormat:@"icon%02d.jpg",random+1];
-    chartMessage.messageType=random;
-    chartMessage.content=textFiled.text;
-    cellFrame.chartMessage=chartMessage;
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     
-    [self.cellFrames addObject:cellFrame];
-    [self.tableView reloadData];
-    
-    //滚动到当前行
-    
-    [self tableViewScrollCurrentIndexPath];
+    NSMutableDictionary *mdic = [@{@"goodsid": [self.content objectForKey:@"goodsid"] ,@"commid":[self.content objectForKey:@"commid"],@"title":@"",@"content":self.resultString} mutableCopy];
+    NSString *jsonStr = [mdic JSONString];
+    NSLog(@"%@",jsonStr);
+    request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"set.goods.comment" Params:jsonStr]];
+    NSString *contentType = @"text/html";
+    [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
+        [self performSelectorOnMainThread:@selector(didsend:) withObject:data waitUntilDone:YES];
+    }];
+
     textFiled.text=@"";
 
 }
+
+
+- (void)didsend:(NSData *)data
+{
+    if (data)
+    {
+        NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
+        NSLog(@"%@",retJson);
+        NSDictionary* dic = [retJson objectFromJSONString];
+        NSNumber* total = [dic objectForKey:@"total"];
+        
+        if (total.intValue){//之后需要替换成status
+            NSArray* array = [dic objectForKey:@"data"];
+            NSDictionary *dicData = [array objectAtIndex:0];
+            NSNumber *stat = [dicData objectForKey:@"state"];
+            
+            if (stat.integerValue) {
+                ChartCellFrame *cellFrame=[[ChartCellFrame alloc]init];
+                ChartMessage *chartMessage=[[ChartMessage alloc]init];
+                chartMessage.icon=[HNLoginData shared].icon;
+                chartMessage.messageType=1;
+                chartMessage.content=self.resultString;
+                cellFrame.chartMessage=chartMessage;
+                
+                [self.cellFrames addObject:cellFrame];
+                [self.tableView reloadData];
+                
+                //滚动到当前行
+                
+                [self tableViewScrollCurrentIndexPath];
+                
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:[dicData objectForKey:@"msg"] delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+                [alert show];
+            }
+            else
+            {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"失败", nil) message:[dicData objectForKey:@"msg"] delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+                [alert show];
+            }
+            
+        }
+        else
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login Fail", nil) message:NSLocalizedString(@"Please input correct username and password", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+            [alert show];
+        }
+    }
+    else{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection Error", nil) message:NSLocalizedString(@"Please check your network.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+        [alert show];
+    }
+}
+
 -(void)KeyBordView:(KeyBordVIew *)keyBoardView textFiledBegin:(UITextField *)textFiled
 {
     [self tableViewScrollCurrentIndexPath];
@@ -309,24 +365,24 @@ static NSString *const cellIdentifier=@"QQChart";
     NSIndexPath *indexPath=[NSIndexPath indexPathForRow:self.cellFrames.count-1 inSection:0];
     [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
--(void)initPlayer{
-    //初始化播放器的时候如下设置
-    UInt32 sessionCategory = kAudioSessionCategory_MediaPlayback;
-    AudioSessionSetProperty(kAudioSessionProperty_AudioCategory,
-                            sizeof(sessionCategory),
-                            &sessionCategory);
-    
-    UInt32 audioRouteOverride = kAudioSessionOverrideAudioRoute_Speaker;
-    AudioSessionSetProperty (kAudioSessionProperty_OverrideAudioRoute,
-                             sizeof (audioRouteOverride),
-                             &audioRouteOverride);
-    
-    AVAudioSession *audioSession = [AVAudioSession sharedInstance];
-    //默认情况下扬声器播放
-    [audioSession setCategory:AVAudioSessionCategoryPlayback error:nil];
-    [audioSession setActive:YES error:nil];
-    audioSession = nil;
-}
+//-(void)initPlayer{
+//    //初始化播放器的时候如下设置
+//    UInt32 sessionCategory = kAudioSessionCategory_MediaPlayback;
+//    AudioSessionSetProperty(kAudioSessionProperty_AudioCategory,
+//                            sizeof(sessionCategory),
+//                            &sessionCategory);
+//    
+//    UInt32 audioRouteOverride = kAudioSessionOverrideAudioRoute_Speaker;
+//    AudioSessionSetProperty (kAudioSessionProperty_OverrideAudioRoute,
+//                             sizeof (audioRouteOverride),
+//                             &audioRouteOverride);
+//    
+//    AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+//    //默认情况下扬声器播放
+//    [audioSession setCategory:AVAudioSessionCategoryPlayback error:nil];
+//    [audioSession setActive:YES error:nil];
+//    audioSession = nil;
+//}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
