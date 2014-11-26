@@ -43,16 +43,18 @@
 
 @property (strong, nonatomic) IBOutlet UIButton *noticeFireButton;
 @property (strong, nonatomic) IBOutlet UIButton *uploadButton;
-@property (strong, nonatomic) IBOutlet UIButton *commitButton;
+
 
 @property (strong, nonatomic) IBOutlet HNDecorateChoiceView *choiceDecorateView;
 
 
 @property (strong, nonatomic) IBOutlet UITextField *timeTextField;
 
-@property (nonatomic, strong)UIImagePickerController *imagePicker;
+
 @property (strong, nonatomic) UIDatePicker *pickerView;
 
+@property (strong, nonatomic) IBOutlet UIButton *commitButton;
+@property (nonatomic, strong)UIImagePickerController *imagePicker;
 @property (strong, nonatomic) NSString* imagePath;
 @property (strong, nonatomic) UIImage *imageUpload;
 @property (strong, nonatomic) UITableView *tableView;

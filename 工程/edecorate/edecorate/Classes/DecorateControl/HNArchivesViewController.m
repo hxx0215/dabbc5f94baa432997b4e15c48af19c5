@@ -94,6 +94,7 @@
     {
         HNArchivesListViewController* dac = [[HNArchivesListViewController alloc]init];
         dac.dID = model.declareId;
+        dac.room = model.roomName;
         [self.navigationController pushViewController:dac animated:YES];
     }
     

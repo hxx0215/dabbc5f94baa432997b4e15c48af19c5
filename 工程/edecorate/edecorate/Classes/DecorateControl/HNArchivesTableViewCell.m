@@ -80,13 +80,13 @@
 - (void)setStatusByintValue:(NSInteger)status
 {
     if (status ==1){
-        self.statusLabel.text = @"满意";
-        self.statusImage.image = [UIImage imageNamed:@"accept.png"];
+        self.statusLabel.text = @"回复状态：已回复";
+        //self.statusImage.image = [UIImage imageNamed:@"accept.png"];
     }
     else
     {
-        self.statusLabel.text = @"不满意";
-        self.statusImage.image = [UIImage imageNamed:@"unsubmit.png"];
+        self.statusLabel.text = @"回复状态：未回复";
+        //self.statusImage.image = [UIImage imageNamed:@"unsubmit.png"];
         
     }
 }

@@ -10,4 +10,5 @@
 
 @interface HNArchivesListViewController : UIViewController
 @property (nonatomic, strong)NSString *dID;
+@property (nonatomic, strong)NSString *room;
 @end

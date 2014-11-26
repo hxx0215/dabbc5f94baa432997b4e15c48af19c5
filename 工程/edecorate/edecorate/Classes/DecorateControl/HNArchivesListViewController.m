@@ -14,6 +14,7 @@
 #import "MJRefresh.h"
 #import "HNArchivesData.h"
 #import "HNArchivesTableViewCell.h"
+#import "HNArchivesDetalViewController.h"
 
 @interface HNArchivesListViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong)UITableView *tTableView;
@@ -73,7 +74,7 @@
     }
     HNArchivesData *model =self.modelList[indexPath.row];
     [cell setRoomName:model.title];
-    [cell setStatusByintValue:model.satisfaction.integerValue];
+    [cell setStatusByintValue:model.isReturn.integerValue];
     
     return cell;
 }
@@ -84,10 +85,9 @@
     
     NSInteger row = indexPath.row;
     HNArchivesData* model = self.modelList[row];
-    //    {
-    //        HNComplaintDetailsViewController* dac = [[HNComplaintDetailsViewController alloc]initWithModel:model];
-    //        [self.navigationController pushViewController:dac animated:YES];
-    //    }
+    HNArchivesDetalViewController *vc = [[HNArchivesDetalViewController alloc]init];
+    vc.model = model;
+    [self.navigationController pushViewController:vc animated:YES];
     
 }
 
@@ -98,7 +98,7 @@
     hud.labelText = NSLocalizedString(@"Loading", nil);
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     //HNLoginModel *model = [[HNLoginModel alloc] init];
-    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:self.dID,@"declareid", nil];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:self.dID,@"declareid", nil];//self.dID
     NSString *jsonStr = [dic JSONString];
     request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"get.archives.list" Params:jsonStr]];
     NSString *contentType = @"text/html";
@@ -128,6 +128,7 @@
                 NSDictionary *dicData = [array objectAtIndex:i];
                 HNArchivesData *tModel = [[HNArchivesData alloc] init];
                 [tModel updateData:dicData];
+                tModel.room = self.room;
                 [self.modelList addObject:tModel];
                 
             }
