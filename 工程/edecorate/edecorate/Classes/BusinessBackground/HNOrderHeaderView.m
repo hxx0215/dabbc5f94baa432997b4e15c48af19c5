@@ -14,10 +14,12 @@
 - (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self){
-        self.filter = [self createButtonWithTitle:NSLocalizedString(@"All Order", nil)];
-        self.filter.right = frame.size.width;
-        self.filter.centerY = frame.size.height / 2;
-        self.search = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, frame.size.width - self.filter.width - 10 , 44)];
+        self.backgroundColor = [UIColor colorWithWhite:245.0/255.0 alpha:1.0];
+        self.filter = [self createButtonWithTitle:NSLocalizedString(@"所有分类", nil)];
+        [self.filter setTitleColor:[UIColor projectGreen] forState:UIControlStateNormal];
+        self.filter.frame = CGRectMake(0, 0, 100, 44);
+        self.search = [[UISearchBar alloc] initWithFrame:CGRectMake(100, 0, frame.size.width - 100, 44)];
+        self.search.layer.cornerRadius = 7.0;
         [self addSubview:self.search];
     }
     return self;

@@ -47,7 +47,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *editPrice;
 @property (strong, nonatomic) IBOutlet UIButton *cancelOrder;
 
-@property (nonatomic, assign) BOOL firstLoad;
+
 @property (nonatomic, strong) NSDictionary *statusidMap;
 @end
 static NSString *identy = @"orderDetailCell";
@@ -65,7 +65,7 @@ static NSString *identy = @"orderDetailCell";
     UINib *nib = [UINib nibWithNibName:NSStringFromClass([HNOrderDetailTableViewCell class]) bundle:nil];
     [self.tableView registerNib:nib forCellReuseIdentifier:identy];
     
-    self.firstLoad = YES;
+
     self.orderDetail = [NSMutableDictionary new];
     
     self.editPrice.layer.cornerRadius = 7.0;
@@ -73,15 +73,11 @@ static NSString *identy = @"orderDetailCell";
     self.cancelOrder.layer.cornerRadius = 7.0;
     [self.cancelOrder setBackgroundColor:[UIColor projectGreen]];
 }
+
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.tableView.frame = self.view.bounds;
-    if (self.firstLoad) {
-        [self loadData];
-        self.firstLoad = NO;
-    }
-    else
-        [self.tableView reloadData];
+    [self loadData];
 }
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
@@ -174,6 +170,10 @@ static NSString *identy = @"orderDetailCell";
 }
 - (IBAction)changePrice:(id)sender {
     HNEditPriceViewController *editor = [[HNEditPriceViewController alloc] init];
+    editor.orderArr = self.goodsInfo;
+    editor.totalPrice = [NSString stringWithFormat:@"%@",self.orderDetail[@"originprice"]];
+    editor.trans = [NSString stringWithFormat:@"%@",self.orderDetail[@"freightprice"]];
+    editor.orderid = [NSString stringWithFormat:@"%@",self.orderDetail[@"orderid"]];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:editor];
     [self.navigationController.view setUserInteractionEnabled:NO];
     [self presentViewController:nav animated:YES completion:^{
@@ -204,7 +204,9 @@ static NSString *identy = @"orderDetailCell";
     return _alertContent;
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 6;
+    if ([[NSString stringWithFormat:@"%@",self.orderDetail[@"statusid"]] isEqualToString:@"0"])
+        return 6;
+    return 5;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 2)

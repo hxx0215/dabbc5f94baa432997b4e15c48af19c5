@@ -135,7 +135,7 @@ static NSString *reuseId = @"businessCell";
             break;
         case kReturnGoods:
         {
-            self.headerView = [[HNReturnsHeaderView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 74)];
+            self.headerView = [[HNReturnsHeaderView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 44)];
             [self.view addSubview:self.headerView];
             break;
         }
