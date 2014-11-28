@@ -19,6 +19,7 @@
 #import "HNReturnsHeaderView.h"
 #import "HNReimburseViewController.h"
 #import "HNReturnsTableViewCell.h"
+#import "HNReturnCategoriesViewController.h"
 
 #import "HNCommentsTableViewCell.h"
 #import "HNCommentsHeaderView.h"
@@ -28,8 +29,9 @@
 #import "HNOrderHeaderView.h"
 #import "HNOrderTableViewCell.h"
 #import "HNOrderViewController.h"
+#import "HNOrderCategoriesViewController.h"
 
-@interface HNBusinessListViewController ()<UITableViewDelegate,UITableViewDataSource,HNGoodsCategoriesDelegate>
+@interface HNBusinessListViewController ()<UITableViewDelegate,UITableViewDataSource,HNGoodsCategoriesDelegate,HNOrderCategoriesDelegate,HNReturnCategoriesDelegate>
 @property (nonatomic, assign)HNBusinessType businessType;
 @property (nonatomic, assign)BOOL shouldRefresh;
 @property (nonatomic, strong)UITableView *tableView;
@@ -135,8 +137,9 @@ static NSString *reuseId = @"businessCell";
             break;
         case kReturnGoods:
         {
-            self.headerView = [[HNReturnsHeaderView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 74)];
-            [self.view addSubview:self.headerView];
+            HNReturnsHeaderView *view = [[HNReturnsHeaderView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 44)];
+            [view.statusButton addTarget:self action:@selector(returnCategory:) forControlEvents:UIControlEventTouchUpInside];
+            self.headerView = view;
             break;
         }
 
@@ -148,7 +151,9 @@ static NSString *reuseId = @"businessCell";
             break;
         case kOrder:
         {
-            self.headerView = [[HNOrderHeaderView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, 44)];
+            HNOrderHeaderView *view = [[HNOrderHeaderView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, 44)];
+            [view.filter addTarget:self action:@selector(orderCategory:) forControlEvents:UIControlEventTouchUpInside];
+            self.headerView = view;
         }
         default:
             break;
@@ -400,9 +405,32 @@ static NSString *reuseId = @"businessCell";
     vc.goodsDelegate = self;
     [self.navigationController pushViewController:vc animated:YES];
 }
+- (void)orderCategory:(id)sender{
+    HNOrderCategoriesViewController *vc = [[HNOrderCategoriesViewController alloc] init];
+    vc.cateDelegate = self;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+- (void)returnCategory:(id)sender{
+    HNReturnCategoriesViewController *vc = [[HNReturnCategoriesViewController alloc] init];
+    vc.cateDelegate = self;
+    [self.navigationController pushViewController:vc animated:YES];
+}
 #pragma mark - HNGoodsCategoryDelegate
 - (void)didSelectGoods:(NSString *)classid title:(NSString *)title{
     HNGoodsHeaderView *head = (HNGoodsHeaderView *)self.headerView;
     [head.categoryButton setTitle:title forState:UIControlStateNormal];
+    [self.goodsSearchDic setObject:classid forKey:@"classid"];
+}
+#pragma mark - HNOrderCategoryDelegate
+- (void)didSelect:(NSString *)orderState name:(NSString *)title{
+    HNOrderHeaderView *head = (HNOrderHeaderView *)self.headerView;
+    [head.filter setTitle:title forState:UIControlStateNormal];
+    [self.orderSearchDic setObject:orderState forKey:@"orderstate"];
+}
+#pragma mark - HNReturnCategoryDelegate
+- (void)didSelectType:(NSString *)type name:(NSString *)title{
+    HNReturnsHeaderView *head = (HNReturnsHeaderView *)self.headerView;
+    [head.statusButton setTitle:title forState:UIControlStateNormal];
+    [self.returnGoodsSearchDic setObject:type forKey:@"type"];
 }
 @end

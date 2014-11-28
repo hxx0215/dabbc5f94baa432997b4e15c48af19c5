@@ -156,6 +156,8 @@
 		B9E433681A06515E000E2CA9 /* HNNewCheckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9E433661A06515E000E2CA9 /* HNNewCheckViewController.m */; };
 		B9E433691A06515E000E2CA9 /* HNNewCheckViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9E433671A06515E000E2CA9 /* HNNewCheckViewController.xib */; };
 		B9EBC8491A0E4D79008523E2 /* HNBrowseImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9EBC8481A0E4D79008523E2 /* HNBrowseImageViewController.m */; };
+		B9F8B5831A2750AB007B79C6 /* HNOrderCategoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9F8B5821A2750AB007B79C6 /* HNOrderCategoriesViewController.m */; };
+		B9F8B5861A28A499007B79C6 /* HNReturnCategoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9F8B5851A28A499007B79C6 /* HNReturnCategoriesViewController.m */; };
 		D3052B791A24E2DE00ECD7A1 /* UIImage+StrethImage.m in Sources */ = {isa = PBXBuildFile; fileRef = D3052B761A24E2DE00ECD7A1 /* UIImage+StrethImage.m */; };
 		D3052B7A1A24E2DE00ECD7A1 /* NSString+DocumentPath.m in Sources */ = {isa = PBXBuildFile; fileRef = D3052B781A24E2DE00ECD7A1 /* NSString+DocumentPath.m */; };
 		D3052B7F1A24E2F100ECD7A1 /* ChartCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3052B7C1A24E2F100ECD7A1 /* ChartCell.m */; };
@@ -527,6 +529,10 @@
 		B9E433671A06515E000E2CA9 /* HNNewCheckViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HNNewCheckViewController.xib; path = Classes/DecorateControl/HNNewCheckViewController.xib; sourceTree = "<group>"; };
 		B9EBC8471A0E4D79008523E2 /* HNBrowseImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNBrowseImageViewController.h; path = Resources/HNBrowseImageViewController.h; sourceTree = "<group>"; };
 		B9EBC8481A0E4D79008523E2 /* HNBrowseImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNBrowseImageViewController.m; path = Resources/HNBrowseImageViewController.m; sourceTree = "<group>"; };
+		B9F8B5811A2750AB007B79C6 /* HNOrderCategoriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNOrderCategoriesViewController.h; path = Classes/BusinessBackground/HNOrderCategoriesViewController.h; sourceTree = "<group>"; };
+		B9F8B5821A2750AB007B79C6 /* HNOrderCategoriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNOrderCategoriesViewController.m; path = Classes/BusinessBackground/HNOrderCategoriesViewController.m; sourceTree = "<group>"; };
+		B9F8B5841A28A499007B79C6 /* HNReturnCategoriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNReturnCategoriesViewController.h; path = Classes/BusinessBackground/HNReturnCategoriesViewController.h; sourceTree = "<group>"; };
+		B9F8B5851A28A499007B79C6 /* HNReturnCategoriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNReturnCategoriesViewController.m; path = Classes/BusinessBackground/HNReturnCategoriesViewController.m; sourceTree = "<group>"; };
 		D3052B751A24E2DE00ECD7A1 /* UIImage+StrethImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+StrethImage.h"; sourceTree = "<group>"; };
 		D3052B761A24E2DE00ECD7A1 /* UIImage+StrethImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+StrethImage.m"; sourceTree = "<group>"; };
 		D3052B771A24E2DE00ECD7A1 /* NSString+DocumentPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+DocumentPath.h"; sourceTree = "<group>"; };
@@ -1200,14 +1206,16 @@
 				B952DAEF1A24B1F400EE569D /* HNOrderDetailTableViewCell.h */,
 				B952DAF01A24B1F400EE569D /* HNOrderDetailTableViewCell.m */,
 				B952DAF11A24B1F400EE569D /* HNOrderDetailTableViewCell.xib */,
-				B9D72D4E19D83E440011CF83 /* HNOrderHeaderView.h */,
-				B9D72D4F19D83E440011CF83 /* HNOrderHeaderView.m */,
-				B9D72D5119D840960011CF83 /* HNOrderTableViewCell.h */,
-				B9D72D5219D840960011CF83 /* HNOrderTableViewCell.m */,
-				B9D72D5319D840960011CF83 /* HNOrderTableViewCell.xib */,
 				B95D15C119D9AE4B00689B4D /* HNEditPriceViewController.h */,
 				B95D15C219D9AE4B00689B4D /* HNEditPriceViewController.m */,
 				B95D15C319D9AE4B00689B4D /* HNEditPriceViewController.xib */,
+				B9D72D4E19D83E440011CF83 /* HNOrderHeaderView.h */,
+				B9D72D4F19D83E440011CF83 /* HNOrderHeaderView.m */,
+				B9F8B5811A2750AB007B79C6 /* HNOrderCategoriesViewController.h */,
+				B9F8B5821A2750AB007B79C6 /* HNOrderCategoriesViewController.m */,
+				B9D72D5119D840960011CF83 /* HNOrderTableViewCell.h */,
+				B9D72D5219D840960011CF83 /* HNOrderTableViewCell.m */,
+				B9D72D5319D840960011CF83 /* HNOrderTableViewCell.xib */,
 				B9E0660619DAED6100893DBD /* HNDeliverGoodsViewController.h */,
 				B9E0660719DAED6100893DBD /* HNDeliverGoodsViewController.m */,
 				B9E0660819DAED6100893DBD /* HNDeliverGoodsViewController.xib */,
@@ -1447,6 +1455,8 @@
 				D38E009519D84EFC000F5263 /* HNReturnsTableViewCell.h */,
 				D38E009619D84EFC000F5263 /* HNReturnsTableViewCell.m */,
 				D38E009719D84EFC000F5263 /* HNReturnsTableViewCell.xib */,
+				B9F8B5841A28A499007B79C6 /* HNReturnCategoriesViewController.h */,
+				B9F8B5851A28A499007B79C6 /* HNReturnCategoriesViewController.m */,
 				D3A96D8B19D98BE80059CF62 /* HNAcceptReturnGoodViewController.h */,
 				D3A96D8C19D98BE80059CF62 /* HNAcceptReturnGoodViewController.m */,
 				D3A96D8D19D98BE80059CF62 /* HNAcceptReturnGoodViewController.xib */,
@@ -1795,6 +1805,7 @@
 				B9DE560119C9C26700280EC7 /* HNDecorateControlViewController.m in Sources */,
 				B9D72D5419D840960011CF83 /* HNOrderTableViewCell.m in Sources */,
 				B9B2BC1619CF1F3000839AED /* ALAsset+accessibilityLabel.m in Sources */,
+				B9F8B5861A28A499007B79C6 /* HNReturnCategoriesViewController.m in Sources */,
 				B9E0667419DCDCB100893DBD /* AFNetworkReachabilityManager.m in Sources */,
 				B97F70591A10DD9D00029C6F /* HNNewReportViewController.m in Sources */,
 				37C8C3E019CC22470020458C /* HNOfficePassesViewController.m in Sources */,
@@ -1818,6 +1829,7 @@
 				B979EDEE1A1F74A800DC22FB /* HNGoodsCategoriesViewController.m in Sources */,
 				B9E0667219DCDCB100893DBD /* AFHTTPRequestOperationManager.m in Sources */,
 				B9B2BC2619CF1F3000839AED /* NSDateFormatter+timeIntervalFormatter.m in Sources */,
+				B9F8B5831A2750AB007B79C6 /* HNOrderCategoriesViewController.m in Sources */,
 				B91A3AC519D6E6E9000F3823 /* MJRefreshHeaderView.m in Sources */,
 				B91A3AD519D703C5000F3823 /* HNGoodsHeaderView.m in Sources */,
 				B9D72D5019D83E440011CF83 /* HNOrderHeaderView.m in Sources */,

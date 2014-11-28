@@ -51,7 +51,7 @@
       @"-3" : NSLocalizedString(@"申请退款", nil),
       @"-2" : NSLocalizedString(@"管理员取消", nil),
       @"-1" : NSLocalizedString(@"用户取消", nil),
-      @"0" : NSLocalizedString(@"未处理", nil),
+      @"0" : NSLocalizedString(@"待付款", nil),
       @"1" : NSLocalizedString(@"已付款", nil),
       @"2" : NSLocalizedString(@"等待发货", nil),
       @"3" : NSLocalizedString(@"已发货", nil),

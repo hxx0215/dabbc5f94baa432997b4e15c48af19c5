@@ -14,11 +14,13 @@
 - (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self){
-        self.search = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, frame.size.width-60, 44)];
-        self.statusButton = [self createButtonWithTitle:NSLocalizedString(@"All Goods", nil)];
-        self.statusButton.frame = CGRectMake(self.search.right,self.search.top,60,self.search.height);
+        self.backgroundColor = [UIColor colorWithWhite:245.0/255.0 alpha:1.0];
+        self.search = [[UISearchBar alloc] initWithFrame:CGRectMake(100, 0, frame.size.width - 100, 44)];
+        self.search.layer.cornerRadius = 7.0;
+        self.statusButton = [self createButtonWithTitle:NSLocalizedString(@"所有分类", nil)];
+        self.statusButton.frame = frame = CGRectMake(0, 0, 100, 44);
         [self addSubview:self.search];
-        [self.statusButton addTarget:self action:@selector(algoods:) forControlEvents:UIControlEventTouchUpInside];
+        [self.statusButton setTitleColor:[UIColor projectGreen] forState:UIControlStateNormal];
     }
     return self;
 }
@@ -30,9 +32,7 @@
     [self addSubview:btn];
     return btn;
 }
-- (void)algoods:(id)sender{
-    NSLog(@"ALL goods");
-}
+
 
 /*
 // Only override drawRect: if you perform custom drawing.
