@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+@class HNOrderCategoriesViewController;
+@protocol HNOrderCategoriesDelegate <NSObject>
 
+@optional
+- (void)didSelect:(NSString *)orderState name:(NSString *)title;
+
+@end
 @interface HNOrderCategoriesViewController : UIViewController
-
+@property (nonatomic, weak)id<HNOrderCategoriesDelegate> cateDelegate;
 @end
