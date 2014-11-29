@@ -12,6 +12,8 @@
 #import "HNConstructTableViewCell.h"
 #import "MBProgressHUD.h"
 #import "HNBrowseImageViewController.h"
+#import "HNConstructPaymentTableViewCell.h"
+
 @interface HNConstructViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong)UITableView *tableView;
 @property (nonatomic, strong)NSArray *companyData;
@@ -24,6 +26,7 @@
 @property (nonatomic, strong)NSString *priceType;
 @end
 
+static NSString *kConstructPaymentCell = @"constPaymentCell";
 @implementation HNConstructViewController
 - (instancetype)init{
     self = [super init];
@@ -48,6 +51,9 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 
     [self.view addSubview:self.tableView];
+
+    UINib *nib = [UINib nibWithNibName:NSStringFromClass([HNConstructPaymentTableViewCell class]) bundle:nil];
+    [self.tableView registerNib:nib forCellReuseIdentifier:kConstructPaymentCell];
     
     [self initDetailData];
     [self initPicDict];
@@ -153,7 +159,7 @@
         return [self.detailTitle count];
     }
     else
-        return 0;
+        return [self.allData[@"needItem"] count];
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 55;
@@ -226,12 +232,15 @@
             [cell.photo setImage:[self.picDict objectForKey:[NSString stringWithFormat:@"%d",indexPath.row]] forState:UIControlStateNormal];
             [cell.photo setImage:[self.picDict objectForKey:[NSString stringWithFormat:@"%d",indexPath.row]] forState:UIControlStateHighlighted];
         }
+        cell.photo.tag = (indexPath.section + 1) * 100 + indexPath.row;
     }
     else
     {
-        //缴费
+        HNConstructPaymentTableViewCell *tCell = [tableView dequeueReusableCellWithIdentifier:kConstructPaymentCell];
+        [tCell setContent:self.allData[@"needItem"][indexPath.row]];
+        return tCell;
     }
-    cell.photo.tag = (indexPath.section + 1) * 100 + indexPath.row;
+    
     return cell;
 }
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath

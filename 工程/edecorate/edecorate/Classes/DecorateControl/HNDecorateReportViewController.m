@@ -301,6 +301,7 @@
                         vc.ownername = [dataArr[0] objectForKey:@"ownername"];
                         vc.ownerphone = [dataArr[0] objectForKey:@"ownerphone"];
                         vc.declareId = [NSString stringWithFormat:@"%@",[dataArr[0] objectForKey:@"declareId"]];
+                        vc.allData = dataArr[0];
                         dispatch_async(dispatch_get_main_queue(), ^{
                             [self.navigationController pushViewController:vc animated:YES];
                         });

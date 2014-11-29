@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface HNConstructPaymentTableViewCell : UITableViewCell
-
+- (void)setContent:(NSDictionary *)content;
 @end

@@ -11,6 +11,8 @@
 #import "HNNewReportTableViewCell.h"
 #import "MBProgressHUD.h"
 #import "HNUploadImage.h"
+#import "HNPurchaseItem.h"
+#import "HNPurchaseViewController.h"
 
 @interface HNSeprateView : UIView
 @property (nonatomic, weak) UIView *hiddenWith;
@@ -524,7 +526,60 @@
     [self.curText resignFirstResponder];
 }
 - (void)purchase:(id)sender{
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    NSString *purchaseType = @"0";
+    if (self.constructType == 1)//公司 type:5
+        purchaseType = @"6";
+    if (self.constructType == 0)
+        purchaseType = @"5";
+    if ([self.allData[@"Isaddition"] intValue] == 1)
+        purchaseType = @"7";
+    NSDictionary *sendDic = @{@"declareid": self.declareId,@"type" : purchaseType};
+    NSString *sendJson = [sendDic JSONString];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"get.prices.list" Params:sendJson]];
+    NSString *contentType = @"text/html";
+    [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
+        if (data){
+            NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
+            NSDictionary *retDic = [retJson objectFromJSONString];
+            NSInteger count = [[retDic objectForKey:@"total"] integerValue];
+            if (count != 0){
+                NSArray *dataArr = [retDic objectForKey:@"data"];
+                NSMutableArray *mustPay = [NSMutableArray new];
+                NSMutableArray *optionPay = [NSMutableArray new];
+                HNPurchaseViewController *vc = [[HNPurchaseViewController alloc] init];
+                for (int i=0;i<count;i++){
+                    HNPurchaseItem *item = [HNPurchaseItem new];
+                    item.title = dataArr[i][@"name"];
+                    if (dataArr[i][@"useUnit"] && ![dataArr[i][@"useUnit"] isEqualToString:@""]){
+                        item.single = 1;
+                        item.nums = 0;
+                        item.unitPrice = [dataArr[i][@"price"] floatValue];
+                        item.price = 0;
+                    }
+                    else{
+                        item.single = 0;
+                        item.price = [dataArr[i][@"price"] floatValue];
+                    }
+                    if ([dataArr[i][@"IsSubmit"] intValue] == 0)
+                    {
+                        [optionPay addObject:item];
+                    }
+                    else
+                        [mustPay addObject:item];
+                }
+                vc.mustPay = mustPay;
+                vc.optionPay = optionPay;
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.navigationController pushViewController:vc animated:YES];
+                });
+            }
+        }
+    }];
+    return;
+    /*[MBProgressHUD showHUDAddedTo:self.view animated:YES];
     self.sendDic[@"principal"] = self.userDic[@"realname"];
     self.sendDic[@"EnterprisePhone"] = self.userDic[@"phone"];
     self.sendDic[@"EIDCard"] = self.userDic[@"idcard"];
@@ -548,7 +603,7 @@
         else{
             NSLog(@"%@",connectionError);
         }
-    }];
+    }];*/
 }
 - (void)upload:(UIButton *)sender{
     UIImagePickerController *pick = [[UIImagePickerController alloc] init];

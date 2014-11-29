@@ -14,4 +14,5 @@
 @property (nonatomic, strong)NSString *roomNumber;
 @property (strong, nonatomic) NSString *ownername;
 @property (strong, nonatomic) NSString *ownerphone;
+@property (nonatomic, strong)NSDictionary *allData;
 @end
