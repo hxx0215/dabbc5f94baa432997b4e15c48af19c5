@@ -30,16 +30,24 @@ typedef enum _HNPAYTYPE
     KHNPayType4
 }HNPayType;
 
+//{"bank_type":"0","bargainor_id":"1223440601","callback_url":"http://helper.ezxvip.com/pay/decotatePaySucceed_notify.aspx","charset":"1","desc":"为报建项目Id为10119的办出入证缴费","notify_url":"http://helper.ezxvip.com/pay/decotatePaySucceed_notify.aspx","sp_billno":"20141129170836503","total_fee":"0","ver":"2.0","mysign":"7c90cc57096a104a2083c39240d43f0d","privateKey":"ddccfc2704ce209e6cbfc6e0fbf6d3dc"}]
 @interface HNDecoratePayModel : NSObject
-@property (nonatomic, strong)NSString *partner;
-@property (nonatomic, strong)NSString *seller;
-@property (nonatomic, strong)NSString *out_trade_no;
-@property (nonatomic, strong)NSString *subject;
-@property (nonatomic, strong)NSString *total_fee;
-@property (nonatomic, strong)NSString *body;
+@property (nonatomic, strong)NSString *bank_type;
+@property (nonatomic, strong)NSString *bargainor_id;
+@property (nonatomic, strong)NSString *callback_url;
+@property (nonatomic, strong)NSString *charset;
+@property (nonatomic, strong)NSString *desc;
 @property (nonatomic, strong)NSString *notify_url;
+@property (nonatomic, strong)NSString *sp_billno;
+@property (nonatomic, strong)NSString *total_fee;
+@property (nonatomic, strong)NSString *ver;
 @property (nonatomic, strong)NSString *mysign;
 @property (nonatomic, strong)NSString *privateKey;
+@property (nonatomic, strong)NSString *fee_type;
+
+@property (nonatomic, strong)NSDictionary *dic;
+-(NSString *)getToken;
+-(void)updataDic:(NSDictionary *)dic;
 @end
 
 @interface HNDecorateChoiceModel : NSObject
@@ -54,6 +62,7 @@ typedef enum _HNPAYTYPE
 
 @protocol HNDecorateChoiceViewDelegate <NSObject>
 - (void)updataDecorateInformation:(HNDecorateChoiceModel*)model;
+- (void)didGetPayToken:(NSString*)token;
 @end
 
 @interface HNDecorateChoiceView : UIView
@@ -62,4 +71,5 @@ typedef enum _HNPAYTYPE
 @property (nonatomic)BOOL updataDecorateInformation;
 @property (nonatomic, strong)HNDecorateChoiceModel *model;
 @property (nonatomic)HNPayType payType;
+-(void) getPayToken:(NSString*)connid;
 @end

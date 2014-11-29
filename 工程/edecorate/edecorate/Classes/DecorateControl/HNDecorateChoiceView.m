@@ -12,8 +12,71 @@
 #import "NSString+Crypt.h"
 #import "HNLoginData.h"
 
-@implementation HNDecoratePayModel
+@interface HNDecoratePayModel()
 @end
+@implementation HNDecoratePayModel
+
+-(void)updataDic:(NSDictionary *)dic;
+{
+    self.dic = dic;
+    
+    [self setValue:[dic objectForKey:@"bank_type"] forKey:@"bank_type"];
+    [self setValue:[dic objectForKey:@"bargainor_id"] forKey:@"bargainor_id"];
+    [self setValue:[dic objectForKey:@"callback_url"] forKey:@"callback_url"];
+    [self setValue:[dic objectForKey:@"charset"] forKey:@"charset"];
+    [self setValue:[dic objectForKey:@"desc"] forKey:@"desc"];
+    [self setValue:[dic objectForKey:@"notify_url"] forKey:@"notify_url"];
+    [self setValue:[dic objectForKey:@"sp_billno"] forKey:@"sp_billno"];
+    [self setValue:[dic objectForKey:@"total_fee"] forKey:@"total_fee"];
+    
+    [self setValue:[dic objectForKey:@"ver"] forKey:@"ver"];
+    [self setValue:[dic objectForKey:@"mysign"] forKey:@"mysign"];
+    [self setValue:[dic objectForKey:@"privateKey"] forKey:@"privateKey"];
+    
+}
+-(NSString *)getToken
+{
+    NSString * ONLINE_PAY_KEY = @"key";
+    NSString * ONLINE_PAY_INIT = @"https://www.tenpay.com/app/mpay/wappay_init.cgi";
+    NSString * ONLINE_PAY = @"https://www.tenpay.com/app/mpay/mp_gate.cgi";
+    NSString * ADDRESS_CONNECTOR = @"?";
+    NSString * PARAM_CONNECTOR = @"&";
+    NSString * VALUES_CONNECTOR = @"=";
+    NSString * ONLINE_PAY_SIGN = @"sign";
+    NSString * ONLINE_PAY_TOKEN = @"token_id";
+    
+    NSString *str = nil;
+    
+    NSString *m_Ver = [NSString stringWithFormat:@"%@=%@",@"ver",self.ver];
+    NSString *m_CharSet = [NSString stringWithFormat:@"%@=%@",@"charset",self.charset];
+    NSString *m_Bank_Type = [NSString stringWithFormat:@"%@=%@",@"bank_type",self.bank_type];
+    NSString *m_Desc = [NSString stringWithFormat:@"%@=%@",@"desc",self.desc];
+    NSString *m_Bargainor = [NSString stringWithFormat:@"%@=%@",@"bargainor_id",self.bargainor_id];
+    NSString *m_Billno = [NSString stringWithFormat:@"%@=%@",@"sp_billno",self.sp_billno];
+    NSString *m_Total = [NSString stringWithFormat:@"%@=%@",@"total_fee",self.total_fee];
+    NSString *m_FeeType = [NSString stringWithFormat:@"%@=%@",@"fee_type",@"1"];
+    NSString *m_Notify = [NSString stringWithFormat:@"%@=%@",@"notify_url",self.notify_url];
+    NSString *m_Callback = [NSString stringWithFormat:@"%@=%@",@"callback_url",self.callback_url];
+
+    NSString *param = [NSString stringWithFormat:@"%@&%@&%@&%@&%@&%@&%@&%@&%@&%@&",m_Ver,m_CharSet,m_Bank_Type,m_Desc,m_Bargainor,m_Billno,m_Total,m_FeeType,m_Notify,m_Callback];
+    
+    NSString *sign = [NSString stringWithFormat:@"%@&%@&%@&%@&%@&%@&%@&%@&%@&%@&",m_Ver,m_CharSet,m_Bank_Type,m_Desc,m_Bargainor,m_Billno,m_Total,m_FeeType,m_Notify,m_Callback];
+    
+    sign = [NSString stringWithFormat:@"%@%@=%@",sign,ONLINE_PAY_KEY,self.mysign];
+    sign = [[sign stringFromMD5] uppercaseString];
+    
+    
+    param = [NSString stringWithFormat:@"%@%@=%@",param,ONLINE_PAY_SIGN,sign];
+    str = [NSString stringWithFormat:@"%@%@%@",ONLINE_PAY_INIT,ADDRESS_CONNECTOR,param];
+    
+//    param += ONLINE_PAY_SIGN + VALUES_CONNECTOR + sign;
+//    return ONLINE_PAY_INIT + ADDRESS_CONNECTOR
+//    + param;
+    return str;
+}
+
+@end
+
 
 @implementation HNDecorateChoiceModel
 @end
@@ -200,27 +263,8 @@
         [alert show];
     }
     
-    
-    if (self.payType) {
-        NSMutableDictionary *sendDic = [[NSMutableDictionary alloc] init];
-        [sendDic setObject:[HNLoginData shared].mshopid forKey:@"mshopid"];
-        [sendDic setObject:self.model.declareId forKey:@"id"];
-        [sendDic setObject:[NSNumber numberWithInteger:(self.payType-1)]forKey:@"type"];
-        NSString *sendJson = [sendDic JSONString];
-        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-        request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"get.pay.info" Params:sendJson]];
-        NSString *contentType = @"text/html";
-        [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
-        [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
-            
-            [self performSelectorOnMainThread:@selector(doLoadingPay:) withObject:data waitUntilDone:YES];
-        }];
-    }
-    else
-    {
         [MBProgressHUD hideHUDForView:self.superview animated:YES];
         [self.delegate updataDecorateInformation:self.model];
-    }
 }
 
 -(void)doLoadingPay:(NSData *)data
@@ -239,15 +283,9 @@
             self.model.payModel = pay;
             NSArray *dataArr = [dic objectForKey:@"data"];
             NSDictionary *dicData = [dataArr objectAtIndex:0];
-            pay.partner = [dicData objectForKey:@"partner"];
-            pay.seller = [dicData objectForKey:@"seller"];
-            pay.out_trade_no = [dicData objectForKey:@"out_trade_no"];
-            pay.subject = [dicData objectForKey:@"subject"];
-            pay.body = [dicData objectForKey:@"body"];
-            pay.total_fee = [dicData objectForKey:@"total_fee"];
-            pay.notify_url = [dicData objectForKey:@"notify_url"];
-            pay.mysign = [dicData objectForKey:@"mysign"];
-            pay.privateKey = [dicData objectForKey:@"privateKey"];
+            [pay updataDic:dicData];
+            
+            
         }
         else
         {
@@ -260,9 +298,31 @@
         [alert show];
     }
     
-    [self.delegate updataDecorateInformation:self.model];
+    if ([self.delegate respondsToSelector:@selector(didGetPayToken:)])
+    {
+        [self.delegate didGetPayToken:[self.model.payModel getToken]];
+    }
 }
 
+-(void) getPayToken:(NSString*)connid
+{
+    if (self.payType) {
+        NSMutableDictionary *sendDic = [[NSMutableDictionary alloc] init];
+        [sendDic setObject:[HNLoginData shared].mshopid forKey:@"mshopid"];
+        [sendDic setObject:self.model.declareId forKey:@"id"];
+        [sendDic setObject:connid forKey:@"connid"];
+        [sendDic setObject:[NSNumber numberWithInteger:(self.payType-1)]forKey:@"type"];
+        NSString *sendJson = [sendDic JSONString];
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+        request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"get.pay.info" Params:sendJson]];
+        NSString *contentType = @"text/html";
+        [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
+        [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
+            
+            [self performSelectorOnMainThread:@selector(doLoadingPay:) withObject:data waitUntilDone:YES];
+        }];
+    }
+}
 /*
  // Only override drawRect: if you perform custom drawing.
  // An empty implementation adversely affects performance during animation.

@@ -13,6 +13,7 @@
 + (NSString *)decodeFromPercentEscapeString: (NSString *) input;
 - (NSString *)encryptWithDES;
 - (NSString *)decryptWithDES;
+- (NSString *) stringFromMD5;
 + (NSString *)createSignWithMethod:(NSString *)method Params:(NSString *)params;
 + (NSString *)createResponseURLWithMethod:(NSString *)method Params:(NSString *)params;
 
