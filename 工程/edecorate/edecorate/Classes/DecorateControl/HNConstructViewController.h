@@ -28,4 +28,7 @@ typedef enum HNConstructType{
 @property (nonatomic, strong)NSString *declareid;
 @property (nonatomic, strong)NSMutableDictionary *chart;
 @property (nonatomic, strong)NSMutableDictionary *shopInfo;
+@property (nonatomic, strong)NSString *assessorstate;
+@property (nonatomic, strong)NSString *paystate;
+@property (nonatomic, strong)NSDictionary *allData;
 @end

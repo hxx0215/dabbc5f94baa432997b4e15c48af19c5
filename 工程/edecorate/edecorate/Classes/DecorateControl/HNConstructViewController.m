@@ -20,6 +20,8 @@
 @property (nonatomic, strong)NSMutableArray *detailTitle;
 @property (nonatomic, strong)NSArray *pernalDetail;
 @property (nonatomic, strong)NSMutableDictionary *picDict;
+@property (nonatomic, strong)NSString *buttonName;
+@property (nonatomic, strong)NSString *priceType;
 @end
 
 @implementation HNConstructViewController
@@ -50,8 +52,27 @@
     [self initDetailData];
     [self initPicDict];
     self.pernalDetail = @[self.roomNo,self.ownerName,self.ownerMobile];
+    [self initButtonName];
 }
-
+- (void)initButtonName{
+    if ([self.assessorstate isEqualToString:@"0"]){
+        self.buttonName = @"开通商家认证";
+    }
+    if ([self.assessorstate isEqualToString:@"-1"]){
+        self.buttonName = @"开通商家认证";
+    }
+    if ([self.assessorstate isEqualToString:@"1"]){
+        if ([self.paystate isEqualToString:@"1"])
+            self.buttonName = @"开通商家认证";
+        else if ([self.paystate isEqualToString:@"2"])
+            self.buttonName = @"前去支付费用";
+        else
+            self.buttonName = @"完善报建资料";
+    }
+    if ([self.assessorstate isEqualToString:@"2"]){
+        self.buttonName = @"开通商家认证";
+    }
+}
 - (void)initDetailData{
     self.detailTitle = [[NSMutableArray alloc] init];
     if (self.constructType < 2){
@@ -103,7 +124,7 @@
     purchase.left = 18;
     purchase.centerY = 44;
     purchase.layer.cornerRadius = 5.0;
-    [purchase setTitle:NSLocalizedString(@"前去支付费用", nil) forState:UIControlStateNormal];
+    [purchase setTitle:self.buttonName forState:UIControlStateNormal];
     [purchase setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [purchase setBackgroundColor:[UIColor colorWithRed:245.0/255.0 green:72.0/255.0 blue:0.0 alpha:1.0]];
     [purchase addTarget:self action:@selector(purchase:) forControlEvents:UIControlEventTouchUpInside];

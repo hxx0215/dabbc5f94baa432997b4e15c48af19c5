@@ -20,6 +20,7 @@
 @property (nonatomic, strong)NSString *status;
 @property (nonatomic, assign)HNConstructType constructType;
 @property (nonatomic, strong)NSString *declareId;
+@property (nonatomic, strong)NSString *paystate;
 @end
 @implementation HNReportModel
 @end
@@ -65,7 +66,7 @@
         [sself refreshData];
     }];
     [self initNaviButton];
-    self.statusMap = @{@"0": @"审核进度:未审核",@"1": @"审核进度:已审核",@"-1":@"审核进度:审核未通过"};
+    self.statusMap = @{@"0": @"审核进度:未审核",@"1": @"审核进度:审核通过",@"-1":@"审核进度:失败",@"2": @"待审核"};
     
     self.reportList = [[NSMutableArray alloc] init];
 //    HNReportModel *tModel = [[HNReportModel alloc] init];
@@ -130,7 +131,25 @@
     }
     HNReportModel *model =self.reportList[indexPath.row];
     [cell setRoomName:model.roomName];
-    [cell setStatus:model.status];
+    NSString *status = @"";
+    if ([model.status isEqualToString:@"0"]){
+        status = @"审核进度:未审核";
+    }
+    if ([model.status isEqualToString:@"-1"]){
+        status = @"审核进度:失败";
+    }
+    if ([model.status isEqualToString:@"1"]){
+        if ([model.paystate isEqualToString:@"1"])
+            status = @"审核进度:已通过";
+        else if ([model.paystate isEqualToString:@"2"])
+            status = @"审核进度:待支付";
+        else
+            status = @"审核进度:待完善资料";
+    }
+    if ([model.status isEqualToString:@"2"]){
+        status = @"审核进度:审核中";
+    }
+    [cell setStatus:status];
 
     return cell;
 }
@@ -160,6 +179,7 @@
             if (count != 0){
                 NSArray *dataArr = [retDic objectForKey:@"data"];
                 HNConstructViewController *vc = [[HNConstructViewController alloc] init];
+                vc.allData = dataArr[0];
                 NSInteger type = [[dataArr[0] objectForKey:@"type"] integerValue];
                 if (type == 0)
                     vc.constructType = kPersonalDetail;
@@ -175,6 +195,8 @@
                 [vc.chart setObject:[dataArr[0] objectForKey:kceilingPlan] forKey:kceilingPlan];
                 [vc.chart setObject:[dataArr[0] objectForKey:kWaterwayPlan] forKey:kWaterwayPlan];
                 [vc.chart setObject:[dataArr[0] objectForKey:kBlockDiagram] forKey:kBlockDiagram];
+                vc.assessorstate = [self.reportList[indexPath.row] status];
+                vc.paystate = [self.reportList[indexPath.row] paystate];
                 vc.shopInfo = [dataArr[0] objectForKey:kshopInfo];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self.navigationController pushViewController:vc animated:YES];
@@ -200,7 +222,7 @@
     return @{@"mshopid": model.mshopid,@"declareid":model.declareId};
 }
 - (NSDictionary *)encodeSendModel:(HNReportSendModel*)model{
-    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:model.mshopid,@"mshopid", nil];
+    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:model.mshopid,@"mshopid",@"50",@"pagesize", nil];
     return dic;
 }
 
@@ -226,9 +248,10 @@
                 [self.reportList removeAllObjects];
                 for (int i=0; i<count; i++) {
                     HNReportModel *model = [[HNReportModel alloc] init];
-                    model.status = self.statusMap[[dataArr[i] objectForKey:@"assessorstate"]];
+                    model.status = [dataArr[i] objectForKey:@"assessorstate"];
                     model.roomName = [NSString stringWithFormat:@"%@",[dataArr[i] objectForKey:@"roomnumber"]];
                     model.declareId = [dataArr[i] objectForKey:@"declareId"];
+                    model.paystate = [dataArr[i] objectForKey:@"paystate"];
                     [self.reportList addObject:model];
                 }
                 [self.rTableView reloadData];

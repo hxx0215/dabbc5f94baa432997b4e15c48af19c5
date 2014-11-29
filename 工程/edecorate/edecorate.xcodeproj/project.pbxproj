@@ -60,6 +60,8 @@
 		B91A3AD519D703C5000F3823 /* HNGoodsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B91A3AD419D703C5000F3823 /* HNGoodsHeaderView.m */; };
 		B91BFCFC19E2C89A00FD468F /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = B91BFCFB19E2C89A00FD468F /* MBProgressHUD.m */; };
 		B91BFCFF19E2D11F00FD468F /* HNLoginData.m in Sources */ = {isa = PBXBuildFile; fileRef = B91BFCFE19E2D11F00FD468F /* HNLoginData.m */; };
+		B9398D471A29EE2E006576FE /* HNConstructPaymentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B9398D451A29EE2E006576FE /* HNConstructPaymentTableViewCell.m */; };
+		B9398D481A29EE2E006576FE /* HNConstructPaymentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9398D461A29EE2E006576FE /* HNConstructPaymentTableViewCell.xib */; };
 		B93ED05E1A085B9F008B99B2 /* btn_scanner01@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B93ED05D1A085B9F008B99B2 /* btn_scanner01@2x.png */; };
 		B94B7A6519C9BF3E000112ED /* HNHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B94B7A6419C9BF3E000112ED /* HNHomeViewController.m */; };
 		B94C773A19D3082D0046AC58 /* CALayer+XibConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = B94C773919D3082D0046AC58 /* CALayer+XibConfiguration.m */; };
@@ -357,6 +359,9 @@
 		B91BFCFB19E2C89A00FD468F /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		B91BFCFD19E2D11F00FD468F /* HNLoginData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNLoginData.h; path = Classes/HNLoginData.h; sourceTree = "<group>"; };
 		B91BFCFE19E2D11F00FD468F /* HNLoginData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNLoginData.m; path = Classes/HNLoginData.m; sourceTree = "<group>"; };
+		B9398D441A29EE2E006576FE /* HNConstructPaymentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNConstructPaymentTableViewCell.h; path = Classes/DecorateControl/HNConstructPaymentTableViewCell.h; sourceTree = "<group>"; };
+		B9398D451A29EE2E006576FE /* HNConstructPaymentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNConstructPaymentTableViewCell.m; path = Classes/DecorateControl/HNConstructPaymentTableViewCell.m; sourceTree = "<group>"; };
+		B9398D461A29EE2E006576FE /* HNConstructPaymentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HNConstructPaymentTableViewCell.xib; path = Classes/DecorateControl/HNConstructPaymentTableViewCell.xib; sourceTree = "<group>"; };
 		B93ED05D1A085B9F008B99B2 /* btn_scanner01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_scanner01@2x.png"; sourceTree = "<group>"; };
 		B94B7A6319C9BF3E000112ED /* HNHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNHomeViewController.h; path = Classes/HNHomeViewController.h; sourceTree = "<group>"; };
 		B94B7A6419C9BF3E000112ED /* HNHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNHomeViewController.m; path = Classes/HNHomeViewController.m; sourceTree = "<group>"; };
@@ -1007,6 +1012,9 @@
 			children = (
 				B965864419F9387700EB4766 /* HNConstructViewController.h */,
 				B965864519F9387700EB4766 /* HNConstructViewController.m */,
+				B9398D441A29EE2E006576FE /* HNConstructPaymentTableViewCell.h */,
+				B9398D451A29EE2E006576FE /* HNConstructPaymentTableViewCell.m */,
+				B9398D461A29EE2E006576FE /* HNConstructPaymentTableViewCell.xib */,
 				B9C2B41919FE8BAC00C93D59 /* HNConstructTableViewCell.h */,
 				B9C2B41A19FE8BAC00C93D59 /* HNConstructTableViewCell.m */,
 				B9882DF019CB06D90093F0F4 /* HNDecorateReportViewController.h */,
@@ -1605,6 +1613,7 @@
 				D3052B851A24E31900ECD7A1 /* messages.plist in Resources */,
 				B9DE560419C9C40B00280EC7 /* Localizable.strings in Resources */,
 				B95D15C519D9AE4B00689B4D /* HNEditPriceViewController.xib in Resources */,
+				B9398D481A29EE2E006576FE /* HNConstructPaymentTableViewCell.xib in Resources */,
 				D33EEABD19D6FF5D00D6F106 /* city.plist in Resources */,
 				D327005E1A12645E00C05CA5 /* HNPersonDetailTableViewCell.xib in Resources */,
 				D3052BB11A24E43000ECD7A1 /* chatto_bg_normal.png in Resources */,
@@ -1825,6 +1834,7 @@
 				B9E0667219DCDCB100893DBD /* AFHTTPRequestOperationManager.m in Sources */,
 				B9B2BC2619CF1F3000839AED /* NSDateFormatter+timeIntervalFormatter.m in Sources */,
 				B9F8B5831A2750AB007B79C6 /* HNOrderCategoriesViewController.m in Sources */,
+				B9398D471A29EE2E006576FE /* HNConstructPaymentTableViewCell.m in Sources */,
 				B91A3AC519D6E6E9000F3823 /* MJRefreshHeaderView.m in Sources */,
 				B91A3AD519D703C5000F3823 /* HNGoodsHeaderView.m in Sources */,
 				B9D72D5019D83E440011CF83 /* HNOrderHeaderView.m in Sources */,

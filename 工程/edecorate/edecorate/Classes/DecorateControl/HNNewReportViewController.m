@@ -250,9 +250,9 @@
     purchase.frame = CGRectMake(10, contentSize.height, self.view.width - 20, 40);
     purchase.layer.cornerRadius = 7.0;
     [self.tableView addSubview:purchase];
-    self.tableView.contentSize = CGSizeMake(contentSize.width, contentSize.height + 60);
+    self.tableView.contentSize = CGSizeMake(contentSize.width, contentSize.height + 80);
     [purchase setBackgroundColor:[UIColor projectRed]];
-    [purchase setTitle:NSLocalizedString(@"前去支付费用", nil) forState:UIControlStateNormal];
+    [purchase setTitle:NSLocalizedString(@"配置缴费项", nil) forState:UIControlStateNormal];
     [purchase addTarget:self action:@selector(purchase:) forControlEvents:UIControlEventTouchUpInside];
 }
 #pragma mark - UITableViewDelegate && DataSource
