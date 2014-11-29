@@ -62,6 +62,8 @@
 		B91BFCFF19E2D11F00FD468F /* HNLoginData.m in Sources */ = {isa = PBXBuildFile; fileRef = B91BFCFE19E2D11F00FD468F /* HNLoginData.m */; };
 		B9398D471A29EE2E006576FE /* HNConstructPaymentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B9398D451A29EE2E006576FE /* HNConstructPaymentTableViewCell.m */; };
 		B9398D481A29EE2E006576FE /* HNConstructPaymentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9398D461A29EE2E006576FE /* HNConstructPaymentTableViewCell.xib */; };
+		B9398D4C1A2A084F006576FE /* HNGetAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9398D4A1A2A084F006576FE /* HNGetAuthViewController.m */; };
+		B9398D4D1A2A084F006576FE /* HNGetAuthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9398D4B1A2A084F006576FE /* HNGetAuthViewController.xib */; };
 		B93ED05E1A085B9F008B99B2 /* btn_scanner01@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B93ED05D1A085B9F008B99B2 /* btn_scanner01@2x.png */; };
 		B94B7A6519C9BF3E000112ED /* HNHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B94B7A6419C9BF3E000112ED /* HNHomeViewController.m */; };
 		B94C773A19D3082D0046AC58 /* CALayer+XibConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = B94C773919D3082D0046AC58 /* CALayer+XibConfiguration.m */; };
@@ -363,6 +365,9 @@
 		B9398D441A29EE2E006576FE /* HNConstructPaymentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNConstructPaymentTableViewCell.h; path = Classes/DecorateControl/HNConstructPaymentTableViewCell.h; sourceTree = "<group>"; };
 		B9398D451A29EE2E006576FE /* HNConstructPaymentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNConstructPaymentTableViewCell.m; path = Classes/DecorateControl/HNConstructPaymentTableViewCell.m; sourceTree = "<group>"; };
 		B9398D461A29EE2E006576FE /* HNConstructPaymentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HNConstructPaymentTableViewCell.xib; path = Classes/DecorateControl/HNConstructPaymentTableViewCell.xib; sourceTree = "<group>"; };
+		B9398D491A2A084F006576FE /* HNGetAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNGetAuthViewController.h; path = Classes/DecorateControl/HNGetAuthViewController.h; sourceTree = "<group>"; };
+		B9398D4A1A2A084F006576FE /* HNGetAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNGetAuthViewController.m; path = Classes/DecorateControl/HNGetAuthViewController.m; sourceTree = "<group>"; };
+		B9398D4B1A2A084F006576FE /* HNGetAuthViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HNGetAuthViewController.xib; path = Classes/DecorateControl/HNGetAuthViewController.xib; sourceTree = "<group>"; };
 		B93ED05D1A085B9F008B99B2 /* btn_scanner01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_scanner01@2x.png"; sourceTree = "<group>"; };
 		B94B7A6319C9BF3E000112ED /* HNHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNHomeViewController.h; path = Classes/HNHomeViewController.h; sourceTree = "<group>"; };
 		B94B7A6419C9BF3E000112ED /* HNHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNHomeViewController.m; path = Classes/HNHomeViewController.m; sourceTree = "<group>"; };
@@ -1037,6 +1042,9 @@
 				B90C417B19FA282A004EBC2B /* HNPurchaseViewController.m */,
 				B90C418219FA368D004EBC2B /* HNPurchaseTableViewCell.h */,
 				B90C418319FA368D004EBC2B /* HNPurchaseTableViewCell.m */,
+				B9398D491A2A084F006576FE /* HNGetAuthViewController.h */,
+				B9398D4A1A2A084F006576FE /* HNGetAuthViewController.m */,
+				B9398D4B1A2A084F006576FE /* HNGetAuthViewController.xib */,
 			);
 			name = Report;
 			sourceTree = "<group>";
@@ -1684,6 +1692,7 @@
 				D38DD5621A0BB1E100886933 /* HNMessageTableViewCell.xib in Resources */,
 				B916F0B519C8781D00A849C7 /* Main.storyboard in Resources */,
 				B9E433691A06515E000E2CA9 /* HNNewCheckViewController.xib in Resources */,
+				B9398D4D1A2A084F006576FE /* HNGetAuthViewController.xib in Resources */,
 				D3CD90FF19CF13DE00E76AF4 /* HNRefundApplyViewController.xib in Resources */,
 				D3052BA41A24E43000ECD7A1 /* chat_bottom_voice_press.png in Resources */,
 			);
@@ -1726,6 +1735,7 @@
 				D3052B8B1A24E35900ECD7A1 /* KeyBordVIew.m in Sources */,
 				B916F0B219C8781D00A849C7 /* AppDelegate.m in Sources */,
 				D3CD90FA19CF09E000E76AF4 /* HNRefundTableViewCell.m in Sources */,
+				B9398D4C1A2A084F006576FE /* HNGetAuthViewController.m in Sources */,
 				B9E433601A063148000E2CA9 /* HNCheckViewController.m in Sources */,
 				B91A3AC319D6E6E9000F3823 /* MJRefreshConst.m in Sources */,
 				B9D3DEDA19CD235A0020CDC9 /* HNCheckTableViewCell.m in Sources */,

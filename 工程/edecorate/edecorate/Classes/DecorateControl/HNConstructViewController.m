@@ -13,6 +13,8 @@
 #import "MBProgressHUD.h"
 #import "HNBrowseImageViewController.h"
 #import "HNConstructPaymentTableViewCell.h"
+#import "HNGetAuthViewController.h"
+#import "HNNewReportViewController.h"
 
 @interface HNConstructViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong)UITableView *tableView;
@@ -291,6 +293,16 @@ static NSString *kConstructPaymentCell = @"constPaymentCell";
     }
 }
 - (void)purchase:(UIButton *)sender{
+    if ([self.buttonName isEqualToString:@"开通商家认证"]){
+        [self cerShop];
+    }
+    if ([self.buttonName isEqualToString:@"前去支付费用"]){
+        [self goPur];
+    }
+    if ([self.buttonName isEqualToString:@"完善报建资料"]){
+        [self configUnComplete];
+    }
+    return ;
     MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = NSLocalizedString(@"Loading", nil);
     NSString *type = self.constructType > 1 ? @"0" :@"1";
@@ -361,6 +373,26 @@ static NSString *kConstructPaymentCell = @"constPaymentCell";
 //    pur.optionPay = @[oItem];
     
 //    [self.navigationController pushViewController:pur animated:YES];
+}
+- (void)cerShop{
+    HNGetAuthViewController *vc = [[HNGetAuthViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+- (void)goPur{
+    
+}
+- (void)configUnComplete{
+    HNNewReportViewController *vc = [[HNNewReportViewController alloc] init];
+    if (self.constructType == kCompanyDetail)
+        vc.constructType = 1;
+    else
+        vc.constructType = 0;
+    vc.declareId = self.declareid;
+    vc.roomNumber = self.roomNo;
+    vc.ownername = self.ownerName;
+    vc.ownerphone = self.ownerMobile;
+    vc.allData = self.allData;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)showNoNetwork{
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection Error", nil) message:NSLocalizedString(@"Please check your network.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];

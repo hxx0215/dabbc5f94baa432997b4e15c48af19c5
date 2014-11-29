@@ -545,37 +545,35 @@
             NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
             NSDictionary *retDic = [retJson objectFromJSONString];
             NSInteger count = [[retDic objectForKey:@"total"] integerValue];
-            if (count != 0){
-                NSArray *dataArr = [retDic objectForKey:@"data"];
-                NSMutableArray *mustPay = [NSMutableArray new];
-                NSMutableArray *optionPay = [NSMutableArray new];
-                HNPurchaseViewController *vc = [[HNPurchaseViewController alloc] init];
-                for (int i=0;i<count;i++){
-                    HNPurchaseItem *item = [HNPurchaseItem new];
-                    item.title = dataArr[i][@"name"];
-                    if (dataArr[i][@"useUnit"] && ![dataArr[i][@"useUnit"] isEqualToString:@""]){
-                        item.single = 1;
-                        item.nums = 0;
-                        item.unitPrice = [dataArr[i][@"price"] floatValue];
-                        item.price = 0;
-                    }
-                    else{
-                        item.single = 0;
-                        item.price = [dataArr[i][@"price"] floatValue];
-                    }
-                    if ([dataArr[i][@"IsSubmit"] intValue] == 0)
-                    {
-                        [optionPay addObject:item];
-                    }
-                    else
-                        [mustPay addObject:item];
+            NSArray *dataArr = [retDic objectForKey:@"data"];
+            NSMutableArray *mustPay = [NSMutableArray new];
+            NSMutableArray *optionPay = [NSMutableArray new];
+            HNPurchaseViewController *vc = [[HNPurchaseViewController alloc] init];
+            for (int i=0;i<count;i++){
+                HNPurchaseItem *item = [HNPurchaseItem new];
+                item.title = dataArr[i][@"name"];
+                if (dataArr[i][@"useUnit"] && ![dataArr[i][@"useUnit"] isEqualToString:@""]){
+                    item.single = 1;
+                    item.nums = 0;
+                    item.unitPrice = [dataArr[i][@"price"] floatValue];
+                    item.price = 0;
                 }
-                vc.mustPay = mustPay;
-                vc.optionPay = optionPay;
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.navigationController pushViewController:vc animated:YES];
-                });
+                else{
+                    item.single = 0;
+                    item.price = [dataArr[i][@"price"] floatValue];
+                }
+                if ([dataArr[i][@"IsSubmit"] intValue] == 0)
+                {
+                    [optionPay addObject:item];
+                }
+                else
+                    [mustPay addObject:item];
             }
+            vc.mustPay = mustPay;
+            vc.optionPay = optionPay;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.navigationController pushViewController:vc animated:YES];
+            });
         }
     }];
     return;
