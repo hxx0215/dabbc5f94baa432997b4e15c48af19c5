@@ -47,26 +47,51 @@
     
     NSString *str = nil;
     
+    
     NSString *m_Ver = [NSString stringWithFormat:@"%@=%@",@"ver",self.ver];
     NSString *m_CharSet = [NSString stringWithFormat:@"%@=%@",@"charset",self.charset];
     NSString *m_Bank_Type = [NSString stringWithFormat:@"%@=%@",@"bank_type",self.bank_type];
     NSString *m_Desc = [NSString stringWithFormat:@"%@=%@",@"desc",self.desc];
     NSString *m_Bargainor = [NSString stringWithFormat:@"%@=%@",@"bargainor_id",self.bargainor_id];
     NSString *m_Billno = [NSString stringWithFormat:@"%@=%@",@"sp_billno",self.sp_billno];
-    NSString *m_Total = [NSString stringWithFormat:@"%@=%@",@"total_fee",self.total_fee];
+    NSString *m_Total = [NSString stringWithFormat:@"%@=%ld",@"total_fee",self.total_fee.integerValue];
     NSString *m_FeeType = [NSString stringWithFormat:@"%@=%@",@"fee_type",@"1"];
     NSString *m_Notify = [NSString stringWithFormat:@"%@=%@",@"notify_url",self.notify_url];
     NSString *m_Callback = [NSString stringWithFormat:@"%@=%@",@"callback_url",self.callback_url];
-
-    NSString *param = [NSString stringWithFormat:@"%@&%@&%@&%@&%@&%@&%@&%@&%@&%@&",m_Ver,m_CharSet,m_Bank_Type,m_Desc,m_Bargainor,m_Billno,m_Total,m_FeeType,m_Notify,m_Callback];
     
-    NSString *sign = [NSString stringWithFormat:@"%@&%@&%@&%@&%@&%@&%@&%@&%@&%@&",m_Ver,m_CharSet,m_Bank_Type,m_Desc,m_Bargainor,m_Billno,m_Total,m_FeeType,m_Notify,m_Callback];
+    NSArray *keys = [NSArray arrayWithObjects:m_Ver,m_CharSet,m_Bank_Type,m_Desc,m_Bargainor,m_Billno,m_Total,m_FeeType,m_Notify,m_Callback, nil];
     
-    sign = [NSString stringWithFormat:@"%@%@=%@",sign,ONLINE_PAY_KEY,self.mysign];
+    NSComparator cmptr = ^(id obj1, id obj2){
+        NSComparisonResult result = [obj1 compare:obj2];
+        switch(result)
+        {
+            case NSOrderedAscending:
+                return NSOrderedAscending;
+            case NSOrderedDescending:
+                return NSOrderedDescending;
+            case NSOrderedSame:
+                return NSOrderedSame;
+            default:
+                return NSOrderedSame;
+        }
+    };
+    NSArray *sortArray = [keys sortedArrayUsingComparator:cmptr];
+    NSString *desString = nil;
+    for (int i=0; i<sortArray.count; i++) {
+        NSString *sstring = [sortArray objectAtIndex:i];
+        if (desString) {
+            desString = [NSString stringWithFormat:@"%@%@%@",desString,sstring,PARAM_CONNECTOR];
+        }
+        else
+            desString = [NSString stringWithFormat:@"%@%@",sstring,PARAM_CONNECTOR];
+    }
+    
+    NSString *sign = [NSString stringWithFormat:@"%@%@%@%@",desString,ONLINE_PAY_KEY,VALUES_CONNECTOR,self.mysign];
+    NSLog(@"%@",sign);
     sign = [[sign stringFromMD5] uppercaseString];
     
     
-    param = [NSString stringWithFormat:@"%@%@=%@",param,ONLINE_PAY_SIGN,sign];
+    NSString *param = [NSString stringWithFormat:@"%@%@%@%@",desString,ONLINE_PAY_SIGN,VALUES_CONNECTOR,sign];
     str = [NSString stringWithFormat:@"%@%@%@",ONLINE_PAY_INIT,ADDRESS_CONNECTOR,param];
     
 //    param += ONLINE_PAY_SIGN + VALUES_CONNECTOR + sign;
