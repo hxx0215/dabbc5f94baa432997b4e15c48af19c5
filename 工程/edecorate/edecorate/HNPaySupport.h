@@ -27,5 +27,6 @@ typedef enum _HNPAYTYPE
 @interface HNPaySupport : NSObject
 +(instancetype)shared;
 @property (nonatomic, weak) id <HNDecoratePayModelDelegate> delegate;
+//cid:类型为4 5 6 7的传报建项目编号， 2传出入证Id，3传送货安装Id
 -(void) getPayToken:(NSString *)declareId cid:(NSString*)connid payType:(HNPayType)type;
 @end
