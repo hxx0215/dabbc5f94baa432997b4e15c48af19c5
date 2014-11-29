@@ -12,7 +12,9 @@
 #import "NSString+Crypt.h"
 #import "HNLoginData.h"
 
-@interface HNDecoratePayModel()
+@interface HNDecoratePayModel()<NSXMLParserDelegate,NSURLConnectionDataDelegate>
+@property(nonatomic) BOOL finished;
+@property(nonatomic,strong) NSString *token;
 @end
 @implementation HNDecoratePayModel
 
@@ -86,20 +88,38 @@
             desString = [NSString stringWithFormat:@"%@%@",sstring,PARAM_CONNECTOR];
     }
     
-    NSString *sign = [NSString stringWithFormat:@"%@%@%@%@",desString,ONLINE_PAY_KEY,VALUES_CONNECTOR,self.mysign];
-    NSLog(@"%@",sign);
+    NSString *sign = [NSString stringWithFormat:@"%@%@%@%@",desString,ONLINE_PAY_KEY,VALUES_CONNECTOR,self.privateKey];
     sign = [[sign stringFromMD5] uppercaseString];
     
     
     NSString *param = [NSString stringWithFormat:@"%@%@%@%@",desString,ONLINE_PAY_SIGN,VALUES_CONNECTOR,sign];
     str = [NSString stringWithFormat:@"%@%@%@",ONLINE_PAY_INIT,ADDRESS_CONNECTOR,param];
     
-//    param += ONLINE_PAY_SIGN + VALUES_CONNECTOR + sign;
-//    return ONLINE_PAY_INIT + ADDRESS_CONNECTOR
-//    + param;
-    return str;
+    str = [str stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSURLRequest *request = [[NSURLRequest alloc]initWithURL:[NSURL URLWithString:str] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
+    NSError *error = nil;
+    NSData *received = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:&error];
+    
+    NSXMLParser *parser = [[NSXMLParser alloc] initWithData:received];
+    [parser setShouldProcessNamespaces:NO];
+    [parser setShouldReportNamespacePrefixes:NO];
+    [parser setShouldResolveExternalEntities:NO];
+    [parser setDelegate:self];
+    [parser parse];
+    
+//ONLINE_PAY + ADDRESS_CONNECTOR +ONLINE_PAY_TOKEN + VALUES_CONNECTOR +token;
+    NSString *url = [NSString stringWithFormat:@"%@%@%@%@%@",ONLINE_PAY,ADDRESS_CONNECTOR,ONLINE_PAY_TOKEN,VALUES_CONNECTOR,self.token];
+    return url;
 }
 
+- (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
+{
+    if (string.length>1) {
+        self.token = string;
+        NSLog(@"Value:%@",string);
+    }
+    
+}
 @end
 
 
