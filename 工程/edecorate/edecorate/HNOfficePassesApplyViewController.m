@@ -216,12 +216,13 @@
         NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
         NSLog(@"%@",retJson);
         NSDictionary* dic = [retJson objectFromJSONString];
-        int commitStatus = 1;
-        if (commitStatus)
+        NSNumber *total = [dic objectForKey:@"total"];
+        if (total.intValue)
         {
-            UIAlertView* alert=[[UIAlertView alloc]initWithTitle:nil message:NSLocalizedString(@"支付成功，您的申请已提交审核，请在审核通过够到物业管理处领取证件", nil) delegate:self cancelButtonTitle:@"关闭" otherButtonTitles:nil,nil];
-            alert.tag=1;
-            [alert show];
+            NSArray *array = [dic objectForKey:@"data"];
+            NSDictionary *dicArray = [array objectAtIndex:0];
+            NSNumber *cardId = [dicArray objectForKey:@"cardId"];
+            [self.choiceDecorateView getPayToken:[NSString stringWithFormat:@"%ld",cardId.integerValue]];
         }
         else
         {
@@ -233,6 +234,13 @@
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection Error", nil) message:NSLocalizedString(@"Please check your network.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
         [alert show];
     }
+}
+
+- (void)didGetPayToken:(NSString*)token
+{
+    NSLog(@"%@",token);
+    NSURL *url = [[NSURL alloc]initWithString:token];
+    [[UIApplication sharedApplication]openURL:url];
 }
 
 - (NSDictionary *)encodeWithTemporaryModel{

@@ -217,6 +217,7 @@
 		D33EEAC219D7000E00D6F106 /* HNAreaPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D33EEAC019D7000E00D6F106 /* HNAreaPickerView.xib */; };
 		D33EEAC619D70C8800D6F106 /* HNProfileChangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D33EEAC419D70C8800D6F106 /* HNProfileChangeViewController.m */; };
 		D351B9701A0FC38D0015D261 /* HNComplaintApplyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D351B96F1A0FC38D0015D261 /* HNComplaintApplyTableViewCell.m */; };
+		D35982E31A28F4DE00C16B6D /* HNMessageDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D35982E21A28F4DE00C16B6D /* HNMessageDetailViewController.m */; };
 		D35EE4DE19EECFC100D889A3 /* HNHttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = D35EE4DD19EECFC100D889A3 /* HNHttpRequest.m */; };
 		D37642D61A20E84600F37956 /* HNProfileData.m in Sources */ = {isa = PBXBuildFile; fileRef = D37642D51A20E84600F37956 /* HNProfileData.m */; };
 		D37642D91A20EF5100F37956 /* HNEditTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D37642D81A20EF5100F37956 /* HNEditTableViewCell.m */; };
@@ -615,6 +616,8 @@
 		D33EEAC419D70C8800D6F106 /* HNProfileChangeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNProfileChangeViewController.m; sourceTree = "<group>"; };
 		D351B96E1A0FC38D0015D261 /* HNComplaintApplyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNComplaintApplyTableViewCell.h; path = Classes/DecorateControl/HNComplaintApplyTableViewCell.h; sourceTree = "<group>"; };
 		D351B96F1A0FC38D0015D261 /* HNComplaintApplyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNComplaintApplyTableViewCell.m; path = Classes/DecorateControl/HNComplaintApplyTableViewCell.m; sourceTree = "<group>"; };
+		D35982E11A28F4DE00C16B6D /* HNMessageDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNMessageDetailViewController.h; sourceTree = "<group>"; };
+		D35982E21A28F4DE00C16B6D /* HNMessageDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNMessageDetailViewController.m; sourceTree = "<group>"; };
 		D35EE4DC19EECFC100D889A3 /* HNHttpRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNHttpRequest.h; sourceTree = "<group>"; };
 		D35EE4DD19EECFC100D889A3 /* HNHttpRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNHttpRequest.m; sourceTree = "<group>"; };
 		D37642D41A20E84600F37956 /* HNProfileData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNProfileData.h; sourceTree = "<group>"; };
@@ -959,6 +962,8 @@
 				D38DD55E1A0BB1E100886933 /* HNMessageTableViewCell.h */,
 				D38DD55F1A0BB1E100886933 /* HNMessageTableViewCell.m */,
 				D38DD5601A0BB1E100886933 /* HNMessageTableViewCell.xib */,
+				D35982E11A28F4DE00C16B6D /* HNMessageDetailViewController.h */,
+				D35982E21A28F4DE00C16B6D /* HNMessageDetailViewController.m */,
 			);
 			name = Message;
 			sourceTree = "<group>";
@@ -1841,6 +1846,7 @@
 				D3CD910319CF141C00E76AF4 /* HNRefundDetailViewController.m in Sources */,
 				B9E0667A19DCDCB100893DBD /* AFNetworkActivityIndicatorManager.m in Sources */,
 				B9E0667119DCDCB100893DBD /* AFHTTPRequestOperation.m in Sources */,
+				D35982E31A28F4DE00C16B6D /* HNMessageDetailViewController.m in Sources */,
 				D37642D91A20EF5100F37956 /* HNEditTableViewCell.m in Sources */,
 				B9D72D5919D846FC0011CF83 /* HNOrderViewController.m in Sources */,
 				D33549F719FEB3D300135800 /* HNPersonNewTableViewCell.m in Sources */,
