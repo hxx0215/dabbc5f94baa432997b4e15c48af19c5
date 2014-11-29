@@ -18,6 +18,7 @@
 #import "HNUploadImage.h"
 #import "HNDeliverGodTableViewCell.h"
 #import "HNNeedPayTableViewCell.h"
+#import "HNPaySupport.h"
 
 @interface HNDeliverApplyViewController ()<UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate,HNDecorateChoiceViewDelegate,UITextFieldDelegate,UIImagePickerControllerDelegate>
 @property bool bo;
@@ -40,7 +41,7 @@
 @property (strong, nonatomic) UIToolbar * topView;
 @property (strong,nonatomic) UIView *commitView;
 @property (nonatomic)CGFloat contentSizeHeight;
-@property (nonatomic, strong)HNDecoratePayModel *payModel;
+@property (nonatomic, strong)HNPaySupport *payModel;
 @end
 
 @implementation HNDeliverApplyViewController
@@ -360,7 +361,7 @@
             self.choiceDecorateView.left = 5;
             self.choiceDecorateView.centerY = contentView.height / 2;
             self.choiceDecorateView.updataDecorateInformation = YES;
-            self.choiceDecorateView.payType = KHNPayType3;
+            self.choiceDecorateView.payType = KHNPayTypeDeliver;
             
         }
         [contentView addSubview:self.choiceDecorateView];

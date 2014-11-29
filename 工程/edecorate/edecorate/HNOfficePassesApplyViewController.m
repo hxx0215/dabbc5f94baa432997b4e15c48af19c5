@@ -35,7 +35,7 @@
 @property (strong,nonatomic) UIView *commitView;
 @property (nonatomic)CGFloat contentSizeHeight;
 @property (nonatomic) BOOL bo;
-@property (strong,nonatomic) HNDecoratePayModel *payModel;
+@property (strong,nonatomic) HNPaySupport *payModel;
 
 @property (strong,nonatomic) NSIndexPath* selectIndex;
 @end
@@ -352,7 +352,7 @@
             self.choiceDecorateView.left = 5;
             self.choiceDecorateView.centerY = contentView.height / 2;
             self.choiceDecorateView.updataDecorateInformation = YES;
-            self.choiceDecorateView.payType = KHNPayType2;
+            self.choiceDecorateView.payType = KHNPayTypePass;
             
         }
         [contentView addSubview:self.choiceDecorateView];
