@@ -34,13 +34,7 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     [self.view addSubview:self.tableView];
-    // Do any additional setup after loading the view from its nib.
-//    [self labelWithTitle:NSLocalizedString(@"Name", nil) label:self.nameTitleLabel];
-//    [self labelWithTitle:NSLocalizedString(@"Category", nil) label:self.categoryTitleLabel];
-//    [self labelWithTitle:NSLocalizedString(@"Address", nil) label:self.addressTitleLabel];
-//    [self labelWithTitle:NSLocalizedString(@"Shopkeeper", nil) label:self.shopkeeperTitleLabel];
-//    [self labelWithTitle:NSLocalizedString(@"Phone", nil) label:self.phoneTitleLabel];
-//    [self labelWithTitle:NSLocalizedString(@"Online Service (QQ)", nil) label:self.onlineServiceTitleLabel];
+    
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"修改" style:UIBarButtonItemStyleDone target:self action:@selector(changButtonClick:)];
     self.navigationItem.rightBarButtonItem = rightButton;
     
@@ -110,6 +104,7 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    self.tableView.frame = self.view.bounds;
     [self loadMyData];
     
 }

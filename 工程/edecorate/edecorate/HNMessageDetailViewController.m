@@ -161,6 +161,16 @@
     return view;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.row==2) {
+        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.tableView.width-100, 1000)];
+        label.text = self.model.message;
+        label.numberOfLines = 0;
+        [label sizeToFit];
+
+        return label.height<30?30:label.height;
+        
+    }
+    
     return 30;
 }
 
@@ -194,6 +204,8 @@
             {
                 titleString = @"消息内容：";
                 detailString = self.model.message;
+                cell.detailTextLabel.numberOfLines = 0;
+                [cell.detailTextLabel sizeToFit];
             }
                 break;
             default:

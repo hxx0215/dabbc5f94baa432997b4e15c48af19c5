@@ -107,9 +107,9 @@
     
     [self.view addSubview:self.tableView];
     
-    self.titleArray1 = [[NSArray alloc] initWithObjects:NSLocalizedString(@"Owners", nil),NSLocalizedString(@"Phone number", nil),NSLocalizedString(@"Construction unit", nil),NSLocalizedString(@"Person in charge of construction", nil),NSLocalizedString(@"Phone number", nil),nil];
-    
-    self.dataArray1 = [[NSArray alloc] initWithObjects:self.temporaryModel.huseInfo.owners,self.temporaryModel.huseInfo.ownersPhoneNumber,self.temporaryModel.huseInfo.constructionUnit,self.temporaryModel.huseInfo.constructionPerson,self.temporaryModel.huseInfo.constructionPersonPhoneNumber,nil];
+//    self.titleArray1 = [[NSArray alloc] initWithObjects:NSLocalizedString(@"Owners", nil),NSLocalizedString(@"Phone number", nil),NSLocalizedString(@"Construction unit", nil),NSLocalizedString(@"Person in charge of construction", nil),NSLocalizedString(@"Phone number", nil),nil];
+//    
+//    self.dataArray1 = [[NSArray alloc] initWithObjects:self.temporaryModel.huseInfo.owners,self.temporaryModel.huseInfo.ownersPhoneNumber,self.temporaryModel.huseInfo.constructionUnit,self.temporaryModel.huseInfo.constructionPerson,self.temporaryModel.huseInfo.constructionPersonPhoneNumber,nil];
     
     if (self.temporaryModel.type==FIRE) {
         HNTemporaryFireModel* fmodel = (HNTemporaryFireModel*)self.temporaryModel;
@@ -212,8 +212,8 @@
     self.temporaryModel.huseInfo.owners = model.ownername;
     self.temporaryModel.huseInfo.ownersPhoneNumber = model.ownerphone;
     self.dataArray1 = [[NSArray alloc] initWithObjects:self.temporaryModel.huseInfo.owners,self.temporaryModel.huseInfo.ownersPhoneNumber,self.temporaryModel.huseInfo.constructionUnit,self.temporaryModel.huseInfo.constructionPerson,self.temporaryModel.huseInfo.constructionPersonPhoneNumber,nil];
-    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:0];
-    [self.tableView reloadSections:indexSet withRowAnimation:YES];
+    //NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:0];
+    //[self.tableView reloadSections:indexSet withRowAnimation:YES];
 }
 
 - (IBAction)commit:(id)sender
@@ -470,7 +470,7 @@
     if (0==section)
     {
         
-        return 5;
+        return 0;
     }
     else
         return 9;
@@ -500,7 +500,8 @@
             self.choiceDecorateView.left = 5;
             self.choiceDecorateView.centerY = contentView.height / 2;
         }
-        self.choiceDecorateView.updataDecorateInformation = YES;
+        //self.choiceDecorateView.updataDecorateInformation = YES;
+        [HNUIStyleSet UIStyleSetRoundView:contentView];
         [contentView addSubview:self.choiceDecorateView];
     }else
     {
