@@ -8,6 +8,7 @@
 
 #import "HNSettingViewController.h"
 #import "HNModfiypwdViewController.h"
+#import "HNImageData.h"
 
 @interface HNSettingViewController ()
 
@@ -65,6 +66,7 @@
 }
 
 - (IBAction)btnClearClick:(UIButton *)sender {
+    [[HNImageData shared] clearCatch ];
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:NSLocalizedString(@"清除缓存成功", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
     [alert show];
 }

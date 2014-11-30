@@ -30,6 +30,11 @@
     return self;
 }
 
+-(void)clearCatch
+{
+    [self.imageDict removeAllObjects];
+}
+
 -(UIImage *)imageWithLink:(NSString *)link
 {
     UIImage *image = [self.imageDict objectForKey:link];

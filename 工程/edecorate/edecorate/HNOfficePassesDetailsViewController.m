@@ -47,34 +47,9 @@
     
     self.dataArray1 = [[NSArray alloc] initWithObjects:self.temporaryModel.ownername,self.temporaryModel.ownerphone,self.temporaryModel.shopname,self.temporaryModel.principal,self.temporaryModel.EnterprisePhone,nil];
     
-    
-    
-    NSString *str = [[NSString alloc]init];
-    for (int i=0; i<[self.temporaryModel.proposerItems count];i++) {
-        HNPassProposerData* proposerData = self.temporaryModel.proposerItems[i];
-        str = [str stringByAppendingString:[NSString stringWithFormat:@"%@ ",proposerData.name]];
-    }
-    if ([self.temporaryModel.proposerItems count]) {
-        
-//        [self labelWithTitle:proposerData.name label:self.decortionMan];
-//        [self labelWithTitle:proposerData.phone label:self.decorationManMobile];
-//        [self labelWithTitle:proposerData.IDcard  label:self.decorationIdCardNo];
-//        [self labelWithTitle:proposerData.Icon label:self.decorationIdCardPic];
-//        [self labelWithTitle:proposerData.isTransaction label:self.decorationPic];
-    }
-//    self.personsLabel.text = str;
-//    
-// 
-//    int officepassPerFee=10,depositFee=30;
-//    int officepassCount=1,depositCount=1;
-//    [self labelWithTitle:[NSString stringWithFormat:@"%d",officepassPerFee] label:self.passcardPerFee];
-//    [self labelWithTitle:[NSString stringWithFormat:@"%d",officepassCount] label:self.passcardCount];
-//    [self labelWithTitle:[NSString stringWithFormat:@"%d",officepassCount*officepassPerFee] label:self.passcardSumFee];
-//    [self labelWithTitle:[NSString stringWithFormat:@"%d",depositFee] label:self.depositPerFee];
-//    [self labelWithTitle:[NSString stringWithFormat:@"%d",depositCount] label:self.depositCount];
-//    [self labelWithTitle:[NSString stringWithFormat:@"%d",depositCount*depositFee] label:self.depositSumFee];
-//    [self labelWithTitle:[NSString stringWithFormat:@"%d",depositCount*depositFee+officepassCount*officepassPerFee] label:self.sumMoney];
-    // Do any additional setup after loading the view from its nib.
+
+    [self loadPic];
+
 }
 
 - (void)labelWithTitle:(NSString *)title label:(UILabel*)lab
@@ -223,10 +198,15 @@
         [cell.iconPhoto addTarget:self action:@selector(showPic:) forControlEvents:UIControlEventTouchUpInside];
         [cell.cardPhoto addTarget:self action:@selector(showPic:) forControlEvents:UIControlEventTouchUpInside];
         
-        [cell.iconPhoto setImage:[[HNImageData shared]imageWithLink:proposer.Icon] forState:UIControlStateNormal];
-        [cell.iconPhoto setImage:[[HNImageData shared]imageWithLink:proposer.Icon] forState:UIControlStateHighlighted];
-        [cell.cardPhoto setImage:[[HNImageData shared]imageWithLink:proposer.IDcardImg] forState:UIControlStateNormal];
-        [cell.cardPhoto setImage:[[HNImageData shared]imageWithLink:proposer.IDcardImg] forState:UIControlStateHighlighted];
+        [cell.iconPhoto setImage:proposer.imageIcon forState:UIControlStateNormal];
+        [cell.iconPhoto setImage:proposer.imageIcon forState:UIControlStateHighlighted];
+        [cell.cardPhoto setImage:proposer.imageIDcard forState:UIControlStateNormal];
+        [cell.cardPhoto setImage:proposer.imageIDcard forState:UIControlStateHighlighted];
+        
+//        [cell.iconPhoto setImage:[[HNImageData shared]imageWithLink:proposer.Icon] forState:UIControlStateNormal];
+//        [cell.iconPhoto setImage:[[HNImageData shared]imageWithLink:proposer.Icon] forState:UIControlStateHighlighted];
+//        [cell.cardPhoto setImage:[[HNImageData shared]imageWithLink:proposer.IDcardImg] forState:UIControlStateNormal];
+//        [cell.cardPhoto setImage:[[HNImageData shared]imageWithLink:proposer.IDcardImg] forState:UIControlStateHighlighted];
         return cell;
     }
     else
@@ -302,6 +282,29 @@
     [self presentViewController:vc animated:NO completion:^{
         
     }];
+}
+
+
+- (void)loadPic{
+
+    for (int i = 0;i<[self.temporaryModel.proposerItems count];i++){
+        HNPassProposerData *obj = [self.temporaryModel.proposerItems objectAtIndex:i];
+        UIImage *img = [UIImage imageNamed:@"selectphoto.png"];
+        obj.imageIDcard = img;
+        obj.imageIcon = img;
+    }
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        for (int i = 0;i<[self.temporaryModel.proposerItems count];i++){
+            HNPassProposerData *obj = [self.temporaryModel.proposerItems objectAtIndex:i];
+            UIImage *image = [[HNImageData shared] imageWithLink:obj.IDcardImg];
+            obj.imageIDcard = image;
+            image = [[HNImageData shared] imageWithLink:obj.Icon];
+            obj.imageIcon = image;
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
+    });
 }
 
 
