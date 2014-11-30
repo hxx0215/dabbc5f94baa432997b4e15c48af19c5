@@ -10,6 +10,7 @@
 #import "UIView+AHKit.h"
 #import "HNPersonDetailTableViewCell.h"
 #import "HNNeedPayTableViewCell.h"
+#import "HNImageUploadTableViewCell.h"
 
 @interface HNDeliverDetailViewController ()<UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,UINavigationControllerDelegate>
 
@@ -82,7 +83,7 @@
 #pragma mark - tableView
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 3 + [self.deliverModel.proposerItems count];
+    return 4 + [self.deliverModel.proposerItems count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -96,7 +97,12 @@
         
         return 3;
     }
-    else if(section<[self.deliverModel.proposerItems count]+2)
+    else if (2==section)
+    {
+        
+        return 3;
+    }
+    else if(section<[self.deliverModel.proposerItems count]+3)
     {
         return 1;
     }
@@ -123,7 +129,10 @@
     if (section == 0){
         label.text = self.deliverModel.roomnumber;
     }
-    else if (section == 0){
+    else if (section == 1){
+        label.text = NSLocalizedString(@"送货车辆信息", nil);
+    }
+    else if (section == 2){
         label.text = NSLocalizedString(@"货物信息", nil);
     }
     else if([self.deliverModel.proposerItems count]>=section-1)
@@ -149,11 +158,18 @@
         
         return 30;
     }
-    else if([self.deliverModel.proposerItems count]==indexPath.section-2)
+    else if (1==indexPath.section)
+    {
+        if (indexPath.row==2) {
+            return 65;
+        }
+        return 30;
+    }
+    else if([self.deliverModel.proposerItems count]==indexPath.section-3)
     {
         return 65;
     }
-    else if([self.deliverModel.proposerItems count]>(indexPath.section-2))
+    else if([self.deliverModel.proposerItems count]>(indexPath.section-3))
     {
         return 155;
     }
@@ -178,6 +194,38 @@
         return cell;
     }
     else if (1==indexPath.section) {
+        if (indexPath.row==2) {
+            static NSString *identy = @"HNImageUploadTableViewCell";
+            HNImageUploadTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
+            if (!cell)
+            {
+                cell = [[HNImageUploadTableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:identy];
+            }
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.title.text = @"行驶驾照：";
+            [cell reset:self.deliverModel.drivingLImg];
+            return cell;
+        }
+        static NSString *identy = @"complaintDetailCell";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
+        if (!cell)
+        {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:identy];
+        }
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        if (indexPath.row == 0) {
+            cell.textLabel.text = @"送货车牌：";
+            cell.detailTextLabel.text = self.deliverModel.plateNumber;
+        }
+        else if (indexPath.row == 1) {
+            cell.textLabel.text = @"行驶证号：";
+            cell.detailTextLabel.text = self.deliverModel.drivingLicence;
+        }
+        
+        cell.textLabel.textColor = [UIColor darkTextColor];
+        return cell;
+    }
+    else if (2==indexPath.section) {
         static NSString *identy = @"complaintDetailCell";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
         if (!cell)
@@ -191,7 +239,7 @@
         cell.textLabel.textColor = [UIColor darkTextColor];
         return cell;
     }
-    else if([self.deliverModel.proposerItems count]>indexPath.section-2)
+    else if([self.deliverModel.proposerItems count]>indexPath.section-3)
     {
         static NSString *identy = @"PersonDetailCell";
         HNPersonDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
@@ -199,7 +247,7 @@
         {
             cell = [[HNPersonDetailTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identy];
         }
-        HNPassProposerData *proposer = [self.deliverModel.proposerItems objectAtIndex:(indexPath.section-2)];
+        HNPassProposerData *proposer = [self.deliverModel.proposerItems objectAtIndex:(indexPath.section-3)];
         cell.nameLabel.text = [NSString stringWithFormat:@"姓名：%@",proposer.name];
         cell.phoneLabel.text = [NSString stringWithFormat:@"联系电话：%@",proposer.phone];
         cell.cardLabel.text = [NSString stringWithFormat:@"身份证号码：%@",proposer.IDcard];
@@ -214,7 +262,7 @@
         
         return cell;
     }
-    else if (indexPath.section == [self.deliverModel.proposerItems count]+2) {
+    else if (indexPath.section == [self.deliverModel.proposerItems count]+3) {
         static NSString *identy = @"purchaseIdenty";
         HNNeedPayTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
         HNDeliverNeedItem *neddItem = [self.deliverModel.needItems objectAtIndex:indexPath.row];

@@ -39,7 +39,9 @@
     [self setValue:[dic objectForKey:@"bTime"] forKey:@"bTime"];
     [self setValue:[dic objectForKey:@"eTime"] forKey:@"eTime"];
     [self setValue:[dic objectForKey:@"state"] forKey:@"state"];
-    
+    [self setValue:[dic objectForKey:@"plateNumber"] forKey:@"plateNumber"];
+    [self setValue:[dic objectForKey:@"drivingLicence"] forKey:@"drivingLicence"];
+    [self setValue:[dic objectForKey:@"drivingLImg"] forKey:@"drivingLImg"];
     
     NSArray* array = [dic objectForKey:@"proposerItem"];
     for (int i=0; i<[array count]; i++) {

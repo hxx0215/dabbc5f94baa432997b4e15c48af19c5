@@ -24,6 +24,11 @@
 @property (nonatomic, strong)NSString *bTime;
 @property (nonatomic, strong)NSString *eTime;
 @property (nonatomic, strong)NSString *state;
+@property (nonatomic, strong)NSString *plateNumber;
+@property (nonatomic, strong)NSString *drivingLicence;
+@property (nonatomic, strong)NSString *drivingLImg;
+@property (nonatomic, strong)UIImage *imagedrivingLImg;
+
 -(BOOL)updateData:(NSDictionary *)dic;
 @end
 

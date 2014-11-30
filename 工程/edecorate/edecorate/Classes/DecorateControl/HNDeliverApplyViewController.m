@@ -19,6 +19,8 @@
 #import "HNDeliverGodTableViewCell.h"
 #import "HNNeedPayTableViewCell.h"
 #import "HNPaySupport.h"
+#import "HNEditTableViewCell.h"
+#import "HNImageUploadTableViewCell.h"
 
 @interface HNDeliverApplyViewController ()<UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate,HNDecorateChoiceViewDelegate,UITextFieldDelegate,UIImagePickerControllerDelegate>
 @property bool bo;
@@ -65,8 +67,8 @@
     [self.model.proposerItems addObject:Proposer];
     
     
-    self.choiceDecorateView = [[HNDecorateChoiceView alloc]initWithFrame:CGRectMake(12, 12, self.view.bounds.size.width-24, 25)];
-    self.choiceDecorateView.delegate = self;
+    //self.choiceDecorateView = [[HNDecorateChoiceView alloc]initWithFrame:CGRectMake(12, 12, self.view.bounds.size.width-24, 25)];
+    //self.choiceDecorateView.delegate = self;
     
     
     self.pickerView = [[UIDatePicker alloc]init];
@@ -233,7 +235,7 @@
         {
             NSArray *array = [dic objectForKey:@"data"];
             NSDictionary *dicArray = [array objectAtIndex:0];
-            NSNumber *cardId = [dicArray objectForKey:@"cardId"];
+            NSNumber *cardId = [dicArray objectForKey:@"installId"];
             [self.choiceDecorateView getPayToken:[NSString stringWithFormat:@"%ld",cardId.integerValue]];
         }
         else
@@ -287,6 +289,9 @@
     for (int i=0; i<[self.model.needItems count]; i++) {
         HNPassNeedItem *tModel = [self.model.needItems objectAtIndex:i];
         
+        if (!tModel.number.integerValue) {
+            continue ;
+        }
         NSDictionary *dic = [[NSMutableDictionary alloc]init];//创建内层的字典
         //（name：缴费项名称，price:缴费金额，numer：数量，totalMoney：总金额，useUnit：单位）"
         [dic setValue:tModel.name forKey:@"name"];
@@ -295,12 +300,11 @@
         [dic setValue:tModel.useUnit forKey:@"useUnit"];
         [dic setValue:tModel.IsSubmit forKey:@"IsSubmit"];
         [dic setValue:tModel.Isrefund forKey:@"Isrefund"];
-        
         [jsonArray2 addObject:dic];
     }
     array2 = [NSArray arrayWithArray:jsonArray2];
     
-    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:self.model.declareId,@"declareId", self.model.product,@"product",self.model.bTime,@"btime",self.model.eTime,@"etime",[array JSONString],@"proposer",[array2 JSONString],@"needItem",nil];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:self.model.declareId,@"declareId", self.model.product,@"product",self.model.bTime,@"btime",self.model.eTime,@"etime",self.model.plateNumber,@"plateNumber",self.model.drivingLicence,@"drivingLicence",self.model.drivingLImg,@"drivingLImg",[array JSONString],@"proposer",[array2 JSONString],@"needItem",nil];
     NSLog(@"%@",[dic JSONString]);
     
     return dic;
@@ -311,7 +315,7 @@
 #pragma mark - tableView
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 4+[self.model.proposerItems count];
+    return 5+[self.model.proposerItems count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -319,15 +323,18 @@
         return 0;
     }
     else if (section==1) {
+        return 3;
+    }
+    else if (section==2) {
         return 1;
     }
-    else if (section<[self.model.proposerItems count]+2) {
+    else if (section<[self.model.proposerItems count]+3) {
         return 1;
-    }
-    else if (section==2+[self.model.proposerItems count]) {
-        return 0;
     }
     else if (section==3+[self.model.proposerItems count]) {
+        return 0;
+    }
+    else if (section==4+[self.model.proposerItems count]) {
         return [self.model.needItems count];
     }
     return 0;
@@ -342,7 +349,7 @@
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.width, 55)];
     UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(10, 5, tableView.width - 20, 50)];
     contentView.backgroundColor = [UIColor projectGreen];
-    if (section==0 || section== 2+[self.model.proposerItems count])
+    if (section==0 || section== 3+[self.model.proposerItems count])
     {
         [HNUIStyleSet UIStyleSetRoundView:contentView];
     }
@@ -366,7 +373,7 @@
         }
         [contentView addSubview:self.choiceDecorateView];
     }
-    else if (section==2+[self.model.proposerItems count]) {
+    else if (section==3+[self.model.proposerItems count]) {
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         
         btn.titleLabel.font = [UIFont systemFontOfSize:15];
@@ -395,13 +402,16 @@
         label.centerY = contentView.height / 2;
         [contentView addSubview:label];
         if (section==1) {
+            label.text = NSLocalizedString(@"送货车辆信息", nil);
+        }
+        else if (section==2) {
             label.text = NSLocalizedString(@"货物信息", nil);
         }
-        else if (section<[self.model.proposerItems count]+2) {
+        else if (section<[self.model.proposerItems count]+3) {
             label.text = NSLocalizedString(@"施工人员信息", nil);
         }
         
-        else if (section==3+[self.model.proposerItems count]) {
+        else if (section==4+[self.model.proposerItems count]) {
             label.text = NSLocalizedString(@"缴费项目", nil);
         }
     }
@@ -412,13 +422,19 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 1)
     {
+        if(indexPath.row == 2)
+            return 65;
+        return 30;
+    }
+    else if (indexPath.section == 2)
+    {
         return 100;
     }
-    else if (indexPath.section<[self.model.proposerItems count]+2)
+    else if (indexPath.section<[self.model.proposerItems count]+3)
     {
         return 145;
     }
-    else if (indexPath.section==3+[self.model.proposerItems count]) {
+    else if (indexPath.section==4+[self.model.proposerItems count]) {
         return 65;
     }
     return 30;
@@ -428,6 +444,60 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if(indexPath.section == 1)
+    {
+        if (indexPath.row==2) {
+            static NSString *identy = @"HNImageUploadTableViewCell";
+            HNImageUploadTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
+            if (!cell)
+            {
+                cell = [[HNImageUploadTableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:identy];
+                [cell reset:self.model.drivingLImg];
+            }
+            [cell.photo addTarget:self action:@selector(imageUploadClick:) forControlEvents:UIControlEventTouchUpInside];
+            cell.photo.tag = 20;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.title.text = @"行驶驾照：";
+            if (self.model.imagedrivingLImg) {
+                [cell.photo setImage:self.model.imagedrivingLImg forState:UIControlStateNormal];
+            }
+            
+            return cell;
+        }
+
+        static NSString *identy = @"HNEditTableViewCell";
+        HNEditTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
+        
+        if (!cell)
+        {
+            cell = [[HNEditTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identy];
+        }
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        switch (indexPath.row) {
+                
+            case 0:
+            {
+                cell.title.text = @"送货车牌：";
+                cell.textView.placeholder = @"在此输入车牌号码";
+                cell.textView.text = self.model.plateNumber;
+                cell.textView.tag = 6;
+            }
+                break;
+            case 1:
+            {
+                cell.title.text = @"行驶证号：";
+                cell.textView.placeholder = @"在此输入行驶证号";
+                cell.textView.text = self.model.drivingLicence;
+                cell.textView.tag = 10;
+            }
+            default:
+                break;
+        }
+        
+        cell.textView.delegate = self;
+        return cell;
+    }
+    else if(indexPath.section == 2)
     {
         static NSString *identy = @"deliverGodCell";
         HNDeliverGodTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
@@ -453,7 +523,7 @@
         self.productTextField = cell.nameTextField;
         return cell;
     }
-    else if (indexPath.section<[self.model.proposerItems count]+2)
+    else if (indexPath.section<[self.model.proposerItems count]+3)
     {
         static NSString *identy = @"newPersonCell";
         HNPersonNewTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
@@ -461,20 +531,20 @@
         {
             cell = [[HNPersonNewTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identy];
         }
-        HNDeliverProposerItem *peroposer = (HNDeliverProposerItem *)[self.model.proposerItems objectAtIndex:(indexPath.section -2)];
+        HNDeliverProposerItem *peroposer = (HNDeliverProposerItem *)[self.model.proposerItems objectAtIndex:(indexPath.section -3)];
         cell.nameTextField.delegate = self;
         cell.nameTextField.text = peroposer.name;
-        cell.nameTextField.tag = (indexPath.section-2)*10+1;
+        cell.nameTextField.tag = (indexPath.section-3)*10+1;
         cell.phoneTextField.delegate = self;
         cell.phoneTextField.text = peroposer.phone;
-        cell.phoneTextField.tag = (indexPath.section-2)*10+2;
+        cell.phoneTextField.tag = (indexPath.section-3)*10+2;
         cell.cardNOTextField.delegate = self;
         cell.cardNOTextField.text = peroposer.IDcard;
-        cell.cardNOTextField.tag = (indexPath.section-2)*10+3;
+        cell.cardNOTextField.tag = (indexPath.section-3)*10+3;
         [cell.iconPhoto addTarget:self action:@selector(imageUploadClick:) forControlEvents:UIControlEventTouchUpInside];
         [cell.cardPhoto addTarget:self action:@selector(imageUploadClick:) forControlEvents:UIControlEventTouchUpInside];
-        cell.iconPhoto.tag = (indexPath.section-2)*10+4;
-        cell.cardPhoto.tag = (indexPath.section-2)*10+5;
+        cell.iconPhoto.tag = (indexPath.section-3)*10+4;
+        cell.cardPhoto.tag = (indexPath.section-3)*10+5;
         [cell reSetPohoto];
         if (peroposer.imageIcon) {
             [cell.iconPhoto setImage:peroposer.imageIcon forState:UIControlStateNormal];
@@ -484,7 +554,7 @@
         }
         return cell;
     }
-    if (indexPath.section == [self.model.proposerItems count]+3) {
+    if (indexPath.section == [self.model.proposerItems count]+4) {
         static NSString *identy = @"purchaseIdenty";
         HNNeedPayTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
         HNDeliverNeedItem *neddItem = [self.model.needItems objectAtIndex:indexPath.row];
@@ -517,7 +587,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.section == [self.model.proposerItems count]+3)
+    if (indexPath.section == [self.model.proposerItems count]+4)
     {
         HNDeliverNeedItem *neddItem = [self.model.needItems objectAtIndex:indexPath.row];
         self.selectIndex = indexPath;
@@ -618,6 +688,11 @@
         if (msg) {
             [self.imageButton setImage:image forState:UIControlStateNormal];
             
+            if (self.imageButton.tag==20) {
+                self.model.imagedrivingLImg = image;
+                self.model.drivingLImg = msg;
+                return ;
+            }
             NSInteger section = self.imageButton.tag/10;
             HNDeliverProposerItem *data = [self.model.proposerItems objectAtIndex:section];
             NSInteger row = self.imageButton.tag%10;
@@ -675,6 +750,14 @@
         {
             self.model.eTime = destDateString;
         }
+    }
+    else if(textField.tag==6)
+    {
+        self.model.plateNumber = textField.text;
+    }
+    else if(textField.tag==10)
+    {
+        self.model.drivingLicence = textField.text;
     }
     else if(textField.tag == 7)
     {
