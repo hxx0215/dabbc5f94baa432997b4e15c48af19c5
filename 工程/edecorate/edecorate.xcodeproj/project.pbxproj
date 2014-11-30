@@ -221,6 +221,7 @@
 		D351B9701A0FC38D0015D261 /* HNComplaintApplyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D351B96F1A0FC38D0015D261 /* HNComplaintApplyTableViewCell.m */; };
 		D35982E31A28F4DE00C16B6D /* HNMessageDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D35982E21A28F4DE00C16B6D /* HNMessageDetailViewController.m */; };
 		D35982E61A2A421300C16B6D /* HNPaySupport.m in Sources */ = {isa = PBXBuildFile; fileRef = D35982E51A2A421300C16B6D /* HNPaySupport.m */; };
+		D35982E91A2B3F0A00C16B6D /* HNModfiypwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D35982E81A2B3F0A00C16B6D /* HNModfiypwdViewController.m */; };
 		D35EE4DE19EECFC100D889A3 /* HNHttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = D35EE4DD19EECFC100D889A3 /* HNHttpRequest.m */; };
 		D37642D61A20E84600F37956 /* HNProfileData.m in Sources */ = {isa = PBXBuildFile; fileRef = D37642D51A20E84600F37956 /* HNProfileData.m */; };
 		D37642D91A20EF5100F37956 /* HNEditTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D37642D81A20EF5100F37956 /* HNEditTableViewCell.m */; };
@@ -626,6 +627,8 @@
 		D35982E21A28F4DE00C16B6D /* HNMessageDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNMessageDetailViewController.m; sourceTree = "<group>"; };
 		D35982E41A2A421300C16B6D /* HNPaySupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNPaySupport.h; sourceTree = "<group>"; };
 		D35982E51A2A421300C16B6D /* HNPaySupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNPaySupport.m; sourceTree = "<group>"; };
+		D35982E71A2B3F0A00C16B6D /* HNModfiypwdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNModfiypwdViewController.h; sourceTree = "<group>"; };
+		D35982E81A2B3F0A00C16B6D /* HNModfiypwdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNModfiypwdViewController.m; sourceTree = "<group>"; };
 		D35EE4DC19EECFC100D889A3 /* HNHttpRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNHttpRequest.h; sourceTree = "<group>"; };
 		D35EE4DD19EECFC100D889A3 /* HNHttpRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNHttpRequest.m; sourceTree = "<group>"; };
 		D37642D41A20E84600F37956 /* HNProfileData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNProfileData.h; sourceTree = "<group>"; };
@@ -1428,6 +1431,8 @@
 				D3201FAB1A0A640C00236B08 /* HNSettingViewController.h */,
 				D3201FAC1A0A640C00236B08 /* HNSettingViewController.m */,
 				D3201FAD1A0A640C00236B08 /* HNSettingViewController.xib */,
+				D35982E71A2B3F0A00C16B6D /* HNModfiypwdViewController.h */,
+				D35982E81A2B3F0A00C16B6D /* HNModfiypwdViewController.m */,
 			);
 			name = Setting;
 			sourceTree = "<group>";
@@ -1826,6 +1831,7 @@
 				D3052B8E1A24E37D00ECD7A1 /* HNCommentsViewController.m in Sources */,
 				B9D3DEE619CD65500020CDC9 /* HNCheckDetailView.m in Sources */,
 				D3F90F1019CB13CA000C95E4 /* HNTemporaryFireViewController.m in Sources */,
+				D35982E91A2B3F0A00C16B6D /* HNModfiypwdViewController.m in Sources */,
 				B9D3DEDE19CD25430020CDC9 /* HNCheckDetailViewController.m in Sources */,
 				B9DE560119C9C26700280EC7 /* HNDecorateControlViewController.m in Sources */,
 				B9D72D5419D840960011CF83 /* HNOrderTableViewCell.m in Sources */,

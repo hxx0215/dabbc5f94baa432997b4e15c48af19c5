@@ -7,6 +7,7 @@
 //
 
 #import "HNSettingViewController.h"
+#import "HNModfiypwdViewController.h"
 
 @interface HNSettingViewController ()
 
@@ -69,9 +70,9 @@
 }
 
 - (IBAction)btnModifPWClick:(UIButton *)sender {
-    [self dismissViewControllerAnimated:YES completion:^{
-        
-    }];
+    HNModfiypwdViewController *order = [[HNModfiypwdViewController alloc]init];
+    order.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:order animated:YES];
 }
 
 /*
