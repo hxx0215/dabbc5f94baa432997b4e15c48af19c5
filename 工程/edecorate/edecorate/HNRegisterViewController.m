@@ -1,31 +1,29 @@
 //
-//  HNModfiypwdViewController.m
+//  HNRegisterViewController.m
 //  edecorate
 //
 //  Created by 刘向宏 on 14-11-30.
 //
 //
 
-#import "HNModfiypwdViewController.h"
+#import "HNRegisterViewController.h"
 #import "HNEditTableViewCell.h"
 #import "MBProgressHUD.h"
 #import "JSONKit.h"
 #import "HNLoginData.h"
 
-@interface HNModfiypwdViewController ()<UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate>
+@interface HNRegisterViewController ()<UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) NSString *oldpwd;
-@property (nonatomic, strong) NSString *newpwd;
-@property (nonatomic, strong) NSString *repwd;
-@property (nonatomic, strong) UITextField *textField;
+@property (nonatomic, strong) UITextField *shopName;
+@property (nonatomic, strong) UITextField *userName;
+@property (nonatomic, strong) UITextField *newpwd;
+@property (nonatomic, strong) UITextField *repwd;
 @end
-
-@implementation HNModfiypwdViewController
+@implementation HNRegisterViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
     self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -38,7 +36,7 @@
     UIBarButtonItem *cancel = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel", nil) style:UIBarButtonItemStyleDone target:self action:@selector(CancelButtonClick:)];
     self.navigationItem.leftBarButtonItem = cancel;
     
-    self.title = @"修改密码";
+    //self.title = @"注册";
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -49,8 +47,7 @@
 
 - (IBAction)OKButtonClick:(id)sender
 {
-    [self.textField resignFirstResponder];
-    if ([self.newpwd isEqualToString:self.repwd]) {
+    if ([self.newpwd.text isEqualToString:self.repwd.text]) {
         [self loadMyData];
     }
     else
@@ -65,6 +62,7 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -76,9 +74,9 @@
     MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = NSLocalizedString(@"Loading", nil);
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[HNLoginData shared].uid,@"uid",[HNLoginData shared].mshopid,@"mshopid", self.oldpwd,@"oldpwd",self.newpwd,@"newpwd",nil];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:self.shopName.text,@"Name",self.userName.text,@"loginname", self.newpwd.text,@"pwd",nil];
     NSString *jsonStr = [dic JSONString];
-    request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"set.user.modfiypwd" Params:jsonStr]];
+    request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"set.shop.register" Params:jsonStr]];
     NSString *contentType = @"text/html";
     [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
@@ -124,23 +122,10 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-    if(textField.tag==0)
-    {
-        self.oldpwd = textField.text;
-    }
-    else if(textField.tag==1)
-    {
-        self.newpwd = textField.text;
-    }
-    else if(textField.tag==2)
-    {
-        self.repwd = textField.text;
-    }
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    self.textField = textField;
 }
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField;
@@ -161,7 +146,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 3;
+    return 4;
 }
 
 
@@ -180,7 +165,7 @@
     contentView.layer.mask = maskLayer;
     
     UILabel *label = [[UILabel alloc] init];
-    label.text = NSLocalizedString(@"修改密码", nil);
+    label.text = NSLocalizedString(@"注册", nil);
     label.font = [UIFont systemFontOfSize:15];
     label.width = contentView.width -10;
     label.numberOfLines = 2;
@@ -214,20 +199,30 @@
             
         case 0:
         {
-            titleString = @"旧密码：";
-            detailString = @"点击在此输入旧密码";
+            titleString = @"商家名称：";
+            detailString = @"点击在此商家名称";
+            self.shopName = cell.textView;
         }
             break;
         case 1:
         {
-            titleString = @"新密码：";
-            detailString = @"点击在此输入新密码";
+            titleString = @"用户名：";
+            detailString = @"点击在此输入用户名";
+            self.userName = cell.textView;
         }
             break;
         case 2:
         {
+            titleString = @"密码：";
+            detailString = @"点击在此输入密码";
+            self.newpwd = cell.textView;
+        }
+            break;
+        case 3:
+        {
             titleString = @"确认密码：";
-            detailString = @"点击在此输入旧密码";
+            detailString = @"点击在此确认密码";
+            self.repwd = cell.textView;
         }
             break;
         default:
@@ -288,7 +283,6 @@
         }
     }
 }
-
 
 /*
 #pragma mark - Navigation

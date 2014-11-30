@@ -222,6 +222,7 @@
 		D35982E31A28F4DE00C16B6D /* HNMessageDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D35982E21A28F4DE00C16B6D /* HNMessageDetailViewController.m */; };
 		D35982E61A2A421300C16B6D /* HNPaySupport.m in Sources */ = {isa = PBXBuildFile; fileRef = D35982E51A2A421300C16B6D /* HNPaySupport.m */; };
 		D35982E91A2B3F0A00C16B6D /* HNModfiypwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D35982E81A2B3F0A00C16B6D /* HNModfiypwdViewController.m */; };
+		D35982EC1A2B4C5A00C16B6D /* HNRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D35982EB1A2B4C5A00C16B6D /* HNRegisterViewController.m */; };
 		D35EE4DE19EECFC100D889A3 /* HNHttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = D35EE4DD19EECFC100D889A3 /* HNHttpRequest.m */; };
 		D37642D61A20E84600F37956 /* HNProfileData.m in Sources */ = {isa = PBXBuildFile; fileRef = D37642D51A20E84600F37956 /* HNProfileData.m */; };
 		D37642D91A20EF5100F37956 /* HNEditTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D37642D81A20EF5100F37956 /* HNEditTableViewCell.m */; };
@@ -629,6 +630,8 @@
 		D35982E51A2A421300C16B6D /* HNPaySupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNPaySupport.m; sourceTree = "<group>"; };
 		D35982E71A2B3F0A00C16B6D /* HNModfiypwdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNModfiypwdViewController.h; sourceTree = "<group>"; };
 		D35982E81A2B3F0A00C16B6D /* HNModfiypwdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNModfiypwdViewController.m; sourceTree = "<group>"; };
+		D35982EA1A2B4C5A00C16B6D /* HNRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNRegisterViewController.h; sourceTree = "<group>"; };
+		D35982EB1A2B4C5A00C16B6D /* HNRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNRegisterViewController.m; sourceTree = "<group>"; };
 		D35EE4DC19EECFC100D889A3 /* HNHttpRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNHttpRequest.h; sourceTree = "<group>"; };
 		D35EE4DD19EECFC100D889A3 /* HNHttpRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNHttpRequest.m; sourceTree = "<group>"; };
 		D37642D41A20E84600F37956 /* HNProfileData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNProfileData.h; sourceTree = "<group>"; };
@@ -1328,6 +1331,8 @@
 				B965863519F693CF00EB4766 /* HNLoginView.m */,
 				B91BFCFD19E2D11F00FD468F /* HNLoginData.h */,
 				B91BFCFE19E2D11F00FD468F /* HNLoginData.m */,
+				D35982EA1A2B4C5A00C16B6D /* HNRegisterViewController.h */,
+				D35982EB1A2B4C5A00C16B6D /* HNRegisterViewController.m */,
 				D3DDF5201A1A31F2000DC300 /* HNImageData.h */,
 				D3DDF5211A1A31F2000DC300 /* HNImageData.m */,
 				B94B7A6219C9BE73000112ED /* Message */,
@@ -1742,6 +1747,7 @@
 				D3CD90FE19CF13DE00E76AF4 /* HNRefundApplyViewController.m in Sources */,
 				D33EEAC619D70C8800D6F106 /* HNProfileChangeViewController.m in Sources */,
 				B91A3AC719D6E6E9000F3823 /* UIScrollView+MJRefresh.m in Sources */,
+				D35982EC1A2B4C5A00C16B6D /* HNRegisterViewController.m in Sources */,
 				B916F0B819C8781D00A849C7 /* ViewController.m in Sources */,
 				D3052B8B1A24E35900ECD7A1 /* KeyBordVIew.m in Sources */,
 				B916F0B219C8781D00A849C7 /* AppDelegate.m in Sources */,

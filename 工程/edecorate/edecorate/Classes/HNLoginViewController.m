@@ -18,6 +18,7 @@
 #import "HNBusinessBKControlViewController.h"
 #import "HNMessageViewController.h"
 #import "HNSettingViewController.h"
+#import "HNRegisterViewController.h"
 
 @interface HNLoginModel: NSObject
 @property (nonatomic, strong)NSString *username;
@@ -148,6 +149,8 @@
 
 - (void)fogetPassword:(id)sender{
     NSLog(@"foget password");
+    HNRegisterViewController *vc = [[HNRegisterViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)rememberPassword:(UIButton *)sender{
     sender.selected = !sender.selected;
