@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface HNProfileData : NSObject
+@property (nonatomic, strong)NSString *headImage;
 @property (nonatomic, strong)NSString *attorneyIDcard;
 @property (nonatomic, strong)NSString *createtime;
 @property (nonatomic, strong)NSString *email;

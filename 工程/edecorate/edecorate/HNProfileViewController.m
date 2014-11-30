@@ -120,7 +120,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 9;
+    return 10;
 }
 
 
@@ -153,20 +153,38 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row==8)
+    if (indexPath.row==0)
     {
-        return 60;
+        return 65;
+    }
+    if (indexPath.row==9)
+    {
+        return 65;
     }
     return 35;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row==8) {
+    if (indexPath.row==0) {
         static NSString *identy = @"HNImageUploadTableViewCell";
         HNImageUploadTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
         if (!cell)
         {
             cell = [[HNImageUploadTableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:identy];
+            [cell.photo addTarget:self action:@selector(showPic:) forControlEvents:UIControlEventTouchUpInside];
+        }
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.title.text = @"商户头像：";
+        [cell reset:self.model.headImage];
+        return cell;
+    }
+    if (indexPath.row==9) {
+        static NSString *identy = @"HNImageUploadTableViewCell";
+        HNImageUploadTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
+        if (!cell)
+        {
+            cell = [[HNImageUploadTableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:identy];
+            [cell.photo addTarget:self action:@selector(showPic:) forControlEvents:UIControlEventTouchUpInside];
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.title.text = @"身份证照片：";
@@ -185,58 +203,52 @@
     NSString *detailString = nil;
     switch (indexPath.row) {
             
-        case 0:
+        case 1:
         {
             titleString = @"商户编号：";
             detailString = [NSString stringWithFormat:@"%ld",self.model.mshopid.integerValue] ;
         }
             break;
-        case 1:
+        case 2:
         {
             titleString = @"注册时间：";
             detailString = self.model.createtime;
         }
             break;
-        case 2:
+        case 3:
         {
             titleString = @"上次登录时间：";
             detailString = self.model.lastlogintime;
         }
             break;
-        case 3:
+        case 4:
         {
             titleString = @"登录名：";
             detailString = self.model.shopusername;
         }
             break;
-        case 4:
+        case 5:
         {
             titleString = @"真实姓名：";
             detailString = self.model.realname;
         }
             break;
-        case 5:
+        case 6:
         {
             titleString = @"联系方式：";
             detailString = self.model.phone;
         }
             break;
-        case 6:
+        case 7:
         {
             titleString = @"电子邮箱：";
             detailString = self.model.email;
         }
             break;
-        case 7:
+        case 8:
         {
             titleString = @"身份证号：";
             detailString = self.model.idcard;
-        }
-            break;
-        case 8:
-        {
-            titleString = @"身份证照片：";
-            detailString = self.model.attorneyIDcard;
         }
             break;
         default:
@@ -299,6 +311,14 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)showPic:(UIButton *)sender{
+    HNBrowseImageViewController *vc = [[HNBrowseImageViewController alloc] init];
+    vc.image = sender.currentImage;
+    [self presentViewController:vc animated:NO completion:^{
+        
+    }];
 }
 
 /*

@@ -21,6 +21,7 @@ shopusername	登录名
 -(BOOL)updateData:(NSDictionary *)dic{
     if (!dic)
         return NO;
+    [self setValue:[dic objectForKey:@"headImage"] forKey:@"headImage"];
     [self setValue:[dic objectForKey:@"attorneyIDcard"] forKey:@"attorneyIDcard"];
     [self setValue:[dic objectForKey:@"createtime"] forKey:@"createtime"];
     [self setValue:[dic objectForKey:@"email"] forKey:@"email"];

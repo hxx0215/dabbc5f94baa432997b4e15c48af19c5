@@ -13,12 +13,16 @@
 #import "MBProgressHUD.h"
 #import "JSONKit.h"
 #import "HNLoginData.h"
+#import "HNImageUploadTableViewCell.h"
 
-@interface HNProfileChangeViewController ()<UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate>
+@interface HNProfileChangeViewController ()<UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate,UIImagePickerControllerDelegate>
 
 @property (strong, nonatomic) UITextField* currentTextField;
 @property (nonatomic, strong) UITableView *tableView;
 @property (strong, nonatomic) UIView* textOKView;
+
+@property (nonatomic, strong) UIImagePickerController *imagePicker;
+@property (strong, nonatomic) UIButton * imageButton;
 @end
 
 @implementation HNProfileChangeViewController
@@ -40,6 +44,15 @@
     self.navigationItem.rightBarButtonItem = done;
     UIBarButtonItem *cancel = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel", nil) style:UIBarButtonItemStyleDone target:self action:@selector(CancelButtonClick:)];
     self.navigationItem.leftBarButtonItem = cancel;
+    
+    UIImagePickerControllerSourceType sourceType=UIImagePickerControllerSourceTypePhotoLibrary;
+    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        sourceType=UIImagePickerControllerSourceTypePhotoLibrary;
+    }
+    self.imagePicker = [[UIImagePickerController alloc] init];
+    self.imagePicker.delegate =self;
+    self.imagePicker.sourceType = sourceType;
+    self.imagePicker.allowsEditing = NO;
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -83,7 +96,7 @@
     MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = NSLocalizedString(@"Loading", nil);
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[HNLoginData shared].uid,@"userid",self.model.realname,@"realname", self.model.email,@"email",self.model.idcard,@"idcard",self.model.phone,@"phone",self.model.attorneyIDcard,@"attorneyIDcard",nil];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[HNLoginData shared].uid,@"userid",self.model.realname,@"realname", self.model.email,@"email",self.model.idcard,@"idcard",self.model.phone,@"phone",self.model.attorneyIDcard,@"attorneyIDcard",self.model.headImage,@"headImage",nil];
     NSString *jsonStr = [dic JSONString];
     request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"set.user.details" Params:jsonStr]];
     NSString *contentType = @"text/html";
@@ -137,29 +150,24 @@
 {
     self.currentTextField = nil;
     switch (textField.tag) {
-        case 0:
+        case 1:
         {
             self.model.realname = textField.text;
         }
             break;
-        case 1:
+        case 3:
         {
             self.model.phone = textField.text;
         }
             break;
-        case 2:
+        case 4:
         {
             self.model.email = textField.text;
         }
             break;
-        case 3:
+        case 5:
         {
             self.model.idcard = textField.text;
-        }
-            break;
-        case 4:
-        {
-            self.model.attorneyIDcard = textField.text;
         }
             break;
         default:
@@ -183,6 +191,45 @@
 {
     return YES;
 }
+
+#pragma mark - UIImagePickerControllerDelegate
+
+- (void)imageUploadClick:(id)sender
+{
+    self.imageButton = sender;
+    [self presentViewController:self.imagePicker animated:YES completion:nil];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
+    UIImage *image=[info objectForKey:UIImagePickerControllerOriginalImage];
+    [self.imagePicker dismissViewControllerAnimated:YES completion:nil];
+    
+    CGFloat scaleSize = 0.1f;
+    UIGraphicsBeginImageContext(CGSizeMake(image.size.width * scaleSize, image.size.height * scaleSize));
+    [image drawInRect:CGRectMake(0, 0, image.size.width * scaleSize, image.size.height * scaleSize)];
+    UIImage *scaledImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.labelText = NSLocalizedString(@"Loading", nil);
+    [HNUploadImage UploadImage:scaledImage block:^(NSString *msg) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        if (msg) {
+            [self.imageButton setImage:image forState:UIControlStateNormal];
+            
+            if (self.imageButton.tag==11) {
+                self.model.attorneyIDcard = msg;
+                return ;
+            }
+            if (self.imageButton.tag==12) {
+                self.model.headImage = msg;
+                return ;
+            }
+            
+        }
+    }];
+    
+}
+
 #pragma mark - tableView
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -190,7 +237,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 5;
+    return 6;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -222,10 +269,45 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if(indexPath.row == 5 || indexPath.row == 0)
+    {
+        return 65;
+    }
     return 35;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if (indexPath.row==0) {
+        static NSString *identy = @"HNImageUploadTableViewCell";
+        HNImageUploadTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
+        if (!cell)
+        {
+            cell = [[HNImageUploadTableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:identy];
+        }
+        [cell.photo addTarget:self action:@selector(imageUploadClick:) forControlEvents:UIControlEventTouchUpInside];
+        cell.photo.tag = 11;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.title.text = @"商户头像：";
+        [cell reset:self.model.headImage];
+        return cell;
+    }
+    
+    if (indexPath.row==5) {
+        static NSString *identy = @"HNImageUploadTableViewCell";
+        HNImageUploadTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
+        if (!cell)
+        {
+            cell = [[HNImageUploadTableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:identy];
+        }
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        [cell.photo addTarget:self action:@selector(imageUploadClick:) forControlEvents:UIControlEventTouchUpInside];
+        cell.photo.tag = 12;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.title.text = @"身份证照片：";
+        [cell reset:self.model.attorneyIDcard];
+        return cell;
+    }
     
     static NSString *identy = @"complaintDetailCell";
     HNEditTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
@@ -239,34 +321,28 @@
     NSString *detailString = nil;
     switch (indexPath.row) {
             
-        case 0:
+        case 1:
         {
             titleString = @"真实姓名：";
             detailString = self.model.realname;
         }
             break;
-        case 1:
+        case 2:
         {
             titleString = @"联系方式：";
             detailString = self.model.phone;
         }
             break;
-        case 2:
+        case 3:
         {
             titleString = @"电子邮箱：";
             detailString = self.model.email;
         }
             break;
-        case 3:
+        case 4:
         {
             titleString = @"身份证号：";
             detailString = self.model.idcard;
-        }
-            break;
-        case 4:
-        {
-            titleString = @"身份证照片：";
-            detailString = self.model.attorneyIDcard;
         }
             break;
         default:
