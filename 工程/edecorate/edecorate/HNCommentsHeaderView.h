@@ -9,6 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface HNCommentsHeaderView : UIView
-@property (nonatomic, strong)UISearchBar *search;
-@property (nonatomic, strong)UISegmentedControl *segment;
+@property (nonatomic, strong)UIImageView *imageView;
+@property (nonatomic, strong)UILabel *titleLabel;
+@property (nonatomic, strong)UILabel *grouppriceTLabel;
+@property (nonatomic, strong)UILabel *grouppriceLabel;
+@property (nonatomic, strong)UILabel *stockLabel;
+- (void)setContent:(NSDictionary *)content;
 @end

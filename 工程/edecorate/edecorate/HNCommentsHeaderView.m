@@ -17,39 +17,44 @@
 - (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self){
-        NSArray *segmentedArray = [[NSArray alloc]initWithObjects:@"评论",@"留言",nil];
-        self.segment= [[UISegmentedControl alloc]initWithItems:segmentedArray];
-        self.segment.frame = CGRectMake(50, 5, frame.size.width-100, 30);
-        self.segment.selectedSegmentIndex = 0;//设置默认选择项索引
-        self.segment.tintColor = [UIColor greenColor];   
-        self.search = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 35, frame.size.width, 44)];
-        [self.segment addTarget:self action:@selector(segmentClick:)forControlEvents:UIControlEventValueChanged];
-        [self addSubview:self.segment];
-        [self addSubview:self.search];
-        //调用HNCommentsTableViewCell.h的SetTableByType方法，默认设置table为评论的列表
-      //  HNCommentsTableViewCell *table=[[HNCommentsTableViewCell alloc] init];
-        //[table SetTableByType:0];
+        self.imageView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 115, 75)];
+        self.titleLabel = [[UILabel alloc]init];
+        self.titleLabel.textColor = [UIColor blueColor];
+        self.titleLabel.font = [UIFont systemFontOfSize:13];
+        self.grouppriceLabel = [[UILabel alloc]init];
+        self.grouppriceLabel.textColor = [UIColor redColor];
+        self.grouppriceLabel.font = [UIFont systemFontOfSize:13];
+        self.stockLabel = [[UILabel alloc]init];
+        self.stockLabel.font = [UIFont systemFontOfSize:13];
+        
+        self.grouppriceTLabel = [[UILabel alloc]init];
+        self.grouppriceTLabel.font = [UIFont systemFontOfSize:13];
+        self.grouppriceTLabel.frame = CGRectMake(130, 35, self.width-130, 15);
+        self.grouppriceTLabel.text = @"销售价格：";
+        [self.grouppriceTLabel sizeToFit];
+        
+        [self addSubview:self.imageView];
+        [self addSubview:self.titleLabel];
+        [self addSubview:self.grouppriceLabel];
+        [self addSubview:self.grouppriceTLabel];
+        [self addSubview:self.stockLabel];
       
     }
     return self;
 }
 
-- (void)segmentClick:(id)sender {
-    
-    NSInteger Index = self.segment.selectedSegmentIndex;
-    switch (Index)
-    {
-        case 0:
-//            HNCommentsTableViewCell *table=[[HNCommentsTableViewCell alloc] init];
-//            [table SetTableByType:0];
-            break;
-        case 1:
-//            HNCommentsTableViewCell *table=[[HNCommentsTableViewCell alloc] init];
-//            [table SetTableByType:1];
-            break;
-        default:
-            break;
-    }
+-(void)layoutSubviews
+{
+    self.titleLabel.frame = CGRectMake(130, 15, self.width-130, 15);
+    self.grouppriceLabel.frame = CGRectMake(self.grouppriceTLabel.right, 35, self.width-130, 15);
+    self.stockLabel.frame = CGRectMake(130, 55, self.width-130, 15);
+}
+
+- (void)setContent:(NSDictionary *)content
+{
+    self.titleLabel.text = [content objectForKey:@"goodsname"];
+    self.grouppriceLabel.text = [content objectForKey:@"groupprice"];
+    self.stockLabel.text = [NSString stringWithFormat:@"库存：%@",[content objectForKey:@"stock"]] ;
 }
 
 @end
