@@ -67,7 +67,7 @@ static NSString *const cellIdentifier=@"QQChart";
     self.view.backgroundColor=[UIColor whiteColor];
     
     //add UItableView
-    self.tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 90, self.view.frame.size.width, self.view.frame.size.height-108-120) style:UITableViewStylePlain];
+    self.tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 90, self.view.frame.size.width, self.view.frame.size.height-108) style:UITableViewStylePlain];
     [self.tableView registerClass:[ChartCell class] forCellReuseIdentifier:cellIdentifier];
     self.tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     self.tableView.allowsSelection = NO;
