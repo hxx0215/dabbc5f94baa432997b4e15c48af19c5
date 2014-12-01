@@ -70,19 +70,19 @@
     self.navigationItem.title = NSLocalizedString(@"Decorate Control", nil) ;
     
     self.view.backgroundColor = [UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1];
-    self.decorateReportedConstruction = [self createButtonWithTitle:NSLocalizedString(@"Reported that construction decoration", nil) selector:@selector(decorateReportedConstructionButton_Clicked:) row:0 coloum:0 image:[UIImage imageNamed:@"decorate_report_button_normal"] imageClick:[UIImage imageNamed:@"decorate_report_button_pressed"]];
+    self.decorateReportedConstruction = [self createButtonWithTitle:NSLocalizedString(@"Reported that construction decoration", nil) selector:@selector(decorateReportedConstructionButton_Clicked:) row:0 coloum:0 image:[UIImage imageNamed:@"我要报建"] imageClick:[UIImage imageNamed:@"我要报建c"]];
     
-    self.decorateAcceptance = [self createButtonWithTitle:NSLocalizedString(@"Decoration acceptance", nil) selector:@selector(decorateAcceptanceButton_Clicked:) row:0 coloum:1 image:[UIImage imageNamed:@"decorate_check_button_normal"] imageClick:[UIImage imageNamed:@"decorate_check_button_pressed"]];
-    self.officePasses = [self createButtonWithTitle:NSLocalizedString(@"Office passes", nil) selector:@selector(officePassesButton_Clicked:) row:0 coloum:2 image:[UIImage imageNamed:@"decorate_passport_button_normal"] imageClick:[UIImage imageNamed:@"decorate_passport_button_pressed"]];
-    self.temporaryFire = [self createButtonWithTitle:NSLocalizedString(@"Temporary fire", nil) selector:@selector(temporaryFireConstructionButton_Clicked:) row:1 coloum:0 image:[UIImage imageNamed:@"decorate_fire_button_normal"] imageClick:[UIImage imageNamed:@"decorate_fire_button_pressed"]];
+    self.decorateAcceptance = [self createButtonWithTitle:NSLocalizedString(@"Decoration acceptance", nil) selector:@selector(decorateAcceptanceButton_Clicked:) row:0 coloum:1 image:[UIImage imageNamed:@"装修验收"] imageClick:[UIImage imageNamed:@"装修验收c"]];
+    self.officePasses = [self createButtonWithTitle:NSLocalizedString(@"Office passes", nil) selector:@selector(officePassesButton_Clicked:) row:0 coloum:2 image:[UIImage imageNamed:@"办出入证"] imageClick:[UIImage imageNamed:@"办出入证c"]];
+    self.temporaryFire = [self createButtonWithTitle:NSLocalizedString(@"Temporary fire", nil) selector:@selector(temporaryFireConstructionButton_Clicked:) row:1 coloum:0 image:[UIImage imageNamed:@"临时用火"] imageClick:[UIImage imageNamed:@"临时用火c"]];
     
-    self.deliveryAndInstallation = [self createButtonWithTitle:NSLocalizedString(@"Delivery&Installation", nil) selector:@selector(deliveryAndInstallationButton_Clicked:) row:1 coloum:1 image:[UIImage imageNamed:@"decorate_installation_button_normal"] imageClick:[UIImage imageNamed:@"decorate_installation_button_pressed"]];
-    self.depositRefund = [self createButtonWithTitle:NSLocalizedString(@"Deposit refund", nil) selector:@selector(depositRefundButton_Clicked:) row:1 coloum:2 image:[UIImage imageNamed:@"decorate_refund_button_normal"] imageClick:[UIImage imageNamed:@"decorate_refund_button_pressed"]];
+    self.deliveryAndInstallation = [self createButtonWithTitle:NSLocalizedString(@"Delivery&Installation", nil) selector:@selector(deliveryAndInstallationButton_Clicked:) row:1 coloum:1 image:[UIImage imageNamed:@"送货安装"] imageClick:[UIImage imageNamed:@"送货安装c"]];
+    self.depositRefund = [self createButtonWithTitle:NSLocalizedString(@"Deposit refund", nil) selector:@selector(depositRefundButton_Clicked:) row:1 coloum:2 image:[UIImage imageNamed:@"押金退款"] imageClick:[UIImage imageNamed:@"押金退款c"]];
     self.IHaveAComplaint = [self createButtonWithTitle:NSLocalizedString(@"I have a complaint", nil) selector:@selector(IHaveAComplaintButton_Clicked:) row:2 coloum:0 image:[UIImage imageNamed:@"decorate_complain_button_normal"] imageClick:[UIImage imageNamed:@"decorate_complain_button_pressed"]];
     
     self.temporaryPower = [self createButtonWithTitle:NSLocalizedString(@"Temporary power", nil) selector:@selector(temporaryPowerButton_Clicked:) row:2 coloum:1 image:[UIImage imageNamed:@"decorate_electric_button_normal"] imageClick:[UIImage imageNamed:@"decorate_electric_button_pressed"]];
     
-    self.archives = [self createButtonWithTitle:NSLocalizedString(@"Archives", nil) selector:@selector(archivesButton_Clicked:) row:2 coloum:2 image:[UIImage imageNamed:@"Archives_but"] imageClick:[UIImage imageNamed:@"Archives_but_click"]];
+    self.archives = [self createButtonWithTitle:NSLocalizedString(@"Archives", nil) selector:@selector(archivesButton_Clicked:) row:2 coloum:2 image:[UIImage imageNamed:@"装修档案"] imageClick:[UIImage imageNamed:@"装修档案c"]];
 }
 
 - (UIButton *)createButtonWithTitle:(NSString *)title selector:(SEL)selector row:(int)ro coloum:(int)col image:(UIImage* )image imageClick:(UIImage* )imageClick{
