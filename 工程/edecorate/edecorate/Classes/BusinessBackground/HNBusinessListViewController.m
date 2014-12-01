@@ -31,7 +31,7 @@
 #import "HNOrderViewController.h"
 #import "HNOrderCategoriesViewController.h"
 
-@interface HNBusinessListViewController ()<UITableViewDelegate,UITableViewDataSource,HNGoodsCategoriesDelegate,HNOrderCategoriesDelegate,HNReturnCategoriesDelegate>
+@interface HNBusinessListViewController ()<UITableViewDelegate,UITableViewDataSource,HNGoodsCategoriesDelegate,HNOrderCategoriesDelegate,HNReturnCategoriesDelegate,UISearchBarDelegate>
 @property (nonatomic, assign)HNBusinessType businessType;
 @property (nonatomic, assign)BOOL shouldRefresh;
 @property (nonatomic, strong)UITableView *tableView;
@@ -43,6 +43,8 @@
 @property (nonatomic, strong)NSMutableDictionary *orderSearchDic;
 @property (nonatomic, strong)NSMutableDictionary *returnGoodsSearchDic;
 @property (nonatomic, strong)NSMutableDictionary *commentDic;
+@property (nonatomic, strong)NSMutableArray *searchList;
+@property (nonatomic, assign)BOOL isSearching;
 @end
 
 static NSString *reuseId = @"businessCell";
@@ -52,6 +54,7 @@ static NSString *reuseId = @"businessCell";
     self = [super init];
     if (self){
         self.businessType = type;
+        self.isSearching = NO;
         self.shouldRefresh = YES;
     }
     return self;
@@ -66,6 +69,7 @@ static NSString *reuseId = @"businessCell";
     [self.view addSubview:self.tableView];
     
     self.businessList = [[NSMutableArray alloc] init];
+    self.searchList = [NSMutableArray new];
     __weak typeof (self) wself = self;
     [self.tableView addHeaderWithCallback:^{
         typeof (self) sself = wself;
@@ -132,6 +136,7 @@ static NSString *reuseId = @"businessCell";
         {
             HNGoodsHeaderView *view = [[HNGoodsHeaderView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 44)];
             [view.categoryButton addTarget:self action:@selector(goodsCategory:) forControlEvents:UIControlEventTouchUpInside];
+            view.search.delegate = self;
             self.headerView = view;
         }
             break;
@@ -140,6 +145,7 @@ static NSString *reuseId = @"businessCell";
             HNReturnsHeaderView *view = [[HNReturnsHeaderView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 44)];
             [view.statusButton addTarget:self action:@selector(returnCategory:) forControlEvents:UIControlEventTouchUpInside];
             self.headerView = view;
+            view.search.delegate = self;
             break;
         }
 
@@ -153,6 +159,7 @@ static NSString *reuseId = @"businessCell";
         {
             HNOrderHeaderView *view = [[HNOrderHeaderView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, 44)];
             [view.filter addTarget:self action:@selector(orderCategory:) forControlEvents:UIControlEventTouchUpInside];
+            view.search.delegate = self;
             self.headerView = view;
         }
         default:
@@ -167,6 +174,9 @@ static NSString *reuseId = @"businessCell";
 
 #pragma mark UITableViewDelegate & UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    if (self.isSearching)
+        return [self.searchList count];
+    else
     return [self.businessList count];
     switch (self.businessType){
         case kReturnGoods:
@@ -182,28 +192,33 @@ static NSString *reuseId = @"businessCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
 
     UITableViewCell *cell = nil;
+    id content = nil;
+    if (self.isSearching)
+        content = self.searchList[indexPath.row];
+    else
+        content = self.businessList[indexPath.row];
     switch (self.businessType){
         case kGoods:{
             HNGoodsTableViewCell *tCell = [tableView dequeueReusableCellWithIdentifier:reuseId];
-            [tCell setContent:self.businessList[indexPath.row]];
+            [tCell setContent:content];
             cell = tCell;
         }
             break;
         case kReturnGoods:{
             HNReturnsTableViewCell *cCell=[tableView dequeueReusableCellWithIdentifier:reuseId];
-            [cCell setContent:self.businessList[indexPath.row]];
+            [cCell setContent:content];
             cell=cCell;
         }
             break;
         case kComment:{
             HNCommentsTableViewCell *cCell=[tableView dequeueReusableCellWithIdentifier:reuseId];
-            [cCell setContent:self.businessList[indexPath.row]];
+            [cCell setContent:content];
             cell=cCell;
         }
             break;
         case kOrder:{
             HNOrderTableViewCell *tCell = [tableView dequeueReusableCellWithIdentifier:reuseId];
-            [tCell setContent:self.businessList[indexPath.row]];
+            [tCell setContent:content];
             cell = tCell;
         }
         default:
@@ -432,5 +447,37 @@ static NSString *reuseId = @"businessCell";
     HNReturnsHeaderView *head = (HNReturnsHeaderView *)self.headerView;
     [head.statusButton setTitle:title forState:UIControlStateNormal];
     [self.returnGoodsSearchDic setObject:type forKey:@"type"];
+}
+#pragma mark - UISearchBarDelegate
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar{
+    searchBar.showsCancelButton = YES;
+    self.isSearching = YES;
+}
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
+    NSLog(@"%@",searchText);
+    [self.searchList removeAllObjects];
+    for (int i=0;i<[self.businessList count];i++)
+        if ([self.businessList[i][@"name"] rangeOfString:searchText].location != NSNotFound)
+            [self.searchList addObject:self.businessList[i]];
+    if ([searchText isEqualToString:@""])
+        for (int i=0; i<[self.businessList count]; i++) {
+            [self.searchList addObject:self.businessList[i]];
+        }
+    [self.tableView reloadData];
+}
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
+    self.isSearching = NO;
+    searchBar.showsCancelButton = NO;
+    searchBar.text = @"";
+    [searchBar resignFirstResponder];
+    [self.tableView reloadData];
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
+    [searchBar resignFirstResponder];
+    searchBar.showsCancelButton = NO;
+    if ([searchBar.text isEqualToString:@""])
+        self.isSearching = NO;
+    [self.tableView reloadData];
 }
 @end
