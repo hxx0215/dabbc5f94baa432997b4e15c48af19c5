@@ -53,19 +53,7 @@
     self.dataArray2 = [[NSArray alloc] initWithObjects:self.deliverModel.product,self.deliverModel.bTime,self.deliverModel.eTime,nil];
     
 
-    
-//    self.product.text = self.deliverModel.product;
-//    self.productTitle.text = NSLocalizedString(@"送货安装产品", nil);
-//    self.timeTitleLabel.text = NSLocalizedString(@"起止日前", nil);
-//    NSDate *bdate = [[NSDate alloc]init];
-//    NSDate *edate = [[NSDate alloc]init];
-//    NSDateFormatter *f = [[NSDateFormatter alloc] init];
-//    [f setDateFormat:@"YYYY/MM/dd HH:mm:ss"];
-//    NSDateFormatter *ff = [[NSDateFormatter alloc] init];
-//    [ff setDateFormat:@"YYYY/MM/dd"];
-//    bdate = [f dateFromString:self.deliverModel.bTime];
-//    edate = [f dateFromString:self.deliverModel.eTime];
-//    self.timeLabel.text = [NSString stringWithFormat:@"%@－%@",[ff stringFromDate:bdate],[ff stringFromDate:edate]];
+    [self loadPic];
     
 }
 
@@ -201,6 +189,7 @@
             {
                 cell = [[HNImageUploadTableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:identy];
             }
+            [cell.photo addTarget:self action:@selector(showPic:) forControlEvents:UIControlEventTouchUpInside];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.title.text = @"行驶驾照：";
             [cell reset:self.deliverModel.drivingLImg];
@@ -254,11 +243,16 @@
         
         [cell.iconPhoto addTarget:self action:@selector(showPic:) forControlEvents:UIControlEventTouchUpInside];
         [cell.cardPhoto addTarget:self action:@selector(showPic:) forControlEvents:UIControlEventTouchUpInside];
+   
+        [cell.iconPhoto setImage:proposer.imageIcon forState:UIControlStateNormal];
+        [cell.iconPhoto setImage:proposer.imageIcon forState:UIControlStateHighlighted];
+        [cell.cardPhoto setImage:proposer.imageIDcard forState:UIControlStateNormal];
+        [cell.cardPhoto setImage:proposer.imageIDcard forState:UIControlStateHighlighted];
         
-        [cell.iconPhoto setImage:[[HNImageData shared]imageWithLink:proposer.Icon] forState:UIControlStateNormal];
-        [cell.iconPhoto setImage:[[HNImageData shared]imageWithLink:proposer.Icon] forState:UIControlStateHighlighted];
-        [cell.cardPhoto setImage:[[HNImageData shared]imageWithLink:proposer.IDcardImg] forState:UIControlStateNormal];
-        [cell.cardPhoto setImage:[[HNImageData shared]imageWithLink:proposer.IDcardImg] forState:UIControlStateHighlighted];
+//        [cell.iconPhoto setImage:[[HNImageData shared]imageWithLink:proposer.Icon] forState:UIControlStateNormal];
+//        [cell.iconPhoto setImage:[[HNImageData shared]imageWithLink:proposer.Icon] forState:UIControlStateHighlighted];
+//        [cell.cardPhoto setImage:[[HNImageData shared]imageWithLink:proposer.IDcardImg] forState:UIControlStateNormal];
+//        [cell.cardPhoto setImage:[[HNImageData shared]imageWithLink:proposer.IDcardImg] forState:UIControlStateHighlighted];
         
         return cell;
     }
@@ -359,7 +353,27 @@
     }];
 }
 
-
+- (void)loadPic{
+    
+    for (int i = 0;i<[self.deliverModel.proposerItems count];i++){
+        HNDeliverProposerItem *obj = [self.deliverModel.proposerItems objectAtIndex:i];
+        UIImage *img = [UIImage imageNamed:@"selectphoto.png"];
+        obj.imageIDcard = img;
+        obj.imageIcon = img;
+    }
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        for (int i = 0;i<[self.deliverModel.proposerItems count];i++){
+            HNDeliverProposerItem *obj = [self.deliverModel.proposerItems objectAtIndex:i];
+            UIImage *image = [[HNImageData shared] imageWithLink:obj.IDcardImg];
+            obj.imageIDcard = image;
+            image = [[HNImageData shared] imageWithLink:obj.Icon];
+            obj.imageIcon = image;
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
+    });
+}
 /*
 #pragma mark - Navigation
 

@@ -17,6 +17,7 @@
 #import "HNLoginData.h"
 #import "JSONKit.h"
 #import "MBProgressHUD.h"
+#import "HNCommentsHeaderView.h"
 
 @interface HNCommentsViewController ()<UITableViewDataSource,UITableViewDelegate,KeyBordVIewDelegate,ChartCellDelegate,AVAudioPlayerDelegate>
 @property (nonatomic,strong) UITableView *tableView;
@@ -27,6 +28,9 @@
 @property (nonatomic,strong) AVAudioRecorder *recorder;
 @property (nonatomic,strong) AVAudioPlayer *player;
 @property (nonatomic,strong) NSString *resultString;
+
+@property (nonatomic,strong) NSDictionary *goodDetaildic;
+@property (nonatomic,strong) HNCommentsHeaderView *headView;
 @end
 static NSString *const cellIdentifier=@"QQChart";
 @implementation HNCommentsViewController
@@ -63,7 +67,7 @@ static NSString *const cellIdentifier=@"QQChart";
     self.view.backgroundColor=[UIColor whiteColor];
     
     //add UItableView
-    self.tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-108) style:UITableViewStylePlain];
+    self.tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 90, self.view.frame.size.width, self.view.frame.size.height-108) style:UITableViewStylePlain];
     [self.tableView registerClass:[ChartCell class] forCellReuseIdentifier:cellIdentifier];
     self.tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     self.tableView.allowsSelection = NO;
@@ -71,6 +75,9 @@ static NSString *const cellIdentifier=@"QQChart";
     self.tableView.dataSource=self;
     self.tableView.delegate=self;
     [self.view addSubview:self.tableView];
+    
+    self.headView = [[HNCommentsHeaderView alloc]initWithFrame:CGRectMake(0, 0, self.tableView.width, 90)];
+    [self.view addSubview:self.headView];
     
     //add keyBorad
     
@@ -121,6 +128,49 @@ static NSString *const cellIdentifier=@"QQChart";
 
 }
 
+-(void)loadMyHeadData
+{
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    //HNLoginModel *model = [[HNLoginModel alloc] init];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[self.content objectForKey:@"goodsid"],@"goodsid", [HNLoginData shared].mshopid,@"mshopid",nil];
+    NSString *jsonStr = [dic JSONString];
+    NSLog(@"%@",jsonStr);
+    request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"get.goods.detail" Params:jsonStr]];
+    NSString *contentType = @"text/html";
+    [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
+        [self performSelectorOnMainThread:@selector(didloadMyHeadData:) withObject:data waitUntilDone:YES];
+    }];
+}
+
+- (void)didloadMyHeadData:(NSData *)data
+{
+    if (data)
+    {
+        NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
+        NSLog(@"%@",retJson);
+        NSDictionary* dic = [retJson objectFromJSONString];
+        NSNumber* total = [dic objectForKey:@"total"];
+        
+        if (total.intValue){//之后需要替换成status
+            NSArray* array = [dic objectForKey:@"data"];
+            self.goodDetaildic = [array objectAtIndex:0];
+            [self loadPic];
+            [self.headView setContent:self.goodDetaildic];
+        }
+        else
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login Fail", nil) message:NSLocalizedString(@"Please input correct username and password", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+            [alert show];
+        }
+    }
+    else{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection Error", nil) message:NSLocalizedString(@"Please check your network.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+        [alert show];
+    }
+}
+
 
 -(void)loadMyData
 {
@@ -139,6 +189,7 @@ static NSString *const cellIdentifier=@"QQChart";
 
 - (void)didloadMyData:(NSData *)data
 {
+    [self loadMyHeadData];
     if (data)
     {
         NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -388,5 +439,22 @@ static NSString *const cellIdentifier=@"QQChart";
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (void)loadPic{
+
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        NSString *str = [self.goodDetaildic objectForKey:@"imgurl"];
+        NSArray *firstSplit = [str componentsSeparatedByString:@","];
+        if ([firstSplit count]<=0) {
+            return ;
+        }
+        UIImage *image = [[HNImageData shared] imageWithLink:[firstSplit objectAtIndex:0] ];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.headView.imageView setImage:image];
+        });
+    });
+}
+
 
 @end
