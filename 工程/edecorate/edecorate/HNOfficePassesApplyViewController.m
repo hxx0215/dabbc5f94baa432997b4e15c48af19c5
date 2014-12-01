@@ -213,6 +213,11 @@
     if (data)
     {
         NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        if (!retStr) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:NSLocalizedString(@"从服务器获取数据失败", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+            [alert show];
+            return;
+        }
         NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
         NSLog(@"%@",retJson);
         NSDictionary* dic = [retJson objectFromJSONString];
@@ -279,7 +284,7 @@
         [dic setValue:[NSNumber numberWithInteger:tModel.number.integerValue] forKey:@"number"];
         [dic setValue:tModel.useUnit forKey:@"useUnit"];
         [dic setValue:tModel.IsSubmit forKey:@"IsSubmit"];
-        [dic setValue:tModel.Isrefund forKey:@"Isrefund"];
+        //[dic setValue:tModel.Isrefund forKey:@"Isrefund"];
         [jsonArray2 addObject:dic];
     }
     array2 = [NSArray arrayWithArray:jsonArray2];

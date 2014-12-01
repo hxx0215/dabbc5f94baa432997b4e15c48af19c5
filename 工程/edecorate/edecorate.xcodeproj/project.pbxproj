@@ -228,6 +228,10 @@
 		D37642D91A20EF5100F37956 /* HNEditTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D37642D81A20EF5100F37956 /* HNEditTableViewCell.m */; };
 		D380638F1A2627F300B8231C /* HNArchivesDetalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D380638E1A2627F300B8231C /* HNArchivesDetalViewController.m */; };
 		D38615EE1A03E9DC005B4093 /* HNDeliverApplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D38615EC1A03E9DC005B4093 /* HNDeliverApplyViewController.m */; };
+		D38CF3751A2CCAEA004509FF /* HNCityChoiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D38CF3741A2CCAEA004509FF /* HNCityChoiceViewController.m */; };
+		D38CF3791A2CCC5A004509FF /* HNFilterDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D38CF3771A2CCC5A004509FF /* HNFilterDataViewController.m */; };
+		D38CF37A1A2CCC5A004509FF /* HNFilterDataViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38CF3781A2CCC5A004509FF /* HNFilterDataViewController.xib */; };
+		D38CF37C1A2CCD85004509FF /* Provineces.plist in Resources */ = {isa = PBXBuildFile; fileRef = D38CF37B1A2CCD85004509FF /* Provineces.plist */; };
 		D38DD5611A0BB1E100886933 /* HNMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D38DD55F1A0BB1E100886933 /* HNMessageTableViewCell.m */; };
 		D38DD5621A0BB1E100886933 /* HNMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38DD5601A0BB1E100886933 /* HNMessageTableViewCell.xib */; };
 		D38DD5651A0BC8DC00886933 /* HNUIStyleSet.m in Sources */ = {isa = PBXBuildFile; fileRef = D38DD5641A0BC8DC00886933 /* HNUIStyleSet.m */; };
@@ -642,6 +646,12 @@
 		D380638E1A2627F300B8231C /* HNArchivesDetalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNArchivesDetalViewController.m; sourceTree = "<group>"; };
 		D38615EB1A03E9DC005B4093 /* HNDeliverApplyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNDeliverApplyViewController.h; path = Classes/DecorateControl/HNDeliverApplyViewController.h; sourceTree = "<group>"; };
 		D38615EC1A03E9DC005B4093 /* HNDeliverApplyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNDeliverApplyViewController.m; path = Classes/DecorateControl/HNDeliverApplyViewController.m; sourceTree = "<group>"; };
+		D38CF3731A2CCAEA004509FF /* HNCityChoiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNCityChoiceViewController.h; sourceTree = "<group>"; };
+		D38CF3741A2CCAEA004509FF /* HNCityChoiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNCityChoiceViewController.m; sourceTree = "<group>"; };
+		D38CF3761A2CCC5A004509FF /* HNFilterDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNFilterDataViewController.h; sourceTree = "<group>"; };
+		D38CF3771A2CCC5A004509FF /* HNFilterDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNFilterDataViewController.m; sourceTree = "<group>"; };
+		D38CF3781A2CCC5A004509FF /* HNFilterDataViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HNFilterDataViewController.xib; sourceTree = "<group>"; };
+		D38CF37B1A2CCD85004509FF /* Provineces.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Provineces.plist; sourceTree = "<group>"; };
 		D38DD55E1A0BB1E100886933 /* HNMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNMessageTableViewCell.h; path = Classes/Message/HNMessageTableViewCell.h; sourceTree = "<group>"; };
 		D38DD55F1A0BB1E100886933 /* HNMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNMessageTableViewCell.m; path = Classes/Message/HNMessageTableViewCell.m; sourceTree = "<group>"; };
 		D38DD5601A0BB1E100886933 /* HNMessageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HNMessageTableViewCell.xib; path = Classes/Message/HNMessageTableViewCell.xib; sourceTree = "<group>"; };
@@ -879,6 +889,9 @@
 		B91A3AA719D6DFFD000F3823 /* Goods */ = {
 			isa = PBXGroup;
 			children = (
+				D38CF3731A2CCAEA004509FF /* HNCityChoiceViewController.h */,
+				D38CF3741A2CCAEA004509FF /* HNCityChoiceViewController.m */,
+				D38CF37B1A2CCD85004509FF /* Provineces.plist */,
 				B91A3AD319D703C5000F3823 /* HNGoodsHeaderView.h */,
 				B91A3AD419D703C5000F3823 /* HNGoodsHeaderView.m */,
 				B979EDEC1A1F74A800DC22FB /* HNGoodsCategoriesViewController.h */,
@@ -889,6 +902,9 @@
 				B91A3AC919D6F2FA000F3823 /* HNGoodsTableViewCell.h */,
 				B91A3ACA19D6F2FA000F3823 /* HNGoodsTableViewCell.m */,
 				B91A3ACB19D6F2FA000F3823 /* HNGoodsTableViewCell.xib */,
+				D38CF3761A2CCC5A004509FF /* HNFilterDataViewController.h */,
+				D38CF3771A2CCC5A004509FF /* HNFilterDataViewController.m */,
+				D38CF3781A2CCC5A004509FF /* HNFilterDataViewController.xib */,
 			);
 			name = Goods;
 			sourceTree = "<group>";
@@ -1651,6 +1667,7 @@
 				D311A7951A1E41FD000E8A4F /* 退换货管理c@2x.png in Resources */,
 				D3052BA81A24E43000ECD7A1 /* chat_bottom_smile_nor.png in Resources */,
 				D3052BA61A24E43000ECD7A1 /* chat_bottom_up_nor.png in Resources */,
+				D38CF37A1A2CCC5A004509FF /* HNFilterDataViewController.xib in Resources */,
 				D311A7941A1E41FD000E8A4F /* 退换货管理@2x.png in Resources */,
 				B9A09D821A0B9CA500A88CD8 /* arrowBack@2x.png in Resources */,
 				B9E0660A19DAED6100893DBD /* HNDeliverGoodsViewController.xib in Resources */,
@@ -1659,6 +1676,7 @@
 				B9A09D831A0B9CA500A88CD8 /* arrowBackClick@2x.png in Resources */,
 				B91A3AC119D6E6E9000F3823 /* MJRefresh.bundle in Resources */,
 				D3052BA21A24E43000ECD7A1 /* chatto_bg_focused.png in Resources */,
+				D38CF37C1A2CCD85004509FF /* Provineces.plist in Resources */,
 				D3052BAB1A24E43000ECD7A1 /* chat_bottom_keyboard_press.png in Resources */,
 				B9A09D7E1A0B9B4A00A88CD8 /* add_click@2x.png in Resources */,
 				B965864319F7E38E00EB4766 /* unsubmit@2x.png in Resources */,
@@ -1858,6 +1876,7 @@
 				D3CD90F719CF09B500E76AF4 /* HNRefundTableViewController.m in Sources */,
 				B9B2BC1C19CF1F3000839AED /* CTAssetsGroupViewCell.m in Sources */,
 				D38DD5611A0BB1E100886933 /* HNMessageTableViewCell.m in Sources */,
+				D38CF3751A2CCAEA004509FF /* HNCityChoiceViewController.m in Sources */,
 				D3FA3E381A1651EC00D98861 /* HNArchivesTableViewCell.m in Sources */,
 				D3052B8A1A24E35900ECD7A1 /* ChartContentView.m in Sources */,
 				B9B2BC1919CF1F3000839AED /* ALAssetsGroup+isEqual.m in Sources */,
@@ -1879,6 +1898,7 @@
 				B9D72D5919D846FC0011CF83 /* HNOrderViewController.m in Sources */,
 				D33549F719FEB3D300135800 /* HNPersonNewTableViewCell.m in Sources */,
 				B9AD9E0819DEC90D00D82439 /* NSString+Crypt.m in Sources */,
+				D38CF3791A2CCC5A004509FF /* HNFilterDataViewController.m in Sources */,
 				B9C2B41B19FE8BAC00C93D59 /* HNConstructTableViewCell.m in Sources */,
 				D391EE8C19CD787D00DE3363 /* HNComplaintTableViewController.m in Sources */,
 				B9B2BC1B19CF1F3000839AED /* CTAssetScrollView.m in Sources */,

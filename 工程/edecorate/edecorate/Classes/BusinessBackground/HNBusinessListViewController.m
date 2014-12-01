@@ -15,6 +15,7 @@
 #import "HNGoodsViewController.h"
 #import "HNGoodsHeaderView.h"
 #import "HNGoodsCategoriesViewController.h"
+#import "HNFilterDataViewController.h"
 
 #import "HNReturnsHeaderView.h"
 #import "HNReimburseViewController.h"
@@ -30,6 +31,7 @@
 #import "HNOrderTableViewCell.h"
 #import "HNOrderViewController.h"
 #import "HNOrderCategoriesViewController.h"
+
 
 @interface HNBusinessListViewController ()<UITableViewDelegate,UITableViewDataSource,HNGoodsCategoriesDelegate,HNOrderCategoriesDelegate,HNReturnCategoriesDelegate,UISearchBarDelegate>
 @property (nonatomic, assign)HNBusinessType businessType;
@@ -411,7 +413,8 @@ static NSString *reuseId = @"businessCell";
 }
 #pragma mark - actions
 - (void)filterData:(id)sender{
-    
+    HNFilterDataViewController *VC = [[HNFilterDataViewController alloc]init];
+    [self.navigationController pushViewController:VC animated:YES];
 }
 - (void)goodsCategory:(id)sender{
     HNGoodsCategoriesViewController *vc = [[HNGoodsCategoriesViewController alloc] init];
