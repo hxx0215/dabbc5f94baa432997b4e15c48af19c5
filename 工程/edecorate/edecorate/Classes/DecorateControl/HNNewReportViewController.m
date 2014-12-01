@@ -128,7 +128,7 @@
     [self initSendDic];
 }
 - (void)initSendDic{
-    self.sendDic = [@{@"declareid": self.declareId , @"shopid" : [HNLoginData shared].mshopid,@"principal":@"",@"EnterprisePhone":@"",@"EIDCard":@"",/*@"beginTime":@"",@"endTime": @"",*/@"population":@"",@"headImage":@"",@"OriginalSChart":@"",@"floorplan":@"",@"wallRemould":@"" , @"ceilingPlan":@"",@"WaterwayPlan":@"",@"BlockDiagram":@"",@"businessLicense":@"",@"TaxIMG":@"",@"organizeIMG":@"",@"qualificationIMG":@"" ,@"ElectricianIMG":@"",@"powerAttorney":@"",@"AttorneyIDcard":@"",@"EIDCardIMG":@"",@"compactIMG":@"",@"kitchenIMG":@"",@"WCIMG":@"",@"roomIMG":@"",@"gasLineIMG":@"",@"electricityBoxIMG":@"",@"waterPipeIMG":@"",@"proportion":@"",@"blueprint":@"" }mutableCopy];
+    self.sendDic = [@{@"declareid": self.declareId , @"mshopid" : [HNLoginData shared].mshopid,@"principal":@"",@"EnterprisePhone":@"",@"EIDCard":@"",/*@"beginTime":@"",@"endTime": @"",*/@"population":@"",@"headImage":@"",@"OriginalSChart":@"",@"floorplan":@"",@"wallRemould":@"" , @"ceilingPlan":@"",@"WaterwayPlan":@"",@"BlockDiagram":@"",@"businessLicense":@"",@"TaxIMG":@"",@"organizeIMG":@"",@"qualificationIMG":@"" ,@"ElectricianIMG":@"",@"powerAttorney":@"",@"AttorneyIDcard":@"",@"EIDCardIMG":@"",@"compactIMG":@"",@"kitchenIMG":@"",@"WCIMG":@"",@"roomIMG":@"",@"gasLineIMG":@"",@"electricityBoxIMG":@"",@"waterPipeIMG":@"",@"proportion":@"",@"blueprint":@"" }mutableCopy];
 }
 - (void)initDateString{
     NSDateFormatter *df = [[NSDateFormatter alloc] init];
@@ -549,6 +549,7 @@
             NSMutableArray *mustPay = [NSMutableArray new];
             NSMutableArray *optionPay = [NSMutableArray new];
             HNPurchaseViewController *vc = [[HNPurchaseViewController alloc] init];
+            vc.allData = [dataArr mutableCopy];
             for (int i=0;i<count;i++){
                 HNPurchaseItem *item = [HNPurchaseItem new];
                 item.title = dataArr[i][@"name"];
@@ -588,7 +589,7 @@
     self.sendDic[@"population"] = self.userDic[@"population"];
     sendJson = [self.sendDic JSONString];
     request = [[NSMutableURLRequest alloc] init];
-    request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"set.decorate.undertake" Params:sendJson]];
+    request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"set.decoraton.declaredetails" Params:sendJson]];
     contentType = @"text/html";
     [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
@@ -598,7 +599,7 @@
             NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
             NSDictionary *retDic = [retJson objectFromJSONString];
-            NSLog(@"%@",retDic);
+//            NSLog(@"%@",retDic[@"data"][0][@"msg"]);
         }
         else{
             NSLog(@"%@",connectionError);

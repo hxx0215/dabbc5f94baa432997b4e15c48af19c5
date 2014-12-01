@@ -18,6 +18,8 @@
 @property (nonatomic, strong)UILabel *totalLabel;
 @property (nonatomic, strong)UIButton *purchase;
 @property (nonatomic, strong)UIButton *checkAll;
+@property (nonatomic, assign)CGFloat totalFee;
+@property (nonatomic, strong)NSMutableArray *sendData;
 @end
 
 @implementation HNPurchaseViewController
@@ -74,6 +76,12 @@
     size.height += self.purchaseView.height;
     self.tableView.contentSize = size;
     [self updateTotalPrice];
+    for (int i=0;i<[self.allData count];i++){
+        NSMutableDictionary *dic = [self.allData[i] mutableCopy];
+        [dic setObject:@(0.00) forKey:@"number"];
+        [dic setObject:@(0.00) forKey:@"totalMoney"];
+        [self.allData replaceObjectAtIndex:i withObject:dic];
+    }
     [MBProgressHUD hideHUDForView:self.view animated:YES];
 }
 
@@ -124,7 +132,7 @@
         [checkBox addTarget:self action:@selector(checkAll:) forControlEvents:UIControlEventTouchUpInside];
         [checkBox sizeToFit];
         self.checkAll = checkBox;
-        [contentView addSubview:checkBox];
+//        [contentView addSubview:checkBox];
         checkBox.left = 4;
         checkBox.centerY = label.centerY;
     }
@@ -218,13 +226,15 @@
         item = self.mustPay[indexPath.row];
         cell.detail.textColor = [UIColor colorWithWhite:128.0/255.0 alpha:1.0];
         cell.checkButton.hidden = YES;
+        cell.checkButton.tag = 100 + indexPath.row;
     }
     else{
         item = self.optionPay[indexPath.row];
         cell.detail.textColor = [UIColor colorWithRed:45.0/255.0 green:138.05 blue:204.0 alpha:1.0];
         cell.checkButton.hidden = NO;
+        cell.checkButton.tag = 1000 + indexPath.row;
     }
-    cell.checkButton.tag = indexPath.row;
+//    cell.checkButton.tag = indexPath.row;
     cell.title.text = item.title;
     cell.price.text = [NSString stringWithFormat:@"%.2f",item.price];
     cell.single = item.single;
@@ -268,6 +278,12 @@
     sender.selected = !sender.selected;
     if (!sender.selected)
         self.checkAll.selected = NO;
+    if (sender.tag>=1000){
+        int index = sender.tag % 1000;
+        HNPurchaseItem *item = self.optionPay[index];
+        item.isSelect = sender.selected;
+        self.optionPay[index] = item;
+    }
     [self updateTotalPrice];
 }
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{
@@ -284,6 +300,15 @@
         item.nums = [tf.text integerValue];
         item.price = item.nums * item.unitPrice;
         cell.price.text = [NSString stringWithFormat:@"%.2f",item.price];
+        for (int i=0;i<[self.allData count];i++){
+            if ([self.allData[i][@"name"] isEqualToString:cell.title.text]){
+                NSMutableDictionary *dic = [self.allData[i] mutableCopy];
+                [dic setObject:[NSNumber numberWithFloat:[cell.price.text floatValue]] forKey:@"totalMoney"];
+                [dic setObject:[NSNumber numberWithFloat:(CGFloat)item.nums] forKey:@"number"];
+                [self.allData replaceObjectAtIndex:i withObject:dic];
+                break ;
+            }
+        }
         [self updateTotalPrice];
     }
 }
@@ -302,12 +327,56 @@
             total += item.price;
     }];
     self.totalLabel.text = [NSString stringWithFormat:@"合计￥%.2f",total];
+    self.totalFee = total;
     [self.totalLabel sizeToFit];
     self.totalLabel.right = self.purchase.left - 24;
 }
+- (void)showMustSub{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"警告", nil) message:NSLocalizedString(@"有必交项未填入数量", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"确定", nil) otherButtonTitles: nil];
+    [alert show];
+}
 - (void)purchase:(id)sender{
-    [HNPaySupport shared].delegate = self;
-    [[HNPaySupport shared] getPayToken:self.declareid cid:self.declareid payType:self.type];
+    if (fabs(self.totalFee)<1e-6)
+        return ;
+    NSMutableArray *item = [NSMutableArray new];
+    for (int i=0;i<[self.allData count];i++){
+        NSMutableDictionary *dic =[NSMutableDictionary new];
+        BOOL iscontinue = NO;
+        [dic setObject:self.allData[i][@"name"] forKey:@"name"];
+        for (int i=0;i<[self.optionPay count];i++)
+            if ([[self.optionPay[i] title] isEqualToString:dic[@"name"]]){
+                iscontinue = ![self.optionPay[i] isSelect];
+                break;
+            }
+        if (iscontinue) continue;
+        [dic setObject:[NSNumber numberWithFloat:[self.allData[i][@"price"] floatValue]] forKey:@"price"];
+        [dic setObject:self.allData[i][@"useUnit"] forKey:@"useUnit"];
+        [dic setObject:self.allData[i][@"number"] forKey:@"number"];
+        [dic setObject:[NSNumber numberWithFloat:[self.allData[i][@"IsSubmit"] floatValue]]  forKey:@"IsSubmit"];
+        [dic setObject:[NSNumber numberWithFloat:[self.allData[i][@"Isrefund"] floatValue]]  forKey:@"Isrefund"];
+        [dic setObject:self.allData[i][@"totalMoney"] forKey:@"totalMoney"];
+        [dic setObject:@(i) forKey:@"sort"];
+        [item addObject:dic];
+    }
+    NSArray *arr = [NSArray arrayWithArray:item];
+    NSDictionary *sendDic = @{@"u_paytype":[NSString stringWithFormat:@"%d",self.type],@"u_declareId": self.declareid,@"u_needItem":[arr JSONString]};
+    NSString *sendJson = [sendDic JSONString];
+    NSLog(@"%@",sendJson);
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"update.decoraton.declaredetails" Params:sendJson]];//[NSURL URLWithString:[NSString createLongResponseURLWithMethod:@"update.decoraton.declaredetails" Params:sendJson ]];
+    NSLog(@"%@",request.URL);
+    NSString *contentType = @"text/html";
+    [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
+        if (data){
+            NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
+            NSDictionary *retDic = [retJson objectFromJSONString];
+            NSLog(@"%@",retDic);
+            [HNPaySupport shared].delegate = self;
+            [[HNPaySupport shared] getPayToken:self.declareid cid:self.declareid payType:self.type];
+        }
+    }];
 }
 - (void)didGetPayUrl:(NSString *)url{
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];

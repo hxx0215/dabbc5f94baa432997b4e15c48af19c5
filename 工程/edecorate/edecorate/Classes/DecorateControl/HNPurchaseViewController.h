@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface HNPurchaseViewController : UIViewController
-@property (nonatomic, strong) NSArray *mustPay;
-@property (nonatomic, strong) NSArray *optionPay;
+@property (nonatomic, strong) NSMutableArray *mustPay;
+@property (nonatomic, strong) NSMutableArray *optionPay;
 @property (nonatomic, strong) NSString *declareid;
 @property (nonatomic, assign) NSInteger type;
+@property (nonatomic, strong) NSMutableArray *allData;
 @end

@@ -16,7 +16,7 @@
 - (NSString *) stringFromMD5;
 + (NSString *)createSignWithMethod:(NSString *)method Params:(NSString *)params;
 + (NSString *)createResponseURLWithMethod:(NSString *)method Params:(NSString *)params;
-
++ (NSString *)createLongResponseURLWithMethod:(NSString *)method Params:(NSString *)params;
 - (NSString *)addPort;
 @end
 

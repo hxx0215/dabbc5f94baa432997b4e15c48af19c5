@@ -14,5 +14,5 @@
 @property (nonatomic, assign)NSInteger single;
 @property (nonatomic, assign)NSInteger nums;
 @property (nonatomic, assign)CGFloat unitPrice;
-
+@property (nonatomic, assign)BOOL isSelect;
 @end

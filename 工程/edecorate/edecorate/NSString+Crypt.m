@@ -10,9 +10,20 @@
 #import <CommonCrypto/CommonCryptor.h>
 #import <CommonCrypto/CommonDigest.h>
 #define KeyStr @"SDFL#)@F"
-#define baseURL @"http://helper.ezxvip.com/"//@"http://113.105.159.115:5030/"
+#define baseURL @"http://helper.ezxvip.com/index.aspx/"//@"http://113.105.159.115:5030/"
 
 @implementation NSString (Crypt)
++(NSString *)createLongResponseURLWithMethod:(NSString *)method Params:(NSString *)params{
+    NSString *retStr;
+    NSString *paramsStr = [params encryptWithDES];
+    NSString *sign = [NSString createSignWithMethod:method Params:paramsStr];
+    if (params && [params length]>0){
+        retStr = [NSString stringWithFormat:@"%@?Method=%@&Params=%@&Sign=%@",baseURL,method,paramsStr,sign];
+    }
+    else
+        retStr = [NSString stringWithFormat:@"%@?Method=%@&Sign=%@",baseURL,method,sign];
+    return retStr;
+}
 +(NSString *)createResponseURLWithMethod:(NSString *)method Params:(NSString *)params{
     NSString *retStr;
     NSString *paramsStr = [[NSString encodeToPercentEscapeString:params] encryptWithDES];
