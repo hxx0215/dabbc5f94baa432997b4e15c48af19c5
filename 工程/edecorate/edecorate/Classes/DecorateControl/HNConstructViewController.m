@@ -15,8 +15,9 @@
 #import "HNConstructPaymentTableViewCell.h"
 #import "HNGetAuthViewController.h"
 #import "HNNewReportViewController.h"
+#import "HNPaySupport.h"
 
-@interface HNConstructViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface HNConstructViewController ()<UITableViewDelegate,UITableViewDataSource,HNDecoratePayModelDelegate>
 @property (nonatomic, strong)UITableView *tableView;
 @property (nonatomic, strong)NSArray *companyData;
 @property (nonatomic, strong)NSArray *personalData;
@@ -379,7 +380,20 @@ static NSString *kConstructPaymentCell = @"constPaymentCell";
     [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)goPur{
-    
+    HNPayType type = 0;
+    if (self.constructType == kCompanyDetail){
+        type = KHNPayType6;
+    }
+    else if (self.constructType == kPersonalDetail)
+        type = KHNPayType5;
+    if ([self.allData[@"Isaddition"] intValue] == 1)
+        type = KHNPayType7;
+    [HNPaySupport shared].delegate = self;
+    [[HNPaySupport shared] getPayToken:self.declareid cid:self.declareid payType:type];
+}
+- (void)didGetPayUrl:(NSString *)url{
+    NSURL *jump = [NSURL URLWithString:url];
+    [[UIApplication sharedApplication] openURL:jump];
 }
 - (void)configUnComplete{
     HNNewReportViewController *vc = [[HNNewReportViewController alloc] init];

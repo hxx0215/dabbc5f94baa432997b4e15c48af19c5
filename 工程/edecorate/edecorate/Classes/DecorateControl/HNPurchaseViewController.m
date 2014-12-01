@@ -10,8 +10,8 @@
 #import "HNPurchaseItem.h"
 #import "HNPurchaseTableViewCell.h"
 #import "MBProgressHUD.h"
-
-@interface HNPurchaseViewController ()<UITableViewDelegate,UITableViewDataSource>
+#import "HNPaySupport.h"
+@interface HNPurchaseViewController ()<UITableViewDelegate,UITableViewDataSource,HNDecoratePayModelDelegate>
 @property (nonatomic, strong)UITableView *tableView;
 @property (nonatomic, strong)NSIndexPath *selectIndex;
 @property (nonatomic, strong)UIView *purchaseView;
@@ -51,6 +51,7 @@
     self.purchase.top = 54;
     [self.purchase setBackgroundColor:[UIColor colorWithRed:245.0/255.0 green:72.0/255.0 blue:0 alpha:1.0]];
     self.purchase.layer.cornerRadius = 5.0;
+    [self.purchase addTarget:self action:@selector(purchase:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.purchaseView addSubview:self.totalLabel];
     [self.purchaseView addSubview:self.purchase];
@@ -303,5 +304,12 @@
     self.totalLabel.text = [NSString stringWithFormat:@"合计￥%.2f",total];
     [self.totalLabel sizeToFit];
     self.totalLabel.right = self.purchase.left - 24;
+}
+- (void)purchase:(id)sender{
+    [HNPaySupport shared].delegate = self;
+    [[HNPaySupport shared] getPayToken:self.declareid cid:self.declareid payType:self.type];
+}
+- (void)didGetPayUrl:(NSString *)url{
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
 }
 @end

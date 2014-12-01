@@ -11,4 +11,6 @@
 @interface HNPurchaseViewController : UIViewController
 @property (nonatomic, strong) NSArray *mustPay;
 @property (nonatomic, strong) NSArray *optionPay;
+@property (nonatomic, strong) NSString *declareid;
+@property (nonatomic, assign) NSInteger type;
 @end

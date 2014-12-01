@@ -153,9 +153,10 @@
 {
     NSMutableDictionary *sendDic = [[NSMutableDictionary alloc] init];
     [sendDic setObject:[HNLoginData shared].mshopid forKey:@"mshopid"];
-    [sendDic setObject:declareId forKey:@"id"];
+    [sendDic setObject:declareId forKey:@"declareid"];
     [sendDic setObject:connid forKey:@"connid"];
-    [sendDic setObject:[NSNumber numberWithInteger:(type)] forKey:@"type"];
+//    [sendDic setObject:[NSNumber numberWithInteger:(type)] forKey:@"type"];
+    [sendDic setObject:[NSString stringWithFormat:@"%d",type] forKey:@"type"];
     NSString *sendJson = [sendDic JSONString];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"get.pay.info" Params:sendJson]];

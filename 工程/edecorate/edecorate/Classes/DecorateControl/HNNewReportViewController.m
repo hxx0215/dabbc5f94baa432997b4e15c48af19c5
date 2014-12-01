@@ -128,7 +128,7 @@
     [self initSendDic];
 }
 - (void)initSendDic{
-    self.sendDic = [@{@"declareid": self.declareId , @"shopid" : [HNLoginData shared].mshopid,@"principal":@"",@"EnterprisePhone":@"",@"EIDCard":@"",@"beginTime":@"",@"endTime": @"",@"population":@"",@"deadline":@"",@"OriginalSChart":@"",@"floorplan":@"",@"wallRemould":@"" , @"ceilingPlan":@"",@"WaterwayPlan":@"",@"BlockDiagram":@"",@"businessLicense":@"",@"TaxIMG":@"",@"organizeIMG":@"",@"qualificationIMG":@"" ,@"ElectricianIMG":@"",@"powerAttorney":@"",@"AttorneyIDcard":@"",@"EIDCardIMG":@"",@"compactIMG":@"",@"kitchenIMG":@"",@"WCIMG":@"",@"roomIMG":@"",@"gasLineIMG":@"",@"electricityBoxIMG":@"",@"waterPipeIMG":@"",@"proportion":@"",@"blueprint":@"" }mutableCopy];
+    self.sendDic = [@{@"declareid": self.declareId , @"shopid" : [HNLoginData shared].mshopid,@"principal":@"",@"EnterprisePhone":@"",@"EIDCard":@"",/*@"beginTime":@"",@"endTime": @"",*/@"population":@"",@"headImage":@"",@"OriginalSChart":@"",@"floorplan":@"",@"wallRemould":@"" , @"ceilingPlan":@"",@"WaterwayPlan":@"",@"BlockDiagram":@"",@"businessLicense":@"",@"TaxIMG":@"",@"organizeIMG":@"",@"qualificationIMG":@"" ,@"ElectricianIMG":@"",@"powerAttorney":@"",@"AttorneyIDcard":@"",@"EIDCardIMG":@"",@"compactIMG":@"",@"kitchenIMG":@"",@"WCIMG":@"",@"roomIMG":@"",@"gasLineIMG":@"",@"electricityBoxIMG":@"",@"waterPipeIMG":@"",@"proportion":@"",@"blueprint":@"" }mutableCopy];
 }
 - (void)initDateString{
     NSDateFormatter *df = [[NSDateFormatter alloc] init];
@@ -526,8 +526,8 @@
     [self.curText resignFirstResponder];
 }
 - (void)purchase:(id)sender{
-    NSString *purchaseType = @"0";
-    if (self.constructType == 1)//公司 type:5
+    __block NSString *purchaseType = @"0";
+    if (self.constructType == 1)//公司 type:6
         purchaseType = @"6";
     if (self.constructType == 0)
         purchaseType = @"5";
@@ -552,6 +552,8 @@
             for (int i=0;i<count;i++){
                 HNPurchaseItem *item = [HNPurchaseItem new];
                 item.title = dataArr[i][@"name"];
+                vc.declareid = self.declareId;
+                vc.type = [purchaseType intValue];
                 if (dataArr[i][@"useUnit"] && ![dataArr[i][@"useUnit"] isEqualToString:@""]){
                     item.single = 1;
                     item.nums = 0;
@@ -576,21 +578,21 @@
             });
         }
     }];
-    return;
-    /*[MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    return;
+//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     self.sendDic[@"principal"] = self.userDic[@"realname"];
     self.sendDic[@"EnterprisePhone"] = self.userDic[@"phone"];
     self.sendDic[@"EIDCard"] = self.userDic[@"idcard"];
-//    self.sendDic[@"beginTime"] = self.beginDate;
-//    self.sendDic[@"endTime"] = self.endDate;
+//    self.sendDic[@"beginTime"] = [self.beginDate substringToIndex:10];
+//    self.sendDic[@"endTime"] = [self.endDate substringToIndex:10];
     self.sendDic[@"population"] = self.userDic[@"population"];
-    NSString *sendJson = [self.sendDic JSONString];
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    sendJson = [self.sendDic JSONString];
+    request = [[NSMutableURLRequest alloc] init];
     request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"set.decorate.undertake" Params:sendJson]];
-    NSString *contentType = @"text/html";
+    contentType = @"text/html";
     [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
+//        [MBProgressHUD hideHUDForView:self.view animated:YES];
         if (data)
         {
             NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -601,7 +603,7 @@
         else{
             NSLog(@"%@",connectionError);
         }
-    }];*/
+    }];
 }
 - (void)upload:(UIButton *)sender{
     UIImagePickerController *pick = [[UIImagePickerController alloc] init];
