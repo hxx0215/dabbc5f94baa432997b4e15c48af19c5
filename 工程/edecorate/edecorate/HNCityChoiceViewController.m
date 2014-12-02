@@ -24,6 +24,8 @@
 @property (nonatomic,strong) UITableView *tableView;
 @property (nonatomic,strong) NSMutableDictionary *arrayCity;
 @property (nonatomic,strong) NSMutableArray *abcArray;
+
+@property (nonatomic,strong) UILabel *cityNameLable;
 @end
 
 @implementation HNCityChoiceViewController
@@ -32,6 +34,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
 	// Do any additional setup after loading the view, typically from a nib.
     NSBundle *bundle = [NSBundle mainBundle];
     NSString *plistPath = [bundle pathForResource:@"Provineces" ofType:@"plist"];
@@ -48,7 +51,21 @@
     self.arrayCity = [[NSMutableDictionary alloc]init];
     self.abcArray = [[NSMutableArray alloc]init];
     
+    self.cityNameLable = [[UILabel alloc]initWithFrame:CGRectMake(10, 10, self.view.width-20, 30)];
+    self.cityNameLable.text = [HNFilterModel shared].city;
+    self.cityNameLable.textColor = [UIColor projectGreen];
+    
+    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(5, 40, self.view.width-10, 1)];
+    label.backgroundColor = [UIColor blackColor];
+    [self.view addSubview:self.cityNameLable];
+    [self.view addSubview:label];
 
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.tableView.frame = CGRectMake(0, 42, self.view.width, self.view.height-42);
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -199,6 +216,19 @@
     return self.abcArray;
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    NSUInteger section = [indexPath section];
+    NSUInteger row = [indexPath row];
+    
+    NSArray *cities = [self.arrayCity objectForKey:[self.abcArray objectAtIndex:section]];
+    cityModel *model = [cities objectAtIndex:row];
+    self.cityNameLable.text = model.name;
+    [HNFilterModel shared].city = model.name;
+    [HNFilterModel shared].cityID = model.areaid;
+}
 
 
 @end

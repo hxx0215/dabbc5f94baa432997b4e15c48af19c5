@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HNFilterModel.h"
 
 @interface HNCityChoiceViewController : UIViewController
 @property (strong, nonatomic) NSArray *provinces;
+@property (strong, nonatomic) NSString *localName;
 @end
