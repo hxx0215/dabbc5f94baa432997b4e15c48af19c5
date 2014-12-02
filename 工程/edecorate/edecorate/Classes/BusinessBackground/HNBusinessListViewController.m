@@ -359,6 +359,12 @@ static NSString *reuseId = @"businessCell";
     UIImage *image =[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[link addPort]]]];
     return image? image : [UIImage imageNamed:@"selectphoto.png"];
 }
+- (void)showBadServer{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"警告", nil) message:NSLocalizedString(@"服务器出现错误，请联系管理人员", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"确定", nil) otherButtonTitles: nil];
+        [alert show];
+    });
+}
 - (void)loadDataWithDic:(NSMutableDictionary *)sendDic withMethod:(NSString *)method{
     NSString *sendJson = [sendDic JSONString];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
@@ -371,6 +377,10 @@ static NSString *reuseId = @"businessCell";
         });
         if (data){
             NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            if (!retStr){
+                [self showBadServer];
+                return ;
+            }
             NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
             NSDictionary *retDic = [retJson objectFromJSONString];
             NSInteger count = [[retDic objectForKey:@"total"] integerValue];

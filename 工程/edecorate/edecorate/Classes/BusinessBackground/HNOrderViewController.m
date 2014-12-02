@@ -82,6 +82,12 @@ static NSString *identy = @"orderDetailCell";
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
 }
+- (void)showBadServer{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"警告", nil) message:NSLocalizedString(@"服务器出现错误，请联系管理人员", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"确定", nil) otherButtonTitles: nil];
+        [alert show];
+    });
+}
 - (void)loadData{
     NSDictionary *sendDic = @{@"orderid": self.orderid};
     NSString *sendJson = [sendDic JSONString];
@@ -92,7 +98,12 @@ static NSString *identy = @"orderDetailCell";
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
         if (data){
             NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            if (!retStr){
+                [self showBadServer];
+                return ;
+            }
             NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
+            
             NSDictionary *retDic = [retJson objectFromJSONString];
             NSInteger count = [[retDic objectForKey:@"total"] integerValue];
             if (count != 0)
@@ -118,6 +129,10 @@ static NSString *identy = @"orderDetailCell";
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
         if (data){
             NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            if (!retStr){
+                [self showBadServer];
+                return ;
+            }
             NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
             NSDictionary *retDic = [retJson objectFromJSONString];
             NSInteger count = [[retDic objectForKey:@"total"] integerValue];

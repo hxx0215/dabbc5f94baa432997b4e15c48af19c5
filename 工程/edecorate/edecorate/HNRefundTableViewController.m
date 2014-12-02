@@ -95,6 +95,11 @@
     if (data)
     {
         NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        
+        if (!retStr){
+            [self showBadServer];
+            return ;
+        }
         NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
         NSLog(@"%@",retJson);
         NSDictionary* dic = [retJson objectFromJSONString];
@@ -152,13 +157,23 @@
         [self performSelectorOnMainThread:@selector(didrefreshData:) withObject:data waitUntilDone:YES];
     }];
 }
-
+- (void)showBadServer{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"警告", nil) message:NSLocalizedString(@"服务器出现错误，请联系管理人员", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"确定", nil) otherButtonTitles: nil];
+        [alert show];
+    });
+}
 -(void)didrefreshData:(NSData*)data
 {
     [self.rTableView headerEndRefreshing];
     if (data)
     {
         NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        
+        if (!retStr){
+            [self showBadServer];
+            return ;
+        }
         NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
         NSDictionary *retDic = [retJson objectFromJSONString];
         NSInteger count = [[retDic objectForKey:@"total"] integerValue];

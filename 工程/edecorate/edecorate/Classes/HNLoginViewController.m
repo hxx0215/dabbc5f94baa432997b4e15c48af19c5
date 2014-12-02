@@ -155,6 +155,12 @@
 - (void)rememberPassword:(UIButton *)sender{
     sender.selected = !sender.selected;
 }
+- (void)showBadServer{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"警告", nil) message:NSLocalizedString(@"服务器出现错误，请联系管理人员", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"确定", nil) otherButtonTitles: nil];
+        [alert show];
+    });
+}
 - (void)login:(id)sender{
     MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = NSLocalizedString(@"Loading", nil);
@@ -174,6 +180,10 @@
         if (data)
         {
             NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            if (!retStr){
+                [self showBadServer];
+                return ;
+            }
             NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
             if ([[HNLoginData shared] updateData:[[[retJson objectFromJSONString] objectForKey:@"data"] objectAtIndex:0]] && [[HNLoginData shared].state isEqualToString:@"1"]){//之后需要替换成status
                 [self loginSuccess];
