@@ -71,6 +71,7 @@
 		B952DAF21A24B1F400EE569D /* HNOrderDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B952DAF01A24B1F400EE569D /* HNOrderDetailTableViewCell.m */; };
 		B952DAF31A24B1F400EE569D /* HNOrderDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B952DAF11A24B1F400EE569D /* HNOrderDetailTableViewCell.xib */; };
 		B953CE0E19CAFBE000BD57DF /* HNLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B953CE0D19CAFBE000BD57DF /* HNLoginViewController.m */; };
+		B9599A7F1A2D4769004467E1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9599A7E1A2D4769004467E1 /* CoreLocation.framework */; };
 		B95D15BF19D9A28200689B4D /* CustomIOS7AlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = B95D15BE19D9A28200689B4D /* CustomIOS7AlertView.m */; };
 		B95D15C419D9AE4B00689B4D /* HNEditPriceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B95D15C219D9AE4B00689B4D /* HNEditPriceViewController.m */; };
 		B95D15C519D9AE4B00689B4D /* HNEditPriceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B95D15C319D9AE4B00689B4D /* HNEditPriceViewController.xib */; };
@@ -387,6 +388,7 @@
 		B952DAF11A24B1F400EE569D /* HNOrderDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HNOrderDetailTableViewCell.xib; path = Classes/BusinessBackground/HNOrderDetailTableViewCell.xib; sourceTree = "<group>"; };
 		B953CE0C19CAFBE000BD57DF /* HNLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNLoginViewController.h; path = Classes/HNLoginViewController.h; sourceTree = "<group>"; };
 		B953CE0D19CAFBE000BD57DF /* HNLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNLoginViewController.m; path = Classes/HNLoginViewController.m; sourceTree = "<group>"; };
+		B9599A7E1A2D4769004467E1 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		B95D15BD19D9A28200689B4D /* CustomIOS7AlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomIOS7AlertView.h; sourceTree = "<group>"; };
 		B95D15BE19D9A28200689B4D /* CustomIOS7AlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomIOS7AlertView.m; sourceTree = "<group>"; };
 		B95D15C119D9AE4B00689B4D /* HNEditPriceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNEditPriceViewController.h; path = Classes/BusinessBackground/HNEditPriceViewController.h; sourceTree = "<group>"; };
@@ -733,6 +735,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9599A7F1A2D4769004467E1 /* CoreLocation.framework in Frameworks */,
 				B9E0664919DCDC7300893DBD /* MobileCoreServices.framework in Frameworks */,
 				B9B2BBF319CF1F1D00839AED /* MediaPlayer.framework in Frameworks */,
 				B9B2BBF119CF1F1000839AED /* AssetsLibrary.framework in Frameworks */,
@@ -815,6 +818,7 @@
 		B916F0A019C8781D00A849C7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B9599A7E1A2D4769004467E1 /* CoreLocation.framework */,
 				B9E0664819DCDC7300893DBD /* MobileCoreServices.framework */,
 				B9B2BBF219CF1F1D00839AED /* MediaPlayer.framework */,
 				B9B2BBF019CF1F1000839AED /* AssetsLibrary.framework */,
