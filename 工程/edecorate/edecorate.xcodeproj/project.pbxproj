@@ -1062,6 +1062,8 @@
 		B965E76119D04B95004CD201 /* Report */ = {
 			isa = PBXGroup;
 			children = (
+				B9882DF019CB06D90093F0F4 /* HNDecorateReportViewController.h */,
+				B9882DF119CB06D90093F0F4 /* HNDecorateReportViewController.m */,
 				B965864419F9387700EB4766 /* HNConstructViewController.h */,
 				B965864519F9387700EB4766 /* HNConstructViewController.m */,
 				B9398D441A29EE2E006576FE /* HNConstructPaymentTableViewCell.h */,
@@ -1069,8 +1071,6 @@
 				B9398D461A29EE2E006576FE /* HNConstructPaymentTableViewCell.xib */,
 				B9C2B41919FE8BAC00C93D59 /* HNConstructTableViewCell.h */,
 				B9C2B41A19FE8BAC00C93D59 /* HNConstructTableViewCell.m */,
-				B9882DF019CB06D90093F0F4 /* HNDecorateReportViewController.h */,
-				B9882DF119CB06D90093F0F4 /* HNDecorateReportViewController.m */,
 				B9882DF319CB079A0093F0F4 /* HNReportTableViewCell.h */,
 				B9882DF419CB079A0093F0F4 /* HNReportTableViewCell.m */,
 				B97F70561A10DD9D00029C6F /* HNNewReportViewController.h */,

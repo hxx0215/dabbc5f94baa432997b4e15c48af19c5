@@ -54,7 +54,9 @@
                 [self.dataList removeAllObjects];
                 for (int i=0;i<count;i++){
                     int processstep = [[[[retDic objectForKey:@"data"] objectAtIndex:i] objectForKey:@"processstep"] integerValue];
-                    if (processstep != 0)
+                    int assessorstate = [[[[retDic objectForKey:@"data"] objectAtIndex:i] objectForKey:@"assessorstate"] integerValue];
+                    int paystate = [[[[retDic objectForKey:@"data"] objectAtIndex:i] objectForKey:@"paystate"] integerValue];
+                    if (processstep != 0 && assessorstate !=0 && paystate!=0)
                     {
                         [self.dataList addObject:retDic[@"data"][i]];
                     }
@@ -104,13 +106,14 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identy];
     }
     // Configure the cell...
+    cell.textLabel.font = [UIFont systemFontOfSize:13.0];
     cell.textLabel.text = self.dataList[indexPath.row][@"roomnumber"];
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (self.chargeDelegate && [self.chargeDelegate respondsToSelector:@selector(didSelect:declareId:)]){
-        [self.chargeDelegate didSelect:self.dataList[indexPath.row][@"roomnumber"] declareId:self.dataList[indexPath.row][@"declareId"]];
+    if (self.chargeDelegate && [self.chargeDelegate respondsToSelector:@selector(didSelect:declareId:data:)]){
+        [self.chargeDelegate didSelect:self.dataList[indexPath.row][@"roomnumber"] declareId:self.dataList[indexPath.row][@"declareId"] data:self.dataList[indexPath.row]];
         [self dismissViewControllerAnimated:YES completion:^{
             
         }];

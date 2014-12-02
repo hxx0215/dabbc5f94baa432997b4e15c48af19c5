@@ -27,9 +27,12 @@
     self.hiddenWith2.hidden = YES;
 }
 @end
-@interface HNNewCheckViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate,UIPickerViewDelegate,UIPickerViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate,HNSelectChargeTableViewControllerDelegate>
+@interface HNNewCheckViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate,UIPickerViewDelegate,UIPickerViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate,HNSelectChargeTableViewControllerDelegate,UITextFieldDelegate,UIAlertViewDelegate>
+@property (strong, nonatomic) IBOutlet UITableViewCell *curStatusCell;
+@property (strong, nonatomic) IBOutlet UILabel *curStatusLabel;
 
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) NSMutableDictionary *curData;
 @property (nonatomic, strong) NSMutableArray *dataArr;
 @property (nonatomic, strong) NSString *curDeclareId;
 @property (nonatomic, strong) NSIndexPath *curIndexPath;
@@ -45,6 +48,7 @@
 
 @property (nonatomic, strong) NSMutableDictionary *sendData;
 @property (nonatomic, strong) NSMutableArray *items;
+@property (nonatomic, strong) UIView *submitView;
 @end
 
 @implementation HNNewCheckViewController
@@ -65,9 +69,11 @@
     self.imgUrl = [NSMutableDictionary new];
     self.curImageIndex = [[NSMutableDictionary alloc] init];
     self.items = [NSMutableArray new];
+    self.curData = [NSMutableDictionary new];
     self.firstIn = YES;
     [self initPickView];
     [self loadList];
+    [self initButtonView];
 }
 - (void)initSendData{
     self.sendData = [NSMutableDictionary new];
@@ -102,6 +108,7 @@
             NSInteger count = [[retDic objectForKey:@"total"] integerValue];
             if (0 != count){
                 [self.pickViewData removeAllObjects];
+                self.curData = retDic[@"data"][0];
                 for (int i=0;i<count;i++){
                     int processstep = [[[[retDic objectForKey:@"data"] objectAtIndex:i] objectForKey:@"processstep"] integerValue];
                     if (processstep != 0)
@@ -143,7 +150,7 @@
                 for (int i = 0;i<count;i++)
                     [self.dataArr addObject:[[retDic objectForKey:@"data"] objectAtIndex:i]];
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.tableView reloadData];
+                    [self reloadTable];
                 });
             }
             else
@@ -164,7 +171,6 @@
     self.sepView.top = 0;
     self.sepView.height = self.view.height - self.listPick.height;
     if (self.firstIn){
-        self.firstIn = NO;
         if ([self.pickViewData count]>0){
             self.curPickViewIndex = 0;
             [self.showPick setTitle:[self.pickViewData[0] objectForKey:@"roomnumber"] forState:UIControlStateNormal];
@@ -172,10 +178,44 @@
         }
     }
     else{
-        [self.tableView reloadData];
+        [self reloadTable];
     }
 }
-
+- (void)reloadTable{
+    [self.tableView reloadData];
+    [self.tableView setNeedsLayout];
+    CGSize size = self.tableView.contentSize;
+    self.submitView.top = size.height;
+    size.height += 88;
+    self.tableView.contentSize = size;
+}
+- (void)initButtonView{
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 88)];
+    UIButton *purchase = [UIButton buttonWithType:UIButtonTypeCustom];
+    purchase.height = 40;
+    purchase.width = self.view.width - 36;
+    purchase.left = 18;
+    purchase.centerY = 44;
+    purchase.layer.cornerRadius = 5.0;
+    [purchase setTitle:NSLocalizedString(@"提交申请", nil) forState:UIControlStateNormal];
+    [purchase setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [purchase setBackgroundColor:[UIColor colorWithRed:245.0/255.0 green:72.0/255.0 blue:0.0 alpha:1.0]];
+    [purchase addTarget:self action:@selector(submitData:) forControlEvents:UIControlEventTouchUpInside];
+    [view addSubview:purchase];
+    self.submitView = view;
+}
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    if (!self.firstIn)
+        return ;
+    self.firstIn = NO;
+    CGSize size = self.tableView.contentSize;
+    self.submitView.top = size.height;
+    [self.tableView addSubview:self.submitView];
+    size.height += self.submitView.height;
+    
+    self.tableView.contentSize = size;
+}
 - (void)showNoNet{
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection Error", nil) message:NSLocalizedString(@"Please check your network.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -235,19 +275,24 @@
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 0)
-        return 0;
+        return 1;
     if (section == 1)
         return 2;
     return [[self.dataArr[section - 2] objectForKey:@"ItemBody"] count];
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSIndexPath *key = [NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section];
-    if ([self.imageSet objectForKey:key] && [[self.imageSet objectForKey:key] count]>0)
+    if ([self.imageSet objectForKey:key] &&([[self.imageSet objectForKey:key] respondsToSelector:@selector(count)] &&[[self.imageSet objectForKey:key] count]>0))
         return 84;
     else
     return 44;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 0){
+        self.curStatusLabel.text = [NSString stringWithFormat:@"当前状态:%@",self.curData[@"processstep"]];
+        [self.curStatusLabel sizeToFit];
+        return self.curStatusCell;
+    }
     static NSString *identify = @"newCheckCell";
     HNNewCheckTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identify];
     if (!cell){
@@ -294,6 +339,10 @@
             cell.leftImg.hidden = YES;
             cell.rightImg.hidden = YES;
         }
+    }
+    else{
+        cell.textField.delegate = self;
+        cell.textField.text = self.imageSet[indexPath];
     }
     return cell;
 }
@@ -348,19 +397,35 @@
 - (void)submitData:(id)sender{
     if ([self.dataArr count]<1)
         return;
-    NSMutableDictionary *sendDic = [@{@"declareid": self.curDeclareId, @"processtep" : [self.dataArr[0] objectForKey:@"processtep"],@"shopreason" : @"noreason" ,@"shopaccessory" :@"/Picture/201409/041700468686.jpg"} mutableCopy];
+    NSMutableDictionary *sendDic = [@{@"declareid": self.curDeclareId, @"processtep" : [self.curData objectForKey:@"processstep"]} mutableCopy];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:1];
+    NSString *shopreason = self.imageSet[indexPath] ? self.imageSet[indexPath] : @"";
     NSMutableArray *arr = [[NSMutableArray alloc] init];
+    indexPath = [NSIndexPath indexPathForRow:1 inSection:1];
+    NSString *shopaccessory = [self connectArr:self.imgUrl[indexPath]];
+    [sendDic setObject:shopreason ? shopreason : @"" forKey:@"shopreason"];
+    [sendDic setObject:shopaccessory ? shopaccessory : @"" forKey:@"shopaccessory"];
     for (int i=0;i< [self.dataArr count];i++){
         for (int j = 0;j< [[self.dataArr[i] objectForKey:@"ItemBody"] count];j++){
             NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
             [dic setObject:[self.dataArr[i] objectForKey:@"itemId"] forKey:@"itemid"];
             [dic setObject:[[self.dataArr[i] objectForKey:@"ItemBody"][j] objectForKey:@"bodyname"] forKey:@"name"];
             [dic setObject:[[self.dataArr[i] objectForKey:@"ItemBody"][j] objectForKey:@"bodytype"] forKey:@"type"];
-            [dic setObject:@"/Picture/201409/041700468686.jpg" forKey:@"img"];
+//            [dic setObject:@"/Picture/201409/041700468686.jpg" forKey:@"img"];
+            indexPath = [NSIndexPath indexPathForRow:j+2 inSection:i+2];
+            id temp = self.imageSet[indexPath];
+            if ([temp isKindOfClass:[NSString class]]){
+                [dic setObject:temp forKey:@"img"];
+            }
+            else
+            {
+                NSString *str = [self connectArr:self.imgUrl[indexPath]];
+                [dic setObject:str ? str:@"" forKey:@"img"];
+            }
             [arr addObject:dic];
         }
     }
-    [sendDic setObject:arr forKey:@"ItemBody"];
+    [sendDic setObject:[arr JSONString] forKey:@"ItemBody"];
     NSString *sendJson = [sendDic JSONString];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"set.acceptance.details" Params:sendJson]];
@@ -368,12 +433,35 @@
     [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
         NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        if (!retStr)
+        {
+            [self showBadServer];
+            return ;
+        }
         NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
         NSDictionary *retDic = [retJson objectFromJSONString];
-        NSLog(@"%@",[retDic objectForKey:@"error"]);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"成功", nil) message:NSLocalizedString(@"提交成功", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"确定", nil) otherButtonTitles: nil];
+            [alert show];
+        });
     }];
 }
-
+- (void)showBadServer{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"警告", nil) message:NSLocalizedString(@"服务器出现错误，请联系管理人员", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"确定", nil) otherButtonTitles: nil];
+        [alert show];
+    });
+}
+- (NSString *)connectArr:(NSArray *)arr{
+    NSMutableString *ret = [NSMutableString new];
+    if ([arr count]==1)
+        return arr[0];
+    else
+        ret = [arr[0] mutableCopy];
+    for (int i=1;i<[arr count];i++)
+        [ret appendFormat:@",%@",arr[i]];
+    return ret;
+}
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
@@ -429,7 +517,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 hud.labelText = NSLocalizedString(@"上传成功", nil);
                 [MBProgressHUD hideHUDForView:self.view animated:YES];
-                [self.tableView reloadData];
+                [self reloadTable];
             });
         }];
     }];
@@ -470,7 +558,7 @@
         curImageIndex = MAX(0, [self.imageSet[indexPath] count] - 1);
     if (curImageIndex<0) curImageIndex = 0;
     [self.curImageIndex setObject:@(curImageIndex) forKey:indexPath];
-    [self.tableView reloadData];
+    [self reloadTable];
 }
 - (void)leftImg:(UIButton *)sender{
     NSInteger section = [sender superview].tag / 100;
@@ -480,7 +568,7 @@
     curImageIndex --;
     if (curImageIndex <0) curImageIndex =0;
     [self.curImageIndex setObject:@(curImageIndex) forKey:indexPath];
-    [self.tableView reloadData];
+    [self reloadTable];
 }
 - (void)rightImg:(UIButton *)sender{
     NSInteger section = [sender superview].tag / 100;
@@ -491,11 +579,24 @@
     curImageIndex ++;
     if (curImageIndex > maxIndex - 1) curImageIndex = maxIndex - 1;
     [self.curImageIndex setObject:@(curImageIndex) forKey:indexPath];
-    [self.tableView reloadData];
+    [self reloadTable];
 }
--(void)didSelect:(NSString *)roomNumber declareId:(NSString *)declareId{
+-(void)didSelect:(NSString *)roomNumber declareId:(NSString *)declareId data:(NSDictionary *)alldata{
     [self.showPick setTitle:roomNumber forState:UIControlStateNormal];
     [self loadTableData:declareId];
+    self.curData = [alldata mutableCopy];
     NSLog(@"%@ : %@",roomNumber,declareId);
+}
+#pragma mark UITextFieldDelegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    NSInteger section = [textField superview].tag / 100;
+    NSInteger row = [textField superview].tag % 100;
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:section];
+    [self.imageSet setObject:textField.text forKey:indexPath];
+    [textField resignFirstResponder];
+    return YES;
+}
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 @end
