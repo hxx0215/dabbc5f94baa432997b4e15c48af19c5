@@ -148,7 +148,7 @@ static NSString *localeString(NSString *local,NSString *append){
     HNCheckDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identify];
     if (!cell){
         cell = [[HNCheckDetailTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identify];
-        [cell.photo addTarget:self action:@selector(showPic:) forControlEvents:UIControlEventTouchUpInside];
+//        [cell.photo addTarget:self action:@selector(showPic:) forControlEvents:UIControlEventTouchUpInside];
     }
     if (indexPath.section <4)
         cell.nameLabel.text = self.tableTitle[indexPath.section][indexPath.row];

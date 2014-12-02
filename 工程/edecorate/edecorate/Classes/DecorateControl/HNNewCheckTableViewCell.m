@@ -49,13 +49,13 @@
         self.curImageView.hidden = YES;
         
         self.leftImg = [UIButton buttonWithType:UIButtonTypeCustom];
-        [self.leftImg setImage:[UIImage imageNamed:@"arrowBack.png"] forState:UIControlStateNormal];
+        [self.leftImg setImage:[UIImage imageNamed:@"zuo.png"] forState:UIControlStateNormal];
         [self.leftImg sizeToFit];
         [self.contentView addSubview:self.leftImg];
         self.leftImg.hidden = YES;
         
         self.rightImg = [UIButton buttonWithType:UIButtonTypeCustom];
-        [self.rightImg setImage:[UIImage imageNamed:@"add.png"] forState:UIControlStateNormal];
+        [self.rightImg setImage:[UIImage imageNamed:@"you.png"] forState:UIControlStateNormal];
         [self.rightImg sizeToFit];
         [self.contentView addSubview:self.rightImg];
         self.rightImg.hidden = YES;
