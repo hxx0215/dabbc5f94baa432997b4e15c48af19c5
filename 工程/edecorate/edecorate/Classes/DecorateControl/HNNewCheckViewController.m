@@ -12,6 +12,8 @@
 #import "HNNewCheckTableViewCell.h"
 #import "HNUploadImage.h"
 #import "MBProgressHUD.h"
+#import "HNSelectChargeTableViewController.h"
+
 @interface HNSeprateCheckView : UIView
 @property (nonatomic, weak) UIView *hiddenWith;
 @property (nonatomic, weak) UIView *hiddenWith2;
@@ -25,7 +27,7 @@
     self.hiddenWith2.hidden = YES;
 }
 @end
-@interface HNNewCheckViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate,UIPickerViewDelegate,UIPickerViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface HNNewCheckViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate,UIPickerViewDelegate,UIPickerViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate,HNSelectChargeTableViewControllerDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArr;
@@ -38,7 +40,11 @@
 @property (nonatomic, strong) HNSeprateCheckView *sepView;
 @property (nonatomic, strong) UIButton *showPick;
 @property (nonatomic, strong) NSMutableDictionary *imageSet;
-@property (strong, nonatomic) NSMutableDictionary *curImage;
+@property (strong, nonatomic) NSMutableDictionary *curImageIndex;
+@property (nonatomic, strong) NSMutableDictionary *imgUrl;
+
+@property (nonatomic, strong) NSMutableDictionary *sendData;
+@property (nonatomic, strong) NSMutableArray *items;
 @end
 
 @implementation HNNewCheckViewController
@@ -56,10 +62,19 @@
     self.pickViewData = [[NSMutableArray alloc] init];
     self.dataArr = [[NSMutableArray alloc] init];
     self.imageSet = [[NSMutableDictionary alloc] init];
-    self.curImage = [[NSMutableDictionary alloc] init];
+    self.imgUrl = [NSMutableDictionary new];
+    self.curImageIndex = [[NSMutableDictionary alloc] init];
+    self.items = [NSMutableArray new];
     self.firstIn = YES;
     [self initPickView];
     [self loadList];
+}
+- (void)initSendData{
+    self.sendData = [NSMutableDictionary new];
+    [self.sendData setObject:@"" forKey:@"declareid"];
+    [self.sendData setObject:@"" forKey:@"processtep"];
+    [self.sendData setObject:@"" forKey:@"shopreason"];
+    [self.sendData setObject:@"" forKey:@"shopaccessory"];
 }
 - (void)initPickView{
     self.listPick = [[UIPickerView alloc] initWithFrame:CGRectMake(0, self.view.height - 216, self.view.width, 216)];
@@ -107,8 +122,10 @@
 - (void)loadTableData:(NSString *)declareId{
     if (!declareId || [declareId isEqualToString:@""])
         return ;
+    self.curDeclareId = declareId;
     [self.imageSet removeAllObjects];
-    [self.curImage removeAllObjects];
+    [self.curImageIndex removeAllObjects];
+    [self.imgUrl removeAllObjects];
     NSDictionary *sendDic = @{@"mshopid": [HNLoginData shared].mshopid,@"declareid" : declareId};
     NSString *sendJson = [sendDic JSONString];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
@@ -225,7 +242,7 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSIndexPath *key = [NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section];
-    if ([self.imageSet objectForKey:key])
+    if ([self.imageSet objectForKey:key] && [[self.imageSet objectForKey:key] count]>0)
         return 84;
     else
     return 44;
@@ -236,6 +253,7 @@
     if (!cell){
         cell = [[HNNewCheckTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identify];
     }
+    cell.contentView.tag = indexPath.section * 100 + indexPath.row;
     if (indexPath.section > 1)
     {
         cell.name.text = [[self.dataArr[indexPath.section - 2] objectForKey:@"ItemBody"][indexPath.row] objectForKey:@"bodyname"];
@@ -257,12 +275,16 @@
     {
         cell.upload.tag = indexPath.section * 100 + indexPath.row;
         [cell.upload addTarget:self action:@selector(uploadImg:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.del addTarget:self action:@selector(delImg:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.leftImg addTarget:self action:@selector(leftImg:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.rightImg addTarget:self action:@selector(rightImg:) forControlEvents:UIControlEventTouchUpInside];
         NSMutableArray *imgArr = [self.imageSet objectForKey:indexPath];
-        if (imgArr)
+        if (imgArr && [imgArr count]>0)
         {
             cell.del.hidden = NO;
             cell.curImageView.hidden = NO;
-            cell.curImageView.image = imgArr[0];
+            NSInteger index = [self.curImageIndex[indexPath] integerValue];
+            cell.curImageView.image = imgArr[index];
             cell.leftImg.hidden = NO;
             cell.rightImg.hidden = NO;
         }
@@ -378,10 +400,14 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
     UIImage *image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
     NSMutableArray *imageArr = [self.imageSet objectForKey:self.curIndexPath];
+    NSMutableArray *imageUrlArr = [self.imgUrl objectForKey:self.curIndexPath];
     if (!imageArr)
         imageArr = [[NSMutableArray alloc] init];
+    if (!imageUrlArr)
+        imageUrlArr = [[NSMutableArray alloc] init];
     [imageArr addObject:image];
-    [self.imageSet setObject:imageArr forKey:self.curIndexPath];
+
+    
     [picker dismissViewControllerAnimated:YES completion:^{
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.labelText = NSLocalizedString(@"上传中", nil);
@@ -391,6 +417,15 @@
         UIImage *img = [HNUploadImage ScaledImage:image scale:scale];
         [HNUploadImage UploadImage:img block:^(NSString *msg){
             NSLog(@"%@",msg);
+            if (!msg){
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                return ;
+            }
+            [self.imageSet setObject:imageArr forKey:self.curIndexPath];
+            [self.curImageIndex setObject:@([imageArr count] - 1) forKey:self.curIndexPath];
+            [imageUrlArr addObject:msg];
+            [self.imgUrl setObject:imageUrlArr forKey:self.curIndexPath];
+            NSLog(@"%@",self.imgUrl);
             dispatch_async(dispatch_get_main_queue(), ^{
                 hud.labelText = NSLocalizedString(@"上传成功", nil);
                 [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -401,6 +436,12 @@
 }
 #pragma mark - ButtonActions
 - (void)showPick:(UIButton *)sender{
+    HNSelectChargeTableViewController *vc = [[HNSelectChargeTableViewController alloc] init];
+    vc.chargeDelegate = self;
+    [self presentViewController:[[UINavigationController alloc] initWithRootViewController:vc] animated:YES completion:^{
+        
+    }];
+    return ;
     [self.listPick reloadAllComponents];
     self.listPick.hidden = NO;
     self.sepView.hidden = NO;
@@ -417,5 +458,44 @@
     [self presentViewController:pick animated:YES completion:^{
         
     }];
+}
+- (void)delImg:(UIButton *)sender{
+    NSInteger section = [sender superview].tag / 100;
+    NSInteger row = [sender superview].tag % 100;
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:section];
+    NSInteger curImageIndex = [self.curImageIndex[indexPath] integerValue];
+    [self.imageSet[indexPath] removeObjectAtIndex:curImageIndex];
+    [self.imgUrl[indexPath] removeObjectAtIndex:curImageIndex];
+    if (curImageIndex>= [self.imageSet[indexPath] count])
+        curImageIndex = MAX(0, [self.imageSet[indexPath] count] - 1);
+    if (curImageIndex<0) curImageIndex = 0;
+    [self.curImageIndex setObject:@(curImageIndex) forKey:indexPath];
+    [self.tableView reloadData];
+}
+- (void)leftImg:(UIButton *)sender{
+    NSInteger section = [sender superview].tag / 100;
+    NSInteger row = [sender superview].tag % 100;
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:section];
+    NSInteger curImageIndex = [self.curImageIndex[indexPath] integerValue];
+    curImageIndex --;
+    if (curImageIndex <0) curImageIndex =0;
+    [self.curImageIndex setObject:@(curImageIndex) forKey:indexPath];
+    [self.tableView reloadData];
+}
+- (void)rightImg:(UIButton *)sender{
+    NSInteger section = [sender superview].tag / 100;
+    NSInteger row = [sender superview].tag % 100;
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:section];
+    NSInteger maxIndex = [self.imageSet[indexPath] count];
+    NSInteger curImageIndex = [self.curImageIndex[indexPath] integerValue];
+    curImageIndex ++;
+    if (curImageIndex > maxIndex - 1) curImageIndex = maxIndex - 1;
+    [self.curImageIndex setObject:@(curImageIndex) forKey:indexPath];
+    [self.tableView reloadData];
+}
+-(void)didSelect:(NSString *)roomNumber declareId:(NSString *)declareId{
+    [self.showPick setTitle:roomNumber forState:UIControlStateNormal];
+    [self loadTableData:declareId];
+    NSLog(@"%@ : %@",roomNumber,declareId);
 }
 @end
