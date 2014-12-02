@@ -15,8 +15,9 @@
 #import "HNLoginData.h"
 #import "HNImageUploadTableViewCell.h"
 #import "HNRefundCardCountTableViewCell.h"
+#import "HNPicTableViewCell.h"
 
-@interface HNRefundApplyViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate>
+@interface HNRefundApplyViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate,HNPicTableViewCellDelegate>
 @property (strong, nonatomic) IBOutlet UIButton *commitButton;
 @property (strong, nonatomic) IBOutlet UIButton *uploadButton;
 
@@ -71,10 +72,19 @@
     //[topView setBarStyle:UIBarStyleBlack];
     self.topView.backgroundColor = [UIColor whiteColor];
     UIBarButtonItem * btnSpace = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
-    UIBarButtonItem * doneButton = [[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(dismissKeyBoard)];
+    UIBarButtonItem * doneButton = [[UIBarButtonItem alloc]initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self action:@selector(dismissKeyBoard)];
     NSArray * buttonsArray = [NSArray arrayWithObjects:btnSpace,doneButton,nil];
     [self.topView setItems:buttonsArray];
     
+}
+
+- (void)updataImage:(NSString*)images heightChange:(BOOL)change
+{
+    self.imageName = images;
+    if (change) {
+        [self.tableView reloadData];
+        [self movewButton];
+    }
 }
 
 - (void)dismissKeyBoard
@@ -207,6 +217,13 @@
     [self.tableView addSubview:self.commitView];
     [self movewButton];
 }
+
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    [self.commitView removeFromSuperview];
+}
+
 -(void)movewButton
 {
     CGSize size = self.tableView.contentSize;
@@ -263,7 +280,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     
-    return 45;
+    return 55;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
@@ -305,10 +322,16 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if(3==indexPath.section)
     {
-        if (indexPath.row==1) {
-            return 60;
+        if (indexPath.row==0) {
+            return 40;
         }
-        else return 50;
+        else
+        {
+            if (self.imageName&&self.imageName.length>0) {
+                return 97;
+            }
+            else return 40;
+        }
     }
     return 40;
 }
@@ -370,7 +393,7 @@
                     }
                     cell = cardCell;
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                    cardCell.title.text = @"回收出入证数量";
+                    cardCell.title.text = @"回收出入证数量:";
                     self.cardMunTextField = cardCell.card;
                     self.cardMunTextField.delegate = self;
                     self.cardMunTextField.inputAccessoryView = self.topView;
@@ -379,19 +402,16 @@
                 case 1:
                 {
                     static NSString *identy = @"refun3_1Cell";
-                    HNImageUploadTableViewCell* imageCell = [tableView dequeueReusableCellWithIdentifier:identy];
+                    HNPicTableViewCell* imageCell = [tableView dequeueReusableCellWithIdentifier:identy];
                     if (!imageCell)
                     {
-                        imageCell = [[HNImageUploadTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identy];
+                        imageCell = [[HNPicTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identy];
                     }
                     cell = imageCell;
+                    imageCell.name.text = @"回收照片";
+                    [imageCell setImages:self.imageName];
+                    imageCell.delegate = self;
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                    imageCell.title.text = @"回收照片";
-                    self.uploadButton = imageCell.photo;
-                    [imageCell.photo addTarget:self action:@selector(upload:) forControlEvents:UIControlEventTouchUpInside];
-                    if (self.image) {
-                        [self.uploadButton setImage:self.image forState:UIControlStateNormal];
-                    }
                 }
                     break;
                     

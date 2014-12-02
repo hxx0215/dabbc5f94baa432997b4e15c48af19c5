@@ -16,6 +16,7 @@
 #import "HNDecorateChoiceView.h"
 #import "HNUploadImage.h"
 #import "HNComplaintApplyTableViewCell.h"
+#import "HNPicTableViewCell.h"
 
 @interface HNComplaint :NSObject
 @property (nonatomic, strong) NSString *body;//		商家编号
@@ -31,7 +32,7 @@
 @end
 
 
-@interface HNComplaintApplyViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate,UITextViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource,HNDecorateChoiceViewDelegate,UITableViewDelegate,UITableViewDataSource>
+@interface HNComplaintApplyViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate,UITextViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource,HNDecorateChoiceViewDelegate,UITableViewDelegate,UITableViewDataSource,HNPicTableViewCellDelegate>
 
 @property (nonatomic, strong)IBOutlet UIScrollView *mainView;
 @property (nonatomic, strong)HNComplaint *complaint;
@@ -219,6 +220,13 @@
     [self.tableView addSubview:self.commitView];
     [self movewButton];
 }
+
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    [self.commitView removeFromSuperview];
+}
+
 -(void)movewButton
 {
     CGSize size = self.tableView.contentSize;
@@ -311,6 +319,15 @@
     //我要投诉中，投诉类别和投诉内容删除self.complaint.body,@"body"self.complaint.complainType,@"complainType",
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys: self.complaint.complainant,@"complainant",[HNLoginData shared].mshopid,@"complainantId",self.imageName,@"complainfile",self.complaint.complainObject,@"complainObject",self.complaint.complainProblem,@"complainProblem",self.temporaryModel.declareId,@"declareId",nil];
     return dic;
+}
+
+- (void)updataImage:(NSString*)images heightChange:(BOOL)change
+{
+    self.imageName = images;
+    if (change) {
+        [self.tableView reloadData];
+        [self movewButton];
+    }
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -557,7 +574,10 @@ bool bo = false;
     switch (indexPath.row)
     {
         case 3:
-            return 60;
+            if (self.imageName&&self.imageName.length>0) {
+                return 95;
+            }
+            else return 40;
             break;
         case 2:
         {
@@ -573,6 +593,20 @@ bool bo = false;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if (indexPath.section==1&&indexPath.row==3) {
+        static NSString *identy = @"piccell";
+        HNPicTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
+        if (!cell)
+        {
+            cell = [[HNPicTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identy];
+        }
+        cell.name.text = NSLocalizedString(@"证明材料：", nil);
+        cell.delegate = self;
+        [cell setImages:self.imageName];
+        
+        return cell;
+    }
     static NSString *identy = @"complaintApplyCell";
     HNComplaintApplyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
     if (!cell)
@@ -581,6 +615,7 @@ bool bo = false;
     }
     
     if (1==indexPath.section){
+
         NSString *titleString = nil;
         NSString *detailString = nil;
         NSString *textString = nil;
@@ -630,21 +665,7 @@ bool bo = false;
 
             }
                 break;
-            case 3:
-            {
-                titleString = NSLocalizedString(@"证明材料：", nil);
-                detailString = NSLocalizedString(@"点此输入投诉人图片", nil);
-                [cell setStyle:2];
-                if(self.complaint.image)
-                {
-                    [cell.photo setImage:self.complaint.image forState:UIControlStateNormal];
-                }
-                [cell.photo addTarget:self action:@selector(upload:) forControlEvents:UIControlEventTouchUpInside];
-                self.uploadButton = cell.photo;
-                
-                
-            }
-                break;
+
                 
             default:
                 break;

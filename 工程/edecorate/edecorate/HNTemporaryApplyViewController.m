@@ -15,6 +15,7 @@
 #import "HNDecorateChoiceView.h"
 #import "HNTemporaryApplyTableViewCell.h"
 #import "HNUploadImage.h"
+#import "HNPicTableViewCell.h"
 
 /*
  "House Information" = "房屋信息";
@@ -35,7 +36,7 @@
  "Upload" = "上传";
  "Submission" = "提交申请";
  */
-@interface HNTemporaryApplyViewController ()<UIAlertViewDelegate,UIImagePickerControllerDelegate,UITextFieldDelegate, UINavigationControllerDelegate,HNDecorateChoiceViewDelegate,UITableViewDataSource,UITableViewDelegate>
+@interface HNTemporaryApplyViewController ()<UIAlertViewDelegate,UIImagePickerControllerDelegate,UITextFieldDelegate, UINavigationControllerDelegate,HNDecorateChoiceViewDelegate,UITableViewDataSource,UITableViewDelegate,HNPicTableViewCellDelegate>
 {
     bool bo;
     NSString *myData[8];
@@ -107,9 +108,6 @@
     
     [self.view addSubview:self.tableView];
     
-//    self.titleArray1 = [[NSArray alloc] initWithObjects:NSLocalizedString(@"Owners", nil),NSLocalizedString(@"Phone number", nil),NSLocalizedString(@"Construction unit", nil),NSLocalizedString(@"Person in charge of construction", nil),NSLocalizedString(@"Phone number", nil),nil];
-//    
-//    self.dataArray1 = [[NSArray alloc] initWithObjects:self.temporaryModel.huseInfo.owners,self.temporaryModel.huseInfo.ownersPhoneNumber,self.temporaryModel.huseInfo.constructionUnit,self.temporaryModel.huseInfo.constructionPerson,self.temporaryModel.huseInfo.constructionPersonPhoneNumber,nil];
     
     if (self.temporaryModel.type==FIRE) {
         HNTemporaryFireModel* fmodel = (HNTemporaryFireModel*)self.temporaryModel;
@@ -122,25 +120,22 @@
         HNTemporaryElectroModel* emodel = (HNTemporaryElectroModel*)self.temporaryModel;
         self.titleArray2 =   [[NSArray alloc] initWithObjects:NSLocalizedString(@"Electro units", nil),NSLocalizedString(@"Use of electro by", nil),NSLocalizedString(@"Electro tools", nil),NSLocalizedString(@"Electro load", nil),NSLocalizedString(@"Start Time", nil),NSLocalizedString(@"End Time", nil),NSLocalizedString(@"Operator", nil),NSLocalizedString(@"Phone", nil),NSLocalizedString(@"Valid documents", nil),nil];
         
-//        self.dataArray2 = [[NSArray alloc] initWithObjects:emodel.dataInfo.electroEnterprise,emodel.dataInfo.electroCause,emodel.dataInfo.electroTool,emodel.dataInfo.electroLoad,emodel.dataInfo.electroBTime,emodel.dataInfo.electroETime,emodel.dataInfo.electroOperator,emodel.dataInfo.electroPhone,emodel.dataInfo.PapersImg ,nil];
-    }
-    
-    [self.noticeFireButton sizeToFit];
-    
-    
-    
-    //@property (strong, nonatomic) IBOutlet UIButton *commitButton;
-    
 
-//    [self.uploadButton setTitle:NSLocalizedString(@"Upload", nil) forState:UIControlStateNormal];
-//    self.uploadButton.layer.cornerRadius = 5.0;
-//    [self.uploadButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-//    [self.uploadButton setBackgroundColor:[UIColor colorWithRed:0.0 green:72.0/255.0 blue:245.0/255.0 alpha:1.0]];
-//    
-//    [self.commitButton setTitle:NSLocalizedString(@"Submission", nil) forState:UIControlStateNormal];
-//    self.commitButton.layer.cornerRadius = 5.0;
-//    [self.commitButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-//    [self.commitButton setBackgroundColor:[UIColor colorWithRed:245.0/255.0 green:72.0/255.0 blue:0.0 alpha:1.0]];
+    }
+    self.commitView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 88)];
+    UIButton *purchase = [UIButton buttonWithType:UIButtonTypeCustom];
+    purchase.height = 40;
+    purchase.width = self.view.width - 36;
+    purchase.left = 18;
+    purchase.centerY = 44;
+    purchase.layer.cornerRadius = 5.0;
+    [purchase setTitle:NSLocalizedString(@"提交申请", nil) forState:UIControlStateNormal];
+    [purchase setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [purchase setBackgroundColor:[UIColor colorWithRed:245.0/255.0 green:72.0/255.0 blue:0.0 alpha:1.0]];
+    [purchase addTarget:self action:@selector(commit:) forControlEvents:UIControlEventTouchUpInside];
+    [self.commitView addSubview:purchase];
+    [self.tableView addSubview:self.commitView];
+    self.commitView.hidden = YES;
     
     self.choiceDecorateView = [[HNDecorateChoiceView alloc]initWithFrame:CGRectMake(12, 12, self.view.bounds.size.width-24, 30)];
     self.choiceDecorateView.delegate = self;
@@ -179,26 +174,14 @@
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     self.tableView.frame = self.view.bounds;
-    self.commitView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 88)];
-    UIButton *purchase = [UIButton buttonWithType:UIButtonTypeCustom];
-    purchase.height = 40;
-    purchase.width = self.view.width - 36;
-    purchase.left = 18;
-    purchase.centerY = 44;
-    purchase.layer.cornerRadius = 5.0;
-    [purchase setTitle:NSLocalizedString(@"提交申请", nil) forState:UIControlStateNormal];
-    [purchase setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [purchase setBackgroundColor:[UIColor colorWithRed:245.0/255.0 green:72.0/255.0 blue:0.0 alpha:1.0]];
-    [purchase addTarget:self action:@selector(commit:) forControlEvents:UIControlEventTouchUpInside];
-    [self.commitView addSubview:purchase];
     [self movewButton];
+    self.commitView.hidden = NO;
 }
 
 -(void)movewButton
 {
     CGSize size = self.tableView.contentSize;
     self.commitView.top = size.height;
-    [self.tableView addSubview:self.commitView];
     size.height += self.commitView.height;
     self.tableView.contentSize = size;
     self.contentSizeHeight = size.height;
@@ -464,6 +447,14 @@
     [self.timeTextField resignFirstResponder];
 }
 
+- (void)updataImage:(NSString*)images heightChange:(BOOL)change
+{
+    self.imagePath = images;
+    if (change) {
+        [self.tableView reloadData];
+        [self movewButton];
+    }
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -535,10 +526,15 @@
     switch (indexPath.row)
     {
         case 8:
-            return 60;
+        {
+            if (self.imagePath) {
+                return 97;
+            }
+            return 40;
+        }
             break;
         default:
-            return 30;
+            return 40;
             break;
             
     }
@@ -564,23 +560,36 @@
         return cell;
     }
     else {
-        static NSString *identy = @"ApplyCell";
-        HNTemporaryApplyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
-        if (!cell)
-        {
-            cell = [[HNTemporaryApplyTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identy];
-        }
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.title.text = [self.titleArray2 objectAtIndex:indexPath.row];
+        
         if (8 == indexPath.row) {
-            [cell setStyle:1];
-            if(self.imageUpload)
-                [cell.photo setImage:self.imageUpload forState:UIControlStateNormal];
-            [cell.photo addTarget:self action:@selector(upload:) forControlEvents:UIControlEventTouchUpInside];
-            self.uploadButton = cell.photo;
+            static NSString *identy = @"ApplyICell";
+            HNPicTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
+            if (!cell)
+            {
+                cell = [[HNPicTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identy];
+            }
+            cell.name.text = [self.titleArray2 objectAtIndex:indexPath.row];
+            cell.delegate = self;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            [cell setImages:self.imagePath];
+//            cell.title.text = [self.titleArray2 objectAtIndex:indexPath.row];
+//            [cell setStyle:1];
+//            if(self.imageUpload)
+//                [cell.photo setImage:self.imageUpload forState:UIControlStateNormal];
+//            [cell.photo addTarget:self action:@selector(upload:) forControlEvents:UIControlEventTouchUpInside];
+//            self.uploadButton = cell.photo;
+            return cell;
         }
         else
         {
+            static NSString *identy = @"ApplyCell";
+            HNTemporaryApplyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
+            if (!cell)
+            {
+                cell = [[HNTemporaryApplyTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identy];
+            }
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.title.text = [self.titleArray2 objectAtIndex:indexPath.row];
             [cell setStyle:0];
             cell.textField.placeholder = [NSString stringWithFormat:@"%@%@",NSLocalizedString(@"请在此输入", nil),cell.title.text];
             cell.textField.delegate = self;
@@ -596,11 +605,12 @@
             }
             cell.textField.text = myData[indexPath.row];
             cell.textField.tag = indexPath.row;
+            return cell;
         }
         
         
         
-        return cell;
+        
     }
 }
 

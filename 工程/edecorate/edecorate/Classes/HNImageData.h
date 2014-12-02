@@ -11,5 +11,6 @@
 @interface HNImageData : NSObject
 +(instancetype)shared;
 -(UIImage *)imageWithLink:(NSString *)link;
+-(void)addImageWithLink:(UIImage*)image link:(NSString *)imageLink;
 -(void)clearCatch;
 @end
