@@ -30,7 +30,7 @@
 }
 
 @end
-@interface HNNewReportViewController ()<UITableViewDelegate,UITableViewDataSource,UIPickerViewDelegate,UIPickerViewDataSource,UITextFieldDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface HNNewReportViewController ()<UITableViewDelegate,UITableViewDataSource,UIPickerViewDelegate,UIPickerViewDataSource,UITextFieldDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,HNNewReportChargeDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UIToolbar *topView;
 @property (nonatomic, strong) NSMutableArray *tableData;
@@ -510,7 +510,12 @@ static NSString *kNewPicCell = @"kNewPicCell";
     [self.tableView reloadData];
 }
 - (void)showPick:(id)sender{
-//    HNNewReportChargeTableViewController *vc = [[HNNewReportChargeTableViewController alloc] init];
+    HNNewReportChargeTableViewController *vc = [[HNNewReportChargeTableViewController alloc] init];
+    vc.chargeDelegate = self;
+    [self presentViewController:[[UINavigationController alloc] initWithRootViewController:vc] animated:YES completion:^{
+        
+    }];
+    return ;
     [self.listPick reloadAllComponents];
     self.listPick.hidden = NO;
     self.sepView.hidden = NO;
@@ -528,6 +533,14 @@ static NSString *kNewPicCell = @"kNewPicCell";
         self.endDate = [df stringFromDate:self.selectedDate];
     [cell.label sizeToFit];
     cell.label.left = 20;
+}
+#pragma mark - HNNewReportChargeDelegate
+- (void)didSelectCharge:(NSDictionary *)charge{
+    NSLog(@"%@",charge);
+    [self.userButton setTitle:[charge objectForKey:@"realname"] forState:UIControlStateNormal];
+    self.userDic[@"idcard"] = charge[@"idcard"];
+    self.userDic[@"phone"] = charge[@"phone"];
+    [self.tableView reloadData];
 }
 #pragma mark - network
 - (void)showNoNetwork{
@@ -662,9 +675,52 @@ static NSString *kNewPicCell = @"kNewPicCell";
     self.sendDic[@"principal"] = self.userDic[@"realname"];
     self.sendDic[@"EnterprisePhone"] = self.userDic[@"phone"];
     self.sendDic[@"EIDCard"] = self.userDic[@"idcard"];
-//    self.sendDic[@"beginTime"] = [self.beginDate substringToIndex:10];
-//    self.sendDic[@"endTime"] = [self.endDate substringToIndex:10];
+    self.sendDic[@"beginTime"] = [self.beginDate substringToIndex:10];
+    self.sendDic[@"endTime"] = [self.endDate substringToIndex:10];
     self.sendDic[@"population"] = self.userDic[@"population"];
+    NSInteger index = 302;
+    self.sendDic[@"OriginalSChart"] = [self imgUrl:index];
+    index++;
+    self.sendDic[@"floorplan"] = [self imgUrl:index];
+    index++;
+    self.sendDic[@"wallRemould"] = [self imgUrl:index];
+    index++;
+    self.sendDic[@"ceilingPlan"] = [self imgUrl:index];
+    index++;
+    self.sendDic[@"WaterwayPlan"] = [self imgUrl:index];
+    index++;
+    self.sendDic[@"BlockDiagram"] = [self imgUrl:index];
+    index = 199;
+    self.sendDic[@"businessLicense"] = [self imgUrl:index];
+    index++;
+    self.sendDic[@"TaxIMG"] = [self imgUrl:index];
+    index++;
+    self.sendDic[@"organizeIMG"] = [self imgUrl:index];
+    index++;
+    self.sendDic[@"qualificationIMG"] = [self imgUrl:index];
+    index++;
+    self.sendDic[@"ElectricianIMG"] = [self imgUrl:index];
+    index++;
+    self.sendDic[@"powerAttorney"] = [self imgUrl:index];
+    index++;
+    self.sendDic[@"AttorneyIDcard"] = [self imgUrl:index];
+    index++;
+    self.sendDic[@"compactIMG"] = [self imgUrl:index];
+    index++;
+    self.sendDic[@"EIDCardIMG"] = [self imgUrl:index];
+    index++;
+    index = 399;
+    self.sendDic[@"kitchenIMG"] = [self imgUrl:index];
+    index++;
+    self.sendDic[@"WCIMG"] = [self imgUrl:index];
+    index++;
+    self.sendDic[@"roomIMG"] = [self imgUrl:index];
+    index++;
+    self.sendDic[@"gasLineIMG"] = [self imgUrl:index];
+    index++;
+    self.sendDic[@"electricityBoxIMG"] = [self imgUrl:index];
+    index++;
+    self.sendDic[@"waterPipeIMG"] = [self imgUrl:index];
     sendJson = [self.sendDic JSONString];
     request = [[NSMutableURLRequest alloc] init];
     request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"set.decoraton.declaredetails" Params:sendJson]];
@@ -676,7 +732,7 @@ static NSString *kNewPicCell = @"kNewPicCell";
         {
             NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             if (!retStr){
-                [self showBadServer];
+//                [self showBadServer];
                 return ;
             }
             NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
@@ -687,6 +743,23 @@ static NSString *kNewPicCell = @"kNewPicCell";
             NSLog(@"%@",connectionError);
         }
     }];
+}
+- (NSString *)imgUrl:(NSInteger)index{
+    index ++;
+    NSString *key = [NSString stringWithFormat:@"%d",index];
+    return [self urlWithArr:self.imageUrl[key]];
+}
+- (NSString *)urlWithArr:(NSArray *)arr{
+    if ([arr count]<1) return @"";
+    NSMutableString *ret = [@"" mutableCopy];
+    if ([arr count]==1)
+    {
+        [ret appendString:arr[0]];
+        return ret;
+    }
+    for (int i =1;i<[arr count];i++)
+        [ret appendFormat:@",%@",arr[i]];
+    return ret;
 }
 - (void)showBadServer{
     dispatch_async(dispatch_get_main_queue(), ^{

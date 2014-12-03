@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class HNNewReportChargeTableViewController;
+@protocol HNNewReportChargeDelegate<NSObject>
+- (void)didSelectCharge:(NSDictionary *)charge;
+@end
 @interface HNNewReportChargeTableViewController : UITableViewController
-
+@property (nonatomic, weak)id<HNNewReportChargeDelegate> chargeDelegate;
 @end
