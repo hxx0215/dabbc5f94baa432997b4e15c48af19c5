@@ -14,6 +14,7 @@
 #import "HNPurchaseItem.h"
 #import "HNPurchaseViewController.h"
 #import "HNConsturctPicTableViewCell.h"
+#import "HNNewReportChargeTableViewController.h"
 
 @interface HNSeprateView : UIView
 @property (nonatomic, weak) UIView *hiddenWith;
@@ -509,6 +510,7 @@ static NSString *kNewPicCell = @"kNewPicCell";
     [self.tableView reloadData];
 }
 - (void)showPick:(id)sender{
+//    HNNewReportChargeTableViewController *vc = [[HNNewReportChargeTableViewController alloc] init];
     [self.listPick reloadAllComponents];
     self.listPick.hidden = NO;
     self.sepView.hidden = NO;

@@ -303,7 +303,8 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0){
-        self.curStatusLabel.text = [NSString stringWithFormat:@"当前状态:%@",self.curData[@"processstep"]];
+        NSDictionary *dic = @{@"1": NSLocalizedString(@"防水闭水", nil),@"2":NSLocalizedString(@"打压电路", nil),@"3":NSLocalizedString(@"沉侧回填", nil),@"4":NSLocalizedString(@"竣工综合", nil)};
+        self.curStatusLabel.text = [NSString stringWithFormat:@"当前状态:%@",dic[self.curData[@"processstep"]]];
         [self.curStatusLabel sizeToFit];
         return self.curStatusCell;
     }

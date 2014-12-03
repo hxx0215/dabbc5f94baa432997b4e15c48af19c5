@@ -359,12 +359,12 @@
         [item addObject:dic];
     }
     NSArray *arr = [NSArray arrayWithArray:item];
-    NSDictionary *sendDic = @{@"u_paytype":[NSString stringWithFormat:@"%d",self.type],@"u_declareId": self.declareid,@"u_needItem":[arr JSONString]};
+    NSDictionary *sendDic = @{@"u_paytype":[NSString stringWithFormat:@"%d",self.type],@"u_declareId": self.declareid};
     NSString *sendJson = [sendDic JSONString];
     NSLog(@"%@",sendJson);
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"update.decoraton.declaredetails" Params:sendJson]];//[NSURL URLWithString:[NSString createLongResponseURLWithMethod:@"update.decoraton.declaredetails" Params:sendJson ]];
-    NSLog(@"%@",request.URL);
+    NSData *jsonBody = 
     NSString *contentType = @"text/html";
     [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){

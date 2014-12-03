@@ -13,6 +13,7 @@
 
 @interface HNSelectChargeTableViewController ()
 @property (nonatomic, strong)NSMutableArray *dataList;
+@property (nonatomic, assign)NSInteger realLength;
 @end
 
 @implementation HNSelectChargeTableViewController
@@ -31,6 +32,10 @@
         typeof(self) strongSelf = weakSelf;
         [strongSelf refreshList];
     }];
+    [self.tableView addFooterWithCallback:^{
+        typeof(self) strongSelf = weakSelf;
+        [strongSelf loadMore];
+    }];
     UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"取消", nil) style:UIBarButtonItemStylePlain target:self action:@selector(cancel:)];
     self.navigationItem.leftBarButtonItem = left;
 }
@@ -48,6 +53,44 @@
         [alert show];
     });
 }
+- (void)loadMore{
+    NSInteger nums = 50;
+    if (0!=self.realLength % nums){
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView footerEndRefreshing];
+        });
+        return ;//已到最后。返回
+    }
+    NSInteger page = self.realLength / nums + 1;
+    [[HNDecorateData shared] loadingDecorateData:[HNLoginData shared].mshopid pageIndex:page pageSize:nums block:^(NSURLResponse *response, NSData *data, NSError *connectionError){
+        [self.tableView footerEndRefreshing];
+        if (data){
+            NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            if (!retStr){
+                [self showBadServer];
+                return ;
+            }
+            NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
+            NSDictionary *retDic = [retJson objectFromJSONString];
+            NSInteger count = [[retDic objectForKey:@"total"] integerValue];
+            self.realLength += count;
+            if (count!=0){
+                for (int i=0;i<count;i++){
+                    int processstep = [[[[retDic objectForKey:@"data"] objectAtIndex:i] objectForKey:@"processstep"] integerValue];
+                    int assessorstate = [[[[retDic objectForKey:@"data"] objectAtIndex:i] objectForKey:@"assessorstate"] integerValue];
+                    int paystate = [[[[retDic objectForKey:@"data"] objectAtIndex:i] objectForKey:@"paystate"] integerValue];
+                    if (processstep != 0 && assessorstate !=0 && paystate!=0)
+                    {
+                        [self.dataList addObject:retDic[@"data"][i]];
+                    }
+                }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.tableView reloadData];
+                });
+            }
+        }
+    }];
+}
 - (void)refreshList{
     [[HNDecorateData shared] loadingDecorateData:[HNLoginData shared].mshopid pageIndex:0 pageSize:50 block:^(NSURLResponse *response, NSData *data, NSError *connectionError){
         [self.tableView headerEndRefreshing];
@@ -61,6 +104,7 @@
             NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
             NSDictionary *retDic = [retJson objectFromJSONString];
             NSInteger count = [[retDic objectForKey:@"total"] integerValue];
+            self.realLength +=count;
             if (count!=0){
                 [self.dataList removeAllObjects];
                 for (int i=0;i<count;i++){
