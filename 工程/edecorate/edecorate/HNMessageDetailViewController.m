@@ -30,6 +30,19 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     [self.view addSubview:self.tableView];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    //HNLoginModel *model = [[HNLoginModel alloc] init];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[HNLoginData shared].mshopid,@"mshopid",self.model.mid ,@"mid",nil];
+    NSString *jsonStr = [dic JSONString];
+    request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"get.message.details" Params:jsonStr]];
+    NSString *contentType = @"text/html";
+    [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
+    }];
+    self.model.isread = @"1";
+    self.title = @"消息详情";
+
 }
 
 - (void)didReceiveMemoryWarning {

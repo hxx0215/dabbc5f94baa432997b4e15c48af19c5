@@ -11,6 +11,7 @@
 #import "HNPersonDetailTableViewCell.h"
 #import "HNNeedPayTableViewCell.h"
 #import "HNImageUploadTableViewCell.h"
+#import "HNPicTableViewCell.h"
 
 @interface HNDeliverDetailViewController ()<UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,UINavigationControllerDelegate>
 
@@ -149,7 +150,11 @@
     else if (1==indexPath.section)
     {
         if (indexPath.row==2) {
-            return 65;
+            if (self.deliverModel.drivingLImg&&self.deliverModel.drivingLImg.length>1) {
+                return 97;
+            }
+            else
+                return 40;
         }
         return 30;
     }
@@ -183,16 +188,19 @@
     }
     else if (1==indexPath.section) {
         if (indexPath.row==2) {
-            static NSString *identy = @"HNImageUploadTableViewCell";
-            HNImageUploadTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
+            static NSString *identy = @"picCell";
+            HNPicTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
             if (!cell)
             {
-                cell = [[HNImageUploadTableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:identy];
+                cell = [[HNPicTableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:identy];
             }
-            [cell.photo addTarget:self action:@selector(showPic:) forControlEvents:UIControlEventTouchUpInside];
+            //[cell.photo addTarget:self action:@selector(showPic:) forControlEvents:UIControlEventTouchUpInside];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.title.text = @"行驶驾照：";
-            [cell reset:self.deliverModel.drivingLImg];
+            cell.name.text = @"行驶驾照：";
+            cell.delegate = self;
+            [cell setImages:self.deliverModel.drivingLImg];
+            [cell MyShowPic:YES];
+            //[cell reset:self.deliverModel.drivingLImg];
             return cell;
         }
         static NSString *identy = @"complaintDetailCell";

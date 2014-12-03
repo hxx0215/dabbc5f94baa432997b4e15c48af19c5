@@ -110,6 +110,7 @@
     
     
     if (self.temporaryModel.type==FIRE) {
+        self.title = @"临时用火申请";
         HNTemporaryFireModel* fmodel = (HNTemporaryFireModel*)self.temporaryModel;
         self.titleArray2 =   [[NSArray alloc] initWithObjects:NSLocalizedString(@"Fire units", nil),NSLocalizedString(@"Use of fire by", nil),NSLocalizedString(@"Fire tools", nil),NSLocalizedString(@"Fire load", nil),NSLocalizedString(@"Start Time", nil),NSLocalizedString(@"End Time", nil),NSLocalizedString(@"Operator", nil),NSLocalizedString(@"Phone", nil),NSLocalizedString(@"Valid documents", nil),nil];
         
@@ -117,6 +118,7 @@
         
     }
     else{
+        self.title = @"临时用电申请";
         HNTemporaryElectroModel* emodel = (HNTemporaryElectroModel*)self.temporaryModel;
         self.titleArray2 =   [[NSArray alloc] initWithObjects:NSLocalizedString(@"Electro units", nil),NSLocalizedString(@"Use of electro by", nil),NSLocalizedString(@"Electro tools", nil),NSLocalizedString(@"Electro load", nil),NSLocalizedString(@"Start Time", nil),NSLocalizedString(@"End Time", nil),NSLocalizedString(@"Operator", nil),NSLocalizedString(@"Phone", nil),NSLocalizedString(@"Valid documents", nil),nil];
         

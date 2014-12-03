@@ -28,7 +28,7 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
+    self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.tableView];
     
     UIBarButtonItem *done = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"OK", nil) style:UIBarButtonItemStyleDone target:self action:@selector(OKButtonClick:)];
@@ -160,29 +160,29 @@
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 55;
+    return 10;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.width, 55)];
-    UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(10, 5, tableView.width - 20, 50)];
-    contentView.backgroundColor = [UIColor projectGreen];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.width, 10)];
+    UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(10, 5, tableView.width - 20, 10)];
+    contentView.backgroundColor = [UIColor colorWithWhite:1.f alpha:0.8f];//[UIColor whiteColor];
     UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:contentView.bounds byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii:CGSizeMake(7, 7)];
     CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
     maskLayer.frame = contentView.bounds;
     maskLayer.path = maskPath.CGPath;
     contentView.layer.mask = maskLayer;
     
-    UILabel *label = [[UILabel alloc] init];
-    label.text = NSLocalizedString(@"注册", nil);
-    label.font = [UIFont systemFontOfSize:15];
-    label.width = contentView.width -10;
-    label.numberOfLines = 2;
-    [label sizeToFit];
-    label.textColor = [UIColor whiteColor];
-    label.left = (contentView.width - label.width)/2;
-    label.centerY = contentView.height / 2;
-    [contentView addSubview:label];
+//    UILabel *label = [[UILabel alloc] init];
+//    label.text = NSLocalizedString(@"注册", nil);
+//    label.font = [UIFont systemFontOfSize:15];
+//    label.width = contentView.width -10;
+//    label.numberOfLines = 2;
+//    [label sizeToFit];
+//    label.textColor = [UIColor whiteColor];
+//    label.left = (contentView.width - label.width)/2;
+//    label.centerY = contentView.height / 2;
+//    [contentView addSubview:label];
     [view addSubview:contentView];
     return view;
 }

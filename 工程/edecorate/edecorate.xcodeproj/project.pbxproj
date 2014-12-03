@@ -93,10 +93,6 @@
 		B98094C71A2EF3AA00C6045E /* HNNewReportChargeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B98094C61A2EF3AA00C6045E /* HNNewReportChargeTableViewController.m */; };
 		B9882DF219CB06D90093F0F4 /* HNDecorateReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9882DF119CB06D90093F0F4 /* HNDecorateReportViewController.m */; };
 		B9882DF519CB079A0093F0F4 /* HNReportTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B9882DF419CB079A0093F0F4 /* HNReportTableViewCell.m */; };
-		B9A09D7E1A0B9B4A00A88CD8 /* add_click@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B9A09D7C1A0B9B4A00A88CD8 /* add_click@2x.png */; };
-		B9A09D7F1A0B9B4A00A88CD8 /* add@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B9A09D7D1A0B9B4A00A88CD8 /* add@2x.png */; };
-		B9A09D821A0B9CA500A88CD8 /* arrowBack@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B9A09D801A0B9CA500A88CD8 /* arrowBack@2x.png */; };
-		B9A09D831A0B9CA500A88CD8 /* arrowBackClick@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B9A09D811A0B9CA500A88CD8 /* arrowBackClick@2x.png */; };
 		B9AD9E0819DEC90D00D82439 /* NSString+Crypt.m in Sources */ = {isa = PBXBuildFile; fileRef = B9AD9E0719DEC90D00D82439 /* NSString+Crypt.m */; };
 		B9AD9E0B19E01A7900D82439 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = B9AD9E0A19E01A7900D82439 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		B9B2BBF119CF1F1000839AED /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B2BBF019CF1F1000839AED /* AssetsLibrary.framework */; };
@@ -195,6 +191,10 @@
 		D3052BAF1A24E43000ECD7A1 /* chat_bg_default.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D3052B9E1A24E43000ECD7A1 /* chat_bg_default.jpg */; };
 		D3052BB01A24E43000ECD7A1 /* chatfrom_bg_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = D3052B9F1A24E43000ECD7A1 /* chatfrom_bg_normal.png */; };
 		D3052BB11A24E43000ECD7A1 /* chatto_bg_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = D3052BA01A24E43000ECD7A1 /* chatto_bg_normal.png */; };
+		D305C1AE1A2F644B0022FD2F /* add_click@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D305C1AA1A2F644B0022FD2F /* add_click@2x.png */; };
+		D305C1AF1A2F644B0022FD2F /* arrowBackClick@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D305C1AB1A2F644B0022FD2F /* arrowBackClick@2x.png */; };
+		D305C1B01A2F644B0022FD2F /* arrowBack@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D305C1AC1A2F644B0022FD2F /* arrowBack@2x.png */; };
+		D305C1B11A2F644B0022FD2F /* add@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D305C1AD1A2F644B0022FD2F /* add@2x.png */; };
 		D30C1C611A2DF04900E817B7 /* HNFilterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D30C1C601A2DF04900E817B7 /* HNFilterModel.m */; };
 		D30E62FD1A237FE80028168B /* HNNeedPayTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D30E62FC1A237FE80028168B /* HNNeedPayTableViewCell.m */; };
 		D311A7901A1E41FD000E8A4F /* 订单管理@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D311A7841A1E41FD000E8A4F /* 订单管理@2x.png */; };
@@ -429,10 +429,6 @@
 		B9882DF119CB06D90093F0F4 /* HNDecorateReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNDecorateReportViewController.m; path = Classes/DecorateControl/HNDecorateReportViewController.m; sourceTree = "<group>"; };
 		B9882DF319CB079A0093F0F4 /* HNReportTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNReportTableViewCell.h; path = Classes/DecorateControl/HNReportTableViewCell.h; sourceTree = "<group>"; };
 		B9882DF419CB079A0093F0F4 /* HNReportTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNReportTableViewCell.m; path = Classes/DecorateControl/HNReportTableViewCell.m; sourceTree = "<group>"; };
-		B9A09D7C1A0B9B4A00A88CD8 /* add_click@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "add_click@2x.png"; sourceTree = "<group>"; };
-		B9A09D7D1A0B9B4A00A88CD8 /* add@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "add@2x.png"; sourceTree = "<group>"; };
-		B9A09D801A0B9CA500A88CD8 /* arrowBack@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrowBack@2x.png"; sourceTree = "<group>"; };
-		B9A09D811A0B9CA500A88CD8 /* arrowBackClick@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrowBackClick@2x.png"; sourceTree = "<group>"; };
 		B9AD9E0619DEC90D00D82439 /* NSString+Crypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Crypt.h"; sourceTree = "<group>"; };
 		B9AD9E0719DEC90D00D82439 /* NSString+Crypt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Crypt.m"; sourceTree = "<group>"; };
 		B9AD9E0919E01A7900D82439 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
@@ -600,6 +596,10 @@
 		D3052B9E1A24E43000ECD7A1 /* chat_bg_default.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = chat_bg_default.jpg; sourceTree = "<group>"; };
 		D3052B9F1A24E43000ECD7A1 /* chatfrom_bg_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chatfrom_bg_normal.png; sourceTree = "<group>"; };
 		D3052BA01A24E43000ECD7A1 /* chatto_bg_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chatto_bg_normal.png; sourceTree = "<group>"; };
+		D305C1AA1A2F644B0022FD2F /* add_click@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "add_click@2x.png"; sourceTree = "<group>"; };
+		D305C1AB1A2F644B0022FD2F /* arrowBackClick@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrowBackClick@2x.png"; sourceTree = "<group>"; };
+		D305C1AC1A2F644B0022FD2F /* arrowBack@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrowBack@2x.png"; sourceTree = "<group>"; };
+		D305C1AD1A2F644B0022FD2F /* add@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "add@2x.png"; sourceTree = "<group>"; };
 		D30C1C5F1A2DF04900E817B7 /* HNFilterModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNFilterModel.h; sourceTree = "<group>"; };
 		D30C1C601A2DF04900E817B7 /* HNFilterModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNFilterModel.m; sourceTree = "<group>"; };
 		D30E62FB1A237FE80028168B /* HNNeedPayTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNNeedPayTableViewCell.h; sourceTree = "<group>"; };
@@ -1193,10 +1193,10 @@
 		B9A09D7B1A0B9B3400A88CD8 /* NavigationItem */ = {
 			isa = PBXGroup;
 			children = (
-				B9A09D7C1A0B9B4A00A88CD8 /* add_click@2x.png */,
-				B9A09D7D1A0B9B4A00A88CD8 /* add@2x.png */,
-				B9A09D801A0B9CA500A88CD8 /* arrowBack@2x.png */,
-				B9A09D811A0B9CA500A88CD8 /* arrowBackClick@2x.png */,
+				D305C1AA1A2F644B0022FD2F /* add_click@2x.png */,
+				D305C1AB1A2F644B0022FD2F /* arrowBackClick@2x.png */,
+				D305C1AC1A2F644B0022FD2F /* arrowBack@2x.png */,
+				D305C1AD1A2F644B0022FD2F /* add@2x.png */,
 			);
 			name = NavigationItem;
 			sourceTree = "<group>";
@@ -1679,6 +1679,7 @@
 				B9D72D5A19D846FC0011CF83 /* HNOrderViewController.xib in Resources */,
 				D3201FAF1A0A640C00236B08 /* HNSettingViewController.xib in Resources */,
 				B90C418119FA3365004EBC2B /* purchasecheckbox@2x.png in Resources */,
+				D305C1AE1A2F644B0022FD2F /* add_click@2x.png in Resources */,
 				D3052BAC1A24E43000ECD7A1 /* toolbar_bottom_bar.png in Resources */,
 				D311A79B1A1E41FD000E8A4F /* 消费卷验证c@2x.png in Resources */,
 				D38E009119D84BE0000F5263 /* HNReimburseViewController.xib in Resources */,
@@ -1689,6 +1690,7 @@
 				D33EEABD19D6FF5D00D6F106 /* city.plist in Resources */,
 				D327005E1A12645E00C05CA5 /* HNPersonDetailTableViewCell.xib in Resources */,
 				D3052BB11A24E43000ECD7A1 /* chatto_bg_normal.png in Resources */,
+				D305C1B11A2F644B0022FD2F /* add@2x.png in Resources */,
 				D311A7911A1E41FD000E8A4F /* 订单管理c@2x.png in Resources */,
 				D3052BA31A24E43000ECD7A1 /* chat_bottom_voice_nor.png in Resources */,
 				D311A7991A1E41FD000E8A4F /* 我的资料c@2x.png in Resources */,
@@ -1699,15 +1701,12 @@
 				B9C5D4651A2D6FA400514ADE /* HNSelectChargeTableViewController.xib in Resources */,
 				D38CF37A1A2CCC5A004509FF /* HNFilterDataViewController.xib in Resources */,
 				D311A7941A1E41FD000E8A4F /* 退换货管理@2x.png in Resources */,
-				B9A09D821A0B9CA500A88CD8 /* arrowBack@2x.png in Resources */,
 				B9E0660A19DAED6100893DBD /* HNDeliverGoodsViewController.xib in Resources */,
 				D3052BB01A24E43000ECD7A1 /* chatfrom_bg_normal.png in Resources */,
 				D3052BA71A24E43000ECD7A1 /* chat_bottom_up_press.png in Resources */,
-				B9A09D831A0B9CA500A88CD8 /* arrowBackClick@2x.png in Resources */,
 				B91A3AC119D6E6E9000F3823 /* MJRefresh.bundle in Resources */,
 				D3052BA21A24E43000ECD7A1 /* chatto_bg_focused.png in Resources */,
 				D3052BAB1A24E43000ECD7A1 /* chat_bottom_keyboard_press.png in Resources */,
-				B9A09D7E1A0B9B4A00A88CD8 /* add_click@2x.png in Resources */,
 				B965864319F7E38E00EB4766 /* unsubmit@2x.png in Resources */,
 				D33EEABC19D6FF5D00D6F106 /* area.plist in Resources */,
 				B91A3ACD19D6F2FA000F3823 /* HNGoodsTableViewCell.xib in Resources */,
@@ -1719,6 +1718,7 @@
 				B916F0BA19C8781D00A849C7 /* Images.xcassets in Resources */,
 				D3052BAF1A24E43000ECD7A1 /* chat_bg_default.jpg in Resources */,
 				D3052BAE1A24E43000ECD7A1 /* icon02.jpg in Resources */,
+				D305C1B01A2F644B0022FD2F /* arrowBack@2x.png in Resources */,
 				B9E19E571A25F94A006D27DE /* HNReturnDetailTableViewCell.xib in Resources */,
 				D311A7961A1E41FD000E8A4F /* 我的商品@2x.png in Resources */,
 				B9C2B42019FE8C6900C93D59 /* selectphotoclick@2x.png in Resources */,
@@ -1745,7 +1745,6 @@
 				D3052BAA1A24E43000ECD7A1 /* chat_bottom_keyboard_nor.png in Resources */,
 				B9D72D5519D840960011CF83 /* HNOrderTableViewCell.xib in Resources */,
 				B965864219F7E38E00EB4766 /* accept@2x.png in Resources */,
-				B9A09D7F1A0B9B4A00A88CD8 /* add@2x.png in Resources */,
 				B965863E19F6A56000EB4766 /* rememberit@2x.png in Resources */,
 				D3052BA11A24E43000ECD7A1 /* chatfrom_bg_focused.png in Resources */,
 				B91A3AD219D6F9D4000F3823 /* HNGoodsViewController.xib in Resources */,
@@ -1759,6 +1758,7 @@
 				B9398D4D1A2A084F006576FE /* HNGetAuthViewController.xib in Resources */,
 				D3CD90FF19CF13DE00E76AF4 /* HNRefundApplyViewController.xib in Resources */,
 				D3052BA41A24E43000ECD7A1 /* chat_bottom_voice_press.png in Resources */,
+				D305C1AF1A2F644B0022FD2F /* arrowBackClick@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

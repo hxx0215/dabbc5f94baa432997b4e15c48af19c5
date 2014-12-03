@@ -10,6 +10,7 @@
 #import "UIView+AHKit.h"
 #import "HNImageUploadTableViewCell.h"
 #import "HNImageData.h"
+#import "HNPicTableViewCell.h"
 
 @interface HNTemporaryDetailsViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (strong, nonatomic) IBOutlet UIButton *noticeFireButton;
@@ -51,6 +52,7 @@
     self.dataArray1 = [[NSArray alloc] initWithObjects:self.temporaryModel.huseInfo.owners,self.temporaryModel.huseInfo.ownersPhoneNumber,self.temporaryModel.huseInfo.constructionUnit,self.temporaryModel.huseInfo.constructionPerson,self.temporaryModel.huseInfo.constructionPersonPhoneNumber,nil];
     
     if (self.temporaryModel.type==FIRE) {
+        self.title = @"临时用火详情";
         HNTemporaryFireModel* fmodel = (HNTemporaryFireModel*)self.temporaryModel;
         self.titleArray2 =   [[NSArray alloc] initWithObjects:NSLocalizedString(@"Fire units", nil),NSLocalizedString(@"Use of fire by", nil),NSLocalizedString(@"Fire tools", nil),NSLocalizedString(@"Fire load", nil),NSLocalizedString(@"Start Time", nil),NSLocalizedString(@"End Time", nil),NSLocalizedString(@"Operator", nil),NSLocalizedString(@"Phone", nil),NSLocalizedString(@"Valid documents", nil),nil];
         
@@ -58,6 +60,7 @@
         
     }
     else{
+        self.title = @"临时用电详情";
         HNTemporaryElectroModel* emodel = (HNTemporaryElectroModel*)self.temporaryModel;
         self.titleArray2 =   [[NSArray alloc] initWithObjects:NSLocalizedString(@"Electro units", nil),NSLocalizedString(@"Use of electro by", nil),NSLocalizedString(@"Electro tools", nil),NSLocalizedString(@"Electro load", nil),NSLocalizedString(@"Start Time", nil),NSLocalizedString(@"End Time", nil),NSLocalizedString(@"Operator", nil),NSLocalizedString(@"Phone", nil),NSLocalizedString(@"Valid documents", nil),nil];
         
@@ -178,7 +181,11 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section==1&&indexPath.row==8) {
-        return 55;
+        NSString *str = [self.dataArray2 objectAtIndex:indexPath.row];
+        if (str&&str.length>1) {
+            return 97;
+        }
+        return 40;
     }
     return 40;
 }
@@ -186,17 +193,20 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if (indexPath.section==1&&indexPath.row==8) {
-        static NSString *identy = @"imageCell";
-        HNImageUploadTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
+        static NSString *identy = @"picCell";
+        HNPicTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
         if (!cell)
         {
-            cell = [[HNImageUploadTableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:identy];
-            [cell.photo addTarget:self action:@selector(showPic:) forControlEvents:UIControlEventTouchUpInside];
+            cell = [[HNPicTableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:identy];
+            //[cell.photo addTarget:self action:@selector(showPic:) forControlEvents:UIControlEventTouchUpInside];
         }
         //UIImage *image = [[HNImageData shared]imageWithLink:[self.dataArray2 objectAtIndex:indexPath.row]];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.title.text = [self.titleArray2 objectAtIndex:indexPath.row];
-        [cell reset:[self.dataArray2 objectAtIndex:indexPath.row]];
+        cell.name.text = [self.titleArray2 objectAtIndex:indexPath.row];
+        [cell setImages:[self.dataArray2 objectAtIndex:indexPath.row]];
+        [cell MyShowPic:YES];
+        cell.delegate = self;
+        //[cell reset:[self.dataArray2 objectAtIndex:indexPath.row]];
         return cell;
     }
     

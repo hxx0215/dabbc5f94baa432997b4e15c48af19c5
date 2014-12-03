@@ -12,4 +12,5 @@
 @property (nonatomic,strong) UILabel *labelTitle;
 @property (nonatomic,strong) UILabel *labelMessage;
 @property (nonatomic,strong) UILabel *labelDate;
+@property (nonatomic,strong) UIImageView *imageViewRead;
 @end

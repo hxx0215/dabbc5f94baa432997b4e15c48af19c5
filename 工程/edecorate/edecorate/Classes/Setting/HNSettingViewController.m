@@ -25,7 +25,7 @@
     
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.title = @"设置";
-    [HNUIStyleSet UIStyleSetRoundView:self.btnLogOut];
+    //[HNUIStyleSet UIStyleSetRoundView:self.btnLogOut];
     
     [self btnWithTitle:@"清除缓存" button:self.btnClear];
     [self.btnClear addTarget:self action:@selector(btnClearClick:) forControlEvents:UIControlEventTouchUpInside];

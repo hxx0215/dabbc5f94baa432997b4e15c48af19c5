@@ -181,6 +181,13 @@
     cell.labelMessage.text = messageModel.message;
     cell.labelDate.text = messageModel.addtime;
     cell.contentView.backgroundColor = [UIColor whiteColor];
+    if (messageModel.isread.intValue) {
+        [cell.imageViewRead setImage:nil];
+    }
+    else
+    {
+        [cell.imageViewRead setImage:[UIImage imageNamed:@"unsubmit"]];
+    }
     return cell;
 }
 

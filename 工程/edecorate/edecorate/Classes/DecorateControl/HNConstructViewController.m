@@ -74,21 +74,21 @@ static NSString *kPicCell = @"picCell";
 }
 - (void)initButtonName{
     if ([self.assessorstate isEqualToString:@"0"]){
-        self.buttonName = @"开通商家认证";
+        self.buttonName = @"开通认证商家";
     }
     if ([self.assessorstate isEqualToString:@"-1"]){
-        self.buttonName = @"开通商家认证";
+        self.buttonName = @"开通认证商家";
     }
     if ([self.assessorstate isEqualToString:@"1"]){
         if ([self.paystate isEqualToString:@"1"])
-            self.buttonName = @"开通商家认证";
+            self.buttonName = @"开通认证商家";
         else if ([self.paystate isEqualToString:@"2"])
             self.buttonName = @"前去支付费用";
         else
             self.buttonName = @"完善报建资料";
     }
     if ([self.assessorstate isEqualToString:@"2"]){
-        self.buttonName = @"开通商家认证";
+        self.buttonName = @"开通认证商家";
     }
 }
 - (void)initDetailData{

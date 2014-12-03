@@ -250,7 +250,7 @@
 
                 cell.name.text = @"附件：";
                 [cell setImages:self.imagePath];
-                cell.showPic = 0;
+                [cell MyShowPic:YES];// = 0;
                 cell.delegate = self;
                 return cell;
             }
@@ -284,7 +284,7 @@
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.name.text = @"附件";
                 [cell setImages:self.model.EnterpriseFile];
-                cell.showPic = 1;
+                [cell MyShowPic:YES];// = 1;
                 cell.delegate = self;
                 return cell;
             }

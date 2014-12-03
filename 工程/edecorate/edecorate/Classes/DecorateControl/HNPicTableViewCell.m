@@ -10,11 +10,13 @@
 #import "MBProgressHUD.h"
 #import "HNUploadImage.h"
 #import "HNImageData.h"
+#import "HNBrowseImageViewController.h"
 
 @interface HNPicTableViewCell()<UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate>
 @property (nonatomic, strong)UIImagePickerController *imagePicker;
 @property (nonatomic, strong)NSMutableArray *imageArray;
 @property (nonatomic)NSInteger currentImage;
+@property (nonatomic) BOOL showPic;
 @end
 
 @implementation HNPicTableViewCell
@@ -24,7 +26,7 @@
     if (self){
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        self.name = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 100, 18)];
+        self.name = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 90, 18)];
         self.name.centerY = self.contentView.height / 2;
         self.name.numberOfLines = 0;
         self.name.lineBreakMode = NSLineBreakByWordWrapping;
@@ -38,7 +40,7 @@
         [self.upload setBackgroundColor:[UIColor colorWithRed:36.0/255.0 green:139.0/255.0 blue:96.0/255.0 alpha:1.0]];
         [self.upload setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         self.upload.titleLabel.font = [UIFont systemFontOfSize:13.0];
-        self.upload.hidden = YES;
+        //self.upload.hidden = YES;
         self.upload.layer.cornerRadius = 7.0;
         [self.upload sizeToFit];
         [self.upload addTarget:self action:@selector(upload:) forControlEvents:UIControlEventTouchUpInside];
@@ -58,6 +60,7 @@
         self.curImage.frame =  CGRectMake(0, 0, 50 , 50);
         [self.contentView addSubview:self.curImage];
         self.curImage.hidden = YES;
+        [self.curImage addTarget:self action:@selector(showPic:) forControlEvents:UIControlEventTouchUpInside];
         
         self.leftImg = [UIButton buttonWithType:UIButtonTypeCustom];
         [self.leftImg setImage:[UIImage imageNamed:@"zuo.png"] forState:UIControlStateNormal];
@@ -94,7 +97,7 @@
     //self.name.left = 15;
     //self.name.centerY = 22;
     
-    self.upload.hidden = NO;
+    //self.upload.hidden = NO;
     self.upload.right = self.contentView.width - 20;
     self.upload.centerY = 22;
     self.del.right = self.upload.left - 10;
@@ -202,7 +205,9 @@
     [self.imageArray removeAllObjects];
     NSArray *array = [images componentsSeparatedByString:@","];
     for (NSString* str in array) {
-        [self.imageArray addObject:str];
+        if (str.length>1) {
+            [self.imageArray addObject:str];
+        }
     }
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
@@ -218,6 +223,14 @@
 
 -(void)retImages
 {
+    if(self.showPic)
+    {
+        self.upload.hidden = YES;
+    }
+    else
+    {
+        self.upload.hidden = NO;
+    }
     if ([self.imageArray count]==0) {
         self.rightImg.hidden = YES;
         self.leftImg.hidden = YES;
@@ -228,7 +241,9 @@
     else
     {
         self.curImage.hidden = NO;
-        self.del.hidden = NO;
+        if (!self.showPic) {
+            self.del.hidden = NO;
+        }
     }
     
     if ([self.imageArray count]>self.currentImage+1) {
@@ -291,5 +306,31 @@
     [self retImages];
     BOOL bo = ([self.imageArray count] == 0);
     [self.delegate updataImage:str heightChange:bo];
+}
+
+- (void)showPic:(UIButton *)sender{
+    if (!self.showPic) {
+        return;
+    }
+    HNBrowseImageViewController *vc = [[HNBrowseImageViewController alloc] init];
+    vc.image = sender.currentImage;
+    [(UIViewController*)self.delegate presentViewController:vc animated:NO completion:^{
+        
+    }];
+}
+
+-(void)MyShowPic:(BOOL)show
+{
+    self.showPic = show;
+    if(self.showPic)
+    {
+        self.upload.hidden = YES;
+        self.del.hidden = YES;
+    }
+    else
+    {
+        self.upload.hidden = NO;
+        self.del.hidden = NO;
+    }
 }
 @end

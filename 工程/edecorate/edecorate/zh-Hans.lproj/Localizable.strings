@@ -164,5 +164,7 @@
 "Forget Password?" = "忘记密码?";
 "Login" = "登录";
 "Done" = "完成";
+"Connection Error" = "网络错误";
 "Please check your network." = "联不上网啦，请检查您的网络环境。";
 "We don't get any data." = "未获取到数据，请稍等一会。";
+"Error" = "错误";

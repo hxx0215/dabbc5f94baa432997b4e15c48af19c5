@@ -18,6 +18,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.view.backgroundColor = [UIColor whiteColor];
+    self.title = @"开通认证商家";
 }
 
 - (void)didReceiveMemoryWarning {

@@ -105,7 +105,7 @@
     UITabBar *tabBar = [self.tabBarController tabBar];
     [tabBar setTintColor:[UIColor greenColor]];
     tabBar.barStyle = UIBarStyleBlack;
-    UITabBarItem *item2 = [[UITabBarItem alloc] initWithTitle:@"装修管控" image:[UIImage imageNamed:@"Tab2"] tag:102];
+    UITabBarItem *item2 = [[UITabBarItem alloc] initWithTitle:@"装修报建" image:[UIImage imageNamed:@"Tab2"] tag:102];
     UITabBarItem *item3 = [[UITabBarItem alloc] initWithTitle:@"商务后台" image:[UIImage imageNamed:@"Tab3"] tag:103];
     UITabBarItem *item4 = [[UITabBarItem alloc] initWithTitle:@"消息" image:[UIImage imageNamed:@"Tab4"] tag:104];
     UITabBarItem *item5 = [[UITabBarItem alloc] initWithTitle:@"设置" image:[UIImage imageNamed:@"Tab5"] tag:105];

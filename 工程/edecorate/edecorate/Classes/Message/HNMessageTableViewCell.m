@@ -15,6 +15,7 @@
     self.labelTitle = (UILabel *)[self viewWithTag:1];
     self.labelMessage = (UILabel *)[self viewWithTag:2];
     self.labelDate = (UILabel *)[self viewWithTag:3];
+    self.imageViewRead = (UIImageView *)[self viewWithTag:4];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

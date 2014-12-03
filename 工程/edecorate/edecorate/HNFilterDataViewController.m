@@ -13,23 +13,23 @@
 #import "MBProgressHUD.h"
 
 
-// 模拟器 宏定义
-#ifdef TARGET_IPHONE_SIMULATOR
-@interface CLLocationManager (Simulator)
-@end
-
-@implementation CLLocationManager (Simulator)
-
--(void)startUpdatingLocation
-{
-    float latitude = 32.061;
-    float longitude = 118.79125;
-    CLLocation *setLocation= [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
-    [self.delegate locationManager:self didUpdateToLocation:setLocation
-                      fromLocation:setLocation];
-}
-@end
-#endif // TARGET_IPHONE_SIMULATOR
+//// 模拟器 宏定义
+//#ifdef TARGET_IPHONE_SIMULATOR
+//@interface CLLocationManager (Simulator)
+//@end
+//
+//@implementation CLLocationManager (Simulator)
+//
+//-(void)startUpdatingLocation
+//{
+//    float latitude = 32.061;
+//    float longitude = 118.79125;
+//    CLLocation *setLocation= [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
+//    [self.delegate locationManager:self didUpdateToLocation:setLocation
+//                      fromLocation:setLocation];
+//}
+//@end
+//#endif // TARGET_IPHONE_SIMULATOR
 
 @interface HNFilterDataViewController ()<CLLocationManagerDelegate>
 @property (strong, nonatomic) IBOutlet UIButton *locationName;
@@ -53,29 +53,45 @@
     
     self.seg.selectedSegmentIndex = [HNFilterModel shared].ordertype.integerValue;
     
+    self.btn1.layer.borderWidth = 1;
+    self.btn1.layer.borderColor = [UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1].CGColor;
+    self.btn2.layer.borderWidth = 1;
+    self.btn2.layer.borderColor = [UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1].CGColor;
+    self.btn3.layer.borderWidth = 1;
+    self.btn3.layer.borderColor = [UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1].CGColor;
+    self.btn4.layer.borderWidth = 1;
+    self.btn4.layer.borderColor = [UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1].CGColor;
     if ([HNFilterModel shared].goodsType1) {
         self.btn1.backgroundColor = [UIColor projectGreen];
+        [self.btn1 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     }
     else{
-        self.btn1.backgroundColor = [UIColor blackColor];
+        self.btn1.backgroundColor = [UIColor whiteColor];
+        [self.btn1 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     }
     if ([HNFilterModel shared].goodsType2) {
         self.btn2.backgroundColor = [UIColor projectGreen];
+        [self.btn2 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     }
     else{
-        self.btn2.backgroundColor = [UIColor blackColor];
+        self.btn2.backgroundColor = [UIColor whiteColor];
+        [self.btn2 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     }
     if ([HNFilterModel shared].goodsType3) {
         self.btn3.backgroundColor = [UIColor projectGreen];
+        [self.btn3 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     }
     else{
-        self.btn3.backgroundColor = [UIColor blackColor];
+        self.btn3.backgroundColor = [UIColor whiteColor];
+        [self.btn3 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     }
     if ([HNFilterModel shared].goodsType4) {
         self.btn4.backgroundColor = [UIColor projectGreen];
+        [self.btn4 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     }
     else{
-        self.btn4.backgroundColor = [UIColor blackColor];
+        self.btn4.backgroundColor = [UIColor whiteColor];
+        [self.btn4 setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     }
 }
 
@@ -110,9 +126,11 @@
             [HNFilterModel shared].goodsType1 = ![HNFilterModel shared].goodsType1;
             if ([HNFilterModel shared].goodsType1) {
                 sender.backgroundColor = [UIColor projectGreen];
+                [sender setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             }
             else{
-                sender.backgroundColor = [UIColor blackColor];
+                sender.backgroundColor = [UIColor whiteColor];
+                [sender setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             }
         }
             break;
@@ -121,9 +139,11 @@
             [HNFilterModel shared].goodsType3 = ![HNFilterModel shared].goodsType3;
             if ([HNFilterModel shared].goodsType3) {
                 sender.backgroundColor = [UIColor projectGreen];
+                [sender setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             }
             else{
-                sender.backgroundColor = [UIColor blackColor];
+                sender.backgroundColor = [UIColor whiteColor];
+                [sender setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             }
         }
             break;
@@ -132,9 +152,11 @@
             [HNFilterModel shared].goodsType2 = ![HNFilterModel shared].goodsType2;
             if ([HNFilterModel shared].goodsType2) {
                 sender.backgroundColor = [UIColor projectGreen];
+                [sender setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             }
             else{
-                sender.backgroundColor = [UIColor blackColor];
+                sender.backgroundColor = [UIColor whiteColor];
+                [sender setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             }
         }
             break;
@@ -143,9 +165,11 @@
             [HNFilterModel shared].goodsType4 = ![HNFilterModel shared].goodsType4;
             if ([HNFilterModel shared].goodsType4) {
                 sender.backgroundColor = [UIColor projectGreen];
+                [sender setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             }
             else{
-                sender.backgroundColor = [UIColor blackColor];
+                sender.backgroundColor = [UIColor whiteColor];
+                [sender setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             }
         }
             break;
