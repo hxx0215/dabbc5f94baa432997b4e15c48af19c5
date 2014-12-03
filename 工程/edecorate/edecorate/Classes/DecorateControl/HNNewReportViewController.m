@@ -13,6 +13,7 @@
 #import "HNUploadImage.h"
 #import "HNPurchaseItem.h"
 #import "HNPurchaseViewController.h"
+#import "HNConsturctPicTableViewCell.h"
 
 @interface HNSeprateView : UIView
 @property (nonatomic, weak) UIView *hiddenWith;
@@ -59,10 +60,16 @@
 @property (nonatomic, weak) UITextField *curText;
 
 @property (nonatomic, strong) NSMutableDictionary *sendDic;
+
+@property (nonatomic, strong) NSMutableDictionary *imageSet;
+@property (nonatomic, strong) NSMutableDictionary *curImageIndex;
+@property (nonatomic, strong) NSMutableDictionary *imageUrl;
+
+@property (nonatomic, strong) UIView *buttonView;
 @end
 
 @implementation HNNewReportViewController
-
+static NSString *kNewPicCell = @"kNewPicCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -72,7 +79,8 @@
     self.tableView.dataSource = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
-    
+    UINib *nib = [UINib nibWithNibName:NSStringFromClass([HNConsturctPicTableViewCell class]) bundle:nil];
+    [self.tableView registerNib:nib forCellReuseIdentifier:kNewPicCell];
     self.userTitle = @[NSLocalizedString(@"身份证号: ", nil),NSLocalizedString(@"手机号: ", nil),NSLocalizedString(@"施工总人数: ", nil),NSLocalizedString(@"开始时间: ", nil),NSLocalizedString(@"结束时间: ", nil)];
     self.companyData = @[NSLocalizedString(@"营业执照", nil),NSLocalizedString(@"税务登记证",nil),NSLocalizedString(@"组织代码登记证",nil),NSLocalizedString(@"资质证书", nil),NSLocalizedString(@"电工证", nil),NSLocalizedString(@"法人委托书",nil),NSLocalizedString(@"法人身份证", nil),NSLocalizedString(@"装修施工合同图证",nil),NSLocalizedString(@"施工负责人身份",nil)];
     self.personalData = @[[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"房屋地址:", nil),self.roomNumber],[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"业主姓名:",nil),self.ownername],[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"手机号:",nil),self.ownerphone]];
@@ -126,9 +134,25 @@
     [self initTopView];
     self.userDic = [@{@"idcard": @"",@"phone" : @"", @"population" :@"",@"realname":@""} mutableCopy];
     [self initSendDic];
+    [self initButtonView];
+    self.imageUrl = [NSMutableDictionary new];
+    self.imageSet = [NSMutableDictionary new];
+    self.curImageIndex = [NSMutableDictionary new];
 }
 - (void)initSendDic{
     self.sendDic = [@{@"declareid": self.declareId , @"mshopid" : [HNLoginData shared].mshopid,@"principal":@"",@"EnterprisePhone":@"",@"EIDCard":@"",/*@"beginTime":@"",@"endTime": @"",*/@"population":@"",@"headImage":@"",@"OriginalSChart":@"",@"floorplan":@"",@"wallRemould":@"" , @"ceilingPlan":@"",@"WaterwayPlan":@"",@"BlockDiagram":@"",@"businessLicense":@"",@"TaxIMG":@"",@"organizeIMG":@"",@"qualificationIMG":@"" ,@"ElectricianIMG":@"",@"powerAttorney":@"",@"AttorneyIDcard":@"",@"EIDCardIMG":@"",@"compactIMG":@"",@"kitchenIMG":@"",@"WCIMG":@"",@"roomIMG":@"",@"gasLineIMG":@"",@"electricityBoxIMG":@"",@"waterPipeIMG":@"",@"proportion":@"",@"blueprint":@"" }mutableCopy];
+}
+- (void)initButtonView{
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+    UIButton *purchase = [UIButton buttonWithType:UIButtonTypeCustom];
+    CGSize contentSize = self.tableView.contentSize;
+    purchase.frame = CGRectMake(10, contentSize.height, self.view.width - 20, 40);
+    purchase.layer.cornerRadius = 7.0;
+    [view addSubview:purchase];
+    [purchase setBackgroundColor:[UIColor projectRed]];
+    [purchase setTitle:NSLocalizedString(@"配置缴费项", nil) forState:UIControlStateNormal];
+    [purchase addTarget:self action:@selector(purchase:) forControlEvents:UIControlEventTouchUpInside];
+    self.buttonView = view;
 }
 - (void)initDateString{
     NSDateFormatter *df = [[NSDateFormatter alloc] init];
@@ -251,24 +275,26 @@
 }
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    UIButton *purchase = [UIButton buttonWithType:UIButtonTypeCustom];
-    CGSize contentSize = self.tableView.contentSize;
-    purchase.frame = CGRectMake(10, contentSize.height, self.view.width - 20, 40);
-    purchase.layer.cornerRadius = 7.0;
-    [self.tableView addSubview:purchase];
-    self.tableView.contentSize = CGSizeMake(contentSize.width, contentSize.height + 80);
-    [purchase setBackgroundColor:[UIColor projectRed]];
-    [purchase setTitle:NSLocalizedString(@"配置缴费项", nil) forState:UIControlStateNormal];
-    [purchase addTarget:self action:@selector(purchase:) forControlEvents:UIControlEventTouchUpInside];
+    
 }
 #pragma mark - UITableViewDelegate && DataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return [self.tableData count];
+    return [self.tableData count] + 1;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    if (section == [self.tableData count])
+        return 0;
     return [self.tableData[section] count];
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if ([self.tableType[indexPath.section][indexPath.row] intValue] == HNNewReportTableViewCellTypeButton)
+    {
+        NSString *key = [NSString stringWithFormat:@"%d",indexPath.section*100 + indexPath.row];
+        if ([self shouldShowAllUI:key])
+            return 115;
+        else
+            return 45;
+    }
     return 60;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -327,7 +353,29 @@
     }
     cell.button.tag = (indexPath.section + 1) * 1000 + indexPath.row;
     if (cell.type == HNNewReportTableViewCellTypeButton){
-        NSString *key = [NSString stringWithFormat:@"%d",cell.button.tag];
+        HNConsturctPicTableViewCell *tCell = [tableView dequeueReusableCellWithIdentifier:kNewPicCell];
+        tCell.contentView.tag = indexPath.section * 100 + indexPath.row;
+        tCell.titleText.text = cell.label.text;
+        [tCell.titleText sizeToFit];
+        tCell.uploadImage.selected = YES;
+        tCell.delImage.selected = YES;
+        [tCell.uploadImage removeTarget:self action:@selector(upload:) forControlEvents:UIControlEventTouchUpInside];
+        [tCell.uploadImage addTarget:self action:@selector(upload:) forControlEvents:UIControlEventTouchUpInside];
+        [tCell.delImage removeTarget:self action:@selector(delImage:) forControlEvents:UIControlEventTouchUpInside];
+        [tCell.delImage addTarget:self action:@selector(delImage:) forControlEvents:UIControlEventTouchUpInside];
+        [tCell.leftImg removeTarget:self action:@selector(leftImage:) forControlEvents:UIControlEventTouchUpInside];
+        [tCell.leftImg addTarget:self action:@selector(leftImage:) forControlEvents:UIControlEventTouchUpInside];
+        [tCell.rightImg removeTarget:self action:@selector(rightImage:) forControlEvents:UIControlEventTouchUpInside];
+        [tCell.rightImg addTarget:self action:@selector(rightImage:) forControlEvents:UIControlEventTouchUpInside];
+        NSString *key = [NSString stringWithFormat:@"%d",tCell.contentView.tag];
+        [self shouldHideCellUI:tCell
+                          hide:![self shouldShowAllUI:key]];
+        NSArray *imageArr = self.imageSet[key];
+        if (imageArr && [imageArr count]>0){
+            tCell.pic.image = imageArr[[self.curImageIndex[key] integerValue]];
+        }
+        return tCell;
+
         if ([self.picDict objectForKey:key] != [NSNull null])
             [cell.button setImage:[self.picDict objectForKey:key] forState:UIControlStateNormal];
         else
@@ -335,6 +383,12 @@
     }
     
     return cell;
+}
+- (void)shouldHideCellUI:(HNConsturctPicTableViewCell *)cell hide:(BOOL)hide{
+    cell.delImage.hidden = hide;
+    cell.leftImg.hidden = hide;
+    cell.rightImg.hidden = hide;
+    cell.pic.hidden = hide;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -353,6 +407,8 @@
     }
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    if (section == [self.tableData count])
+        return self.buttonView;
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.width, 55)];
     UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(10, 5, tableView.width - 20, 50)];
     contentView.backgroundColor = [UIColor projectGreen];
@@ -510,6 +566,14 @@
     UIImage *image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
     NSString *key = [NSString stringWithFormat:@"%d",picker.view.tag];
     [self.picDict setObject:image forKey:key];
+    NSMutableArray *imageArr = self.imageSet[key];
+    NSMutableArray *imageUrl = self.imageUrl[key];
+    if (!imageArr)
+        imageArr = [NSMutableArray new];
+    if (!imageUrl)
+        imageUrl = [NSMutableArray new];
+    [imageArr addObject:image];
+    
     [picker dismissViewControllerAnimated:YES completion:^{
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.labelText = NSLocalizedString(@"上传中", nil);
@@ -518,10 +582,14 @@
         CGFloat scale = MIN(1, maxWH / maxImg);
         UIImage *img = [HNUploadImage ScaledImage:image scale:scale];
         [HNUploadImage UploadImage:img block:^(NSString *msg){
-            NSLog(@"%@",msg);
+            [imageUrl addObject:msg];
+            [self.imageSet setObject:imageArr forKey:key];
+            [self.imageUrl setObject:imageUrl forKey:key];
+            [self.curImageIndex setObject:@([imageArr count] - 1) forKey:key];
             dispatch_async(dispatch_get_main_queue(), ^{
                 hud.labelText = NSLocalizedString(@"上传成功", nil);
                 [MBProgressHUD hideHUDForView:self.view animated:YES];
+                [self.tableView reloadData];
             });
         }];
     }];
@@ -626,12 +694,49 @@
 }
 - (void)upload:(UIButton *)sender{
     UIImagePickerController *pick = [[UIImagePickerController alloc] init];
-    pick.view.tag = sender.tag;
+    pick.view.tag = [sender superview].tag;
     pick.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
     pick.delegate = self;
     [self presentViewController:pick animated:YES completion:^{
         
     }];
+}
+- (void)leftImage:(UIButton *)sender{
+    NSString *key = [NSString stringWithFormat:@"%d",[sender superview].tag];
+    NSInteger curImageIndex = [self.curImageIndex[key] integerValue];
+    curImageIndex --;
+    if (curImageIndex <0) curImageIndex =0;
+    [self.curImageIndex setObject:@(curImageIndex) forKey:key];
+    [self.tableView reloadData];
+}
+- (void)rightImage:(UIButton *)sender{
+    NSString *key = [NSString stringWithFormat:@"%d",[sender superview].tag];
+    NSInteger maxIndex = [self.imageSet[key] count];
+    NSInteger curImageIndex = [self.curImageIndex[key] integerValue];
+    curImageIndex ++;
+    if (curImageIndex > maxIndex - 1) curImageIndex = maxIndex - 1;
+    [self.curImageIndex setObject:@(curImageIndex) forKey:key];
+    [self.tableView reloadData];
+}
+- (void)delImage:(UIButton *)sender{
+    NSString *key = [NSString stringWithFormat:@"%d",[sender superview].tag];
+    if ([self.imageSet[key] count]<1)
+        return ;
+    NSInteger curImageIndex = [self.curImageIndex[key] integerValue];
+    [self.imageSet[key] removeObjectAtIndex:curImageIndex];
+    [self.imageUrl[key] removeObjectAtIndex:curImageIndex];
+    if (curImageIndex>= [self.imageSet[key] count])
+        curImageIndex = MAX(0, [self.imageSet[key] count] - 1);
+    if (curImageIndex<0) curImageIndex = 0;
+    [self.curImageIndex setObject:@(curImageIndex) forKey:key];
+    [self.tableView reloadData];
+}
+- (BOOL)shouldShowAllUI:(NSString *)key{
+    NSArray *imgarr = self.imageSet[key];
+    if (imgarr && [imgarr count]>0)
+        return YES;
+    else
+        return NO;
 }
 @end
 
