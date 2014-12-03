@@ -78,6 +78,10 @@ static NSString *reuseId = @"businessCell";
         typeof (self) sself = wself;
         [sself refreshList];
     }];
+    [self.tableView addFooterWithCallback:^{
+        typeof(self) strongSelf = wself;
+        [strongSelf loadMore];
+    }];
     self.tableView.headerRefreshingText = @"刷新中";
     
     [self initHeaderViewWithType:self.businessType];
@@ -87,13 +91,18 @@ static NSString *reuseId = @"businessCell";
     self.tableView.height -= self.headerView.height;
     
     [self loadCellWithType:self.businessType];
+    self.shouldRefresh = YES;
     if (self.businessType == kGoods)
         [self initNavi];
 }
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     self.tableView.height = self.view.height - self.headerView.height;
-    [self.tableView headerBeginRefreshing];
+    if (self.shouldRefresh)
+    {
+        [self.tableView headerBeginRefreshing];
+        self.shouldRefresh = NO;
+    }
 }
 - (void)initNavi{
     self.filter = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"筛选", nil) style:UIBarButtonItemStylePlain target:self action:@selector(filterData:)];
@@ -108,28 +117,28 @@ static NSString *reuseId = @"businessCell";
             NSString *areaid = [HNFilterModel shared].cityID;
             NSString *goodstype = [[HNFilterModel shared] stringGoodsType];
             NSString *ordertype = [HNFilterModel shared].ordertype;
-            self.goodsSearchDic = [@{@"mshopid": [HNLoginData shared].mshopid , @"areaid":areaid,@"goodsname":@"",@"classid":@"",@"goodstype":goodstype,@"ordertype":ordertype,@"imgwidth":@"100",@"imgheight":@"75",@"pagesize":@"",@"pageindex":@""}mutableCopy];
+            self.goodsSearchDic = [@{@"mshopid": [HNLoginData shared].mshopid , @"areaid":areaid,@"goodsname":@"",@"classid":@"",@"goodstype":goodstype,@"ordertype":ordertype,@"imgwidth":@"100",@"imgheight":@"75",@"pagesize":@"50",@"pageindex":@""}mutableCopy];
         }
             break;
         case kReturnGoods:
         {
             UINib *nib=[UINib nibWithNibName:NSStringFromClass([HNReturnsTableViewCell class]) bundle:nil];
             [self.tableView registerNib:nib forCellReuseIdentifier:reuseId];
-            self.returnGoodsSearchDic = [@{@"mshopid": [HNLoginData shared].mshopid ,@"type":@"",@"orderid" : @"",@"pagesize":@"",@"pageindex":@""} mutableCopy];
+            self.returnGoodsSearchDic = [@{@"mshopid": [HNLoginData shared].mshopid ,@"type":@"",@"orderid" : @"",@"pagesize":@"50",@"pageindex":@""} mutableCopy];
         }
             break;
         case kComment:
         {
             UINib *nib=[UINib nibWithNibName:NSStringFromClass([HNCommentsTableViewCell class]) bundle:nil];
             [self.tableView registerNib:nib forCellReuseIdentifier:reuseId];
-            self.commentDic = [@{@"mshopid": [HNLoginData shared].mshopid ,@"goodsid":@"",@"pagesize":@"",@"pageindex":@""} mutableCopy];
+            self.commentDic = [@{@"mshopid": [HNLoginData shared].mshopid ,@"goodsid":@"",@"pagesize":@"50",@"pageindex":@""} mutableCopy];
         }
             break;
         case kOrder:
         {
             UINib *nib = [UINib nibWithNibName:NSStringFromClass([HNOrderTableViewCell class]) bundle:nil];
             [self.tableView registerNib:nib forCellReuseIdentifier:reuseId];
-            self.orderSearchDic = [@{@"mshopid": [HNLoginData shared].mshopid ,@"orderstate":@"",@"userid" : @"",@"orderid" : @"",@"timetype":@"",@"pagesize":@"",@"pageindex":@""} mutableCopy];
+            self.orderSearchDic = [@{@"mshopid": [HNLoginData shared].mshopid ,@"orderstate":@"",@"userid" : @"",@"orderid" : @"",@"timetype":@"",@"pagesize":@"50",@"pageindex":@""} mutableCopy];
         }
             break;
         default:
@@ -319,6 +328,41 @@ static NSString *reuseId = @"businessCell";
             break;
     }
 }
+- (void)loadMore{
+    NSInteger nums = 50;
+    if (0!=[self.businessList count] % 50)
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView footerEndRefreshing];
+        });
+        return ;
+    }
+    NSInteger page = [self.businessList count] / nums + 1;
+    NSString *sPage = [NSString stringWithFormat:@"%d",page];
+    switch (self.businessType){
+        case kGoods:{
+            [self.goodsSearchDic setObject:sPage forKey:@"pageindex"];
+            [self loadMoreData:self.goodsSearchDic withMethod:@"get.goods.list"];
+        }
+            break;
+        case kOrder:{
+            [self.orderSearchDic setObject:sPage forKey:@"pageindex"];
+            [self loadMoreData:self.orderSearchDic withMethod:@"get.order.list"];
+        }
+            break;
+        case kReturnGoods:{
+            [self.returnGoodsSearchDic setObject:sPage forKey:@"pageindex"];
+            [self loadMoreData:self.returnGoodsSearchDic withMethod:@"get.order.return"];
+        }
+            break;
+        case kComment:
+            [self.commentDic setObject:sPage forKey:@"pageindex"];
+            [self loadMoreData:self.commentDic withMethod:@"get.goods.comment"];
+            break;
+        default:
+            break;
+    }
+}
 - (void)loadThumbnail{
     switch (self.businessType) {
         case kGoods:
@@ -369,6 +413,47 @@ static NSString *reuseId = @"businessCell";
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"警告", nil) message:NSLocalizedString(@"服务器出现错误，请联系管理人员", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"确定", nil) otherButtonTitles: nil];
         [alert show];
     });
+}
+- (void)loadMoreData:(NSMutableDictionary *)sendDic withMethod:(NSString *)method{
+    NSString *sendJson = [sendDic JSONString];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:method Params:sendJson]];
+    NSString *contentType = @"text/html";
+    [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView footerEndRefreshing];
+        });
+        if (data){
+            NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            if (!retStr){
+                [self showBadServer];
+                return ;
+            }
+            NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
+            NSDictionary *retDic = [retJson objectFromJSONString];
+            NSInteger count = [[retDic objectForKey:@"total"] integerValue];
+            if (0!=count){
+                for (int i = 0; i< count; i++) {
+                    [self.businessList addObject:[[retDic objectForKey:@"data"] objectAtIndex:i]];
+                }
+                [self loadDefault];
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                    [self loadThumbnail];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self.tableView reloadData];
+                    });
+                });
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.tableView reloadData];
+                });
+            }
+            else
+                [self showNoData];
+        }else
+            [self showNoNetwork];
+    }];
 }
 - (void)loadDataWithDic:(NSMutableDictionary *)sendDic withMethod:(NSString *)method{
     NSString *sendJson = [sendDic JSONString];
@@ -429,6 +514,7 @@ static NSString *reuseId = @"businessCell";
 #pragma mark - actions
 - (void)filterData:(id)sender{
     HNFilterDataViewController *VC = [[HNFilterDataViewController alloc]init];
+    self.shouldRefresh = YES;
     [self.navigationController pushViewController:VC animated:YES];
 }
 - (void)goodsCategory:(id)sender{
@@ -453,18 +539,21 @@ static NSString *reuseId = @"businessCell";
     HNGoodsHeaderView *head = (HNGoodsHeaderView *)self.headerView;
     [head.categoryButton setTitle:title forState:UIControlStateNormal];
     [self.goodsSearchDic setObject:classid forKey:@"classid"];
+    self.shouldRefresh = YES;
 }
 #pragma mark - HNOrderCategoryDelegate
 - (void)didSelect:(NSString *)orderState name:(NSString *)title{
     HNOrderHeaderView *head = (HNOrderHeaderView *)self.headerView;
     [head.filter setTitle:title forState:UIControlStateNormal];
     [self.orderSearchDic setObject:orderState forKey:@"orderstate"];
+    self.shouldRefresh = YES;
 }
 #pragma mark - HNReturnCategoryDelegate
 - (void)didSelectType:(NSString *)type name:(NSString *)title{
     HNReturnsHeaderView *head = (HNReturnsHeaderView *)self.headerView;
     [head.statusButton setTitle:title forState:UIControlStateNormal];
     [self.returnGoodsSearchDic setObject:type forKey:@"type"];
+    self.shouldRefresh = YES;
 }
 #pragma mark - UISearchBarDelegate
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar{

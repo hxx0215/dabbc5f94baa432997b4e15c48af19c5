@@ -13,7 +13,7 @@
 #import "HNLoginData.h"
 #import "HNImageData.h"
 
-@interface HNOrderViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface HNOrderViewController ()<UITableViewDelegate,UITableViewDataSource,CustomIOS7AlertViewDelegate>
 @property (strong, nonatomic) IBOutlet UITableViewCell *orderMess;
 @property (strong, nonatomic) IBOutlet UITableViewCell *receiptCell;
 @property (strong, nonatomic) IBOutlet UITableViewCell *receiveCell;
@@ -200,17 +200,21 @@ static NSString *identy = @"orderDetailCell";
     alertView.parentView = self.navigationController.view;
     alertView.containerView  = self.alertContent;
     [alertView setButtonTitles:@[NSLocalizedString(@"OK", nil),NSLocalizedString(@"取消", nil)]];
+    alertView.delegate = self;
     [alertView show];
 }
 - (IBAction)deliver:(id)sender {
     NSLog(@"发货");
 }
-
+- (void)customIOS7dialogButtonTouchUpInside:(id)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    NSLog(@"%d",buttonIndex);
+    [alertView close];
+}
 - (UIView *)alertContent{
     if (!_alertContent){
         _alertContent = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 280, 200)];
         self.cancelLabel = [[UILabel alloc] init];
-        self.cancelLabel.text = NSLocalizedString(@"Cancel Order Memo:", nil);
+        self.cancelLabel.text = NSLocalizedString(@"备注:", nil);
         [self.cancelLabel sizeToFit];
         [_alertContent addSubview:self.cancelLabel];
         self.cancelMemo = [[UITextView alloc] initWithFrame:CGRectMake(10, 30, 260, 160)];

@@ -91,10 +91,10 @@
     [self.view addSubview:self.forget];
 
     [self.view addSubview:self.loginButton];
-    self.loginView.userName.text = @"zhangdongfang1";
-    self.loginView.password.text = @"123456";
+//    self.loginView.userName.text = @"zhangdongfang1";
+//    self.loginView.password.text = @"123456";
     [self initTabBar];
-
+    [self initUserDefault];
 }
 - (void)initTabBar{
     self.tabBarController = [[UITabBarController alloc] init];
@@ -131,11 +131,28 @@
     self.tabBarController.viewControllers = @[nav2,nav3,nav4,nav5];
     self.tabBarController.delegate = self;
 }
+- (void)initUserDefault{
+    NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
+    NSString *username =[defaults objectForKey:@"HNUSERNAME"];
+    if (!username)
+    {
+        [defaults setObject:@"" forKey:@"HNUSERNAME"];
+        [defaults setObject:@"" forKey:@"HNPASSWORD"];
+        [defaults setBool:NO forKey:@"HNREMEMBER"];
+        [defaults synchronize];
+    }
+}
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
 //    [self.view insertSubview:self.backImage atIndex:100];
     [self.view insertSubview:self.backImage belowSubview:self.loginView];
-
+    NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
+    BOOL checked = [defaults boolForKey:@"HNREMEMBER"];
+    self.remember.selected = checked;
+    if (checked){
+        self.loginView.userName.text = [defaults objectForKey:@"HNUSERNAME"];
+        self.loginView.password.text = [defaults objectForKey:@"HNPASSWORD"];
+    }
 }
 - (void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
@@ -162,6 +179,13 @@
     });
 }
 - (void)login:(id)sender{
+    NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
+    [defaults setBool:self.remember.selected forKey:@"HNREMEMBER"];
+    if (self.remember.selected){
+        [defaults setObject:self.loginView.userName.text forKey:@"HNUSERNAME"];
+        [defaults setObject:self.loginView.password.text forKey:@"HNPASSWORD"];
+    }
+    [defaults synchronize];
     MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = NSLocalizedString(@"Loading", nil);
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
@@ -212,6 +236,7 @@
 }
 
 - (void)loginSuccess{
+    
     HNHomeViewController *homeViewController = [[HNHomeViewController alloc] init];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:homeViewController];
     nav.navigationBar.translucent = NO;
