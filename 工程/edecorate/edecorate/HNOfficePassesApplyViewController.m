@@ -207,8 +207,14 @@
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     NSString *jsonStr = [[self encodeWithTemporaryModel] JSONString];
     request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"set.pass.list" Params:jsonStr]];
-    NSString *contentType = @"text/html";
+    
+    NSData *jsonBody = [[self bodyWithModel] dataUsingEncoding:NSUTF8StringEncoding];
+    NSString *contentType = @"application/x-www-form-urlencoded; charset=utf-8";
     [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPMethod:@"POST"];
+    [request setHTTPBody:jsonBody];
+    NSString *postLength = [NSString stringWithFormat:@"%ld",[jsonBody length]];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
     
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
         [self performSelectorOnMainThread:@selector(didCheckOut:) withObject:data waitUntilDone:YES];
@@ -264,7 +270,23 @@
 //    proposerId	Y	申请用户userid
 //    proposer	Y	申请人员信息JSON（realname：姓名，idcard：身份证号，phone：联系电话，idcardImg：身份证照片，icon：头像）
 //    needItem	Y	缴费项json([{name:名称,price:价格,useUnit:单位,number:数量,IsSubmit:是否必缴,Isrefund:是否可退,totalMoney:总金额,sort:排序},{...}]
-//                            
+//
+
+    
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:self.temporaryModel.declareId,@"declareId", [NSString stringWithFormat:@"%ld",(unsigned long)[self.temporaryModel.proposerItems count]],@"headcount",[HNLoginData shared].uid,@"proposerId",self.temporaryModel.declareId,@"totalcost",nil];
+    NSLog(@"%@",[dic JSONString]);
+    
+    return dic;
+}
+
+
+- (NSString *)bodyWithModel
+{
+    /*
+     proposer		申请人员信息json[{realname:姓名,idcard:身份证号,phone:联系电话,idcardImg:身份证照片,icon:头像},{...}]）
+     needItem		缴费项json([{name:名称,price:价格,useUnit:单位,number:数量,IsSubmit:是否必缴,Isrefund:是否可退,totalMoney:总金额,sort:排序},{...}]
+     */
+    
     NSArray *array = [[NSArray alloc]init];
     NSMutableArray *jsonArray = [[NSMutableArray alloc]init];//创建最外层的数组
     for (int i=0; i<[self.temporaryModel.proposerItems count]; i++) {
@@ -298,12 +320,13 @@
     }
     array2 = [NSArray arrayWithArray:jsonArray2];
     
-    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:self.temporaryModel.declareId,@"declareId", [NSString stringWithFormat:@"%ld",(unsigned long)[self.temporaryModel.proposerItems count]],@"headcount",[HNLoginData shared].uid,@"proposerId",[array JSONString],@"proposer",[array2 JSONString],@"needItem",self.temporaryModel.declareId,@"totalcost",nil];
-    NSLog(@"%@",[dic JSONString]);
+    NSString *strBody = [NSString stringWithFormat:@"proposer=%@&needItem=%@",[array JSONString],[array2 JSONString]];
+    //NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[array JSONString],@"proposer",[array2 JSONString],@"needItem",nil];
+    NSLog(@"%@",strBody);//[dic JSONString]);
     
-    return dic;
+    return strBody;//dic;
+    
 }
-
 //- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 //{
 //    //if(alertView.tag==1)
