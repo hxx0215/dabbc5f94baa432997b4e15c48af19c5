@@ -122,7 +122,7 @@
     }
 }
 - (void)reportButton_Clicked:(id)sender{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:NSLocalizedString(@"请输入要承接的保健项目编号", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"取消", nil) otherButtonTitles:NSLocalizedString(@"确定",nil), nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:NSLocalizedString(@"请输入要承接的报建项目编号", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"取消", nil) otherButtonTitles:NSLocalizedString(@"确定",nil), nil];
     alert.alertViewStyle = UIAlertViewStylePlainTextInput;
     [alert show];
 }
