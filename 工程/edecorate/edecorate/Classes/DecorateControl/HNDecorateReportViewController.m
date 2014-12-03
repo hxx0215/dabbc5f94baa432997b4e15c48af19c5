@@ -37,6 +37,8 @@
 @property (nonatomic, strong)NSMutableArray *reportList;
 @property (nonatomic, strong)UIBarButtonItem *reportButton;
 @property (nonatomic, strong)NSDictionary *statusMap;
+@property (nonatomic, assign)BOOL isFirstIn;
+@property (nonatomic, assign)NSInteger pageIndex;
 @end
 
 @implementation HNDecorateReportViewController
@@ -65,10 +67,15 @@
         typeof(self) sself = wself;
         [sself refreshData];
     }];
+    [self.rTableView addFooterWithCallback:^{
+        typeof (self) sself = wself;
+        [sself loadMore];
+    }];
     [self initNaviButton];
     self.statusMap = @{@"0": @"审核进度:未审核",@"1": @"审核进度:审核通过",@"-1":@"审核进度:失败",@"2": @"待审核"};
-    
+    self.isFirstIn = YES;
     self.reportList = [[NSMutableArray alloc] init];
+    self.pageIndex = 0;
 //    HNReportModel *tModel = [[HNReportModel alloc] init];
 //    tModel.roomName = @"施工房号：XXXX";
 //    tModel.status = @"审核进度:审核中";
@@ -108,7 +115,11 @@
 }
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [self.rTableView headerBeginRefreshing];
+    if (self.isFirstIn)
+    {
+        self.isFirstIn = NO;
+        [self.rTableView headerBeginRefreshing];
+    }
 }
 - (void)reportButton_Clicked:(id)sender{
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:NSLocalizedString(@"请输入要承接的保健项目编号", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"取消", nil) otherButtonTitles:NSLocalizedString(@"确定",nil), nil];
@@ -234,7 +245,52 @@
     NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:model.mshopid,@"mshopid",@"50",@"pagesize", nil];
     return dic;
 }
-
+- (void)loadMore{
+    NSInteger nums = 50;
+    if (0!=[self.reportList count] % 50)
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.rTableView footerEndRefreshing];
+        });
+        return ;
+    }
+    NSInteger page = [self.reportList count] / nums + 1;
+    NSDictionary *sendDic = @{@"mshopid": [HNLoginData shared].mshopid,@"pageindex":[NSString stringWithFormat:@"%d",page],@"pagesize":[NSString stringWithFormat:@"%d",nums]};
+    NSString *sendJson = [sendDic JSONString];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"get.decoration.declare" Params:sendJson]];
+    NSString *contentType = @"text/html";
+    [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
+    
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.rTableView footerEndRefreshing];
+        });
+        if (data){
+            NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            if (!retStr){
+                [self showBadServer];
+                return ;
+            }
+            NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
+            NSDictionary *retDic = [retJson objectFromJSONString];
+            NSInteger count = [[retDic objectForKey:@"total"] integerValue];
+            if (count!=0)
+            {
+                NSArray *dataArr = [retDic objectForKey:@"data"];
+                for (int i=0; i<count; i++) {
+                    HNReportModel *model = [[HNReportModel alloc] init];
+                    model.status = [dataArr[i] objectForKey:@"assessorstate"];
+                    model.roomName = [NSString stringWithFormat:@"%@",[dataArr[i] objectForKey:@"roomnumber"]];
+                    model.declareId = [dataArr[i] objectForKey:@"declareId"];
+                    model.paystate = [dataArr[i] objectForKey:@"paystate"];
+                    [self.reportList addObject:model];
+                }
+                [self.rTableView reloadData];
+            }
+        }
+    }];
+}
 - (void)refreshData{
     HNReportSendModel *model = [[HNReportSendModel alloc] init];
     model.mshopid = [HNLoginData shared].mshopid;

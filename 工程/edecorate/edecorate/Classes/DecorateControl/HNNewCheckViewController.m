@@ -223,12 +223,12 @@
     if (!self.firstIn)
         return ;
     self.firstIn = NO;
-    CGSize size = self.tableView.contentSize;
-    self.submitView.top = size.height;
+//    CGSize size = self.tableView.contentSize;
+//    self.submitView.top = size.height;
     [self.tableView addSubview:self.submitView];
-    size.height += self.submitView.height;
+
     
-    self.tableView.contentSize = size;
+//    self.tableView.contentSize = size;
 }
 - (void)showNoNet{
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection Error", nil) message:NSLocalizedString(@"Please check your network.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
