@@ -27,7 +27,7 @@
     self.hiddenWith2.hidden = YES;
 }
 @end
-@interface HNNewCheckViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate,UIPickerViewDelegate,UIPickerViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate,HNSelectChargeTableViewControllerDelegate,UITextFieldDelegate,UIAlertViewDelegate>
+@interface HNNewCheckViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate,UIPickerViewDelegate,UIPickerViewDataSource,UINavigationControllerDelegate,HNSelectChargeTableViewControllerDelegate,UITextFieldDelegate,UIAlertViewDelegate,UIActionSheetDelegate>
 @property (strong, nonatomic) IBOutlet UITableViewCell *curStatusCell;
 @property (strong, nonatomic) IBOutlet UILabel *curStatusLabel;
 
@@ -540,6 +540,19 @@
         }];
     }];
 }
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == 2)
+        return;
+    UIImagePickerController *pick = [[UIImagePickerController alloc] init];
+    if (buttonIndex == 1)
+        pick.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+    else
+        pick.sourceType = UIImagePickerControllerSourceTypeCamera;
+    pick.delegate = self;
+    [self presentViewController:pick animated:YES completion:^{
+        
+    }];
+}
 #pragma mark - ButtonActions
 - (void)showPick:(UIButton *)sender{
     HNSelectChargeTableViewController *vc = [[HNSelectChargeTableViewController alloc] init];
@@ -552,18 +565,14 @@
     self.listPick.hidden = NO;
     self.sepView.hidden = NO;
 }
+
 - (void)uploadImg:(UIButton *)sender{
     NSInteger section = sender.tag / 100;
     NSInteger row = sender.tag % 100;
     self.curIndexPath = [NSIndexPath indexPathForRow:row inSection:section];
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"选择照片照片获取方式", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"取消", nil) destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"相机", nil),NSLocalizedString(@"相册", nil), nil];
+    [sheet showInView:self.view];
     
-    UIImagePickerController *pick = [[UIImagePickerController alloc] init];
-    pick.view.tag = sender.tag;
-    pick.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
-    pick.delegate = self;
-    [self presentViewController:pick animated:YES completion:^{
-        
-    }];
 }
 - (void)delImg:(UIButton *)sender{
     NSInteger section = [sender superview].tag / 100;
