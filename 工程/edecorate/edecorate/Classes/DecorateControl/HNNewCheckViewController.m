@@ -440,12 +440,20 @@
             [arr addObject:dic];
         }
     }
-    [sendDic setObject:[arr JSONString] forKey:@"ItemBody"];
+//    [sendDic setObject:[arr JSONString] forKey:@"ItemBody"];
     NSString *sendJson = [sendDic JSONString];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"set.acceptance.details" Params:sendJson]];
-    NSString *contentType = @"text/html";
+    NSString *bodyJson = [NSString stringWithFormat:@"ItemBody=%@",[arr JSONString]];
+    NSData *bodyData = [bodyJson dataUsingEncoding:NSUTF8StringEncoding];
+    
+    NSString *contentType = @"application/x-www-form-urlencoded; charset=utf-8";
     [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPMethod:@"POST"];
+    [request setHTTPBody:bodyData];
+    NSString *postLength = [NSString stringWithFormat:@"%d",[bodyData length]];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
         NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         if (!retStr)
@@ -456,7 +464,7 @@
         NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
         NSDictionary *retDic = [retJson objectFromJSONString];
         dispatch_async(dispatch_get_main_queue(), ^{
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"成功", nil) message:NSLocalizedString(@"提交成功", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"确定", nil) otherButtonTitles: nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:retDic[@"data"][0][@"msg"] delegate:self cancelButtonTitle:NSLocalizedString(@"确定", nil) otherButtonTitles: nil];
             [alert show];
         });
     }];
