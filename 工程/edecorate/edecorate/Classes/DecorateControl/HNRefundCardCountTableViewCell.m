@@ -35,6 +35,7 @@
         self.title.centerY = self.contentView.height / 2;
         self.title.numberOfLines = 0;
         self.title.lineBreakMode = NSLineBreakByWordWrapping;
+        self.title.font = [UIFont systemFontOfSize:13];
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         [self.contentView addSubview:self.card];
         [self.contentView addSubview:self.title];

@@ -53,6 +53,11 @@
         return image;
     }
 }
+
+-(void)addImageWithLink:(UIImage*)image link:(NSString *)imageLink
+{
+    [self.imageDict setObject:image forKey:imageLink];
+}
 @end
 
 

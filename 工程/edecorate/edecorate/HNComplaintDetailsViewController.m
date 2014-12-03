@@ -8,6 +8,7 @@
 
 #import "HNComplaintDetailsViewController.h"
 #import "UIView+AHKit.h"
+#import "HNPicTableViewCell.h"
 
 @interface HNComplaintDetailsViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;

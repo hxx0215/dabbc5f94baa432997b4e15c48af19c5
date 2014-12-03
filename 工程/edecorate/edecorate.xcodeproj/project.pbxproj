@@ -192,6 +192,7 @@
 		D3052BAF1A24E43000ECD7A1 /* chat_bg_default.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D3052B9E1A24E43000ECD7A1 /* chat_bg_default.jpg */; };
 		D3052BB01A24E43000ECD7A1 /* chatfrom_bg_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = D3052B9F1A24E43000ECD7A1 /* chatfrom_bg_normal.png */; };
 		D3052BB11A24E43000ECD7A1 /* chatto_bg_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = D3052BA01A24E43000ECD7A1 /* chatto_bg_normal.png */; };
+		D30C1C611A2DF04900E817B7 /* HNFilterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D30C1C601A2DF04900E817B7 /* HNFilterModel.m */; };
 		D30E62FD1A237FE80028168B /* HNNeedPayTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D30E62FC1A237FE80028168B /* HNNeedPayTableViewCell.m */; };
 		D311A7901A1E41FD000E8A4F /* 订单管理@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D311A7841A1E41FD000E8A4F /* 订单管理@2x.png */; };
 		D311A7911A1E41FD000E8A4F /* 订单管理c@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D311A7851A1E41FD000E8A4F /* 订单管理c@2x.png */; };
@@ -235,7 +236,6 @@
 		D38CF3751A2CCAEA004509FF /* HNCityChoiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D38CF3741A2CCAEA004509FF /* HNCityChoiceViewController.m */; };
 		D38CF3791A2CCC5A004509FF /* HNFilterDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D38CF3771A2CCC5A004509FF /* HNFilterDataViewController.m */; };
 		D38CF37A1A2CCC5A004509FF /* HNFilterDataViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38CF3781A2CCC5A004509FF /* HNFilterDataViewController.xib */; };
-		D38CF37C1A2CCD85004509FF /* Provineces.plist in Resources */ = {isa = PBXBuildFile; fileRef = D38CF37B1A2CCD85004509FF /* Provineces.plist */; };
 		D38DD5611A0BB1E100886933 /* HNMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D38DD55F1A0BB1E100886933 /* HNMessageTableViewCell.m */; };
 		D38DD5621A0BB1E100886933 /* HNMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D38DD5601A0BB1E100886933 /* HNMessageTableViewCell.xib */; };
 		D38DD5651A0BC8DC00886933 /* HNUIStyleSet.m in Sources */ = {isa = PBXBuildFile; fileRef = D38DD5641A0BC8DC00886933 /* HNUIStyleSet.m */; };
@@ -592,6 +592,8 @@
 		D3052B9E1A24E43000ECD7A1 /* chat_bg_default.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = chat_bg_default.jpg; sourceTree = "<group>"; };
 		D3052B9F1A24E43000ECD7A1 /* chatfrom_bg_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chatfrom_bg_normal.png; sourceTree = "<group>"; };
 		D3052BA01A24E43000ECD7A1 /* chatto_bg_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chatto_bg_normal.png; sourceTree = "<group>"; };
+		D30C1C5F1A2DF04900E817B7 /* HNFilterModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNFilterModel.h; sourceTree = "<group>"; };
+		D30C1C601A2DF04900E817B7 /* HNFilterModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNFilterModel.m; sourceTree = "<group>"; };
 		D30E62FB1A237FE80028168B /* HNNeedPayTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNNeedPayTableViewCell.h; sourceTree = "<group>"; };
 		D30E62FC1A237FE80028168B /* HNNeedPayTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNNeedPayTableViewCell.m; sourceTree = "<group>"; };
 		D311A7841A1E41FD000E8A4F /* 订单管理@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "订单管理@2x.png"; sourceTree = "<group>"; };
@@ -659,7 +661,6 @@
 		D38CF3761A2CCC5A004509FF /* HNFilterDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNFilterDataViewController.h; sourceTree = "<group>"; };
 		D38CF3771A2CCC5A004509FF /* HNFilterDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNFilterDataViewController.m; sourceTree = "<group>"; };
 		D38CF3781A2CCC5A004509FF /* HNFilterDataViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HNFilterDataViewController.xib; sourceTree = "<group>"; };
-		D38CF37B1A2CCD85004509FF /* Provineces.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Provineces.plist; sourceTree = "<group>"; };
 		D38DD55E1A0BB1E100886933 /* HNMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNMessageTableViewCell.h; path = Classes/Message/HNMessageTableViewCell.h; sourceTree = "<group>"; };
 		D38DD55F1A0BB1E100886933 /* HNMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNMessageTableViewCell.m; path = Classes/Message/HNMessageTableViewCell.m; sourceTree = "<group>"; };
 		D38DD5601A0BB1E100886933 /* HNMessageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HNMessageTableViewCell.xib; path = Classes/Message/HNMessageTableViewCell.xib; sourceTree = "<group>"; };
@@ -899,9 +900,6 @@
 		B91A3AA719D6DFFD000F3823 /* Goods */ = {
 			isa = PBXGroup;
 			children = (
-				D38CF3731A2CCAEA004509FF /* HNCityChoiceViewController.h */,
-				D38CF3741A2CCAEA004509FF /* HNCityChoiceViewController.m */,
-				D38CF37B1A2CCD85004509FF /* Provineces.plist */,
 				B91A3AD319D703C5000F3823 /* HNGoodsHeaderView.h */,
 				B91A3AD419D703C5000F3823 /* HNGoodsHeaderView.m */,
 				B979EDEC1A1F74A800DC22FB /* HNGoodsCategoriesViewController.h */,
@@ -915,6 +913,10 @@
 				D38CF3761A2CCC5A004509FF /* HNFilterDataViewController.h */,
 				D38CF3771A2CCC5A004509FF /* HNFilterDataViewController.m */,
 				D38CF3781A2CCC5A004509FF /* HNFilterDataViewController.xib */,
+				D38CF3731A2CCAEA004509FF /* HNCityChoiceViewController.h */,
+				D38CF3741A2CCAEA004509FF /* HNCityChoiceViewController.m */,
+				D30C1C5F1A2DF04900E817B7 /* HNFilterModel.h */,
+				D30C1C601A2DF04900E817B7 /* HNFilterModel.m */,
 			);
 			name = Goods;
 			sourceTree = "<group>";
@@ -1691,7 +1693,6 @@
 				B9A09D831A0B9CA500A88CD8 /* arrowBackClick@2x.png in Resources */,
 				B91A3AC119D6E6E9000F3823 /* MJRefresh.bundle in Resources */,
 				D3052BA21A24E43000ECD7A1 /* chatto_bg_focused.png in Resources */,
-				D38CF37C1A2CCD85004509FF /* Provineces.plist in Resources */,
 				D3052BAB1A24E43000ECD7A1 /* chat_bottom_keyboard_press.png in Resources */,
 				B9A09D7E1A0B9B4A00A88CD8 /* add_click@2x.png in Resources */,
 				B965864319F7E38E00EB4766 /* unsubmit@2x.png in Resources */,
@@ -1809,6 +1810,7 @@
 				B95D15BF19D9A28200689B4D /* CustomIOS7AlertView.m in Sources */,
 				D38615EE1A03E9DC005B4093 /* HNDeliverApplyViewController.m in Sources */,
 				D33EEAC119D7000E00D6F106 /* HNAreaPickerView.m in Sources */,
+				D30C1C611A2DF04900E817B7 /* HNFilterModel.m in Sources */,
 				D3FA3E3B1A1653E500D98861 /* HNArchivesData.m in Sources */,
 				D33EEA7319D6F39500D6F106 /* HNBusinessBackgroundModel.m in Sources */,
 				B9B2BC1E19CF1F3000839AED /* CTAssetsPageViewController.m in Sources */,

@@ -218,9 +218,13 @@
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     NSString *jsonStr = [[self encodeWithModel] JSONString];
     request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"set.install.list" Params:jsonStr]];
-    NSString *contentType = @"text/html";
+    NSData *jsonBody = [[self bodyWithModel] JSONData];
+    NSString *contentType = @"text/json";
     [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
     [request setHTTPMethod:@"POST"];
+    [request setHTTPBody:jsonBody];
+    NSString *postLength = [NSString stringWithFormat:@"%ld",[jsonBody length]];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
         [self performSelectorOnMainThread:@selector(didcommit:) withObject:data waitUntilDone:YES];
     }];
@@ -275,11 +279,21 @@
      product		送货产品名称
      btime		送货开始时间
      etime		送货结束时间
-     proposer		申请人员信息json[{realname:姓名,idcard:身份证号,phone:联系电话,idcardImg:身份证照片,icon:头像},{...}]）
-     needItem		缴费项json([{name:名称,price:价格,useUnit:单位,number:数量,IsSubmit:是否必缴,Isrefund:是否可退,totalMoney:总金额,sort:排序},{...}]
      */
     
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:self.model.declareId,@"declareId", self.model.product,@"product",self.model.bTime,@"btime",self.model.eTime,@"etime",self.model.plateNumber,@"plateNumber",self.model.drivingLicence,@"drivingLicence",self.model.drivingLImg,@"drivingLImg",nil];
+    NSLog(@"%@",[dic JSONString]);
+    
+    return dic;
+}
 
+- (NSDictionary *)bodyWithModel
+{
+    /*
+    proposer		申请人员信息json[{realname:姓名,idcard:身份证号,phone:联系电话,idcardImg:身份证照片,icon:头像},{...}]）
+    needItem		缴费项json([{name:名称,price:价格,useUnit:单位,number:数量,IsSubmit:是否必缴,Isrefund:是否可退,totalMoney:总金额,sort:排序},{...}]
+                            */
+    
     NSArray *array = [[NSArray alloc]init];
     NSMutableArray *jsonArray = [[NSMutableArray alloc]init];//创建最外层的数组
     for (int i=0; i<[self.model.proposerItems count]; i++) {
@@ -293,7 +307,7 @@
         [dic setValue:tModel.Icon forKey:@"icon"];
         [jsonArray addObject:dic];
     }
-    array = [NSArray arrayWithArray:jsonArray];
+    //array = [NSArray arrayWithArray:jsonArray];
     
     NSArray *array2 = [[NSArray alloc]init];
     NSMutableArray *jsonArray2 = [[NSMutableArray alloc]init];//创建最外层的数组
@@ -313,12 +327,13 @@
         //[dic setValue:tModel.Isrefund forKey:@"Isrefund"];
         [jsonArray2 addObject:dic];
     }
-    array2 = [NSArray arrayWithArray:jsonArray2];
+    //array2 = [NSArray arrayWithArray:jsonArray2];
     
-    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:self.model.declareId,@"declareId", self.model.product,@"product",self.model.bTime,@"btime",self.model.eTime,@"etime",self.model.plateNumber,@"plateNumber",self.model.drivingLicence,@"drivingLicence",self.model.drivingLImg,@"drivingLImg",[array JSONString],@"proposer",[array2 JSONString],@"needItem",nil];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[array JSONString],@"proposer",[array2 JSONString],@"needItem",nil];
     NSLog(@"%@",[dic JSONString]);
     
     return dic;
+    
 }
 
 

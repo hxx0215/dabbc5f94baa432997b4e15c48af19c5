@@ -7,6 +7,7 @@
 //
 
 #import "HNUploadImage.h"
+#import "HNImageData.h"
 
 @implementation HNUploadImage
 
@@ -104,6 +105,9 @@
         else{
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection Error", nil) message:NSLocalizedString(@"Please check your network.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
             [alert show];
+        }
+        if (imagePath) {
+            [[HNImageData shared] addImageWithLink:image link:imagePath];
         }
         UploadComplete(imagePath);
         

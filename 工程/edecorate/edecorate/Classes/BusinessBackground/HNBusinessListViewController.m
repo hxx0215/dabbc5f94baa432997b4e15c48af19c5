@@ -16,6 +16,7 @@
 #import "HNGoodsHeaderView.h"
 #import "HNGoodsCategoriesViewController.h"
 #import "HNFilterDataViewController.h"
+#import "HNFilterModel.h"
 
 #import "HNReturnsHeaderView.h"
 #import "HNReimburseViewController.h"
@@ -104,7 +105,10 @@ static NSString *reuseId = @"businessCell";
         {
             UINib *nib = [UINib nibWithNibName:NSStringFromClass([HNGoodsTableViewCell class]) bundle:nil];
             [self.tableView registerNib:nib forCellReuseIdentifier:reuseId];
-            self.goodsSearchDic = [@{@"mshopid": [HNLoginData shared].mshopid , @"areaid":@"",@"goodsname":@"",@"classid":@"",@"goodstype":@"",@"ordertype":@"",@"imgwidth":@"100",@"imgheight":@"75",@"pagesize":@"",@"pageindex":@""}mutableCopy];
+            NSString *areaid = [HNFilterModel shared].cityID;
+            NSString *goodstype = [[HNFilterModel shared] stringGoodsType];
+            NSString *ordertype = [HNFilterModel shared].ordertype;
+            self.goodsSearchDic = [@{@"mshopid": [HNLoginData shared].mshopid , @"areaid":areaid,@"goodsname":@"",@"classid":@"",@"goodstype":goodstype,@"ordertype":ordertype,@"imgwidth":@"100",@"imgheight":@"75",@"pagesize":@"",@"pageindex":@""}mutableCopy];
         }
             break;
         case kReturnGoods:
@@ -300,6 +304,7 @@ static NSString *reuseId = @"businessCell";
 - (void)refreshList{
     switch (self.businessType) {
         case kGoods:
+            [self loadCellWithType:kGoods];
             [self loadDataWithDic:self.goodsSearchDic withMethod:@"get.goods.list"];
             break;
         case kOrder:
