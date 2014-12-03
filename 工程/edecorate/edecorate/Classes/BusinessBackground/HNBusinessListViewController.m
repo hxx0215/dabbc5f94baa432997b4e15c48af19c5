@@ -162,7 +162,7 @@ static NSString *reuseId = @"businessCell";
             [view.statusButton addTarget:self action:@selector(returnCategory:) forControlEvents:UIControlEventTouchUpInside];
             self.headerView = view;
             view.search.delegate = self;
-            self.title = NSLocalizedString(@"退换货管理", nil)
+            self.title = NSLocalizedString(@"退换货管理", nil);
             break;
         }
 
