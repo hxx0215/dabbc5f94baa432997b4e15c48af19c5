@@ -12,14 +12,16 @@
 #import "HNUploadImage.h"
 #import "HNImageUploadTableViewCell.h"
 #import "HNTemporaryApplyTableViewCell.h"
+#import "HNPicTableViewCell.h"
 
-@interface HNArchivesDetalViewController ()<UITableViewDataSource,UITableViewDelegate,UIImagePickerControllerDelegate,UITextFieldDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface HNArchivesDetalViewController ()<UITableViewDataSource,UITableViewDelegate,UIImagePickerControllerDelegate,UITextFieldDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,HNPicTableViewCellDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UIButton *uploadButton;
 @property (nonatomic, strong) UIImage *uploadImage;
 
 @property (nonatomic, strong)UIImagePickerController *imagePicker;
 @property (strong, nonatomic) NSString* imagePath;
+//@property (nonatomic) NSString* imagePath;
 @end
 
 @implementation HNArchivesDetalViewController
@@ -48,6 +50,8 @@
     self.imagePicker.delegate =self;
     self.imagePicker.sourceType = sourceType;
     self.imagePicker.allowsEditing = NO;
+    
+    [self loadMyData];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -59,7 +63,6 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [self loadMyData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -114,11 +117,7 @@
             }
             [self.tableView reloadData];
         }
-        else
-        {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"We get no data", nil) message:NSLocalizedString(@"Please check", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
-            [alert show];
-        }
+
     }
     else{
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection Error", nil) message:NSLocalizedString(@"Please check your network.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
@@ -215,7 +214,10 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section==2&&indexPath.row==1&&!self.model.isReturn.integerValue) {
-        return 60;
+        if (self.imagePath&&self.imagePath.length>1) {
+            return 97;
+        }
+        return 40;
     }
     if (indexPath.section==2&&indexPath.row==3) {
         return 60;
@@ -223,50 +225,67 @@
     return 30;
 }
 
+- (void)updataImage:(NSString*)images heightChange:(BOOL)change
+{
+    self.imagePath = images;
+    if (change) {
+        [self.tableView reloadData];
+    }
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if (2==indexPath.section){
         if(!self.model.isReturn.integerValue)
         {
-            static NSString *identy = @"ApplyCell";
-            HNTemporaryApplyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
-            if (!cell)
-            {
-                cell = [[HNTemporaryApplyTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identy];
-            }
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            
             
             if (1 == indexPath.row) {
-                cell.title.text = @"附件：";
-                [cell setStyle:1];
-                if(self.uploadImage)
-                    [cell.photo setImage:self.uploadImage forState:UIControlStateNormal];
-                [cell.photo addTarget:self action:@selector(upload:) forControlEvents:UIControlEventTouchUpInside];
-                self.uploadButton = cell.photo;
+                static NSString *identy = @"picCell";
+                HNPicTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
+                if (!cell)
+                {
+                    cell = [[HNPicTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identy];
+                }
+
+                cell.name.text = @"附件：";
+                [cell setImages:self.imagePath];
+                cell.showPic = 0;
+                cell.delegate = self;
+                return cell;
             }
             else
             {
+                static NSString *identy = @"ApplyCell";
+                HNTemporaryApplyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
+                if (!cell)
+                {
+                    cell = [[HNTemporaryApplyTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identy];
+                }
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.title.text = @"回复内容：";
                 [cell setStyle:0];
                 cell.textField.placeholder = @"点击输入回复内容";
                 cell.textField.delegate = self;
+                return cell;
             }
-            return cell;
+            
         }
         else
         {
             if (indexPath.row==3) {
                 static NSString *identy = @"imageCell";
-                HNImageUploadTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
+                HNPicTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
                 if (!cell)
                 {
-                    cell = [[HNImageUploadTableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:identy];
-                    [cell.photo addTarget:self action:@selector(showPic:) forControlEvents:UIControlEventTouchUpInside];
+                    cell = [[HNPicTableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:identy];
                 }
                 //UIImage *image = [[HNImageData shared]imageWithLink:[self.dataArray2 objectAtIndex:indexPath.row]];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                cell.title.text = @"附件";
-                [cell reset:self.model.EnterpriseFile];
+                cell.name.text = @"附件";
+                [cell setImages:self.model.EnterpriseFile];
+                cell.showPic = 1;
+                cell.delegate = self;
                 return cell;
             }
             static NSString *identy = @"complaintDetailCell";
@@ -421,6 +440,15 @@
     
 }
 
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField        // return NO to disallow editing.
+{
+    self.tableView.contentSize = CGSizeMake(self.view.width,self.tableView.contentSize.height+216);//原始滑动距离增加键盘高度
+    CGPoint pt = [textField convertPoint:CGPointMake(0, 0) toView:self.tableView];//把当前的textField的坐标映射到scrollview上
+    if(self.tableView.contentOffset.y-pt.y<=0)//判断最上面不要去滚动
+        [self.tableView setContentOffset:CGPointMake(0, pt.y) animated:YES];//华东
+    return YES;
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
@@ -430,6 +458,9 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     self.model.gccReturn = textField.text;
+    [UIView animateWithDuration:0.30f animations:^{
+        self.tableView.contentSize = CGSizeMake(self.view.bounds.size.width, self.tableView.contentSize.height-216);
+    }];
 }
 
 #pragma mark commitclicked
@@ -467,24 +498,20 @@
         NSDictionary* dic = [retJson objectFromJSONString];
         NSNumber* total = [dic objectForKey:@"total"];
         
+        NSString *msg = nil;
         if (total.intValue){//之后需要替换成status
             NSArray* array = [dic objectForKey:@"data"];
             NSDictionary *dicData = [array objectAtIndex:0];
             NSNumber *state = [dicData objectForKey:@"state"];
+            msg = [dicData objectForKey:@"msg"];
             if (state&&state.integerValue) {
                 [self.navigationController popViewControllerAnimated:YES];
+                return;
             }
-            else
-            {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"失败", nil) message:[dicData objectForKey:@"msg"] delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
-                [alert show];
-            }
+
         }
-        else
-        {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"We get no data", nil) message:NSLocalizedString(@"Please check", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
-            [alert show];
-        }
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"失败", nil) message:msg delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+        [alert show];
     }
     else{
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection Error", nil) message:NSLocalizedString(@"Please check your network.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];

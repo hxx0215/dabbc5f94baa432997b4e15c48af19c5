@@ -23,7 +23,7 @@
 #import "HNImageUploadTableViewCell.h"
 #import "HNPicTableViewCell.h"
 
-@interface HNDeliverApplyViewController ()<UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate,HNDecorateChoiceViewDelegate,UITextFieldDelegate,UIImagePickerControllerDelegate,HNPicTableViewCellDelegate,UINavigationControllerDelegate>
+@interface HNDeliverApplyViewController ()<UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate,HNDecorateChoiceViewDelegate,UITextFieldDelegate,UIImagePickerControllerDelegate,HNPicTableViewCellDelegate,UINavigationControllerDelegate,UIActionSheetDelegate>
 @property bool bo;
 @property (strong, nonatomic) HNDecorateChoiceView *choiceDecorateView;
 
@@ -210,11 +210,6 @@
             [self.tableView reloadData];
             [self movewButton];
         }
-        else
-        {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login Fail", nil) message:NSLocalizedString(@"Please input correct username and password", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
-            [alert show];
-        }
     }
     else{
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection Error", nil) message:NSLocalizedString(@"Please check your network.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
@@ -270,11 +265,11 @@
             NSNumber *cardId = [dicArray objectForKey:@"installId"];
             [self.choiceDecorateView getPayToken:[NSString stringWithFormat:@"%ld",cardId.integerValue]];
         }
-        else
-        {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Loading Fail", nil) message:NSLocalizedString(@"Please try again", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
-            [alert show];
-        }
+//        else
+//        {
+//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Loading Fail", nil) message:NSLocalizedString(@"Please try again", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+//            [alert show];
+//        }
     }
     else{
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection Error", nil) message:NSLocalizedString(@"Please check your network.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
@@ -713,7 +708,50 @@
 - (void)imageUploadClick:(id)sender
 {
     self.imageButton = sender;
-    [self presentViewController:self.imagePicker animated:YES completion:nil];
+    
+    UIActionSheet *sheet;
+    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+    {
+        sheet  = [[UIActionSheet alloc] initWithTitle:@"选择" delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"取消" otherButtonTitles:@"拍照",@"从相册选择", nil];
+    }
+    else {
+        sheet = [[UIActionSheet alloc] initWithTitle:@"选择" delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"取消" otherButtonTitles:@"从相册选择", nil];
+    }
+    sheet.tag = 255;
+    [sheet showInView:self.view];
+    
+}
+
+-(void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (actionSheet.tag == 255) {
+        NSUInteger sourceType = 0;
+        if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+            switch (buttonIndex) {
+                case 0:
+                    return;
+                case 1:
+                    // 相机
+                    sourceType = UIImagePickerControllerSourceTypeCamera;
+                    break;
+                case 2:
+                    // 相册
+                    sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                    break;
+            }
+        }
+        else {
+            if (buttonIndex == 0) {
+                return;
+            } else {
+                sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            }
+        }
+        
+        self.imagePicker.sourceType = sourceType;
+        
+        [self presentViewController:self.imagePicker animated:YES completion:nil];
+    }
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{

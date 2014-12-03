@@ -22,6 +22,7 @@
 @property (strong, nonatomic) UIButton *leftImg;
 @property (strong, nonatomic) UIButton *rightImg;
 @property (nonatomic) NSInteger index;
+@property (nonatomic) NSInteger showPic;
 @property (nonatomic, weak) id <HNPicTableViewCellDelegate> delegate;
 -(void)setImages:(NSString*)images;
 @end

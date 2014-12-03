@@ -198,6 +198,7 @@
 
 -(void)setImages:(NSString*)images
 {
+    self.currentImage = 0;
     [self.imageArray removeAllObjects];
     NSArray *array = [images componentsSeparatedByString:@","];
     for (NSString* str in array) {
@@ -242,9 +243,20 @@
     else
         self.leftImg.hidden = YES;
     
-    UIImage *image = [[HNImageData shared] imageWithLink:[self.imageArray objectAtIndex:self.currentImage]];
-    [self.curImage setImage:image forState:UIControlStateNormal];
-    [self.curImage setImage:image forState:UIControlStateHighlighted];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSInteger tagi = self.currentImage;
+        UIImage *image = [[HNImageData shared] imageWithLink:[self.imageArray objectAtIndex:self.currentImage]];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (tagi == self.currentImage) {
+                [self.curImage setImage:image forState:UIControlStateNormal];
+                [self.curImage setImage:image forState:UIControlStateHighlighted];
+            }
+            
+        });
+        
+    });
+
 }
 
 -(void)moveImage:(UIButton*)sender

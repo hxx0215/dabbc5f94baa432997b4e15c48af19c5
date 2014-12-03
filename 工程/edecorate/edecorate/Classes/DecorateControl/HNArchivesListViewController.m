@@ -146,7 +146,7 @@
         }
         else
         {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"We get no data", nil) message:NSLocalizedString(@"Please check", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:NSLocalizedString(@"该报建没有装修档案", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
             [alert show];
         }
     }
