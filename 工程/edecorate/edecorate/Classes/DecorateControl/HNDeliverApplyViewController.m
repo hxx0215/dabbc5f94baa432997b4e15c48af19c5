@@ -218,8 +218,9 @@
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     NSString *jsonStr = [[self encodeWithModel] JSONString];
     request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"set.install.list" Params:jsonStr]];
-    NSData *jsonBody = [[self bodyWithModel] JSONData];
-    NSString *contentType = @"text/json";
+    NSData *jsonBody = [[self bodyWithModel] dataUsingEncoding:NSUTF8StringEncoding];
+    
+    NSString *contentType = @"application/x-www-form-urlencoded; charset=utf-8";
     [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
     [request setHTTPMethod:@"POST"];
     [request setHTTPBody:jsonBody];
@@ -287,7 +288,7 @@
     return dic;
 }
 
-- (NSDictionary *)bodyWithModel
+- (NSString *)bodyWithModel
 {
     /*
     proposer		申请人员信息json[{realname:姓名,idcard:身份证号,phone:联系电话,idcardImg:身份证照片,icon:头像},{...}]）
@@ -307,7 +308,7 @@
         [dic setValue:tModel.Icon forKey:@"icon"];
         [jsonArray addObject:dic];
     }
-    //array = [NSArray arrayWithArray:jsonArray];
+    array = [NSArray arrayWithArray:jsonArray];
     
     NSArray *array2 = [[NSArray alloc]init];
     NSMutableArray *jsonArray2 = [[NSMutableArray alloc]init];//创建最外层的数组
@@ -327,12 +328,13 @@
         //[dic setValue:tModel.Isrefund forKey:@"Isrefund"];
         [jsonArray2 addObject:dic];
     }
-    //array2 = [NSArray arrayWithArray:jsonArray2];
+    array2 = [NSArray arrayWithArray:jsonArray2];
     
-    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[array JSONString],@"proposer",[array2 JSONString],@"needItem",nil];
-    NSLog(@"%@",[dic JSONString]);
+    NSString *strBody = [NSString stringWithFormat:@"proposer=%@&needItem=%@",[array JSONString],[array2 JSONString]];
+    //NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[array JSONString],@"proposer",[array2 JSONString],@"needItem",nil];
+    NSLog(@"%@",strBody);//[dic JSONString]);
     
-    return dic;
+    return strBody;//dic;
     
 }
 
