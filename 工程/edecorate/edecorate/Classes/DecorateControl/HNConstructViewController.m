@@ -18,7 +18,7 @@
 #import "HNPaySupport.h"
 #import "HNConsturctPicTableViewCell.h"
 
-@interface HNConstructViewController ()<UITableViewDelegate,UITableViewDataSource,HNDecoratePayModelDelegate>
+@interface HNConstructViewController ()<UITableViewDelegate,UITableViewDataSource,HNDecoratePayModelDelegate,UIAlertViewDelegate>
 @property (nonatomic, strong)UITableView *tableView;
 @property (nonatomic, strong)NSArray *companyData;
 @property (nonatomic, strong)NSArray *personalData;
@@ -496,6 +496,12 @@ static NSString *kPicCell = @"picCell";
         type = KHNPayType7;
     [HNPaySupport shared].delegate = self;
     [[HNPaySupport shared] getPayToken:self.declareid cid:self.declareid payType:type];
+    [self showPurchased];
+}
+-(void)showPurchased{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"完成", nil) message:NSLocalizedString(@"请至网页端完成支付", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"完成", nil) otherButtonTitles:NSLocalizedString(@"支付遇到问题", nil), nil];
+    alert.tag = 123;
+    [alert show];
 }
 - (void)didGetPayUrl:(NSString *)url{
     NSURL *jump = [NSURL URLWithString:url];
@@ -540,5 +546,9 @@ static NSString *kPicCell = @"picCell";
     }
     return images;
 }
-
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{
+    if (alertView.tag == 123){
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
 @end

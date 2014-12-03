@@ -11,7 +11,8 @@
 #import "HNPurchaseTableViewCell.h"
 #import "MBProgressHUD.h"
 #import "HNPaySupport.h"
-@interface HNPurchaseViewController ()<UITableViewDelegate,UITableViewDataSource,HNDecoratePayModelDelegate>
+#import "HNDecorateReportViewController.h"
+@interface HNPurchaseViewController ()<UITableViewDelegate,UITableViewDataSource,HNDecoratePayModelDelegate,UIAlertViewDelegate>
 @property (nonatomic, strong)UITableView *tableView;
 @property (nonatomic, strong)NSIndexPath *selectIndex;
 @property (nonatomic, strong)UIView *purchaseView;
@@ -287,6 +288,20 @@
     [self updateTotalPrice];
 }
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{
+    if (alertView.tag == 123){
+        NSLog(@"%@",[self.navigationController viewControllers]);
+        BOOL find = NO;
+        for (UIViewController *vc in [self.navigationController viewControllers]){
+            if ([vc isKindOfClass:[HNDecorateReportViewController class]])
+            {
+                find = YES;
+                [self.navigationController popToViewController:vc animated:YES];
+                return;
+            }
+        }
+        [self.navigationController popViewControllerAnimated:YES];
+        return ;
+    }
     UITextField *tf=[alertView textFieldAtIndex:0];
     if (1==buttonIndex){
         HNPurchaseItem *item = nil;
@@ -364,9 +379,15 @@
     NSLog(@"%@",sendJson);
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"update.decoraton.declaredetails" Params:sendJson]];//[NSURL URLWithString:[NSString createLongResponseURLWithMethod:@"update.decoraton.declaredetails" Params:sendJson ]];
-    NSData *jsonBody = 
-    NSString *contentType = @"text/html";
+    NSString *bodyStr = [NSString stringWithFormat:@"u_needItem=%@",[arr JSONString]];
+    NSData *jsonBody = [bodyStr dataUsingEncoding:NSUTF8StringEncoding];
+    NSString *contentType = @"application/x-www-form-urlencoded; charset=utf-8";
     [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPMethod:@"POST"];
+    [request setHTTPBody:jsonBody];
+    NSString *postLength = [NSString stringWithFormat:@"%d",[jsonBody length]];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
         if (data){
             NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -379,6 +400,7 @@
             NSLog(@"%@",retDic);
             [HNPaySupport shared].delegate = self;
             [[HNPaySupport shared] getPayToken:self.declareid cid:self.declareid payType:self.type];
+            [self showJump];
         }
     }];
 }
@@ -388,7 +410,15 @@
         [alert show];
     });
 }
+- (void)showJump{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"完成", nil) message:NSLocalizedString(@"请在网页端完成支付", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"完成", nil) otherButtonTitles:NSLocalizedString(@"支付遇到问题", nil), nil];
+        alert.tag = 123;
+        [alert show];
+    });
+}
 - (void)didGetPayUrl:(NSString *)url{
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
 }
+
 @end
