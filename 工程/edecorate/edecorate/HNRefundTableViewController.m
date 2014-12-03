@@ -30,6 +30,10 @@
 @property (nonatomic, strong)NSMutableArray *refundList;
 @property (nonatomic, strong)NSDictionary *statusMap;
 @property (nonatomic, strong)HNRefundModel *currentModel;
+
+@property (nonatomic)BOOL isfirst;
+@property (nonatomic) NSInteger pages;
+@property (nonatomic) NSInteger lastTotal;
 @end
 
 
@@ -46,11 +50,21 @@
     self.rTableView.dataSource = self;
     [self.view addSubview:self.rTableView];
     self.refundList = [[NSMutableArray alloc] init];
+    
     __weak typeof(self) wself = self;
     [self.rTableView addHeaderWithCallback:^{
         typeof(self) sself = wself;
+        sself.pages = 0;
+        sself.lastTotal = 8;
         [sself refreshData];
     }];
+    [self.rTableView addFooterWithCallback:^{
+        typeof(self) sself = wself;
+        [sself loadMore];
+    }];
+    self.isfirst = YES;
+    self.pages = 0;
+    self.lastTotal = 8;
     
     self.statusMap = @{@"0": @"审核进度:未审核",@"1": @"审核进度:已审核",@"-1":@"审核进度:审核未通过"};
     
@@ -58,19 +72,9 @@
     self.navigationItem.title = NSLocalizedString(@"Deposit refund", nil);
     
     
-//    UIBarButtonItem* barButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"新增", nil) style:UIBarButtonItemStylePlain target:self action:@selector(addButton_Clicked)];
-//    self.navigationItem.rightBarButtonItem = barButtonItem;
-    //[self loadMyData];
 }
 
-//-(void)addButton_Clicked
-//{
-//    {
-//        HNRefundApplyViewController* avc = [[HNRefundApplyViewController alloc]init];
-//        [self.navigationController pushViewController:avc animated:YES];
-//    }
-//}
-//
+
 -(void)loadMyData:(HNRefundModel*)model
 {
     MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -116,11 +120,6 @@
             HNRefundApplyViewController* dac = [[HNRefundApplyViewController alloc]initWithModel:tModel];
             [self.navigationController pushViewController:dac animated:YES];
         }
-        else
-        {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Load Data Fail", nil) message:NSLocalizedString(@"NO data", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
-            [alert show];
-        }
     }
     else{
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection Error", nil) message:NSLocalizedString(@"Please check your network.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
@@ -131,7 +130,24 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-//    self.modelList = [[NSMutableArray alloc] init];
+
+    if (self.isfirst) {
+        self.pages = 0;
+        self.lastTotal = 8;
+        [self refreshData];
+        self.isfirst = NO;
+    }
+}
+
+-(void)loadMore
+{
+    if (self.lastTotal!=8) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.rTableView footerEndRefreshing];
+        });
+        return ;//已到最后。返回
+    }
+    self.pages ++;
     [self refreshData];
 }
 
@@ -140,7 +156,7 @@
 }
 
 - (NSDictionary *)encodeSendModel:(HNRefundSendModel*)model{
-    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:model.mshopid,@"mshopid", nil];
+        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[HNLoginData shared].mshopid,@"mshopid",@"8",@"pagesize",[NSString stringWithFormat:@"%ld",(self.pages+1)],@"pageindex", nil];
     return dic;
 }
 
@@ -166,6 +182,7 @@
 -(void)didrefreshData:(NSData*)data
 {
     [self.rTableView headerEndRefreshing];
+    [self.rTableView footerEndRefreshing];
     if (data)
     {
         NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -177,10 +194,13 @@
         NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
         NSDictionary *retDic = [retJson objectFromJSONString];
         NSInteger count = [[retDic objectForKey:@"total"] integerValue];
+        if (self.pages==0) {
+            [self.refundList removeAllObjects];
+        }
+        self.lastTotal = count;
         if (0!=count)
         {
             NSArray *dataArr = [retDic objectForKey:@"data"];
-            [self.refundList removeAllObjects];
             for (int i=0; i<count; i++) {
                 HNRefundModel *model = [[HNRefundModel alloc] init];
                 model.status = self.statusMap[[dataArr[i] objectForKey:@"assessorstate"]];
@@ -189,10 +209,6 @@
                 [self.refundList addObject:model];
             }
             [self.rTableView reloadData];
-        }
-        else{
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"We don't get any data.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
-            [alert show];
         }
     }else{
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection Error", nil) message:NSLocalizedString(@"Please check your network.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];

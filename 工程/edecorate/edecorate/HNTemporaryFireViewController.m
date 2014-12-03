@@ -23,6 +23,9 @@
 @property (nonatomic, strong)HNTemporaryData *model;
 @property (nonatomic)HNTemporaryType temporaryType;
 @property (nonatomic, strong)HNTemporaryTableViewCell* temporaryTableViewCell;
+@property (nonatomic)BOOL isfirst;
+@property (nonatomic) NSInteger pages;
+@property (nonatomic) NSInteger lastTotal;
 @end
 
 @implementation HNTemporaryFireViewController
@@ -57,6 +60,8 @@
     __weak typeof(self) wself = self;
     [self.tTableView addHeaderWithCallback:^{
         typeof(self) sself = wself;
+        sself.pages = 0;
+        sself.lastTotal = 8;
         switch (sself.temporaryType) {
             case FIRE:
                 [sself loadFire];
@@ -68,6 +73,11 @@
             default:
                 break;
         }
+    }];
+    
+    [self.tTableView addFooterWithCallback:^{
+        typeof(self) sself = wself;
+        [sself loadMore];
     }];
 
     
@@ -90,8 +100,32 @@
 //        default:
 //            break;
 //    }
+    self.isfirst = TRUE;
     
 }
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    if (self.isfirst) {
+        self.pages = 0;
+        self.lastTotal = 8;
+        switch (self.temporaryType) {
+            case FIRE:
+                [self loadFire];
+                break;
+            case POWER:
+                [self loadPower];
+                break;
+                
+            default:
+                break;
+        }
+        
+        self.isfirst = NO;
+    }
+}
+
 - (void)initNaviButton{
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button setImage:[UIImage imageNamed:@"add.png"] forState:UIControlStateNormal];
@@ -100,10 +134,33 @@
     [button sizeToFit];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
 }
+
 -(void)addButton_Clicked
 {
     HNTemporaryApplyViewController* tac = [[HNTemporaryApplyViewController alloc]initWithType:self.temporaryType];
     [self.navigationController pushViewController:tac animated:YES];
+}
+
+-(void)loadMore
+{
+    if (self.lastTotal!=8) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tTableView footerEndRefreshing];
+        });
+        return ;//已到最后。返回
+    }
+    self.pages ++;
+    switch (self.temporaryType) {
+        case FIRE:
+            [self loadFire];
+            break;
+        case POWER:
+            [self loadPower];
+            break;
+            
+        default:
+            break;
+    }
 }
 
 -(void)loadFire
@@ -120,11 +177,12 @@
 
         [self performSelectorOnMainThread:@selector(didLoadFire:) withObject:data waitUntilDone:YES];
     }];
-
 }
+
 -(void)didLoadFire:(NSData *)data
 {
     [self.tTableView headerEndRefreshing];
+    [self.tTableView footerEndRefreshing];
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     if (data)
     {
@@ -137,15 +195,15 @@
         NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
         NSLog(@"%@",retJson);
         NSDictionary* dic = [retJson objectFromJSONString];
-        [self.model updateData:dic];
         NSLog(@"%@",self.model.error);
-        if (self.model.total.intValue){//之后需要替换成status
-            [self.tTableView reloadData];
+        if (self.pages==0) {
+            [self.model.modelList removeAllObjects];
         }
-        else
-        {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Loading Fail", nil) message:NSLocalizedString(@"Please try again", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
-            [alert show];
+        [self.model updateData:dic];
+        self.lastTotal = self.model.total.intValue;
+        if (self.model.total.intValue){//之后需要替换成status
+            
+            [self.tTableView reloadData];
         }
     }
     else{
@@ -180,6 +238,7 @@
 -(void)didLoadPower:(NSData *)data
 {
     [self.tTableView headerEndRefreshing];
+    [self.tTableView footerEndRefreshing];
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     if (data)
     {
@@ -192,14 +251,13 @@
         NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
         NSLog(@"%@",retJson);
         NSDictionary* dic = [retJson objectFromJSONString];
+        if (self.pages==0) {
+            [self.model.modelList removeAllObjects];
+        }
         [self.model updateData:dic];
+        self.lastTotal = self.model.total.intValue;
         if (self.model.total.intValue){//之后需要替换成status
             [self.tTableView reloadData];
-        }
-        else
-        {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Loading Fail", nil) message:NSLocalizedString(@"Please try again", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
-            [alert show];
         }
     }
     else{
@@ -209,7 +267,7 @@
 }
 
 - (NSDictionary *)encodeWithTemporaryModel:(NSString *)shopid{
-    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:shopid,@"mshopid", nil];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:shopid,@"mshopid",@"8",@"pagesize",[NSString stringWithFormat:@"%ld",(self.pages+1)],@"pageindex", nil];
     return dic;
 }
 
@@ -225,22 +283,8 @@
     return @"";
 }
 
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    
-    switch (self.temporaryType) {
-        case FIRE:
-            [self loadFire];
-            break;
-        case POWER:
-            [self loadPower];
-            break;
-            
-        default:
-            break;
-    }
-    
-}
+
+
 #pragma mark - tableView Delegate & DataSource
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 75.0;

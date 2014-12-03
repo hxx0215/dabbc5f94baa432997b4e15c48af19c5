@@ -192,12 +192,18 @@
 
 @implementation HNTemporaryData
 
+-(id)init
+{
+    self = [super init];
+    self.modelList = [[NSMutableArray alloc] init];
+    return self;
+}
 -(BOOL)updateData:(NSDictionary *)dic{
     if (!dic)
         return NO;
     //[self setValue:[dic objectForKey:@"verification"] forKey:@"verification"];
     [self setValue:[dic objectForKey:@"total"] forKey:@"total"];
-    self.modelList = [[NSMutableArray alloc] init];
+    
     NSArray* array = [dic objectForKey:@"data"];
     for (int i = 0; i<self.total.intValue; i++) {
         NSDictionary *dicData = [array objectAtIndex:i];

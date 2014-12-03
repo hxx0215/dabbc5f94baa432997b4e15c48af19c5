@@ -23,7 +23,9 @@
 @property (nonatomic, strong)UITableView *dTableView;
 @property (nonatomic, strong)NSMutableArray *deliverList;
 
-
+@property (nonatomic)BOOL isfirst;
+@property (nonatomic) NSInteger pages;
+@property (nonatomic) NSInteger lastTotal;
 @end
 
 @implementation HNDeliverViewController
@@ -42,12 +44,22 @@
     __weak typeof(self) wself = self;
     [self.dTableView addHeaderWithCallback:^{
         typeof(self) sself = wself;
+        sself.pages = 0;
+        sself.lastTotal = 8;
         [sself loadMyData];
     }];
+    [self.dTableView addFooterWithCallback:^{
+        typeof(self) sself = wself;
+        [sself loadMore];
+    }];
+    self.isfirst = YES;
+    self.pages = 0;
+    self.lastTotal = 8;
     
     self.navigationItem.title = NSLocalizedString(@"Delivery&Installation", nil);
     
 
+    self.isfirst = YES;
     [self initNaviButton];
     //[self loadMyData];
 }
@@ -67,6 +79,24 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    if (self.isfirst) {
+        self.pages = 0;
+        self.lastTotal = 8;
+        [self loadMyData];
+        self.isfirst = NO;
+    }
+    
+}
+
+-(void)loadMore
+{
+    if (self.lastTotal!=8) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.dTableView footerEndRefreshing];
+        });
+        return ;//已到最后。返回
+    }
+    self.pages ++;
     [self loadMyData];
 }
 
@@ -76,7 +106,7 @@
     hud.labelText = NSLocalizedString(@"Loading", nil);
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     //HNLoginModel *model = [[HNLoginModel alloc] init];
-    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[HNLoginData shared].mshopid,@"mshopid", nil];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[HNLoginData shared].mshopid,@"mshopid",@"8",@"pagesize",[NSString stringWithFormat:@"%ld",(self.pages+1)],@"pageindex", nil];
     NSString *jsonStr = [dic JSONString];
     request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"get.install.list" Params:jsonStr]];
     NSString *contentType = @"text/html";
@@ -95,10 +125,10 @@
 -(void)didLoadMyData:(NSData*)data
 {
     [self.dTableView headerEndRefreshing];
+    [self.dTableView footerEndRefreshing];
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     if (data)
     {
-        [self.deliverList removeAllObjects];
         NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         if (!retStr){
             [self showBadServer];
@@ -108,6 +138,10 @@
         NSLog(@"%@",retJson);
         NSDictionary* dic = [retJson objectFromJSONString];
         NSNumber* total = [dic objectForKey:@"total"];
+        if (self.pages==0) {
+            [self.deliverList removeAllObjects];
+        }
+        self.lastTotal = total.intValue;
         
         if (total.intValue){//之后需要替换成status
             NSArray* array = [dic objectForKey:@"data"];
@@ -118,11 +152,6 @@
                 [self.deliverList addObject:tModel];
             }
             [self.dTableView reloadData];
-        }
-        else
-        {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login Fail", nil) message:NSLocalizedString(@"Please input correct username and password", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
-            [alert show];
         }
     }
     else{

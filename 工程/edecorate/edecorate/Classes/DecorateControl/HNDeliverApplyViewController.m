@@ -21,8 +21,9 @@
 #import "HNPaySupport.h"
 #import "HNEditTableViewCell.h"
 #import "HNImageUploadTableViewCell.h"
+#import "HNPicTableViewCell.h"
 
-@interface HNDeliverApplyViewController ()<UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate,HNDecorateChoiceViewDelegate,UITextFieldDelegate,UIImagePickerControllerDelegate>
+@interface HNDeliverApplyViewController ()<UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate,HNDecorateChoiceViewDelegate,UITextFieldDelegate,UIImagePickerControllerDelegate,HNPicTableViewCellDelegate,UINavigationControllerDelegate>
 @property bool bo;
 @property (strong, nonatomic) HNDecorateChoiceView *choiceDecorateView;
 
@@ -117,6 +118,21 @@
     [purchase addTarget:self action:@selector(commit:) forControlEvents:UIControlEventTouchUpInside];
     [self.commitView addSubview:purchase];
     [self movewButton];
+}
+
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [self.commitView removeFromSuperview];
+    [super viewDidDisappear:animated];
+}
+
+- (void)updataImage:(NSString*)images heightChange:(BOOL)change
+{
+    self.model.drivingLImg = images;
+    if (change) {
+        [self.tableView reloadData];
+        [self movewButton];
+    }
 }
 
 -(void)movewButton
@@ -451,7 +467,12 @@
     if (indexPath.section == 1)
     {
         if(indexPath.row == 2)
-            return 65;
+        {
+            if (self.model.drivingLImg) {
+                return 97;
+            }
+            return 40;
+        }
         return 30;
     }
     else if (indexPath.section == 2)
@@ -475,20 +496,15 @@
     {
         if (indexPath.row==2) {
             static NSString *identy = @"HNImageUploadTableViewCell";
-            HNImageUploadTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
+            HNPicTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identy];
             if (!cell)
             {
-                cell = [[HNImageUploadTableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:identy];
-                [cell reset:self.model.drivingLImg];
+                cell = [[HNPicTableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:identy];
             }
-            [cell.photo addTarget:self action:@selector(imageUploadClick:) forControlEvents:UIControlEventTouchUpInside];
-            cell.photo.tag = 20;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.title.text = @"行驶驾照：";
-            if (self.model.imagedrivingLImg) {
-                [cell.photo setImage:self.model.imagedrivingLImg forState:UIControlStateNormal];
-            }
-            
+            cell.name.text = @"行驶驾照：";
+            cell.delegate = self;
+            [cell setImages:self.model.drivingLImg];
             return cell;
         }
 

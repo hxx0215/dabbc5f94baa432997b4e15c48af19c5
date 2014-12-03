@@ -19,7 +19,7 @@
 }
 
 -(void)loadingDecorateData:(NSString *)mshopid block:(void (^)(NSURLResponse *, NSData *, NSError *))loadComplete{
-    [self loadingDecorateData:mshopid pageIndex:-1 pageSize:-1 block:loadComplete];
+    [self loadingDecorateData:mshopid pageIndex:0 pageSize:10000 block:loadComplete];
 }
 
 -(void)loadingDecorateData:(NSString *)mshopid pageIndex:(NSInteger)pageIndex pageSize:(NSInteger)pageSize block:(void (^)(NSURLResponse *response, NSData *data, NSError *connectionError))loadComplete{
