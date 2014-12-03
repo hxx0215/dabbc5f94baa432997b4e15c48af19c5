@@ -19,6 +19,10 @@
 @interface HNMessageViewController ()<UITableViewDelegate , UITableViewDataSource>
 @property (nonatomic, strong)UITableView *mTableView;
 @property (nonatomic, strong)NSMutableArray *mList;
+
+@property (nonatomic)BOOL isfirst;
+@property (nonatomic) NSInteger pages;
+@property (nonatomic) NSInteger lastTotal;
 @end
 
 @implementation HNMessageViewController
@@ -32,17 +36,6 @@
     self.title = NSLocalizedString(@"Message", nil);
     [self initTableView];
     
-//    self.mList = [[NSMutableArray alloc] init];
-//    HNMessageModel *m1= [[HNMessageModel alloc] init];
-//    m1.title = @"装修违规纠正通知";
-//    m1.messgae = @"  您在更美（毫州）华佗国际中药城1栋18号铺进行装..";
-//    m1.date = @"2014/9/17 14:30";
-//    [self.mList addObject:m1];
-//    HNMessageModel *m2= [[HNMessageModel alloc] init];
-//    m2.title = @"处罚单";
-//    m2.messgae = @"  您好！非常感谢阁下一直以来对我公司工作的支持和配合..";
-//    m2.date = @"2014/9/18 10:30";
-//    [self.mList addObject:m2];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -61,9 +54,17 @@
     __weak typeof(self) wself = self;
     [self.mTableView addHeaderWithCallback:^{
         typeof(self) sself = wself;
+        sself.pages = 0;
+        sself.lastTotal = 8;
         [sself loadMyData];
     }];
-
+    [self.mTableView addFooterWithCallback:^{
+        typeof(self) sself = wself;
+        [sself loadMore];
+    }];
+    self.isfirst = YES;
+    self.pages = 0;
+    self.lastTotal = 8;
     
     UINib *nib = [UINib nibWithNibName:NSStringFromClass([HNMessageTableViewCell class]) bundle:nil];
     [self.mTableView registerNib:nib forCellReuseIdentifier:@"messageCell"];
@@ -74,6 +75,23 @@
     [super viewWillAppear:animated];
     self.mTableView.frame = self.view.bounds;
     self.mTableView.height = self.view.bounds.size.height-self.navigationController.navigationBar.height;
+    if (self.isfirst) {
+        self.pages = 0;
+        self.lastTotal = 8;
+        [self loadMyData];
+        self.isfirst = NO;
+    }
+}
+
+-(void)loadMore
+{
+    if (self.lastTotal!=8) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.mTableView footerEndRefreshing];
+        });
+        return ;//已到最后。返回
+    }
+    self.pages ++;
     [self loadMyData];
 }
 
@@ -84,7 +102,7 @@
     hud.labelText = NSLocalizedString(@"Loading", nil);
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     //HNLoginModel *model = [[HNLoginModel alloc] init];
-    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[HNLoginData shared].mshopid,@"mshopid", nil];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[HNLoginData shared].mshopid,@"mshopid",@"8",@"pagesize",[NSString stringWithFormat:@"%ld",(self.pages+1)],@"pageindex", nil];
     NSLog(@"%@",[HNLoginData shared].mshopid);
     NSString *jsonStr = [dic JSONString];
     request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"get.shop.message" Params:jsonStr]];
@@ -103,11 +121,11 @@
 - (void)didloadMyData:(NSData *)data
 {
     [self.mTableView headerEndRefreshing];
+    [self.mTableView footerEndRefreshing];
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     
     if (data)
     {
-        [self.mList removeAllObjects];
         NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         if (!retStr){
             [self showBadServer];
@@ -117,6 +135,11 @@
         NSLog(@"%@",retJson);
         NSDictionary* dic = [retJson objectFromJSONString];
         NSNumber* total = [dic objectForKey:@"total"];
+        
+        if (self.pages==0) {
+            [self.mList removeAllObjects];
+        }
+        self.lastTotal = total.intValue;
         
         if (total.intValue){//之后需要替换成status
             NSArray* array = [dic objectForKey:@"data"];
@@ -128,11 +151,6 @@
                 
             }
             [self.mTableView reloadData];
-        }
-        else
-        {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login Fail", nil) message:NSLocalizedString(@"Please input correct username and password", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
-            [alert show];
         }
     }
     else{
