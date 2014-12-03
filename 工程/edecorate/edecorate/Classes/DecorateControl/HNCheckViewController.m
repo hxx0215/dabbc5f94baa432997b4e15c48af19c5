@@ -10,6 +10,8 @@
 #import "HNCheckDetailTableViewCell.h"
 #import "MBProgressHUD.h"
 #import "HNBrowseImageViewController.h"
+#import "HNConsturctPicTableViewCell.h"
+
 @interface HNCheckViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong)UITableView *tableView;
 @property (nonatomic, strong)NSMutableArray *tableTitle;
@@ -18,6 +20,10 @@
 @property (nonatomic, strong)NSArray *ownTitle;
 @property (nonatomic, strong)NSMutableArray *headTitle;
 @property (nonatomic, strong)NSMutableDictionary *imgCache;
+
+@property (nonatomic, strong)NSMutableDictionary *imageSet;
+@property (nonatomic, strong)NSMutableDictionary *curImageIndex;
+@property (nonatomic, strong)NSMutableDictionary *imageUrl;
 @end
 
 @implementation HNCheckViewController
@@ -27,6 +33,7 @@
 static NSString *localeString(NSString *local,NSString *append){
     return [NSString stringWithFormat:@"%@%@",NSLocalizedString(local, nil),append];
 }
+static NSString *kCheckDetailCell = @"kCheckDetailCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -36,6 +43,9 @@ static NSString *localeString(NSString *local,NSString *append){
     self.tableView.dataSource = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
+    UINib *nib = [UINib nibWithNibName:NSStringFromClass([HNConsturctPicTableViewCell class]) bundle:nil];
+    [self.tableView registerNib:nib forCellReuseIdentifier:kCheckDetailCell];
+    
     NSDictionary *dic = @{@"-1": NSLocalizedString(@"未通过", nil),@"1": NSLocalizedString(@"通过", nil),@"0" : NSLocalizedString(@"审核中", nil)};
     self.checkInfo = @[localeString(@"申请验收时间",self.declaretime),localeString(@"施工方备注 :", self.shopreason),localeString(@"施工方附件", @"")];
     self.managerTitle = @[localeString(@"物业审核状态 :", dic[self.manageAssessor]),localeString(@"物业审核备注 :", self.manageckreason),localeString(@"物业审核时间 :", self.managecktime),localeString(@"物业审核附件",@"")];
@@ -53,10 +63,18 @@ static NSString *localeString(NSString *local,NSString *append){
         [self.tableTitle addObject:[obj objectForKey:@"Bodyitem"]];
     }];
     self.imgCache = [[NSMutableDictionary alloc] init];
+    self.imageSet = [NSMutableDictionary new];
+    self.imageUrl = [NSMutableDictionary new];
+    self.curImageIndex = [NSMutableDictionary new];
+    [self loadImages];
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.tableView.frame = self.view.bounds;
+}
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [self.tableView reloadData];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -93,6 +111,8 @@ static NSString *localeString(NSString *local,NSString *append){
     return view;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if ([self shouldShowCom:indexPath])
+        return 115;
     return 60;
 }
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -158,56 +178,93 @@ static NSString *localeString(NSString *local,NSString *append){
     cell.contentLabel.hidden = YES;
     if (indexPath.section<4 && indexPath.row == [self.tableTitle[indexPath.section] count] - 1){
         cell.photo.hidden = NO;
-        UIImage *img = [self.imgCache objectForKey:indexPath];
-        switch (indexPath.section) {
-            case 1:
-            {
-                if (!img)
-                {
-                    img = [self imageWithLink:self.shopaccessory];
-                    [self.imgCache setObject:img forKey:indexPath];
-                }
-                [cell.photo setImage:img forState:UIControlStateNormal];
-            }
-                break;
-            case 2:{
-                if (!img){
-                    img = [self imageWithLink:self.manageraccessory];
-                    [self.imgCache setObject:img forKey:indexPath];
-                }
-                [cell.photo setImage:img forState:UIControlStateNormal];
-            }
-                break;
-            case 3:{
-                if (!img){
-                    img = [self imageWithLink:self.owneraccessory];
-                    [self.imgCache setObject:img forKey:indexPath];
-                }
-                [cell.photo setImage:img forState:UIControlStateNormal];
-            }
-            default:
-                break;
-        }
+//        UIImage *img = [self.imgCache objectForKey:indexPath];
+//        switch (indexPath.section) {
+//            case 1:
+//            {
+//                if (!img)
+//                {
+//                    img = [self imageWithLink:self.shopaccessory];
+//                    [self.imgCache setObject:img forKey:indexPath];
+//                }
+//                [cell.photo setImage:img forState:UIControlStateNormal];
+//            }
+//                break;
+//            case 2:{
+//                if (!img){
+//                    img = [self imageWithLink:self.manageraccessory];
+//                    [self.imgCache setObject:img forKey:indexPath];
+//                }
+//                [cell.photo setImage:img forState:UIControlStateNormal];
+//            }
+//                break;
+//            case 3:{
+//                if (!img){
+//                    img = [self imageWithLink:self.owneraccessory];
+//                    [self.imgCache setObject:img forKey:indexPath];
+//                }
+//                [cell.photo setImage:img forState:UIControlStateNormal];
+//            }
+//            default:
+//                break;
+//        }
     }
     if (indexPath.section >= 4)
     {
         if (2 ==[self.tableTitle[indexPath.section][indexPath.row][@"type"] integerValue]){
+            
             cell.photo.hidden = NO;
-            UIImage *img = [self.imgCache objectForKey:indexPath];
-            if (!img){
-                img = [self imageWithLink:self.tableTitle[indexPath.section][indexPath.row][@"img"]];
-                [self.imgCache setObject:img forKey:indexPath];
-            }
-            [cell.photo setImage:img forState:UIControlStateNormal];
+//            UIImage *img = [self.imgCache objectForKey:indexPath];
+//            if (!img){
+//                img = [self imageWithLink:self.tableTitle[indexPath.section][indexPath.row][@"img"]];
+//                [self.imgCache setObject:img forKey:indexPath];
+//            }
+//            [cell.photo setImage:img forState:UIControlStateNormal];
         }
         else{
             cell.contentLabel.text = self.tableTitle[indexPath.section][indexPath.row][@"img"];
             cell.contentLabel.hidden = NO;
         }
     }
+    if (!cell.photo.hidden){
+        HNConsturctPicTableViewCell *tCell = [tableView dequeueReusableCellWithIdentifier:kCheckDetailCell];
+        tCell.contentView.tag = indexPath.section * 100 + indexPath.row;
+        [tCell.leftImg removeTarget:self action:@selector(leftImage:) forControlEvents:UIControlEventTouchUpInside];
+        [tCell.leftImg addTarget:self action:@selector(leftImage:) forControlEvents:UIControlEventTouchUpInside];
+        [tCell.rightImg removeTarget:self action:@selector(rightImage:) forControlEvents:UIControlEventTouchUpInside];
+        [tCell.rightImg addTarget:self action:@selector(rightImage:) forControlEvents:UIControlEventTouchUpInside];
+        tCell.delImage.hidden = YES;
+        tCell.uploadImage.hidden = YES;
+        tCell.titleText.text = cell.nameLabel.text;
+        [self configCell:tCell showOther:[self shouldShowCom:indexPath]];
+        [tCell.titleText sizeToFit];
+        if (self.imageSet[indexPath]!=[NSNull null]){
+            NSArray *imageArr = self.imageSet[indexPath];
+            if (imageArr && [imageArr count]>0)
+            {
+                NSInteger index = [self.curImageIndex[indexPath] integerValue];
+                tCell.pic.image = imageArr[index];
+            }
+        }
+        return tCell;
+    }
     [cell.nameLabel sizeToFit];
     [cell.contentLabel sizeToFit];
     return cell;
+}
+- (void)configCell:(HNConsturctPicTableViewCell *)cell showOther:(BOOL)show{
+    cell.leftImg.hidden = !show;
+    cell.rightImg.hidden = !show;
+    cell.pic.hidden = !show;
+}
+- (BOOL)shouldShowCom:(NSIndexPath *)indexPath{
+    NSIndexPath *idp = [NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section];
+    if (self.imageSet[idp]!=[NSNull null]){
+        NSArray *imageArr = self.imageSet[idp];
+        if (imageArr && [imageArr count]>0)
+            return YES;
+    }
+    return NO;
 }
 - (UIImage *)imageWithLink:(NSString *)link{
     UIImage *image =[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[link addPort]]]];
@@ -217,11 +274,61 @@ static NSString *localeString(NSString *local,NSString *append){
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
 }
-- (void)showPic:(UIButton *)sender{
-    HNBrowseImageViewController *vc = [[HNBrowseImageViewController alloc] init];
-    vc.image = sender.currentImage;
-    [self presentViewController:vc animated:NO completion:^{
-        
-    }];
+- (void)loadImages{
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:1];
+    [self.imageUrl setObject:self.shopaccessory forKey:indexPath];
+    [self.imageSet setObject:[self imagesFromUrl:self.shopaccessory] forKey:indexPath];
+    [self.curImageIndex setObject:@(0) forKey:indexPath];
+    indexPath = [NSIndexPath indexPathForRow:3 inSection:2];
+    [self.imageUrl setObject:self.manageraccessory forKey:indexPath];
+    [self.imageSet setObject:[self imagesFromUrl:self.manageraccessory] forKey:indexPath];
+    [self.curImageIndex setObject:@(0) forKey:indexPath];
+    indexPath = [NSIndexPath indexPathForRow:3 inSection:3];
+    [self.imageUrl setObject:self.owneraccessory forKey:indexPath];
+    [self.imageSet setObject:[self imagesFromUrl:self.owneraccessory] forKey:indexPath];
+    [self.curImageIndex setObject:@(0) forKey:indexPath];
+    for (int i=4;i<[self.tableTitle count];i++)
+        for (int j=0;j<[self.tableTitle[i] count];j++)
+            if ([self.tableTitle[i][j][@"type"] integerValue] == 2){
+                indexPath = [NSIndexPath indexPathForRow:j inSection:i];
+                NSString *url = self.tableTitle[indexPath.section][indexPath.row][@"img"];
+                [self.imageUrl setObject:url forKey:indexPath];
+                [self.imageSet setObject:[self imagesFromUrl:url] forKey:indexPath];
+                [self.curImageIndex setObject:@(0) forKey:indexPath];
+            }
+}
+- (NSObject *)imagesFromUrl:(NSString *)urls{
+    if ([urls isEqualToString:@""])
+        return [NSNull null];
+    NSArray *list = [urls componentsSeparatedByString:@","];
+    if ([list count]<1)
+        return [NSNull null];
+    NSMutableArray *images = [NSMutableArray new];
+    for (NSString *url in list)
+    {
+        [images addObject:[self imageWithLink:url]];
+    }
+    return images;
+}
+- (void)leftImage:(UIButton *)sender{
+    NSInteger section = [sender superview].tag / 100;
+    NSInteger row = [sender superview].tag % 100;
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:section];
+    NSInteger curIndex = [self.curImageIndex[indexPath] integerValue];
+    curIndex -- ;
+    if (curIndex <0) curIndex = 0;
+    self.curImageIndex[indexPath] = @(curIndex);
+    [self.tableView reloadData];
+}
+- (void)rightImage:(UIButton *)sender{
+    NSInteger section = [sender superview].tag / 100;
+    NSInteger row = [sender superview].tag % 100;
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:section];
+    NSInteger curIndex = [self.curImageIndex[indexPath] integerValue];
+    NSInteger maxIndex = [self.imageSet[indexPath] count];
+    curIndex ++;
+    if (curIndex > maxIndex - 1) curIndex = maxIndex - 1;
+    self.curImageIndex[indexPath] = @(curIndex);
+    [self.tableView reloadData];
 }
 @end
