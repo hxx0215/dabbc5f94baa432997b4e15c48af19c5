@@ -57,7 +57,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
-    self.title = NSLocalizedString(@"Decorate Construction", nil);
+    self.title = NSLocalizedString(@"装修报建", nil);
     self.rTableView = [[UITableView alloc] initWithFrame:self.view.bounds];
     self.rTableView.delegate = self;
     self.rTableView.dataSource = self;

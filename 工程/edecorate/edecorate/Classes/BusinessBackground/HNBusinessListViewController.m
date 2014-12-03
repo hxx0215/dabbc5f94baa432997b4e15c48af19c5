@@ -153,6 +153,7 @@ static NSString *reuseId = @"businessCell";
             [view.categoryButton addTarget:self action:@selector(goodsCategory:) forControlEvents:UIControlEventTouchUpInside];
             view.search.delegate = self;
             self.headerView = view;
+            self.title = NSLocalizedString(@"我的商品", nil);
         }
             break;
         case kReturnGoods:
@@ -161,6 +162,7 @@ static NSString *reuseId = @"businessCell";
             [view.statusButton addTarget:self action:@selector(returnCategory:) forControlEvents:UIControlEventTouchUpInside];
             self.headerView = view;
             view.search.delegate = self;
+            self.title = NSLocalizedString(@"退换货管理", nil)
             break;
         }
 
@@ -168,6 +170,7 @@ static NSString *reuseId = @"businessCell";
         {
 //            self.headerView=[[HNCommentsHeaderView alloc] initWithFrame:CGRectMake(0,0, self.view.width, 74)];
             self.headerView = [UIView new];
+            self.title = NSLocalizedString(@"评价留言", nil);
         }
             break;
         case kOrder:
@@ -175,6 +178,7 @@ static NSString *reuseId = @"businessCell";
             HNOrderHeaderView *view = [[HNOrderHeaderView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, 44)];
             [view.filter addTarget:self action:@selector(orderCategory:) forControlEvents:UIControlEventTouchUpInside];
             view.search.delegate = self;
+            self.title = NSLocalizedString(@"订单管理", nil);
             self.headerView = view;
         }
         default:
