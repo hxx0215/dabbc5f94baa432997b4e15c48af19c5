@@ -16,6 +16,7 @@
 #import "HNGetAuthViewController.h"
 #import "HNNewReportViewController.h"
 #import "HNPaySupport.h"
+#import "HNConsturctPicTableViewCell.h"
 
 @interface HNConstructViewController ()<UITableViewDelegate,UITableViewDataSource,HNDecoratePayModelDelegate>
 @property (nonatomic, strong)UITableView *tableView;
@@ -27,9 +28,14 @@
 @property (nonatomic, strong)NSMutableDictionary *picDict;
 @property (nonatomic, strong)NSString *buttonName;
 @property (nonatomic, strong)NSString *priceType;
+
+@property (nonatomic, strong)NSMutableDictionary *imageSet;
+@property (nonatomic, strong)NSMutableDictionary *curImageIndex;
+@property (nonatomic, strong)UIView *buttonView;
 @end
 
 static NSString *kConstructPaymentCell = @"constPaymentCell";
+static NSString *kPicCell = @"picCell";
 @implementation HNConstructViewController
 - (instancetype)init{
     self = [super init];
@@ -57,11 +63,14 @@ static NSString *kConstructPaymentCell = @"constPaymentCell";
 
     UINib *nib = [UINib nibWithNibName:NSStringFromClass([HNConstructPaymentTableViewCell class]) bundle:nil];
     [self.tableView registerNib:nib forCellReuseIdentifier:kConstructPaymentCell];
+    nib = [UINib nibWithNibName:NSStringFromClass([HNConsturctPicTableViewCell class]) bundle:nil];
+    [self.tableView registerNib:nib forCellReuseIdentifier:kPicCell];
     
     [self initDetailData];
     [self initPicDict];
     self.pernalDetail = @[self.roomNo,self.ownerName,self.ownerMobile];
     [self initButtonName];
+    [self initButtonView];
 }
 - (void)initButtonName{
     if ([self.assessorstate isEqualToString:@"0"]){
@@ -94,26 +103,48 @@ static NSString *kConstructPaymentCell = @"constPaymentCell";
 }
 - (void)initPicDict{
     self.picDict = [[NSMutableDictionary alloc] init];
+    self.imageSet = [NSMutableDictionary new];
+    self.curImageIndex = [NSMutableDictionary new];
     NSString *offset = @"3";
     if (self.constructType < 2){
-        [self.picDict setObject:[self imageWithLink:self.shopInfo[@"businessLicense"]] forKey:@"1"];
-        [self.picDict setObject:[self imageWithLink:self.shopInfo[@"TaxCertificate"]] forKey:@"2"];
-        [self.picDict setObject:[self imageWithLink:self.shopInfo[@"OrganizationCode"]] forKey:@"3"];
-        [self.picDict setObject:[self imageWithLink:self.shopInfo[@"Certificate"]] forKey:@"4"];
-        [self.picDict setObject:[self imageWithLink:self.shopInfo[@"Electrician"]] forKey:@"5"];
-        [self.picDict setObject:[self imageWithLink:self.shopInfo[@"powerAttorney"]] forKey:@"6"];
-        [self.picDict setObject:[self imageWithLink:self.shopInfo[@"gccIDCard"]] forKey:@"7"];
-        [self.picDict setObject:[self imageWithLink:self.shopInfo[@"compactIMG"]] forKey:@"8"];
-        [self.picDict setObject:[self imageWithLink:self.shopInfo[@"AttorneyIDcard"]] forKey:@"9"];
+        [self.picDict setObject:self.shopInfo[@"businessLicense"] forKey:@"1"];
+        [self.picDict setObject:self.shopInfo[@"TaxCertificate"] forKey:@"2"];
+        [self.picDict setObject:self.shopInfo[@"OrganizationCode"] forKey:@"3"];
+        [self.picDict setObject:self.shopInfo[@"Certificate"] forKey:@"4"];
+        [self.picDict setObject:self.shopInfo[@"Electrician"] forKey:@"5"];
+        [self.picDict setObject:self.shopInfo[@"powerAttorney"] forKey:@"6"];
+        [self.picDict setObject:self.shopInfo[@"gccIDCard"] forKey:@"7"];
+        [self.picDict setObject:self.shopInfo[@"compactIMG"] forKey:@"8"];
+        [self.picDict setObject:self.shopInfo[@"AttorneyIDcard"] forKey:@"9"];
+        [self.imageSet setObject:[self imagesFromUrl:self.shopInfo[@"businessLicense"]] forKey:@"1"];
+        [self.imageSet setObject:[self imagesFromUrl:self.shopInfo[@"TaxCertificate"]] forKey:@"2"];
+        [self.imageSet setObject:[self imagesFromUrl:self.shopInfo[@"OrganizationCode"]] forKey:@"3"];
+        [self.imageSet setObject:[self imagesFromUrl:self.shopInfo[@"Certificate"]] forKey:@"4"];
+        [self.imageSet setObject:[self imagesFromUrl:self.shopInfo[@"Electrician"]] forKey:@"5"];
+        [self.imageSet setObject:[self imagesFromUrl:self.shopInfo[@"powerAttorney"]] forKey:@"6"];
+        [self.imageSet setObject:[self imagesFromUrl:self.shopInfo[@"gccIDCard"]] forKey:@"7"];
+        [self.imageSet setObject:[self imagesFromUrl:self.shopInfo[@"compactIMG"]] forKey:@"8"];
+        [self.imageSet setObject:[self imagesFromUrl:self.shopInfo[@"AttorneyIDcard"]] forKey:@"9"];
         offset = @"13";
     }
     NSInteger flag = [offset integerValue];
-    [self.picDict setObject:[self imageWithLink:self.chart[kOriginalSChart]] forKey:[NSString stringWithFormat:@"%d",++flag]];
-    [self.picDict setObject:[self imageWithLink:self.chart[kfloorplan]] forKey:[NSString stringWithFormat:@"%d",++flag]];
-    [self.picDict setObject:[self imageWithLink:self.chart[kwallRemould]] forKey:[NSString stringWithFormat:@"%d",++flag]];
-    [self.picDict setObject:[self imageWithLink:self.chart[kceilingPlan]] forKey:[NSString stringWithFormat:@"%d",++flag]];
-    [self.picDict setObject:[self imageWithLink:self.chart[kWaterwayPlan]] forKey:[NSString stringWithFormat:@"%d",++flag]];
-    [self.picDict setObject:[self imageWithLink:self.chart[kBlockDiagram]] forKey:[NSString stringWithFormat:@"%d",++flag]];
+    [self.picDict setObject:self.chart[kOriginalSChart] forKey:[NSString stringWithFormat:@"%d",++flag]];
+    [self.picDict setObject:self.chart[kfloorplan] forKey:[NSString stringWithFormat:@"%d",++flag]];
+    [self.picDict setObject:self.chart[kwallRemould] forKey:[NSString stringWithFormat:@"%d",++flag]];
+    [self.picDict setObject:self.chart[kceilingPlan] forKey:[NSString stringWithFormat:@"%d",++flag]];
+    [self.picDict setObject:self.chart[kWaterwayPlan] forKey:[NSString stringWithFormat:@"%d",++flag]];
+    [self.picDict setObject:self.chart[kBlockDiagram] forKey:[NSString stringWithFormat:@"%d",++flag]];
+    flag = [offset integerValue];
+    [self.imageSet setObject:[self imagesFromUrl:self.chart[kOriginalSChart]] forKey:[NSString stringWithFormat:@"%d",++flag]];
+    [self.imageSet setObject:[self imagesFromUrl:self.chart[kfloorplan]] forKey:[NSString stringWithFormat:@"%d",++flag]];
+    [self.imageSet setObject:[self imagesFromUrl:self.chart[kwallRemould]] forKey:[NSString stringWithFormat:@"%d",++flag]];
+    [self.imageSet setObject:[self imagesFromUrl:self.chart[kceilingPlan]] forKey:[NSString stringWithFormat:@"%d",++flag]];
+    [self.imageSet setObject:[self imagesFromUrl:self.chart[kWaterwayPlan]] forKey:[NSString stringWithFormat:@"%d",++flag]];
+    [self.imageSet setObject:[self imagesFromUrl:self.chart[kBlockDiagram]] forKey:[NSString stringWithFormat:@"%d",++flag]];
+    for (int i=0;i<flag - 1;i++){
+        NSString *key = [NSString stringWithFormat:@"%d",i];
+        [self.curImageIndex setObject:@(0) forKey:key];
+    }
 }
 - (UIImage *)imageWithLink:(NSString *)link{
     UIImage *image =[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[link addPort]]]];
@@ -124,9 +155,8 @@ static NSString *kConstructPaymentCell = @"constPaymentCell";
     self.tableView.frame = self.view.bounds;
     [self.tableView reloadData];
 }
-- (void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 88)];
+- (void)initButtonView{
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 55)];
     UIButton *purchase = [UIButton buttonWithType:UIButtonTypeCustom];
     purchase.height = 40;
     purchase.width = self.view.width - 36;
@@ -138,21 +168,23 @@ static NSString *kConstructPaymentCell = @"constPaymentCell";
     [purchase setBackgroundColor:[UIColor colorWithRed:245.0/255.0 green:72.0/255.0 blue:0.0 alpha:1.0]];
     [purchase addTarget:self action:@selector(purchase:) forControlEvents:UIControlEventTouchUpInside];
     [view addSubview:purchase];
-    CGSize size = self.tableView.contentSize;
-    view.top = size.height;
-    [self.tableView addSubview:view];
-    size.height += view.height;
-    self.tableView.contentSize = size;
+    self.buttonView = view;
+}
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    if (2 == section)
+        return 0;
     if (0==section)
     {
 //        if (self.constructType < 2)
@@ -169,6 +201,8 @@ static NSString *kConstructPaymentCell = @"constPaymentCell";
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    if (section == 2)
+        return self.buttonView;
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.width, 55)];
     UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(10, 5, tableView.width - 20, 50)];
     contentView.backgroundColor = [UIColor projectGreen];
@@ -193,6 +227,24 @@ static NSString *kConstructPaymentCell = @"constPaymentCell";
     return view;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (0==indexPath.row)
+        return 60;
+    NSUInteger offset = 0;
+    if (self.constructType < 2){
+        offset = [self.companyData count] + 1;
+    }
+    if (offset == indexPath.row)
+        return 60;
+    if (offset < indexPath.row && offset + [self.personalData count] + 1> indexPath.row)
+        return 60;
+    if (indexPath.section == 0)
+    {
+        NSString *key = [NSString stringWithFormat:@"%d",indexPath.row];
+        if (self.imageSet[key] == [NSNull null])
+            return 45;
+        else
+            return 115;
+    }
     return 60;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -201,7 +253,6 @@ static NSString *kConstructPaymentCell = @"constPaymentCell";
     if (!cell)
     {
         cell = [[HNConstructTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identy];
-        [cell.photo addTarget:self action:@selector(showPic:) forControlEvents:UIControlEventTouchUpInside];
     }
     if (0==indexPath.section){
         //图纸及资料
@@ -232,6 +283,33 @@ static NSString *kConstructPaymentCell = @"constPaymentCell";
             cell.photo.hidden = YES;
         }
         if (!cell.photo.hidden){
+            HNConsturctPicTableViewCell *tCell = [tableView dequeueReusableCellWithIdentifier:kPicCell];
+            tCell.titleText.text = cell.title.text;
+            tCell.delImage.hidden = YES;
+            tCell.uploadImage.hidden = YES;
+            NSString *key = [NSString stringWithFormat:@"%d",indexPath.row];
+            if (self.imageSet[key] == [NSNull null])
+            {
+                tCell.leftImg.hidden = YES;
+                tCell.rightImg.hidden = YES;
+                tCell.pic.hidden = YES;
+            }
+            else
+            {
+                tCell.leftImg.hidden = NO;
+                tCell.rightImg.hidden = NO;
+                tCell.pic.hidden = NO;
+                NSArray *arr = self.imageSet[key];
+                NSInteger index = [self.curImageIndex[key] integerValue];
+                tCell.pic.image = arr[index];
+            }
+            tCell.contentView.tag = indexPath.section * 100 + indexPath.row;
+            [tCell.leftImg removeTarget:self action:@selector(leftImage:) forControlEvents:UIControlEventTouchUpInside];
+            [tCell.rightImg removeTarget:self action:@selector(rightImage:) forControlEvents:UIControlEventTouchUpInside];
+            [tCell.leftImg addTarget:self action:@selector(leftImage:) forControlEvents:UIControlEventTouchUpInside];
+            [tCell.rightImg addTarget:self action:@selector(rightImage:) forControlEvents:UIControlEventTouchUpInside];
+            [tCell.titleText sizeToFit];
+            return tCell;
             [cell.photo setImage:[self.picDict objectForKey:[NSString stringWithFormat:@"%d",indexPath.row]] forState:UIControlStateNormal];
             [cell.photo setImage:[self.picDict objectForKey:[NSString stringWithFormat:@"%d",indexPath.row]] forState:UIControlStateHighlighted];
         }
@@ -245,6 +323,23 @@ static NSString *kConstructPaymentCell = @"constPaymentCell";
     }
     
     return cell;
+}
+- (void)leftImage:(UIButton *)sender{
+    NSString *key = [NSString stringWithFormat:@"%d",[sender superview].tag % 100];
+    NSInteger index = [self.curImageIndex[key] integerValue];
+    index -- ;
+    if (index<0)index = 0;
+    [self.curImageIndex setObject:[NSString stringWithFormat:@"%d",index] forKey:key];
+    [self.tableView reloadData];
+}
+- (void)rightImage:(UIButton *)sender{
+    NSString *key = [NSString stringWithFormat:@"%d",[sender superview].tag % 100];
+    NSInteger index = [self.curImageIndex[key] integerValue];
+    index ++;
+    if (index>[self.imageSet[key] count] -1)
+        index = [self.imageSet[key] count] -1;
+    [self.curImageIndex setObject:[NSString stringWithFormat:@"%d",index] forKey:key];
+    [self.tableView reloadData];
 }
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -432,12 +527,18 @@ static NSString *kConstructPaymentCell = @"constPaymentCell";
         [alert show];
     });
 }
-- (void)showPic:(UIButton *)sender{
-    HNBrowseImageViewController *vc = [[HNBrowseImageViewController alloc] init];
-    vc.image = sender.currentImage;
-    [self presentViewController:vc animated:NO completion:^{
-        
-    }];
+- (NSObject *)imagesFromUrl:(NSString *)urls{
+    if ([urls isEqualToString:@""])
+        return [NSNull null];
+    NSArray *list = [urls componentsSeparatedByString:@","];
+    if ([list count]<1)
+        return [NSNull null];
+    NSMutableArray *images = [NSMutableArray new];
+    for (NSString *url in list)
+    {
+        [images addObject:[self imageWithLink:url]];
+    }
+    return images;
 }
 
 @end

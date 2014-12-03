@@ -88,6 +88,8 @@
 		B97F70591A10DD9D00029C6F /* HNNewReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B97F70571A10DD9D00029C6F /* HNNewReportViewController.m */; };
 		B97F705A1A10DD9D00029C6F /* HNNewReportViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B97F70581A10DD9D00029C6F /* HNNewReportViewController.xib */; };
 		B97F70671A12294000029C6F /* HNNewReportTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B97F70661A12294000029C6F /* HNNewReportTableViewCell.m */; };
+		B98094C31A2E9F5800C6045E /* HNConsturctPicTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B98094C11A2E9F5800C6045E /* HNConsturctPicTableViewCell.m */; };
+		B98094C41A2E9F5800C6045E /* HNConsturctPicTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B98094C21A2E9F5800C6045E /* HNConsturctPicTableViewCell.xib */; };
 		B9882DF219CB06D90093F0F4 /* HNDecorateReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9882DF119CB06D90093F0F4 /* HNDecorateReportViewController.m */; };
 		B9882DF519CB079A0093F0F4 /* HNReportTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B9882DF419CB079A0093F0F4 /* HNReportTableViewCell.m */; };
 		B9A09D7E1A0B9B4A00A88CD8 /* add_click@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B9A09D7C1A0B9B4A00A88CD8 /* add_click@2x.png */; };
@@ -417,6 +419,9 @@
 		B97F70581A10DD9D00029C6F /* HNNewReportViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HNNewReportViewController.xib; path = Classes/DecorateControl/HNNewReportViewController.xib; sourceTree = "<group>"; };
 		B97F70651A12294000029C6F /* HNNewReportTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNNewReportTableViewCell.h; path = Classes/DecorateControl/HNNewReportTableViewCell.h; sourceTree = "<group>"; };
 		B97F70661A12294000029C6F /* HNNewReportTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNNewReportTableViewCell.m; path = Classes/DecorateControl/HNNewReportTableViewCell.m; sourceTree = "<group>"; };
+		B98094C01A2E9F5800C6045E /* HNConsturctPicTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNConsturctPicTableViewCell.h; path = Classes/DecorateControl/HNConsturctPicTableViewCell.h; sourceTree = "<group>"; };
+		B98094C11A2E9F5800C6045E /* HNConsturctPicTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNConsturctPicTableViewCell.m; path = Classes/DecorateControl/HNConsturctPicTableViewCell.m; sourceTree = "<group>"; };
+		B98094C21A2E9F5800C6045E /* HNConsturctPicTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HNConsturctPicTableViewCell.xib; path = Classes/DecorateControl/HNConsturctPicTableViewCell.xib; sourceTree = "<group>"; };
 		B9882DF019CB06D90093F0F4 /* HNDecorateReportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNDecorateReportViewController.h; path = Classes/DecorateControl/HNDecorateReportViewController.h; sourceTree = "<group>"; };
 		B9882DF119CB06D90093F0F4 /* HNDecorateReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNDecorateReportViewController.m; path = Classes/DecorateControl/HNDecorateReportViewController.m; sourceTree = "<group>"; };
 		B9882DF319CB079A0093F0F4 /* HNReportTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNReportTableViewCell.h; path = Classes/DecorateControl/HNReportTableViewCell.h; sourceTree = "<group>"; };
@@ -1068,11 +1073,14 @@
 				B9882DF119CB06D90093F0F4 /* HNDecorateReportViewController.m */,
 				B965864419F9387700EB4766 /* HNConstructViewController.h */,
 				B965864519F9387700EB4766 /* HNConstructViewController.m */,
+				B9C2B41919FE8BAC00C93D59 /* HNConstructTableViewCell.h */,
+				B9C2B41A19FE8BAC00C93D59 /* HNConstructTableViewCell.m */,
+				B98094C01A2E9F5800C6045E /* HNConsturctPicTableViewCell.h */,
+				B98094C11A2E9F5800C6045E /* HNConsturctPicTableViewCell.m */,
+				B98094C21A2E9F5800C6045E /* HNConsturctPicTableViewCell.xib */,
 				B9398D441A29EE2E006576FE /* HNConstructPaymentTableViewCell.h */,
 				B9398D451A29EE2E006576FE /* HNConstructPaymentTableViewCell.m */,
 				B9398D461A29EE2E006576FE /* HNConstructPaymentTableViewCell.xib */,
-				B9C2B41919FE8BAC00C93D59 /* HNConstructTableViewCell.h */,
-				B9C2B41A19FE8BAC00C93D59 /* HNConstructTableViewCell.m */,
 				B9882DF319CB079A0093F0F4 /* HNReportTableViewCell.h */,
 				B9882DF419CB079A0093F0F4 /* HNReportTableViewCell.m */,
 				B97F70561A10DD9D00029C6F /* HNNewReportViewController.h */,
@@ -1740,6 +1748,7 @@
 				D3052BA51A24E43000ECD7A1 /* chat_bottom_textfield.png in Resources */,
 				B9C5D45C1A2D699900514ADE /* HNPicTableViewCell.xib in Resources */,
 				D38DD5621A0BB1E100886933 /* HNMessageTableViewCell.xib in Resources */,
+				B98094C41A2E9F5800C6045E /* HNConsturctPicTableViewCell.xib in Resources */,
 				B916F0B519C8781D00A849C7 /* Main.storyboard in Resources */,
 				B9E433691A06515E000E2CA9 /* HNNewCheckViewController.xib in Resources */,
 				B9398D4D1A2A084F006576FE /* HNGetAuthViewController.xib in Resources */,
@@ -1789,6 +1798,7 @@
 				D3CD90FA19CF09E000E76AF4 /* HNRefundTableViewCell.m in Sources */,
 				B9398D4C1A2A084F006576FE /* HNGetAuthViewController.m in Sources */,
 				B9E433601A063148000E2CA9 /* HNCheckViewController.m in Sources */,
+				B98094C31A2E9F5800C6045E /* HNConsturctPicTableViewCell.m in Sources */,
 				B91A3AC319D6E6E9000F3823 /* MJRefreshConst.m in Sources */,
 				B9D3DEDA19CD235A0020CDC9 /* HNCheckTableViewCell.m in Sources */,
 				D3A47BCC1A01361B00B83682 /* HNDecorateChoiceView.m in Sources */,
