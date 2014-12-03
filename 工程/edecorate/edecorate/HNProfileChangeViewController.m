@@ -15,7 +15,7 @@
 #import "HNLoginData.h"
 #import "HNImageUploadTableViewCell.h"
 
-@interface HNProfileChangeViewController ()<UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate,UIImagePickerControllerDelegate>
+@interface HNProfileChangeViewController ()<UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate>
 
 @property (strong, nonatomic) UITextField* currentTextField;
 @property (nonatomic, strong) UITableView *tableView;
@@ -204,11 +204,57 @@
 
 #pragma mark - UIImagePickerControllerDelegate
 
+#pragma mark - UIImagePickerControllerDelegate
+
 - (void)imageUploadClick:(id)sender
 {
     self.imageButton = sender;
-    [self presentViewController:self.imagePicker animated:YES completion:nil];
+    
+    UIActionSheet *sheet;
+    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+    {
+        sheet  = [[UIActionSheet alloc] initWithTitle:@"选择" delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"取消" otherButtonTitles:@"拍照",@"从相册选择", nil];
+    }
+    else {
+        sheet = [[UIActionSheet alloc] initWithTitle:@"选择" delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"取消" otherButtonTitles:@"从相册选择", nil];
+    }
+    sheet.tag = 255;
+    [sheet showInView:self.view];
+    
 }
+
+-(void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (actionSheet.tag == 255) {
+        NSUInteger sourceType = 0;
+        if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+            switch (buttonIndex) {
+                case 0:
+                    return;
+                case 1:
+                    // 相机
+                    sourceType = UIImagePickerControllerSourceTypeCamera;
+                    break;
+                case 2:
+                    // 相册
+                    sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                    break;
+            }
+        }
+        else {
+            if (buttonIndex == 0) {
+                return;
+            } else {
+                sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            }
+        }
+        
+        self.imagePicker.sourceType = sourceType;
+        
+        [self presentViewController:self.imagePicker animated:YES completion:nil];
+    }
+}
+
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
     UIImage *image=[info objectForKey:UIImagePickerControllerOriginalImage];

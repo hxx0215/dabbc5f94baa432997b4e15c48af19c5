@@ -283,6 +283,7 @@
     NSLog(@"%@",token);
     NSURL *url = [[NSURL alloc]initWithString:token];
     [[UIApplication sharedApplication]openURL:url];
+    [self showPurchased];
 }
 
 - (NSDictionary *)encodeWithModel{
@@ -640,6 +641,10 @@
 }
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{
+    if (alertView.tag == 123){
+        [self.navigationController popViewControllerAnimated:YES];
+        return;
+    }
     UITextField *tf=[alertView textFieldAtIndex:0];
     if (1==buttonIndex){
         HNDeliverNeedItem *neddItem = [self.model.needItems objectAtIndex:self.selectIndex.row];
@@ -649,6 +654,12 @@
         cell.price.text = neddItem.totalMoney;
         cell.detail.text = [NSString stringWithFormat:@"单价%@   数量%@%@",neddItem.price,neddItem.number,neddItem.useUnit];
     }
+}
+
+-(void)showPurchased{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"完成", nil) message:NSLocalizedString(@"请至网页端完成支付", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"完成", nil) otherButtonTitles:NSLocalizedString(@"支付遇到问题", nil), nil];
+    alert.tag = 123;
+    [alert show];
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath

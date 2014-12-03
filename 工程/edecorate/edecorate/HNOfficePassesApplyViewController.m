@@ -166,11 +166,6 @@
             [self.tableView reloadData];
             [self movewButton];
         }
-        else
-        {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login Fail", nil) message:NSLocalizedString(@"Please input correct username and password", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
-            [alert show];
-        }
     }
     else{
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection Error", nil) message:NSLocalizedString(@"Please check your network.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
@@ -244,11 +239,6 @@
             NSNumber *cardId = [dicArray objectForKey:@"cardId"];
             [self.choiceDecorateView getPayToken:[NSString stringWithFormat:@"%ld",cardId.integerValue]];
         }
-        else
-        {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Loading Fail", nil) message:NSLocalizedString(@"Please try again", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
-            [alert show];
-        }
     }
     else{
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection Error", nil) message:NSLocalizedString(@"Please check your network.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
@@ -261,6 +251,7 @@
     NSLog(@"%@",token);
     NSURL *url = [[NSURL alloc]initWithString:token];
     [[UIApplication sharedApplication]openURL:url];
+    [self showPurchased];
 }
 
 - (NSDictionary *)encodeWithTemporaryModel{
@@ -524,6 +515,10 @@
 }
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{
+    if (alertView.tag == 123){
+        [self.navigationController popViewControllerAnimated:YES];
+        return;
+    }
     UITextField *tf=[alertView textFieldAtIndex:0];
     if (1==buttonIndex){
         HNPassNeedItem *neddItem = [self.temporaryModel.needItems objectAtIndex:self.selectIndex.row];
@@ -737,6 +732,13 @@
 {
     return YES;
 }
+
+-(void)showPurchased{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"完成", nil) message:NSLocalizedString(@"请至网页端完成支付", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"完成", nil) otherButtonTitles:NSLocalizedString(@"支付遇到问题", nil), nil];
+    alert.tag = 123;
+    [alert show];
+}
+
 /*
  #pragma mark - Navigation
  
