@@ -30,7 +30,7 @@
 }
 
 @end
-@interface HNNewReportViewController ()<UITableViewDelegate,UITableViewDataSource,UIPickerViewDelegate,UIPickerViewDataSource,UITextFieldDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,HNNewReportChargeDelegate>
+@interface HNNewReportViewController ()<UITableViewDelegate,UITableViewDataSource,UIPickerViewDelegate,UIPickerViewDataSource,UITextFieldDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,HNNewReportChargeDelegate,UIActionSheetDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UIToolbar *topView;
 @property (nonatomic, strong) NSMutableArray *tableData;
@@ -767,14 +767,26 @@ static NSString *kNewPicCell = @"kNewPicCell";
         [alert show];
     });
 }
-- (void)upload:(UIButton *)sender{
+#pragma mark UIActionSheetDelegate
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == 2)
+        return ;
     UIImagePickerController *pick = [[UIImagePickerController alloc] init];
-    pick.view.tag = [sender superview].tag;
-    pick.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+    pick.view.tag = actionSheet.tag;
+    if (buttonIndex == 1)
+        pick.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+    else
+        pick.sourceType = UIImagePickerControllerSourceTypeCamera;
     pick.delegate = self;
     [self presentViewController:pick animated:YES completion:^{
         
     }];
+}
+- (void)upload:(UIButton *)sender{
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"选择图片获取方式", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"取消", nil) destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"相机", nil),NSLocalizedString(@"相册", nil), nil];
+    sheet.tag = [sender superview].tag;
+    [sheet showInView:self.view];
+
 }
 - (void)leftImage:(UIButton *)sender{
     NSString *key = [NSString stringWithFormat:@"%d",[sender superview].tag];
