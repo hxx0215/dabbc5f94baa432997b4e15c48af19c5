@@ -57,10 +57,10 @@
 }
 - (void)setStatus:(NSString *)status{
     self.statusLabel.text = status;
-    if ([status isEqualToString:@"审核进度:未提交"]){
+    if ([status isEqualToString:@"审核进度:未审核"]){
         self.statusImage.image = [UIImage imageNamed:@"unsubmit.png"];
     }
-    else if ([status isEqualToString:@"审核进度:已审核"]){
+    else if ([status isEqualToString:@"审核进度:已通过"]){
         self.statusImage.image = [UIImage imageNamed:@"accept.png"];
     }
     else

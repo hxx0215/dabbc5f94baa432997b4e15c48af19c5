@@ -103,7 +103,7 @@
     //vc1.title = NSLocalizedString(@"E Decorate", nil);
     //UITabBarItem *item1 = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Home", nil) image:[UIImage imageNamed:@"设置_11"] tag:101];
     UITabBar *tabBar = [self.tabBarController tabBar];
-    [tabBar setTintColor:[UIColor greenColor]];
+    [tabBar setTintColor:[UIColor colorWithRed:144.0/255.0 green:197.0/255.0 blue:31.0/255.0 alpha:1.0]];
     tabBar.barStyle = UIBarStyleBlack;
     UITabBarItem *item2 = [[UITabBarItem alloc] initWithTitle:@"装修报建" image:[UIImage imageNamed:@"Tab2"] tag:102];
     UITabBarItem *item3 = [[UITabBarItem alloc] initWithTitle:@"商家后台" image:[UIImage imageNamed:@"Tab3"] tag:103];

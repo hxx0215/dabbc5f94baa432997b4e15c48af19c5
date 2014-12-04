@@ -12,4 +12,5 @@
 @property (nonatomic, strong)UILabel *roomName;
 @property (nonatomic, strong)UILabel *checkSchedule;
 @property (nonatomic, strong)UILabel *checkStage;
+@property (nonatomic, strong)UIImageView *statusImage;
 @end

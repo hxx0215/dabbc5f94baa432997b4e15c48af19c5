@@ -25,9 +25,13 @@
         self.checkSchedule.font = [UIFont systemFontOfSize:14];
         self.checkStage.textColor = [UIColor colorWithWhite:128.0/255.0 alpha:1.0];
         self.checkSchedule.textColor = [UIColor colorWithWhite:128.0/255.0 alpha:1.0];
+        self.statusImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 10, 10)];
+        self.statusImage.left = 12;
+        self.statusImage.centerY = self.roomName.centerY;
         [self.contentView addSubview:self.roomName];
         [self.contentView addSubview:self.checkStage];
         [self.contentView addSubview:self.checkSchedule];
+        [self.contentView addSubview:self.statusImage];
         self.checkStage.left = self.checkSchedule.right + 5;
         
         self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;

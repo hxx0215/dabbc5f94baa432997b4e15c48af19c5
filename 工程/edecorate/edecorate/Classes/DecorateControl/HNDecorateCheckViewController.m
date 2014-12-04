@@ -116,6 +116,12 @@
     [cell.checkSchedule sizeToFit];
     cell.checkStage.left = cell.checkSchedule.right + 5;
     cell.checkSchedule.top = cell.checkStage.top;
+    cell.statusImage.image = [UIImage new];
+    if ([cell.checkStage.text isEqualToString:@"验收通过"])
+        cell.statusImage.image = [UIImage imageNamed:@"accept.png"];
+    if ([cell.checkStage.text isEqualToString:@"验收不通过"])
+        cell.statusImage.image = [UIImage imageNamed:@"unsubmit.png"];
+    
     return cell;
 }
 - (void)showBadServer{
