@@ -74,6 +74,7 @@
     [self initPickView];
     [self loadList];
     [self initButtonView];
+    self.title = @"新建装修验收";
 }
 - (void)initSendData{
     self.sendData = [NSMutableDictionary new];

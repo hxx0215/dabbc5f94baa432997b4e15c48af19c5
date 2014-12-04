@@ -36,7 +36,7 @@
     UIBarButtonItem *cancel = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel", nil) style:UIBarButtonItemStyleDone target:self action:@selector(CancelButtonClick:)];
     self.navigationItem.leftBarButtonItem = cancel;
     
-    //self.title = @"注册";
+    self.title = @"注册";
 }
 
 - (void)viewDidAppear:(BOOL)animated
