@@ -13,6 +13,7 @@
 @property (nonatomic, strong)NSString *status;
 //@property (nonatomic, assign)HNConstructType constructType;
 @property (nonatomic, strong)NSString *declareId;
+
 @end
 
 

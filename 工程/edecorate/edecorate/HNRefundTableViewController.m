@@ -58,10 +58,10 @@
         sself.lastTotal = 8;
         [sself refreshData];
     }];
-    [self.rTableView addFooterWithCallback:^{
-        typeof(self) sself = wself;
-        [sself loadMore];
-    }];
+//    [self.rTableView addFooterWithCallback:^{
+//        typeof(self) sself = wself;
+//        [sself loadMore];
+//    }];
     self.isfirst = YES;
     self.pages = 0;
     self.lastTotal = 8;
@@ -156,7 +156,7 @@
 }
 
 - (NSDictionary *)encodeSendModel:(HNRefundSendModel*)model{
-        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[HNLoginData shared].mshopid,@"mshopid",@"8",@"pagesize",[NSString stringWithFormat:@"%ld",(self.pages+1)],@"pageindex", nil];
+        NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:[HNLoginData shared].mshopid,@"mshopid",@"10000",@"pagesize",@"",@"pageindex", nil];
     return dic;
 }
 
@@ -182,7 +182,7 @@
 -(void)didrefreshData:(NSData*)data
 {
     [self.rTableView headerEndRefreshing];
-    [self.rTableView footerEndRefreshing];
+    //[self.rTableView footerEndRefreshing];
     if (data)
     {
         NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -202,6 +202,10 @@
         {
             NSArray *dataArr = [retDic objectForKey:@"data"];
             for (int i=0; i<count; i++) {
+                NSString *processstep = [dataArr[i] objectForKey:@"processstep"];
+                if (processstep.integerValue<5) {
+                    continue;
+                }
                 HNRefundModel *model = [[HNRefundModel alloc] init];
                 model.status = self.statusMap[[dataArr[i] objectForKey:@"assessorstate"]];
                 model.roomName = [NSString stringWithFormat:@"%@",[dataArr[i] objectForKey:@"roomnumber"]];
