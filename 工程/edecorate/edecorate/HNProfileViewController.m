@@ -25,7 +25,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.title = NSLocalizedString(@"我的资料", nil);
     self.view.backgroundColor = [UIColor whiteColor];
     
     self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];

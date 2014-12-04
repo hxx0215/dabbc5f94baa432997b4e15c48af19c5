@@ -209,7 +209,7 @@
         case 0:
         {
             titleString = @"商家名称：";
-            detailString = @"点击在此商家名称";
+            detailString = @"点击在此输入商家名称";
             self.shopName = cell.textView;
         }
             break;
