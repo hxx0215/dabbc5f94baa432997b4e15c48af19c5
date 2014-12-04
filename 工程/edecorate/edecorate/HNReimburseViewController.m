@@ -19,6 +19,7 @@
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UITableViewCell *returnidCell;
 @property (strong, nonatomic) IBOutlet UITableViewCell *returnMessCell;
+@property (strong, nonatomic) IBOutlet UITableViewCell *repairMessCell;
 
 @property (strong, nonatomic) IBOutlet UILabel *orderid;
 @property (strong, nonatomic) IBOutlet UILabel *userPayPrice;
@@ -28,6 +29,11 @@
 @property (strong, nonatomic) IBOutlet UITextField *takeAddr;
 @property (strong, nonatomic) IBOutlet UITextView *memo;
 @property (strong, nonatomic) IBOutlet UIButton *confirm;
+
+@property (strong, nonatomic) IBOutlet UITextField *interflowCom;
+@property (strong, nonatomic) IBOutlet UITextField *code;
+@property (strong, nonatomic) IBOutlet UIButton *repairConfirm;
+@property (strong, nonatomic) IBOutlet UITextView *repairMemo;
 
 @property (assign, nonatomic) BOOL shouldRefresh;
 @property (strong, nonatomic) NSMutableDictionary *contentDic;
@@ -52,10 +58,14 @@ static NSString *kHNReturnCellIdenty = @"HNReturnCell";
     
     self.memo.layer.cornerRadius = 7.0;
     self.memo.backgroundColor = [UIColor colorWithWhite:245.0/255.0 alpha:1.0];
+    self.repairMemo.layer.cornerRadius = 7.0;
+    self.repairMemo.backgroundColor = [UIColor colorWithWhite:245.0/255.0 alpha:1.0];
     [self initAccessoryView];
     
     self.confirm.layer.cornerRadius = 7.0;
+    self.repairConfirm.layer.cornerRadius = 7.0;
     [self.confirm setBackgroundColor:[UIColor projectRed]];
+    [self.repairConfirm setBackgroundColor:[UIColor projectRed]];
 }
 - (void)initAccessoryView{
     //定义一个toolBar
@@ -77,10 +87,12 @@ static NSString *kHNReturnCellIdenty = @"HNReturnCell";
     [topView setItems:buttonsArray];
     //    [textView setInputView:topView];
     [self.memo setInputAccessoryView:topView];
+    [self.repairMemo setInputAccessoryView:topView];
 }
 - (void)resignKeyboard{
     self.tableView.frame = self.view.bounds;
     [self.memo resignFirstResponder];
+    [self.repairMemo resignFirstResponder];
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -254,7 +266,10 @@ static NSString *kHNReturnCellIdenty = @"HNReturnCell";
         cell.textLabel.numberOfLines = 5;
     }
     if (indexPath.section == 3){
-        cell = self.returnMessCell;
+        if ([self.contentDic[@"type"] integerValue]==3)//修理
+            cell= self.repairMessCell;
+        else
+            cell = self.returnMessCell;
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
@@ -290,6 +305,9 @@ static NSString *kHNReturnCellIdenty = @"HNReturnCell";
 }
 - (IBAction)confirmReturn:(UIButton *)sender {
     NSDictionary *sendDic = @{@"mshopid": [HNLoginData shared].mshopid,@"returnid":self.returnid,@"isagree" : self.isAgree.on ? @(1):@(0),@"reason":self.memo.text,@"orderid":self.orderid.text,@"status":self.contentDic[@"status"],@"type":self.contentDic[@"type"],@"userid":self.contentDic[@"userid"]};
+    [self sendConfirm:sendDic];
+}
+- (void)sendConfirm:(NSDictionary *)sendDic{
     NSString *sendJson = [sendDic JSONString];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"set.order.returndetail" Params:sendJson]];
@@ -311,6 +329,10 @@ static NSString *kHNReturnCellIdenty = @"HNReturnCell";
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"失败", nil) message:NSLocalizedString(@"确认失败请于服务器端联系", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"确认", nil) otherButtonTitles: nil];
         [alert show];
     }];
+}
+- (IBAction)repairConfir:(UIButton *)sender {
+    NSDictionary *sendDic = @{@"mshopid": [HNLoginData shared].mshopid,@"returnid":self.returnid,@"orderid":self.orderid.text,@"status":self.contentDic[@"status"],@"type":self.contentDic[@"type"],@"userid":self.contentDic[@"userid"],@"company":self.interflowCom.text,@"code":self.code.text};
+    [self sendConfirm:sendDic];
 }
 
 @end

@@ -6,11 +6,16 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HNReimburseViewController">
             <connections>
+                <outlet property="code" destination="ch6-Uz-Z1u" id="NcI-br-3NY"/>
                 <outlet property="confirm" destination="xyp-eO-J9z" id="Co1-bK-tNx"/>
+                <outlet property="interflowCom" destination="Iqd-vg-iKz" id="jm2-CP-r8E"/>
                 <outlet property="isAgree" destination="bGV-kx-FG0" id="mnO-25-YbT"/>
                 <outlet property="memo" destination="8mz-Il-RBx" id="Vj6-LV-kXH"/>
                 <outlet property="onlinePayPrice" destination="qB1-0Q-wwb" id="Ytz-fI-Djc"/>
                 <outlet property="orderid" destination="GSG-0f-dWX" id="ePy-98-1Mg"/>
+                <outlet property="repairConfirm" destination="B29-cp-3Zd" id="Czr-6l-8E0"/>
+                <outlet property="repairMemo" destination="H3u-mb-XWa" id="qOZ-tC-UfR"/>
+                <outlet property="repairMessCell" destination="BIF-ht-oeU" id="akd-a6-6Ii"/>
                 <outlet property="returnMessCell" destination="gpz-vE-Ok0" id="xPQ-zY-Z3r"/>
                 <outlet property="returnidCell" destination="wsP-3l-JTf" id="xRv-IZ-HmC"/>
                 <outlet property="tableView" destination="cPn-1y-HJ9" id="w2z-yJ-wR0"/>
@@ -154,6 +159,77 @@
                 </subviews>
             </tableViewCellContentView>
             <point key="canvasLocation" x="-171" y="-39.5"/>
+        </tableViewCell>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="238" id="BIF-ht-oeU">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="235"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BIF-ht-oeU" id="b7m-vA-cAL">
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="物流公司:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="atg-Ht-hCr">
+                        <rect key="frame" x="8" y="8" width="65" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="说明:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Oh3-lI-6B7">
+                        <rect key="frame" x="8" y="66" width="65" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="H3u-mb-XWa">
+                        <rect key="frame" x="8" y="95" width="304" height="89"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
+                        <connections>
+                            <outlet property="delegate" destination="-1" id="pXw-6q-Hbx"/>
+                        </connections>
+                    </textView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="B29-cp-3Zd">
+                        <rect key="frame" x="8" y="192" width="304" height="30"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <state key="normal" title="确认申请">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="confirmReturn:" destination="-1" eventType="touchUpInside" id="ZVs-og-ycw"/>
+                            <action selector="repairConfir:" destination="-1" eventType="touchUpInside" id="maF-nH-bdH"/>
+                        </connections>
+                    </button>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="物流公司" minimumFontSize="17" id="Iqd-vg-iKz">
+                        <rect key="frame" x="81" y="4" width="226" height="30"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits"/>
+                        <connections>
+                            <outlet property="delegate" destination="-1" id="ho9-LS-E1J"/>
+                        </connections>
+                    </textField>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="发货单号" minimumFontSize="17" id="ch6-Uz-Z1u">
+                        <rect key="frame" x="81" y="37" width="226" height="30"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits"/>
+                        <connections>
+                            <outlet property="delegate" destination="-1" id="e1X-Tx-Rxe"/>
+                        </connections>
+                    </textField>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="发货单号:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ghq-qH-Bka">
+                        <rect key="frame" x="8" y="41" width="65" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </tableViewCellContentView>
+            <point key="canvasLocation" x="-183" y="446"/>
         </tableViewCell>
     </objects>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
