@@ -30,7 +30,7 @@
 }
 
 @end
-@interface HNNewReportViewController ()<UITableViewDelegate,UITableViewDataSource,UIPickerViewDelegate,UIPickerViewDataSource,UITextFieldDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,HNNewReportChargeDelegate,UIActionSheetDelegate>
+@interface HNNewReportViewController ()<UITableViewDelegate,UITableViewDataSource,UIPickerViewDelegate,UIPickerViewDataSource,UITextFieldDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,HNNewReportChargeDelegate,UIActionSheetDelegate,UIAlertViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UIToolbar *topView;
 @property (nonatomic, strong) NSMutableArray *tableData;
@@ -665,6 +665,15 @@ static NSString *kNewPicCell = @"kNewPicCell";
             }
             vc.mustPay = mustPay;
             vc.optionPay = optionPay;
+            if ([vc.mustPay count]+[vc.optionPay count] == 0)
+            {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"成功", nil) message:NSLocalizedString(@"报建成功", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"确定", nil) otherButtonTitles: nil];
+                    alert.tag = 234;
+                    [alert show];
+                });
+            }
+            else
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.navigationController pushViewController:vc animated:YES];
             });
@@ -672,6 +681,10 @@ static NSString *kNewPicCell = @"kNewPicCell";
     }];
 //    return;
 //    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    request = [[NSMutableURLRequest alloc] init];
+    sendDic = @{@"declareid": self.declareId,@"mshopid" : [HNLoginData shared].mshopid};
+    NSString *jsonStr = [sendDic JSONString];
+    request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"set.decoraton.declaredetails" Params:jsonStr]];
     self.sendDic[@"principal"] = self.userDic[@"realname"];
     self.sendDic[@"EnterprisePhone"] = self.userDic[@"phone"];
     self.sendDic[@"EIDCard"] = self.userDic[@"idcard"];
@@ -721,10 +734,15 @@ static NSString *kNewPicCell = @"kNewPicCell";
     self.sendDic[@"electricityBoxIMG"] = [self imgUrl:index];
     index++;
     self.sendDic[@"waterPipeIMG"] = [self imgUrl:index];
-    sendJson = [self.sendDic JSONString];
-    request = [[NSMutableURLRequest alloc] init];
-    request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"set.decoraton.declaredetails" Params:sendJson]];
-    contentType = @"text/html";
+    NSString *strBody = [NSString stringWithFormat:@"principal=%@&EnterprisePhone=%@&EIDCard=%@&population=%@&OriginalSChart=%@&floorplan=%@&wallRemould=%@&ceilingPlan=%@&WaterwayPlan=%@&BlockDiagram=%@&businessLicense=%@&TaxIMG=%@&organizeIMG=%@&qualificationIMG=%@&ElectricianIMG=%@&powerAttorney=%@&AttorneyIDcard=%@&compactIMG=%@&EIDCardIMG=%@&kitchenIMG=%@&WCIMG=%@&roomIMG=%@&gasLineIMG=%@&electricityBoxIMG=%@&waterPipeIMG=%@",self.sendDic[@"principal"],self.sendDic[@"EnterprisePhone"],self.sendDic[@"EIDCard"],self.sendDic[@"population"],self.sendDic[@"OriginalSChart"],self.sendDic[@"floorplan"],self.sendDic[@"wallRemould"],self.sendDic[@"ceilingPlan"],self.sendDic[@"WaterwayPlan"],self.sendDic[@"BlockDiagram"],self.sendDic[@"businessLicense"] ,self.sendDic[@"TaxIMG"],self.sendDic[@"organizeIMG"],self.sendDic[@"qualificationIMG"],self.sendDic[@"ElectricianIMG"],self.sendDic[@"powerAttorney"],self.sendDic[@"AttorneyIDcard"],self.sendDic[@"compactIMG"],self.sendDic[@"EIDCardIMG"],self.sendDic[@"kitchenIMG"],self.sendDic[@"WCIMG"],self.sendDic[@"roomIMG"],self.sendDic[@"gasLineIMG"],self.sendDic[@"electricityBoxIMG"],self.sendDic[@"waterPipeIMG"]];
+    NSData *jsonBody = [strBody dataUsingEncoding:NSUTF8StringEncoding];
+    contentType = @"application/x-www-form-urlencoded; charset=utf-8";
+    [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPMethod:@"POST"];
+    [request setHTTPBody:jsonBody];
+    NSString *postLength = [NSString stringWithFormat:@"%d",[jsonBody length]];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    
     [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
 //        [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -781,6 +799,11 @@ static NSString *kNewPicCell = @"kNewPicCell";
     [self presentViewController:pick animated:YES completion:^{
         
     }];
+}
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{
+    if (alertView.tag == 234){
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 - (void)upload:(UIButton *)sender{
     UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"选择图片获取方式", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"取消", nil) destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"相机", nil),NSLocalizedString(@"相册", nil), nil];
