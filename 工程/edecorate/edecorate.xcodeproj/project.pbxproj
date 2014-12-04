@@ -79,8 +79,6 @@
 		B965863819F69B7000EB4766 /* loginback@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B965863719F69B7000EB4766 /* loginback@2x.png */; };
 		B965863C19F6A4FC00EB4766 /* remember@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B965863B19F6A4FC00EB4766 /* remember@2x.png */; };
 		B965863E19F6A56000EB4766 /* rememberit@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B965863D19F6A56000EB4766 /* rememberit@2x.png */; };
-		B965864219F7E38E00EB4766 /* accept@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B965864019F7E38E00EB4766 /* accept@2x.png */; };
-		B965864319F7E38E00EB4766 /* unsubmit@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B965864119F7E38E00EB4766 /* unsubmit@2x.png */; };
 		B965864619F9387700EB4766 /* HNConstructViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B965864519F9387700EB4766 /* HNConstructViewController.m */; };
 		B965E76019D04955004CD201 /* HNDeliverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B965E75F19D04955004CD201 /* HNDeliverViewController.m */; };
 		B965E76919D04CDA004CD201 /* HNDeliverDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B965E76719D04CDA004CD201 /* HNDeliverDetailViewController.m */; };
@@ -131,6 +129,8 @@
 		B9D72D5519D840960011CF83 /* HNOrderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9D72D5319D840960011CF83 /* HNOrderTableViewCell.xib */; };
 		B9D72D5919D846FC0011CF83 /* HNOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D72D5719D846FC0011CF83 /* HNOrderViewController.m */; };
 		B9D72D5A19D846FC0011CF83 /* HNOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9D72D5819D846FC0011CF83 /* HNOrderViewController.xib */; };
+		B9DD58DC1A308E9200AA4CDC /* unsubmit@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B9DD58DB1A308E9200AA4CDC /* unsubmit@2x.png */; };
+		B9DD58DE1A308E9700AA4CDC /* accept@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B9DD58DD1A308E9700AA4CDC /* accept@2x.png */; };
 		B9DE55FD19C9C0EA00280EC7 /* UIView+AHKit.m in Sources */ = {isa = PBXBuildFile; fileRef = B9DE55FC19C9C0EA00280EC7 /* UIView+AHKit.m */; };
 		B9DE560119C9C26700280EC7 /* HNDecorateControlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9DE560019C9C26700280EC7 /* HNDecorateControlViewController.m */; };
 		B9DE560419C9C40B00280EC7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B9DE560619C9C40B00280EC7 /* Localizable.strings */; };
@@ -405,8 +405,6 @@
 		B965863719F69B7000EB4766 /* loginback@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loginback@2x.png"; sourceTree = "<group>"; };
 		B965863B19F6A4FC00EB4766 /* remember@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "remember@2x.png"; sourceTree = "<group>"; };
 		B965863D19F6A56000EB4766 /* rememberit@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rememberit@2x.png"; sourceTree = "<group>"; };
-		B965864019F7E38E00EB4766 /* accept@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "accept@2x.png"; sourceTree = "<group>"; };
-		B965864119F7E38E00EB4766 /* unsubmit@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unsubmit@2x.png"; sourceTree = "<group>"; };
 		B965864419F9387700EB4766 /* HNConstructViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNConstructViewController.h; path = Classes/DecorateControl/HNConstructViewController.h; sourceTree = "<group>"; };
 		B965864519F9387700EB4766 /* HNConstructViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNConstructViewController.m; path = Classes/DecorateControl/HNConstructViewController.m; sourceTree = "<group>"; };
 		B965E75E19D04955004CD201 /* HNDeliverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNDeliverViewController.h; path = Classes/DecorateControl/HNDeliverViewController.h; sourceTree = "<group>"; };
@@ -494,6 +492,8 @@
 		B9D72D5619D846FC0011CF83 /* HNOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNOrderViewController.h; path = Classes/BusinessBackground/HNOrderViewController.h; sourceTree = "<group>"; };
 		B9D72D5719D846FC0011CF83 /* HNOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNOrderViewController.m; path = Classes/BusinessBackground/HNOrderViewController.m; sourceTree = "<group>"; };
 		B9D72D5819D846FC0011CF83 /* HNOrderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HNOrderViewController.xib; path = Classes/BusinessBackground/HNOrderViewController.xib; sourceTree = "<group>"; };
+		B9DD58DB1A308E9200AA4CDC /* unsubmit@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unsubmit@2x.png"; sourceTree = "<group>"; };
+		B9DD58DD1A308E9700AA4CDC /* accept@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "accept@2x.png"; sourceTree = "<group>"; };
 		B9DE55FB19C9C0EA00280EC7 /* UIView+AHKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+AHKit.h"; path = "Third Party/UIView+AHKit.h"; sourceTree = "<group>"; };
 		B9DE55FC19C9C0EA00280EC7 /* UIView+AHKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+AHKit.m"; path = "Third Party/UIView+AHKit.m"; sourceTree = "<group>"; };
 		B9DE55FF19C9C26700280EC7 /* HNDecorateControlViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNDecorateControlViewController.h; path = Classes/DecorateControl/HNDecorateControlViewController.h; sourceTree = "<group>"; };
@@ -1063,8 +1063,8 @@
 		B965863F19F7E37E00EB4766 /* Report */ = {
 			isa = PBXGroup;
 			children = (
-				B965864019F7E38E00EB4766 /* accept@2x.png */,
-				B965864119F7E38E00EB4766 /* unsubmit@2x.png */,
+				B9DD58DD1A308E9700AA4CDC /* accept@2x.png */,
+				B9DD58DB1A308E9200AA4CDC /* unsubmit@2x.png */,
 			);
 			name = Report;
 			sourceTree = "<group>";
@@ -1705,9 +1705,9 @@
 				D3052BB01A24E43000ECD7A1 /* chatfrom_bg_normal.png in Resources */,
 				D3052BA71A24E43000ECD7A1 /* chat_bottom_up_press.png in Resources */,
 				B91A3AC119D6E6E9000F3823 /* MJRefresh.bundle in Resources */,
+				B9DD58DE1A308E9700AA4CDC /* accept@2x.png in Resources */,
 				D3052BA21A24E43000ECD7A1 /* chatto_bg_focused.png in Resources */,
 				D3052BAB1A24E43000ECD7A1 /* chat_bottom_keyboard_press.png in Resources */,
-				B965864319F7E38E00EB4766 /* unsubmit@2x.png in Resources */,
 				D33EEABC19D6FF5D00D6F106 /* area.plist in Resources */,
 				B91A3ACD19D6F2FA000F3823 /* HNGoodsTableViewCell.xib in Resources */,
 				D3A96D8F19D98BE80059CF62 /* HNAcceptReturnGoodViewController.xib in Resources */,
@@ -1738,13 +1738,13 @@
 				B965863C19F6A4FC00EB4766 /* remember@2x.png in Resources */,
 				37724D7819D8F69700A9B7EC /* HNCommentsDetailViewController.xib in Resources */,
 				B9C5D45F1A2D6A8800514ADE /* you@2x.png in Resources */,
+				B9DD58DC1A308E9200AA4CDC /* unsubmit@2x.png in Resources */,
 				D33EEA6519D6C2B700D6F106 /* HNVolumeViewController.xib in Resources */,
 				B965863819F69B7000EB4766 /* loginback@2x.png in Resources */,
 				B916F0AC19C8781D00A849C7 /* InfoPlist.strings in Resources */,
 				D33EEAC219D7000E00D6F106 /* HNAreaPickerView.xib in Resources */,
 				D3052BAA1A24E43000ECD7A1 /* chat_bottom_keyboard_nor.png in Resources */,
 				B9D72D5519D840960011CF83 /* HNOrderTableViewCell.xib in Resources */,
-				B965864219F7E38E00EB4766 /* accept@2x.png in Resources */,
 				B965863E19F6A56000EB4766 /* rememberit@2x.png in Resources */,
 				D3052BA11A24E43000ECD7A1 /* chatfrom_bg_focused.png in Resources */,
 				B91A3AD219D6F9D4000F3823 /* HNGoodsViewController.xib in Resources */,
