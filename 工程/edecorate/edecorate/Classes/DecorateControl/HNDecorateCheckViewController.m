@@ -96,7 +96,7 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 85;
+    return 70;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return [self.checkList count];
@@ -112,6 +112,10 @@
     cell.roomName.text = model.roomName;
     cell.checkSchedule.text = model.checkSchedule;
     cell.checkStage.text = self.stageMap[model.checkStage];
+    [cell.checkStage sizeToFit];
+    [cell.checkSchedule sizeToFit];
+    cell.checkStage.left = cell.checkSchedule.right + 5;
+    cell.checkSchedule.top = cell.checkStage.top;
     return cell;
 }
 - (void)showBadServer{
