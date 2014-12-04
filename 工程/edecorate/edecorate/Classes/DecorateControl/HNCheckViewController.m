@@ -66,6 +66,7 @@ static NSString *kCheckDetailCell = @"kCheckDetailCell";
     self.imageSet = [NSMutableDictionary new];
     self.imageUrl = [NSMutableDictionary new];
     self.curImageIndex = [NSMutableDictionary new];
+    
     [self loadImages];
 }
 - (void)viewWillAppear:(BOOL)animated{
