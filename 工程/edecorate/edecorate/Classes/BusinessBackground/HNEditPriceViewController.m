@@ -76,7 +76,10 @@ static NSString *kEditPriceCellIdenty = @"EditPriceCell";
     });
 }
 - (void)done:(id)sender{
-    NSDictionary *sendDic = @{@"mshopid": [HNLoginData shared].mshopid ,@"orderid" : self.orderid,@"ordermark" :@"",@"orderstate" :@"",@"newprice":self.goodsPrice.text,@"newfreight":self.editTrans.text};
+    CGFloat transFee=[self.editTrans.text floatValue];
+    if (self.isFreeTrans.selected)
+        transFee = 0.0;
+    NSDictionary *sendDic = @{@"mshopid": [HNLoginData shared].mshopid ,@"orderid" : self.orderid,@"ordermark" :@"",@"orderstate" :@"",@"newprice":self.goodsPrice.text,@"newfreight":@(transFee)};
     NSString *sendJson = [sendDic JSONString];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"update.order.operation" Params:sendJson]];
@@ -128,6 +131,7 @@ static NSString *kEditPriceCellIdenty = @"EditPriceCell";
 }
 - (IBAction)checkFree:(UIButton *)sender {
     sender.selected = ! sender.selected;
+    [self updateSumPrice];
 }
 
 #pragma mark UITableViewDelegate && DataSource
@@ -179,7 +183,17 @@ NSString * isZero(NSString *str){
 }
 #pragma mark UITextFieldDelegate
 - (void)textFieldDidEndEditing:(UITextField *)textField{
-    self.sumPrice.text = [NSString stringWithFormat:@"%@ + %@ = %.2f",isZero(self.goodsPrice.text),isZero(self.editTrans.text),[self.goodsPrice.text floatValue] + [self.editTrans.text floatValue]];
+    [self updateSumPrice];
+}
+- (void)updateSumPrice{
+    CGFloat trans = [self.editTrans.text floatValue];
+    NSString *apend = @"";
+    if (self.isFreeTrans.selected)
+    {
+        apend = @"(免)";
+        trans = 0;
+    }
+    self.sumPrice.text = [NSString stringWithFormat:@"%@ + %@%@ = %.2f",isZero(self.goodsPrice.text),isZero(self.editTrans.text),apend,[self.goodsPrice.text floatValue] + trans];
 }
 #pragma mark UIAlertViewDelegate
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{
