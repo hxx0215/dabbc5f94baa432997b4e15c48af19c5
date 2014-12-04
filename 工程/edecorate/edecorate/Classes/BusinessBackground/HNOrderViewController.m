@@ -207,8 +207,30 @@ static NSString *identy = @"orderDetailCell";
     NSLog(@"发货");
 }
 - (void)customIOS7dialogButtonTouchUpInside:(id)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    NSLog(@"%d",buttonIndex);
-    [alertView close];
+    if (buttonIndex == 0){
+        NSDictionary *sendDic = @{@"mshopid": [HNLoginData shared].mshopid,@"orderid":self.orderid,@"changestate" : @(1) ,@"ordermark":self.cancelMemo.text,@"orderstate":@""};
+        NSString *sendJson = [sendDic JSONString];
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+        request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"set.order.operation" Params:sendJson]];
+        NSString *contentType = @"text/html";
+        [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
+        [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
+            if (data){
+                NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [alertView close];
+                });
+                NSDictionary *retDic = [retJson objectFromJSONString];
+                if ([retDic[@"data"][0][@"state"] integerValue]== 1)
+                {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self.navigationController popViewControllerAnimated:YES];
+                    });
+                }
+            }
+        }];
+    }
 }
 - (UIView *)alertContent{
     if (!_alertContent){

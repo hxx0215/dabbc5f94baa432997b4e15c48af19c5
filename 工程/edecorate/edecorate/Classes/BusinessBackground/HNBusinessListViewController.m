@@ -48,6 +48,7 @@
 @property (nonatomic, strong)NSMutableDictionary *commentDic;
 @property (nonatomic, strong)NSMutableArray *searchList;
 @property (nonatomic, assign)BOOL isSearching;
+@property (nonatomic, assign)BOOL stopLoadThumb;
 @end
 
 static NSString *reuseId = @"businessCell";
@@ -97,12 +98,17 @@ static NSString *reuseId = @"businessCell";
 }
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+    self.stopLoadThumb = NO;
     self.tableView.height = self.view.height - self.headerView.height;
     if (self.shouldRefresh)
     {
         [self.tableView headerBeginRefreshing];
         self.shouldRefresh = NO;
     }
+}
+- (void)viewWillDisappear:(BOOL)animated{
+    self.stopLoadThumb = YES;
+    [super viewWillDisappear:animated];
 }
 - (void)initNavi{
     self.filter = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"筛选", nil) style:UIBarButtonItemStylePlain target:self action:@selector(filterData:)];
@@ -395,6 +401,8 @@ static NSString *reuseId = @"businessCell";
         NSMutableDictionary *dic = [obj mutableCopy];
         UIImage *image = [self imageWithLink:imgURL];
         [dic setObject:image forKey:@"uiimage"];
+        if (self.stopLoadThumb)
+            break;
         [self.businessList replaceObjectAtIndex:i withObject:dic];
     }
 }
