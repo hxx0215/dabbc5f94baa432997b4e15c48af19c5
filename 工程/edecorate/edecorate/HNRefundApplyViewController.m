@@ -142,11 +142,6 @@
             alert.tag=1;
             [alert show];
         }
-        else
-        {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Loading Fail", nil) message:NSLocalizedString(@"Please try again", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
-            [alert show];
-        }
     }
     else{
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection Error", nil) message:NSLocalizedString(@"Please check your network.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
@@ -161,7 +156,7 @@
      cardimg		回收照片
      */
     
-    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:self.temporaryModel.declareId,@"declareid", self.cardMunTextField.text,@"cardnum",self.imageName,@"cardimg",nil];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:self.temporaryModel.declareId,@"declareid", self.imageName,@"cardimg",nil];//self.cardMunTextField.text,@"cardnum",
     return dic;
 }
 
@@ -272,7 +267,7 @@
         return 3;
     }
     else if(3==section)
-        return 2;
+        return 1;
     else
         return 1;
 }
@@ -322,7 +317,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if(3==indexPath.section)
     {
-        if (indexPath.row==0) {
+        if (indexPath.row==3) {
             return 40;
         }
         else
@@ -383,7 +378,7 @@
         {
             UITableViewCell *cell = nil;
             switch (indexPath.row) {
-                case 0:
+                case 2:
                 {
                     static NSString *identy = @"refun3_0Cell";
                     HNRefundCardCountTableViewCell *cardCell = [tableView dequeueReusableCellWithIdentifier:identy];
@@ -399,7 +394,7 @@
                     self.cardMunTextField.inputAccessoryView = self.topView;
                 }
                     break;
-                case 1:
+                case 0:
                 {
                     static NSString *identy = @"refun3_1Cell";
                     HNPicTableViewCell* imageCell = [tableView dequeueReusableCellWithIdentifier:identy];
