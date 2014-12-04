@@ -69,9 +69,9 @@ static NSString *identy = @"orderDetailCell";
     self.orderDetail = [NSMutableDictionary new];
     
     self.editPrice.layer.cornerRadius = 7.0;
-    [self.editPrice setBackgroundColor:[UIColor projectGreen]];
+    [self.editPrice setBackgroundColor:[UIColor projectRed]];
     self.cancelOrder.layer.cornerRadius = 7.0;
-    [self.cancelOrder setBackgroundColor:[UIColor projectGreen]];
+    [self.cancelOrder setBackgroundColor:[UIColor projectRed]];
 }
 
 - (void)viewWillAppear:(BOOL)animated{

@@ -12,6 +12,8 @@
 #import "CustomIOS7AlertView.h"
 #import "HNReturnDetailTableViewCell.h"
 #import "HNImageData.h"
+#import "HNLoginData.h"
+
 
 @interface HNReimburseViewController ()<CustomIOS7AlertViewDelegate,UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,UITextViewDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
@@ -53,7 +55,7 @@ static NSString *kHNReturnCellIdenty = @"HNReturnCell";
     [self initAccessoryView];
     
     self.confirm.layer.cornerRadius = 7.0;
-    [self.confirm setBackgroundColor:[UIColor projectGreen]];
+    [self.confirm setBackgroundColor:[UIColor projectRed]];
 }
 - (void)initAccessoryView{
     //定义一个toolBar
@@ -285,6 +287,30 @@ static NSString *kHNReturnCellIdenty = @"HNReturnCell";
 - (BOOL)textViewShouldEndEditing:(UITextView *)textView{
     self.tableView.frame = self.view.bounds;
     return YES;
+}
+- (IBAction)confirmReturn:(UIButton *)sender {
+    NSDictionary *sendDic = @{@"mshopid": [HNLoginData shared].mshopid,@"returnid":self.returnid,@"isagree" : self.isAgree.on ? @(1):@(0),@"reason":self.memo.text,@"orderid":self.orderid.text,@"status":self.contentDic[@"status"],@"type":self.contentDic[@"type"],@"userid":self.contentDic[@"userid"]};
+    NSString *sendJson = [sendDic JSONString];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"set.order.returndetail" Params:sendJson]];
+    NSString *contentType = @"text/html";
+    [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
+        if (data){
+            NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
+            NSDictionary *retDic = [retJson objectFromJSONString];
+            if ([retDic[@"data"][0][@"state"] integerValue]== 1)
+            {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.navigationController popViewControllerAnimated:YES];
+                });
+                return ;
+            }
+        }
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"失败", nil) message:NSLocalizedString(@"确认失败请于服务器端联系", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"确认", nil) otherButtonTitles: nil];
+        [alert show];
+    }];
 }
 
 @end
