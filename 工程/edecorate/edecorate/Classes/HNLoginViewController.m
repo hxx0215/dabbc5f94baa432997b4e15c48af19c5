@@ -152,6 +152,9 @@
     if (checked){
         self.loginView.userName.text = [defaults objectForKey:@"HNUSERNAME"];
         self.loginView.password.text = [defaults objectForKey:@"HNPASSWORD"];
+    }else{
+        self.loginView.userName.text = @"";
+        self.loginView.password.text = @"";
     }
 }
 - (void)viewDidDisappear:(BOOL)animated{
