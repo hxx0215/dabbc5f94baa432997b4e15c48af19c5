@@ -198,7 +198,7 @@
     if (!cell)
     {
         cell = [[HNEditTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identy];
-        cell.textView.secureTextEntry = YES;
+        
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
@@ -211,6 +211,7 @@
             titleString = @"商家名称：";
             detailString = @"点击在此输入商家名称";
             self.shopName = cell.textView;
+            cell.textView.secureTextEntry = NO;
         }
             break;
         case 1:
@@ -218,6 +219,7 @@
             titleString = @"用户名：";
             detailString = @"点击在此输入用户名";
             self.userName = cell.textView;
+            cell.textView.secureTextEntry = NO;
         }
             break;
         case 2:
@@ -225,6 +227,7 @@
             titleString = @"密码：";
             detailString = @"点击在此输入密码";
             self.newpwd = cell.textView;
+            cell.textView.secureTextEntry = YES;
         }
             break;
         case 3:
@@ -232,6 +235,7 @@
             titleString = @"确认密码：";
             detailString = @"点击在此确认密码";
             self.repwd = cell.textView;
+            cell.textView.secureTextEntry = YES;
         }
             break;
         default:
