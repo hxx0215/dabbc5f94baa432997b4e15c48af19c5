@@ -496,7 +496,8 @@ static NSString *kPicCell = @"picCell";
         type = KHNPayType7;
     [HNPaySupport shared].delegate = self;
     [[HNPaySupport shared] getPayToken:self.declareid cid:self.declareid payType:type];
-    [self showPurchased];
+    
+//    [self showPurchased];
 }
 -(void)showPurchased{
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"完成", nil) message:NSLocalizedString(@"请至网页端完成支付", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"完成", nil) otherButtonTitles:NSLocalizedString(@"支付遇到问题", nil), nil];
@@ -506,6 +507,7 @@ static NSString *kPicCell = @"picCell";
 - (void)didGetPayUrl:(NSString *)url{
     NSURL *jump = [NSURL URLWithString:url];
     [[UIApplication sharedApplication] openURL:jump];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 - (void)configUnComplete{
     HNNewReportViewController *vc = [[HNNewReportViewController alloc] init];
