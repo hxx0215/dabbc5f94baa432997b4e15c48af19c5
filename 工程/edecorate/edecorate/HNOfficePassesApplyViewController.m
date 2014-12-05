@@ -251,7 +251,8 @@
     NSLog(@"%@",token);
     NSURL *url = [[NSURL alloc]initWithString:token];
     [[UIApplication sharedApplication]openURL:url];
-    [self showPurchased];
+    [self.navigationController popViewControllerAnimated:YES];
+    //[self showPurchased];
 }
 
 - (NSDictionary *)encodeWithTemporaryModel{
