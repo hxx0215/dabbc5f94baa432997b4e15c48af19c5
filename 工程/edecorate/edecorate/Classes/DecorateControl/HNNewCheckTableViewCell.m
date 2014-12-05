@@ -27,22 +27,22 @@
         self.upload = [UIButton buttonWithType:UIButtonTypeCustom];
         [self.upload setTitle:NSLocalizedString(@"上传", nil) forState:UIControlStateNormal];
         [self.contentView addSubview:self.upload];
-        [self.upload setBackgroundColor:[UIColor colorWithRed:36.0/255.0 green:139.0/255.0 blue:96.0/255.0 alpha:1.0]];
+        [self.upload setBackgroundColor:[UIColor projectGreen]];
         [self.upload setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        self.upload.titleLabel.font = [UIFont systemFontOfSize:13.0];
+        self.upload.titleLabel.font = [UIFont systemFontOfSize:15.0];
         self.upload.hidden = YES;
         self.upload.layer.cornerRadius = 7.0;
-        [self.upload sizeToFit];
+        self.upload.frame = CGRectMake(0, 0, 38, 30);
         
         self.del = [UIButton buttonWithType:UIButtonTypeCustom];
         [self.del setTitle:NSLocalizedString(@"删除", nil) forState:UIControlStateNormal];
         [self.contentView addSubview:self.del];
-        [self.del setBackgroundColor:[UIColor colorWithRed:36.0/255.0 green:139.0/255.0 blue:96.0/255.0 alpha:1.0]];
+        [self.del setBackgroundColor:[UIColor projectGreen]];
         [self.del setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        self.del.titleLabel.font = [UIFont systemFontOfSize:13.0];
+        self.del.titleLabel.font = [UIFont systemFontOfSize:15.0];
         self.del.hidden = YES;
         self.del.layer.cornerRadius = 7.0;
-        [self.del sizeToFit];
+        self.del.frame = CGRectMake(0, 0, 38, 30);
         
         self.curImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 36, 36)];
         [self.contentView addSubview:self.curImageView];
