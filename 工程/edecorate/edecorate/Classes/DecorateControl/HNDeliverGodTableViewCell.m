@@ -33,6 +33,17 @@
     self.bTimeTextField.frame = CGRectMake(labelWidth+20, 35, self.bounds.size.width-(labelWidth+20)-12, 30);
     self.endTimeTextField.frame = CGRectMake(labelWidth+20, 65, self.bounds.size.width-(labelWidth+20)-12, 30);
     
+    CGFloat fColor = 200/255.0;
+    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(12, 35, self.bounds.size.width-12-12, 1)];
+    [self.contentView addSubview:view];
+    view.backgroundColor = [UIColor colorWithWhite:fColor alpha:1];
+    [self.contentView bringSubviewToFront:view];
+    
+    view = [[UIView alloc]initWithFrame:CGRectMake(12, 65, self.bounds.size.width-12-12, 1)];
+    [self.contentView addSubview:view];
+    view.backgroundColor = [UIColor colorWithWhite:fColor alpha:1];
+    [self.contentView bringSubviewToFront:view];
+    
     self.nameLabel.text = NSLocalizedString(@"送货安装产品：", nil);
     self.bTimeLabel.text = NSLocalizedString(@"Start Time", nil);
     self.endTimeLabel.text = NSLocalizedString(@"End Time", nil);

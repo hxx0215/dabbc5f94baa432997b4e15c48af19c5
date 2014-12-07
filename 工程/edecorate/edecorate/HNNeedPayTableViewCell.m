@@ -29,6 +29,7 @@
         [self.contentView addSubview:self.price];
         [self.contentView addSubview:self.detail];
         //[self.contentView addSubview:self.checkButton];
+        
     }
     return self;
 }

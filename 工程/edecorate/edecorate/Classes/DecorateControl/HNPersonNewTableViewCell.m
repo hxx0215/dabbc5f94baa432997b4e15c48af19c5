@@ -39,9 +39,30 @@
     self.cardLabel = [[UILabel alloc]init];
     CGFloat labelWidth = 70;
     CGFloat labelHeight = 30;
-    self.iconPhoto.frame = CGRectMake(15, 5, 60, 60);
+    self.iconPhoto.frame = CGRectMake(14, 15, 60, 60);
     self.cardTitleButton.frame = CGRectMake(15, 95, 60, 50);
     self.cardPhoto.frame = CGRectMake(75, 95, self.bounds.size.width-75-12, 50);
+    
+    CGFloat fColor = 200/255.0;
+    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(75, 1, 1, 144)];
+    [self.contentView addSubview:view];
+    view.backgroundColor = [UIColor colorWithWhite:fColor alpha:1];
+    [self.contentView bringSubviewToFront:view];
+    
+    view = [[UIView alloc]initWithFrame:CGRectMake(75, 5+labelHeight, self.bounds.size.width-75-12, 1)];
+    [self.contentView addSubview:view];
+    view.backgroundColor = [UIColor colorWithWhite:fColor alpha:1];
+    [self.contentView bringSubviewToFront:view];
+    
+    view = [[UIView alloc]initWithFrame:CGRectMake(75, 35+labelHeight, self.bounds.size.width-75-12, 1)];
+    [self.contentView addSubview:view];
+    view.backgroundColor = [UIColor colorWithWhite:fColor alpha:1];
+    [self.contentView bringSubviewToFront:view];
+    
+    view = [[UIView alloc]initWithFrame:CGRectMake(12, 65+labelHeight, self.bounds.size.width-12-12, 1)];
+    [self.contentView addSubview:view];
+    view.backgroundColor = [UIColor colorWithWhite:fColor alpha:1];
+    [self.contentView bringSubviewToFront:view];
     
     self.nameLabel.frame = CGRectMake(75, 5, labelWidth, labelHeight);
     self.phoneLabel.frame = CGRectMake(75, 35, labelWidth, labelHeight);
