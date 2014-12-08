@@ -346,8 +346,8 @@
             cell.curImageView.hidden = NO;
             NSInteger index = [self.curImageIndex[indexPath] integerValue];
             cell.curImageView.image = imgArr[index];
-            cell.leftImg.hidden = NO;
-            cell.rightImg.hidden = NO;
+            cell.leftImg.hidden = ([imgArr count]==1);
+            cell.rightImg.hidden = ([imgArr count]==1);
         }
         else{
             cell.del.hidden = YES;

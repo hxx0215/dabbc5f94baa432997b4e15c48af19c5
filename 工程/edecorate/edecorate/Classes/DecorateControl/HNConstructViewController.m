@@ -296,12 +296,12 @@ static NSString *kPicCell = @"picCell";
             }
             else
             {
-                tCell.leftImg.hidden = NO;
-                tCell.rightImg.hidden = NO;
                 tCell.pic.hidden = NO;
                 NSArray *arr = self.imageSet[key];
                 NSInteger index = [self.curImageIndex[key] integerValue];
                 tCell.pic.image = arr[index];
+                tCell.leftImg.hidden = ([arr count]==1);
+                tCell.rightImg.hidden = ([arr count]==1);
             }
             tCell.contentView.tag = indexPath.section * 100 + indexPath.row;
             [tCell.leftImg removeTarget:self action:@selector(leftImage:) forControlEvents:UIControlEventTouchUpInside];
@@ -310,8 +310,6 @@ static NSString *kPicCell = @"picCell";
             [tCell.rightImg addTarget:self action:@selector(rightImage:) forControlEvents:UIControlEventTouchUpInside];
             [tCell.titleText sizeToFit];
             return tCell;
-            [cell.photo setImage:[self.picDict objectForKey:[NSString stringWithFormat:@"%d",indexPath.row]] forState:UIControlStateNormal];
-            [cell.photo setImage:[self.picDict objectForKey:[NSString stringWithFormat:@"%d",indexPath.row]] forState:UIControlStateHighlighted];
         }
         cell.photo.tag = (indexPath.section + 1) * 100 + indexPath.row;
     }

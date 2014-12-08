@@ -245,6 +245,8 @@ static NSString *kCheckDetailCell = @"kCheckDetailCell";
             {
                 NSInteger index = [self.curImageIndex[indexPath] integerValue];
                 tCell.pic.image = imageArr[index];
+                tCell.leftImg.hidden = ([imageArr count]==1);
+                tCell.rightImg.hidden = ([imageArr count]==1);
             }
         }
         return tCell;

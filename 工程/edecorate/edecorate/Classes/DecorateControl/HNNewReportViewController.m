@@ -374,6 +374,8 @@ static NSString *kNewPicCell = @"kNewPicCell";
         NSArray *imageArr = self.imageSet[key];
         if (imageArr && [imageArr count]>0){
             tCell.pic.image = imageArr[[self.curImageIndex[key] integerValue]];
+            tCell.leftImg.hidden = ([imageArr count] == 1);
+            tCell.rightImg.hidden = ([imageArr count] == 1);
         }
         return tCell;
 
