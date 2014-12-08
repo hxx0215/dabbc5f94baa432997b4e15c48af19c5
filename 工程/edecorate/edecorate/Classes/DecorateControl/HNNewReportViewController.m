@@ -368,6 +368,8 @@ static NSString *kNewPicCell = @"kNewPicCell";
         [tCell.leftImg addTarget:self action:@selector(leftImage:) forControlEvents:UIControlEventTouchUpInside];
         [tCell.rightImg removeTarget:self action:@selector(rightImage:) forControlEvents:UIControlEventTouchUpInside];
         [tCell.rightImg addTarget:self action:@selector(rightImage:) forControlEvents:UIControlEventTouchUpInside];
+        [tCell.showPic removeTarget:self action:@selector(showPic:) forControlEvents:UIControlEventTouchUpInside];
+        [tCell.showPic addTarget:self action:@selector(showPic:) forControlEvents:UIControlEventTouchUpInside];
         NSString *key = [NSString stringWithFormat:@"%d",tCell.contentView.tag];
         [self shouldHideCellUI:tCell
                           hide:![self shouldShowAllUI:key]];
@@ -842,6 +844,16 @@ static NSString *kNewPicCell = @"kNewPicCell";
     if (curImageIndex<0) curImageIndex = 0;
     [self.curImageIndex setObject:@(curImageIndex) forKey:key];
     [self.tableView reloadData];
+}
+- (void)showPic:(UIButton *)sender{
+    NSString *key = [NSString stringWithFormat:@"%d",[sender superview].tag];
+    NSArray *imageArr = self.imageSet[key];
+    UIImage *curImage = imageArr[[self.curImageIndex[key] integerValue]];
+    HNBrowseImageViewController *vc = [[HNBrowseImageViewController alloc] init];
+    vc.image = curImage;
+    [self presentViewController:vc animated:NO completion:^{
+        
+    }];
 }
 - (BOOL)shouldShowAllUI:(NSString *)key{
     NSArray *imgarr = self.imageSet[key];

@@ -54,6 +54,13 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="rei-JK-z6t">
+                        <rect key="frame" x="123" y="53" width="75" height="50"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <state key="normal">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
                 </subviews>
             </tableViewCellContentView>
             <connections>
@@ -61,6 +68,7 @@
                 <outlet property="leftImg" destination="Z9c-s5-cKt" id="QMe-GR-V2o"/>
                 <outlet property="pic" destination="b5A-QR-arv" id="cXX-g8-S2X"/>
                 <outlet property="rightImg" destination="f3U-6w-PAL" id="J1p-Q1-puT"/>
+                <outlet property="showPic" destination="rei-JK-z6t" id="uCU-Dm-cso"/>
                 <outlet property="titleText" destination="shO-zN-OhJ" id="WvO-lE-eAY"/>
                 <outlet property="uploadImage" destination="HkV-Rp-OAV" id="Lzr-Ii-d6G"/>
             </connections>

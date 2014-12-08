@@ -15,5 +15,6 @@
 @property (strong, nonatomic) IBOutlet UIImageView *pic;
 @property (strong, nonatomic) IBOutlet UIButton *delImage;
 @property (strong, nonatomic) IBOutlet UIButton *uploadImage;
+@property (strong, nonatomic) IBOutlet UIButton *showPic;
 @property (strong, nonatomic) UIImage *img;
 @end

@@ -339,6 +339,7 @@
         [cell.del addTarget:self action:@selector(delImg:) forControlEvents:UIControlEventTouchUpInside];
         [cell.leftImg addTarget:self action:@selector(leftImg:) forControlEvents:UIControlEventTouchUpInside];
         [cell.rightImg addTarget:self action:@selector(rightImg:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.showPic addTarget:self action:@selector(showPic:) forControlEvents:UIControlEventTouchUpInside];
         NSMutableArray *imgArr = [self.imageSet objectForKey:indexPath];
         if (imgArr && [imgArr count]>0)
         {
@@ -608,6 +609,18 @@
     if (curImageIndex > maxIndex - 1) curImageIndex = maxIndex - 1;
     [self.curImageIndex setObject:@(curImageIndex) forKey:indexPath];
     [self reloadTable];
+}
+- (void)showPic:(UIButton *)sender{
+    NSInteger section = [sender superview].tag / 100;
+    NSInteger row = [sender superview].tag % 100;
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:section];
+    NSMutableArray *imgArr = [self.imageSet objectForKey:indexPath];
+    NSInteger index = [self.curImageIndex[indexPath] integerValue];
+    HNBrowseImageViewController *vc = [[HNBrowseImageViewController alloc] init];
+    vc.image = imgArr[index];
+    [self presentViewController:vc animated:NO completion:^{
+        
+    }];
 }
 -(void)didSelect:(NSString *)roomNumber declareId:(NSString *)declareId data:(NSDictionary *)alldata{
     [self.showPick setTitle:roomNumber forState:UIControlStateNormal];
