@@ -15,12 +15,12 @@
     if (self){
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         self.title = [[UILabel alloc] initWithFrame:CGRectMake(37, 0, 200, 18)];
-        self.title.font = [UIFont systemFontOfSize:18.0];
+        self.title.font = [UIFont systemFontOfSize:12.0];
         self.price = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 19)];
-        self.price.font = [UIFont systemFontOfSize:19.0];
+        self.price.font = [UIFont systemFontOfSize:12.0];
         self.price.textAlignment = NSTextAlignmentRight;
         self.detail = [[UILabel alloc] initWithFrame:CGRectMake(37, 0, 200, 13)];;
-        self.detail.font = [UIFont systemFontOfSize:13.0];
+        self.detail.font = [UIFont systemFontOfSize:11.0];
         //self.checkButton = [UIButton buttonWithType:UIButtonTypeCustom];
         //[self.checkButton setBackgroundImage:[UIImage imageNamed:@"purchasecheckbox.png"] forState:UIControlStateNormal];
         //[self.checkButton setImage:[UIImage imageNamed:@"purchasecheck.png"] forState:UIControlStateSelected];

@@ -641,7 +641,7 @@
     UIImage *scaledImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.labelText = NSLocalizedString(@"Loading", nil);
+    hud.labelText = NSLocalizedString(@"上传中", nil);
     [HNUploadImage UploadImage:scaledImage block:^(NSString *msg) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         if (msg) {

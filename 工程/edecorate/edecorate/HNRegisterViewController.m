@@ -105,22 +105,19 @@
         NSDictionary* dic = [retJson objectFromJSONString];
         NSNumber* total = [dic objectForKey:@"total"];
         
+        NSString *msg = nil;
         if (total.intValue){
             NSArray *array = [dic objectForKey:@"data"];
             NSDictionary* dicarray = [array objectAtIndex:0];
             NSString *state = [dicarray objectForKey:@"state"];
+            msg = [dicarray objectForKey:@"msg"];
             
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:[dicarray objectForKey:@"msg"] delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
-            [alert show];
             if (state.integerValue) {
                 [self.navigationController popViewControllerAnimated:YES];
             }
         }
-        else
-        {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login Fail", nil) message:NSLocalizedString(@"Please input correct username and password", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
-            [alert show];
-        }
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:msg delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+        [alert show];
     }
     else{
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection Error", nil) message:NSLocalizedString(@"Please check your network.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
