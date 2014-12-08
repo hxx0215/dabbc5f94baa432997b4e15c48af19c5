@@ -143,23 +143,26 @@
     HNReportModel *model =self.reportList[indexPath.row];
     [cell setRoomName:model.roomName];
     NSString *status = @"";
-    if ([model.status isEqualToString:@"0"]){
-        status = @"审核进度:未审核";
-    }
-    if ([model.status isEqualToString:@"-1"]){
-        status = @"审核进度:失败";
-    }
-    if ([model.status isEqualToString:@"1"]){
-        if ([model.paystate isEqualToString:@"1"])
+    if ([model.paystate isEqualToString:@"1"])
+    {
+        if ([model.status isEqualToString:@"0"]){
+            status = @"审核进度:未审核";
+        }
+        if ([model.status isEqualToString:@"-1"]){
+            status = @"审核进度:失败";
+        }
+        if ([model.status isEqualToString:@"1"]){
             status = @"审核进度:已通过";
-        else if ([model.paystate isEqualToString:@"2"])
-            status = @"审核进度:待支付";
-        else
-            status = @"审核进度:待完善资料";
+        }
+        if ([model.status isEqualToString:@"2"]){
+            status = @"审核进度:审核中";
+        }
     }
-    if ([model.status isEqualToString:@"2"]){
-        status = @"审核进度:审核中";
-    }
+    else if ([model.paystate isEqualToString:@"2"])
+        status = @"审核进度:待支付";
+    else
+        status = @"审核进度:待完善资料";
+    
     [cell setStatus:status];
 
     return cell;
