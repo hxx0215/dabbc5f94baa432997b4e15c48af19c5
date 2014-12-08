@@ -93,19 +93,19 @@
             [self.decorateList removeAllObjects];
             for (int i=0; i<count; i++) {
                 HNDecorateChoiceModel *model = [[HNDecorateChoiceModel alloc] init];
-                model.status = [dataArr[i] objectForKey:@"assessorstate"];
+                model.alldata = [dataArr[i] copy];
+                model.assessorstate = [dataArr[i] objectForKey:@"assessorstate"];
+                model.processstep = [dataArr[i] objectForKey:@"processstep"];
+                model.paystate = [dataArr[i] objectForKey:@"paystate"];
+                model.createTime = [dataArr[i] objectForKey:@"createTime"];
                 model.roomName = [NSString stringWithFormat:@"%@",[dataArr[i] objectForKey:@"roomnumber"]];
                 model.declareId = [dataArr[i] objectForKey:@"declareId"];
-                [self.decorateList addObject:model];
+                if (model.processstep.integerValue != 0 && model.assessorstate.integerValue !=0 && model.paystate.integerValue!=0)
+                    [self.decorateList addObject:model];
             }
             [self.selectPicker reloadAllComponents];
         }
         
-        else
-        {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login Fail", nil) message:NSLocalizedString(@"Please input correct username and password", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
-            [alert show];
-        }
     }
     else{
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection Error", nil) message:NSLocalizedString(@"Please check your network.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
@@ -157,7 +157,7 @@
     if (!self.delegate) {
         return;
     }
-    if(!self.updataDecorateInformation)
+    //if(!self.updataDecorateInformation)
     {
         [self.delegate updataDecorateInformation:self.model];
         return;

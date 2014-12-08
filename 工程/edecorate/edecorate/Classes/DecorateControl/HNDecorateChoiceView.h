@@ -13,8 +13,13 @@
 
 @interface HNDecorateChoiceModel : NSObject
 @property (nonatomic, strong)NSString *roomName;
-@property (nonatomic, strong)NSString *status;
 @property (nonatomic, strong)NSString *declareId;
+@property (nonatomic, strong)NSString *processstep;
+@property (nonatomic, strong)NSString *paystate;
+@property (nonatomic, strong)NSString *assessorstate;
+@property (nonatomic, strong)NSString *createTime;
+@property (nonatomic, strong)NSDictionary *alldata;
+
 @property (nonatomic, strong)NSString *ownername;
 @property (nonatomic, strong)NSString *ownerphone;
 @property (nonatomic, strong)HNPaySupport *payModel;

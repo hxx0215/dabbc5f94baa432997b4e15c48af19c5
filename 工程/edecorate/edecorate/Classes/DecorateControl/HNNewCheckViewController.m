@@ -13,6 +13,7 @@
 #import "HNUploadImage.h"
 #import "MBProgressHUD.h"
 #import "HNSelectChargeTableViewController.h"
+#import "HNDecorateChoiceView.h"
 
 @interface HNSeprateCheckView : UIView
 @property (nonatomic, weak) UIView *hiddenWith;
@@ -27,7 +28,7 @@
     self.hiddenWith2.hidden = YES;
 }
 @end
-@interface HNNewCheckViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate,UIPickerViewDelegate,UIPickerViewDataSource,UINavigationControllerDelegate,HNSelectChargeTableViewControllerDelegate,UITextFieldDelegate,UIAlertViewDelegate,UIActionSheetDelegate>
+@interface HNNewCheckViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate,UIPickerViewDelegate,UIPickerViewDataSource,UINavigationControllerDelegate,HNSelectChargeTableViewControllerDelegate,UITextFieldDelegate,UIAlertViewDelegate,UIActionSheetDelegate,HNDecorateChoiceViewDelegate>
 @property (strong, nonatomic) IBOutlet UITableViewCell *curStatusCell;
 @property (strong, nonatomic) IBOutlet UILabel *curStatusLabel;
 
@@ -42,6 +43,7 @@
 @property (nonatomic, strong) UIPickerView *listPick;
 @property (nonatomic, strong) HNSeprateCheckView *sepView;
 @property (nonatomic, strong) UIButton *showPick;
+@property (nonatomic, strong) HNDecorateChoiceView *decorateChoiceView;
 @property (nonatomic, strong) NSMutableDictionary *imageSet;
 @property (strong, nonatomic) NSMutableDictionary *curImageIndex;
 @property (nonatomic, strong) NSMutableDictionary *imgUrl;
@@ -267,9 +269,20 @@
     if (section == 0)
     {
 //        label.text = [self.pickViewData[self.curPickViewIndex] objectForKey:@"roomnumber"];
-        self.showPick.frame = contentView.bounds;
-        self.showPick.layer.cornerRadius = 7.0;
-        [contentView addSubview:self.showPick];
+        if(!self.decorateChoiceView)
+        {
+            self.decorateChoiceView = [[HNDecorateChoiceView alloc]initWithFrame:CGRectMake(12, 12, self.view.bounds.size.width-24, 30)];
+            self.decorateChoiceView.delegate = self;
+            self.decorateChoiceView.left = 5;
+            self.decorateChoiceView.centerY = contentView.height / 2;
+            self.decorateChoiceView.updataDecorateInformation = NO;
+            self.decorateChoiceView.payType = KHNPayTypeNo;
+            
+        }
+        [contentView addSubview:self.decorateChoiceView];
+        //self.showPick.frame = contentView.bounds;
+        //self.showPick.layer.cornerRadius = 7.0;
+        //[contentView addSubview:self.showPick];
         return view;
     }
     else
@@ -284,6 +297,14 @@
     [contentView addSubview:label];
     return view;
 }
+
+- (void)updataDecorateInformation:(HNDecorateChoiceModel*)model
+{
+    [self loadTableData:model.declareId];
+    self.curData = [model.alldata mutableCopy];
+    //NSLog(@"%@ : %@",roomNumber,declareId);
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     if ([self.pickViewData count]<1) return 0;
     return [self.dataArr count] + 2;
