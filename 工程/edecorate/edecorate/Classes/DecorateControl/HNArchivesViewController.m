@@ -27,6 +27,7 @@
 @interface HNArchivesViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong)UITableView *tTableView;
 @property (nonatomic, strong)NSMutableArray *modelList;
+@property (nonatomic)BOOL isFirst;
 @end
 
 @implementation HNArchivesViewController
@@ -47,7 +48,7 @@
         typeof(self) sself = wself;
         [sself loadMyData];
     }];
-    
+    self.isFirst = YES;
     self.navigationItem.title = NSLocalizedString(@"Archives", nil);
     
 }
@@ -60,7 +61,11 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self loadMyData];
+    if (self.isFirst) {
+        [self loadMyData];
+        self.isFirst = NO;
+    }
+    
     
 }
 #pragma mark - tableView Delegate & DataSource

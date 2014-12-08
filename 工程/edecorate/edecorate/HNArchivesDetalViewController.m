@@ -220,7 +220,9 @@
         return 40;
     }
     if (indexPath.section==2&&indexPath.row==3) {
-        return 60;
+        if(self.model.EnterpriseFile&&self.model.EnterpriseFile.length>1)
+            return 97;
+        else return 40;
     }
     return 30;
 }
