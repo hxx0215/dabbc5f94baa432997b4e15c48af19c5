@@ -59,6 +59,10 @@
         [self.rightImg sizeToFit];
         [self.contentView addSubview:self.rightImg];
         self.rightImg.hidden = YES;
+        
+        self.showPic = [UIButton buttonWithType:UIButtonTypeCustom];
+        self.showPic.frame = self.curImageView.frame;
+        [self.contentView addSubview:self.showPic];
     }
     return self;
 }
@@ -94,6 +98,7 @@
         self.rightImg.right = self.contentView.width - 20;
         self.rightImg.centerY = self.leftImg.centerY;
     }
+    self.showPic.frame = self.curImageView.frame;
 }
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     [textField resignFirstResponder];

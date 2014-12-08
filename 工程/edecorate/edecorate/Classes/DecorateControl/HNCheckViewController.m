@@ -234,6 +234,8 @@ static NSString *kCheckDetailCell = @"kCheckDetailCell";
         [tCell.leftImg addTarget:self action:@selector(leftImage:) forControlEvents:UIControlEventTouchUpInside];
         [tCell.rightImg removeTarget:self action:@selector(rightImage:) forControlEvents:UIControlEventTouchUpInside];
         [tCell.rightImg addTarget:self action:@selector(rightImage:) forControlEvents:UIControlEventTouchUpInside];
+        [tCell.showPic removeTarget:self action:@selector(showPic:) forControlEvents:UIControlEventTouchUpInside];
+        [tCell.showPic addTarget:self action:@selector(showPic:) forControlEvents:UIControlEventTouchUpInside];
         tCell.delImage.hidden = YES;
         tCell.uploadImage.hidden = YES;
         tCell.titleText.text = cell.nameLabel.text;
@@ -245,6 +247,8 @@ static NSString *kCheckDetailCell = @"kCheckDetailCell";
             {
                 NSInteger index = [self.curImageIndex[indexPath] integerValue];
                 tCell.pic.image = imageArr[index];
+                tCell.leftImg.hidden = ([imageArr count]==1);
+                tCell.rightImg.hidden = ([imageArr count]==1);
             }
         }
         return tCell;
@@ -331,5 +335,18 @@ static NSString *kCheckDetailCell = @"kCheckDetailCell";
     if (curIndex > maxIndex - 1) curIndex = maxIndex - 1;
     self.curImageIndex[indexPath] = @(curIndex);
     [self.tableView reloadData];
+}
+- (void)showPic:(UIButton *)sender{
+    NSInteger section = [sender superview].tag / 100;
+    NSInteger row = [sender superview].tag % 100;
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:section];
+    NSArray *imageArr = self.imageSet[indexPath];
+    NSInteger index = [self.curImageIndex[indexPath] integerValue];
+    UIImage *image = imageArr[index];
+    HNBrowseImageViewController *vc = [[HNBrowseImageViewController alloc] init];
+    vc.image = image;
+    [self presentViewController:vc animated:NO completion:^{
+        
+    }];
 }
 @end

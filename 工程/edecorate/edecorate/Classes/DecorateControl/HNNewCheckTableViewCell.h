@@ -18,4 +18,5 @@
 @property (strong, nonatomic) UIImageView *curImageView;
 @property (strong, nonatomic) UIButton *leftImg;
 @property (strong, nonatomic) UIButton *rightImg;
+@property (strong, nonatomic) UIButton *showPic;
 @end

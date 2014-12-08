@@ -296,22 +296,22 @@ static NSString *kPicCell = @"picCell";
             }
             else
             {
-                tCell.leftImg.hidden = NO;
-                tCell.rightImg.hidden = NO;
                 tCell.pic.hidden = NO;
                 NSArray *arr = self.imageSet[key];
                 NSInteger index = [self.curImageIndex[key] integerValue];
                 tCell.pic.image = arr[index];
+                tCell.leftImg.hidden = ([arr count]==1);
+                tCell.rightImg.hidden = ([arr count]==1);
             }
             tCell.contentView.tag = indexPath.section * 100 + indexPath.row;
             [tCell.leftImg removeTarget:self action:@selector(leftImage:) forControlEvents:UIControlEventTouchUpInside];
             [tCell.rightImg removeTarget:self action:@selector(rightImage:) forControlEvents:UIControlEventTouchUpInside];
+            [tCell.showPic removeTarget:self action:@selector(showPic:) forControlEvents:UIControlEventTouchUpInside];
             [tCell.leftImg addTarget:self action:@selector(leftImage:) forControlEvents:UIControlEventTouchUpInside];
             [tCell.rightImg addTarget:self action:@selector(rightImage:) forControlEvents:UIControlEventTouchUpInside];
+            [tCell.showPic addTarget:self action:@selector(showPic:) forControlEvents:UIControlEventTouchUpInside];
             [tCell.titleText sizeToFit];
             return tCell;
-            [cell.photo setImage:[self.picDict objectForKey:[NSString stringWithFormat:@"%d",indexPath.row]] forState:UIControlStateNormal];
-            [cell.photo setImage:[self.picDict objectForKey:[NSString stringWithFormat:@"%d",indexPath.row]] forState:UIControlStateHighlighted];
         }
         cell.photo.tag = (indexPath.section + 1) * 100 + indexPath.row;
     }
@@ -340,6 +340,17 @@ static NSString *kPicCell = @"picCell";
         index = [self.imageSet[key] count] -1;
     [self.curImageIndex setObject:[NSString stringWithFormat:@"%d",index] forKey:key];
     [self.tableView reloadData];
+}
+- (void)showPic:(UIButton *)sender{
+    NSString *key = [NSString stringWithFormat:@"%d",[sender superview].tag % 100];
+    NSArray *arr = self.imageSet[key];
+    NSInteger index = [self.curImageIndex[key] integerValue];
+    UIImage *curImage = arr[index];
+    HNBrowseImageViewController *vc = [[HNBrowseImageViewController alloc] init];
+    vc.image = curImage;
+    [self presentViewController:vc animated:NO completion:^{
+        
+    }];
 }
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
