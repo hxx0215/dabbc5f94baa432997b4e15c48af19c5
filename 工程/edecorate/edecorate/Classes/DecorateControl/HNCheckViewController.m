@@ -49,7 +49,7 @@ static NSString *kCheckDetailCell = @"kCheckDetailCell";
     NSDictionary *dic = @{@"-1": NSLocalizedString(@"未通过", nil),@"1": NSLocalizedString(@"通过", nil),@"0" : NSLocalizedString(@"审核中", nil)};
     self.checkInfo = @[localeString(@"申请验收时间",self.declaretime),localeString(@"施工方备注 :", self.shopreason),localeString(@"施工方附件", @"")];
     self.managerTitle = @[localeString(@"物业审核状态 :", dic[self.manageAssessor]),localeString(@"物业审核备注 :", self.manageckreason),localeString(@"物业审核时间 :", self.managecktime),localeString(@"物业审核附件",@"")];
-    self.ownTitle = @[localeString(@"业主审核状态 :", dic[self.manageAssessor]),localeString(@"业主审核备注 :", self.ownerckreason),localeString(@"业主审核时间 :", self.ownercktime),localeString(@"业主审核附件",@"")];
+    self.ownTitle = @[localeString(@"业主审核状态 :", dic[self.ownerAssessor]),localeString(@"业主审核备注 :", self.ownerckreason),localeString(@"业主审核时间 :", self.ownercktime),localeString(@"业主审核附件",@"")];
     self.headTitle = [[NSMutableArray alloc] initWithObjects:[NSString stringWithFormat:@"%@ : %@",self.processname,dic[[NSString stringWithFormat:@"%d",self.state]]],NSLocalizedString(@"验收信息", nil),NSLocalizedString(@"物业审核", nil),NSLocalizedString(@"业主审核", nil), nil];
     for (id obj in self.contentArr){
         [self.headTitle addObject:[NSString stringWithFormat:@"%@",[obj objectForKey:@"typename"]]];
