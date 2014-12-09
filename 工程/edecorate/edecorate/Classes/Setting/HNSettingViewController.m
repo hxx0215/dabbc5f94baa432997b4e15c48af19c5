@@ -12,13 +12,15 @@
 
 @interface HNSettingViewController ()
 
-@property(nonatomic,strong) IBOutlet UIView* view2;
+@property (strong, nonatomic) IBOutlet UISwitch *switchCheckVersion;
 @property(nonatomic,strong) IBOutlet UIButton* btnClear;
 @property(nonatomic,strong) IBOutlet UIButton* btnModifPW;
 @property(nonatomic,strong) IBOutlet UIButton* btnLogOut;
+@property(nonatomic,strong) IBOutlet UIView* viewCheckVersion;
 @end
 
 @implementation HNSettingViewController
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -31,6 +33,15 @@
     [self.btnClear addTarget:self action:@selector(btnClearClick:) forControlEvents:UIControlEventTouchUpInside];
     [self btnWithTitle:@"修改密码" button:self.btnModifPW];
     [self.btnModifPW addTarget:self action:@selector(btnModifPWClick:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UILabel *label = [[UILabel alloc]init];
+    label.text = @"检查更新";
+    label.font = [UIFont systemFontOfSize:17];
+    [label sizeToFit];
+    [self.viewCheckVersion addSubview:label];
+    label.centerY = self.viewCheckVersion.height/2;
+    [self.viewCheckVersion bringSubviewToFront:label];
+    label.left = 24;
     
 }
 
@@ -59,6 +70,10 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (IBAction)checkVersonClick:(id)sender {
+}
+
 - (IBAction)logOut:(UIButton *)sender {
     [self dismissViewControllerAnimated:YES completion:^{
         

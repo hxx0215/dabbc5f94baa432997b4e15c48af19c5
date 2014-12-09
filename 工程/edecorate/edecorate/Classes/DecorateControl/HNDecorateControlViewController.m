@@ -12,7 +12,7 @@
 #import "HNTemporaryFireViewController.h"
 #import "HNOfficePassesViewController.h"
 #import "HNDecorateCheckViewController.h"
-#include "HNComplaintTableViewController.h"
+#import "HNComplaintTableViewController.h"
 #import "HNRefundTableViewController.h"
 #import "HNOfficePassesApplyViewController.h"
 #import "HNDeliverViewController.h"
