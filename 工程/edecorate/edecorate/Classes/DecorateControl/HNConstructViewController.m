@@ -73,6 +73,18 @@ static NSString *kPicCell = @"picCell";
     [self initButtonView];
 }
 - (void)initButtonName{
+    if ([self.paystate isEqualToString:@"1"])
+    {
+        self.buttonName = @"开通商家认证";
+        return ;
+    }
+    if ([self.paystate isEqualToString:@"2"]){
+        self.buttonName = @"前去支付费用";
+        return;
+    }
+    self.buttonName = @"完善报建资料";
+    return ;
+//--------------------------老的----------------------------------
     if ([self.assessorstate isEqualToString:@"0"]){
         self.buttonName = @"开通认证商家";
     }
