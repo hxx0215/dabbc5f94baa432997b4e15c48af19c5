@@ -19,6 +19,7 @@
 #import "HNMessageViewController.h"
 #import "HNSettingViewController.h"
 #import "HNRegisterViewController.h"
+#import "HNUpgrade.h"
 
 @interface HNLoginModel: NSObject
 @property (nonatomic, strong)NSString *username;
@@ -27,7 +28,7 @@
 @implementation HNLoginModel
 @end
 
-@interface HNLoginViewController()<UITabBarControllerDelegate>
+@interface HNLoginViewController()<UITabBarControllerDelegate,UIAlertViewDelegate>
 
 @property (nonatomic, strong)UIButton *loginButton;
 @property (nonatomic, strong)UIImageView *backImage;
@@ -156,6 +157,16 @@
         self.loginView.userName.text = @"";
         self.loginView.password.text = @"";
     }
+    BOOL shouldUpgrade = [defaults boolForKey:@"HNAUTOUPGRADE"];
+    if (shouldUpgrade){
+        [[HNUpgrade sharedInstance] checkUpdate:^(BOOL flag){
+            if (flag){
+                UIAlertView *alert= [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"升级", nil) message:NSLocalizedString(@"已有新版本是否需要升级", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"取消", nil) otherButtonTitles:NSLocalizedString(@"确定", nil), nil];
+                alert.tag = 1001;
+                [alert show];
+            }
+        }];
+    }
 }
 - (void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
@@ -278,5 +289,10 @@
 {
 //    NSLog(@"didSelectViewController!");
 }
-
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{
+    if (alertView.tag == 1001){
+        if (buttonIndex == 1)
+            [[HNUpgrade sharedInstance] upgrade];
+    }
+}
 @end

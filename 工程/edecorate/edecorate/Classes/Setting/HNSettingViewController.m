@@ -9,6 +9,7 @@
 #import "HNSettingViewController.h"
 #import "HNModfiypwdViewController.h"
 #import "HNImageData.h"
+#import "HNUpgrade.h"
 
 @interface HNSettingViewController ()
 
@@ -44,7 +45,11 @@
     label.left = 24;
     
 }
-
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setBool:self.switchCheckVersion.on forKey:@"HNAUTOUPGRADE"];
+}
 -(void)btnWithTitle:(NSString*)title button:(UIButton*)btn
 {
     [btn setTitle:title forState:UIControlStateNormal];
@@ -71,7 +76,18 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)checkVersonClick:(id)sender {
+- (IBAction)checkVersonClick:(UISwitch *)sender {
+    if (sender.on){
+        [[HNUpgrade sharedInstance] checkUpdate:^(BOOL flag){
+            if (flag)
+            {
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[HNUpgrade sharedInstance].upgradeUrl]];
+            }
+        }];
+    }
+    NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
+    [defaults setBool:sender.on forKey:@"HNAUTOUPGRADE"];
+    [defaults synchronize];
 }
 
 - (IBAction)logOut:(UIButton *)sender {

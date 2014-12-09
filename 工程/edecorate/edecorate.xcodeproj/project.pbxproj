@@ -162,6 +162,7 @@
 		B9E433641A064706000E2CA9 /* HNCheckDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B9E433631A064706000E2CA9 /* HNCheckDetailTableViewCell.m */; };
 		B9E433681A06515E000E2CA9 /* HNNewCheckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9E433661A06515E000E2CA9 /* HNNewCheckViewController.m */; };
 		B9E433691A06515E000E2CA9 /* HNNewCheckViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9E433671A06515E000E2CA9 /* HNNewCheckViewController.xib */; };
+		B9EA2A211A37163B00D25328 /* HNUpgrade.m in Sources */ = {isa = PBXBuildFile; fileRef = B9EA2A201A37163B00D25328 /* HNUpgrade.m */; };
 		B9EBC8491A0E4D79008523E2 /* HNBrowseImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9EBC8481A0E4D79008523E2 /* HNBrowseImageViewController.m */; };
 		B9F8B5831A2750AB007B79C6 /* HNOrderCategoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9F8B5821A2750AB007B79C6 /* HNOrderCategoriesViewController.m */; };
 		B9F8B5861A28A499007B79C6 /* HNReturnCategoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9F8B5851A28A499007B79C6 /* HNReturnCategoriesViewController.m */; };
@@ -556,6 +557,8 @@
 		B9E433651A06515E000E2CA9 /* HNNewCheckViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNNewCheckViewController.h; path = Classes/DecorateControl/HNNewCheckViewController.h; sourceTree = "<group>"; };
 		B9E433661A06515E000E2CA9 /* HNNewCheckViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNNewCheckViewController.m; path = Classes/DecorateControl/HNNewCheckViewController.m; sourceTree = "<group>"; };
 		B9E433671A06515E000E2CA9 /* HNNewCheckViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HNNewCheckViewController.xib; path = Classes/DecorateControl/HNNewCheckViewController.xib; sourceTree = "<group>"; };
+		B9EA2A1F1A37163B00D25328 /* HNUpgrade.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNUpgrade.h; path = Classes/HNUpgrade.h; sourceTree = "<group>"; };
+		B9EA2A201A37163B00D25328 /* HNUpgrade.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNUpgrade.m; path = Classes/HNUpgrade.m; sourceTree = "<group>"; };
 		B9EBC8471A0E4D79008523E2 /* HNBrowseImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNBrowseImageViewController.h; path = Resources/HNBrowseImageViewController.h; sourceTree = "<group>"; };
 		B9EBC8481A0E4D79008523E2 /* HNBrowseImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNBrowseImageViewController.m; path = Resources/HNBrowseImageViewController.m; sourceTree = "<group>"; };
 		B9F8B5811A2750AB007B79C6 /* HNOrderCategoriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNOrderCategoriesViewController.h; path = Classes/BusinessBackground/HNOrderCategoriesViewController.h; sourceTree = "<group>"; };
@@ -1253,6 +1256,8 @@
 		B9D3DEE019CD2E8A0020CDC9 /* Share */ = {
 			isa = PBXGroup;
 			children = (
+				B9EA2A1F1A37163B00D25328 /* HNUpgrade.h */,
+				B9EA2A201A37163B00D25328 /* HNUpgrade.m */,
 				B9EBC8471A0E4D79008523E2 /* HNBrowseImageViewController.h */,
 				B9EBC8481A0E4D79008523E2 /* HNBrowseImageViewController.m */,
 				D33EEABE19D7000E00D6F106 /* HNAreaPickerView.h */,
@@ -1931,6 +1936,7 @@
 				D37642D91A20EF5100F37956 /* HNEditTableViewCell.m in Sources */,
 				B9D72D5919D846FC0011CF83 /* HNOrderViewController.m in Sources */,
 				D33549F719FEB3D300135800 /* HNPersonNewTableViewCell.m in Sources */,
+				B9EA2A211A37163B00D25328 /* HNUpgrade.m in Sources */,
 				B9AD9E0819DEC90D00D82439 /* NSString+Crypt.m in Sources */,
 				D38CF3791A2CCC5A004509FF /* HNFilterDataViewController.m in Sources */,
 				B9C2B41B19FE8BAC00C93D59 /* HNConstructTableViewCell.m in Sources */,
