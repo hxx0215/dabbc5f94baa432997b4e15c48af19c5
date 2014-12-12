@@ -287,19 +287,22 @@
     }
     [self updateTotalPrice];
 }
+- (void)poptoList{
+    NSLog(@"%@",[self.navigationController viewControllers]);
+    BOOL find = NO;
+    for (UIViewController *vc in [self.navigationController viewControllers]){
+        if ([vc isKindOfClass:[HNDecorateReportViewController class]])
+        {
+            find = YES;
+            [self.navigationController popToViewController:vc animated:YES];
+            return;
+        }
+    }
+    [self.navigationController popViewControllerAnimated:YES];
+}
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{
     if (alertView.tag == 123){
-        NSLog(@"%@",[self.navigationController viewControllers]);
-        BOOL find = NO;
-        for (UIViewController *vc in [self.navigationController viewControllers]){
-            if ([vc isKindOfClass:[HNDecorateReportViewController class]])
-            {
-                find = YES;
-                [self.navigationController popToViewController:vc animated:YES];
-                return;
-            }
-        }
-        [self.navigationController popViewControllerAnimated:YES];
+        [self poptoList];
         return ;
     }
     UITextField *tf=[alertView textFieldAtIndex:0];
@@ -412,9 +415,10 @@
 }
 - (void)showJump{
     dispatch_async(dispatch_get_main_queue(), ^{
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"完成", nil) message:NSLocalizedString(@"请在网页端完成支付", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"完成", nil) otherButtonTitles:NSLocalizedString(@"支付遇到问题", nil), nil];
-        alert.tag = 123;
-        [alert show];
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"完成", nil) message:NSLocalizedString(@"请在网页端完成支付", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"完成", nil) otherButtonTitles:NSLocalizedString(@"支付遇到问题", nil), nil];
+//        alert.tag = 123;
+//        [alert show];
+        [self poptoList];
     });
 }
 - (void)didGetPayUrl:(NSString *)url{
