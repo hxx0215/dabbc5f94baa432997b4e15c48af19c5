@@ -149,6 +149,9 @@
 //}
 
 -(void)textFieldDidEndEditing:(UITextField *)textField{
+    if ([self.decorateList count]==0) {
+        return;
+    }
     NSInteger row = [self.selectPicker selectedRowInComponent:0];
     self.model = (HNDecorateChoiceModel*)[self.decorateList objectAtIndex:row];
     self.textFiled.text = self.model.roomName;

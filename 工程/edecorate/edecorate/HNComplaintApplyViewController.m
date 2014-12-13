@@ -32,43 +32,45 @@
 @end
 
 
-@interface HNComplaintApplyViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate,UITextViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource,HNDecorateChoiceViewDelegate,UITableViewDelegate,UITableViewDataSource,HNPicTableViewCellDelegate>
+@interface HNComplaintApplyViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate,UITextViewDelegate,HNDecorateChoiceViewDelegate,UITableViewDelegate,UITableViewDataSource,HNPicTableViewCellDelegate>
 
 @property (nonatomic, strong)IBOutlet UIScrollView *mainView;
 @property (nonatomic, strong)HNComplaint *complaint;
-@property (nonatomic, strong)IBOutlet UILabel *houseInfMainLabel;
-@property (nonatomic, strong)IBOutlet UILabel *constructionInfMainLabel;
-@property (nonatomic, strong)IBOutlet UILabel *complaintInfMainLabel;
-
-@property (nonatomic, strong)IBOutlet UILabel *houseInfTitleLabel;
-@property (nonatomic, strong)IBOutlet UILabel *houseInfLabel;
-@property (nonatomic, strong)IBOutlet UILabel *ownersLabel;
-@property (nonatomic, strong)IBOutlet UILabel *ownersPhoneNumberLabel;
-@property (nonatomic, strong)IBOutlet UILabel *constructionUnitTitleLabel;
-@property (nonatomic, strong)IBOutlet UILabel *constructionUnitLabel;
-@property (nonatomic, strong)IBOutlet UILabel *constructionPersonLabel;
-@property (nonatomic, strong)IBOutlet UILabel *constructionPersonPhoneNumberLabel;
+//@property (nonatomic, strong)IBOutlet UILabel *houseInfMainLabel;
+//@property (nonatomic, strong)IBOutlet UILabel *constructionInfMainLabel;
+//@property (nonatomic, strong)IBOutlet UILabel *complaintInfMainLabel;
+//
+//@property (nonatomic, strong)IBOutlet UILabel *houseInfTitleLabel;
+//@property (nonatomic, strong)IBOutlet UILabel *houseInfLabel;
+//@property (nonatomic, strong)IBOutlet UILabel *ownersLabel;
+//@property (nonatomic, strong)IBOutlet UILabel *ownersPhoneNumberLabel;
+//@property (nonatomic, strong)IBOutlet UILabel *constructionUnitTitleLabel;
+//@property (nonatomic, strong)IBOutlet UILabel *constructionUnitLabel;
+//@property (nonatomic, strong)IBOutlet UILabel *constructionPersonLabel;
+//@property (nonatomic, strong)IBOutlet UILabel *constructionPersonPhoneNumberLabel;
 @property (strong, nonatomic) IBOutlet UIButton *commitButton;
 @property (strong, nonatomic) IBOutlet UIButton *uploadButton;
-@property (strong, nonatomic) IBOutlet UITextView *complaintContansTextView;
+
+@property (strong, nonatomic) IBOutlet UITextView *complaintTextView;
+@property (strong, nonatomic) IBOutlet UITextField *currentTextField;
 
 @property (nonatomic, strong)IBOutlet UILabel *complaintInformationTitleLable;
 
-@property (nonatomic, strong)IBOutlet UITextField *complaintBody;
-@property (nonatomic, strong)IBOutlet UITextField *complaintComplainant;
-@property (nonatomic, strong)IBOutlet UILabel *complaintCategoryTitleLable;
-@property (nonatomic, strong)IBOutlet UILabel *complaintObjectTitleLable;
-@property (nonatomic, strong)IBOutlet UILabel *complaintIssueTitleLable;
-@property (nonatomic, strong)IBOutlet UILabel *evidenceTitleLable;
-@property (nonatomic, strong)IBOutlet UITextField *complaintObjectTF;
-@property (nonatomic, strong)IBOutlet UITextField *complaintOCategoryTF;
+//@property (nonatomic, strong)IBOutlet UITextField *complaintBody;
+//@property (nonatomic, strong)IBOutlet UITextField *complaintComplainant;
+//@property (nonatomic, strong)IBOutlet UILabel *complaintCategoryTitleLable;
+//@property (nonatomic, strong)IBOutlet UILabel *complaintObjectTitleLable;
+//@property (nonatomic, strong)IBOutlet UILabel *complaintIssueTitleLable;
+//@property (nonatomic, strong)IBOutlet UILabel *evidenceTitleLable;
+//@property (nonatomic, strong)IBOutlet UITextField *complaintObjectTF;
+//@property (nonatomic, strong)IBOutlet UITextField *complaintOCategoryTF;
 
 @property (nonatomic, strong)UIImagePickerController *imagePicker;
 
-@property (nonatomic, strong)HNCommbox* commbox;
-@property (nonatomic, strong)UIPickerView* complaintCategoryPickView;
-@property (nonatomic, strong)NSArray* complaintCategoryPickerArray;
-@property (strong, nonatomic) UIView* textOKView;
+//@property (nonatomic, strong)HNCommbox* commbox;
+//@property (nonatomic, strong)UIPickerView* complaintCategoryPickView;
+//@property (nonatomic, strong)NSArray* complaintCategoryPickerArray;
+//@property (strong, nonatomic) UIView* textOKView;
 
 @property (strong, nonatomic) NSString* imageName;
 
@@ -104,29 +106,6 @@
     
     [self.view addSubview:self.tableView];
     
-
-    
-    //Complaint Information
-    [self labelWithTitle:NSLocalizedString(@"Complaint Information", nil) label:self.complaintInformationTitleLable];
-    [self labelWithTitle:NSLocalizedString(@"Complaint Category", nil) label:self.complaintCategoryTitleLable];
-    [self labelWithTitle:NSLocalizedString(@"Complaint Object", nil) label:self.complaintObjectTitleLable];
-    [self labelWithTitle:NSLocalizedString(@"Complaint Issue", nil) label:self.complaintIssueTitleLable];
-    [self labelWithTitle:NSLocalizedString(@"Evidence", nil) label:self.evidenceTitleLable];
-
-    
-    self.complaintContansTextView.layer.borderWidth = 1.0;
-    self.complaintContansTextView.layer.borderColor = [UIColor blackColor].CGColor;
-
-    [self.uploadButton setTitle:NSLocalizedString(@"Upload", nil) forState:UIControlStateNormal];
-    self.uploadButton.layer.cornerRadius = 5.0;
-    [self.uploadButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.uploadButton setBackgroundColor:[UIColor colorWithRed:0.0 green:72.0/255.0 blue:245.0/255.0 alpha:1.0]];
-    
-    [self.commitButton setTitle:NSLocalizedString(@"Submit complaint", nil) forState:UIControlStateNormal];
-    self.commitButton.layer.cornerRadius = 5.0;
-    [self.commitButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.commitButton setBackgroundColor:[UIColor colorWithRed:245.0/255.0 green:72.0/255.0 blue:0.0 alpha:1.0]];
-    
     
     UIImagePickerControllerSourceType sourceType=UIImagePickerControllerSourceTypePhotoLibrary;
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
@@ -137,36 +116,6 @@
     self.imagePicker.sourceType = sourceType;
     self.imagePicker.allowsEditing = NO;
     
-    
-//    NSMutableArray* arr = [[NSMutableArray alloc] init];
-//    [arr addObject:@"投诉业主"];
-//    [arr addObject:@"投诉装修单位"];
-//    _commbox = [[HNCommbox alloc] initWithFrame:CGRectMake(self.houseInfLabel.left, self.complaintCategoryTitleLable.top, self.complaintContansTextView.width, self.commitButton.height) withArray:arr];
-//    [self.view addSubview:_commbox];
-    
-    self.complaintObjectTF.delegate = self;
-    self.complaintContansTextView.delegate = self;
-    
-    
-    self.complaintCategoryPickerArray = [NSArray arrayWithObjects:@"投诉业主",@"投诉装修单位", nil];
-    self.complaintCategoryPickView = [[UIPickerView alloc]init];
-    self.complaintCategoryPickView.delegate = self;
-    self.complaintCategoryPickView.dataSource = self;
-    [self.complaintCategoryPickView setFrame:CGRectMake(0, 0, 320, 200)];
-    self.complaintCategoryPickView.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
-    self.complaintCategoryPickView.showsSelectionIndicator = YES;
-    self.complaintOCategoryTF.inputView = self.complaintCategoryPickView;
-    self.complaintOCategoryTF.delegate = self;
-    self.textOKView = [[UIView alloc]init];
-    self.textOKView.backgroundColor = [UIColor grayColor];
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.textOKView addSubview:button];
-    button.width = self.textOKView.width = 50;
-    button.height = self.textOKView.height = self.complaintOCategoryTF.height;
-    [button setTitle:@"OK" forState:UIControlStateNormal];
-    self.textOKView.hidden = YES;
-    [self.mainView addSubview:self.textOKView];
-    [button addTarget:self action:@selector(OKTextClick) forControlEvents:UIControlEventTouchUpInside];
     
     self.topView = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 30)];
     //[topView setBarStyle:UIBarStyleBlack];
@@ -182,19 +131,19 @@
 
 - (void)updataDecorateInformation:(HNDecorateChoiceModel*)model
 {
-    self.houseInfLabel.text = model.roomName;
-    self.ownersPhoneNumberLabel.text = model.ownerphone;
-    self.ownersLabel.text = model.ownername;
-    [self.ownersPhoneNumberLabel sizeToFit];
-    [self.ownersLabel sizeToFit ];
-    self.ownersPhoneNumberLabel.right = self.view.width - 14;
-    self.ownersLabel.right = self.ownersPhoneNumberLabel.left-5;
+//    self.houseInfLabel.text = model.roomName;
+//    self.ownersPhoneNumberLabel.text = model.ownerphone;
+//    self.ownersLabel.text = model.ownername;
+//    [self.ownersPhoneNumberLabel sizeToFit];
+//    [self.ownersLabel sizeToFit ];
+//    self.ownersPhoneNumberLabel.right = self.view.width - 14;
+//    self.ownersLabel.right = self.ownersPhoneNumberLabel.left-5;
     self.temporaryModel.declareId = model.declareId;
 }
 
 -(void)dismissKeyBoard
 {
-    [self.complaintContansTextView resignFirstResponder];
+    [self.complaintTextView resignFirstResponder];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -245,16 +194,16 @@
 //    lab.layer.borderColor = [UIColor blackColor].CGColor;
 }
 
--(void)OKTextClick
-{
-    NSInteger row = [self.complaintCategoryPickView selectedRowInComponent:0];
-    self.complaintOCategoryTF.text = [self.complaintCategoryPickerArray objectAtIndex:row];
-    [self.complaintOCategoryTF resignFirstResponder];
-    
-}
+
 
 - (IBAction)commit:(id)sender
 {
+    if (self.currentTextField) {
+        [self.currentTextField resignFirstResponder];
+    }
+    if (self.complaintTextView) {
+        [self.complaintTextView resignFirstResponder];
+    }
     MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = NSLocalizedString(@"Loading", nil);
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
@@ -291,11 +240,7 @@
         if (commitStatus)
         {
             UIAlertView* alert=[[UIAlertView alloc]initWithTitle:nil message:@"已提交投诉" delegate:self cancelButtonTitle:@"OK"otherButtonTitles:nil,nil];
-            [alert show];
-        }
-        else
-        {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Loading Fail", nil) message:NSLocalizedString(@"Please try again", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+            alert.tag = 1;
             [alert show];
         }
     }
@@ -370,11 +315,7 @@ bool bo = false;
 {
     bo = false;
     NSLog(@"textFieldDidBeginEditing");
-    if (textField == self.complaintOCategoryTF) {
-        self.textOKView.right = textField.right;
-        self.textOKView.bottom = textField.bottom;
-        self.textOKView.hidden = NO;
-    }
+    self.currentTextField = textField;
     
 }
 
@@ -397,16 +338,6 @@ bool bo = false;
             self.complaint.complainant = textField.text;
         }
             break;
-//        case 1:
-//        {
-//            self.complaint.body = textField.text;
-//        }
-//            break;
-//        case 2:
-//        {
-//            self.complaint.complainType = textField.text;
-//        }
-//            break;
         case 1:
         {
             self.complaint.complainObject = textField.text;
@@ -450,14 +381,15 @@ bool bo = false;
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
     bo = false;
+    self.complaintTextView = textView;
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
     self.complaint.complainProblem = textView.text;
-    if ([textView isEqual:self.complaintContansTextView]) {
-        self.complaintContansTextView.height = self.complaintContansTextView.contentSize.height;
-        self.textViewHeight = self.complaintContansTextView.height;
+    if ([textView isEqual:self.complaintTextView]) {
+        self.complaintTextView.height = self.complaintTextView.contentSize.height;
+        self.textViewHeight = self.complaintTextView.height;
         [self.tableView reloadData];
         [self movewButton];
     };
@@ -488,24 +420,24 @@ bool bo = false;
     return YES;
 }
 
--(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
-    return 1;
-}
--(NSInteger) pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
-    return [self.complaintCategoryPickerArray count];
-}
--(NSString*) pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
-    return [self.complaintCategoryPickerArray objectAtIndex:row];
-}
-
-
-
-- (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component
-
-{
-    return 50.0;
-    
-}
+//-(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
+//    return 1;
+//}
+//-(NSInteger) pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
+//    return [self.complaintCategoryPickerArray count];
+//}
+//-(NSString*) pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
+//    return [self.complaintCategoryPickerArray objectAtIndex:row];
+//}
+//
+//
+//
+//- (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component
+//
+//{
+//    return 50.0;
+//    
+//}
 
 #pragma mark - tableView
 
@@ -654,13 +586,13 @@ bool bo = false;
                 titleString = NSLocalizedString(@"投诉问题：", nil);
                 detailString = NSLocalizedString(@"点此输入投诉问题", nil);
                 textString = self.complaint.complainProblem;
-                self.complaintContansTextView = cell.textView2;
+                self.complaintTextView = cell.textView2;
                 cell.textView2.text = textString;
                 if (self.textViewHeight>30) {
                     cell.textView2.height = self.textViewHeight;
                 }
                 cell.textView2.delegate = self;
-                self.complaintContansTextView.inputAccessoryView = self.topView;
+                self.complaintTextView.inputAccessoryView = self.topView;
                 [cell setStyle:1];
 
             }

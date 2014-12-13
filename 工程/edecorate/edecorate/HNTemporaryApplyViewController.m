@@ -51,6 +51,7 @@
 
 @property (strong, nonatomic) IBOutlet UITextField *timeTextField;
 
+@property (strong, nonatomic) UITextField *currentTextField;
 
 @property (strong, nonatomic) UIDatePicker *pickerView;
 
@@ -203,6 +204,9 @@
 
 - (IBAction)commit:(id)sender
 {
+    if (self.currentTextField) {
+        [self.currentTextField resignFirstResponder];
+    }
     NSString *method;
     NSString *jsonStr;
     MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -407,6 +411,7 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField           // became first responder
 {
+    self.currentTextField = textField;
     bo = false;
     if (textField.tag == 4 || textField.tag == 5) {
         self.timeTextField = textField;
@@ -416,6 +421,7 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
 
+    self.currentTextField = nil;
     if (textField==self.timeTextField) {
         NSDate *selected = [self.pickerView date];
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];

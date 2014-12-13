@@ -32,6 +32,7 @@
 @property (nonatomic, strong)IBOutlet UITextField* eTimeTextField;
 @property (strong,nonatomic) NSIndexPath* selectIndex;
 
+@property (strong, nonatomic) UITextField * currentTextField;
 
 @property (nonatomic, strong) HNDeliverData* model;
 
@@ -224,6 +225,9 @@
 
 - (IBAction)commit:(id)sender
 {
+    if (self.currentTextField) {
+        [self.currentTextField resignFirstResponder];
+    }
     MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = NSLocalizedString(@"Loading", nil);
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
@@ -826,11 +830,13 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField           // became first responder
 {
+    self.currentTextField = textField;
     self.bo = false;
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
+    self.currentTextField = nil;
     if (textField.tag==8||textField.tag==9) {
         NSDate *selected = [self.pickerView date];
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];

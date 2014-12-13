@@ -20,13 +20,12 @@
 
 @interface HNOfficePassesApplyViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate,HNDecorateChoiceViewDelegate,UITextFieldDelegate,UIActionSheetDelegate>
 
-
-
-
 @property (nonatomic, strong) UIImagePickerController *imagePicker;
 @property (nonatomic, strong) HNPersonNewTableViewCell *addNewCell;
 
 @property (strong, nonatomic) HNDecorateChoiceView *choiceDecorateView;
+
+@property (strong, nonatomic) UITextField * currentTextField;
 
 @property (strong, nonatomic) UIButton * imageButton;
 
@@ -197,6 +196,9 @@
 
 - (IBAction)checkOut:(id)sender
 {
+    if (self.currentTextField) {
+        [self.currentTextField resignFirstResponder];
+    }
     MBProgressHUD *hud=[MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.labelText = NSLocalizedString(@"Loading", nil);
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
@@ -686,11 +688,13 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField           // became first responder
 {
+    self.currentTextField = textField;
     self.bo = false;
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
+    self.currentTextField = nil;
     NSInteger section = textField.tag/10;
     HNPassProposerData *data = [self.temporaryModel.proposerItems objectAtIndex:section];
     NSInteger row = textField.tag%10;
