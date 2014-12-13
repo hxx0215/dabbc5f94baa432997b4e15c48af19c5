@@ -168,11 +168,6 @@ static NSString *const cellIdentifier=@"QQChart";
             [self loadPic];
             [self.headView setContent:self.goodDetaildic];
         }
-        else
-        {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login Fail", nil) message:NSLocalizedString(@"Please input correct username and password", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
-            [alert show];
-        }
     }
     else{
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection Error", nil) message:NSLocalizedString(@"Please check your network.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
@@ -233,11 +228,6 @@ static NSString *const cellIdentifier=@"QQChart";
                 [self.cellFrames addObject:cellFrame];
             }
             [self.tableView reloadData];
-        }
-        else
-        {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login Fail", nil) message:NSLocalizedString(@"Please input correct username and password", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
-            [alert show];
         }
     }
     else{

@@ -167,17 +167,17 @@
             self.model.realname = textField.text;
         }
             break;
-        case 3:
+        case 2:
         {
             self.model.phone = textField.text;
         }
             break;
-        case 4:
+        case 3:
         {
             self.model.email = textField.text;
         }
             break;
-        case 5:
+        case 4:
         {
             self.model.idcard = textField.text;
         }
