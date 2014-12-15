@@ -15,7 +15,7 @@
 #import "HNLoginData.h"
 #import "HNImageUploadTableViewCell.h"
 
-@interface HNProfileChangeViewController ()<UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate>
+@interface HNProfileChangeViewController ()<UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,UINavigationControllerDelegate>
 
 @property (strong, nonatomic) UITextField* currentTextField;
 @property (nonatomic, strong) UITableView *tableView;
@@ -55,6 +55,7 @@
     self.imagePicker.delegate =self;
     self.imagePicker.sourceType = sourceType;
     self.imagePicker.allowsEditing = NO;
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated

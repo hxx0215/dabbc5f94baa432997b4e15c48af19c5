@@ -168,3 +168,5 @@
 "Please check your network." = "联不上网啦，请检查您的网络环境。";
 "We don't get any data." = "未获取到数据，请稍等一会。";
 "Error" = "错误";
+"Please input correct username and password" = "请输入正确的用户名和密码";
+"Login Fail" = "登录失败";

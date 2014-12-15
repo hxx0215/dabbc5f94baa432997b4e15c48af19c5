@@ -19,6 +19,7 @@
 @interface HNProfileViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (strong, nonatomic) HNProfileData *model;
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic) BOOL isUpdata;
 @end
 
 @implementation HNProfileViewController
@@ -43,7 +44,7 @@
     self.model = [[HNProfileData alloc]init];
 
 
-    
+    self.isUpdata = YES;
 }
 
 
@@ -51,6 +52,7 @@
     HNProfileChangeViewController *controller = [[HNProfileChangeViewController alloc] init];
     controller.model = self.model;
     //[self.navigationController pushViewController:controller animated:YES];
+    self.isUpdata = YES;
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:controller];
     nav.navigationBar.translucent = NO;
     [self.navigationController.view setUserInteractionEnabled:NO];
@@ -102,11 +104,6 @@
             [self.model updateData:[array objectAtIndex:0]];
             [self.tableView reloadData];
         }
-        else
-        {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login Fail", nil) message:NSLocalizedString(@"Please input correct username and password", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
-            [alert show];
-        }
     }
     else{
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection Error", nil) message:NSLocalizedString(@"Please check your network.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
@@ -117,8 +114,10 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.tableView.frame = self.view.bounds;
-    [self loadMyData];
-    
+    if (self.isUpdata) {
+        [self loadMyData];
+        self.isUpdata = NO;
+    }
 }
 #pragma mark - tableView
 

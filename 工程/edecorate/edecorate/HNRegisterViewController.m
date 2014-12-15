@@ -213,8 +213,8 @@
             break;
         case 1:
         {
-            titleString = @"用户名：";
-            detailString = @"点击在此输入用户名";
+            titleString = @"登录手机号：";
+            detailString = @"点击在此输入手机号";
             self.userName = cell.textView;
             cell.textView.secureTextEntry = NO;
         }
