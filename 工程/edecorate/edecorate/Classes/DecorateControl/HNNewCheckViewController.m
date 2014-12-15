@@ -450,7 +450,7 @@
             [dic setObject:[[self.dataArr[i] objectForKey:@"ItemBody"][j] objectForKey:@"bodyname"] forKey:@"name"];
             [dic setObject:[[self.dataArr[i] objectForKey:@"ItemBody"][j] objectForKey:@"bodytype"] forKey:@"type"];
 //            [dic setObject:@"/Picture/201409/041700468686.jpg" forKey:@"img"];
-            indexPath = [NSIndexPath indexPathForRow:j+2 inSection:i+2];
+            indexPath = [NSIndexPath indexPathForRow:j inSection:i+2];
             id temp = self.imageSet[indexPath];
             if ([temp isKindOfClass:[NSString class]]){
                 [dic setObject:temp forKey:@"img"];
