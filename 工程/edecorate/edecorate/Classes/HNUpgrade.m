@@ -36,7 +36,7 @@
             NSInteger count = [[retDic objectForKey:@"total"] integerValue];
             if (count !=0 ){
                 NSDictionary *data = retDic[@"data"][0];
-                NSString *versions = data[@"versions"];
+                NSString *versions = data[@"version"];
                 self.upgradeUrl = data[@"url"];
                 NSArray *version = [versions componentsSeparatedByString:@"."];
                 BOOL flag = NO;
