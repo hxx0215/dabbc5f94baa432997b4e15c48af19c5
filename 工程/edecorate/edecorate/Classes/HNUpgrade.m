@@ -22,8 +22,8 @@
     NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
     NSString *app_Version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
     self.versions = [app_Version componentsSeparatedByString:@"."];
-    NSDictionary *sendDic = @{@"type": @(1)};
-    NSString *sendJson = [sendDic JSONString];
+    //NSDictionary *sendDic = @{@"type":[NSString stringWithFormat:@"%d",1]};
+    NSString *sendJson = @"{\"type\":1}";//[sendDic JSONString];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"get.mobile.version" Params:sendJson]];
     NSString *contentType = @"text/html";
@@ -36,7 +36,7 @@
             NSInteger count = [[retDic objectForKey:@"total"] integerValue];
             if (count !=0 ){
                 NSDictionary *data = retDic[@"data"][0];
-                NSString *versions = data[@"versions"];
+                NSString *versions = data[@"version"];
                 self.upgradeUrl = data[@"url"];
                 NSArray *version = [versions componentsSeparatedByString:@"."];
                 BOOL flag = NO;
