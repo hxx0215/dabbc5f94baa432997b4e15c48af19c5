@@ -1380,8 +1380,6 @@
 				B965863519F693CF00EB4766 /* HNLoginView.m */,
 				B91BFCFD19E2D11F00FD468F /* HNLoginData.h */,
 				B91BFCFE19E2D11F00FD468F /* HNLoginData.m */,
-				D35982EA1A2B4C5A00C16B6D /* HNRegisterViewController.h */,
-				D35982EB1A2B4C5A00C16B6D /* HNRegisterViewController.m */,
 				D3DDF5201A1A31F2000DC300 /* HNImageData.h */,
 				D3DDF5211A1A31F2000DC300 /* HNImageData.m */,
 				B94B7A6219C9BE73000112ED /* Message */,
@@ -1487,6 +1485,8 @@
 				D3201FAD1A0A640C00236B08 /* HNSettingViewController.xib */,
 				D35982E71A2B3F0A00C16B6D /* HNModfiypwdViewController.h */,
 				D35982E81A2B3F0A00C16B6D /* HNModfiypwdViewController.m */,
+				D35982EA1A2B4C5A00C16B6D /* HNRegisterViewController.h */,
+				D35982EB1A2B4C5A00C16B6D /* HNRegisterViewController.m */,
 			);
 			name = Setting;
 			sourceTree = "<group>";

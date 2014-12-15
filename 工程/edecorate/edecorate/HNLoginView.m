@@ -20,7 +20,7 @@
         self.backgroundColor = [UIColor whiteColor];
         self.layer.cornerRadius = 5.0;
         self.userLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 85, frame.size.height / 2 -1)];
-        self.userLabel.text = NSLocalizedString(@"User", nil);
+        self.userLabel.text = NSLocalizedString(@"手机号", nil);
         self.userLabel.textAlignment = NSTextAlignmentRight;
         UIView *sep1 = [self createSeperateLine:CGRectMake(0, 0, 1, 20)];
         sep1.centerY = self.userLabel.centerY;
