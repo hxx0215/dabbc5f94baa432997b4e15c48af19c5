@@ -30,7 +30,20 @@
 @end
 @interface HNNewCheckViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate,UIPickerViewDelegate,UIPickerViewDataSource,UINavigationControllerDelegate,HNSelectChargeTableViewControllerDelegate,UITextFieldDelegate,UIAlertViewDelegate,UIActionSheetDelegate,HNDecorateChoiceViewDelegate>
 @property (strong, nonatomic) IBOutlet UITableViewCell *curStatusCell;
-@property (strong, nonatomic) IBOutlet UILabel *curStatusLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *step1;
+@property (weak, nonatomic) IBOutlet UIImageView *step2;
+@property (weak, nonatomic) IBOutlet UIImageView *step3;
+@property (weak, nonatomic) IBOutlet UIImageView *step4;
+@property (weak, nonatomic) IBOutlet UIButton *stepprocess1;
+@property (weak, nonatomic) IBOutlet UIButton *stepprocess2;
+@property (weak, nonatomic) IBOutlet UIButton *stepprocess3;
+@property (weak, nonatomic) IBOutlet UILabel *steplabel1;
+@property (weak, nonatomic) IBOutlet UILabel *steplabel2;
+@property (weak, nonatomic) IBOutlet UILabel *steplabel3;
+@property (weak, nonatomic) IBOutlet UILabel *steplabel4;
+@property (nonatomic, strong) NSArray *steps;
+@property (nonatomic, strong) NSArray *stepprocesses;
+@property (nonatomic, strong) NSArray *steplabels;
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableDictionary *curData;
@@ -77,6 +90,9 @@
     [self loadList];
     [self initButtonView];
     self.title = @"新建装修验收";
+    self.steps = @[self.step1,self.step2,self.step3,self.step4];
+    self.stepprocesses = @[self.stepprocess1,self.stepprocess2,self.stepprocess3];
+    self.steplabels = @[self.steplabel1,self.steplabel2,self.steplabel3,self.steplabel4];
 }
 - (void)initSendData{
     self.sendData = [NSMutableDictionary new];
@@ -317,6 +333,8 @@
     return [[self.dataArr[section - 2] objectForKey:@"ItemBody"] count];
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 0)
+        return 116;
     NSIndexPath *key = [NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section];
     if ([self.imageSet objectForKey:key] &&([[self.imageSet objectForKey:key] respondsToSelector:@selector(count)] &&[[self.imageSet objectForKey:key] count]>0))
         return 84;
@@ -325,9 +343,37 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0){
-        NSDictionary *dic = @{@"1": NSLocalizedString(@"防水闭水", nil),@"2":NSLocalizedString(@"打压电路", nil),@"3":NSLocalizedString(@"沉侧回填", nil),@"4":NSLocalizedString(@"竣工综合", nil)};
-        self.curStatusLabel.text = [NSString stringWithFormat:@"当前状态:%@",dic[self.curData[@"processstep"]]];
-        [self.curStatusLabel sizeToFit];
+        NSInteger step = [self.curData[@"processstep"] integerValue];
+        step--;
+        for (int i=0;i<4;i++){
+            UIImageView *imgView = self.steps[i];
+            UILabel *label = self.steplabels[i];
+            if (i<=step){
+                imgView.highlighted = NO;
+                label.textColor = [UIColor colorWithRed:60.0/255.0 green:173.0/255.0 blue:230.0/255.0 alpha:1.0];
+            }
+            else{
+                imgView.highlighted = YES;
+                label.textColor = [UIColor colorWithRed:204.0/255.0 green:204.0/255.0 blue:204.0/255.0 alpha:1.0];
+            }
+            if (i==3)
+                break ;
+            UIButton *button = self.stepprocesses[i];
+            if (i<step - 1)
+            {
+                button.enabled = YES;
+                [button setImage:[UIImage imageNamed:@"ic_step_done.png"] forState:UIControlStateNormal];
+            }
+            else if (i== step - 1){
+                button.enabled = YES;
+                [button setImage:[UIImage imageNamed:@"ic_step_processing.png"] forState:UIControlStateNormal];
+            }else{
+                button.enabled = NO;
+                [button setImage:[UIImage imageNamed:@"ic_step_failed.png"] forState:UIControlStateNormal];
+            }
+        }
+//        self.curStatusLabel.text = [NSString stringWithFormat:@"当前状态:%@",dic[self.curData[@"processstep"]]];
+//        [self.curStatusLabel sizeToFit];
         return self.curStatusCell;
     }
     static NSString *identify = @"newCheckCell";
