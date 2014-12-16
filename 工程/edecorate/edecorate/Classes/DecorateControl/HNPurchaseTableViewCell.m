@@ -10,7 +10,8 @@
 #import "HNPurchaseItem.h"
 
 @interface HNPurchaseTableViewCell()
-
+@property (nonatomic, strong)UIButton *plusButton;
+@property (nonatomic, strong)UIButton *mineButton;
 @end
 @implementation HNPurchaseTableViewCell
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
@@ -28,10 +29,18 @@
         [self.checkButton setBackgroundImage:[UIImage imageNamed:@"purchasecheckbox.png"] forState:UIControlStateNormal];
         [self.checkButton setImage:[UIImage imageNamed:@"purchasecheck.png"] forState:UIControlStateSelected];
         [self.checkButton sizeToFit];
+        self.plusButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [self.plusButton setImage:[UIImage imageNamed:@"btn_inc.png"] forState:UIControlStateNormal];
+        self.mineButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [self.mineButton setImage:[UIImage imageNamed:@"btn_dec.png"] forState:UIControlStateNormal];
+        [self.plusButton sizeToFit];
+        [self.mineButton sizeToFit];
         [self.contentView addSubview:self.title];
         [self.contentView addSubview:self.price];
         [self.contentView addSubview:self.detail];
         [self.contentView addSubview:self.checkButton];
+        [self.contentView addSubview:self.plusButton];
+        [self.contentView addSubview:self.mineButton];
     }
     return self;
 }
@@ -58,6 +67,10 @@
     }
     self.checkButton.left = 14;
     self.checkButton.top = 12;
+    self.plusButton.top = self.price.bottom+2;
+    self.mineButton.top = self.plusButton.top;
+    self.mineButton.right = self.contentView.width - 24;
+    self.plusButton.right = self.mineButton.left;
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

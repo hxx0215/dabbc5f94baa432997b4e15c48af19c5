@@ -91,6 +91,8 @@
 		B98094C71A2EF3AA00C6045E /* HNNewReportChargeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B98094C61A2EF3AA00C6045E /* HNNewReportChargeTableViewController.m */; };
 		B9882DF219CB06D90093F0F4 /* HNDecorateReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9882DF119CB06D90093F0F4 /* HNDecorateReportViewController.m */; };
 		B9882DF519CB079A0093F0F4 /* HNReportTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B9882DF419CB079A0093F0F4 /* HNReportTableViewCell.m */; };
+		B9A5F8821A4052FB007D1138 /* btn_dec@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B9A5F8801A4052FB007D1138 /* btn_dec@2x.png */; };
+		B9A5F8831A4052FB007D1138 /* btn_inc@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B9A5F8811A4052FB007D1138 /* btn_inc@2x.png */; };
 		B9AD9E0819DEC90D00D82439 /* NSString+Crypt.m in Sources */ = {isa = PBXBuildFile; fileRef = B9AD9E0719DEC90D00D82439 /* NSString+Crypt.m */; };
 		B9AD9E0B19E01A7900D82439 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = B9AD9E0A19E01A7900D82439 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		B9B2BBF119CF1F1000839AED /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B2BBF019CF1F1000839AED /* AssetsLibrary.framework */; };
@@ -428,6 +430,8 @@
 		B9882DF119CB06D90093F0F4 /* HNDecorateReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNDecorateReportViewController.m; path = Classes/DecorateControl/HNDecorateReportViewController.m; sourceTree = "<group>"; };
 		B9882DF319CB079A0093F0F4 /* HNReportTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNReportTableViewCell.h; path = Classes/DecorateControl/HNReportTableViewCell.h; sourceTree = "<group>"; };
 		B9882DF419CB079A0093F0F4 /* HNReportTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNReportTableViewCell.m; path = Classes/DecorateControl/HNReportTableViewCell.m; sourceTree = "<group>"; };
+		B9A5F8801A4052FB007D1138 /* btn_dec@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_dec@2x.png"; sourceTree = "<group>"; };
+		B9A5F8811A4052FB007D1138 /* btn_inc@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_inc@2x.png"; sourceTree = "<group>"; };
 		B9AD9E0619DEC90D00D82439 /* NSString+Crypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Crypt.h"; sourceTree = "<group>"; };
 		B9AD9E0719DEC90D00D82439 /* NSString+Crypt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Crypt.m"; sourceTree = "<group>"; };
 		B9AD9E0919E01A7900D82439 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
@@ -805,6 +809,8 @@
 		B90C417D19FA3321004EBC2B /* Purchase */ = {
 			isa = PBXGroup;
 			children = (
+				B9A5F8801A4052FB007D1138 /* btn_dec@2x.png */,
+				B9A5F8811A4052FB007D1138 /* btn_inc@2x.png */,
 				B90C417E19FA3365004EBC2B /* purchasecheck@2x.png */,
 				B90C417F19FA3365004EBC2B /* purchasecheckbox@2x.png */,
 			);
@@ -1690,6 +1696,7 @@
 				D38E009119D84BE0000F5263 /* HNReimburseViewController.xib in Resources */,
 				D3052B851A24E31900ECD7A1 /* messages.plist in Resources */,
 				B9DE560419C9C40B00280EC7 /* Localizable.strings in Resources */,
+				B9A5F8821A4052FB007D1138 /* btn_dec@2x.png in Resources */,
 				B95D15C519D9AE4B00689B4D /* HNEditPriceViewController.xib in Resources */,
 				B9398D481A29EE2E006576FE /* HNConstructPaymentTableViewCell.xib in Resources */,
 				D33EEABD19D6FF5D00D6F106 /* city.plist in Resources */,
@@ -1763,6 +1770,7 @@
 				B9398D4D1A2A084F006576FE /* HNGetAuthViewController.xib in Resources */,
 				D3CD90FF19CF13DE00E76AF4 /* HNRefundApplyViewController.xib in Resources */,
 				D3052BA41A24E43000ECD7A1 /* chat_bottom_voice_press.png in Resources */,
+				B9A5F8831A4052FB007D1138 /* btn_inc@2x.png in Resources */,
 				D305C1AF1A2F644B0022FD2F /* arrowBackClick@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
