@@ -36,7 +36,7 @@
         
         self.userName = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, self.width - sep1.right - 15, self.userLabel.height)];
         self.userName.left = sep1.right + 15;
-        self.userName.placeholder = NSLocalizedString(@"User/Email/Mobile", nil);
+        self.userName.placeholder = NSLocalizedString(@"请输入手机号", nil);
         
         self.password = [[UITextField alloc] initWithFrame:self.userName.frame];
         self.password.left = self.userName.left;

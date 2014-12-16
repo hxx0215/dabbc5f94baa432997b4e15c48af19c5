@@ -298,7 +298,24 @@
      btime		送货开始时间
      etime		送货结束时间
      */
-    
+    if (!self.model.product) {
+        self.model.product = @"";
+    }
+    if (!self.model.bTime) {
+        self.model.bTime = @"";
+    }
+    if (!self.model.eTime) {
+        self.model.eTime = @"";
+    }
+    if (!self.model.plateNumber) {
+        self.model.plateNumber = @"";
+    }
+    if (!self.model.drivingLicence) {
+        self.model.drivingLicence = @"";
+    }
+    if (!self.model.drivingLImg) {
+        self.model.drivingLImg = @"";
+    }
     NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:self.model.declareId,@"declareId", self.model.product,@"product",self.model.bTime,@"btime",self.model.eTime,@"etime",self.model.plateNumber,@"plateNumber",self.model.drivingLicence,@"drivingLicence",self.model.drivingLImg,@"drivingLImg",nil];
     NSLog(@"%@",[dic JSONString]);
     
@@ -318,6 +335,21 @@
         HNDeliverProposerItem *tModel = [self.model.proposerItems objectAtIndex:i];
         NSDictionary *dic = [[NSMutableDictionary alloc]init];//创建内层的字典
         //申请人员信息JSON（realname：姓名，idcard：身份证号，phone：联系电话，idcardImg：身份证照片，icon：头像）
+        if (!tModel.name) {
+            tModel.name = @"";
+        }
+        if (!tModel.IDcard) {
+            tModel.IDcard = @"";
+        }
+        if (!tModel.phone) {
+            tModel.phone = @"";
+        }
+        if (!tModel.IDcardImg) {
+            tModel.IDcardImg = @"";
+        }
+        if (!tModel.Icon) {
+            tModel.Icon = @"";
+        }
         [dic setValue:tModel.name forKey:@"realname"];
         [dic setValue:tModel.IDcard forKey:@"idcard"];
         [dic setValue:tModel.phone forKey:@"phone"];

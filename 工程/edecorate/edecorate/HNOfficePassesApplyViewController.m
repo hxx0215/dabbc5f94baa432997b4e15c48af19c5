@@ -267,7 +267,7 @@
 //
 
     
-    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:self.temporaryModel.declareId,@"declareId", [NSString stringWithFormat:@"%ld",(unsigned long)[self.temporaryModel.proposerItems count]],@"headcount",[HNLoginData shared].uid,@"proposerId",self.temporaryModel.declareId,@"totalcost",nil];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:self.temporaryModel.declareId,@"declareId", [NSString stringWithFormat:@"%ld",(unsigned long)[self.temporaryModel.proposerItems count]],@"headcount",[HNLoginData shared].uid,@"proposerId",nil];//self.temporaryModel.declareId,@"totalcost"
     NSLog(@"%@",[dic JSONString]);
     
     return dic;
@@ -288,6 +288,21 @@
         
         NSDictionary *dic = [[NSMutableDictionary alloc]init];//创建内层的字典
         //申请人员信息JSON（realname：姓名，idcard：身份证号，phone：联系电话，idcardImg：身份证照片，icon：头像）
+        if (!tModel.name) {
+            tModel.name = @"";
+        }
+        if (!tModel.IDcard) {
+            tModel.IDcard = @"";
+        }
+        if (!tModel.phone) {
+            tModel.phone = @"";
+        }
+        if (!tModel.IDcardImg) {
+            tModel.IDcardImg = @"";
+        }
+        if (!tModel.Icon) {
+            tModel.Icon = @"";
+        }
         [dic setValue:tModel.name forKey:@"realname"];
         [dic setValue:tModel.IDcard forKey:@"idcard"];
         [dic setValue:tModel.phone forKey:@"phone"];
