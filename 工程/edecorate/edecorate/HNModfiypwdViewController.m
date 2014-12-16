@@ -121,7 +121,7 @@
         }
         else
         {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login Fail", nil) message:NSLocalizedString(@"Please input correct username and password", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:NSLocalizedString(@"未知错误", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
             [alert show];
         }
     }
@@ -237,7 +237,7 @@
         case 2:
         {
             titleString = @"确认密码：";
-            detailString = @"点击在此输入旧密码";
+            detailString = @"点击在此确认密码";
         }
             break;
         default:
