@@ -252,7 +252,7 @@
 
                 cell.name.text = @"附件：";
                 [cell setImages:self.imagePath];
-                [cell MyShowPic:YES];// = 0;
+                //[cell MyShowPic:YES];// = 0;
                 cell.delegate = self;
                 return cell;
             }
