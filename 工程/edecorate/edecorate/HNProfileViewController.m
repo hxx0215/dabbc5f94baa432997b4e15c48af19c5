@@ -102,6 +102,7 @@
         if (total.intValue){//之后需要替换成status
             NSArray* array = [dic objectForKey:@"data"];
             [self.model updateData:[array objectAtIndex:0]];
+            [HNLoginData shared].icon = self.model.headImage;
             [self.tableView reloadData];
         }
     }
