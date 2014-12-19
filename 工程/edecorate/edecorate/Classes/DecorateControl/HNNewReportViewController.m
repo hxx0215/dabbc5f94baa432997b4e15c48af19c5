@@ -542,6 +542,7 @@ static NSString *kNewPicCell = @"kNewPicCell";
 - (void)didSelectCharge:(NSDictionary *)charge{
     NSLog(@"%@",charge);
     [self.userButton setTitle:[charge objectForKey:@"realname"] forState:UIControlStateNormal];
+    self.userDic[@"realname"] = charge[@"realname"];
     self.userDic[@"idcard"] = charge[@"idcard"];
     self.userDic[@"phone"] = charge[@"phone"];
     [self.tableView reloadData];
