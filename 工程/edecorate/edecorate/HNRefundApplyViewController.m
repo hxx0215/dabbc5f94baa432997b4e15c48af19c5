@@ -155,8 +155,11 @@
      cardnum		回收出入证数量
      cardimg		回收照片
      */
-    
-    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:self.temporaryModel.declareId,@"declareid", self.imageName,@"cardimg",nil];//self.cardMunTextField.text,@"cardnum",
+    NSString *imageNameStr = @"";
+    if (self.imageName) {
+        imageNameStr = self.imageName;
+    }
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:self.temporaryModel.declareId,@"declareid", imageNameStr,@"cardimg",nil];//self.cardMunTextField.text,@"cardnum",
     return dic;
 }
 

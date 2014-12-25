@@ -116,6 +116,7 @@
             HNRefundData *tModel = [[HNRefundData alloc] init];
             [tModel updateData:dicData];
             tModel.refundModel = self.currentModel;
+            tModel.declareId = self.currentModel.declareId;
             
             HNRefundApplyViewController* dac = [[HNRefundApplyViewController alloc]initWithModel:tModel];
             [self.navigationController pushViewController:dac animated:YES];
