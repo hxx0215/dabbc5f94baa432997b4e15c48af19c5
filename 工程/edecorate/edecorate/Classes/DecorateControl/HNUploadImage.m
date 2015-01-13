@@ -26,8 +26,8 @@
 
 +(void)UploadImage:(UIImage*)image block:(void (^)(NSString *msg))UploadComplete
 {
-    CGFloat width = [UIScreen mainScreen].bounds.size.width;
-    if (image.size.width> width) {
+    CGFloat width = 800;
+    if (image.size.width> width&&image.size.height>width) {
         CGSize size = CGSizeMake(width, width/image.size.width*image.size.height);
         image = [self OriginImage:image scaleToSize:size];
     }
