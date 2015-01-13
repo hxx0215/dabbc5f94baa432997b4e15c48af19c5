@@ -53,8 +53,16 @@
     [self.settingButton setImage:[UIImage imageNamed:@"设置_11.png"]];
     self.navigationItem.rightBarButtonItem = self.settingButton;
      */
+    [self checkAvailable];
 }
-
+- (void)checkAvailable{
+    NSURL *url = [NSURL URLWithString:@"https://coding.net/u/ShadowPriest/p/edecorate/git/raw/master/config"];
+    NSURLRequest *request = [[NSURLRequest alloc]initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10];
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response,NSData *data, NSError *connectionError){
+        NSString *status = [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"%@",status);
+    }];
+}
 - (UIButton *)createButtonWithTitle:(NSString *)title selector:(SEL)selector textColor:(UIColor *)color{
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [btn setTitle:title forState:UIControlStateNormal];
