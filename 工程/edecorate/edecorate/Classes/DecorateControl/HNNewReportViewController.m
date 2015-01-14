@@ -83,13 +83,16 @@ static NSString *kNewPicCell = @"kNewPicCell";
     UINib *nib = [UINib nibWithNibName:NSStringFromClass([HNConsturctPicTableViewCell class]) bundle:nil];
     [self.tableView registerNib:nib forCellReuseIdentifier:kNewPicCell];
     self.userTitle = @[NSLocalizedString(@"身份证号: ", nil),NSLocalizedString(@"手机号: ", nil),NSLocalizedString(@"施工总人数: ", nil),NSLocalizedString(@"开始时间: ", nil),NSLocalizedString(@"结束时间: ", nil)];
-    self.companyData = @[NSLocalizedString(@"营业执照", nil),NSLocalizedString(@"税务登记证",nil),NSLocalizedString(@"组织代码登记证",nil),NSLocalizedString(@"资质证书", nil),NSLocalizedString(@"电工证", nil),NSLocalizedString(@"法人委托书",nil),NSLocalizedString(@"法人身份证", nil),NSLocalizedString(@"装修施工合同图证",nil),NSLocalizedString(@"施工负责人身份",nil)];
+    if (self.constructType == 1)
+        self.companyData = @[NSLocalizedString(@"营业执照", nil),NSLocalizedString(@"税务登记证",nil),NSLocalizedString(@"组织代码登记证",nil),NSLocalizedString(@"资质证书", nil),NSLocalizedString(@"电工证", nil),NSLocalizedString(@"法人委托书",nil),NSLocalizedString(@"法人身份证", nil),NSLocalizedString(@"装修施工合同图证",nil),NSLocalizedString(@"施工负责人身份",nil)];
+    else
+        self.companyData = @[NSLocalizedString(@"电工证", nil),NSLocalizedString(@"施工责任人身份证", nil)];
     self.personalData = @[[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"房屋地址:", nil),self.roomNumber],[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"业主姓名:",nil),self.ownername],[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"手机号:",nil),self.ownerphone]];
     self.graphData = @[NSLocalizedString(@"原始结构图", nil),NSLocalizedString(@"平面布置图",nil),NSLocalizedString(@"墙体改造图",nil),NSLocalizedString(@"墙体改造图2", nil),NSLocalizedString(@"水路布置图", nil),NSLocalizedString(@"电路分布图",nil)];
     if (self.constructType == 1)
         self.headerTitle = @[@"",NSLocalizedString(@"承包方式: ", nil),NSLocalizedString(@"装修公司资料", nil),NSLocalizedString(@"业主及图纸资料", nil),NSLocalizedString(@"业主房屋实景图", nil)];
     else
-        self.headerTitle = @[@"",NSLocalizedString(@"承包方式: ", nil),NSLocalizedString(@"业主及图纸资料", nil),NSLocalizedString(@"业主房屋实景图", nil)];
+        self.headerTitle = @[@"",NSLocalizedString(@"承包方式: ", nil),NSLocalizedString(@"施工方资料", nil),NSLocalizedString(@"业主及图纸资料", nil),NSLocalizedString(@"业主房屋实景图", nil)];
     NSMutableArray *personal = [NSMutableArray new];
     [personal addObjectsFromArray:self.personalData];
     [personal addObjectsFromArray:self.graphData];
@@ -98,8 +101,8 @@ static NSString *kNewPicCell = @"kNewPicCell";
     self.tableData = [[NSMutableArray alloc] init];
     [self.tableData addObject:self.userTitle];
     [self.tableData addObject:[NSArray new]];
-    if (self.constructType == 1)
-        [self.tableData addObject:self.companyData];
+
+    [self.tableData addObject:self.companyData];
     [self.tableData addObject:personal];
     [self.tableData addObject:self.housePic];
     
@@ -108,7 +111,11 @@ static NSString *kNewPicCell = @"kNewPicCell";
     for (id o in self.companyData){
         [tArr addObject:@"0"];
     }
-    self.companyCellType = [tArr copy];
+    if (1==self.constructType){
+        self.companyCellType = [tArr copy];
+    }
+    else
+        self.companyCellType = @[@"0",@"0"];
     self.personalCellType = @[@"3",@"3",@"3"];
     [tArr removeAllObjects];
     for (id o in self.graphData){
@@ -124,9 +131,9 @@ static NSString *kNewPicCell = @"kNewPicCell";
     self.tableType = [NSMutableArray new];
     [self.tableType addObject:self.userCellType];
     [self.tableType addObject:[NSArray new]];
-    if (1==self.constructType){
-        [self.tableType addObject:self.companyCellType];
-    }
+    
+    [self.tableType addObject:self.companyCellType];
+
     [self.tableType addObject:persnalType];
     [self.tableType addObject:[tArr copy]];
     [self initDateString];
@@ -190,15 +197,14 @@ static NSString *kNewPicCell = @"kNewPicCell";
 - (void)initPicDict{
     self.picDict = [[NSMutableDictionary alloc] init];
     int offset = 2;
-    if (self.constructType == 1)
+
+    offset++;
+    for (int i = 0 ;i < [self.companyData count];i++)
     {
-        offset++;
-        for (int i = 0 ;i < [self.companyData count];i++)
-        {
-            NSString *key = [NSString stringWithFormat:@"%d",i + offset * 1000];
-            [self.picDict setObject:[NSNull null] forKey:key];
-        }
+        NSString *key = [NSString stringWithFormat:@"%d",i + offset * 1000];
+        [self.picDict setObject:[NSNull null] forKey:key];
     }
+
     offset++;
     for (int i=0; i< [self.graphData count];i ++){
         NSString *key = [NSString stringWithFormat:@"%d", i + 3 + offset * 1000];
