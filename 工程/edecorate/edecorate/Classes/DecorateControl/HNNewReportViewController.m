@@ -723,7 +723,7 @@ static NSString *kNewPicCell = @"kNewPicCell";
     index++;
     self.sendDic[@"qualificationIMG"] = [self imgUrl:index];
     index++;
-    self.sendDic[@"ElectricianIMG"] = [self imgUrl:index];
+    self.sendDic[@"ElectricianIMG"] = (self.constructType == 1)?[self imgUrl:index]:[self imgUrl:199];//203imgUrl会帮你+1，我怎么写出的代码这么2
     index++;
     self.sendDic[@"powerAttorney"] = [self imgUrl:index];
     index++;
@@ -731,7 +731,7 @@ static NSString *kNewPicCell = @"kNewPicCell";
     index++;
     self.sendDic[@"compactIMG"] = [self imgUrl:index];
     index++;
-    self.sendDic[@"EIDCardIMG"] = [self imgUrl:index];
+    self.sendDic[@"EIDCardIMG"] = (self.constructType == 1)?[self imgUrl:index]:[self imgUrl:200];//207
     index++;
     index = 399;
     self.sendDic[@"kitchenIMG"] = [self imgUrl:index];
