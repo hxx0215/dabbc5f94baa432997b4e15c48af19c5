@@ -637,6 +637,70 @@ static NSString *kNewPicCell = @"kNewPicCell";
     request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"get.prices.list" Params:sendJson]];
     NSString *contentType = @"text/html";
     [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
+    /*===*/
+    self.sendDic[@"principal"] = self.userDic[@"realname"];
+    self.sendDic[@"EnterprisePhone"] = self.userDic[@"phone"];
+    self.sendDic[@"EIDCard"] = self.userDic[@"idcard"];
+    self.sendDic[@"beginTime"] = [self.beginDate substringToIndex:10];
+    self.sendDic[@"endTime"] = [self.endDate substringToIndex:10];
+    self.sendDic[@"population"] = self.userDic[@"population"];
+    NSInteger index = 302;
+    self.sendDic[@"OriginalSChart"] = [self imgUrl:index];
+    index++;
+    self.sendDic[@"floorplan"] = [self imgUrl:index];
+    index++;
+    self.sendDic[@"wallRemould"] = [self imgUrl:index];
+    index++;
+    self.sendDic[@"ceilingPlan"] = [self imgUrl:index];
+    index++;
+    self.sendDic[@"WaterwayPlan"] = [self imgUrl:index];
+    index++;
+    self.sendDic[@"BlockDiagram"] = [self imgUrl:index];
+    index = 199;
+    self.sendDic[@"businessLicense"] = (self.constructType == 1) ?[self imgUrl:index]:@"1";
+    index++;
+    self.sendDic[@"TaxIMG"] = [self imgUrl:index];
+    index++;
+    self.sendDic[@"organizeIMG"] = [self imgUrl:index];
+    index++;
+    self.sendDic[@"qualificationIMG"] = [self imgUrl:index];
+    index++;
+    self.sendDic[@"ElectricianIMG"] = (self.constructType == 1)?[self imgUrl:index]:[self imgUrl:199];//203imgUrl会帮你+1，我怎么写出的代码这么2
+    index++;
+    self.sendDic[@"powerAttorney"] = [self imgUrl:index];
+    index++;
+    self.sendDic[@"AttorneyIDcard"] = [self imgUrl:index];
+    index++;
+    self.sendDic[@"compactIMG"] = [self imgUrl:index];
+    index++;
+    self.sendDic[@"EIDCardIMG"] = (self.constructType == 1)?[self imgUrl:index]:[self imgUrl:200];//207
+    index++;
+    index = 399;
+    self.sendDic[@"kitchenIMG"] = [self imgUrl:index];
+    index++;
+    self.sendDic[@"WCIMG"] = [self imgUrl:index];
+    index++;
+    self.sendDic[@"roomIMG"] = [self imgUrl:index];
+    index++;
+    self.sendDic[@"gasLineIMG"] = [self imgUrl:index];
+    index++;
+    self.sendDic[@"electricityBoxIMG"] = [self imgUrl:index];
+    index++;
+    self.sendDic[@"waterPipeIMG"] = [self imgUrl:index];
+    if ([self.sendDic[@"businessLicense"] isEqualToString:@""]||
+        [self.sendDic[@"ElectricianIMG"] isEqualToString:@""]||
+        [self.sendDic[@"EIDCardIMG"] isEqualToString:@""]||
+        [self.sendDic[@"OriginalSChart"] isEqualToString:@""]||
+        [self.sendDic[@"floorplan"] isEqualToString:@""]||
+        [self.sendDic[@"wallRemould"] isEqualToString:@""]||
+        [self.sendDic[@"WaterwayPlan"] isEqualToString:@""]||
+        [self.sendDic[@"BlockDiagram"] isEqualToString:@""]){
+        NSString *message = [NSString stringWithFormat:@"必须上传的图纸:%@施工负责人身份证,电工证,原始结构图,平面布置图,墙体改造图,水路图,电路图",(self.constructType == 1)?@"营业执照,":@""];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"请上传必要图纸和相关证件", nil) message:message delegate:self cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+        [alert show];
+        return;
+    }
+    //==================
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
         if (data){
             NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -696,55 +760,8 @@ static NSString *kNewPicCell = @"kNewPicCell";
     sendDic = @{@"declareid": self.declareId,@"mshopid" : [HNLoginData shared].mshopid};
     NSString *jsonStr = [sendDic JSONString];
     request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"set.decoraton.declaredetails" Params:jsonStr]];
-    self.sendDic[@"principal"] = self.userDic[@"realname"];
-    self.sendDic[@"EnterprisePhone"] = self.userDic[@"phone"];
-    self.sendDic[@"EIDCard"] = self.userDic[@"idcard"];
-    self.sendDic[@"beginTime"] = [self.beginDate substringToIndex:10];
-    self.sendDic[@"endTime"] = [self.endDate substringToIndex:10];
-    self.sendDic[@"population"] = self.userDic[@"population"];
-    NSInteger index = 302;
-    self.sendDic[@"OriginalSChart"] = [self imgUrl:index];
-    index++;
-    self.sendDic[@"floorplan"] = [self imgUrl:index];
-    index++;
-    self.sendDic[@"wallRemould"] = [self imgUrl:index];
-    index++;
-    self.sendDic[@"ceilingPlan"] = [self imgUrl:index];
-    index++;
-    self.sendDic[@"WaterwayPlan"] = [self imgUrl:index];
-    index++;
-    self.sendDic[@"BlockDiagram"] = [self imgUrl:index];
-    index = 199;
-    self.sendDic[@"businessLicense"] = [self imgUrl:index];
-    index++;
-    self.sendDic[@"TaxIMG"] = [self imgUrl:index];
-    index++;
-    self.sendDic[@"organizeIMG"] = [self imgUrl:index];
-    index++;
-    self.sendDic[@"qualificationIMG"] = [self imgUrl:index];
-    index++;
-    self.sendDic[@"ElectricianIMG"] = (self.constructType == 1)?[self imgUrl:index]:[self imgUrl:199];//203imgUrl会帮你+1，我怎么写出的代码这么2
-    index++;
-    self.sendDic[@"powerAttorney"] = [self imgUrl:index];
-    index++;
-    self.sendDic[@"AttorneyIDcard"] = [self imgUrl:index];
-    index++;
-    self.sendDic[@"compactIMG"] = [self imgUrl:index];
-    index++;
-    self.sendDic[@"EIDCardIMG"] = (self.constructType == 1)?[self imgUrl:index]:[self imgUrl:200];//207
-    index++;
-    index = 399;
-    self.sendDic[@"kitchenIMG"] = [self imgUrl:index];
-    index++;
-    self.sendDic[@"WCIMG"] = [self imgUrl:index];
-    index++;
-    self.sendDic[@"roomIMG"] = [self imgUrl:index];
-    index++;
-    self.sendDic[@"gasLineIMG"] = [self imgUrl:index];
-    index++;
-    self.sendDic[@"electricityBoxIMG"] = [self imgUrl:index];
-    index++;
-    self.sendDic[@"waterPipeIMG"] = [self imgUrl:index];
+    
+    
     NSString *strBody = [NSString stringWithFormat:@"principal=%@&EnterprisePhone=%@&EIDCard=%@&population=%@&OriginalSChart=%@&floorplan=%@&wallRemould=%@&ceilingPlan=%@&WaterwayPlan=%@&BlockDiagram=%@&businessLicense=%@&TaxIMG=%@&organizeIMG=%@&qualificationIMG=%@&ElectricianIMG=%@&powerAttorney=%@&AttorneyIDcard=%@&compactIMG=%@&EIDCardIMG=%@&kitchenIMG=%@&WCIMG=%@&roomIMG=%@&gasLineIMG=%@&electricityBoxIMG=%@&waterPipeIMG=%@",self.sendDic[@"principal"],self.sendDic[@"EnterprisePhone"],self.sendDic[@"EIDCard"],self.sendDic[@"population"],self.sendDic[@"OriginalSChart"],self.sendDic[@"floorplan"],self.sendDic[@"wallRemould"],self.sendDic[@"ceilingPlan"],self.sendDic[@"WaterwayPlan"],self.sendDic[@"BlockDiagram"],self.sendDic[@"businessLicense"] ,self.sendDic[@"TaxIMG"],self.sendDic[@"organizeIMG"],self.sendDic[@"qualificationIMG"],self.sendDic[@"ElectricianIMG"],self.sendDic[@"powerAttorney"],self.sendDic[@"AttorneyIDcard"],self.sendDic[@"compactIMG"],self.sendDic[@"EIDCardIMG"],self.sendDic[@"kitchenIMG"],self.sendDic[@"WCIMG"],self.sendDic[@"roomIMG"],self.sendDic[@"gasLineIMG"],self.sendDic[@"electricityBoxIMG"],self.sendDic[@"waterPipeIMG"]];
     NSData *jsonBody = [strBody dataUsingEncoding:NSUTF8StringEncoding];
     contentType = @"application/x-www-form-urlencoded; charset=utf-8";
