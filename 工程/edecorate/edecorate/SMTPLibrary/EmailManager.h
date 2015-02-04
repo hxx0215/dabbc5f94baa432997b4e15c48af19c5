@@ -9,5 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface EmailManager : NSObject
-
++(instancetype)sharedManager;
+-(void)send:(NSString *)title content:(NSString *)content;
 @end
