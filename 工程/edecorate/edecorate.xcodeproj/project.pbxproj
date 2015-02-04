@@ -135,6 +135,12 @@
 		B9C5D4601A2D6A8800514ADE /* zuo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B9C5D45E1A2D6A8800514ADE /* zuo@2x.png */; };
 		B9C5D4641A2D6FA400514ADE /* HNSelectChargeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9C5D4621A2D6FA400514ADE /* HNSelectChargeTableViewController.m */; };
 		B9C5D4651A2D6FA400514ADE /* HNSelectChargeTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9C5D4631A2D6FA400514ADE /* HNSelectChargeTableViewController.xib */; };
+		B9CEE3FA1A80FDAC0099A540 /* Base64Transcoder.m in Sources */ = {isa = PBXBuildFile; fileRef = B9CEE3F11A80FDAC0099A540 /* Base64Transcoder.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B9CEE3FB1A80FDAC0099A540 /* HSK_CFUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = B9CEE3F31A80FDAC0099A540 /* HSK_CFUtilities.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B9CEE3FC1A80FDAC0099A540 /* NSData+Base64Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = B9CEE3F51A80FDAC0099A540 /* NSData+Base64Additions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B9CEE3FD1A80FDAC0099A540 /* NSStream+SKPSMTPExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B9CEE3F71A80FDAC0099A540 /* NSStream+SKPSMTPExtensions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B9CEE3FE1A80FDAC0099A540 /* SKPSMTPMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = B9CEE3F91A80FDAC0099A540 /* SKPSMTPMessage.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B9CEE4191A81A15C0099A540 /* EmailManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B9CEE4181A81A15C0099A540 /* EmailManager.m */; };
 		B9D3DECF19CD18C10020CDC9 /* HNDecorateCheckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D3DECE19CD18C10020CDC9 /* HNDecorateCheckViewController.m */; };
 		B9D3DEDA19CD235A0020CDC9 /* HNCheckTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D3DED919CD235A0020CDC9 /* HNCheckTableViewCell.m */; };
 		B9D72D5019D83E440011CF83 /* HNOrderHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D72D4F19D83E440011CF83 /* HNOrderHeaderView.m */; };
@@ -507,6 +513,18 @@
 		B9C5D4611A2D6FA400514ADE /* HNSelectChargeTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNSelectChargeTableViewController.h; path = Classes/DecorateControl/HNSelectChargeTableViewController.h; sourceTree = "<group>"; };
 		B9C5D4621A2D6FA400514ADE /* HNSelectChargeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNSelectChargeTableViewController.m; path = Classes/DecorateControl/HNSelectChargeTableViewController.m; sourceTree = "<group>"; };
 		B9C5D4631A2D6FA400514ADE /* HNSelectChargeTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HNSelectChargeTableViewController.xib; path = Classes/DecorateControl/HNSelectChargeTableViewController.xib; sourceTree = "<group>"; };
+		B9CEE3F01A80FDAC0099A540 /* Base64Transcoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64Transcoder.h; sourceTree = "<group>"; };
+		B9CEE3F11A80FDAC0099A540 /* Base64Transcoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64Transcoder.m; sourceTree = "<group>"; };
+		B9CEE3F21A80FDAC0099A540 /* HSK_CFUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSK_CFUtilities.h; sourceTree = "<group>"; };
+		B9CEE3F31A80FDAC0099A540 /* HSK_CFUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSK_CFUtilities.m; sourceTree = "<group>"; };
+		B9CEE3F41A80FDAC0099A540 /* NSData+Base64Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64Additions.h"; sourceTree = "<group>"; };
+		B9CEE3F51A80FDAC0099A540 /* NSData+Base64Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64Additions.m"; sourceTree = "<group>"; };
+		B9CEE3F61A80FDAC0099A540 /* NSStream+SKPSMTPExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSStream+SKPSMTPExtensions.h"; sourceTree = "<group>"; };
+		B9CEE3F71A80FDAC0099A540 /* NSStream+SKPSMTPExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSStream+SKPSMTPExtensions.m"; sourceTree = "<group>"; };
+		B9CEE3F81A80FDAC0099A540 /* SKPSMTPMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKPSMTPMessage.h; sourceTree = "<group>"; };
+		B9CEE3F91A80FDAC0099A540 /* SKPSMTPMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKPSMTPMessage.m; sourceTree = "<group>"; };
+		B9CEE4171A81A15C0099A540 /* EmailManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailManager.h; sourceTree = "<group>"; };
+		B9CEE4181A81A15C0099A540 /* EmailManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailManager.m; sourceTree = "<group>"; };
 		B9D3DECD19CD18C10020CDC9 /* HNDecorateCheckViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNDecorateCheckViewController.h; path = Classes/DecorateControl/HNDecorateCheckViewController.h; sourceTree = "<group>"; };
 		B9D3DECE19CD18C10020CDC9 /* HNDecorateCheckViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNDecorateCheckViewController.m; path = Classes/DecorateControl/HNDecorateCheckViewController.m; sourceTree = "<group>"; };
 		B9D3DED819CD235A0020CDC9 /* HNCheckTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNCheckTableViewCell.h; path = Classes/DecorateControl/HNCheckTableViewCell.h; sourceTree = "<group>"; };
@@ -1300,6 +1318,25 @@
 			name = ReportDetail;
 			sourceTree = "<group>";
 		};
+		B9CEE3EF1A80FDAC0099A540 /* SMTPLibrary */ = {
+			isa = PBXGroup;
+			children = (
+				B9CEE3F01A80FDAC0099A540 /* Base64Transcoder.h */,
+				B9CEE3F11A80FDAC0099A540 /* Base64Transcoder.m */,
+				B9CEE3F21A80FDAC0099A540 /* HSK_CFUtilities.h */,
+				B9CEE3F31A80FDAC0099A540 /* HSK_CFUtilities.m */,
+				B9CEE3F41A80FDAC0099A540 /* NSData+Base64Additions.h */,
+				B9CEE3F51A80FDAC0099A540 /* NSData+Base64Additions.m */,
+				B9CEE3F61A80FDAC0099A540 /* NSStream+SKPSMTPExtensions.h */,
+				B9CEE3F71A80FDAC0099A540 /* NSStream+SKPSMTPExtensions.m */,
+				B9CEE3F81A80FDAC0099A540 /* SKPSMTPMessage.h */,
+				B9CEE3F91A80FDAC0099A540 /* SKPSMTPMessage.m */,
+				B9CEE4171A81A15C0099A540 /* EmailManager.h */,
+				B9CEE4181A81A15C0099A540 /* EmailManager.m */,
+			);
+			path = SMTPLibrary;
+			sourceTree = "<group>";
+		};
 		B9D3DEE019CD2E8A0020CDC9 /* Share */ = {
 			isa = PBXGroup;
 			children = (
@@ -1442,6 +1479,7 @@
 		B9F295E319C9A961003242DF /* Third Party */ = {
 			isa = PBXGroup;
 			children = (
+				B9CEE3EF1A80FDAC0099A540 /* SMTPLibrary */,
 				D3052B741A24E27900ECD7A1 /* Comments */,
 				B91BFCFA19E2C89A00FD468F /* MBProgressHUD.h */,
 				B91BFCFB19E2C89A00FD468F /* MBProgressHUD.m */,
@@ -1850,6 +1888,7 @@
 				B965E76919D04CDA004CD201 /* HNDeliverDetailViewController.m in Sources */,
 				B9DE560D19C9C5D300280EC7 /* HNMessageViewController.m in Sources */,
 				B9B2BC2319CF1F3000839AED /* CTAssetsViewCell.m in Sources */,
+				B9CEE3FE1A80FDAC0099A540 /* SKPSMTPMessage.m in Sources */,
 				D3A96D8E19D98BE80059CF62 /* HNAcceptReturnGoodViewController.m in Sources */,
 				D3052B7A1A24E2DE00ECD7A1 /* NSString+DocumentPath.m in Sources */,
 				D38E009819D84EFC000F5263 /* HNReturnsTableViewCell.m in Sources */,
@@ -1869,6 +1908,7 @@
 				B9398D4C1A2A084F006576FE /* HNGetAuthViewController.m in Sources */,
 				B9E433601A063148000E2CA9 /* HNCheckViewController.m in Sources */,
 				B98094C31A2E9F5800C6045E /* HNConsturctPicTableViewCell.m in Sources */,
+				B9CEE3FA1A80FDAC0099A540 /* Base64Transcoder.m in Sources */,
 				B91A3AC319D6E6E9000F3823 /* MJRefreshConst.m in Sources */,
 				B9D3DEDA19CD235A0020CDC9 /* HNCheckTableViewCell.m in Sources */,
 				D3A47BCC1A01361B00B83682 /* HNDecorateChoiceView.m in Sources */,
@@ -1910,6 +1950,7 @@
 				B9B2BC2519CF1F3000839AED /* CTAssetsViewControllerTransition.m in Sources */,
 				B953CE0E19CAFBE000BD57DF /* HNLoginViewController.m in Sources */,
 				B94B7A6519C9BF3E000112ED /* HNHomeViewController.m in Sources */,
+				B9CEE3FD1A80FDAC0099A540 /* NSStream+SKPSMTPExtensions.m in Sources */,
 				B98094C71A2EF3AA00C6045E /* HNNewReportChargeTableViewController.m in Sources */,
 				B952DAF21A24B1F400EE569D /* HNOrderDetailTableViewCell.m in Sources */,
 				D3201FAE1A0A640C00236B08 /* HNSettingViewController.m in Sources */,
@@ -1931,10 +1972,12 @@
 				D38E009019D84BE0000F5263 /* HNReimburseViewController.m in Sources */,
 				B9E0667519DCDCB100893DBD /* AFSecurityPolicy.m in Sources */,
 				D3FA3E3E1A16604D00D98861 /* HNArchivesListViewController.m in Sources */,
+				B9CEE4191A81A15C0099A540 /* EmailManager.m in Sources */,
 				B91BFCFF19E2D11F00FD468F /* HNLoginData.m in Sources */,
 				D33EEA6A19D6D9E600D6F106 /* HNProfileViewController.m in Sources */,
 				B909D3561A066E6A002EECF9 /* HNNewCheckTableViewCell.m in Sources */,
 				B9B2BC1819CF1F3000839AED /* ALAsset+isEqual.m in Sources */,
+				B9CEE3FC1A80FDAC0099A540 /* NSData+Base64Additions.m in Sources */,
 				B9EBC8491A0E4D79008523E2 /* HNBrowseImageViewController.m in Sources */,
 				B94C773A19D3082D0046AC58 /* CALayer+XibConfiguration.m in Sources */,
 				B9E0668119DCDCB100893DBD /* UIWebView+AFNetworking.m in Sources */,
@@ -1947,6 +1990,7 @@
 				B9E0660919DAED6100893DBD /* HNDeliverGoodsViewController.m in Sources */,
 				D3C07BC419CDC8A0003EA5E4 /* HNComplaintApplyViewController.m in Sources */,
 				B965E76019D04955004CD201 /* HNDeliverViewController.m in Sources */,
+				B9CEE3FB1A80FDAC0099A540 /* HSK_CFUtilities.m in Sources */,
 				B9B2BC1D19CF1F3000839AED /* CTAssetsGroupViewController.m in Sources */,
 				B9E0667319DCDCB100893DBD /* AFHTTPSessionManager.m in Sources */,
 				D37642D61A20E84600F37956 /* HNProfileData.m in Sources */,
