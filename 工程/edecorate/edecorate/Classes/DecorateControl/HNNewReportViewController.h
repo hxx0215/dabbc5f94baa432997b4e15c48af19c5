@@ -15,4 +15,6 @@
 @property (strong, nonatomic) NSString *ownername;
 @property (strong, nonatomic) NSString *ownerphone;
 @property (nonatomic, strong)NSDictionary *allData;
+@property (nonatomic, strong) NSMutableDictionary *chart;
+@property (nonatomic, strong) NSMutableDictionary *shopInfo;
 @end

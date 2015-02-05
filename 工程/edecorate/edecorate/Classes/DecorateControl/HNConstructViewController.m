@@ -543,6 +543,8 @@ static NSString *kPicCell = @"picCell";
     vc.ownername = self.ownerName;
     vc.ownerphone = self.ownerMobile;
     vc.allData = self.allData;
+    vc.chart = self.chart;
+    vc.shopInfo = self.shopInfo;
     [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)showNoNetwork{

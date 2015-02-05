@@ -146,6 +146,54 @@ static NSString *kNewPicCell = @"kNewPicCell";
     self.imageUrl = [NSMutableDictionary new];
     self.imageSet = [NSMutableDictionary new];
     self.curImageIndex = [NSMutableDictionary new];
+    [self initURLandSet];
+}
+-(void)initURLandSet{
+    NSInteger index = 200;
+    if (self.constructType == 1)
+    {
+        [self setURLandSet:self.shopInfo[@"businessLicense"] withKey:index];
+        index ++;
+        [self setURLandSet:self.shopInfo[@"TaxCertificate"] withKey:index];
+        index ++;
+        [self setURLandSet:self.shopInfo[@"OrganizationCode"] withKey:index];
+        index ++;
+        [self setURLandSet:self.shopInfo[@"Certificate"] withKey:index];
+        index ++;
+        [self setURLandSet:self.shopInfo[@"Electrician"] withKey:index];
+        index ++;
+        [self setURLandSet:self.shopInfo[@"powerAttorney"] withKey:index];
+        index ++;
+        [self setURLandSet:self.shopInfo[@"gccIDCard"] withKey:index];
+        index ++;
+        [self setURLandSet:self.shopInfo[@"compactIMG"] withKey:index];
+        index ++;
+        [self setURLandSet:self.shopInfo[@"AttorneyIDcard"] withKey:index];
+    }
+    else{
+        [self setURLandSet:self.shopInfo[@"Electrician"] withKey:index];
+        index ++;
+        [self setURLandSet:self.shopInfo[@"AttorneyIDcard"] withKey:index];
+    }
+    index = 303;
+    [self setURLandSet:self.chart[@"OriginalSChart"] withKey:index];
+    index ++;
+    [self setURLandSet:self.chart[@"floorplan"] withKey:index];
+    index ++;
+    [self setURLandSet:self.chart[@"wallRemould"] withKey:index];
+    index ++;
+    [self setURLandSet:self.chart[@"ceilingPlan"] withKey:index];
+    index ++;
+    [self setURLandSet:self.chart[@"WaterwayPlan"] withKey:index];
+    index ++;
+    [self setURLandSet:self.chart[@"BlockDiagram"] withKey:index];
+}
+- (void)setURLandSet:(NSString *)url withKey:(NSInteger)index{
+    NSString *key = [NSString stringWithFormat:@"%d",index];
+    if (url&&![url isEqualToString:@""]){
+        [self.imageUrl setObject:[self arrFromUrl:url] forKey:key];
+        [self.imageSet setObject:[self imagesFromUrl:url] forKey:key];
+    }
 }
 - (void)initSendDic{
     self.sendDic = [@{@"declareid": self.declareId , @"mshopid" : [HNLoginData shared].mshopid,@"principal":@"",@"EnterprisePhone":@"",@"EIDCard":@"",/*@"beginTime":@"",@"endTime": @"",*/@"population":@"",@"headImage":@"",@"OriginalSChart":@"",@"floorplan":@"",@"wallRemould":@"" , @"ceilingPlan":@"",@"WaterwayPlan":@"",@"BlockDiagram":@"",@"businessLicense":@"",@"TaxIMG":@"",@"organizeIMG":@"",@"qualificationIMG":@"" ,@"ElectricianIMG":@"",@"powerAttorney":@"",@"AttorneyIDcard":@"",@"EIDCardIMG":@"",@"compactIMG":@"",@"kitchenIMG":@"",@"WCIMG":@"",@"roomIMG":@"",@"gasLineIMG":@"",@"electricityBoxIMG":@"",@"waterPipeIMG":@"",@"proportion":@"",@"blueprint":@"" }mutableCopy];
@@ -795,6 +843,15 @@ static NSString *kNewPicCell = @"kNewPicCell";
     NSString *key = [NSString stringWithFormat:@"%d",index];
     return [self urlWithArr:self.imageUrl[key]];
 }
+- (NSMutableArray *)arrFromUrl:(NSString *)url{
+    NSMutableArray *ret = [NSMutableArray new];
+    NSArray *list = [url componentsSeparatedByString:@","];
+    if([list count]<1)
+        return [@[url] mutableCopy];
+    else
+        return [list mutableCopy];
+//    return ret;
+}
 - (NSString *)urlWithArr:(NSArray *)arr{
     if ([arr count]<1) return @"";
     NSMutableString *ret = [@"" mutableCopy];
@@ -806,6 +863,23 @@ static NSString *kNewPicCell = @"kNewPicCell";
     for (int i =1;i<[arr count];i++)
         [ret appendFormat:@",%@",arr[i]];
     return ret;
+}
+- (NSObject *)imagesFromUrl:(NSString *)urls{
+    if ([urls isEqualToString:@""])
+        return [NSNull null];
+    NSArray *list = [urls componentsSeparatedByString:@","];
+    if ([list count]<1)
+        return [NSNull null];
+    NSMutableArray *images = [NSMutableArray new];
+    for (NSString *url in list)
+    {
+        [images addObject:[self imageWithLink:url]];
+    }
+    return images;
+}
+- (UIImage *)imageWithLink:(NSString *)link{
+    UIImage *image =[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[link addPort]]]];
+    return image? image : [UIImage imageNamed:@"selectphoto.png"];
 }
 - (void)showBadServer{
     dispatch_async(dispatch_get_main_queue(), ^{
