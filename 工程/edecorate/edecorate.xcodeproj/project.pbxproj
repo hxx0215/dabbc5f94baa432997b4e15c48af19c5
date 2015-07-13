@@ -135,6 +135,8 @@
 		B9C5D4601A2D6A8800514ADE /* zuo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B9C5D45E1A2D6A8800514ADE /* zuo@2x.png */; };
 		B9C5D4641A2D6FA400514ADE /* HNSelectChargeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9C5D4621A2D6FA400514ADE /* HNSelectChargeTableViewController.m */; };
 		B9C5D4651A2D6FA400514ADE /* HNSelectChargeTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9C5D4631A2D6FA400514ADE /* HNSelectChargeTableViewController.xib */; };
+		B9CE22531B52A07300F271F7 /* BaseNetWorkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CE22521B52A07300F271F7 /* BaseNetWorkManager.swift */; };
+		B9CE22561B52A31500F271F7 /* UIColor+Project.m in Sources */ = {isa = PBXBuildFile; fileRef = B9CE22551B52A31500F271F7 /* UIColor+Project.m */; };
 		B9CEE3FA1A80FDAC0099A540 /* Base64Transcoder.m in Sources */ = {isa = PBXBuildFile; fileRef = B9CEE3F11A80FDAC0099A540 /* Base64Transcoder.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		B9CEE3FB1A80FDAC0099A540 /* HSK_CFUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = B9CEE3F31A80FDAC0099A540 /* HSK_CFUtilities.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		B9CEE3FC1A80FDAC0099A540 /* NSData+Base64Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = B9CEE3F51A80FDAC0099A540 /* NSData+Base64Additions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -143,6 +145,7 @@
 		B9CEE4191A81A15C0099A540 /* EmailManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B9CEE4181A81A15C0099A540 /* EmailManager.m */; };
 		B9D3DECF19CD18C10020CDC9 /* HNDecorateCheckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D3DECE19CD18C10020CDC9 /* HNDecorateCheckViewController.m */; };
 		B9D3DEDA19CD235A0020CDC9 /* HNCheckTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D3DED919CD235A0020CDC9 /* HNCheckTableViewCell.m */; };
+		B9D401991B52ABDD005D532D /* EdecorateAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D401981B52ABDD005D532D /* EdecorateAPI.swift */; };
 		B9D72D5019D83E440011CF83 /* HNOrderHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D72D4F19D83E440011CF83 /* HNOrderHeaderView.m */; };
 		B9D72D5419D840960011CF83 /* HNOrderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B9D72D5219D840960011CF83 /* HNOrderTableViewCell.m */; };
 		B9D72D5519D840960011CF83 /* HNOrderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9D72D5319D840960011CF83 /* HNOrderTableViewCell.xib */; };
@@ -513,6 +516,10 @@
 		B9C5D4611A2D6FA400514ADE /* HNSelectChargeTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNSelectChargeTableViewController.h; path = Classes/DecorateControl/HNSelectChargeTableViewController.h; sourceTree = "<group>"; };
 		B9C5D4621A2D6FA400514ADE /* HNSelectChargeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNSelectChargeTableViewController.m; path = Classes/DecorateControl/HNSelectChargeTableViewController.m; sourceTree = "<group>"; };
 		B9C5D4631A2D6FA400514ADE /* HNSelectChargeTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HNSelectChargeTableViewController.xib; path = Classes/DecorateControl/HNSelectChargeTableViewController.xib; sourceTree = "<group>"; };
+		B9CE22511B52A07200F271F7 /* edecorate-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "edecorate-Bridging-Header.h"; sourceTree = "<group>"; };
+		B9CE22521B52A07300F271F7 /* BaseNetWorkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseNetWorkManager.swift; sourceTree = "<group>"; };
+		B9CE22541B52A31500F271F7 /* UIColor+Project.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Project.h"; sourceTree = "<group>"; };
+		B9CE22551B52A31500F271F7 /* UIColor+Project.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Project.m"; sourceTree = "<group>"; };
 		B9CEE3F01A80FDAC0099A540 /* Base64Transcoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64Transcoder.h; sourceTree = "<group>"; };
 		B9CEE3F11A80FDAC0099A540 /* Base64Transcoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64Transcoder.m; sourceTree = "<group>"; };
 		B9CEE3F21A80FDAC0099A540 /* HSK_CFUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSK_CFUtilities.h; sourceTree = "<group>"; };
@@ -529,6 +536,7 @@
 		B9D3DECE19CD18C10020CDC9 /* HNDecorateCheckViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNDecorateCheckViewController.m; path = Classes/DecorateControl/HNDecorateCheckViewController.m; sourceTree = "<group>"; };
 		B9D3DED819CD235A0020CDC9 /* HNCheckTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNCheckTableViewCell.h; path = Classes/DecorateControl/HNCheckTableViewCell.h; sourceTree = "<group>"; };
 		B9D3DED919CD235A0020CDC9 /* HNCheckTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNCheckTableViewCell.m; path = Classes/DecorateControl/HNCheckTableViewCell.m; sourceTree = "<group>"; };
+		B9D401981B52ABDD005D532D /* EdecorateAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EdecorateAPI.swift; sourceTree = "<group>"; };
 		B9D72D4E19D83E440011CF83 /* HNOrderHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNOrderHeaderView.h; path = Classes/BusinessBackground/HNOrderHeaderView.h; sourceTree = "<group>"; };
 		B9D72D4F19D83E440011CF83 /* HNOrderHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNOrderHeaderView.m; path = Classes/BusinessBackground/HNOrderHeaderView.m; sourceTree = "<group>"; };
 		B9D72D5119D840960011CF83 /* HNOrderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNOrderTableViewCell.h; path = Classes/BusinessBackground/HNOrderTableViewCell.h; sourceTree = "<group>"; };
@@ -1318,6 +1326,17 @@
 			name = ReportDetail;
 			sourceTree = "<group>";
 		};
+		B9CE22501B529F5000F271F7 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				B9CE22521B52A07300F271F7 /* BaseNetWorkManager.swift */,
+				B9D401981B52ABDD005D532D /* EdecorateAPI.swift */,
+				B9CE22511B52A07200F271F7 /* edecorate-Bridging-Header.h */,
+			);
+			name = Networking;
+			path = Classes/Networking;
+			sourceTree = "<group>";
+		};
 		B9CEE3EF1A80FDAC0099A540 /* SMTPLibrary */ = {
 			isa = PBXGroup;
 			children = (
@@ -1351,6 +1370,8 @@
 				D33EEABB19D6FF5D00D6F106 /* city.plist */,
 				B9AD9E0619DEC90D00D82439 /* NSString+Crypt.h */,
 				B9AD9E0719DEC90D00D82439 /* NSString+Crypt.m */,
+				B9CE22541B52A31500F271F7 /* UIColor+Project.h */,
+				B9CE22551B52A31500F271F7 /* UIColor+Project.m */,
 				D35EE4DC19EECFC100D889A3 /* HNHttpRequest.h */,
 				D35EE4DD19EECFC100D889A3 /* HNHttpRequest.m */,
 			);
@@ -1455,6 +1476,7 @@
 		B9F295E219C9A8DA003242DF /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				B9CE22501B529F5000F271F7 /* Networking */,
 				D3201FAA1A0A63D900236B08 /* Setting */,
 				B94B7A6319C9BF3E000112ED /* HNHomeViewController.h */,
 				B94B7A6419C9BF3E000112ED /* HNHomeViewController.m */,
@@ -1733,7 +1755,7 @@
 				LastUpgradeCheck = 0510;
 				TargetAttributes = {
 					B916F09D19C8781D00A849C7 = {
-						DevelopmentTeam = F44XSCNJGN;
+						DevelopmentTeam = G65933C85Y;
 					};
 					B916F0BE19C8781E00A849C7 = {
 						TestTargetID = B916F09D19C8781D00A849C7;
@@ -1921,6 +1943,7 @@
 				D32700591A1243BE00C05CA5 /* HNTemporaryApplyTableViewCell.m in Sources */,
 				D3CD90F419CED1FA00E76AF4 /* HNCommbox.m in Sources */,
 				D3B783C01A11104C0036856C /* HNRefundCardCountTableViewCell.m in Sources */,
+				B9CE22561B52A31500F271F7 /* UIColor+Project.m in Sources */,
 				B9B2BC2419CF1F3000839AED /* CTAssetsViewController.m in Sources */,
 				B90C417C19FA282A004EBC2B /* HNPurchaseViewController.m in Sources */,
 				B9E0667D19DCDCB100893DBD /* UIButton+AFNetworking.m in Sources */,
@@ -1928,6 +1951,7 @@
 				B90C418419FA368D004EBC2B /* HNPurchaseTableViewCell.m in Sources */,
 				B9C5D4641A2D6FA400514ADE /* HNSelectChargeTableViewController.m in Sources */,
 				B95D15BF19D9A28200689B4D /* CustomIOS7AlertView.m in Sources */,
+				B9D401991B52ABDD005D532D /* EdecorateAPI.swift in Sources */,
 				D38615EE1A03E9DC005B4093 /* HNDeliverApplyViewController.m in Sources */,
 				D33EEAC119D7000E00D6F106 /* HNAreaPickerView.m in Sources */,
 				D30C1C611A2DF04900E817B7 /* HNFilterModel.m in Sources */,
@@ -2027,6 +2051,7 @@
 				D3FA3E351A164F4700D98861 /* HNArchivesViewController.m in Sources */,
 				B979EDEE1A1F74A800DC22FB /* HNGoodsCategoriesViewController.m in Sources */,
 				B9E0667219DCDCB100893DBD /* AFHTTPRequestOperationManager.m in Sources */,
+				B9CE22531B52A07300F271F7 /* BaseNetWorkManager.swift in Sources */,
 				B9B2BC2619CF1F3000839AED /* NSDateFormatter+timeIntervalFormatter.m in Sources */,
 				B9F8B5831A2750AB007B79C6 /* HNOrderCategoriesViewController.m in Sources */,
 				B9398D471A29EE2E006576FE /* HNConstructPaymentTableViewCell.m in Sources */,
@@ -2154,11 +2179,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Blackit Marketing Limited";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Blackit Marketing Limited";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "edecorate/edecorate-Prefix.pch";
 				INFOPLIST_FILE = "edecorate/edecorate-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
@@ -2166,6 +2193,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "edecorate/Classes/Networking/edecorate-Bridging-Header.h";
 				WRAPPER_EXTENSION = app;
 			};
 			name = "ad hoc distribution test";
@@ -2263,17 +2291,21 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Blackit Marketing Limited";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Blackit Marketing Limited";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "edecorate/edecorate-Prefix.pch";
 				INFOPLIST_FILE = "edecorate/edecorate-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "edecorate/Classes/Networking/edecorate-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2283,17 +2315,20 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Blackit Marketing Limited";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Blackit Marketing Limited";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "edecorate/edecorate-Prefix.pch";
 				INFOPLIST_FILE = "edecorate/edecorate-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "edecorate/Classes/Networking/edecorate-Bridging-Header.h";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

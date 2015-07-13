@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "UIColor+Project.h"
 @interface NSString (Crypt)
 + (NSString *)encodeToPercentEscapeString:(NSString *)input;
 + (NSString *)decodeFromPercentEscapeString: (NSString *) input;
@@ -21,7 +21,3 @@
 @end
 
 
-@interface UIColor (Project)
-+ (UIColor *)projectGreen;
-+ (UIColor *)projectRed;
-@end

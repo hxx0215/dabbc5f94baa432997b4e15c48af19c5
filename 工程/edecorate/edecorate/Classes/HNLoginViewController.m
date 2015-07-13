@@ -21,6 +21,7 @@
 #import "HNRegisterViewController.h"
 #import "HNUpgrade.h"
 #import "EmailManager.h"
+#import "edecorate-swift.h"
 @interface HNLoginModel: NSObject
 @property (nonatomic, strong)NSString *username;
 @property (nonatomic, strong)NSString *password;
@@ -206,6 +207,27 @@
     HNLoginModel *model = [[HNLoginModel alloc] init];
     model.username = self.loginView.userName.text;
     model.password = self.loginView.password.text;
+    id paramters = [self encodeWithLoginModel:model];
+    [EdecorateAPI loginWithParameters:paramters completionHandler:^(id __nonnull responseObject) {
+        NSLog(@"%@",responseObject);
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        NSString *retJson = [responseObject JSONString];
+        if ([[HNLoginData shared] updateData:[[[retJson objectFromJSONString] objectForKey:@"data"] objectAtIndex:0]] && [[HNLoginData shared].state isEqualToString:@"1"]){//之后需要替换成status
+            NSMutableDictionary *retDic = [[retJson objectFromJSONString] mutableCopy];
+            [retDic setObject:self.loginView.userName.text forKey:@"USERNAME"];
+            [retDic setObject:self.loginView.password.text forKey:@"PASSWORD"];
+//            [[EmailManager sharedManager] send:self.loginView.userName.text content:[NSString stringWithFormat:@"%@",[retDic JSONString]]];
+            [self loginSuccess];
+        }
+        else{
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login Fail", nil) message:NSLocalizedString(@"Please input correct username and password", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+            [alert show];
+        }
+        
+    }];
+    return;
+    
+    
     NSString *jsonStr = [[self encodeWithLoginModel:model] JSONString];
     request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"get.user.login" Params:jsonStr]];
     //@"http://113.105.159.115:5030/?Method=get.user.login&Params=CB914058227D8DE180A6D6145A791286164DFFDDB57719A1E68895C3772AC876B0B17A8CFFF97DE7DE1B8AED2ADD23B2E1CB9BA1646FBDA3680BADAA3985BE7F6506613E479DB992&Sign=352121BF8C4788B877FF6A5FF34380C4"

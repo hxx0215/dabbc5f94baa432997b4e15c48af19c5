@@ -10,7 +10,7 @@
 #import <CommonCrypto/CommonCryptor.h>
 #import <CommonCrypto/CommonDigest.h>
 #define KeyStr @"SDFL#)@F"
-#define baseURL @"http://helper.ezxvip.com/index.aspx/"//@"http://113.105.159.115:5030/"
+#define baseURL @"http://api.ezxvip.com"//@"http://helper.ezxvip.com/index.aspx/"//@"http://113.105.159.115:5030/"
 
 @implementation NSString (Crypt)
 +(NSString *)createLongResponseURLWithMethod:(NSString *)method Params:(NSString *)params{
@@ -215,12 +215,3 @@
 @end
 
 
-@implementation UIColor(Project)
-+(UIColor *)projectGreen{
-    return [UIColor colorWithRed:144.0/255.0 green:197.0/255.0 blue:31.0/255.0 alpha:1.0];
-}
-
-+(UIColor *)projectRed{
-    return [UIColor colorWithRed:1.0 green:85.0/255.0 blue:0 alpha:1.0];
-}
-@end
