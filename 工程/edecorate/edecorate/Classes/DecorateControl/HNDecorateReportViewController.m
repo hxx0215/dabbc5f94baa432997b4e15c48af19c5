@@ -20,7 +20,7 @@
 @property (nonatomic, strong)NSString *status;
 @property (nonatomic, assign)HNConstructType constructType;
 @property (nonatomic, strong)NSString *declareId;
-@property (nonatomic, strong)NSString *paystate;
+@property (nonatomic, strong)NSNumber *paystate;
 @end
 @implementation HNReportModel
 @end
@@ -143,7 +143,7 @@
     HNReportModel *model =self.reportList[indexPath.row];
     [cell setRoomName:model.roomName];
     NSString *status = @"";
-    if ([model.paystate isEqualToString:@"1"])
+    if ([model.paystate  isEqual:@1])//[model.paystate isEqualToString:@"1"])
     {
         if ([model.status isEqualToString:@"0"]){
             status = @"审核进度:未审核";
@@ -158,7 +158,7 @@
             status = @"审核进度:审核中";
         }
     }
-    else if ([model.paystate isEqualToString:@"2"])
+    else if ([model.paystate isEqual:@2])//[model.paystate isEqualToString:@"2"])
         status = @"审核进度:待支付";
     else
         status = @"审核进度:待完善资料";

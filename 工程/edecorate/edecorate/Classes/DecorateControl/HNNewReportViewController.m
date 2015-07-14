@@ -302,9 +302,6 @@ static NSString *kNewPicCell = @"kNewPicCell";
                     [self.tableView reloadData];
                 });
             }
-            else{
-                [self showNoData];
-            }
         }else{
             [self showNoNetwork];
         }

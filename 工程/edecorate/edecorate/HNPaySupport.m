@@ -161,7 +161,9 @@
     [sendDic setObject:declareId forKey:@"declareid"];
     [sendDic setObject:connid forKey:@"connid"];
 //    [sendDic setObject:[NSNumber numberWithInteger:(type)] forKey:@"type"];
+    [sendDic setObject:declareId forKey:@"id"];
     [sendDic setObject:[NSString stringWithFormat:@"%d",type] forKey:@"type"];
+    [sendDic setObject:@"tenpaywap" forKey:@"paycode"];
     NSString *sendJson = [sendDic JSONString];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"get.pay.info" Params:sendJson]];

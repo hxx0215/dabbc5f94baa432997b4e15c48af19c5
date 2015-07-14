@@ -17,6 +17,7 @@
 #import "HNNewReportViewController.h"
 #import "HNPaySupport.h"
 #import "HNConsturctPicTableViewCell.h"
+#import "NSNumber+Cmp2String.h"
 
 @interface HNConstructViewController ()<UITableViewDelegate,UITableViewDataSource,HNDecoratePayModelDelegate,UIAlertViewDelegate>
 @property (nonatomic, strong)UITableView *tableView;
@@ -517,6 +518,7 @@ static NSString *kPicCell = @"picCell";
         type = KHNPayType5;
     if ([self.allData[@"Isaddition"] intValue] == 1)
         type = KHNPayType7;
+    type = 1;
     [HNPaySupport shared].delegate = self;
     [[HNPaySupport shared] getPayToken:self.declareid cid:self.declareid payType:type];
     
