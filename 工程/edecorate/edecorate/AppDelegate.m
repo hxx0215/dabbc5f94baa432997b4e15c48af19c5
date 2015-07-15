@@ -54,22 +54,22 @@
 //    [_udidLabel setText:[NSString stringWithFormat:@"UDID: %@", [APService openUDID]]];
 //    [self.window addSubview:_udidLabel];
     
-    NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
-    
-    [defaultCenter addObserver:self selector:@selector(networkDidSetup:) name:kAPNetworkDidSetupNotification object:nil];
-    [defaultCenter addObserver:self selector:@selector(networkDidClose:) name:kAPNetworkDidCloseNotification object:nil];
-    [defaultCenter addObserver:self selector:@selector(networkDidRegister:) name:kAPNetworkDidRegisterNotification object:nil];
-    [defaultCenter addObserver:self selector:@selector(networkDidLogin:) name:kAPNetworkDidLoginNotification object:nil];
-    [defaultCenter addObserver:self selector:@selector(networkDidReceiveMessage:) name:kAPNetworkDidReceiveMessageNotification object:nil];
+//    NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
+//    
+//    [defaultCenter addObserver:self selector:@selector(networkDidSetup:) name:kAPNetworkDidSetupNotification object:nil];
+//    [defaultCenter addObserver:self selector:@selector(networkDidClose:) name:kAPNetworkDidCloseNotification object:nil];
+//    [defaultCenter addObserver:self selector:@selector(networkDidRegister:) name:kAPNetworkDidRegisterNotification object:nil];
+//    [defaultCenter addObserver:self selector:@selector(networkDidLogin:) name:kAPNetworkDidLoginNotification object:nil];
+//    [defaultCenter addObserver:self selector:@selector(networkDidReceiveMessage:) name:kAPNetworkDidReceiveMessageNotification object:nil];
 //    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[[UIViewController alloc] init]];
     [self.window makeKeyAndVisible];
     
-    [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
-                                                   UIRemoteNotificationTypeSound |
-                                                   UIRemoteNotificationTypeAlert)];
-    [APService setupWithOption:launchOptions];
-    
-    [APService setTags:[NSSet setWithObjects:@"tag4",@"tag5",@"tag6",nil] alias:@"别名" callbackSelector:@selector(tagsAliasCallback:tags:alias:) target:self];
+//    [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
+//                                                   UIRemoteNotificationTypeSound |
+//                                                   UIRemoteNotificationTypeAlert)];
+//    [APService setupWithOption:launchOptions];
+//    
+//    [APService setTags:[NSSet setWithObjects:@"tag4",@"tag5",@"tag6",nil] alias:@"别名" callbackSelector:@selector(tagsAliasCallback:tags:alias:) target:self];
     
     return YES;
 }
@@ -94,12 +94,10 @@
 {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
-    [application setApplicationIconBadgeNumber:0];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
@@ -113,7 +111,6 @@
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-    [APService registerDeviceToken:deviceToken];
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *) error {
@@ -121,21 +118,15 @@
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    [APService handleRemoteNotification:userInfo];
 }
 
 //avoid compile error for sdk under 7.0
 #ifdef __IPHONE_7_0
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
-    [APService handleRemoteNotification:userInfo];
-    completionHandler(UIBackgroundFetchResultNoData);
-}
 #endif
 
 #pragma mark -
 
 - (void)networkDidSetup:(NSNotification *)notification {
-    [_infoLabel setText:@"已连接"];
 //    NSLog(@"已连接");
 }
 
