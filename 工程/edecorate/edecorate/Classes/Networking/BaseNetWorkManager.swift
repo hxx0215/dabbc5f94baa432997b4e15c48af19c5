@@ -15,7 +15,7 @@ class BaseNetWorkManager: NSObject {
         
     }
     
-    func defaultGetWithMethod(method:String,parameters:AnyObject,complete:(responseObject:AnyObject) -> ()){
+    func defaultGetWithMethod(method:String,parameters:AnyObject,complete:(responseObject:AnyObject?,error:NSError?) -> ()){
         let urlString = NSString.createResponseURLWithMethod(method, params: parameters.JSONString())//NSString.createSignWithMethod(method, params:parameters.JSONString())
         var request = NSMutableURLRequest()
         request.URL = NSURL(string: urlString)
@@ -29,7 +29,9 @@ class BaseNetWorkManager: NSObject {
                     return;
                 }
                 let retJson = NSString.decodeFromPercentEscapeString(retStr!.decryptWithDES())
-                complete(responseObject: retJson.objectFromJSONString())
+                complete(responseObject: retJson.objectFromJSONString(),error: error)
+            }else{
+                complete(responseObject: nil, error: error)
             }
         }
     }

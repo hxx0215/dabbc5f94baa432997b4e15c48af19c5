@@ -208,7 +208,7 @@
     model.username = self.loginView.userName.text;
     model.password = self.loginView.password.text;
     id paramters = [self encodeWithLoginModel:model];
-    [EdecorateAPI loginWithParameters:paramters completionHandler:^(id __nonnull responseObject) {
+    [EdecorateAPI loginWithParameters:paramters completionHandler:^(id __nonnull responseObject, NSError * __nullable error) {
         NSLog(@"%@",responseObject);
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         NSString *retJson = [responseObject JSONString];
