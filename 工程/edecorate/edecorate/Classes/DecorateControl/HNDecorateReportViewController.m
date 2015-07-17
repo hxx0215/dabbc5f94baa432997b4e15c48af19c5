@@ -13,7 +13,7 @@
 #import "HNLoginData.h"
 #import "MBProgressHUD.h"
 #import "HNConstructViewController.h"
-
+#import "edecorate-swift.h"
 
 @interface HNReportModel : NSObject
 @property (nonatomic, strong)NSString *roomName;
@@ -180,6 +180,10 @@
     HNReportSendModel *sendmodel = [[HNReportSendModel alloc] init];
     sendmodel.mshopid = [HNLoginData shared].mshopid;
     sendmodel.declareId = [self.reportList[indexPath.row] declareId];
+//    [EdecorateAPI getdecoratonDeclaredetail:[self encodeSendModel:sendmodel] completionHandler:^(id __nullable response, NSError * __nullable error) {
+//        NSLog(@"%@",response);
+//    }];
+//    return;
     NSString *sendJson = [[self encodeDetailModel:sendmodel] JSONString];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"get.decoraton.declaredetails" Params:sendJson]];
