@@ -301,6 +301,13 @@
 - (void)refreshData{
     HNReportSendModel *model = [[HNReportSendModel alloc] init];
     model.mshopid = [HNLoginData shared].mshopid;
+//    [EdecorateAPI getdecoratonDeclaredetail:[self encodeSendModel:model] completionHandler:^(id __nullable response, NSError * __nullable error) {
+//        [self.rTableView headerEndRefreshing];
+//        if (!error){
+//            NSLog(@"%@",response);
+//        }
+//    }];
+//    return;
     NSString *sendJson = [[self encodeSendModel:model] JSONString];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"get.decoration.declare" Params:sendJson]];
