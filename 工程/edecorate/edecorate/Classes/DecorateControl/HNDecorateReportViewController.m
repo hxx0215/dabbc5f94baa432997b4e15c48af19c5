@@ -301,33 +301,14 @@
 - (void)refreshData{
     HNReportSendModel *model = [[HNReportSendModel alloc] init];
     model.mshopid = [HNLoginData shared].mshopid;
-//    [EdecorateAPI getdecoratonDeclaredetail:[self encodeSendModel:model] completionHandler:^(id __nullable response, NSError * __nullable error) {
-//        [self.rTableView headerEndRefreshing];
-//        if (!error){
-//            NSLog(@"%@",response);
-//        }
-//    }];
-//    return;
-    NSString *sendJson = [[self encodeSendModel:model] JSONString];
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"get.decoration.declare" Params:sendJson]];
-    NSString *contentType = @"text/html";
-    [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
-    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
+    [EdecorateAPI getdecoratonDeclaredetail:[self encodeSendModel:model] completionHandler:^(id __nullable response, NSError * __nullable error) {
         [self.rTableView headerEndRefreshing];
-        if (data)
-        {
-            NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            if (!retStr){
-                [self showBadServer];
-                return ;
-            }
-            NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
-            NSDictionary *retDic = [retJson objectFromJSONString];
-            NSInteger count = [[retDic objectForKey:@"total"] integerValue];
+        if (!error){
+            NSLog(@"%@",response);
+            NSInteger count = [[response objectForKey:@"total"] integerValue];
             if (0!=count)
             {
-                NSArray *dataArr = [retDic objectForKey:@"data"];
+                NSArray *dataArr = [response objectForKey:@"data"];
                 [self.reportList removeAllObjects];
                 for (int i=0; i<count; i++) {
                     HNReportModel *model = [[HNReportModel alloc] init];
@@ -348,6 +329,47 @@
             [alert show];
         }
     }];
+//    return;
+//    NSString *sendJson = [[self encodeSendModel:model] JSONString];
+//    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+//    request.URL = [NSURL URLWithString:[NSString createResponseURLWithMethod:@"get.decoration.declare" Params:sendJson]];
+//    NSString *contentType = @"text/html";
+//    [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
+//    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError){
+//        [self.rTableView headerEndRefreshing];
+//        if (data)
+//        {
+//            NSString *retStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//            if (!retStr){
+//                [self showBadServer];
+//                return ;
+//            }
+//            NSString *retJson =[NSString decodeFromPercentEscapeString:[retStr decryptWithDES]];
+//            NSDictionary *retDic = [retJson objectFromJSONString];
+//            NSInteger count = [[retDic objectForKey:@"total"] integerValue];
+//            if (0!=count)
+//            {
+//                NSArray *dataArr = [retDic objectForKey:@"data"];
+//                [self.reportList removeAllObjects];
+//                for (int i=0; i<count; i++) {
+//                    HNReportModel *model = [[HNReportModel alloc] init];
+//                    model.status = [dataArr[i] objectForKey:@"assessorstate"];
+//                    model.roomName = [NSString stringWithFormat:@"%@",[dataArr[i] objectForKey:@"roomnumber"]];
+//                    model.declareId = [dataArr[i] objectForKey:@"declareId"];
+//                    model.paystate = [dataArr[i] objectForKey:@"paystate"];
+//                    [self.reportList addObject:model];
+//                }
+//                [self.rTableView reloadData];
+//            }
+//            else{
+//                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"We don't get any data.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+//                [alert show];
+//            }
+//        }else{
+//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Connection Error", nil) message:NSLocalizedString(@"Please check your network.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+//            [alert show];
+//        }
+//    }];
 }
 #pragma mark - UIAlertViewDelegate
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{
