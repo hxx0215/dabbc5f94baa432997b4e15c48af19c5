@@ -1761,7 +1761,7 @@
 				LastUpgradeCheck = 0510;
 				TargetAttributes = {
 					B916F09D19C8781D00A849C7 = {
-						DevelopmentTeam = G65933C85Y;
+						DevelopmentTeam = T5LS247X7S;
 					};
 					B916F0BE19C8781E00A849C7 = {
 						TestTargetID = B916F09D19C8781D00A849C7;

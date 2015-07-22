@@ -11,7 +11,7 @@
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>5D4CB9C369CACF1C12125C7777427F5EAC72E2A5</key>
-		<string>code.csdn.net:qtongtek_xiongbin/qtongtek_iosapp.git</string>
+		<string>https://github.com/hxx0215/edecorate.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>工程/edecorate/edecorate.xcodeproj</string>
@@ -21,7 +21,7 @@
 		<string>../../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>code.csdn.net:qtongtek_xiongbin/qtongtek_iosapp.git</string>
+	<string>https://github.com/hxx0215/edecorate.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
