@@ -1761,7 +1761,7 @@
 				LastUpgradeCheck = 0510;
 				TargetAttributes = {
 					B916F09D19C8781D00A849C7 = {
-						DevelopmentTeam = T5LS247X7S;
+						DevelopmentTeam = F44XSCNJGN;
 					};
 					B916F0BE19C8781E00A849C7 = {
 						TestTargetID = B916F09D19C8781D00A849C7;
@@ -2188,7 +2188,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Blackit Marketing Limited";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "edecorate/edecorate-Prefix.pch";
 				INFOPLIST_FILE = "edecorate/edecorate-Info.plist";
@@ -2199,7 +2199,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "b5ce02f5-2db0-4d8d-a73b-06f90fabccfe";
 				SWIFT_OBJC_BRIDGING_HEADER = "edecorate/Classes/Networking/edecorate-Bridging-Header.h";
 				WRAPPER_EXTENSION = app;
 			};
@@ -2300,7 +2300,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Blackit Marketing Limited";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "edecorate/edecorate-Prefix.pch";
 				INFOPLIST_FILE = "edecorate/edecorate-Info.plist";
@@ -2310,7 +2310,7 @@
 					"$(PROJECT_DIR)/lib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "b5ce02f5-2db0-4d8d-a73b-06f90fabccfe";
 				SWIFT_OBJC_BRIDGING_HEADER = "edecorate/Classes/Networking/edecorate-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				WRAPPER_EXTENSION = app;
@@ -2324,7 +2324,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Blackit Marketing Limited";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "edecorate/edecorate-Prefix.pch";
 				INFOPLIST_FILE = "edecorate/edecorate-Info.plist";
@@ -2334,7 +2334,7 @@
 					"$(PROJECT_DIR)/lib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "b5ce02f5-2db0-4d8d-a73b-06f90fabccfe";
 				SWIFT_OBJC_BRIDGING_HEADER = "edecorate/Classes/Networking/edecorate-Bridging-Header.h";
 				WRAPPER_EXTENSION = app;
 			};
