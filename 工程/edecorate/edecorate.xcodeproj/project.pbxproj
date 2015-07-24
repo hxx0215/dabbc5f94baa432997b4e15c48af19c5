@@ -43,7 +43,6 @@
 		B916F0DF19C8788200A849C7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B916F0DE19C8788200A849C7 /* Security.framework */; };
 		B916F0E119C8788D00A849C7 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B916F0E019C8788D00A849C7 /* libz.dylib */; };
 		B916F0E319C878AC00A849C7 /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = B916F0E219C878AC00A849C7 /* PushConfig.plist */; };
-		B916F0E719C8795F00A849C7 /* libPushSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B916F0E619C8795F00A849C7 /* libPushSDK.a */; };
 		B91A3AAF19D6E1B6000F3823 /* HNBusinessListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B91A3AAE19D6E1B6000F3823 /* HNBusinessListViewController.m */; };
 		B91A3AC119D6E6E9000F3823 /* MJRefresh.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B91A3AB119D6E6E9000F3823 /* MJRefresh.bundle */; };
 		B91A3AC219D6E6E9000F3823 /* MJRefreshBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = B91A3AB419D6E6E9000F3823 /* MJRefreshBaseView.m */; };
@@ -368,8 +367,6 @@
 		B916F0DE19C8788200A849C7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		B916F0E019C8788D00A849C7 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		B916F0E219C878AC00A849C7 /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PushConfig.plist; sourceTree = "<group>"; };
-		B916F0E519C8795F00A849C7 /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
-		B916F0E619C8795F00A849C7 /* libPushSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libPushSDK.a; sourceTree = "<group>"; };
 		B91A3AAD19D6E1B6000F3823 /* HNBusinessListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HNBusinessListViewController.h; path = Classes/BusinessBackground/HNBusinessListViewController.h; sourceTree = "<group>"; };
 		B91A3AAE19D6E1B6000F3823 /* HNBusinessListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HNBusinessListViewController.m; path = Classes/BusinessBackground/HNBusinessListViewController.m; sourceTree = "<group>"; };
 		B91A3AB119D6E6E9000F3823 /* MJRefresh.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MJRefresh.bundle; sourceTree = "<group>"; };
@@ -816,7 +813,6 @@
 				B916F0DF19C8788200A849C7 /* Security.framework in Frameworks */,
 				B916F0DD19C8787400A849C7 /* SystemConfiguration.framework in Frameworks */,
 				B916F0DB19C8786900A849C7 /* CoreTelephony.framework in Frameworks */,
-				B916F0E719C8795F00A849C7 /* libPushSDK.a in Frameworks */,
 				B916F0D919C8785E00A849C7 /* CoreFoundation.framework in Frameworks */,
 				B916F0D719C8785400A849C7 /* CFNetwork.framework in Frameworks */,
 				B916F0A419C8781D00A849C7 /* CoreGraphics.framework in Frameworks */,
@@ -958,8 +954,6 @@
 		B916F0E419C8795F00A849C7 /* JPushlib */ = {
 			isa = PBXGroup;
 			children = (
-				B916F0E519C8795F00A849C7 /* APService.h */,
-				B916F0E619C8795F00A849C7 /* libPushSDK.a */,
 			);
 			name = JPushlib;
 			path = lib;
