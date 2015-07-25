@@ -16,7 +16,6 @@ class EdecorateAPI: BaseNetWorkManager {
     }
     class func loginWithParameters(parameter:AnyObject,completionHandler:((AnyObject?,NSError?) -> ())){
         self.sharedInstance.defaultGetWithMethod(Constant.LoginDomain, parameters: parameter, complete: completionHandler)
-//        self.sharedInstance.defaultGetWithMethod(Constant.LoginDomain, parameters: parameter, complete: completionHandler)
     }
     class func getdecoratonDeclaredetail(parameter:AnyObject,completionHandler:((AnyObject?,NSError?)->())){
         self.sharedInstance.defaultGetWithMethod(Constant.GetDecorationDeclaredetails, parameters: parameter, complete: completionHandler)
