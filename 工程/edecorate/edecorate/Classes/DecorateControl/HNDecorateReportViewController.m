@@ -249,7 +249,7 @@
     return @{@"mshopid": model.mshopid,@"declareid":model.declareId};
 }
 - (NSDictionary *)encodeSendModel:(HNReportSendModel*)model{
-    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:model.mshopid,@"mshopid",@"50",@"pagesize", nil];
+    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:model.mshopid,@"mshopid",@"50",@"pagesize",@"",@"pageindex", nil];
     return dic;
 }
 - (void)loadMore{
@@ -301,7 +301,8 @@
 - (void)refreshData{
     HNReportSendModel *model = [[HNReportSendModel alloc] init];
     model.mshopid = [HNLoginData shared].mshopid;
-    [EdecorateAPI getdecoratonDeclaredetail:[self encodeSendModel:model] completionHandler:^(id __nullable response, NSError * __nullable error) {
+    
+    [EdecorateAPI getDecorationDeclare:[self encodeSendModel:model] completionHandler:^(id __nullable response, NSError * __nullable error) {
         [self.rTableView headerEndRefreshing];
         if (!error){
             NSLog(@"%@",response);
