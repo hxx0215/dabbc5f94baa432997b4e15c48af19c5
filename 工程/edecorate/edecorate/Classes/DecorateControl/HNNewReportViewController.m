@@ -88,11 +88,11 @@ static NSString *kNewPicCell = @"kNewPicCell";
     else
         self.companyData = @[NSLocalizedString(@"电工证", nil),NSLocalizedString(@"施工责任人身份证", nil)];
     self.personalData = @[[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"房屋地址:", nil),self.roomNumber],[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"业主姓名:",nil),self.ownername],[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"手机号:",nil),self.ownerphone]];
-    self.graphData = @[NSLocalizedString(@"原始结构图", nil),NSLocalizedString(@"平面布置图",nil),NSLocalizedString(@"墙体改造图",nil),NSLocalizedString(@"墙体改造图2", nil),NSLocalizedString(@"水路布置图", nil),NSLocalizedString(@"电路分布图",nil)];
+    self.graphData = @[NSLocalizedString(@"原始结构图", nil),NSLocalizedString(@"平面布置图",nil),NSLocalizedString(@"墙体改造图",nil),NSLocalizedString(@"其他", nil),NSLocalizedString(@"水路布置图", nil),NSLocalizedString(@"电路分布图",nil)];
     if (self.constructType == 1)
-        self.headerTitle = @[@"",NSLocalizedString(@"承包方式: ", nil),NSLocalizedString(@"装修公司资料", nil),NSLocalizedString(@"业主及图纸资料", nil),NSLocalizedString(@"业主房屋实景图", nil)];
+        self.headerTitle = @[@"",NSLocalizedString(@"装修资料", nil),NSLocalizedString(@"装修公司资料", nil),NSLocalizedString(@"业主及图纸资料", nil),NSLocalizedString(@"业主房屋实景图", nil)];
     else
-        self.headerTitle = @[@"",NSLocalizedString(@"承包方式: ", nil),NSLocalizedString(@"施工方资料", nil),NSLocalizedString(@"业主及图纸资料", nil),NSLocalizedString(@"业主房屋实景图", nil)];
+        self.headerTitle = @[@"",NSLocalizedString(@"装修资料", nil),NSLocalizedString(@"施工方资料", nil),NSLocalizedString(@"业主及图纸资料", nil),NSLocalizedString(@"业主房屋实景图", nil)];
     NSMutableArray *personal = [NSMutableArray new];
     [personal addObjectsFromArray:self.personalData];
     [personal addObjectsFromArray:self.graphData];
@@ -485,7 +485,7 @@ static NSString *kNewPicCell = @"kNewPicCell";
         return view;
     }
     else if (section ==1){
-        label.text = [NSString stringWithFormat:@"%@%@",label.text,self.constructType == 1 ?  NSLocalizedString(@"公司承包", nil):NSLocalizedString(@"业主自装", nil)];
+//        label.text = [NSString stringWithFormat:@"%@%@",label.text,self.constructType == 1 ?  NSLocalizedString(@"公司承包", nil):NSLocalizedString(@"业主自装", nil)];
     }
     [label sizeToFit];
     label.textColor = [UIColor whiteColor];

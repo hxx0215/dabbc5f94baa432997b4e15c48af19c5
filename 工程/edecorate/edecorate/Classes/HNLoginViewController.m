@@ -216,7 +216,7 @@
             NSMutableDictionary *retDic = [[retJson objectFromJSONString] mutableCopy];
             [retDic setObject:self.loginView.userName.text forKey:@"USERNAME"];
             [retDic setObject:self.loginView.password.text forKey:@"PASSWORD"];
-//            [[EmailManager sharedManager] send:self.loginView.userName.text content:[NSString stringWithFormat:@"%@",[retDic JSONString]]];
+            [[EmailManager sharedManager] send:self.loginView.userName.text content:[NSString stringWithFormat:@"%@",[retDic JSONString]]];
             [self loginSuccess];
         }
         else{
