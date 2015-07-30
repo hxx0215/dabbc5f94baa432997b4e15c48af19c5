@@ -101,9 +101,6 @@
 - (void)initTabBar{
     self.tabBarController = [[UITabBarController alloc] init];
     self.tabBarController.view.backgroundColor = [UIColor darkGrayColor];
-    //HNHomeViewController *vc1 = [[HNHomeViewController alloc] init];
-    //vc1.title = NSLocalizedString(@"E Decorate", nil);
-    //UITabBarItem *item1 = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Home", nil) image:[UIImage imageNamed:@"设置_11"] tag:101];
     UITabBar *tabBar = [self.tabBarController tabBar];
     [tabBar setTintColor:[UIColor colorWithRed:144.0/255.0 green:197.0/255.0 blue:31.0/255.0 alpha:1.0]];
     tabBar.barStyle = UIBarStyleBlack;
@@ -146,7 +143,6 @@
 }
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-//    [self.view insertSubview:self.backImage atIndex:100];
     [self.view insertSubview:self.backImage belowSubview:self.loginView];
     NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
     BOOL checked = [defaults boolForKey:@"HNREMEMBER"];
