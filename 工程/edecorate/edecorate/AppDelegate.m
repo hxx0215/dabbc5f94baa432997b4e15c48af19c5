@@ -73,16 +73,10 @@
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *) error {
-    NSLog(@"did Fail To Register For Remote Notifications With Error: %@", error);
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
 }
 
-//avoid compile error for sdk under 7.0
-#ifdef __IPHONE_7_0
-#endif
-
-#pragma mark -
 
 @end
