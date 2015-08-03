@@ -118,7 +118,6 @@
     [sender setBackgroundColor:[UIColor whiteColor]];
     HNBusinessBKControlViewController* bc = [[HNBusinessBKControlViewController alloc]init];
     [self.navigationController pushViewController:bc animated:YES];
-    NSLog(@"busi");
 }
 - (void)messageButton_Clicked:(UIButton *)sender{
     [sender setBackgroundColor:[UIColor whiteColor]];
@@ -129,7 +128,6 @@
 }
 
 - (void)settingButton_Clicked:(id)sender{
-    NSLog(@"setting");
 }
 
 
